@@ -1,0 +1,7 @@
+{
+  "lerna": "2",
+  "packages": [
+    "@pageobject/*"
+  ],
+  "version": "0.0.0"
+}

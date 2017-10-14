@@ -1,0 +1,133 @@
+import {inspect} from 'util';
+import {Adapter, PathSegment, Predicate, findElement} from './findElement';
+import {reliable} from './reliable';
+
+export type InitialComponent<
+  TElement,
+  TAdapter extends Adapter<TElement>
+> = ComponentClass<TElement, TAdapter, PageObject<TElement, TAdapter>>;
+
+export interface ComponentClass<
+  TElement,
+  TAdapter extends Adapter<TElement>,
+  TComponent extends PageObject<TElement, TAdapter>
+> {
+  readonly selector: string;
+
+  new (path: PathSegment<TElement>[], adapter: TAdapter): TComponent;
+}
+
+export interface PageClass<
+  TElement,
+  TAdapter extends Adapter<TElement>,
+  TPage extends PageObject<TElement, TAdapter>
+> {
+  readonly InitialComponents: InitialComponent<TElement, TAdapter>[];
+  readonly url: RegExp | string;
+
+  new (path: PathSegment<TElement>[], adapter: TAdapter): TPage;
+}
+
+export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
+  public static async waitFor<
+    TElement,
+    TAdapter extends Adapter<TElement>,
+    TPage extends PageObject<TElement, TAdapter>
+  >(
+    Page: PageClass<TElement, TAdapter, TPage>,
+    adapter: TAdapter
+  ): Promise<TPage> {
+    return reliable(async () => {
+      const url = await adapter.getCurrentUrl();
+
+      if (
+        typeof Page.url === 'string' ? url !== Page.url : !Page.url.test(url)
+      ) {
+        const actual = inspect(url);
+        const expected = inspect(Page.url);
+
+        throw new Error(
+          `Unable to load page (actual=${actual}, expected=${expected})`
+        );
+      }
+
+      const rootPath = [{selector: 'html', unique: true}];
+
+      for (const Component of Page.InitialComponents) {
+        await findElement(
+          [...rootPath, {selector: Component.selector, unique: false}],
+          adapter
+        );
+      }
+
+      return new Page(rootPath, adapter);
+    });
+  }
+
+  protected readonly adapter: TAdapter;
+
+  private readonly path: PathSegment<TElement>[];
+
+  public constructor(path: PathSegment<TElement>[], adapter: TAdapter) {
+    this.path = path;
+    this.adapter = adapter;
+  }
+
+  protected async findSelf(): Promise<TElement> {
+    return reliable(async () => findElement(this.path, this.adapter));
+  }
+
+  protected async findFirstDescendant(
+    selector: string,
+    predicate?: Predicate<TElement>
+  ): Promise<TElement> {
+    return reliable(async () =>
+      findElement(
+        [...this.path, {selector, unique: false, predicate}],
+        this.adapter
+      )
+    );
+  }
+
+  protected async findUniqueDescendant(
+    selector: string,
+    predicate?: Predicate<TElement>
+  ): Promise<TElement> {
+    return reliable(async () =>
+      findElement(
+        [...this.path, {selector, unique: true, predicate}],
+        this.adapter
+      )
+    );
+  }
+
+  protected selectFirstDescendant<
+    TComponent extends PageObject<TElement, TAdapter>
+  >(
+    Component: ComponentClass<TElement, TAdapter, TComponent>,
+    predicate?: Predicate<TElement>
+  ): TComponent {
+    return new Component(
+      [...this.path, {selector: Component.selector, unique: false, predicate}],
+      this.adapter
+    );
+  }
+
+  protected selectUniqueDescendant<
+    TComponent extends PageObject<TElement, TAdapter>
+  >(
+    Component: ComponentClass<TElement, TAdapter, TComponent>,
+    predicate?: Predicate<TElement>
+  ): TComponent {
+    return new Component(
+      [...this.path, {selector: Component.selector, unique: true, predicate}],
+      this.adapter
+    );
+  }
+
+  protected async waitFor<TPage extends PageObject<TElement, TAdapter>>(
+    Page: PageClass<TElement, TAdapter, TPage>
+  ): Promise<TPage> {
+    return PageObject.waitFor(Page, this.adapter);
+  }
+}
