@@ -11,14 +11,14 @@ npm install @pageobject/class
 ## Overview
 
 - [Class `PageObject`](#class-pageobject)
-  - [Static Method `public PageObject.waitFor(Page, adapter)`](#static-method-public-pageobjectwaitforpage-adapter)
+  - [Static Method `public PageObject.goto(Page, adapter)`](#static-method-public-pageobjectgotopage-adapter)
   - [Instance Variable `protected this.adapter`](#instance-variable-protected-thisadapter)
   - [Instance Method `protected this.findSelf()`](#instance-method-protected-thisfindself)
   - [Instance Method `protected this.findFirstDescendant(selector, predicate?)`](#instance-method-protected-thisfindfirstdescendantselector-predicate)
   - [Instance Method `protected this.findUniqueDescendant(selector, predicate?)`](#instance-method-protected-thisfinduniquedescendantselector-predicate)
   - [Instance Method `protected this.selectFirstDescendant(Component, predicate?)`](#instance-method-protected-thisselectfirstdescendantcomponent-predicate)
   - [Instance Method `protected this.selectUniqueDescendant(Component, predicate?)`](#instance-method-protected-thisselectuniquedescendantcomponent-predicate)
-  - [Instance Method `protected this.waitFor(Page)`](#instance-method-protected-thiswaitforpage)
+  - [Instance Method `protected this.goto(Page)`](#instance-method-protected-thisgotopage)
 - [Type `Adapter`](#type-adapter)
 - [Type `PageClass`](#type-pageclass)
 - [Type `ComponentClass`](#type-componentclass)
@@ -35,21 +35,15 @@ import {PageObject} from '@pageobject/class';
 const {PageObject} = require('@pageobject/class');
 ```
 
-### Static Method `public PageObject.waitFor(Page, adapter)`
+### Static Method `public PageObject.goto(Page, adapter)`
 
 ```js
-const myPage = await PageObject.waitFor(MyPage, someAdapter);
+const myPage = await PageObject.goto(MyPage, someAdapter);
 ```
 
-Waits for the specified page to load.
+Instantiates the specified page class when loaded, throws an error otherwise.
 
-A page is considered loaded as soon as the initial components declared on the page class are found and the declared URL matches the current one.
-
-The timeout for waiting for the page to load defaults to 10 seconds and can be configured using the `PAGEOBJECT_TIMEOUT` environment variable:
-
-```js
-process.env.PAGEOBJECT_TIMEOUT = 30000; // 30 seconds
-```
+A page class is considered loaded if its declared initial components are found and its declared URL matches the current one.
 
 **Parameters:**
 
@@ -73,13 +67,7 @@ const element = await myPage.findSelf();
 Schedules a command to find the underlying DOM element of this component.
 The method will traverse up the components' ancestors to get the element path.
 
-If no element is found, or an error occurs, the command is repeated until the timeout expires.
-
-The timeout defaults to 10 seconds and can be configured using the `PAGEOBJECT_TIMEOUT` environment variable:
-
-```js
-process.env.PAGEOBJECT_TIMEOUT = 30000; // 30 seconds
-```
+If no element is found, an error is thrown.
 
 **Parameters:** None.
 
@@ -93,15 +81,10 @@ const element = await myPage.findFirstDescendant('div');
 
 Schedules a command to find the specified descendant DOM element of this component.
 The method will traverse up the components' ancestors to get the element path.
+
 If multiple elements are found, the first one is returned.
 
-If no element is found, or an error occurs, the command is repeated until the timeout expires.
-
-The timeout defaults to 10 seconds and can be configured using the `PAGEOBJECT_TIMEOUT` environment variable:
-
-```js
-process.env.PAGEOBJECT_TIMEOUT = 30000; // 30 seconds
-```
+If no element is found, an error is thrown.
 
 **Parameters:**
 
@@ -119,13 +102,7 @@ const element = await myPage.findUniqueDescendant('div');
 Schedules a command to find the specified descendant DOM element of this component.
 The method will traverse up the components' ancestors to get the element path.
 
-If no **unique** element is found, or an error occurs, the command is repeated until the timeout expires.
-
-The timeout defaults to 10 seconds and can be configured using the `PAGEOBJECT_TIMEOUT` environment variable:
-
-```js
-process.env.PAGEOBJECT_TIMEOUT = 30000; // 30 seconds
-```
+If no **unique** element is found, an error is thrown.
 
 **Parameters:**
 
@@ -167,21 +144,15 @@ an error is thrown during an element search.
 
 **Returns:** `Component` An instance of the specified component class.
 
-### Instance Method `protected this.waitFor(Page)`
+### Instance Method `protected this.goto(Page)`
 
 ```js
-const myOtherPage = await myPage.waitFor(MyOtherPage);
+const myOtherPage = await myPage.goto(MyOtherPage);
 ```
 
-Waits for the specified page to load.
+Instantiates the specified page class when loaded, throws an error otherwise.
 
-A page is considered loaded as soon as the initial components declared on the page class are found and the declared URL matches the current one.
-
-The timeout for waiting for the page to load defaults to 10 seconds and can be configured using the `PAGEOBJECT_TIMEOUT` environment variable:
-
-```js
-process.env.PAGEOBJECT_TIMEOUT = 30000; // 30 seconds
-```
+A page class is considered loaded if its declared initial components are found and its declared URL matches the current one.
 
 **Parameters:**
 

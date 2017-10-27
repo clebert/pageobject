@@ -23,6 +23,6 @@ export class NewsSubtext extends PageObject<WebElement, SeleniumAdapter> {
   public async hideAsAnonymous(): Promise<HideLoginPage> {
     await this.hide();
 
-    return this.waitFor(HideLoginPage);
+    return this.goto(HideLoginPage);
   }
 }

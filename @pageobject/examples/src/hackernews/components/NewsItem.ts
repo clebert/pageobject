@@ -37,6 +37,6 @@ export class NewsItem extends PageObject<WebElement, SeleniumAdapter> {
   public async voteAsAnonymous(): Promise<VoteLoginPage> {
     await this.vote();
 
-    return this.waitFor(VoteLoginPage);
+    return this.goto(VoteLoginPage);
   }
 }

@@ -36,7 +36,7 @@ export class SeleniumBrowser {
   ): Promise<TPage> {
     await this.driver.navigate().to(url);
 
-    return PageObject.waitFor(Page, this.adapter);
+    return PageObject.goto(Page, this.adapter);
   }
 
   public async quit(): Promise<void> {

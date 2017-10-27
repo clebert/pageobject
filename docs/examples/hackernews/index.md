@@ -182,7 +182,7 @@ class NewsItem extends PageObject<WebElement, SeleniumAdapter> {
   public async voteAsAnonymous(): Promise<VoteLoginPage> {
     await this.vote();
 
-    return await this.waitFor(VoteLoginPage);
+    return await this.goto(VoteLoginPage);
   }
 }
 ```
@@ -222,7 +222,7 @@ class NewsSubtext extends PageObject<WebElement, SeleniumAdapter> {
   public async hideAsAnonymous(): Promise<HideLoginPage> {
     await this.hide();
 
-    return await this.waitFor(HideLoginPage);
+    return await this.goto(HideLoginPage);
   }
 }
 ```
