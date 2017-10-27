@@ -12,22 +12,6 @@ export class NewsItem extends PageObject<WebElement, SeleniumAdapter> {
     return parseInt(await element.getText(), 10);
   }
 
-  public async getTitle(): Promise<string> {
-    const element = await this.findUniqueDescendant('a.storylink');
-
-    return element.getText();
-  }
-
-  public async canVote(): Promise<boolean> {
-    try {
-      await this.findUniqueDescendant('a.nosee div.votearrow');
-
-      return false;
-    } catch {
-      return true;
-    }
-  }
-
   public async vote(): Promise<void> {
     const element = await this.findUniqueDescendant('div.votearrow');
 
