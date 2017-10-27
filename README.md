@@ -1,6 +1,7 @@
 # PageObjectJS
 
 [![Build Status][badge-travis-image]][badge-travis-link]
+![Stability][badge-stability-image]
 
 **Readable. Reliable. Maintainable.** E2E testing using any browser automation framework.
 
@@ -75,6 +76,7 @@ npm run release
 ---
 Built by (c) Clemens Akens. Released under the terms of the [MIT License][license].
 
+[badge-stability-image]: https://img.shields.io/badge/stability-unstable-yellow.svg
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 
