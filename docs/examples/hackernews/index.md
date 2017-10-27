@@ -146,33 +146,11 @@ class NewsItem extends PageObject<WebElement, SeleniumAdapter> {
   }
 ```
 
-#### Descendant Element `a.storylink`
-
-![components/NewsItem/a.storylink](components/NewsItem/a.storylink.png)
-
-```js
-  public async getTitle(): Promise<string> {
-    const element = await this.findUniqueDescendant('a.storylink');
-
-    return await element.getText();
-  }
-```
-
 #### Descendant Element `div.votearrow`
 
 ![components/NewsItem/div.votearrow](components/NewsItem/div.votearrow.png)
 
 ```js
-  public async canVote(): Promise<boolean> {
-    try {
-      await this.findUniqueDescendant('a.nosee div.votearrow');
-
-      return false;
-    } catch {
-      return true;
-    }
-  }
-
   public async vote(): Promise<void> {
     const element = await this.findUniqueDescendant('div.votearrow');
 
@@ -182,7 +160,7 @@ class NewsItem extends PageObject<WebElement, SeleniumAdapter> {
   public async voteAsAnonymous(): Promise<VoteLoginPage> {
     await this.vote();
 
-    return await this.waitFor(VoteLoginPage);
+    return await this.goto(VoteLoginPage);
   }
 }
 ```
@@ -194,18 +172,6 @@ class NewsItem extends PageObject<WebElement, SeleniumAdapter> {
 ```js
 class NewsSubtext extends PageObject<WebElement, SeleniumAdapter> {
   public static selector = 'td.subtext';
-```
-
-#### Descendant Element `span.score`
-
-![components/NewsSubtext/span.score](components/NewsSubtext/span.score.png)
-
-```js
-  public async getScore(): Promise<number> {
-    const element = await this.findUniqueDescendant('span.score');
-
-    return parseInt(await element.getText(), 10);
-  }
 ```
 
 #### Descendant Element `a` + `textEquals('hide')`
@@ -222,7 +188,7 @@ class NewsSubtext extends PageObject<WebElement, SeleniumAdapter> {
   public async hideAsAnonymous(): Promise<HideLoginPage> {
     await this.hide();
 
-    return await this.waitFor(HideLoginPage);
+    return await this.goto(HideLoginPage);
   }
 }
 ```

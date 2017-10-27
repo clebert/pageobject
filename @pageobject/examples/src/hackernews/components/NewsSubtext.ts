@@ -8,12 +8,6 @@ const {textEquals} = predicates;
 export class NewsSubtext extends PageObject<WebElement, SeleniumAdapter> {
   public static selector = 'td.subtext';
 
-  public async getScore(): Promise<number> {
-    const element = await this.findUniqueDescendant('span.score');
-
-    return parseInt(await element.getText(), 10);
-  }
-
   public async hide(): Promise<void> {
     const element = await this.findUniqueDescendant('a', textEquals('hide'));
 
@@ -23,6 +17,6 @@ export class NewsSubtext extends PageObject<WebElement, SeleniumAdapter> {
   public async hideAsAnonymous(): Promise<HideLoginPage> {
     await this.hide();
 
-    return this.waitFor(HideLoginPage);
+    return this.goto(HideLoginPage);
   }
 }
