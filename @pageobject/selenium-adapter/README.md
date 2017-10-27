@@ -2,6 +2,7 @@
 
 [![Package Version][badge-npm-image]][badge-npm-link]
 [![Build Status][badge-travis-image]][badge-travis-link]
+![Stability][badge-stability-image]
 
 An adapter for connecting page objects to [Selenium][selenium].
 
@@ -34,6 +35,7 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][licens
 
 [badge-npm-image]: https://img.shields.io/npm/v/@pageobject/selenium-adapter.svg
 [badge-npm-link]: https://www.npmjs.com/package/@pageobject/selenium-adapter
+[badge-stability-image]: https://img.shields.io/badge/stability-unstable-yellow.svg
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 
