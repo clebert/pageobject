@@ -1,10 +1,10 @@
 {
   "name": "@pageobject/examples",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@pageobject/class": "~0.0.0",
-    "@pageobject/selenium-adapter": "~0.0.0",
+    "@pageobject/class": "^0.1.0",
+    "@pageobject/selenium-adapter": "^0.1.0",
     "@types/selenium-webdriver": "~3.0.8",
     "selenium-webdriver": "~3.6.0"
   }
