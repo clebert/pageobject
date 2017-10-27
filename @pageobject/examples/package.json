@@ -5,7 +5,7 @@
   "dependencies": {
     "@pageobject/class": "^0.1.0",
     "@pageobject/selenium-adapter": "^0.1.0",
-    "@types/selenium-webdriver": "~3.0.8",
-    "selenium-webdriver": "~3.6.0"
+    "@types/selenium-webdriver": "^3.0.8",
+    "selenium-webdriver": "^3.6.0"
   }
 }
