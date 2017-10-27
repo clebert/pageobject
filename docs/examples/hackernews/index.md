@@ -67,9 +67,9 @@ describe('GIVEN the Hacker News front page is open', () => {
 
       const loginPage = await news.subtext.hideAsAnonymous();
 
-      expect(
-        await loginPage.displaysMessage('You have to be logged in to hide.')
-      ).toBe(true);
+      expect(await loginPage.getMessage()).toBe(
+        'You have to be logged in to hide.'
+      );
     });
 
     test('THEN voting a news should trigger a redirect to the login page', async () => {
@@ -78,9 +78,9 @@ describe('GIVEN the Hacker News front page is open', () => {
 
       const loginPage = await news.item.voteAsAnonymous();
 
-      expect(
-        await loginPage.displaysMessage('You have to be logged in to vote.')
-      ).toBe(true);
+      expect(await loginPage.getMessage()).toBe(
+        'You have to be logged in to vote.'
+      );
     });
   });
 });
@@ -236,11 +236,10 @@ class LoginPage extends PageObject<WebElement, SeleniumAdapter> {
   public static InitialComponents = [];
   public static url = /login/;
 
-  public async displaysMessage(message: string): Promise<boolean> {
+  public async getMessage(): Promise<string> {
     const element = await this.findSelf();
-    const html = await element.getText();
 
-    return html.indexOf(message) > -1;
+    return element.getText();
   }
 }
 ```
