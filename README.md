@@ -1,5 +1,7 @@
 # PageObjectJS
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/clebert/pageobject.svg)](https://greenkeeper.io/)
+
 [![Build Status][badge-travis-image]][badge-travis-link]
 ![Stability][badge-stability-image]
 
