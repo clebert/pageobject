@@ -10,7 +10,7 @@ node_js:
 before_install:
 - 'npm prune'
 before_script:
-- 'git fetch --unshallow'
+- '([ -f "$(git rev-parse --git-dir)"/shallow ] && git fetch --unshallow) || true'
 - '"$(npm bin)"/commitlint --from="$TRAVIS_BRANCH" --to="$TRAVIS_COMMIT"'
 - '"$(npm bin)"/commitlint --from="$TRAVIS_COMMIT"'
 script:
