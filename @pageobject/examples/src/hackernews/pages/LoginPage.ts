@@ -6,11 +6,10 @@ export class LoginPage extends PageObject<WebElement, SeleniumAdapter> {
   public static InitialComponents = [];
   public static url = /login/;
 
-  public async displaysMessage(message: string): Promise<boolean> {
+  public async getMessage(): Promise<string> {
     const element = await this.findSelf();
-    const html = await element.getText();
 
-    return html.indexOf(message) > -1;
+    return element.getText();
   }
 }
 
