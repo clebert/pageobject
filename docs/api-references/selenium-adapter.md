@@ -121,16 +121,11 @@ The adapter associated with this browser abstraction.
 const myPage = await browser.open(MyPage, 'https://example.com/');
 ```
 
-Schedules a command to navigate to the specified URL, and then waits for the specified page to load.
-A page is considered loaded as soon as the initial components declared on the page class are found and the declared URL matches the current one.
+Schedules a command to navigate to the specified URL, and then instantiates the specified page class when loaded, throws an error otherwise.
+
+A page class is considered loaded if its declared initial components are found and its declared URL matches the current one.
 
 The timeout for the navigation must be configured via Selenium, it usually defaults to 30 seconds.
-
-The timeout for waiting for the page to load defaults to 10 seconds and can be configured using the `PAGEOBJECT_TIMEOUT` environment variable:
-
-```js
-process.env.PAGEOBJECT_TIMEOUT = 30000; // 30 seconds
-```
 
 **Parameters:**
 
