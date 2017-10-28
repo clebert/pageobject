@@ -198,8 +198,15 @@ class NewsSubtext extends PageObject<WebElement, SeleniumAdapter> {
 ![pages/LoginPage](pages/LoginPage.png)
 
 ```js
+const InitialElements = [
+  'input[type="submit"][value="login"]',
+  'input[type="submit"][value="create account"]'
+];
+```
+
+```js
 class LoginPage extends PageObject<WebElement, SeleniumAdapter> {
-  public static InitialComponents = [];
+  public static InitialElements = InitialElements;
   public static url = /login/;
 
   public async displaysMessage(message: string): Promise<boolean> {
@@ -217,7 +224,7 @@ class LoginPage extends PageObject<WebElement, SeleniumAdapter> {
 
 ```js
 class HideLoginPage extends LoginPage {
-  public static InitialComponents = [];
+  public static InitialElements = InitialElements;
   public static url = /hide\?id=[0-9]+/;
 }
 ```
@@ -228,7 +235,7 @@ class HideLoginPage extends LoginPage {
 
 ```js
 class VoteLoginPage extends LoginPage {
-  public static InitialComponents = [];
+  public static InitialElements = InitialElements;
   public static url = /vote\?id=[0-9]+/;
 }
 ```
