@@ -88,7 +88,7 @@ If no element is found, an error is thrown.
 
 **Parameters:**
 
-- `selector: string` The search criteria for an element must be defined using a CSS selector.
+- `selector: string` The search criteria for an element must be defined using a [CSS selector][css-selectors].
 - [`predicate?: Predicate`](#predicate) You may also provide a custom predicate function as an additional search criteria.
 
 **Returns:** [`Promise<Element>`](#element) A promise that will resolve to the specified descendant DOM element of this component.
@@ -106,7 +106,7 @@ If no **unique** element is found, an error is thrown.
 
 **Parameters:**
 
-- `selector: string` The search criteria for an element must be defined using a CSS selector.
+- `selector: string` The search criteria for an element must be defined using a [CSS selector][css-selectors].
 - [`predicate?: Predicate`](#predicate) You may also provide a custom predicate function as an additional search criteria.
 
 **Returns:** [`Promise<Element>`](#element) A promise that will resolve to the specified descendant DOM element of this component.
@@ -174,6 +174,7 @@ The following adapters are currently available:
 // TypeScript
 class MyPage extends PageObject<SomeElement, SomeAdapter> {
   public static InitialComponents = [MyComponent];
+  public static InitialElements = ['h1'];
   public static url = /example\.com/;
 
   // ...
@@ -184,14 +185,19 @@ class MyPage extends PageObject {
   // ...
 }
 
-MyPage.InitialComponents = [];
+MyPage.InitialComponents = [MyComponent];
+MyPage.InitialElements = ['h1'];
 MyPage.url = /example\.com/;
 ```
 
-A page class declares a concrete page type, it has two required properties:
+A page class declares a concrete page type, it has the following optional properties:
 
-- [`PageClass.InitialComponents: ComponentClass[]`](#componentclass)
-- `PageClass.url: RegExp | string`
+- [`PageClass.InitialComponents?: ComponentClass[]`](#componentclass)
+- [`PageClass.InitialElements?: string[]`][css-selectors]
+- `PageClass.url?: RegExp | string`
+
+**To write reliable tests, it is important to specify the properties of a page as accurately as possible.**
+Most important is the specification of initial components or elements.
 
 ## Type `ComponentClass`
 
@@ -213,7 +219,7 @@ MyComponent.selector = 'div';
 
 A component class declares a concrete component type, it has one required property:
 
-- `ComponentClass.selector: string`
+- [`ComponentClass.selector: string`][css-selectors]
 
 ## Type `Element`
 
@@ -240,6 +246,7 @@ const element = await myPage.findFirstDescendant('div', atIndex(1));
 ```
 
 A predicate function takes as input an element and its index and returns a promise that will resolve to a boolean.
-In addition to a CSS selector, it is another search criteria for selecting a specific component or finding a specific DOM element.
+In addition to a [CSS selector][css-selectors], it is another search criteria for selecting a specific component or finding a specific DOM element.
 
+[css-selectors]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors
 [selenium-webelement]: http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/webdriver_exports_WebElement.html

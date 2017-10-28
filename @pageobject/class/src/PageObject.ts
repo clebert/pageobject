@@ -21,10 +21,23 @@ export interface PageClass<
   TAdapter extends Adapter<TElement>,
   TPage extends PageObject<TElement, TAdapter>
 > {
-  readonly InitialComponents: InitialComponent<TElement, TAdapter>[];
-  readonly url: RegExp | string;
+  readonly InitialComponents?: InitialComponent<TElement, TAdapter>[];
+  readonly InitialElements?: string[];
+  readonly url?: RegExp | string;
 
   new (path: PathSegment<TElement>[], adapter: TAdapter): TPage;
+}
+
+function test(actual: string, expected: RegExp | string | undefined): boolean {
+  if (typeof expected === 'string') {
+    return actual === expected;
+  }
+
+  if (expected) {
+    return expected.test(actual);
+  }
+
+  return true;
 }
 
 export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
@@ -36,23 +49,31 @@ export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
     Page: PageClass<TElement, TAdapter, TPage>,
     adapter: TAdapter
   ): Promise<TPage> {
+    const rootPath = [{selector: 'html', unique: true}];
+
+    if (Page.InitialComponents) {
+      for (const Component of Page.InitialComponents) {
+        await findElement(
+          [...rootPath, {selector: Component.selector, unique: false}],
+          adapter
+        );
+      }
+    }
+
+    if (Page.InitialElements) {
+      for (const selector of Page.InitialElements) {
+        await findElement([...rootPath, {selector, unique: false}], adapter);
+      }
+    }
+
     const url = await adapter.getCurrentUrl();
 
-    if (typeof Page.url === 'string' ? url !== Page.url : !Page.url.test(url)) {
+    if (!test(url, Page.url)) {
       const actual = inspect(url);
       const expected = inspect(Page.url);
 
       throw new Error(
-        `Page not loaded (actual=${actual}, expected=${expected})`
-      );
-    }
-
-    const rootPath = [{selector: 'html', unique: true}];
-
-    for (const Component of Page.InitialComponents) {
-      await findElement(
-        [...rootPath, {selector: Component.selector, unique: false}],
-        adapter
+        `No matching url found (actual=${actual}, expected=${expected})`
       );
     }
 
