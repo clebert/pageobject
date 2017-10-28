@@ -27,11 +27,12 @@ npm install @types/selenium-webdriver
   - [Static Method `public SeleniumBrowser.launchHeadlessChrome()`](#static-method-public-seleniumbrowserlaunchheadlesschrome)
   - [Constructor Method `new SeleniumBrowser(driver, adapter)`](#constructor-method-new-seleniumbrowserdriver-adapter)
   - [Instance Variable `public this.adapter`](#instance-variable-public-thisadapter)
-  - [Instance Method `public this.open(Page, url)`](#instance-method-public-thisopenpage-url)
+  - [Instance Method `public this.open(Page, url, timeouts?)`](#instance-method-public-thisopenpage-url-timeouts)
   - [Instance Method `public this.quit()`](#instance-method-public-thisquit)
 - [Predicates](#predicates)
   - [Function `predicates.atIndex(n)`](#function-predicatesatindexn)
   - [Function `predicates.textEquals(value)`](#function-predicatestextequalsvalue)
+- [Type `SeleniumTimeouts`](#type-seleniumtimeouts)
 
 ## Class `SeleniumAdapter`
 
@@ -115,7 +116,7 @@ The adapter associated with this browser abstraction.
 
 **Type:** [`adapter: SeleniumAdapter`](#class-seleniumadapter)
 
-### Instance Method `public this.open(Page, url)`
+### Instance Method `public this.open(Page, url, timeouts?)`
 
 ```js
 const myPage = await browser.open(MyPage, 'https://example.com/');
@@ -125,12 +126,11 @@ Schedules a command to navigate to the specified URL, and then instantiates the 
 
 A page class is considered loaded if its declared initial components are found and its declared URL matches the current one.
 
-The timeout for the navigation must be configured via Selenium, it usually defaults to 30 seconds.
-
 **Parameters:**
 
 - [`Page: PageClass`](class.md#pageclass) The class of the page to load.
 - `url: string` The URL to navigate to.
+- [`timeouts?: SeleniumTimeouts`](#type-seleniumtimeouts)
 
 **Returns:** `Promise<Page>` A promise that will resolve to an instance of the specified page class.
 
@@ -183,6 +183,18 @@ Compares against the visible (i.e. not hidden by CSS) innerText of an element, i
 - `value: string` The expected text.
 
 **Returns:** [Predicate](class.md#predicate)
+
+## Type `SeleniumTimeouts`
+
+```js
+// Default
+{implicitlyWait: 5000, pageLoad: 30000}
+```
+
+A configuration for managing the timeout behavior for WebDriver instances, it has two required properties:
+
+- `implicitlyWait: number` Specifies the amount of time the driver should wait when searching for an element if it is not immediately present.
+- `pageLoad: number` Sets the amount of time to wait for a page load to complete before returning an error. If the timeout is negative, page loads may be indefinite.
 
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
 [selenium-capabilities]: http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_Capabilities.html
