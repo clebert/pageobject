@@ -53,11 +53,11 @@ const adapter = new SeleniumAdapter(driver);
 
 **Parameters:**
 
-- [`driver: WebDriver`][selenium-webdriver] An instance of the Selenium WebDriver.
+- [`driver: WebDriver`][selenium-webdriver] An instance of the WebDriver.
 
 ### Instance Variable `public this.driver`
 
-The Selenium WebDriver instance associated with this adapter.
+The WebDriver instance associated with this adapter.
 
 **Type:** [`driver: WebDriver`][selenium-webdriver]
 
@@ -107,8 +107,8 @@ const browser = new SeleniumBrowser(driver, adapter);
 
 **Parameters:**
 
-- [`driver: WebDriver`][selenium-webdriver] An instance of the Selenium WebDriver.
-- [`adapter: SeleniumAdapter`](#class-seleniumadapter) The adapter for connecting a page object to Selenium WebDriver.
+- [`driver: WebDriver`][selenium-webdriver] An instance of the WebDriver.
+- [`adapter: SeleniumAdapter`](#class-seleniumadapter) The adapter for connecting a page object to WebDriver.
 
 ### Instance Variable `public this.adapter`
 
@@ -130,7 +130,7 @@ A page class is considered loaded if its declared initial components are found a
 
 - [`Page: PageClass`](class.md#pageclass) The class of the page to load.
 - `url: string` The URL to navigate to.
-- [`timeouts?: SeleniumTimeouts`](#type-seleniumtimeouts)
+- [`timeouts?: SeleniumTimeouts`](#type-seleniumtimeouts) The configuration object for managing the timeout behavior of the WebDriver instance.
 
 **Returns:** `Promise<Page>` A promise that will resolve to an instance of the specified page class.
 
@@ -140,7 +140,7 @@ A page class is considered loaded if its declared initial components are found a
 await browser.quit();
 ```
 
-Terminates the browser session. After calling quit, the Selenium WebDriver instance associated with this browser abstraction will be invalidated and may no longer be used to issue commands against the browser.
+Terminates the browser session. After calling quit, the WebDriver instance associated with this browser abstraction will be invalidated and may no longer be used to issue commands against the browser.
 
 **Parameters:** None.
 
@@ -191,7 +191,7 @@ Compares against the visible (i.e. not hidden by CSS) innerText of an element, i
 {implicitlyWait: 5000, pageLoad: 30000}
 ```
 
-A configuration for managing the timeout behavior for WebDriver instances, it has two required properties:
+A configuration object for managing the timeout behavior of WebDriver instances, it has two required properties:
 
 - `implicitlyWait: number` Specifies the amount of time the driver should wait when searching for an element if it is not immediately present.
 - `pageLoad: number` Sets the amount of time to wait for a page load to complete before returning an error. If the timeout is negative, page loads may be indefinite.
