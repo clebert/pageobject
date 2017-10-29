@@ -17,3 +17,5 @@ script:
 - 'npm test'
 after_success:
 - '< coverage/lcov.info "$(npm bin)"/coveralls'
+env:
+- DBUS_SESSION_BUS_ADDRESS=/dev/null

@@ -97,6 +97,10 @@ class FrontPage extends PageObject<WebElement, SeleniumAdapter> {
   public static InitialComponents = [NewsList];
   public static url = /\/news$/;
 
+  public static async open(browser: SeleniumBrowser): Promise<FrontPage> {
+    return browser.open(FrontPage, 'https://news.ycombinator.com/news');
+  }
+
   public selectNewsList(): NewsList {
     return this.selectUniqueDescendant(NewsList);
   }
