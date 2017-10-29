@@ -24,10 +24,12 @@ npm install @types/selenium-webdriver
   - [Instance Variable `public this.driver`](#instance-variable-public-thisdriver)
 - [Class `SeleniumBrowser`](#class-seleniumbrowser)
   - [Static Method `public SeleniumBrowser.launchHeadlessChrome()`](#static-method-public-seleniumbrowserlaunchheadlesschrome)
-  - [Constructor Method `new SeleniumBrowser(driver, adapter)`](#constructor-method-new-seleniumbrowserdriver-adapter)
+  - [Constructor Method `new SeleniumBrowser(adapter)`](#constructor-method-new-seleniumbrowseradapter)
   - [Instance Variable `public this.adapter`](#instance-variable-public-thisadapter)
   - [Instance Method `public this.open(Page, url)`](#instance-method-public-thisopenpage-url)
   - [Instance Method `public this.quit()`](#instance-method-public-thisquit)
+  - [Instance Method `public this.setElementSearchTimeout(ms)`](#instance-method-public-thissetelementsearchtimeoutms)
+  - [Instance Method `public this.setPageLoadTimeout(ms)`](#instance-method-public-thissetpageloadtimeoutms)
 - [Predicates](#predicates)
   - [Function `predicates.atIndex(n)`](#function-predicatesatindexn)
   - [Function `predicates.textEquals(value)`](#function-predicatestextequalsvalue)
@@ -51,7 +53,7 @@ const adapter = new SeleniumAdapter(driver);
 
 **Parameters:**
 
-- [`driver: WebDriver`][selenium-webdriver] An instance of the WebDriver.
+- [`driver: WebDriver`][selenium-webdriver] The WebDriver instance that provides automated control over a browser session.
 
 ### Instance Variable `public this.driver`
 
@@ -81,17 +83,16 @@ Creates a new WebDriver session to control a headless Chrome.
 
 **Returns:** `Promise<SeleniumBrowser>`
 
-### Constructor Method `new SeleniumBrowser(driver, adapter)`
+### Constructor Method `new SeleniumBrowser(adapter)`
 
 ```js
 const driver = await new Builder().forBrowser('chrome').build();
 const adapter = new SeleniumAdapter(driver);
-const browser = new SeleniumBrowser(driver, adapter);
+const browser = new SeleniumBrowser(adapter);
 ```
 
 **Parameters:**
 
-- [`driver: WebDriver`][selenium-webdriver] The WebDriver instance that provides automated control over a browser session.
 - [`adapter: SeleniumAdapter`](#class-seleniumadapter) The adapter for connecting page objects to Selenium.
 
 ### Instance Variable `public this.adapter`
@@ -126,6 +127,36 @@ await browser.quit();
 Terminates the browser session. After calling quit, the WebDriver instance associated with this browser abstraction will be invalidated and may no longer be used to issue commands against the browser.
 
 **Parameters:** None.
+
+**Returns:** `Promise<void>`
+
+### Instance Method `public this.setElementSearchTimeout(ms)`
+
+```js
+await browser.setElementSearchTimeout(5000); // 5 seconds
+```
+
+Specifies the amount of time the driver should wait when searching for an element if it is not immediately present.
+
+Setting the wait timeout to 0 (its default value), disables waiting, but **it is recommended to set a wait timeout greater than 0.**
+
+**Parameters:**
+
+- `ms: number` The amount of time to wait, in milliseconds.
+
+**Returns:** `Promise<void>`
+
+### Instance Method `public this.setPageLoadTimeout(ms)`
+
+```js
+await browser.setPageLoadTimeout(10000); // 10 seconds
+```
+
+Sets the amount of time to wait for a page load to complete before returning an error. If the timeout is negative, page loads may be indefinite.
+
+**Parameters:**
+
+- `ms: number` The amount of time to wait, in milliseconds.
 
 **Returns:** `Promise<void>`
 

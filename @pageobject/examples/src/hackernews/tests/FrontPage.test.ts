@@ -4,12 +4,15 @@ import 'chromedriver';
 import {SeleniumBrowser} from '@pageobject/selenium-adapter';
 import {FrontPage} from '../pages/FrontPage';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
 
 let browser: SeleniumBrowser;
 
 beforeEach(async () => {
   browser = await SeleniumBrowser.launchHeadlessChrome();
+
+  await browser.setElementSearchTimeout(5000);
+  await browser.setPageLoadTimeout(10000);
 });
 
 afterEach(async () => {
