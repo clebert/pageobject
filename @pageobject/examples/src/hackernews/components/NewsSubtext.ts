@@ -17,6 +17,8 @@ export class NewsSubtext extends PageObject<WebElement, SeleniumAdapter> {
   public async hideAsAnonymous(): Promise<HideLoginPage> {
     await this.hide();
 
+    console.log('SCREENSHOT', await this.adapter.driver.takeScreenshot());
+
     return this.goto(HideLoginPage);
   }
 }
