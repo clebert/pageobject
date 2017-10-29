@@ -5,7 +5,7 @@
 > -- [Simon Stewart][simon-stewart]
 
 PageObjectJS is a class-based implementation of the [Page Object Pattern](guides/page-object-pattern.md) for JavaScript.
-It allows you to write **readable**, **reliable**, and **maintainable** automated E2E tests using a simple but powerful [API](api-references/index.md).
+It allows you to write **readable**, **stable**, and **maintainable** automated E2E tests using a simple but powerful [API](api-references/index.md).
 
 Your tests can be written using any browser automation framework, all you need is an appropriate adapter.
 An adapter connects a specific browser automation library with [@pageobject/class](api-references/class.md).
