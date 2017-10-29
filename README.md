@@ -3,7 +3,7 @@
 [![Build Status][badge-travis-image]][badge-travis-link]
 ![Stability][badge-stability-image]
 
-**Readable. Reliable. Maintainable.** E2E testing using any browser automation framework.
+**Readable. Stable. Maintainable.** E2E testing using any browser automation framework.
 
 ## Documentation
 

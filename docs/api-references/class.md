@@ -196,9 +196,6 @@ A page class declares a concrete page type, it has the following optional proper
 - [`PageClass.InitialElements?: string[]`][css-selectors]
 - `PageClass.url?: RegExp | string`
 
-**To write reliable tests, it is important to specify the properties of a page as accurately as possible.**
-Most important is the specification of initial components or elements.
-
 ## Type `ComponentClass`
 
 ```js
