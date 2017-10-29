@@ -23,16 +23,14 @@ npm install @types/selenium-webdriver
   - [Constructor Method `new SeleniumAdapter(driver)`](#constructor-method-new-seleniumadapterdriver)
   - [Instance Variable `public this.driver`](#instance-variable-public-thisdriver)
 - [Class `SeleniumBrowser`](#class-seleniumbrowser)
-  - [Static Method `public SeleniumBrowser.launch(capabilities)`](#static-method-public-seleniumbrowserlaunchcapabilities)
   - [Static Method `public SeleniumBrowser.launchHeadlessChrome()`](#static-method-public-seleniumbrowserlaunchheadlesschrome)
   - [Constructor Method `new SeleniumBrowser(driver, adapter)`](#constructor-method-new-seleniumbrowserdriver-adapter)
   - [Instance Variable `public this.adapter`](#instance-variable-public-thisadapter)
-  - [Instance Method `public this.open(Page, url, timeouts?)`](#instance-method-public-thisopenpage-url-timeouts)
+  - [Instance Method `public this.open(Page, url)`](#instance-method-public-thisopenpage-url)
   - [Instance Method `public this.quit()`](#instance-method-public-thisquit)
 - [Predicates](#predicates)
   - [Function `predicates.atIndex(n)`](#function-predicatesatindexn)
   - [Function `predicates.textEquals(value)`](#function-predicatestextequalsvalue)
-- [Type `SeleniumTimeouts`](#type-seleniumtimeouts)
 
 ## Class `SeleniumAdapter`
 
@@ -71,20 +69,6 @@ import {SeleniumBrowser} from '@pageobject/selenium-adapter';
 const {SeleniumBrowser} = require('@pageobject/selenium-adapter');
 ```
 
-### Static Method `public SeleniumBrowser.launch(capabilities)`
-
-```js
-const browser = await SeleniumBrowser.launch({browserName: 'chrome'});
-```
-
-Creates a new WebDriver session based on the specified capabilities.
-
-**Parameters:**
-
-- [`capabilities: Capabilities`][selenium-capabilities] A set of capabilities for the new WebDriver session.
-
-**Returns:** `Promise<SeleniumBrowser>`
-
 ### Static Method `public SeleniumBrowser.launchHeadlessChrome()`
 
 ```js
@@ -107,8 +91,8 @@ const browser = new SeleniumBrowser(driver, adapter);
 
 **Parameters:**
 
-- [`driver: WebDriver`][selenium-webdriver] An instance of the WebDriver.
-- [`adapter: SeleniumAdapter`](#class-seleniumadapter) The adapter for connecting a page object to WebDriver.
+- [`driver: WebDriver`][selenium-webdriver] The WebDriver instance that provides automated control over a browser session.
+- [`adapter: SeleniumAdapter`](#class-seleniumadapter) The adapter for connecting page objects to Selenium.
 
 ### Instance Variable `public this.adapter`
 
@@ -116,7 +100,7 @@ The adapter associated with this browser abstraction.
 
 **Type:** [`adapter: SeleniumAdapter`](#class-seleniumadapter)
 
-### Instance Method `public this.open(Page, url, timeouts?)`
+### Instance Method `public this.open(Page, url)`
 
 ```js
 const myPage = await browser.open(MyPage, 'https://example.com/');
@@ -130,7 +114,6 @@ A page class is considered loaded if its declared initial components are found a
 
 - [`Page: PageClass`](class.md#pageclass) The class of the page to load.
 - `url: string` The URL to navigate to.
-- [`timeouts?: SeleniumTimeouts`](#type-seleniumtimeouts) The configuration object for managing the timeout behavior of the WebDriver instance.
 
 **Returns:** `Promise<Page>` A promise that will resolve to an instance of the specified page class.
 
@@ -184,19 +167,6 @@ Compares against the visible (i.e. not hidden by CSS) innerText of an element, i
 
 **Returns:** [Predicate](class.md#predicate)
 
-## Type `SeleniumTimeouts`
-
-```js
-// Default
-{implicitlyWait: 5000, pageLoad: 30000}
-```
-
-A configuration object for managing the timeout behavior of WebDriver instances, it has two required properties:
-
-- `implicitlyWait: number` Specifies the amount of time the driver should wait when searching for an element if it is not immediately present.
-- `pageLoad: number` Sets the amount of time to wait for a page load to complete before returning an error. If the timeout is negative, page loads may be indefinite.
-
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
-[selenium-capabilities]: http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_Capabilities.html
 [selenium-webdriver]: http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html
 [typescript]: https://www.typescriptlang.org/

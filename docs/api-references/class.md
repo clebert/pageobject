@@ -48,7 +48,7 @@ A page class is considered loaded if its declared initial components are found a
 **Parameters:**
 
 - [`Page: PageClass`](#pageclass) The class of the page to load.
-- [`adapter: Adapter`](#adapter) The adapter for connecting a page object to a specific browser automation library.
+- [`adapter: Adapter`](#adapter) The adapter for connecting page objects to a specific browser automation library.
 
 **Returns:** `Promise<Page>` A promise that will resolve to an instance of the specified page class.
 
