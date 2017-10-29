@@ -1,5 +1,5 @@
 import {PageClass, PageObject} from '@pageobject/class';
-import {Builder, Capabilities, WebDriver, WebElement} from 'selenium-webdriver';
+import {Builder, Capabilities, WebElement} from 'selenium-webdriver';
 import {SeleniumAdapter} from './SeleniumAdapter';
 
 export class SeleniumBrowser {
@@ -11,15 +11,12 @@ export class SeleniumBrowser {
     /* tslint:disable-next-line await-promise */
     const driver = await new Builder().withCapabilities(capabilities).build();
 
-    return new SeleniumBrowser(driver, new SeleniumAdapter(driver));
+    return new SeleniumBrowser(new SeleniumAdapter(driver));
   }
 
   public readonly adapter: SeleniumAdapter;
 
-  private readonly driver: WebDriver;
-
-  public constructor(driver: WebDriver, adapter: SeleniumAdapter) {
-    this.driver = driver;
+  public constructor(adapter: SeleniumAdapter) {
     this.adapter = adapter;
   }
 
@@ -27,12 +24,26 @@ export class SeleniumBrowser {
     Page: PageClass<WebElement, SeleniumAdapter, TPage>,
     url: string
   ): Promise<TPage> {
-    await this.driver.navigate().to(url);
+    await this.adapter.driver.navigate().to(url);
 
     return PageObject.goto(Page, this.adapter);
   }
 
   public async quit(): Promise<void> {
-    await this.driver.quit();
+    await this.adapter.driver.quit();
+  }
+
+  public async setElementSearchTimeout(ms: number): Promise<void> {
+    await this.adapter.driver
+      .manage()
+      .timeouts()
+      .implicitlyWait(ms);
+  }
+
+  public async setPageLoadTimeout(ms: number): Promise<void> {
+    await this.adapter.driver
+      .manage()
+      .timeouts()
+      .pageLoadTimeout(ms);
   }
 }
