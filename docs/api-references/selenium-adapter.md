@@ -51,6 +51,8 @@ const driver = await new Builder().forBrowser('chrome').build();
 const adapter = new SeleniumAdapter(driver);
 ```
 
+Please refer to the ["Using the Builder API"][selenium] documentation for instructions on creating a WebDriver instance.
+
 **Parameters:**
 
 - [`driver: WebDriver`][selenium-webdriver] The WebDriver instance that provides automated control over a browser session.
