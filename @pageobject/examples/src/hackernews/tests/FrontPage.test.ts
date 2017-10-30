@@ -20,7 +20,7 @@ teardown(async function callback(): Promise<void> {
     if (this.currentTest.state !== 'passed') {
       const screenshot = await browser.adapter.driver.takeScreenshot();
 
-      allure.createAttachement('screenshot on fail', screenshot);
+      allure.createAttachment('screenshot on fail', screenshot);
     }
   } finally {
     await browser.quit();
