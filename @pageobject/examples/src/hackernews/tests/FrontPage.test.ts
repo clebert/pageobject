@@ -33,7 +33,7 @@ teardown(async () => browser.quit());
 async function takeScreenshot(name: string): Promise<void> {
   const screenshot = await browser.adapter.driver.takeScreenshot();
 
-  allure.createAttachment(name, screenshot, 'image/png');
+  allure.createAttachment(name, new Buffer(screenshot, 'base64'), 'image/png');
 }
 
 teardown(async () => {
