@@ -11,7 +11,7 @@ setup(async () => {
   browser = await SeleniumBrowser.launchHeadlessChrome();
 
   await browser.setElementSearchTimeout(5000);
-  await browser.setPageLoadTimeout(10000);
+  // await browser.setPageLoadTimeout(10000);
 });
 
 /*
