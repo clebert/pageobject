@@ -14,27 +14,25 @@ setup(async () => {
   await browser.setPageLoadTimeout(10000);
 });
 
-teardown(async function callback(): Promise<void> {
-  try {
-    /* tslint:disable-next-line no-invalid-this */
-    if (this.currentTest.state !== 'passed') {
-      const screenshot = await browser.adapter.driver.takeScreenshot();
+async function takeScreenshotOnFailure(
+  this: Mocha.IBeforeAndAfterContext
+): Promise<void> {
+  /* tslint:disable-next-line no-invalid-this */
+  if (this.currentTest.state !== 'passed') {
+    const screenshot = await browser.adapter.driver.takeScreenshot();
 
-      allure.createAttachment('screenshot on fail', screenshot, 'image/png');
-    }
-  } finally {
-    await browser.quit();
+    allure.createAttachment('failure screenshot', screenshot, 'image/png');
   }
-});
+}
+
+teardown(takeScreenshotOnFailure);
+teardown(async () => browser.quit());
 
 suite('GIVEN the Hacker News front page is open', () => {
   let frontPage: FrontPage;
 
   setup(async () => {
-    frontPage = await browser.open(
-      FrontPage,
-      'https://news.ycombinator.com/news'
-    );
+    frontPage = await FrontPage.open(browser);
   });
 
   test('THEN the displayed rank of a news should match its position in the news list', async () => {
