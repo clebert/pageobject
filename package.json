@@ -51,7 +51,8 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/@pageobject/*/src/**/*.{ts,tsx}",
-      "!**/@pageobject/*/src/**/*.test.{ts,tsx}"
+      "!**/@pageobject/*/src/**/*.test.{ts,tsx}",
+      "!**/@pageobject/examples/**"
     ],
     "coverageThreshold": {
       "global": {
@@ -70,7 +71,11 @@
       "tsx"
     ],
     "testMatch": [
-      "**/@pageobject/*/src/**/*.test.{ts,tsx}"
+      "<rootDir>/@pageobject/*/src/**/*.test.{ts,tsx}"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/@pageobject/examples/"
     ],
     "transform": {
       ".ts": "<rootDir>/node_modules/ts-jest/preprocessor.js"
