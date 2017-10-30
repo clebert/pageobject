@@ -1,42 +1,36 @@
 /* tslint:disable-next-line no-implicit-dependencies no-import-side-effect */
 import 'chromedriver';
 
-test('foo', async () => {
-  throw new Error('an error');
-});
-
-afterEach('take screenshot on failure', async function callback(): Promise<
-  void
-> {
-  /* tslint:disable-next-line no-invalid-this */
-  if (this.currentTest.state !== 'passed') {
-    console.log('screenshot on fail');
-  }
-});
-
-/*
 import {SeleniumBrowser} from '@pageobject/selenium-adapter';
+import * as assert from 'assert';
 import {FrontPage} from '../pages/FrontPage';
-
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
 
 let browser: SeleniumBrowser;
 
-beforeEach(async () => {
+setup(async () => {
   browser = await SeleniumBrowser.launchHeadlessChrome();
 
   await browser.setElementSearchTimeout(5000);
   await browser.setPageLoadTimeout(10000);
 });
 
-afterEach(async () => {
-  await browser.quit();
+teardown(async function callback(): Promise<void> {
+  try {
+    /* tslint:disable-next-line no-invalid-this */
+    if (this.currentTest.state !== 'passed') {
+      const screenshot = await browser.adapter.driver.takeScreenshot();
+
+      allure.createAttachement('screenshot on fail', screenshot);
+    }
+  } finally {
+    await browser.quit();
+  }
 });
 
-describe('GIVEN the Hacker News front page is open', () => {
+suite('GIVEN the Hacker News front page is open', () => {
   let frontPage: FrontPage;
 
-  beforeEach(async () => {
+  setup(async () => {
     frontPage = await browser.open(
       FrontPage,
       'https://news.ycombinator.com/news'
@@ -47,19 +41,19 @@ describe('GIVEN the Hacker News front page is open', () => {
     const newsList = frontPage.selectNewsList();
     const news3 = newsList.selectNews(3);
 
-    expect(await news3.item.getRank()).toBe(3);
+    assert.strictEqual(await news3.item.getRank(), 3);
   });
 
-  describe('WHEN the user is not logged in', () => {
+  suite('WHEN the user is not logged in', () => {
     test('THEN hiding a news should trigger a redirect to the login page', async () => {
       const newsList = frontPage.selectNewsList();
       const news = newsList.selectNews();
 
       const loginPage = await news.subtext.hideAsAnonymous();
 
-      expect(
+      assert.ok(
         await loginPage.displaysMessage('You have to be logged in to hide.')
-      ).toBe(true);
+      );
     });
 
     test('THEN voting a news should trigger a redirect to the login page', async () => {
@@ -68,10 +62,9 @@ describe('GIVEN the Hacker News front page is open', () => {
 
       const loginPage = await news.item.voteAsAnonymous();
 
-      expect(
+      assert.ok(
         await loginPage.displaysMessage('You have to be logged in to vote.')
-      ).toBe(true);
+      );
     });
   });
 });
-*/
