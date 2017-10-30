@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@pageobject/class": "^0.2.0",
+    "@types/jest": "^21.1.5",
     "@types/selenium-webdriver": "^3.0.8",
     "selenium-webdriver": "^3.6.0"
   }

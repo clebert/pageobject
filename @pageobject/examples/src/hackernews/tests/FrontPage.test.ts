@@ -1,6 +1,18 @@
 /* tslint:disable-next-line no-implicit-dependencies no-import-side-effect */
 import 'chromedriver';
 
+test('foo', async () => {
+  throw new Error('an error');
+});
+
+afterEach('take screenshot on failure', async function(): Promise<void> {
+  /* tslint:disable-next-line no-invalid-this */
+  if (this.currentTest.state !== 'passed') {
+    console.log('screenshot on fail');
+  }
+});
+
+/*
 import {SeleniumBrowser} from '@pageobject/selenium-adapter';
 import {FrontPage} from '../pages/FrontPage';
 
@@ -60,3 +72,4 @@ describe('GIVEN the Hacker News front page is open', () => {
     });
   });
 });
+*/

@@ -5,6 +5,8 @@ language: node_js
 cache:
   directories:
   - node_modules
+jdk:
+- oraclejdk8
 node_js:
 - '8'
 before_install:
@@ -15,7 +17,12 @@ before_script:
 - '"$(npm bin)"/commitlint --from="$TRAVIS_COMMIT"'
 script:
 - 'npm test'
+after_script:
+- 'npm run report'
 after_success:
 - '< coverage/lcov.info "$(npm bin)"/coveralls'
 env:
-- DBUS_SESSION_BUS_ADDRESS=/dev/null
+  global:
+  - DBUS_SESSION_BUS_ADDRESS=/dev/null
+  - secure: c843l9WzcuerFDF0u8VNUv/1RO27HSdQ+MJYlch7WVgGe+GWvkiRk4zpnYA+1qljKRumnWVL+ZPnWhkIW1J8EGsh4U3lNeUxaRL2+Gzi+vBdUJCjSZt9WnDBoXv/zQgWyPfynf4jSAZzlgzKmJrH5yRAggK8+hV8dqTE5xNa78S2+hL6WWzbeWWViwieinzsHPmePGW8JpYDWd7lnm3b+LI5/cNwJZYHnEhud/GrFbGvG21AzFoJeIvKV5fL5XL0YP8M/FvVvfI/ZC/RXf7m+RzOBQfVMe44Dn7IMbRVEsrxE0z9BjWpUc7GWmZqmYR0BD8LOAejxu6CXMMWzdLjcus6ettsJ9ahdMLWq/qIn7UztrLTxrhbuOQq5EVTOq2CRU3WGyK2K0EnonmLgmblB5/iFqoy5Bf4I4f0W1hgbLUFTn75mecEwqxBQGBZfeuJSXDbXNVK2yew2BPLnJf4UpNmeCOD+M41iDmwK61kkcjfY88yVLgrU33hU5bUESkVwCfnxugr53CdrcPXRJqa7j0/xC9MkRt++0VySEYVJX1FRE2XoMwG81/6SGfXm2LNt32FUZ9l2t/jjMzORpU4bc8mZZnXQZCYTUZw/GCmFA5E2NGXcVdR5kjfrUSVS1ANBb4kRkW6GgKO2G+tG/wOQZTT6tezzjMw1LFnrcRIJFM=
+  - secure: Qrp29E7oo7bYPWoogVk9Lxg+ua4i2iR1RAyjwbIJSkp2k5c/9YVgpY46XTEpEW6JCI3bqLPKRvn303ZfH0FOrDI5n4sZWAVSwBvXbsoWvGmNeJouOdcQHQssMG9sxmN3Hn6qdxurUz+eDeSTdJ+w7qDu8/6hZAUxd+tqjDuWAQtyoYffGyVo8/KG+i+RXyQJfI8qjPQsdzNd/FOjl6mxBkrztjyVgcY64C1tOXWIH7bs3U9gtDCYbx8zH8IEP8Jd2szUYSYzewnSVFMwR8KYvioSeHFV3YpEPZXbdTnrFnwa4SoUMljyv2b1FB+k15qt/B9KW9Uj/eUKwp0HfhLIP4mh3mSYxb1MkwOANpTf1crbkghtw7A3LeqJZ5ne+280OyyDNi/vnMkh0xbbzaleuUh6nhojAnKPzl5dWpflbw+SYcfCU1snwIvQACg6l0HGfc8JwFoabtBg6t2rpdlL4SfmyURSTLPwLHq3rsILJ58/KzUMKQ3vKt6orj5IdUMNvR7NOyhiw4aMPdw/OkWGiIyHkrKA5goKNeF5Z2b2kNlY64RODzz9+qLbwnLp/vqT46ZFs8RAnKW6Pf1LC43gjz9Al2eKmgQIQKGMj9cy2C0YKZg4cN/4eVKDIHarT7+VANQHGhZa3DS7ND+VMmWLDTsa2RL0EIvaMLDJM0aoubo=

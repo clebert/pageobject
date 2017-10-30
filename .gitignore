@@ -2,6 +2,7 @@
 @pageobject/*/.npmrc
 @pageobject/*/tsconfig.json
 @pageobject/*/tslint.json
+allure-*/
 coverage/
 lerna-debug.log
 lib/
