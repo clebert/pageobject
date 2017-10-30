@@ -1,5 +1,6 @@
 @pageobject/*/tsconfig.json
 @pageobject/*/tslint.json
+allure-*/
 coverage/
 lerna.json
 lib/

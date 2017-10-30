@@ -1,0 +1,5 @@
+{
+  "region": "eu-central-1",
+  "domain": "pageobject.js",
+  "uploadDir": "./allure-report"
+}
