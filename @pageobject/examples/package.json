@@ -6,7 +6,7 @@
     "report": "allure generate allure-results --clean -o allure-report",
     "postreport": "s3-website deploy --lock-config",
     "pretest": "rm -rf allure-report && rm -rf allure-results",
-    "test": "multi='progress=- mocha-allure-reporter=-' mocha --async-only --timeout 15000 --ui tdd --reporter mocha-multi './lib/**/*.test.js'",
+    "test": "multi='progress=- mocha-allure-reporter=-' mocha --async-only --timeout 60000 --ui tdd --reporter mocha-multi './lib/**/*.test.js'",
     "posttest": "node src/quick-start/test.js"
   },
   "dependencies": {
