@@ -5,7 +5,9 @@ test('foo', async () => {
   throw new Error('an error');
 });
 
-afterEach('take screenshot on failure', async function(): Promise<void> {
+afterEach('take screenshot on failure', async function callback(): Promise<
+  void
+> {
   /* tslint:disable-next-line no-invalid-this */
   if (this.currentTest.state !== 'passed') {
     console.log('screenshot on fail');
