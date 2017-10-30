@@ -14,10 +14,11 @@ setup(async () => {
   await browser.setPageLoadTimeout(10000);
 });
 
+/*
 async function takeScreenshotOnFailure(
   this: Mocha.IBeforeAndAfterContext
 ): Promise<void> {
-  /* tslint:disable-next-line no-invalid-this */
+  // tslint:disable-next-line no-invalid-this
   if (this.currentTest.state !== 'passed') {
     const screenshot = await browser.adapter.driver.takeScreenshot();
 
@@ -27,12 +28,29 @@ async function takeScreenshotOnFailure(
 
 teardown(takeScreenshotOnFailure);
 teardown(async () => browser.quit());
+*/
+
+async function takeScreenshot(name: string): Promise<void> {
+  const screenshot = await browser.adapter.driver.takeScreenshot();
+
+  allure.createAttachment(name, screenshot, 'image/png');
+}
+
+teardown(async () => {
+  try {
+    await takeScreenshot('after test');
+  } finally {
+    await browser.quit();
+  }
+});
 
 suite('GIVEN the Hacker News front page is open', () => {
   let frontPage: FrontPage;
 
   setup(async () => {
     frontPage = await FrontPage.open(browser);
+
+    await takeScreenshot('before test');
   });
 
   test('THEN the displayed rank of a news should match its position in the news list', async () => {
