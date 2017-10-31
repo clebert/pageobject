@@ -4,7 +4,7 @@ import 'chromedriver';
 import {join} from 'path';
 import {SeleniumBrowser} from '..';
 
-const url = `file://${join(__dirname, 'index.html')}`;
+const url = `file://${join(__dirname, '../__fixtures__/index.html')}`;
 
 let browser: SeleniumBrowser;
 
