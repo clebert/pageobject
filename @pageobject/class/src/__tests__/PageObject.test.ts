@@ -40,9 +40,23 @@ class MockPageObject extends PageObject<string, MockAdapter> {
   ): Promise<string> {
     return this.findUniqueDescendant(selector, predicate);
   }
-}
 
-beforeEach(() => mockFindElement.mockClear());
+  public async callSelectFirstDescendant(
+    Component: jest.Mock,
+    predicate: Predicate<string>
+  ): Promise<{}> {
+    /* tslint:disable-next-line no-any */
+    return this.selectFirstDescendant(Component as any, predicate);
+  }
+
+  public async callSelectUniqueDescendant(
+    Component: jest.Mock,
+    predicate: Predicate<string>
+  ): Promise<{}> {
+    /* tslint:disable-next-line no-any */
+    return this.selectUniqueDescendant(Component as any, predicate);
+  }
+}
 
 describe('PageObject', () => {
   let mockAdapter: MockAdapter;
@@ -51,6 +65,8 @@ describe('PageObject', () => {
   beforeEach(async () => {
     mockAdapter = new MockAdapter();
     mockPageObject = new MockPageObject(mockPath, mockAdapter);
+
+    mockFindElement.mockClear();
   });
 
   describe('static goto(Page, adapter)', () => {
@@ -148,20 +164,62 @@ describe('PageObject', () => {
   });
 
   describe('selectFirstDescendant(Component, predicate?)', () => {
-    it('should TODO', async () => {
-      // TODO
+    it('should return an instance of the specified component class', async () => {
+      const MockComponentClass = jest.fn();
+
+      /* tslint:disable-next-line no-any */
+      (MockComponentClass as any).selector = 'mockSelector';
+
+      const component = await mockPageObject.callSelectFirstDescendant(
+        MockComponentClass,
+        mockPredicate
+      );
+
+      expect(MockComponentClass.mock.instances.length).toBe(1);
+      expect(MockComponentClass.mock.instances[0]).toBe(component);
+
+      expect(MockComponentClass.mock.calls).toEqual([
+        [
+          [
+            ...mockPath,
+            {selector: 'mockSelector', unique: false, predicate: mockPredicate}
+          ],
+          mockAdapter
+        ]
+      ]);
     });
   });
 
   describe('selectUniqueDescendant(Component, predicate?)', () => {
-    it('should TODO', async () => {
-      // TODO
+    it('should return an instance of the specified component class', async () => {
+      const MockComponentClass = jest.fn();
+
+      /* tslint:disable-next-line no-any */
+      (MockComponentClass as any).selector = 'mockSelector';
+
+      const component = await mockPageObject.callSelectUniqueDescendant(
+        MockComponentClass,
+        mockPredicate
+      );
+
+      expect(MockComponentClass.mock.instances.length).toBe(1);
+      expect(MockComponentClass.mock.instances[0]).toBe(component);
+
+      expect(MockComponentClass.mock.calls).toEqual([
+        [
+          [
+            ...mockPath,
+            {selector: 'mockSelector', unique: true, predicate: mockPredicate}
+          ],
+          mockAdapter
+        ]
+      ]);
     });
   });
 
   describe('goto(Page)', () => {
     it('should TODO', async () => {
-      // TODO
+      // TODO: spyOn
     });
   });
 });
