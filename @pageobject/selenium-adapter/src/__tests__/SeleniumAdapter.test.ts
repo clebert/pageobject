@@ -19,7 +19,7 @@ afterEach(async () => {
 });
 
 describe('SeleniumAdapter', () => {
-  describe('findElements(selector, parent?)', () => {
+  describe('public this.findElements(selector, parent?)', () => {
     it('should return all <p> elements', async () => {
       const elements = await browser.adapter.findElements('p');
 
@@ -45,7 +45,7 @@ describe('SeleniumAdapter', () => {
     });
   });
 
-  describe('getCurrentUrl()', () => {
+  describe('public this.getCurrentUrl()', () => {
     it('should return the initial url', async () => {
       expect(await browser.adapter.getCurrentUrl()).toBe(url);
     });
