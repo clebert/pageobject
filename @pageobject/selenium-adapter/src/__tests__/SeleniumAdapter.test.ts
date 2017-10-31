@@ -18,8 +18,8 @@ afterEach(async () => {
   await browser.quit();
 });
 
-describe('class SeleniumAdapter', () => {
-  describe('findElements()', () => {
+describe('SeleniumAdapter', () => {
+  describe('findElements(selector, parent?)', () => {
     it('should return all <p> elements', async () => {
       const elements = await browser.adapter.findElements('p');
 

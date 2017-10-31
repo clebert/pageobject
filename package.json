@@ -8,7 +8,6 @@
     "commitmsg": "commitlint --edit",
     "precompile": "lerna exec -- rm -rf lib/",
     "compile": "lerna exec -- tsc --project .",
-    "postcompile": "lerna exec --ignore @pageobject/examples -- rm -rf lib/tests/",
     "format": "./scripts/prettier.sh --write",
     "format:test": "./scripts/prettier.sh --list-different",
     "postinstall": "./scripts/copy.sh && lerna bootstrap",
