@@ -23,7 +23,9 @@ const mockPath: PathSegment<string>[] = [
 const mockPredicate = async () => true;
 
 class MockPageObject extends PageObject<string, MockAdapter> {
-  // TODO: getAdapter
+  public getAdapter(): MockAdapter {
+    return this.adapter;
+  }
 
   public async callFindSelf(): Promise<string> {
     return this.findSelf();
@@ -79,6 +81,12 @@ describe('PageObject', () => {
   describe('public PageObject.goto(Page, adapter)', () => {
     it('should TODO', async () => {
       // TODO
+    });
+  });
+
+  describe('protected this.adapter', () => {
+    it('should be the adapter associated with this page object', () => {
+      expect(mockPageObject.getAdapter()).toBe(mockAdapter);
     });
   });
 
