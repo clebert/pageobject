@@ -70,7 +70,7 @@
       "tsx"
     ],
     "testMatch": [
-      "**/@pageobject/*/src/**/*.test.{ts,tsx}"
+      "<rootDir>/@pageobject/*/src/**/*.test.{ts,tsx}"
     ],
     "transform": {
       ".ts": "<rootDir>/node_modules/ts-jest/preprocessor.js"
