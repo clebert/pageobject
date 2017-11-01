@@ -66,6 +66,8 @@ ExamplePage.url = /example\.com/;
 (async () => {
   const browser = await SeleniumBrowser.launchHeadlessChrome();
 
+  await browser.setElementSearchTimeout(5000);
+
   try {
     const page = await browser.open(ExamplePage, 'https://example.com/');
 
