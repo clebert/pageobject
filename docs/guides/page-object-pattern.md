@@ -1,4 +1,8 @@
-# Page Object Pattern
+# Page Object Pattern: The Key to Maintainable E2E Tests
+
+One of the biggest obstacles of E2E tests is they are brittle. To combat this, there is a concept called the Page Object pattern.
+
+At its core, the Page Object pattern is a specialized form of the [Facade pattern][facade-pattern]. If you are unfamiliar with the facade pattern, it means hiding bad APIs behind better ones.
 
 A page object wraps a HTML page, or component, with an API, allowing you to manipulate page elements without digging around in the HTML.
 
@@ -42,7 +46,10 @@ The essential principle is that there is only one place in your test suite with 
 - [Readable. Stable. Maintainable. E2E Testing @ Facebook][facebook-talk-video]
 - [Martin Fowler: PageObject][martin-fowler-page-object]
 - [Selenium: PageObjects][selenium-page-objects]
+- [Justin Abrahms: Selenium's Page Object Pattern][justin-abrah-selenium-page-object-pattern]
 
+[facade-pattern]: https://en.wikipedia.org/wiki/Facade_pattern
 [facebook-talk-video]: https://youtu.be/diYgXpktTqo
+[justin-abrah-selenium-page-object-pattern]: https://justin.abrah.ms/python/selenium-page-object-pattern--the-key-to-maintainable-tests.html
 [martin-fowler-page-object]: https://martinfowler.com/bliki/PageObject.html
 [selenium-page-objects]: https://github.com/SeleniumHQ/selenium/wiki/PageObjects

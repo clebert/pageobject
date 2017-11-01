@@ -20,7 +20,7 @@ This is a multi-package repository ([monorepo][monorepo]).
 
 ### [@pageobject/class][docs-api-references-class]
 
-A class-based implementation of the [Page Object Pattern][docs-guides-page-object-pattern] for JavaScript.
+A class-based implementation of the [Page Object pattern][docs-guides-page-object-pattern] for JavaScript.
 
 ### [@pageobject/selenium-adapter][docs-api-references-selenium-adapter]
 

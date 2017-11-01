@@ -1,8 +1,8 @@
 # Guides
 
-## Page Object Pattern
+## Page Object Pattern: The Key to Maintainable E2E Tests
 
-A page object wraps a HTML page, or component, with an API, allowing you to manipulate page elements without digging around in the HTML. [**[…] READ MORE**](page-object-pattern.md)
+One of the biggest obstacles of E2E tests is they are brittle. To combat this, there is a concept called the Page Object pattern. [**[…] READ MORE**](page-object-pattern.md)
 
 - [Implementation Notes](page-object-pattern.md#implementation-notes)
 - [Related Links](page-object-pattern.md#related-links)
