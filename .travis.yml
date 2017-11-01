@@ -1,6 +1,8 @@
 dist: trusty
 addons:
-  chrome: stable
+  apt:
+    packages:
+    - google-chrome-stable
 language: node_js
 cache:
   directories:
