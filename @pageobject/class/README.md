@@ -4,7 +4,7 @@
 [![Build Status][badge-travis-image]][badge-travis-link]
 ![Stability][badge-stability-image]
 
-A class-based implementation of the [Page Object Pattern][docs-guides-page-object-pattern] for JavaScript.
+A class-based implementation of the [Page Object pattern][docs-guides-page-object-pattern] for JavaScript.
 
 ## Installation
 
