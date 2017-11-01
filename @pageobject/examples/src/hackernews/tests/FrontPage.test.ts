@@ -23,10 +23,7 @@ describe('GIVEN the Hacker News front page is open', () => {
   let frontPage: FrontPage;
 
   beforeEach(async () => {
-    frontPage = await browser.open(
-      FrontPage,
-      'https://news.ycombinator.com/news'
-    );
+    frontPage = await FrontPage.open(browser);
   });
 
   test('THEN the displayed rank of a news should match its position in the news list', async () => {

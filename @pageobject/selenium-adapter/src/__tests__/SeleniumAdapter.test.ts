@@ -4,7 +4,7 @@ import 'chromedriver';
 import {join} from 'path';
 import {SeleniumBrowser} from '..';
 
-const url = `file://${join(__dirname, 'index.html')}`;
+const url = `file://${join(__dirname, '../__fixtures__/index.html')}`;
 
 let browser: SeleniumBrowser;
 
@@ -18,8 +18,8 @@ afterEach(async () => {
   await browser.quit();
 });
 
-describe('class SeleniumAdapter', () => {
-  describe('findElements()', () => {
+describe('SeleniumAdapter', () => {
+  describe('public this.findElements(selector, parent?)', () => {
     it('should return all <p> elements', async () => {
       const elements = await browser.adapter.findElements('p');
 
@@ -45,7 +45,7 @@ describe('class SeleniumAdapter', () => {
     });
   });
 
-  describe('getCurrentUrl()', () => {
+  describe('public this.getCurrentUrl()', () => {
     it('should return the initial url', async () => {
       expect(await browser.adapter.getCurrentUrl()).toBe(url);
     });

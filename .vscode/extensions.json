@@ -3,6 +3,7 @@
     "EditorConfig.EditorConfig",
     "DavidAnson.vscode-markdownlint",
     "esbenp.prettier-vscode",
-    "eg2.tslint"
+    "eg2.tslint",
+    "WallabyJs.wallaby-vscode"
   ]
 }
