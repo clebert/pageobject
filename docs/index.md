@@ -23,11 +23,11 @@ are planned:
 
 [![Facebook Talk][facebook-talk-image]][facebook-talk-video]
 
-## Documentation
+## [► API References](api-references/index.md)
 
-- [API References](api-references/index.md)
-- [Examples](examples/index.md)
-- [Guides](guides/index.md)
+## [► Examples](examples/index.md)
+
+## [► Guides](guides/index.md)
 
 ## Quick Start
 
