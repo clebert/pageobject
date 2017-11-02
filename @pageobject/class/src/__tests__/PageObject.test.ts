@@ -430,5 +430,25 @@ describe('PageObject', () => {
         mockedGoto.mockRestore();
       }
     });
+
+    it('should call PageObject.goto(Page, adapter) and rethrow its error', async () => {
+      const mockedGoto = jest.spyOn(PageObject, 'goto');
+
+      mockedGoto.mockImplementation(async () => {
+        throw new Error('mockMessage');
+      });
+
+      try {
+        const MockPageClass = jest.fn();
+
+        await expect(mockPageObject.callGoto(MockPageClass)).rejects.toEqual(
+          new Error('mockMessage')
+        );
+
+        expect(MockPageClass.mock.calls.length).toBe(0);
+      } finally {
+        mockedGoto.mockRestore();
+      }
+    });
   });
 });

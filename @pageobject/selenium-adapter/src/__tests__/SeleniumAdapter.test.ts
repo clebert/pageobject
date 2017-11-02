@@ -1,17 +1,23 @@
 /* tslint:disable-next-line no-implicit-dependencies no-import-side-effect */
 import 'chromedriver';
 
+import {PageObject} from '@pageobject/class';
 import {join} from 'path';
+import {WebElement} from 'selenium-webdriver';
 import {SeleniumAdapter} from '..';
 
 const url = `file://${join(__dirname, '../__fixtures__/index.html')}`;
 
 let adapter: SeleniumAdapter;
 
+class IndexPage extends PageObject<WebElement, SeleniumAdapter> {
+  public static InitialElements = ['#foo', '#bar'];
+}
+
 beforeEach(async () => {
   adapter = await SeleniumAdapter.launchHeadlessChrome();
 
-  await adapter.driver.navigate().to(url);
+  await adapter.open(IndexPage, url);
 });
 
 afterEach(async () => {
