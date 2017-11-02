@@ -18,11 +18,11 @@ Learn more about using PageObjectJS at [pageobject.js.org][docs]
 
 This is a multi-package repository ([monorepo][monorepo]).
 
-### [@pageobject/class][docs-api-references-class]
+### [@pageobject/class][package-class]
 
 A class-based implementation of the [Page Object pattern][docs-guides-page-object-pattern] for JavaScript.
 
-### [@pageobject/selenium-adapter][docs-api-references-selenium-adapter]
+### [@pageobject/selenium-adapter][package-selenium-adapter]
 
 An adapter for connecting page objects to [Selenium][selenium].
 
@@ -82,14 +82,15 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][licens
 
 [docs]: https://clebert.github.io/pageobject/
 [docs-api-references]: https://clebert.github.io/pageobject/api-references/
-[docs-api-references-class]: https://clebert.github.io/pageobject/api-references/class.html
-[docs-api-references-selenium-adapter]: https://clebert.github.io/pageobject/api-references/selenium-adapter.html
 [docs-examples]: https://clebert.github.io/pageobject/examples/
 [docs-guides]: https://clebert.github.io/pageobject/guides/
 [docs-guides-page-object-pattern]: https://clebert.github.io/pageobject/guides/page-object-pattern.html
 [docs-quick-start]: https://clebert.github.io/pageobject/#quick-start
 
 [license]: https://github.com/clebert/pageobject/blob/master/LICENSE
+
+[package-class]: https://github.com/clebert/pageobject/tree/master/@pageobject/class
+[package-selenium-adapter]: https://github.com/clebert/pageobject/tree/master/@pageobject/selenium-adapter
 
 [githooks]: https://git-scm.com/docs/githooks
 [monorepo]: https://github.com/lerna/lerna#about
