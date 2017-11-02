@@ -13,6 +13,21 @@ and this project adheres to [Semantic Versioning][semver-spec].
 
 ### Fixed
 
+## v0.3.0 - 2017-11-02
+
+### Added
+
+#### @pageobject/selenium-adapter
+
+- Added the static `launchHeadlessChrome()` method to the `SeleniumAdapter` class.
+- Added the `open(Page, url)` method to the `SeleniumAdapter` class.
+
+### Changed
+
+#### @pageobject/selenium-adapter
+
+- **Breaking:** Removed the `SeleniumBrowser` class.
+
 ## v0.2.0 - 2017-10-29
 
 ### Added
