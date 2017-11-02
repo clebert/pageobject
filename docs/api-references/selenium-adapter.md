@@ -107,7 +107,7 @@ const element = await myPage.findFirstDescendant('div', atIndex(1));
 
 - `n: number` The expected index.
 
-**Returns:** [Predicate](class.md#type-predicate)
+**Returns:** [`Predicate`](class.md#type-predicate)
 
 ### Function `predicates.textEquals(value)`
 
@@ -122,7 +122,7 @@ Compares against the visible (i.e. not hidden by CSS) innerText of an element, i
 
 - `value: string` The expected text.
 
-**Returns:** [Predicate](class.md#type-predicate)
+**Returns:** [`Predicate`](class.md#type-predicate)
 
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
 [selenium-webdriver]: http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html
