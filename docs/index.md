@@ -31,7 +31,7 @@ are planned:
 
 ## Quick Start
 
-**Please ensure that Node.js `>=8` and Chrome `>=59` are installed.**
+**Please ensure that Node.js [`>=8`][node-8] and Chrome [`>=59`][chrome-59] are installed.**
 
 Install dependencies:
 
@@ -97,9 +97,11 @@ In contrast to the example above, it is recommended to use a test runner like [J
 
 **Before you start to write your own E2E tests, you should also become familiar with the [implementation notes](guides/page-object-pattern.md#implementation-notes) and [examples](examples/index.md).**
 
+[chrome-59]: https://developers.google.com/web/updates/2017/05/nic59
 [facebook-talk-image]: http://img.youtube.com/vi/diYgXpktTqo/0.jpg
 [facebook-talk-video]: https://youtu.be/diYgXpktTqo
 [jest]: http://facebook.github.io/jest/
+[node-8]: https://nodejs.org/en/blog/release/v8.0.0/
 [protractor]: http://www.protractortest.org/#/
 [puppeteer]: https://github.com/GoogleChrome/puppeteer
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
