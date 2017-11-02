@@ -1,29 +1,36 @@
 /* tslint:disable-next-line no-implicit-dependencies no-import-side-effect */
 import 'chromedriver';
 
-import {SeleniumBrowser} from '@pageobject/selenium-adapter';
+import {SeleniumAdapter} from '@pageobject/selenium-adapter';
 import {FrontPage} from '../pages/FrontPage';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
 
-let browser: SeleniumBrowser;
+let adapter: SeleniumAdapter;
 
 beforeEach(async () => {
-  browser = await SeleniumBrowser.launchHeadlessChrome();
+  adapter = await SeleniumAdapter.launchHeadlessChrome();
 
-  await browser.setElementSearchTimeout(5000);
-  await browser.setPageLoadTimeout(10000);
+  await adapter.driver
+    .manage()
+    .timeouts()
+    .implicitlyWait(5000);
+
+  await adapter.driver
+    .manage()
+    .timeouts()
+    .pageLoadTimeout(10000);
 });
 
 afterEach(async () => {
-  await browser.quit();
+  await adapter.driver.quit();
 });
 
 describe('GIVEN the Hacker News front page is open', () => {
   let frontPage: FrontPage;
 
   beforeEach(async () => {
-    frontPage = await FrontPage.open(browser);
+    frontPage = await FrontPage.open(adapter);
   });
 
   test('THEN the displayed rank of a news should match its position in the news list', async () => {

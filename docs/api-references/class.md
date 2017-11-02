@@ -47,8 +47,8 @@ A page class is considered loaded if its declared initial components are found a
 
 **Parameters:**
 
-- [`Page: PageClass`](#pageclass) The class of the page to load.
-- [`adapter: Adapter`](#adapter) The adapter for connecting page objects to a specific browser automation library.
+- [`Page: PageClass`](#type-pageclass) The class of the page to load.
+- [`adapter: Adapter`](#type-adapter) The adapter for connecting page objects to a specific browser automation library.
 
 **Returns:** `Promise<Page>` A promise that will resolve to an instance of the specified page class.
 
@@ -56,7 +56,7 @@ A page class is considered loaded if its declared initial components are found a
 
 The adapter associated with this page object.
 
-**Type:** [`adapter: Adapter`](#adapter)
+**Type:** [`adapter: Adapter`](#type-adapter)
 
 ### Instance Method `protected this.findSelf()`
 
@@ -71,7 +71,7 @@ If no element is found, an error is thrown.
 
 **Parameters:** None.
 
-**Returns:** [`Promise<Element>`](#element) A promise that will resolve to the underlying DOM element of this component.
+**Returns:** [`Promise<Element>`](#type-element) A promise that will resolve to the underlying DOM element of this component.
 
 ### Instance Method `protected this.findFirstDescendant(selector, predicate?)`
 
@@ -89,9 +89,9 @@ If no element is found, an error is thrown.
 **Parameters:**
 
 - `selector: string` The search criteria for an element must be defined using a [CSS selector][css-selectors].
-- [`predicate?: Predicate`](#predicate) You may also provide a custom predicate function as an additional search criteria.
+- [`predicate?: Predicate`](#type-predicate) You may also provide a custom predicate function as an additional search criteria.
 
-**Returns:** [`Promise<Element>`](#element) A promise that will resolve to the specified descendant DOM element of this component.
+**Returns:** [`Promise<Element>`](#type-element) A promise that will resolve to the specified descendant DOM element of this component.
 
 ### Instance Method `protected this.findUniqueDescendant(selector, predicate?)`
 
@@ -107,9 +107,9 @@ If no **unique** element is found, an error is thrown.
 **Parameters:**
 
 - `selector: string` The search criteria for an element must be defined using a [CSS selector][css-selectors].
-- [`predicate?: Predicate`](#predicate) You may also provide a custom predicate function as an additional search criteria.
+- [`predicate?: Predicate`](#type-predicate) You may also provide a custom predicate function as an additional search criteria.
 
-**Returns:** [`Promise<Element>`](#element) A promise that will resolve to the specified descendant DOM element of this component.
+**Returns:** [`Promise<Element>`](#type-element) A promise that will resolve to the specified descendant DOM element of this component.
 
 ### Instance Method `protected this.selectFirstDescendant(Component, predicate?)`
 
@@ -122,8 +122,8 @@ If the selected component points to multiple DOM elements, the first one is sele
 
 **Parameters:**
 
-- [`Component: ComponentClass`](#componentclass) The class of the component to select.
-- [`predicate?: Predicate`](#predicate) You may also provide a custom predicate function as an additional selection criteria.
+- [`Component: ComponentClass`](#type-componentclass) The class of the component to select.
+- [`predicate?: Predicate`](#type-predicate) You may also provide a custom predicate function as an additional selection criteria.
 
 **Returns:** `Component` An instance of the specified component class.
 
@@ -139,8 +139,8 @@ an error is thrown during an element search.
 
 **Parameters:**
 
-- [`Component: ComponentClass`](#componentclass) The class of the component to select.
-- [`predicate?: Predicate`](#predicate) You may also provide a custom predicate function as an additional selection criteria.
+- [`Component: ComponentClass`](#type-componentclass) The class of the component to select.
+- [`predicate?: Predicate`](#type-predicate) You may also provide a custom predicate function as an additional selection criteria.
 
 **Returns:** `Component` An instance of the specified component class.
 
@@ -156,7 +156,7 @@ A page class is considered loaded if its declared initial components are found a
 
 **Parameters:**
 
-- [`Page: PageClass`](#pageclass) The class of the page to load.
+- [`Page: PageClass`](#type-pageclass) The class of the page to load.
 
 **Returns:** `Promise<Page>` A promise that will resolve to an instance of the specified page class.
 
@@ -192,7 +192,7 @@ MyPage.url = /example\.com/;
 
 A page class declares a concrete page type, it has the following optional properties:
 
-- [`PageClass.InitialComponents?: ComponentClass[]`](#componentclass)
+- [`PageClass.InitialComponents?: ComponentClass[]`](#type-componentclass)
 - [`PageClass.InitialElements?: string[]`][css-selectors]
 - `PageClass.url?: RegExp | string`
 

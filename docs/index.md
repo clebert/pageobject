@@ -49,7 +49,7 @@ Create a `test.js` file:
 require('chromedriver');
 
 const {PageObject} = require('@pageobject/class');
-const {SeleniumBrowser} = require('@pageobject/selenium-adapter');
+const {SeleniumAdapter} = require('@pageobject/selenium-adapter');
 const assert = require('assert');
 
 class ExamplePage extends PageObject {
@@ -64,18 +64,21 @@ ExamplePage.InitialElements = ['h1'];
 ExamplePage.url = /example\.com/;
 
 (async () => {
-  const browser = await SeleniumBrowser.launchHeadlessChrome();
+  const adapter = await SeleniumAdapter.launchHeadlessChrome();
 
-  await browser.setElementSearchTimeout(5000);
+  await adapter.driver
+    .manage()
+    .timeouts()
+    .implicitlyWait(5000);
 
   try {
-    const page = await browser.open(ExamplePage, 'https://example.com/');
+    const page = await adapter.open(ExamplePage, 'https://example.com/');
 
     assert.strictEqual(await page.getHeadline(), 'Example Domain');
 
     console.log('OK');
   } finally {
-    await browser.quit();
+    await adapter.driver.quit();
   }
 })().catch(e => {
   console.error(e.message);

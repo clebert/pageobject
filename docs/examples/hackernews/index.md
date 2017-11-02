@@ -33,27 +33,31 @@ Time:        5.067s, estimated 6s
 ```
 
 ```js
-let browser: SeleniumBrowser;
+let adapter: SeleniumAdapter;
 
 beforeEach(async () => {
-  browser = await SeleniumBrowser.launchHeadlessChrome();
+  adapter = await SeleniumAdapter.launchHeadlessChrome();
 
-  await browser.setElementSearchTimeout(5000);
-  await browser.setPageLoadTimeout(10000);
+  await adapter.driver
+    .manage()
+    .timeouts()
+    .implicitlyWait(5000);
+
+  await adapter.driver
+    .manage()
+    .timeouts()
+    .pageLoadTimeout(10000);
 });
 
 afterEach(async () => {
-  await browser.quit();
+  await adapter.driver.quit();
 });
 
 describe('GIVEN the Hacker News front page is open', () => {
   let frontPage: FrontPage;
 
   beforeEach(async () => {
-    frontPage = await browser.open(
-      FrontPage,
-      'https://news.ycombinator.com/news'
-    );
+    frontPage = await FrontPage.open(adapter);
   });
 
   test('THEN the displayed rank of a news should match its position in the news list', async () => {
@@ -100,8 +104,8 @@ class FrontPage extends PageObject<WebElement, SeleniumAdapter> {
   public static InitialComponents = [NewsList];
   public static url = /\/news$/;
 
-  public static async open(browser: SeleniumBrowser): Promise<FrontPage> {
-    return browser.open(FrontPage, 'https://news.ycombinator.com/news');
+  public static async open(adapter: SeleniumAdapter): Promise<FrontPage> {
+    return adapter.open(FrontPage, 'https://news.ycombinator.com/news');
   }
 
   public selectNewsList(): NewsList {
