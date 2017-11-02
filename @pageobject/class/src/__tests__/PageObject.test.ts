@@ -75,6 +75,7 @@ describe('PageObject', () => {
     mockPageObject = new MockPageObject(mockPath, mockAdapter);
 
     mockedFindElement.mockClear();
+    mockedFindElement.mockReset();
   });
 
   describe('public PageObject.goto(Page, adapter)', () => {
@@ -156,20 +157,109 @@ describe('PageObject', () => {
     });
 
     describe('called with a page class with declared initial elements', () => {
-      it('should TODO', async () => {
-        // TODO
+      beforeEach(() => {
+        (MockPageClass as any).InitialElements = [
+          'mockSelector1',
+          'mockSelector2'
+        ];
+      });
+
+      it('should return an instance of the specified page class', async () => {
+        const page = await PageObject.goto(MockPageClass as any, mockAdapter);
+
+        expect(mockedFindElement.mock.calls).toEqual([
+          [
+            [
+              {selector: 'html', unique: true},
+              {selector: 'mockSelector1', unique: false}
+            ],
+            mockAdapter
+          ],
+          [
+            [
+              {selector: 'html', unique: true},
+              {selector: 'mockSelector2', unique: false}
+            ],
+            mockAdapter
+          ]
+        ]);
+
+        expect(MockPageClass.mock.instances.length).toBe(1);
+        expect(MockPageClass.mock.instances[0]).toBe(page);
+
+        expect(MockPageClass.mock.calls).toEqual([
+          [[{selector: 'html', unique: true}], mockAdapter]
+        ]);
+      });
+
+      it('should call findElement(path, adapter) and rethrow its error', async () => {
+        mockedFindElement.mockImplementation(async () => {
+          throw new Error('mockMessage');
+        });
+
+        await expect(
+          PageObject.goto(MockPageClass as any, mockAdapter)
+        ).rejects.toEqual(new Error('mockMessage'));
       });
     });
 
-    describe('called with a page class with declared url', () => {
-      it('should TODO', async () => {
-        // TODO
+    describe('called with a page class with declared regex url', () => {
+      it('should return an instance of the specified page class', async () => {
+        (MockPageClass as any).url = /mockURL/;
+
+        const page = await PageObject.goto(MockPageClass as any, mockAdapter);
+
+        expect(mockAdapter.getCurrentUrl.mock.calls).toEqual([[]]);
+        expect(mockedFindElement.mock.calls.length).toEqual(0);
+
+        expect(MockPageClass.mock.instances.length).toBe(1);
+        expect(MockPageClass.mock.instances[0]).toBe(page);
+
+        expect(MockPageClass.mock.calls).toEqual([
+          [[{selector: 'html', unique: true}], mockAdapter]
+        ]);
+      });
+
+      it('should throw a "No matching url found" error', async () => {
+        (MockPageClass as any).url = /otherURL/;
+
+        await expect(
+          PageObject.goto(MockPageClass as any, mockAdapter)
+        ).rejects.toEqual(
+          new Error(
+            "No matching url found (actual='mockURL', expected=/otherURL/)"
+          )
+        );
       });
     });
 
-    describe('called with a page class with all declarations', () => {
-      it('should TODO', async () => {
-        // TODO
+    describe('called with a page class with declared string url', () => {
+      it('should return an instance of the specified page class', async () => {
+        (MockPageClass as any).url = 'mockURL';
+
+        const page = await PageObject.goto(MockPageClass as any, mockAdapter);
+
+        expect(mockAdapter.getCurrentUrl.mock.calls).toEqual([[]]);
+        expect(mockedFindElement.mock.calls.length).toEqual(0);
+
+        expect(MockPageClass.mock.instances.length).toBe(1);
+        expect(MockPageClass.mock.instances[0]).toBe(page);
+
+        expect(MockPageClass.mock.calls).toEqual([
+          [[{selector: 'html', unique: true}], mockAdapter]
+        ]);
+      });
+
+      it('should throw a "No matching url found" error', async () => {
+        (MockPageClass as any).url = 'otherURL';
+
+        await expect(
+          PageObject.goto(MockPageClass as any, mockAdapter)
+        ).rejects.toEqual(
+          new Error(
+            "No matching url found (actual='mockURL', expected='otherURL')"
+          )
+        );
       });
     });
   });
