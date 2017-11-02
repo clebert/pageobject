@@ -39,7 +39,7 @@ module.exports = ({localProjectDir, projectCacheDir}) => {
       '!@pageobject/class/src/**/*.test.{ts,tsx}'
     ],
     hints: {
-      ignoreCoverage: 'istanbul ignore'
+      ignoreCoverage: /istanbul ignore/
     },
     preprocessors: {
       '**/*.{ts,tsx}': file =>
