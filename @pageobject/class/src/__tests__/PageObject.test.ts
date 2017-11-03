@@ -3,20 +3,10 @@
 jest.mock('../findElement');
 
 import {PageObject, PathSegment, Predicate} from '..';
+import {MockAdapter} from '../__mocks__/MockAdapter';
 import {findElement} from '../findElement';
 
 const mockedFindElement = findElement as jest.Mock;
-
-class MockAdapter {
-  public readonly findElements: jest.Mock<Promise<string[]>> = jest.fn();
-  public readonly getCurrentUrl: jest.Mock<Promise<string>>;
-
-  public constructor() {
-    this.getCurrentUrl = jest
-      .fn<Promise<string>>()
-      .mockImplementation(async () => 'mockURL');
-  }
-}
 
 const mockPath: PathSegment<string>[] = [
   {selector: 'mockSelector', unique: false}

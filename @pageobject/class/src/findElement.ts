@@ -21,9 +21,15 @@ async function findElements<TElement>(
   remainingPath: PathSegment<TElement>[],
   adapter: Adapter<TElement>
 ): Promise<TElement[]> {
-  const elements = await (remainingPath.length > 0
-    ? adapter.findElements(selector, await findElement(remainingPath, adapter))
-    : adapter.findElements(selector));
+  const elementsPromise =
+    remainingPath.length > 0
+      ? adapter.findElements(
+          selector,
+          await findElement(remainingPath, adapter)
+        )
+      : adapter.findElements(selector);
+
+  const elements = await elementsPromise;
 
   if (!predicate) {
     return elements;
