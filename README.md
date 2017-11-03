@@ -1,6 +1,7 @@
 # PageObjectJS
 
 [![Build Status][badge-travis-image]][badge-travis-link]
+[![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 ![Stability][badge-stability-image]
 
 **Readable. Stable. Maintainable.** E2E testing using any browser automation framework.
@@ -76,6 +77,8 @@ npm run release
 ---
 Built by (c) Clemens Akens. Released under the terms of the [MIT License][license].
 
+[badge-coveralls-image]: https://coveralls.io/repos/github/clebert/pageobject/badge.svg?branch=master
+[badge-coveralls-link]: https://coveralls.io/github/clebert/pageobject?branch=master
 [badge-stability-image]: https://img.shields.io/badge/stability-unstable-yellow.svg
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject

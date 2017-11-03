@@ -3,6 +3,7 @@ import 'chromedriver';
 
 import {join} from 'path';
 import {SeleniumAdapter} from '..';
+import {IndexPage} from '../__fixtures__/IndexPage';
 
 const url = `file://${join(__dirname, '../__fixtures__/index.html')}`;
 
@@ -11,7 +12,7 @@ let adapter: SeleniumAdapter;
 beforeEach(async () => {
   adapter = await SeleniumAdapter.launchHeadlessChrome();
 
-  await adapter.driver.navigate().to(url);
+  await adapter.open(IndexPage, url);
 });
 
 afterEach(async () => {

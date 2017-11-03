@@ -2,6 +2,7 @@
 
 [![Package Version][badge-npm-image]][badge-npm-link]
 [![Build Status][badge-travis-image]][badge-travis-link]
+[![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 ![Stability][badge-stability-image]
 
 An adapter for connecting page objects to [Selenium][selenium].
@@ -33,6 +34,8 @@ Learn more about using PageObjectJS at [pageobject.js.org][docs]
 ---
 Built by (c) Clemens Akens. Released under the terms of the [MIT License][license].
 
+[badge-coveralls-image]: https://coveralls.io/repos/github/clebert/pageobject/badge.svg?branch=master
+[badge-coveralls-link]: https://coveralls.io/github/clebert/pageobject?branch=master
 [badge-npm-image]: https://img.shields.io/npm/v/@pageobject/selenium-adapter.svg
 [badge-npm-link]: https://www.npmjs.com/package/@pageobject/selenium-adapter
 [badge-stability-image]: https://img.shields.io/badge/stability-unstable-yellow.svg
