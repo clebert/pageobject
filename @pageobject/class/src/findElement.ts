@@ -7,7 +7,8 @@ export interface Adapter<TElement> {
 
 export type Predicate<TElement> = (
   element: TElement,
-  index: number
+  index: number,
+  elements: TElement[]
 ) => Promise<boolean>;
 
 export interface PathSegment<TElement> {
