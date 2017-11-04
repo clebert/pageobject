@@ -13,6 +13,25 @@ and this project adheres to [Semantic Versioning][semver-spec].
 
 ### Fixed
 
+## v0.4.0 - 2017-11-04
+
+### Added
+
+#### @pageobject/class
+
+- **Breaking:** Added the required property `selectors` to the interface `PageClass`.
+- **Breaking:** Added the required parameter `elements` to the type `Predicate`.
+
+### Changed
+
+#### @pageobject/class
+
+- **Breaking:** Set the optional property `url` of the interface `PageClass` to required.
+- **Breaking:** Changed the type of the property `url` of the interface `PageClass` from `RegExp | string` to `RegExp`.
+- **Breaking:** Removed the type `InitialComponent`.
+- Removed the optional property `InitialComponents` of the interface `PageClass`.
+- Removed the optional property `InitialElements` of the interface `PageClass`.
+
 ## v0.3.0 - 2017-11-02
 
 ### Added
