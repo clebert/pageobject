@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning][semver-spec].
 
 ### Fixed
 
+## v0.5.0 - 2017-11-05
+
+### Added
+
+#### @pageobject/class
+
+- Added an element search retry mechanism, it can be configured using the environment variable `ELEMENT_SEARCH_TIMEOUT`.
+
 ## v0.4.0 - 2017-11-04
 
 ### Added
