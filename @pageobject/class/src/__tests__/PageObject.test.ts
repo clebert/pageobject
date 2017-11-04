@@ -49,6 +49,15 @@ describe('PageObject', () => {
   });
 
   describe('public PageObject.goto(Page, adapter)', () => {
+    it('should return an instance of the specified page class', async () => {
+      const page = await PageObject.goto(MockPageClass, mockAdapter);
+
+      expect(MockPageClass.mock.instances.length).toBe(1);
+      expect(MockPageClass.mock.instances[0]).toBe(page);
+
+      expect(MockPageClass.mock.calls).toEqual([[rootPath, mockAdapter]]);
+    });
+
     it('should call findElement(path, adapter) and rethrow its error', async () => {
       mockedFindElement.mockImplementation(async () => {
         throw new Error('mockMessage');
@@ -59,76 +68,45 @@ describe('PageObject', () => {
       );
     });
 
-    describe('called with a page class without selectors', () => {
-      it('should return an instance of the specified page class', async () => {
-        const page = await PageObject.goto(MockPageClass, mockAdapter);
+    it('should call findElement(path, adapter) once', async () => {
+      await PageObject.goto(MockPageClass, mockAdapter);
 
-        expect(MockPageClass.mock.instances.length).toBe(1);
-        expect(MockPageClass.mock.instances[0]).toBe(page);
-
-        expect(MockPageClass.mock.calls).toEqual([[rootPath, mockAdapter]]);
-      });
-
-      it('should call findElement(path, adapter) once', async () => {
-        await PageObject.goto(MockPageClass, mockAdapter);
-
-        expect(mockedFindElement.mock.calls).toEqual([[rootPath, mockAdapter]]);
-      });
+      expect(mockedFindElement.mock.calls).toEqual([[rootPath, mockAdapter]]);
     });
 
-    describe('called with a page class with selectors', () => {
-      beforeEach(() => {
-        (MockPageClass as any).selectors = ['mockSelector1', 'mockSelector2'];
-      });
+    it('should call findElement(path, adapter) multiple times', async () => {
+      (MockPageClass as any).selectors = ['mockSelector1', 'mockSelector2'];
 
-      it('should return an instance of the specified page class', async () => {
-        const page = await PageObject.goto(MockPageClass, mockAdapter);
+      await PageObject.goto(MockPageClass, mockAdapter);
 
-        expect(MockPageClass.mock.instances.length).toBe(1);
-        expect(MockPageClass.mock.instances[0]).toBe(page);
-
-        expect(MockPageClass.mock.calls).toEqual([[rootPath, mockAdapter]]);
-      });
-
-      it('should call findElement(path, adapter) multiple times', async () => {
-        await PageObject.goto(MockPageClass, mockAdapter);
-
-        expect(mockedFindElement.mock.calls).toEqual([
-          [rootPath, mockAdapter],
-          [
-            [...rootPath, {selector: 'mockSelector1', unique: false}],
-            mockAdapter
-          ],
-          [
-            [...rootPath, {selector: 'mockSelector2', unique: false}],
-            mockAdapter
-          ]
-        ]);
-      });
+      expect(mockedFindElement.mock.calls).toEqual([
+        [rootPath, mockAdapter],
+        [
+          [...rootPath, {selector: 'mockSelector1', unique: false}],
+          mockAdapter
+        ],
+        [[...rootPath, {selector: 'mockSelector2', unique: false}], mockAdapter]
+      ]);
     });
 
-    describe('called with a page class with a non-matching url', () => {
-      beforeEach(() => {
-        (MockPageClass as any).url = /mockOtherUrl/;
-      });
+    it('should throw a "No matching url found" error', async () => {
+      (MockPageClass as any).url = /mockOtherUrl/;
 
-      it('should throw a "No matching url found" error', async () => {
-        await expect(
-          PageObject.goto(MockPageClass, mockAdapter)
-        ).rejects.toEqual(
-          new Error(
-            "No matching url found (actual='mockUrl', expected=/mockOtherUrl/)"
-          )
-        );
-      });
+      await expect(PageObject.goto(MockPageClass, mockAdapter)).rejects.toEqual(
+        new Error(
+          "No matching url found (actual='mockUrl', expected=/mockOtherUrl/)"
+        )
+      );
+    });
 
-      it('should call findElement(path, adapter) before matching the url', async () => {
-        try {
-          await PageObject.goto(MockPageClass, mockAdapter);
-        } catch {
-          expect(mockedFindElement.mock.calls.length).toEqual(1);
-        }
-      });
+    it('should call findElement(path, adapter) before matching the url', async () => {
+      (MockPageClass as any).url = /mockOtherUrl/;
+
+      try {
+        await PageObject.goto(MockPageClass, mockAdapter);
+      } catch {
+        expect(mockedFindElement.mock.calls.length).toEqual(1);
+      }
     });
   });
 

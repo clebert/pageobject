@@ -5,9 +5,8 @@ import 'chromedriver';
 
 import {Predicate} from '@pageobject/class';
 import {join} from 'path';
-import {SeleniumAdapter} from '..';
+import {SeleniumAdapter, predicates} from '..';
 import {IndexPage} from '../__fixtures__/IndexPage';
-import {atIndex, textEquals} from '../predicates';
 
 const url = `file://${join(__dirname, '../__fixtures__/index.html')}`;
 
@@ -28,7 +27,7 @@ describe('predicates', () => {
 
   describe('atIndex(n)', () => {
     beforeEach(() => {
-      predicate = atIndex(1);
+      predicate = predicates.atIndex(1);
     });
 
     it('should return a predicate that returns true', async () => {
@@ -43,7 +42,7 @@ describe('predicates', () => {
 
   describe('textEquals(value)', () => {
     beforeEach(async () => {
-      predicate = textEquals('Foo');
+      predicate = predicates.textEquals('Foo');
     });
 
     it('should return a predicate that returns true', async () => {
