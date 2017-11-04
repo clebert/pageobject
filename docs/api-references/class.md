@@ -68,7 +68,7 @@ Schedules a command to find the underlying DOM element of this page object.
 
 - If this page object represents a component then the method will traverse up the components' ancestors to get the path of the underlying DOM element.
 - If this page object represents a page then the method will return the root `<HTML>` DOM element.
-- If no element is found, an error is thrown.
+- If no DOM element is found, an error is thrown.
 
 **Parameters:** None.
 
@@ -83,12 +83,12 @@ const element = await myPage.findFirstDescendant('div');
 Schedules a command to find the specified descendant DOM element of this page object.
 
 - If this page object represents a component then the method will traverse up the components' ancestors to get the path of the specified descendant DOM element.
-- If multiple elements are found, the first one is returned.
-- If no element is found, an error is thrown.
+- If multiple DOM elements are found, the first one is returned.
+- If no DOM element is found, an error is thrown.
 
 **Parameters:**
 
-- `selector: string` The search criteria for an element must be defined using a [CSS selector][css-selectors].
+- `selector: string` The search criteria for a DOM element must be defined using a [CSS selector][css-selectors].
 - [`predicate?: Predicate`](#type-predicate) You may also provide a custom predicate function as an additional search criteria.
 
 **Returns:** [`Promise<Element>`](#type-element) A promise that will resolve to the specified descendant DOM element of this page object.
@@ -102,11 +102,11 @@ const element = await myPage.findUniqueDescendant('div');
 Schedules a command to find the specified descendant DOM element of this page object.
 
 - If this page object represents a component then the method will traverse up the components' ancestors to get the path of the specified descendant DOM element.
-- If no **unique** element is found, an error is thrown.
+- If no **unique** DOM element is found, an error is thrown.
 
 **Parameters:**
 
-- `selector: string` The search criteria for an element must be defined using a [CSS selector][css-selectors].
+- `selector: string` The search criteria for a DOM element must be defined using a [CSS selector][css-selectors].
 - [`predicate?: Predicate`](#type-predicate) You may also provide a custom predicate function as an additional search criteria.
 
 **Returns:** [`Promise<Element>`](#type-element) A promise that will resolve to the specified descendant DOM element of this page object.
@@ -118,7 +118,8 @@ const component = myPage.selectFirstDescendant(MyComponent);
 ```
 
 Selects the specified descendant component of this component.
-If the selected component points to multiple DOM elements, the first one is selected during an element search.
+
+- If the selected component points to multiple DOM elements, the first one is selected during a search.
 
 **Parameters:**
 
@@ -134,8 +135,8 @@ const component = myPage.selectUniqueDescendant(MyComponent);
 ```
 
 Selects the specified descendant component of this component.
-If the selected component points to multiple DOM elements,
-an error is thrown during an element search.
+
+- If the selected component points to multiple DOM elements, an error is thrown during a search.
 
 **Parameters:**
 
@@ -219,7 +220,7 @@ A component class declares a concrete component type, it has one required static
 
 ## Type `Element`
 
-The type of an element depends on the adapter used:
+The type of an object that represents a DOM element depends on the adapter used:
 
 - @pageobject/selenium-adapter → [`WebElement`][selenium-webelement]
 
@@ -228,12 +229,12 @@ The type of an element depends on the adapter used:
 ```js
 // TypeScript
 function atIndex(n: number): Predicate<SomeElement> {
-  return async (element, index) => index === n;
+  return async (element, index, elements) => index === n;
 }
 
 // JavaScript
 function atIndex(n) {
-  return async (element, index) => index === n;
+  return async (element, index, elements) => index === n;
 }
 ```
 
@@ -241,8 +242,15 @@ function atIndex(n) {
 const element = await myPage.findFirstDescendant('div', atIndex(1));
 ```
 
-A predicate function takes as input an element and its index and returns a promise that will resolve to a boolean.
-In addition to a [CSS selector][css-selectors], it is another search criteria for selecting a specific component or finding a specific DOM element.
+In addition to a [CSS selector][css-selectors], a predicate function is another search criteria for selecting a specific component or finding a specific DOM element.
+
+**Parameters:**
+
+- [`element: Element`](#type-element) The current DOM element being processed in the array of found DOM elements.
+- `index: number` The index of the current DOM element being processed in the array of found DOM elements.
+- [`elements: Element[]`](#type-element) The array of found DOM elements.
+
+**Returns:** `Promise<boolean>` A promise that will resolve to a boolean.
 
 [css-selectors]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors
 [selenium-webelement]: http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/webdriver_exports_WebElement.html
