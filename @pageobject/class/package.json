@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/class",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "A class-based implementation of the Page Object pattern for JavaScript.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
