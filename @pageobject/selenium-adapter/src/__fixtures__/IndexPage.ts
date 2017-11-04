@@ -4,5 +4,5 @@ import {SeleniumAdapter} from '..';
 
 export class IndexPage extends PageObject<WebElement, SeleniumAdapter> {
   public static selectors = ['#foo', '#bar'];
-  public static url = /index.html/;
+  public static url = /index\.html/;
 }

@@ -43,7 +43,7 @@ const myPage = await PageObject.goto(MyPage, someAdapter);
 
 Instantiates the specified page class when loaded, throws an error otherwise.
 
-A page class is considered loaded if its declared initial components are found and its declared URL matches the current one.
+A page class is considered loaded if its declared selectors are found and its declared URL matches the current one.
 
 **Parameters:**
 
@@ -152,7 +152,7 @@ const myOtherPage = await myPage.goto(MyOtherPage);
 
 Instantiates the specified page class when loaded, throws an error otherwise.
 
-A page class is considered loaded if its declared initial components are found and its declared URL matches the current one.
+A page class is considered loaded if its declared selectors are found and its declared URL matches the current one.
 
 **Parameters:**
 
@@ -173,8 +173,7 @@ The following adapters are currently available:
 ```js
 // TypeScript
 class MyPage extends PageObject<SomeElement, SomeAdapter> {
-  public static InitialComponents = [MyComponent];
-  public static InitialElements = ['h1'];
+  public static selectors = [MyComponent.selector, 'h1'];
   public static url = /example\.com/;
 
   // ...
@@ -185,16 +184,14 @@ class MyPage extends PageObject {
   // ...
 }
 
-MyPage.InitialComponents = [MyComponent];
-MyPage.InitialElements = ['h1'];
+MyPage.selectors = [MyComponent.selector, 'h1'];
 MyPage.url = /example\.com/;
 ```
 
-A page class declares a concrete page type, it has the following optional properties:
+A page class declares a concrete page type, it has two required static properties:
 
-- [`PageClass.InitialComponents?: ComponentClass[]`](#type-componentclass)
-- [`PageClass.InitialElements?: string[]`][css-selectors]
-- `PageClass.url?: RegExp | string`
+- [`PageClass.selectors: string[]`][css-selectors]
+- `PageClass.url: RegExp`
 
 ## Type `ComponentClass`
 
@@ -214,7 +211,7 @@ class MyComponent extends PageObject {
 MyComponent.selector = 'div';
 ```
 
-A component class declares a concrete component type, it has one required property:
+A component class declares a concrete component type, it has one required static property:
 
 - [`ComponentClass.selector: string`][css-selectors]
 
