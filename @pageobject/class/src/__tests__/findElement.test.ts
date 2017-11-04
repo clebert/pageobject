@@ -63,6 +63,18 @@ describe('findElement(path, adapter)', () => {
     expect(element).toBe('mockElement3-2');
   });
 
+  it('should call a predicate and rethrow its error', async () => {
+    const predicate = jest.fn(async () => {
+      throw new Error('mockMessage');
+    });
+
+    const mockPath = [{selector: 'mockSelector', unique: false, predicate}];
+
+    await expect(findElement(mockPath, mockAdapter)).rejects.toEqual(
+      new Error('mockMessage')
+    );
+  });
+
   it('should throw a "No path segments found" error', async () => {
     await expect(findElement([], mockAdapter)).rejects.toEqual(
       new Error('No path segments found')
