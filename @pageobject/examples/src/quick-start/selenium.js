@@ -12,7 +12,7 @@ class ExamplePage extends PageObject {
   }
 }
 
-ExamplePage.InitialElements = ['h1'];
+ExamplePage.selectors = ['h1'];
 ExamplePage.url = /example\.com/;
 
 (async () => {

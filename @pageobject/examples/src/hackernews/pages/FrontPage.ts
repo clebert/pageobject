@@ -4,7 +4,7 @@ import {WebElement} from 'selenium-webdriver';
 import {NewsList} from '../components/NewsList';
 
 export class FrontPage extends PageObject<WebElement, SeleniumAdapter> {
-  public static InitialComponents = [NewsList];
+  public static selectors = [NewsList.selector];
   public static url = /\/news$/;
 
   public static async open(adapter: SeleniumAdapter): Promise<FrontPage> {

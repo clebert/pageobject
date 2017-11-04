@@ -101,7 +101,7 @@ describe('GIVEN the Hacker News front page is open', () => {
 
 ```js
 class FrontPage extends PageObject<WebElement, SeleniumAdapter> {
-  public static InitialComponents = [NewsList];
+  public static selectors = [NewsList.selector];
   public static url = /\/news$/;
 
   public static async open(adapter: SeleniumAdapter): Promise<FrontPage> {
@@ -209,7 +209,7 @@ class NewsSubtext extends PageObject<WebElement, SeleniumAdapter> {
 ![pages/LoginPage](pages/LoginPage.png)
 
 ```js
-const InitialElements = [
+const selectors = [
   'input[type="submit"][value="login"]',
   'input[type="submit"][value="create account"]'
 ];
@@ -217,7 +217,7 @@ const InitialElements = [
 
 ```js
 class LoginPage extends PageObject<WebElement, SeleniumAdapter> {
-  public static InitialElements = InitialElements;
+  public static selectors = selectors;
   public static url = /login/;
 
   public async displaysMessage(message: string): Promise<boolean> {
@@ -235,7 +235,7 @@ class LoginPage extends PageObject<WebElement, SeleniumAdapter> {
 
 ```js
 class HideLoginPage extends LoginPage {
-  public static InitialElements = InitialElements;
+  public static selectors = selectors;
   public static url = /hide\?id=[0-9]+/;
 }
 ```
@@ -246,7 +246,7 @@ class HideLoginPage extends LoginPage {
 
 ```js
 class VoteLoginPage extends LoginPage {
-  public static InitialElements = InitialElements;
+  public static selectors = selectors;
   public static url = /vote\?id=[0-9]+/;
 }
 ```

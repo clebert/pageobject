@@ -4,6 +4,6 @@ export class MockAdapter<TElement = string> {
 
   public constructor() {
     this.findElements = jest.fn(async () => []);
-    this.getCurrentUrl = jest.fn(async () => 'mockURL');
+    this.getCurrentUrl = jest.fn(async () => 'mockUrl');
   }
 }
