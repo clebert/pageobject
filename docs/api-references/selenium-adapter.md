@@ -79,6 +79,7 @@ Schedules a command to navigate to the specified URL, and then instantiates the 
 
 - A page class is considered loaded if each of its declared selectors point to at least one existing DOM element and its declared URL matches the current one.
 - When searching for a DOM element, the method polls the DOM until the element has been found, or the timeout expires. The timeout can be configured using the environment variable `ELEMENT_SEARCH_TIMEOUT`, it defaults to `5000` milliseconds.
+- **Please make sure Selenium's [implicit wait timeout][selenium-timeouts] is set to `0` (its default value).**
 
 **Parameters:**
 
@@ -126,5 +127,6 @@ Compares against the visible (i.e. not hidden by CSS) innerText of an element, i
 **Returns:** [`Predicate`](class.md#type-predicate)
 
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
+[selenium-timeouts]: http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/webdriver_exports_Timeouts.html
 [selenium-webdriver]: http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html
 [typescript]: https://www.typescriptlang.org/
