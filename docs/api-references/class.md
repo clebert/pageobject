@@ -64,14 +64,15 @@ The adapter associated with this page object.
 const element = await myPage.findSelf();
 ```
 
-Schedules a command to find the underlying DOM element of this component.
-The method will traverse up the components' ancestors to get the element path.
+Schedules a command to find the underlying DOM element of this page object.
 
-If no element is found, an error is thrown.
+- If this page object represents a component then the method will traverse up the components' ancestors to get the path of the underlying DOM element.
+- If this page object represents a page then the method will return the root `<HTML>` DOM element.
+- If no element is found, an error is thrown.
 
 **Parameters:** None.
 
-**Returns:** [`Promise<Element>`](#type-element) A promise that will resolve to the underlying DOM element of this component.
+**Returns:** [`Promise<Element>`](#type-element) A promise that will resolve to the underlying DOM element of this page object.
 
 ### Instance Method `protected this.findFirstDescendant(selector, predicate?)`
 
@@ -79,19 +80,18 @@ If no element is found, an error is thrown.
 const element = await myPage.findFirstDescendant('div');
 ```
 
-Schedules a command to find the specified descendant DOM element of this component.
-The method will traverse up the components' ancestors to get the element path.
+Schedules a command to find the specified descendant DOM element of this page object.
 
-If multiple elements are found, the first one is returned.
-
-If no element is found, an error is thrown.
+- If this page object represents a component then the method will traverse up the components' ancestors to get the path of the specified descendant DOM element.
+- If multiple elements are found, the first one is returned.
+- If no element is found, an error is thrown.
 
 **Parameters:**
 
 - `selector: string` The search criteria for an element must be defined using a [CSS selector][css-selectors].
 - [`predicate?: Predicate`](#type-predicate) You may also provide a custom predicate function as an additional search criteria.
 
-**Returns:** [`Promise<Element>`](#type-element) A promise that will resolve to the specified descendant DOM element of this component.
+**Returns:** [`Promise<Element>`](#type-element) A promise that will resolve to the specified descendant DOM element of this page object.
 
 ### Instance Method `protected this.findUniqueDescendant(selector, predicate?)`
 
@@ -99,17 +99,17 @@ If no element is found, an error is thrown.
 const element = await myPage.findUniqueDescendant('div');
 ```
 
-Schedules a command to find the specified descendant DOM element of this component.
-The method will traverse up the components' ancestors to get the element path.
+Schedules a command to find the specified descendant DOM element of this page object.
 
-If no **unique** element is found, an error is thrown.
+- If this page object represents a component then the method will traverse up the components' ancestors to get the path of the specified descendant DOM element.
+- If no **unique** element is found, an error is thrown.
 
 **Parameters:**
 
 - `selector: string` The search criteria for an element must be defined using a [CSS selector][css-selectors].
 - [`predicate?: Predicate`](#type-predicate) You may also provide a custom predicate function as an additional search criteria.
 
-**Returns:** [`Promise<Element>`](#type-element) A promise that will resolve to the specified descendant DOM element of this component.
+**Returns:** [`Promise<Element>`](#type-element) A promise that will resolve to the specified descendant DOM element of this page object.
 
 ### Instance Method `protected this.selectFirstDescendant(Component, predicate?)`
 
@@ -190,8 +190,10 @@ MyPage.url = /example\.com/;
 
 A page class declares a concrete page type, it has two required static properties:
 
-- [`PageClass.selectors: string[]`][css-selectors]
-- `PageClass.url: RegExp`
+- [`PageClass.selectors: string[]`][css-selectors] The initial CSS selectors.
+- `PageClass.url: RegExp` The initial URL.
+
+**It is recommended to specify initial CSS selectors which are unique for each page type.**
 
 ## Type `ComponentClass`
 
@@ -213,7 +215,7 @@ MyComponent.selector = 'div';
 
 A component class declares a concrete component type, it has one required static property:
 
-- [`ComponentClass.selector: string`][css-selectors]
+- [`ComponentClass.selector: string`][css-selectors] The CSS selector of the components root DOM element.
 
 ## Type `Element`
 
