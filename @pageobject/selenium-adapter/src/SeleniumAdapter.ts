@@ -31,7 +31,7 @@ export class SeleniumAdapter implements Adapter<WebElement> {
   ): Promise<TPage> {
     await this.driver.navigate().to(url);
 
-    return PageObject.goto(Page, this);
+    return PageObject.goto(Page, this as SeleniumAdapter);
   }
 
   public async findElements(
