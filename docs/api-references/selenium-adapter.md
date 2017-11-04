@@ -77,7 +77,8 @@ const myPage = await adapter.open(MyPage, 'https://example.com/');
 
 Schedules a command to navigate to the specified URL, and then instantiates the specified page class when loaded, throws an error otherwise.
 
-A page class is considered loaded if its declared selectors are found and its declared URL matches the current one.
+- A page class is considered loaded if its declared selectors are found and its declared URL matches the current one.
+- When searching for a DOM element, the method polls the DOM until the element has been found, or the timeout expires. The timeout can be configured using the environment variable `ELEMENT_SEARCH_TIMEOUT`, it defaults to `5000` milliseconds.
 
 **Parameters:**
 

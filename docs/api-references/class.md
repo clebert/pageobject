@@ -43,7 +43,8 @@ const myPage = await PageObject.goto(MyPage, someAdapter);
 
 Instantiates the specified page class when loaded, throws an error otherwise.
 
-A page class is considered loaded if its declared selectors are found and its declared URL matches the current one.
+- A page class is considered loaded if its declared selectors are found and its declared URL matches the current one.
+- When searching for a DOM element, the method polls the DOM until the element has been found, or the timeout expires. The timeout can be configured using the environment variable `ELEMENT_SEARCH_TIMEOUT`, it defaults to `5000` milliseconds.
 
 **Parameters:**
 
@@ -69,6 +70,7 @@ Schedules a command to find the underlying DOM element of this page object.
 - If this page object represents a component then the method will traverse up the components' ancestors to get the path of the underlying DOM element.
 - If this page object represents a page then the method will return the root `<HTML>` DOM element.
 - If no DOM element is found, an error is thrown.
+- When searching for a DOM element, the method polls the DOM until the element has been found, or the timeout expires. The timeout can be configured using the environment variable `ELEMENT_SEARCH_TIMEOUT`, it defaults to `5000` milliseconds.
 
 **Parameters:** None.
 
@@ -85,6 +87,7 @@ Schedules a command to find the specified descendant DOM element of this page ob
 - If this page object represents a component then the method will traverse up the components' ancestors to get the path of the specified descendant DOM element.
 - If multiple DOM elements are found, the first one is returned.
 - If no DOM element is found, an error is thrown.
+- When searching for a DOM element, the method polls the DOM until the element has been found, or the timeout expires. The timeout can be configured using the environment variable `ELEMENT_SEARCH_TIMEOUT`, it defaults to `5000` milliseconds.
 
 **Parameters:**
 
@@ -103,6 +106,7 @@ Schedules a command to find the specified descendant DOM element of this page ob
 
 - If this page object represents a component then the method will traverse up the components' ancestors to get the path of the specified descendant DOM element.
 - If no **unique** DOM element is found, an error is thrown.
+- When searching for a DOM element, the method polls the DOM until the element has been found, or the timeout expires. The timeout can be configured using the environment variable `ELEMENT_SEARCH_TIMEOUT`, it defaults to `5000` milliseconds.
 
 **Parameters:**
 
@@ -119,7 +123,7 @@ const component = myPage.selectFirstDescendant(MyComponent);
 
 Selects the specified descendant component of this component.
 
-- If the selected component points to multiple DOM elements, the first one is selected during a search.
+- If the selected component points to multiple DOM elements, the first one is selected during an element search.
 
 **Parameters:**
 
@@ -136,7 +140,7 @@ const component = myPage.selectUniqueDescendant(MyComponent);
 
 Selects the specified descendant component of this component.
 
-- If the selected component points to multiple DOM elements, an error is thrown during a search.
+- If the selected component points to multiple DOM elements, an error is thrown during an element search.
 
 **Parameters:**
 
@@ -153,7 +157,8 @@ const myOtherPage = await myPage.goto(MyOtherPage);
 
 Instantiates the specified page class when loaded, throws an error otherwise.
 
-A page class is considered loaded if its declared selectors are found and its declared URL matches the current one.
+- A page class is considered loaded if its declared selectors are found and its declared URL matches the current one.
+- When searching for a DOM element, the method polls the DOM until the element has been found, or the timeout expires. The timeout can be configured using the environment variable `ELEMENT_SEARCH_TIMEOUT`, it defaults to `5000` milliseconds.
 
 **Parameters:**
 

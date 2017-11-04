@@ -54,7 +54,7 @@ describe('findElement(path, adapter)', () => {
   });
 
   it('should call retryOnError(action, retryDelay, timeout) with the default timeout', async () => {
-    process.env.PAGEOBJECT_ELEMENT_SEARCH_TIMEOUT = '';
+    process.env.ELEMENT_SEARCH_TIMEOUT = '';
 
     await findElement([{selector: 'mockSelector', unique: false}], mockAdapter);
 
@@ -63,7 +63,7 @@ describe('findElement(path, adapter)', () => {
   });
 
   it('should call retryOnError(action, retryDelay, timeout) with an individual timeout', async () => {
-    process.env.PAGEOBJECT_ELEMENT_SEARCH_TIMEOUT = '1000';
+    process.env.ELEMENT_SEARCH_TIMEOUT = '1000';
 
     await findElement([{selector: 'mockSelector', unique: false}], mockAdapter);
 

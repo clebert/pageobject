@@ -46,7 +46,7 @@ async function findElements<TElement>(
 }
 
 function getTimeout(): number {
-  const maybeTimeout = process.env.PAGEOBJECT_ELEMENT_SEARCH_TIMEOUT;
+  const maybeTimeout = process.env.ELEMENT_SEARCH_TIMEOUT;
 
   return maybeTimeout ? parseInt(maybeTimeout, 10) : defaultTimeout;
 }
