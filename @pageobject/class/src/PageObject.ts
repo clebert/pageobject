@@ -1,11 +1,6 @@
 import {inspect} from 'util';
 import {Adapter, PathSegment, Predicate, findElement} from './findElement';
 
-export type InitialComponent<
-  TElement,
-  TAdapter extends Adapter<TElement>
-> = ComponentClass<TElement, TAdapter, PageObject<TElement, TAdapter>>;
-
 export interface ComponentClass<
   TElement,
   TAdapter extends Adapter<TElement>,
@@ -21,23 +16,10 @@ export interface PageClass<
   TAdapter extends Adapter<TElement>,
   TPage extends PageObject<TElement, TAdapter>
 > {
-  readonly InitialComponents?: InitialComponent<TElement, TAdapter>[];
-  readonly InitialElements?: string[];
-  readonly url?: RegExp | string;
+  readonly selectors: string[];
+  readonly url: RegExp;
 
   new (path: PathSegment<TElement>[], adapter: TAdapter): TPage;
-}
-
-function test(actual: string, expected: RegExp | string | undefined): boolean {
-  if (typeof expected === 'string') {
-    return actual === expected;
-  }
-
-  if (expected) {
-    return expected.test(actual);
-  }
-
-  return true;
 }
 
 export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
@@ -51,24 +33,15 @@ export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
   ): Promise<TPage> {
     const rootPath = [{selector: 'html', unique: true}];
 
-    if (Page.InitialComponents) {
-      for (const Component of Page.InitialComponents) {
-        await findElement(
-          [...rootPath, {selector: Component.selector, unique: false}],
-          adapter
-        );
-      }
-    }
+    await findElement(rootPath, adapter);
 
-    if (Page.InitialElements) {
-      for (const selector of Page.InitialElements) {
-        await findElement([...rootPath, {selector, unique: false}], adapter);
-      }
+    for (const selector of Page.selectors) {
+      await findElement([...rootPath, {selector, unique: false}], adapter);
     }
 
     const url = await adapter.getCurrentUrl();
 
-    if (!test(url, Page.url)) {
+    if (!Page.url.test(url)) {
       const actual = inspect(url);
       const expected = inspect(Page.url);
 

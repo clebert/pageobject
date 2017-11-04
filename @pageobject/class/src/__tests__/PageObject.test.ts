@@ -2,11 +2,23 @@
 
 jest.mock('../findElement');
 
-import {PageObject, PathSegment, Predicate} from '..';
+import {ComponentClass, PageClass, PageObject, PathSegment} from '..';
 import {MockAdapter} from '../__mocks__/MockAdapter';
+import {MockPageObject} from '../__mocks__/MockPageObject';
 import {findElement} from '../findElement';
 
+type MockComponentClassType = jest.Mock<MockPageObject> &
+  ComponentClass<string, MockAdapter, MockPageObject>;
+
+type MockPageClassType = jest.Mock<MockPageObject> &
+  PageClass<string, MockAdapter, MockPageObject>;
+
 const mockedFindElement = findElement as jest.Mock;
+
+beforeEach(async () => {
+  mockedFindElement.mockClear();
+  mockedFindElement.mockReset();
+});
 
 const mockPath: PathSegment<string>[] = [
   {selector: 'mockSelector', unique: false}
@@ -14,242 +26,108 @@ const mockPath: PathSegment<string>[] = [
 
 const mockPredicate = async () => true;
 
-class MockPageObject extends PageObject<string, MockAdapter> {
-  public getAdapter(): MockAdapter {
-    return this.adapter;
-  }
-
-  public async callFindSelf(): Promise<string> {
-    return this.findSelf();
-  }
-
-  public async callFindFirstDescendant(
-    selector: string,
-    predicate: Predicate<string>
-  ): Promise<string> {
-    return this.findFirstDescendant(selector, predicate);
-  }
-
-  public async callFindUniqueDescendant(
-    selector: string,
-    predicate: Predicate<string>
-  ): Promise<string> {
-    return this.findUniqueDescendant(selector, predicate);
-  }
-
-  public async callSelectFirstDescendant(
-    Component: jest.Mock,
-    predicate: Predicate<string>
-  ): Promise<{}> {
-    return this.selectFirstDescendant(Component as any, predicate);
-  }
-
-  public async callSelectUniqueDescendant(
-    Component: jest.Mock,
-    predicate: Predicate<string>
-  ): Promise<{}> {
-    return this.selectUniqueDescendant(Component as any, predicate);
-  }
-
-  public async callGoto(Page: jest.Mock): Promise<{}> {
-    return this.goto(Page as any);
-  }
-}
+const rootPath = [{selector: 'html', unique: true}];
 
 describe('PageObject', () => {
+  let MockComponentClass: MockComponentClassType;
+  let MockPageClass: MockPageClassType;
   let mockAdapter: MockAdapter;
   let mockPageObject: MockPageObject;
 
   beforeEach(async () => {
+    MockComponentClass = jest.fn() as any;
+
+    (MockComponentClass as any).selector = 'mockSelector';
+
+    MockPageClass = jest.fn() as any;
+
+    (MockPageClass as any).selectors = [];
+    (MockPageClass as any).url = /mockUrl/;
+
     mockAdapter = new MockAdapter();
     mockPageObject = new MockPageObject(mockPath, mockAdapter);
-
-    mockedFindElement.mockClear();
-    mockedFindElement.mockReset();
   });
 
   describe('public PageObject.goto(Page, adapter)', () => {
-    let MockPageClass: jest.Mock;
+    it('should call findElement(path, adapter) and rethrow its error', async () => {
+      mockedFindElement.mockImplementation(async () => {
+        throw new Error('mockMessage');
+      });
 
-    beforeEach(() => {
-      MockPageClass = jest.fn();
+      await expect(PageObject.goto(MockPageClass, mockAdapter)).rejects.toEqual(
+        new Error('mockMessage')
+      );
     });
 
-    describe('called with a page class without declarations', () => {
+    describe('called with a page class without selectors', () => {
       it('should return an instance of the specified page class', async () => {
-        const page = await PageObject.goto(MockPageClass as any, mockAdapter);
-
-        expect(mockedFindElement.mock.calls.length).toBe(0);
+        const page = await PageObject.goto(MockPageClass, mockAdapter);
 
         expect(MockPageClass.mock.instances.length).toBe(1);
         expect(MockPageClass.mock.instances[0]).toBe(page);
 
-        expect(MockPageClass.mock.calls).toEqual([
-          [[{selector: 'html', unique: true}], mockAdapter]
-        ]);
+        expect(MockPageClass.mock.calls).toEqual([[rootPath, mockAdapter]]);
+      });
+
+      it('should call findElement(path, adapter) once', async () => {
+        await PageObject.goto(MockPageClass, mockAdapter);
+
+        expect(mockedFindElement.mock.calls).toEqual([[rootPath, mockAdapter]]);
       });
     });
 
-    describe('called with a page class with declared initial components', () => {
-      let MockComponentClass1: jest.Mock;
-      let MockComponentClass2: jest.Mock;
-
+    describe('called with a page class with selectors', () => {
       beforeEach(() => {
-        MockComponentClass1 = jest.fn();
-        MockComponentClass2 = jest.fn();
-
-        (MockComponentClass1 as any).selector = 'mockSelector1';
-        (MockComponentClass2 as any).selector = 'mockSelector2';
-
-        (MockPageClass as any).InitialComponents = [
-          MockComponentClass1,
-          MockComponentClass2
-        ];
+        (MockPageClass as any).selectors = ['mockSelector1', 'mockSelector2'];
       });
 
       it('should return an instance of the specified page class', async () => {
-        const page = await PageObject.goto(MockPageClass as any, mockAdapter);
+        const page = await PageObject.goto(MockPageClass, mockAdapter);
+
+        expect(MockPageClass.mock.instances.length).toBe(1);
+        expect(MockPageClass.mock.instances[0]).toBe(page);
+
+        expect(MockPageClass.mock.calls).toEqual([[rootPath, mockAdapter]]);
+      });
+
+      it('should call findElement(path, adapter) multiple times', async () => {
+        await PageObject.goto(MockPageClass, mockAdapter);
 
         expect(mockedFindElement.mock.calls).toEqual([
+          [rootPath, mockAdapter],
           [
-            [
-              {selector: 'html', unique: true},
-              {selector: 'mockSelector1', unique: false}
-            ],
+            [...rootPath, {selector: 'mockSelector1', unique: false}],
             mockAdapter
           ],
           [
-            [
-              {selector: 'html', unique: true},
-              {selector: 'mockSelector2', unique: false}
-            ],
+            [...rootPath, {selector: 'mockSelector2', unique: false}],
             mockAdapter
           ]
         ]);
-
-        expect(MockPageClass.mock.instances.length).toBe(1);
-        expect(MockPageClass.mock.instances[0]).toBe(page);
-
-        expect(MockPageClass.mock.calls).toEqual([
-          [[{selector: 'html', unique: true}], mockAdapter]
-        ]);
-      });
-
-      it('should call findElement(path, adapter) and rethrow its error', async () => {
-        mockedFindElement.mockImplementation(async () => {
-          throw new Error('mockMessage');
-        });
-
-        await expect(
-          PageObject.goto(MockPageClass as any, mockAdapter)
-        ).rejects.toEqual(new Error('mockMessage'));
       });
     });
 
-    describe('called with a page class with declared initial elements', () => {
+    describe('called with a page class with a non-matching url', () => {
       beforeEach(() => {
-        (MockPageClass as any).InitialElements = [
-          'mockSelector1',
-          'mockSelector2'
-        ];
-      });
-
-      it('should return an instance of the specified page class', async () => {
-        const page = await PageObject.goto(MockPageClass as any, mockAdapter);
-
-        expect(mockedFindElement.mock.calls).toEqual([
-          [
-            [
-              {selector: 'html', unique: true},
-              {selector: 'mockSelector1', unique: false}
-            ],
-            mockAdapter
-          ],
-          [
-            [
-              {selector: 'html', unique: true},
-              {selector: 'mockSelector2', unique: false}
-            ],
-            mockAdapter
-          ]
-        ]);
-
-        expect(MockPageClass.mock.instances.length).toBe(1);
-        expect(MockPageClass.mock.instances[0]).toBe(page);
-
-        expect(MockPageClass.mock.calls).toEqual([
-          [[{selector: 'html', unique: true}], mockAdapter]
-        ]);
-      });
-
-      it('should call findElement(path, adapter) and rethrow its error', async () => {
-        mockedFindElement.mockImplementation(async () => {
-          throw new Error('mockMessage');
-        });
-
-        await expect(
-          PageObject.goto(MockPageClass as any, mockAdapter)
-        ).rejects.toEqual(new Error('mockMessage'));
-      });
-    });
-
-    describe('called with a page class with declared regex url', () => {
-      it('should return an instance of the specified page class', async () => {
-        (MockPageClass as any).url = /mockURL/;
-
-        const page = await PageObject.goto(MockPageClass as any, mockAdapter);
-
-        expect(mockAdapter.getCurrentUrl.mock.calls).toEqual([[]]);
-        expect(mockedFindElement.mock.calls.length).toEqual(0);
-
-        expect(MockPageClass.mock.instances.length).toBe(1);
-        expect(MockPageClass.mock.instances[0]).toBe(page);
-
-        expect(MockPageClass.mock.calls).toEqual([
-          [[{selector: 'html', unique: true}], mockAdapter]
-        ]);
+        (MockPageClass as any).url = /mockOtherUrl/;
       });
 
       it('should throw a "No matching url found" error', async () => {
-        (MockPageClass as any).url = /otherURL/;
-
         await expect(
-          PageObject.goto(MockPageClass as any, mockAdapter)
+          PageObject.goto(MockPageClass, mockAdapter)
         ).rejects.toEqual(
           new Error(
-            "No matching url found (actual='mockURL', expected=/otherURL/)"
+            "No matching url found (actual='mockUrl', expected=/mockOtherUrl/)"
           )
         );
       });
-    });
 
-    describe('called with a page class with declared string url', () => {
-      it('should return an instance of the specified page class', async () => {
-        (MockPageClass as any).url = 'mockURL';
-
-        const page = await PageObject.goto(MockPageClass as any, mockAdapter);
-
-        expect(mockAdapter.getCurrentUrl.mock.calls).toEqual([[]]);
-        expect(mockedFindElement.mock.calls.length).toEqual(0);
-
-        expect(MockPageClass.mock.instances.length).toBe(1);
-        expect(MockPageClass.mock.instances[0]).toBe(page);
-
-        expect(MockPageClass.mock.calls).toEqual([
-          [[{selector: 'html', unique: true}], mockAdapter]
-        ]);
-      });
-
-      it('should throw a "No matching url found" error', async () => {
-        (MockPageClass as any).url = 'otherURL';
-
-        await expect(
-          PageObject.goto(MockPageClass as any, mockAdapter)
-        ).rejects.toEqual(
-          new Error(
-            "No matching url found (actual='mockURL', expected='otherURL')"
-          )
-        );
+      it('should call findElement(path, adapter) before matching the url', async () => {
+        try {
+          await PageObject.goto(MockPageClass, mockAdapter);
+        } catch {
+          expect(mockedFindElement.mock.calls.length).toEqual(1);
+        }
       });
     });
   });
@@ -349,12 +227,8 @@ describe('PageObject', () => {
   });
 
   describe('protected this.selectFirstDescendant(Component, predicate?)', () => {
-    it('should return an instance of the specified component class', async () => {
-      const MockComponentClass = jest.fn();
-
-      (MockComponentClass as any).selector = 'mockSelector';
-
-      const component = await mockPageObject.callSelectFirstDescendant(
+    it('should return an instance of the specified component class', () => {
+      const component = mockPageObject.callSelectFirstDescendant(
         MockComponentClass,
         mockPredicate
       );
@@ -375,12 +249,8 @@ describe('PageObject', () => {
   });
 
   describe('protected this.selectUniqueDescendant(Component, predicate?)', () => {
-    it('should return an instance of the specified component class', async () => {
-      const MockComponentClass = jest.fn();
-
-      (MockComponentClass as any).selector = 'mockSelector';
-
-      const component = await mockPageObject.callSelectUniqueDescendant(
+    it('should return an instance of the specified component class', () => {
+      const component = mockPageObject.callSelectUniqueDescendant(
         MockComponentClass,
         mockPredicate
       );
@@ -405,15 +275,12 @@ describe('PageObject', () => {
       const mockedGoto = jest.spyOn(PageObject, 'goto');
 
       try {
-        const MockPageClass = jest.fn();
         const page = await mockPageObject.callGoto(MockPageClass);
 
         expect(MockPageClass.mock.instances.length).toBe(1);
         expect(MockPageClass.mock.instances[0]).toBe(page);
 
-        expect(MockPageClass.mock.calls).toEqual([
-          [[{selector: 'html', unique: true}], mockAdapter]
-        ]);
+        expect(MockPageClass.mock.calls).toEqual([[rootPath, mockAdapter]]);
 
         expect(mockedGoto.mock.calls).toEqual([[MockPageClass, mockAdapter]]);
       } finally {
@@ -429,8 +296,6 @@ describe('PageObject', () => {
       });
 
       try {
-        const MockPageClass = jest.fn();
-
         await expect(mockPageObject.callGoto(MockPageClass)).rejects.toEqual(
           new Error('mockMessage')
         );

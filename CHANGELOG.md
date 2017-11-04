@@ -19,14 +19,14 @@ and this project adheres to [Semantic Versioning][semver-spec].
 
 #### @pageobject/selenium-adapter
 
-- Added the static `launchHeadlessChrome()` method to the `SeleniumAdapter` class.
-- Added the `open(Page, url)` method to the `SeleniumAdapter` class.
+- Added the static method `launchHeadlessChrome()` to the class `SeleniumAdapter`.
+- Added the method `open(Page, url)` to the class `SeleniumAdapter`.
 
 ### Changed
 
 #### @pageobject/selenium-adapter
 
-- **Breaking:** Removed the `SeleniumBrowser` class.
+- **Breaking:** Removed the class `SeleniumBrowser`.
 
 ## v0.2.0 - 2017-10-29
 
@@ -34,30 +34,30 @@ and this project adheres to [Semantic Versioning][semver-spec].
 
 #### @pageobject/class
 
-- Added the optional `InitialElements` property to the `PageClass` interface.
+- Added the optional property `InitialElements` to the interface `PageClass`.
 
 #### @pageobject/selenium-adapter
 
-- Added the `setElementSearchTimeout(ms)` method to the `SeleniumBrowser` class.
-- Added the `setPageLoadTimeout(ms)` method to the `SeleniumBrowser` class.
+- Added the method `setElementSearchTimeout(ms)` to the class `SeleniumBrowser`.
+- Added the method `setPageLoadTimeout(ms)` to the class `SeleniumBrowser`.
 
 ### Changed
 
 #### @pageobject/class
 
-- Set the required `InitialComponents` and `url` properties of the `PageClass` interface to optional.
+- Set the required properties `InitialComponents` and `url` of the interface `PageClass` to optional.
 
 #### @pageobject/selenium-adapter
 
-- **Breaking:** Changed the parameters of the constructor method of the `SeleniumBrowser` class.
-- **Breaking:** Removed the static `launch(capabilities)` method of the `SeleniumBrowser` class.
+- **Breaking:** Changed the parameters of the constructor method of the class `SeleniumBrowser`.
+- **Breaking:** Removed the static method `launch(capabilities)` of the class `SeleniumBrowser`.
 
 ## v0.1.0 - 2017-10-27
 
 ### Added
 
-- Added the @pageobject/class package.
-- Added the @pageobject/selenium-adapter package.
+- Added the package @pageobject/class.
+- Added the package @pageobject/selenium-adapter.
 
 [keepachangelog]: http://keepachangelog.com/en/1.0.0/
 [semver-spec]: http://semver.org/spec/v2.0.0.html
