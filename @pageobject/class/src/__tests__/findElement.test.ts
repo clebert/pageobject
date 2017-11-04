@@ -1,6 +1,22 @@
+/* tslint:disable no-any */
+
+jest.mock('../retryOnError');
+
 import {inspect} from 'util';
 import {MockAdapter} from '../__mocks__/MockAdapter';
 import {findElement} from '../findElement';
+import {Action, retryOnError} from '../retryOnError';
+
+const mockedRetryOnError = retryOnError as jest.Mock;
+
+beforeEach(async () => {
+  mockedRetryOnError.mockClear();
+  mockedRetryOnError.mockReset();
+
+  mockedRetryOnError.mockImplementation(async (action: Action<any>) =>
+    action()
+  );
+});
 
 describe('findElement(path, adapter)', () => {
   let mockAdapter: MockAdapter;
@@ -12,6 +28,47 @@ describe('findElement(path, adapter)', () => {
       .mockImplementationOnce(async () => ['mockElement1-1', 'mockElement1-2'])
       .mockImplementationOnce(async () => ['mockElement2-1', 'mockElement2-2'])
       .mockImplementationOnce(async () => ['mockElement3-1', 'mockElement3-2']);
+  });
+
+  it('should call retryOnError(action, retryDelay, timeout) once and return its result', async () => {
+    mockedRetryOnError.mockImplementation(async () => 'mockElement');
+
+    expect(
+      await findElement(
+        [{selector: 'mockSelector', unique: false}],
+        mockAdapter
+      )
+    ).toBe('mockElement');
+
+    expect(mockedRetryOnError.mock.calls.length).toBe(1);
+  });
+
+  it('should call retryOnError(action, retryDelay, timeout) and rethrow its error', async () => {
+    mockedRetryOnError.mockImplementation(async () => {
+      throw new Error('mockMessage');
+    });
+
+    await expect(
+      findElement([{selector: 'mockSelector', unique: false}], mockAdapter)
+    ).rejects.toEqual(new Error('mockMessage'));
+  });
+
+  it('should call retryOnError(action, retryDelay, timeout) with the default timeout', async () => {
+    process.env.PAGEOBJECT_ELEMENT_SEARCH_TIMEOUT = '';
+
+    await findElement([{selector: 'mockSelector', unique: false}], mockAdapter);
+
+    expect(mockedRetryOnError.mock.calls[0][1]).toBe(40);
+    expect(mockedRetryOnError.mock.calls[0][2]).toBe(5000);
+  });
+
+  it('should call retryOnError(action, retryDelay, timeout) with an individual timeout', async () => {
+    process.env.PAGEOBJECT_ELEMENT_SEARCH_TIMEOUT = '1000';
+
+    await findElement([{selector: 'mockSelector', unique: false}], mockAdapter);
+
+    expect(mockedRetryOnError.mock.calls[0][1]).toBe(40);
+    expect(mockedRetryOnError.mock.calls[0][2]).toBe(1000);
   });
 
   it('should return a descendant element', async () => {

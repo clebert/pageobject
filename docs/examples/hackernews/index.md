@@ -37,16 +37,6 @@ let adapter: SeleniumAdapter;
 
 beforeEach(async () => {
   adapter = await SeleniumAdapter.launchHeadlessChrome();
-
-  await adapter.driver
-    .manage()
-    .timeouts()
-    .implicitlyWait(5000);
-
-  await adapter.driver
-    .manage()
-    .timeouts()
-    .pageLoadTimeout(10000);
 });
 
 afterEach(async () => {
