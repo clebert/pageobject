@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning][semver-spec].
 
 ### Fixed
 
+## v0.5.1 - 2017-11-05
+
+### Fixed
+
+#### @pageobject/class
+
+- Even during a recursive element search, the retry mechanism should only be initialized once.
+
 ## v0.5.0 - 2017-11-05
 
 ### Added
