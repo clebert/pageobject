@@ -2,6 +2,9 @@
   "name": "@pageobject/examples",
   "version": "0.5.1",
   "private": true,
+  "scripts": {
+    "test": "node src/getting-started/selenium/test.js"
+  },
   "dependencies": {
     "@pageobject/class": "^0.5.1",
     "@pageobject/selenium-adapter": "^0.5.1",
