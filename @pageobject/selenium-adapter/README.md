@@ -1,6 +1,6 @@
 # @pageobject/selenium-adapter [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link] ![Stability][badge-stability-image]
 
-[**PageObjectJS**][repo] | [**API References**](../../docs/api-references/index.md) | [**Examples**](../../docs/examples/index.md) | [**Guides**](../../docs/guides/index.md)
+[**Getting Started**][repo-getting-started] | [**API References**](../../docs/api-references/index.md) | [**Examples**](../../docs/examples/index.md) | [**Guides**](../../docs/guides/index.md)
 
 An adapter for connecting page objects to [Selenium][selenium].
 
@@ -20,7 +20,7 @@ npm install @types/selenium-webdriver
 ```
 
 ---
-Built by (c) Clemens Akens. Released under the terms of the [MIT License][license].
+Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-license].
 
 [badge-coveralls-image]: https://coveralls.io/repos/github/clebert/pageobject/badge.svg?branch=master
 [badge-coveralls-link]: https://coveralls.io/github/clebert/pageobject?branch=master
@@ -30,9 +30,8 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][licens
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 
-[license]: https://github.com/clebert/pageobject/blob/master/LICENSE
-
-[repo]: https://github.com/clebert/pageobject
+[repo-getting-started]: https://github.com/clebert/pageobject#getting-started
+[repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
 [typescript]: https://www.typescriptlang.org/

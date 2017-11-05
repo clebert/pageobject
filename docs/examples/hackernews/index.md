@@ -2,7 +2,7 @@
 
 This example uses [Jest][jest] as test runner and [Selenium][selenium] as browser automation library.
 
-It is written in [TypeScript][typescript], **the entire code can be found [here][example-code-hackernews].**
+It is written in [TypeScript][typescript], **the entire code can be found [here][repo-example-code-hackernews].**
 
 ## Overview
 
@@ -241,7 +241,7 @@ class VoteLoginPage extends LoginPage {
 }
 ```
 
-[example-code-hackernews]: https://github.com/clebert/pageobject/tree/master/@pageobject/examples/src/hackernews
+[repo-example-code-hackernews]: https://github.com/clebert/pageobject/tree/master/@pageobject/examples/src/hackernews
 
 [hackernews]: https://news.ycombinator.com/news
 [jest]: http://facebook.github.io/jest/

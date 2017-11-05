@@ -6,13 +6,13 @@ PageObjectJS is a class-based implementation of the [Page Object pattern](docs/g
 It allows you to write **readable**, **stable**, and **maintainable** automated E2E tests using a simple but powerful [API](docs/api-references/index.md).
 
 Your tests can be written using any browser automation framework, all you need is an appropriate adapter.
-An adapter connects a specific browser automation library with [@pageobject/class][package-class].
+An adapter connects a specific browser automation library with [@pageobject/class][repo-package-class].
 
 The following adapters are currently available:
 
-- [@pageobject/selenium-adapter][package-selenium-adapter] → [Selenium][selenium]
+- [@pageobject/selenium-adapter][repo-package-selenium-adapter] → [Selenium][selenium]
 
-**This implementation is inspired by a Facebook talk at the SeleniumConf Berlin 2017.**
+**PageObjectJS is inspired by a Facebook talk at the SeleniumConf Berlin 2017.**
 
 [![Facebook Talk][facebook-talk-image]][facebook-talk-video]
 
@@ -100,11 +100,11 @@ node test.js
 
 This is a multi-package repository ([monorepo][monorepo]).
 
-### [@pageobject/class][package-class]
+### [@pageobject/class][repo-package-class]
 
 A class-based implementation of the [Page Object pattern](docs/guides/page-object-pattern.md) for JavaScript.
 
-### [@pageobject/selenium-adapter][package-selenium-adapter]
+### [@pageobject/selenium-adapter][repo-package-selenium-adapter]
 
 An adapter for connecting page objects to [Selenium][selenium].
 
@@ -156,7 +156,7 @@ npm run release
 ```
 
 ---
-Built by (c) Clemens Akens. Released under the terms of the [MIT License][license].
+Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-license].
 
 [badge-coveralls-image]: https://coveralls.io/repos/github/clebert/pageobject/badge.svg?branch=master
 [badge-coveralls-link]: https://coveralls.io/github/clebert/pageobject?branch=master
@@ -164,10 +164,9 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][licens
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 
-[license]: https://github.com/clebert/pageobject/blob/master/LICENSE
-
-[package-class]: https://github.com/clebert/pageobject/tree/master/@pageobject/class
-[package-selenium-adapter]: https://github.com/clebert/pageobject/tree/master/@pageobject/selenium-adapter
+[repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
+[repo-package-class]: https://github.com/clebert/pageobject/tree/master/@pageobject/class
+[repo-package-selenium-adapter]: https://github.com/clebert/pageobject/tree/master/@pageobject/selenium-adapter
 
 [facebook-talk-image]: http://img.youtube.com/vi/diYgXpktTqo/0.jpg
 [facebook-talk-video]: https://youtu.be/diYgXpktTqo
