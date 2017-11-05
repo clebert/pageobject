@@ -1,5 +1,9 @@
 # Page Object Pattern: The Key to Maintainable E2E Tests
 
+> If you have WebDriver APIs in your test methods, You're Doing It Wrong.
+>
+> -- [Simon Stewart][simon-stewart]
+
 One of the biggest obstacles of E2E tests is they are brittle. To combat this, there is a concept called the Page Object pattern.
 
 At its core, the Page Object pattern is a specialized form of the [Facade pattern][facade-pattern]. If you are unfamiliar with the facade pattern, it means hiding bad APIs behind better ones.
@@ -53,3 +57,4 @@ The essential principle is that there is only one place in your test suite with 
 [justin-abrah-selenium-page-object-pattern]: https://justin.abrah.ms/python/selenium-page-object-pattern--the-key-to-maintainable-tests.html
 [martin-fowler-page-object]: https://martinfowler.com/bliki/PageObject.html
 [selenium-page-objects]: https://github.com/SeleniumHQ/selenium/wiki/PageObjects
+[simon-stewart]: https://twitter.com/shs96c

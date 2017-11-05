@@ -16,7 +16,7 @@
     "release": "./scripts/release.sh",
     "pretest": "npm run compile",
     "test": "npm run format:test && npm run lint && jest --no-cache",
-    "posttest": "node @pageobject/examples/src/quick-start/selenium.js",
+    "posttest": "lerna exec --scope @pageobject/examples -- npm test",
     "upgrade": "ncu -ua && lerna exec -- ncu -ua",
     "watch": "run-p watch:*",
     "watch:compile": "lerna exec --parallel --concurrency 99 -- tsc --project . --watch",
