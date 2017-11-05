@@ -1,19 +1,8 @@
 require('chromedriver');
 
-const {PageObject} = require('@pageobject/class');
 const {SeleniumAdapter} = require('@pageobject/selenium-adapter');
 const assert = require('assert');
-
-class ExamplePage extends PageObject {
-  async getHeadline() {
-    const element = await this.findUniqueDescendant('h1');
-
-    return element.getText();
-  }
-}
-
-ExamplePage.selectors = ['h1'];
-ExamplePage.url = /example\.com/;
+const {ExamplePage} = require('./ExamplePage');
 
 (async () => {
   const adapter = await SeleniumAdapter.launchHeadlessChrome();
