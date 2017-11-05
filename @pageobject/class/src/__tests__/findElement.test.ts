@@ -30,17 +30,10 @@ describe('findElement(path, adapter)', () => {
       .mockImplementationOnce(async () => ['mockElement3-1', 'mockElement3-2']);
   });
 
-  it('should call retryOnError(action, retryDelay, timeout) once and return its result', async () => {
+  it('should call retryOnError(action, retryDelay, timeout) and return its result', async () => {
     mockedRetryOnError.mockImplementation(async () => 'mockElement');
 
-    expect(
-      await findElement(
-        [{selector: 'mockSelector', unique: false}],
-        mockAdapter
-      )
-    ).toBe('mockElement');
-
-    expect(mockedRetryOnError.mock.calls.length).toBe(1);
+    expect(await findElement([], mockAdapter)).toBe('mockElement');
   });
 
   it('should call retryOnError(action, retryDelay, timeout) and rethrow its error', async () => {
@@ -48,9 +41,22 @@ describe('findElement(path, adapter)', () => {
       throw new Error('mockMessage');
     });
 
-    await expect(
-      findElement([{selector: 'mockSelector', unique: false}], mockAdapter)
-    ).rejects.toEqual(new Error('mockMessage'));
+    await expect(findElement([], mockAdapter)).rejects.toEqual(
+      new Error('mockMessage')
+    );
+  });
+
+  it('should call retryOnError(action, retryDelay, timeout) only once', async () => {
+    await findElement(
+      [
+        {selector: 'mockSelector1', unique: false},
+        {selector: 'mockSelector2', unique: false},
+        {selector: 'mockSelector3', unique: false}
+      ],
+      mockAdapter
+    );
+
+    expect(mockedRetryOnError.mock.calls.length).toBe(1);
   });
 
   it('should call retryOnError(action, retryDelay, timeout) with the default timeout', async () => {
@@ -71,18 +77,18 @@ describe('findElement(path, adapter)', () => {
     expect(mockedRetryOnError.mock.calls[0][2]).toBe(1000);
   });
 
-  it('should return a descendant element', async () => {
+  it('should return a descendant element without mutating the path', async () => {
     const element = await findElement(
-      [
+      Object.freeze([
         {selector: 'mockSelector1', unique: false},
         {selector: 'mockSelector2', unique: false},
         {selector: 'mockSelector3', unique: false}
-      ],
+      ]) as any,
       mockAdapter
     );
 
     expect(mockAdapter.findElements.mock.calls).toEqual([
-      ['mockSelector1'],
+      ['mockSelector1', undefined],
       ['mockSelector2', 'mockElement1-1'],
       ['mockSelector3', 'mockElement2-1']
     ]);
@@ -90,15 +96,15 @@ describe('findElement(path, adapter)', () => {
     expect(element).toBe('mockElement3-1');
   });
 
-  it('should return a descendant element using a predicate', async () => {
+  it('should return a descendant element using a predicate without mutating the path', async () => {
     const predicate = jest.fn(async (_, index) => index === 1);
 
     const element = await findElement(
-      [
+      Object.freeze([
         {selector: 'mockSelector1', unique: false, predicate},
         {selector: 'mockSelector2', unique: false, predicate},
         {selector: 'mockSelector3', unique: false, predicate}
-      ],
+      ]) as any,
       mockAdapter
     );
 
@@ -112,7 +118,7 @@ describe('findElement(path, adapter)', () => {
     ]);
 
     expect(mockAdapter.findElements.mock.calls).toEqual([
-      ['mockSelector1'],
+      ['mockSelector1', undefined],
       ['mockSelector2', 'mockElement1-2'],
       ['mockSelector3', 'mockElement2-2']
     ]);
