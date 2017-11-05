@@ -12,7 +12,7 @@ The following adapters are currently available:
 
 - [@pageobject/selenium-adapter][repo-package-selenium-adapter] → [Selenium][selenium]
 
-**PageObjectJS is inspired by a Facebook talk at the SeleniumConf Berlin 2017.**
+**PageObjectJS is inspired by a Facebook talk at the SeleniumConf Berlin.**
 
 [![Facebook Talk][facebook-talk-image]][facebook-talk-video]
 
