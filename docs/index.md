@@ -10,14 +10,9 @@ It allows you to write **readable**, **stable**, and **maintainable** automated 
 Your tests can be written using any browser automation framework, all you need is an appropriate adapter.
 An adapter connects a specific browser automation library with [@pageobject/class](api-references/class.md).
 
-The following adapters already exist:
+The following adapters are available:
 
 - [@pageobject/selenium-adapter](api-references/selenium-adapter.md) → [Selenium][selenium]
-
-are planned:
-
-- @pageobject/adapter-protractor → [Protractor][protractor]
-- @pageobject/adapter-puppeteer → [Puppeteer][puppeteer]
 
 **This implementation is inspired by a Facebook talk at the SeleniumConf Berlin 2017:**
 
@@ -97,7 +92,5 @@ In contrast to the example above, it is recommended to use a test runner like [J
 [facebook-talk-video]: https://youtu.be/diYgXpktTqo
 [jest]: http://facebook.github.io/jest/
 [node-8]: https://nodejs.org/en/blog/release/v8.0.0/
-[protractor]: http://www.protractortest.org/#/
-[puppeteer]: https://github.com/GoogleChrome/puppeteer
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
 [simon-stewart]: https://twitter.com/shs96c
