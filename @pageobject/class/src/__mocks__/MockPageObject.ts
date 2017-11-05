@@ -17,28 +17,28 @@ export class MockPageObject<TElement = string> extends PageObject<
 
   public async callFindFirstDescendant(
     selector: string,
-    predicate: Predicate<TElement>
+    predicate: Predicate<TElement, MockAdapter<TElement>>
   ): Promise<TElement> {
     return this.findFirstDescendant(selector, predicate);
   }
 
   public async callFindUniqueDescendant(
     selector: string,
-    predicate: Predicate<TElement>
+    predicate: Predicate<TElement, MockAdapter<TElement>>
   ): Promise<TElement> {
     return this.findUniqueDescendant(selector, predicate);
   }
 
   public callSelectFirstDescendant(
     Component: jest.Mock<PageObject<TElement, MockAdapter<TElement>>>,
-    predicate: Predicate<TElement>
+    predicate: Predicate<TElement, MockAdapter<TElement>>
   ): PageObject<TElement, MockAdapter<TElement>> {
     return this.selectFirstDescendant(Component as any, predicate);
   }
 
   public callSelectUniqueDescendant(
     Component: jest.Mock<PageObject<TElement, MockAdapter<TElement>>>,
-    predicate: Predicate<TElement>
+    predicate: Predicate<TElement, MockAdapter<TElement>>
   ): PageObject<TElement, MockAdapter<TElement>> {
     return this.selectUniqueDescendant(Component as any, predicate);
   }

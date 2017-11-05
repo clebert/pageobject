@@ -234,12 +234,12 @@ The type of an object that represents a DOM element depends on the adapter used:
 ```js
 // TypeScript
 function atIndex(n: number): Predicate<SomeElement> {
-  return async (element, index, elements) => index === n;
+  return async (adapter, element, index, elements) => index === n;
 }
 
 // JavaScript
 function atIndex(n) {
-  return async (element, index, elements) => index === n;
+  return async (adapter, element, index, elements) => index === n;
 }
 ```
 
@@ -251,6 +251,7 @@ In addition to a [CSS selector][css-selectors], a predicate function is another 
 
 **Parameters:**
 
+- [`adapter: Adapter`](#type-adapter) The adapter associated with the current page object.
 - [`element: Element`](#type-element) The current DOM element being processed in the array of found DOM elements.
 - `index: number` The index of the current DOM element being processed in the array of found DOM elements.
 - [`elements: Element[]`](#type-element) The array of found DOM elements.
