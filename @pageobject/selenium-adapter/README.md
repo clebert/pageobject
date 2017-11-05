@@ -1,4 +1,4 @@
-# @pageobject/selenium-adapter [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link] ![Stability][badge-stability-image]
+# @pageobject/selenium-adapter [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
 [**Getting Started**][repo-getting-started] | [**API References**](../../docs/api-references/index.md) | [**Examples**](../../docs/examples/index.md) | [**Guides**](../../docs/guides/index.md)
 
@@ -26,7 +26,6 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-coveralls-link]: https://coveralls.io/github/clebert/pageobject?branch=master
 [badge-npm-image]: https://img.shields.io/npm/v/@pageobject/selenium-adapter.svg
 [badge-npm-link]: https://www.npmjs.com/package/@pageobject/selenium-adapter
-[badge-stability-image]: https://img.shields.io/badge/stability-unstable-yellow.svg
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 
