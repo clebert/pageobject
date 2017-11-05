@@ -1,7 +1,7 @@
 {
-  "name": "@pageobject/selenium-adapter",
+  "name": "@pageobject/puppeteer-adapter",
   "version": "0.6.0",
-  "description": "An adapter for connecting page objects to Selenium.",
+  "description": "An adapter for connecting page objects to Puppeteer.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
   "homepage": "https://pageobject.js.org/",
@@ -15,8 +15,7 @@
     "end-to-end",
     "e2e",
     "pageobject",
-    "selenium",
-    "webdriver"
+    "puppeteer"
   ],
   "repository": {
     "type": "git",
@@ -32,11 +31,11 @@
   "typings": "lib/index.d.ts",
   "peerDependencies": {
     "@pageobject/class": "^0.6.0",
-    "selenium-webdriver": "^3.6.0"
+    "puppeteer": "^0.12.0"
   },
   "devDependencies": {
     "@pageobject/class": "^0.6.0",
-    "@types/selenium-webdriver": "^3.0.8",
-    "selenium-webdriver": "^3.6.0"
+    "@types/puppeteer": "^0.12.2",
+    "puppeteer": "^0.12.0"
   }
 }

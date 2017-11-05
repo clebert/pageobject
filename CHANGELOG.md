@@ -13,6 +13,12 @@ and this project adheres to [Semantic Versioning][semver-spec].
 
 ### Fixed
 
+## v0.7.0 - 2017-11-06
+
+### Added
+
+- Added the package @pageobject/puppeteer-adapter
+
 ## v0.6.0 - 2017-11-06
 
 ### Changed

@@ -13,7 +13,8 @@
     "testing",
     "automation",
     "end-to-end",
-    "e2e"
+    "e2e",
+    "pageobject"
   ],
   "repository": {
     "type": "git",
