@@ -1,4 +1,4 @@
-# PageObjectJS [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
+# PageObjectJS [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link] [![TypeScript][badge-typescript-image]][badge-typescript-link]
 
 [**Getting Started**](#getting-started) | [**API References**](docs/api-references/index.md) | [**Examples**](docs/examples/index.md) | [**Guides**](docs/guides/index.md)
 
@@ -239,6 +239,8 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-coveralls-link]: https://coveralls.io/github/clebert/pageobject?branch=master
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
+[badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
+[badge-typescript-link]: https://www.typescriptlang.org/
 
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [repo-package-class]: https://github.com/clebert/pageobject/tree/master/@pageobject/class
