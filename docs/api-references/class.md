@@ -57,7 +57,7 @@ Instantiates the specified page class when loaded, throws an error otherwise.
 
 The adapter associated with this page object.
 
-**Type:** [`adapter: Adapter`](#type-adapter)
+**Type:** [`Adapter`](#type-adapter)
 
 ### Instance Method `protected this.findSelf()`
 

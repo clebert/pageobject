@@ -59,7 +59,7 @@ The method launches a browser instance with given arguments. The browser will be
 const browser = await launch();
 const page = await browser.newPage();
 
-const adapter = new SeleniumAdapter(browser, page);
+const adapter = new PuppeteerAdapter(browser, page);
 ```
 
 **Parameters:**
@@ -71,9 +71,13 @@ const adapter = new SeleniumAdapter(browser, page);
 
 The Browser instance associated with this adapter.
 
+**Type:** [`Browser`][puppeteer-class-browser]
+
 ### Instance Variable `public this.page`
 
 The Page instance associated with this adapter.
+
+**Type:** [`Page`][puppeteer-class-page]
 
 ### Instance Method `public this.open(Page, url, options?)`
 

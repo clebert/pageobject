@@ -68,7 +68,7 @@ Please refer to the ["Using the Builder API"][selenium] documentation for instru
 
 The WebDriver instance associated with this adapter.
 
-**Type:** [`driver: WebDriver`][selenium-webdriver]
+**Type:** [`WebDriver`][selenium-webdriver]
 
 ### Instance Method `public this.open(Page, url)`
 
