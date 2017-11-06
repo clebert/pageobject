@@ -9,7 +9,9 @@
     "@pageobject/class": "^0.7.0",
     "@pageobject/puppeteer-adapter": "^0.7.0",
     "@pageobject/selenium-adapter": "^0.7.0",
+    "@types/puppeteer": "^0.12.2",
     "@types/selenium-webdriver": "^3.0.8",
+    "puppeteer": "^0.12.0",
     "selenium-webdriver": "^3.6.0"
   }
 }
