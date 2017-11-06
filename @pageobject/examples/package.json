@@ -1,14 +1,14 @@
 {
   "name": "@pageobject/examples",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "scripts": {
     "test": "node src/getting-started/selenium/test.js && node src/getting-started/puppeteer/test.js"
   },
   "dependencies": {
-    "@pageobject/class": "^0.6.0",
-    "@pageobject/puppeteer-adapter": "^0.6.0",
-    "@pageobject/selenium-adapter": "^0.6.0",
+    "@pageobject/class": "^0.7.0",
+    "@pageobject/puppeteer-adapter": "^0.7.0",
+    "@pageobject/selenium-adapter": "^0.7.0",
     "@types/selenium-webdriver": "^3.0.8",
     "selenium-webdriver": "^3.6.0"
   }
