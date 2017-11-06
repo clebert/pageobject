@@ -16,10 +16,10 @@ export function textEquals(
       element
     );
 
-    const innerText = await innerTextHandle.jsonValue();
-
-    await innerTextHandle.dispose();
-
-    return innerText === value;
+    try {
+      return (await innerTextHandle.jsonValue()) === value;
+    } finally {
+      await innerTextHandle.dispose();
+    }
   };
 }

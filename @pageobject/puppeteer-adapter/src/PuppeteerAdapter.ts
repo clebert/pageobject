@@ -79,10 +79,10 @@ export class PuppeteerAdapter implements Adapter<ElementHandle> {
       () => window.location.href
     );
 
-    const url: string = await urlHandle.jsonValue();
-
-    await urlHandle.dispose();
-
-    return url;
+    try {
+      return urlHandle.jsonValue();
+    } finally {
+      await urlHandle.dispose();
+    }
   }
 }

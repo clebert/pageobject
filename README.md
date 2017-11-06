@@ -100,7 +100,74 @@ node test.js
 
 ### Using Puppeteer
 
-TODO
+**Install dependencies:**
+
+```sh
+npm install \
+  @pageobject/class \
+  @pageobject/puppeteer-adapter \
+  puppeteer
+```
+
+Please ensure that Node.js `>=8` is also installed.
+
+**Create a file `ExamplePage.js`:**
+
+```js
+const {PageObject} = require('@pageobject/class');
+
+class ExamplePage extends PageObject {
+  async getHeadline() {
+    const innerTextHandle = await this.adapter.page.evaluateHandle(
+      element => element.innerText.trim(),
+      await this.findUniqueDescendant('h1')
+    );
+
+    try {
+      return innerTextHandle.jsonValue();
+    } finally {
+      await innerTextHandle.dispose();
+    }
+  }
+}
+
+ExamplePage.selectors = ['h1'];
+ExamplePage.url = /example\.com/;
+
+exports.ExamplePage = ExamplePage;
+```
+
+**Create a file `test.js`:**
+
+```js
+const {PuppeteerAdapter} = require('@pageobject/puppeteer-adapter');
+const assert = require('assert');
+const {ExamplePage} = require('./ExamplePage');
+
+(async () => {
+  const adapter = await PuppeteerAdapter.launchChrome();
+
+  try {
+    const page = await adapter.open(ExamplePage, 'https://example.com/');
+
+    assert.strictEqual(await page.getHeadline(), 'Example Domain');
+
+    console.log('OK');
+  } finally {
+    await adapter.browser.close();
+  }
+})().catch(e => {
+  console.error(e.message);
+
+  process.exit(1);
+});
+```
+
+**Run the test:**
+
+```sh
+node test.js
+```
 
 ## Packages
 
