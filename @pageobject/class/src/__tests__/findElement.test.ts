@@ -97,7 +97,7 @@ describe('findElement(path, adapter)', () => {
   });
 
   it('should return a descendant element using a predicate without mutating the path', async () => {
-    const predicate = jest.fn(async (_, index) => index === 1);
+    const predicate = jest.fn(async (_, __, index) => index === 1);
 
     const element = await findElement(
       Object.freeze([
@@ -109,12 +109,12 @@ describe('findElement(path, adapter)', () => {
     );
 
     expect(predicate.mock.calls).toEqual([
-      ['mockElement1-1', 0, ['mockElement1-1', 'mockElement1-2']],
-      ['mockElement1-2', 1, ['mockElement1-1', 'mockElement1-2']],
-      ['mockElement2-1', 0, ['mockElement2-1', 'mockElement2-2']],
-      ['mockElement2-2', 1, ['mockElement2-1', 'mockElement2-2']],
-      ['mockElement3-1', 0, ['mockElement3-1', 'mockElement3-2']],
-      ['mockElement3-2', 1, ['mockElement3-1', 'mockElement3-2']]
+      [mockAdapter, 'mockElement1-1', 0, ['mockElement1-1', 'mockElement1-2']],
+      [mockAdapter, 'mockElement1-2', 1, ['mockElement1-1', 'mockElement1-2']],
+      [mockAdapter, 'mockElement2-1', 0, ['mockElement2-1', 'mockElement2-2']],
+      [mockAdapter, 'mockElement2-2', 1, ['mockElement2-1', 'mockElement2-2']],
+      [mockAdapter, 'mockElement3-1', 0, ['mockElement3-1', 'mockElement3-2']],
+      [mockAdapter, 'mockElement3-2', 1, ['mockElement3-1', 'mockElement3-2']]
     ]);
 
     expect(mockAdapter.findElements.mock.calls).toEqual([

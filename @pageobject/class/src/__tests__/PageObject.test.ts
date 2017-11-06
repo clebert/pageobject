@@ -20,7 +20,7 @@ beforeEach(async () => {
   mockedFindElement.mockReset();
 });
 
-const mockPath: PathSegment<string>[] = [
+const mockPath: PathSegment<string, MockAdapter>[] = [
   {selector: 'mockSelector', unique: false}
 ];
 

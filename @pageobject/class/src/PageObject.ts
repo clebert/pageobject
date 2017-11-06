@@ -8,7 +8,7 @@ export interface ComponentClass<
 > {
   readonly selector: string;
 
-  new (path: PathSegment<TElement>[], adapter: TAdapter): TComponent;
+  new (path: PathSegment<TElement, TAdapter>[], adapter: TAdapter): TComponent;
 }
 
 export interface PageClass<
@@ -19,7 +19,7 @@ export interface PageClass<
   readonly selectors: string[];
   readonly url: RegExp;
 
-  new (path: PathSegment<TElement>[], adapter: TAdapter): TPage;
+  new (path: PathSegment<TElement, TAdapter>[], adapter: TAdapter): TPage;
 }
 
 export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
@@ -55,9 +55,12 @@ export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
 
   protected readonly adapter: TAdapter;
 
-  private readonly path: PathSegment<TElement>[];
+  private readonly path: PathSegment<TElement, TAdapter>[];
 
-  public constructor(path: PathSegment<TElement>[], adapter: TAdapter) {
+  public constructor(
+    path: PathSegment<TElement, TAdapter>[],
+    adapter: TAdapter
+  ) {
     this.path = path;
     this.adapter = adapter;
   }
@@ -68,7 +71,7 @@ export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
 
   protected async findFirstDescendant(
     selector: string,
-    predicate?: Predicate<TElement>
+    predicate?: Predicate<TElement, TAdapter>
   ): Promise<TElement> {
     return findElement(
       [...this.path, {selector, unique: false, predicate}],
@@ -78,7 +81,7 @@ export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
 
   protected async findUniqueDescendant(
     selector: string,
-    predicate?: Predicate<TElement>
+    predicate?: Predicate<TElement, TAdapter>
   ): Promise<TElement> {
     return findElement(
       [...this.path, {selector, unique: true, predicate}],
@@ -90,7 +93,7 @@ export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
     TComponent extends PageObject<TElement, TAdapter>
   >(
     Component: ComponentClass<TElement, TAdapter, TComponent>,
-    predicate?: Predicate<TElement>
+    predicate?: Predicate<TElement, TAdapter>
   ): TComponent {
     return new Component(
       [...this.path, {selector: Component.selector, unique: false, predicate}],
@@ -102,7 +105,7 @@ export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
     TComponent extends PageObject<TElement, TAdapter>
   >(
     Component: ComponentClass<TElement, TAdapter, TComponent>,
-    predicate?: Predicate<TElement>
+    predicate?: Predicate<TElement, TAdapter>
   ): TComponent {
     return new Component(
       [...this.path, {selector: Component.selector, unique: true, predicate}],

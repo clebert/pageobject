@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning][semver-spec].
 
 ### Fixed
 
+## v0.6.0 - 2017-11-06
+
+### Changed
+
+#### @pageobject/class
+
+- **Breaking:** In addition to the existing parameters, an adapter is now the first parameter of any predicate function.
+
 ## v0.5.1 - 2017-11-05
 
 ### Fixed
