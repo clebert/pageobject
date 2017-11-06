@@ -54,6 +54,7 @@ Creates a new WebDriver session to control a headless Chrome.
 
 ```js
 const driver = await new Builder().forBrowser('chrome').build();
+
 const adapter = new SeleniumAdapter(driver);
 ```
 
@@ -102,6 +103,7 @@ const {predicates} = require('@pageobject/selenium-adapter');
 
 ```js
 const {atIndex} = predicates;
+
 const element = await myPage.findFirstDescendant('div', atIndex(1));
 ```
 
@@ -115,6 +117,7 @@ const element = await myPage.findFirstDescendant('div', atIndex(1));
 
 ```js
 const {textEquals} = predicates;
+
 const element = await myPage.findFirstDescendant('div', textEquals('example'));
 ```
 
