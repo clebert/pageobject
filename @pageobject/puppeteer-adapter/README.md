@@ -1,22 +1,22 @@
-# @pageobject/selenium-adapter [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
+# @pageobject/puppeteer-adapter [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
 [**Getting Started**][repo-getting-started] | [**API References**](../../docs/api-references/index.md) | [**Examples**](../../docs/examples/index.md) | [**Guides**](../../docs/guides/index.md)
 
-An adapter for connecting page objects to [Selenium][selenium].
+An adapter for connecting page objects to [Puppeteer][puppeteer].
 
 ## Installation
 
 ```sh
 npm install \
   @pageobject/class \
-  @pageobject/selenium-adapter \
-  selenium-webdriver
+  @pageobject/puppeteer-adapter \
+  puppeteer
 ```
 
-If you use [TypeScript][typescript], please install the types for Selenium as well:
+If you use [TypeScript][typescript], please install the types for Puppeteer as well:
 
 ```sh
-npm install @types/selenium-webdriver
+npm install @types/puppeteer
 ```
 
 ---
@@ -24,13 +24,13 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 
 [badge-coveralls-image]: https://coveralls.io/repos/github/clebert/pageobject/badge.svg?branch=master
 [badge-coveralls-link]: https://coveralls.io/github/clebert/pageobject?branch=master
-[badge-npm-image]: https://img.shields.io/npm/v/@pageobject/selenium-adapter.svg
-[badge-npm-link]: https://www.npmjs.com/package/@pageobject/selenium-adapter
+[badge-npm-image]: https://img.shields.io/npm/v/@pageobject/puppeteer-adapter.svg
+[badge-npm-link]: https://www.npmjs.com/package/@pageobject/puppeteer-adapter
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 
-[repo-getting-started]: https://github.com/clebert/pageobject#using-selenium
+[repo-getting-started]: https://github.com/clebert/pageobject#using-puppeteer
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 
-[selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
+[puppeteer]: https://github.com/GoogleChrome/puppeteer
 [typescript]: https://www.typescriptlang.org/

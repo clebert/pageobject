@@ -11,6 +11,7 @@ An adapter connects a specific browser automation library with [@pageobject/clas
 The following adapters are currently available:
 
 - [@pageobject/selenium-adapter][repo-package-selenium-adapter] → [Selenium][selenium]
+- [@pageobject/puppeteer-adapter][repo-package-puppeteer-adapter] → [Puppeteer][puppeteer]
 
 **PageObjectJS is inspired by a Facebook talk at the SeleniumConf Berlin.**
 
@@ -20,6 +21,7 @@ The following adapters are currently available:
 
 - [Getting Started](#getting-started)
   - [Using Selenium](#using-selenium)
+  - [Using Puppeteer](#using-puppeteer)
 - [Packages](#packages)
 - [Development](#development)
 
@@ -96,6 +98,77 @@ const {ExamplePage} = require('./ExamplePage');
 node test.js
 ```
 
+### Using Puppeteer
+
+**Install dependencies:**
+
+```sh
+npm install \
+  @pageobject/class \
+  @pageobject/puppeteer-adapter \
+  puppeteer
+```
+
+Please ensure that Node.js `>=8` is also installed.
+
+**Create a file `ExamplePage.js`:**
+
+```js
+const {PageObject} = require('@pageobject/class');
+
+class ExamplePage extends PageObject {
+  async getHeadline() {
+    const innerTextHandle = await this.adapter.page.evaluateHandle(
+      element => element.innerText.trim(),
+      await this.findUniqueDescendant('h1')
+    );
+
+    try {
+      return innerTextHandle.jsonValue();
+    } finally {
+      await innerTextHandle.dispose();
+    }
+  }
+}
+
+ExamplePage.selectors = ['h1'];
+ExamplePage.url = /example\.com/;
+
+exports.ExamplePage = ExamplePage;
+```
+
+**Create a file `test.js`:**
+
+```js
+const {PuppeteerAdapter} = require('@pageobject/puppeteer-adapter');
+const assert = require('assert');
+const {ExamplePage} = require('./ExamplePage');
+
+(async () => {
+  const adapter = await PuppeteerAdapter.launchChrome();
+
+  try {
+    const page = await adapter.open(ExamplePage, 'https://example.com/');
+
+    assert.strictEqual(await page.getHeadline(), 'Example Domain');
+
+    console.log('OK');
+  } finally {
+    await adapter.browser.close();
+  }
+})().catch(e => {
+  console.error(e.message);
+
+  process.exit(1);
+});
+```
+
+**Run the test:**
+
+```sh
+node test.js
+```
+
 ## Packages
 
 This is a multi-package repository ([monorepo][monorepo]).
@@ -107,6 +180,10 @@ A class-based implementation of the [Page Object pattern](docs/guides/page-objec
 ### [@pageobject/selenium-adapter][repo-package-selenium-adapter]
 
 An adapter for connecting page objects to [Selenium][selenium].
+
+### [@pageobject/puppeteer-adapter][repo-package-puppeteer-adapter]
+
+An adapter for connecting page objects to [Puppeteer][puppeteer].
 
 ## Development
 
@@ -165,6 +242,7 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [repo-package-class]: https://github.com/clebert/pageobject/tree/master/@pageobject/class
+[repo-package-puppeteer-adapter]: https://github.com/clebert/pageobject/tree/master/@pageobject/puppeteer-adapter
 [repo-package-selenium-adapter]: https://github.com/clebert/pageobject/tree/master/@pageobject/selenium-adapter
 
 [facebook-talk-image]: http://img.youtube.com/vi/diYgXpktTqo/0.jpg
@@ -172,4 +250,5 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [githooks]: https://git-scm.com/docs/githooks
 [jest]: http://facebook.github.io/jest/
 [monorepo]: https://github.com/lerna/lerna#about
+[puppeteer]: https://github.com/GoogleChrome/puppeteer
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
