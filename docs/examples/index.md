@@ -1,5 +1,5 @@
 # Examples
 
-## Selenium
-
-- [A test suite for Hacker News](hackernews/index.md)
+- A test suite for Hacker News
+  - [Using Selenium](hackernews/selenium.md)
+  - [Using Puppeteer](hackernews/puppeteer.md)
