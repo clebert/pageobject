@@ -229,7 +229,7 @@ A component class declares a concrete component type, it has one required static
 The type of an object that represents a DOM element depends on the adapter used:
 
 - @pageobject/selenium-adapter → [`WebElement`][selenium-webelement]
-- @pageobject/puppeteer-adapter → [`ElementHandle`][puppeteer-elementhandle]
+- @pageobject/puppeteer-adapter → [`ElementHandle`][puppeteer-class-elementhandle]
 
 ## Type `Predicate`
 
@@ -261,5 +261,5 @@ In addition to a [CSS selector][css-selectors], a predicate function is another 
 **Returns:** `Promise<boolean>` A promise that will resolve to a boolean.
 
 [css-selectors]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors
-[puppeteer-elementhandle]: https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-elementhandle
+[puppeteer-class-elementhandle]: https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-elementhandle
 [selenium-webelement]: http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/webdriver_exports_WebElement.html
