@@ -13,6 +13,31 @@ and this project adheres to [Semantic Versioning][semver-spec].
 
 ### Fixed
 
+## v0.8.0 - 2017-11-09
+
+### Added
+
+- Added the package @pageobject/predicates
+
+#### @pageobject/class
+
+- Added the class `AdapterTestSuite` a common test suite for adapters (only relevant for adapter authors).
+- Added the class `AdapterMock` (only relevant for @pageobject package authors).
+
+### Changed
+
+#### @pageobject/class
+
+- **Breaking:** Changed the interface `Adapter` (only relevant for adapter authors).
+
+#### @pageobject/selenium-adapter
+
+- **Breaking:** Removed the predicate functions.
+
+#### @pageobject/puppeteer-adapter
+
+- **Breaking:** Removed the predicate functions.
+
 ## v0.7.0 - 2017-11-06
 
 ### Added

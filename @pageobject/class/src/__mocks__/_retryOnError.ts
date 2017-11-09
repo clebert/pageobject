@@ -1,6 +1,6 @@
 const retryOnErrorModule = jest.genMockFromModule<{
   retryOnError: jest.Mock;
-}>('../retryOnError');
+}>('../_retryOnError');
 
 retryOnErrorModule.retryOnError = jest.fn();
 

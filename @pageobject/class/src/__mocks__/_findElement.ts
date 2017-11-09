@@ -1,6 +1,6 @@
 const findElementModule = jest.genMockFromModule<{
   findElement: jest.Mock;
-}>('../findElement');
+}>('../_findElement');
 
 findElementModule.findElement = jest.fn();
 

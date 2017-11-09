@@ -34,14 +34,19 @@ export class SeleniumAdapter implements Adapter<WebElement> {
     return PageObject.goto(Page, this as SeleniumAdapter);
   }
 
+  /* tslint:disable no-any */
+  public async evaluate<TResult>(
+    script: (...args: any[]) => TResult,
+    ...args: any[]
+  ): Promise<TResult> {
+    return this.driver.executeScript<TResult>(script, ...args);
+  }
+  /* tslint:enable no-any */
+
   public async findElements(
     selector: string,
     parent?: WebElement
   ): Promise<WebElement[]> {
     return (parent || this.driver).findElements(By.css(selector));
-  }
-
-  public async getCurrentUrl(): Promise<string> {
-    return this.driver.getCurrentUrl();
   }
 }

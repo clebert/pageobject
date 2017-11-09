@@ -1,26 +1,6 @@
 import {inspect} from 'util';
-import {Adapter, PathSegment, Predicate, findElement} from './findElement';
-
-export interface ComponentClass<
-  TElement,
-  TAdapter extends Adapter<TElement>,
-  TComponent extends PageObject<TElement, TAdapter>
-> {
-  readonly selector: string;
-
-  new (path: PathSegment<TElement, TAdapter>[], adapter: TAdapter): TComponent;
-}
-
-export interface PageClass<
-  TElement,
-  TAdapter extends Adapter<TElement>,
-  TPage extends PageObject<TElement, TAdapter>
-> {
-  readonly selectors: string[];
-  readonly url: RegExp;
-
-  new (path: PathSegment<TElement, TAdapter>[], adapter: TAdapter): TPage;
-}
+import {Adapter, ComponentClass, PageClass, PathSegment, Predicate} from '.';
+import {findElement} from './_findElement';
 
 export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
   public static async goto<
@@ -31,7 +11,7 @@ export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
     Page: PageClass<TElement, TAdapter, TPage>,
     adapter: TAdapter
   ): Promise<TPage> {
-    const rootPath = [{selector: 'html', unique: true}];
+    const rootPath = [{selector: ':root', unique: true}];
 
     await findElement(rootPath, adapter);
 
@@ -39,7 +19,7 @@ export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
       await findElement([...rootPath, {selector, unique: false}], adapter);
     }
 
-    const url = await adapter.getCurrentUrl();
+    const url = await adapter.evaluate(() => window.location.href);
 
     if (!Page.url.test(url)) {
       const actual = inspect(url);

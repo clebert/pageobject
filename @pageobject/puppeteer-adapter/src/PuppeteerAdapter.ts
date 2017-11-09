@@ -37,6 +37,15 @@ export class PuppeteerAdapter implements Adapter<ElementHandle> {
     return PageObject.goto(Page, this as PuppeteerAdapter);
   }
 
+  /* tslint:disable no-any */
+  public async evaluate<TResult>(
+    script: (...args: any[]) => TResult,
+    ...args: any[]
+  ): Promise<TResult> {
+    return this.page.evaluate(script, ...args);
+  }
+  /* tslint:enable no-any */
+
   public async findElements(
     selector: string,
     parent?: ElementHandle
@@ -71,18 +80,5 @@ export class PuppeteerAdapter implements Adapter<ElementHandle> {
     await elementsHandle.dispose();
 
     return elements;
-  }
-
-  public async getCurrentUrl(): Promise<string> {
-    const urlHandle = await this.page.evaluateHandle(
-      /* istanbul ignore next */
-      () => window.location.href
-    );
-
-    try {
-      return urlHandle.jsonValue();
-    } finally {
-      await urlHandle.dispose();
-    }
   }
 }

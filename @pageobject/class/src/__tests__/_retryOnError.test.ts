@@ -1,4 +1,4 @@
-import {retryOnError} from '../retryOnError';
+import {retryOnError} from '../_retryOnError';
 
 const retryDelay = 10;
 const timeout = retryDelay * 5;
@@ -49,7 +49,7 @@ describe('retryOnError(action, retryDelay, timeout)', () => {
   describe('called with an action that always throws an error', () => {
     it('should call the action multiple times and rethrow its error after the timeout has expired', async () => {
       const action = jest.fn(async () => {
-        throw new Error('mockMessage');
+        throw new Error('message');
       });
 
       const promise = retryOnError(action, retryDelay, timeout);
@@ -58,7 +58,7 @@ describe('retryOnError(action, retryDelay, timeout)', () => {
 
       expect(action.mock.calls.length).toBe(timeout / retryDelay - 1);
 
-      await expect(promise).rejects.toEqual(new Error('mockMessage'));
+      await expect(promise).rejects.toEqual(new Error('message'));
     });
   });
 
@@ -67,12 +67,12 @@ describe('retryOnError(action, retryDelay, timeout)', () => {
       const action = jest
         .fn()
         .mockImplementationOnce(async () => {
-          throw new Error('mockMessage');
+          throw new Error('message');
         })
         .mockImplementationOnce(async () => {
-          throw new Error('mockMessage');
+          throw new Error('message');
         })
-        .mockImplementation(async () => 'mockResult');
+        .mockImplementation(async () => 'result');
 
       const promise = retryOnError(action, retryDelay, timeout);
 
@@ -80,7 +80,7 @@ describe('retryOnError(action, retryDelay, timeout)', () => {
 
       expect(action.mock.calls.length).toBe(3);
 
-      expect(await promise).toBe('mockResult');
+      expect(await promise).toBe('result');
     });
   });
 });

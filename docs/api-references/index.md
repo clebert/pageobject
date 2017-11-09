@@ -4,6 +4,10 @@
 
 A class-based implementation of the [Page Object pattern](../guides/page-object-pattern.md) for JavaScript.
 
+## [@pageobject/predicates](predicates.md)
+
+A collection of useful [predicate](class.md#type-predicate) functions.
+
 ## [@pageobject/selenium-adapter](selenium-adapter.md)
 
 An adapter for connecting page objects to [Selenium][selenium].

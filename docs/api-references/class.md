@@ -251,6 +251,8 @@ const element = await myPage.findFirstDescendant('div', atIndex(1));
 
 In addition to a [CSS selector][css-selectors], a predicate function is another search criteria for selecting a specific component or finding a specific DOM element.
 
+The package [@pageobject/predicates][repo-package-predicates] provides a collection of useful predicate functions.
+
 **Parameters:**
 
 - [`adapter: Adapter`](#type-adapter) The adapter associated with the current page object.
@@ -259,6 +261,8 @@ In addition to a [CSS selector][css-selectors], a predicate function is another 
 - [`elements: Element[]`](#type-element) The array of found DOM elements.
 
 **Returns:** `Promise<boolean>` A promise that will resolve to a boolean.
+
+[repo-package-predicates]: https://github.com/clebert/pageobject/tree/master/@pageobject/predicates
 
 [css-selectors]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors
 [puppeteer-class-elementhandle]: https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-elementhandle
