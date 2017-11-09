@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning][semver-spec].
 
 ### Added
 
-- Added the package @pageobject/predicates
+- Added the package @pageobject/predicates.
 
 #### @pageobject/class
 
@@ -42,7 +42,7 @@ and this project adheres to [Semantic Versioning][semver-spec].
 
 ### Added
 
-- Added the package @pageobject/puppeteer-adapter
+- Added the package @pageobject/puppeteer-adapter.
 
 ## v0.6.0 - 2017-11-06
 

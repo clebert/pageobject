@@ -143,54 +143,6 @@ const element = await myPage.findUniqueDescendant('div', atIndex(1));
 
 **Returns:** [`Predicate`](class.md#type-predicate)
 
-### Function `predicates.htmlContains(html)`
-
-```js
-const {htmlContains} = predicates;
-
-const element = await myPage.findFirstDescendant('div', htmlContains('<p>example</p>'));
-```
-
-Compares against the innerHTML of an element, including sub-elements, without any leading or trailing whitespace.
-
-**Parameters:**
-
-- `html: string` The expected sub-html.
-
-**Returns:** [`Predicate`](class.md#type-predicate)
-
-### Function `predicates.htmlEquals(html)`
-
-```js
-const {htmlEquals} = predicates;
-
-const element = await myPage.findFirstDescendant('div', htmlEquals('<p>example</p>'));
-```
-
-Compares against the innerHTML of an element, including sub-elements, without any leading or trailing whitespace.
-
-**Parameters:**
-
-- `html: string` The expected html.
-
-**Returns:** [`Predicate`](class.md#type-predicate)
-
-### Function `predicates.htmlMatches(html)`
-
-```js
-const {htmlMatches} = predicates;
-
-const element = await myPage.findFirstDescendant('div', htmlMatches(/<p>example<\/p>/));
-```
-
-Compares against the innerHTML of an element, including sub-elements, without any leading or trailing whitespace.
-
-**Parameters:**
-
-- `html: RegExp` The expected html pattern.
-
-**Returns:** [`Predicate`](class.md#type-predicate)
-
 ### Function `predicates.attributeContains(name, value)`
 
 ```js
@@ -239,6 +191,54 @@ Compares against the value of the specified attribute of an element, without any
 
 - `name: string` The name of the attribute.
 - `value: RegExp` The expected value pattern.
+
+**Returns:** [`Predicate`](class.md#type-predicate)
+
+### Function `predicates.htmlContains(html)`
+
+```js
+const {htmlContains} = predicates;
+
+const element = await myPage.findFirstDescendant('div', htmlContains('<p>example</p>'));
+```
+
+Compares against the innerHTML of an element, including sub-elements, without any leading or trailing whitespace.
+
+**Parameters:**
+
+- `html: string` The expected sub-html.
+
+**Returns:** [`Predicate`](class.md#type-predicate)
+
+### Function `predicates.htmlEquals(html)`
+
+```js
+const {htmlEquals} = predicates;
+
+const element = await myPage.findFirstDescendant('div', htmlEquals('<p>example</p>'));
+```
+
+Compares against the innerHTML of an element, including sub-elements, without any leading or trailing whitespace.
+
+**Parameters:**
+
+- `html: string` The expected html.
+
+**Returns:** [`Predicate`](class.md#type-predicate)
+
+### Function `predicates.htmlMatches(html)`
+
+```js
+const {htmlMatches} = predicates;
+
+const element = await myPage.findFirstDescendant('div', htmlMatches(/<p>example<\/p>/));
+```
+
+Compares against the innerHTML of an element, including sub-elements, without any leading or trailing whitespace.
+
+**Parameters:**
+
+- `html: RegExp` The expected html pattern.
 
 **Returns:** [`Predicate`](class.md#type-predicate)
 
