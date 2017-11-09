@@ -1,7 +1,7 @@
 [**Getting Started**][repo-getting-started] | [**API References**][repo-api-references] | [**Examples**][repo-examples] | [**Guides**][repo-guides]
 
 PageObjectJS is a class-based implementation of the [Page Object pattern][repo-guides-page-object-pattern] for JavaScript.
-It allows you to write **readable**, **stable**, and **maintainable** automated E2E tests using a simple but powerful [API][repo-api-references].
+It allows you to write **readable**, **stable**, and **maintainable** automated E2E tests using a declarative [API][repo-api-references].
 
 Your tests can be written using any browser automation framework, all you need is an appropriate adapter.
 An adapter connects a specific browser automation library with [@pageobject/class][repo-package-class].
