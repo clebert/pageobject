@@ -33,7 +33,7 @@ At its core, the Page Object pattern is a specialized form of the [Facade patter
 
 So instead of having each test fetch elements directly and being fragile towards UI changes, the Page Object pattern introduces what is basically a decoupling layer.
 
-You create an object that represents the UI you want to test, which could be a whole page or a significant part of it. The responsibility of this object is to wrap HTML elements and encapslutate interactions with the UI. And this is the only place you need to modify when the UI changes.
+You create an object that represents the UI you want to test, which could be a whole page or a significant part of it. The responsibility of this object is to wrap HTML elements and encapsulate interactions with the UI. And this is the only place you need to modify when the UI changes.
 
 The essential principle is that there is only one place in your test suite that knows the structure of the HTML of a particular page or component.
 

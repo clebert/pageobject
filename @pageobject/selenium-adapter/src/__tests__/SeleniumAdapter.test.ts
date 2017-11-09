@@ -1,64 +1,39 @@
 /* tslint:disable-next-line no-implicit-dependencies no-import-side-effect */
 import 'chromedriver';
 
-import {join} from 'path';
+import {AdapterTestSuite, PageObject} from '@pageobject/class';
+import {WebElement} from 'selenium-webdriver';
 import {SeleniumAdapter} from '..';
-import {IndexPage} from '../__fixtures__/IndexPage';
 
-const url = `file://${join(__dirname, '../__fixtures__/index.html')}`;
+class TestPage extends PageObject<WebElement, SeleniumAdapter> {
+  public static selectors: string[];
+  public static url: RegExp;
+}
 
-let adapter: SeleniumAdapter;
+class SeleniumAdapterTestSuite extends AdapterTestSuite<
+  WebElement,
+  SeleniumAdapter
+> {
+  public async open(url: string): Promise<SeleniumAdapter> {
+    const adapter = await SeleniumAdapter.launchHeadlessChrome();
 
-beforeEach(async () => {
-  adapter = await SeleniumAdapter.launchHeadlessChrome();
+    TestPage.selectors = this.initialSelectors;
+    TestPage.url = this.urlPattern;
 
-  await adapter.open(IndexPage, url);
-});
+    await adapter.open(TestPage, url);
 
-afterEach(async () => {
-  await adapter.driver.quit();
-});
+    return adapter;
+  }
+
+  public async quit(adapter: SeleniumAdapter): Promise<void> {
+    await adapter.driver.quit();
+  }
+}
 
 describe('SeleniumAdapter', () => {
-  describe('public this.findElements(selector, parent?)', () => {
-    it('should return all <p> elements', async () => {
-      const elements = await adapter.findElements('p');
+  it('should pass the test suite', async () => {
+    const testSuite = new SeleniumAdapterTestSuite();
 
-      expect(elements).toHaveLength(2);
-
-      expect(await elements[0].getText()).toBe('Foo');
-      expect(await elements[1].getText()).toBe('Bar');
-    });
-
-    it('should return only the descendant <p> element of #bar', async () => {
-      const container = (await adapter.findElements('#bar'))[0];
-      const elements = await adapter.findElements('p', container);
-
-      expect(elements).toHaveLength(1);
-
-      expect(await elements[0].getText()).toBe('Bar');
-    });
-
-    it('should return no elements', async () => {
-      const elements = await adapter.findElements('.undefined');
-
-      expect(elements).toHaveLength(0);
-    });
-  });
-
-  describe('public this.getCurrentUrl()', () => {
-    it('should return the initial url', async () => {
-      expect(await adapter.getCurrentUrl()).toBe(url);
-    });
-
-    it('should return a manipulated url', async () => {
-      const manipulatedUrl = `${url}?foo=bar`;
-
-      await adapter.driver.executeScript<void>((_url: string) => {
-        window.history.pushState({}, 'Test', _url);
-      }, manipulatedUrl);
-
-      expect(await adapter.getCurrentUrl()).toBe(manipulatedUrl);
-    });
+    await testSuite.runTests();
   });
 });

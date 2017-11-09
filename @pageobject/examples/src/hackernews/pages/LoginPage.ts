@@ -13,9 +13,9 @@ export class LoginPage extends PageObject<WebElement, SeleniumAdapter> {
 
   public async displaysMessage(message: string): Promise<boolean> {
     const element = await this.findSelf();
-    const html = await element.getText();
+    const text = await element.getText();
 
-    return html.indexOf(message) > -1;
+    return text.indexOf(message) > -1;
   }
 }
 

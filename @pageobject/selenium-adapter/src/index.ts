@@ -1,5 +1,3 @@
-import * as predicates from './predicates';
+import {SeleniumAdapter} from './SeleniumAdapter';
 
-export {predicates};
-
-export * from './SeleniumAdapter';
+export {SeleniumAdapter};

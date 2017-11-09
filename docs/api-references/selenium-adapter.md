@@ -24,9 +24,6 @@ npm install @types/selenium-webdriver
   - [Constructor Method `new SeleniumAdapter(driver)`](#constructor-method-new-seleniumadapterdriver)
   - [Instance Variable `public this.driver`](#instance-variable-public-thisdriver)
   - [Instance Method `public this.open(Page, url)`](#instance-method-public-thisopenpage-url)
-- [Predicates](#predicates)
-  - [Function `predicates.atIndex(n)`](#function-predicatesatindexn)
-  - [Function `predicates.textEquals(value)`](#function-predicatestextequalsvalue)
 
 ## Class `SeleniumAdapter`
 
@@ -88,46 +85,6 @@ Schedules a command to navigate to the specified URL, and then instantiates the 
 - `url: string` The URL to navigate to.
 
 **Returns:** `Promise<Page>` A promise that will resolve to an instance of the specified page class.
-
-## Predicates
-
-```js
-// ES2015 / TypeScript
-import {predicates} from '@pageobject/selenium-adapter';
-
-// CommonJS
-const {predicates} = require('@pageobject/selenium-adapter');
-```
-
-### Function `predicates.atIndex(n)`
-
-```js
-const {atIndex} = predicates;
-
-const element = await myPage.findFirstDescendant('div', atIndex(1));
-```
-
-**Parameters:**
-
-- `n: number` The expected index.
-
-**Returns:** [`Predicate`](class.md#type-predicate)
-
-### Function `predicates.textEquals(value)`
-
-```js
-const {textEquals} = predicates;
-
-const element = await myPage.findFirstDescendant('div', textEquals('example'));
-```
-
-Compares against the visible (i.e. not hidden by CSS) innerText of an element, including sub-elements, without any leading or trailing whitespace.
-
-**Parameters:**
-
-- `value: string` The expected text.
-
-**Returns:** [`Predicate`](class.md#type-predicate)
 
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
 [selenium-timeouts]: http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/webdriver_exports_Timeouts.html

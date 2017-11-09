@@ -1,5 +1,3 @@
-import * as predicates from './predicates';
+import {PuppeteerAdapter} from './PuppeteerAdapter';
 
-export {predicates};
-
-export * from './PuppeteerAdapter';
+export {PuppeteerAdapter};

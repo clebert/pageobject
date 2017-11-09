@@ -25,9 +25,6 @@ npm install @types/puppeteer
   - [Instance Variable `public this.browser`](#instance-variable-public-thisbrowser)
   - [Instance Variable `public this.page`](#instance-variable-public-thispage)
   - [Instance Method `public this.open(Page, url, options?)`](#instance-method-public-thisopenpage-url-options)
-- [Predicates](#predicates)
-  - [Function `predicates.atIndex(n)`](#function-predicatesatindexn)
-  - [Function `predicates.textEquals(value)`](#function-predicatestextequalsvalue)
 
 ## Class `PuppeteerAdapter`
 
@@ -97,46 +94,6 @@ Schedules a command to navigate to the specified URL, and then instantiates the 
 - [`options?: NavigationOptions`][puppeteer-pagegotourl-options] The set of configurable navigation options.
 
 **Returns:** `Promise<Page>` A promise that will resolve to an instance of the specified page class.
-
-## Predicates
-
-```js
-// ES2015 / TypeScript
-import {predicates} from '@pageobject/puppeteer-adapter';
-
-// CommonJS
-const {predicates} = require('@pageobject/puppeteer-adapter');
-```
-
-### Function `predicates.atIndex(n)`
-
-```js
-const {atIndex} = predicates;
-
-const element = await myPage.findFirstDescendant('div', atIndex(1));
-```
-
-**Parameters:**
-
-- `n: number` The expected index.
-
-**Returns:** [`Predicate`](class.md#type-predicate)
-
-### Function `predicates.textEquals(value)`
-
-```js
-const {textEquals} = predicates;
-
-const element = await myPage.findFirstDescendant('div', textEquals('example'));
-```
-
-Compares against the visible (i.e. not hidden by CSS) innerText of an element, including sub-elements, without any leading or trailing whitespace.
-
-**Parameters:**
-
-- `value: string` The expected text.
-
-**Returns:** [`Predicate`](class.md#type-predicate)
 
 [puppeteer]: https://github.com/GoogleChrome/puppeteer
 [puppeteer-class-browser]: https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-browser

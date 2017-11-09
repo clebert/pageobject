@@ -6,7 +6,7 @@ It is written in [TypeScript][typescript], **the entire code can be found [here]
 
 ## Overview
 
-- [Tests](#tests)
+- [Test Suite](#test-suite)
 - [Page Objects](#page-objects)
   - [Page `FrontPage`](#page-frontpage)
   - [Component `NewsList`](#component-newslist)
@@ -16,20 +16,18 @@ It is written in [TypeScript][typescript], **the entire code can be found [here]
   - [Page `HideLoginPage`](#page-hideloginpage)
   - [Page `VoteLoginPage`](#page-voteloginpage)
 
-## Tests
+## Test Suite
 
 ```sh
-PASS @pageobject/examples/src/hackernews/tests/FrontPage.test.ts (5.057s)
+PASS @pageobject/examples/src/hackernews/tests/FrontPage.test.ts
   GIVEN the Hacker News front page is open
-    ✓ THEN the displayed rank of a news should match its position in the news list (1435ms)
+    ✓ THEN the displayed rank of a news should match its position in the news list
     WHEN the user is not logged in
-      ✓ THEN hiding a news should trigger a redirect to the login page (1495ms)
-      ✓ THEN voting a news should trigger a redirect to the login page (1999ms)
+      ✓ THEN hiding a news should trigger a redirect to the login page
+      ✓ THEN voting a news should trigger a redirect to the login page
 
 Test Suites: 1 passed, 1 total
 Tests:       3 passed, 3 total
-Snapshots:   0 total
-Time:        5.067s, estimated 6s
 ```
 
 ```js
@@ -212,9 +210,9 @@ class LoginPage extends PageObject<WebElement, SeleniumAdapter> {
 
   public async displaysMessage(message: string): Promise<boolean> {
     const element = await this.findSelf();
-    const html = await element.getText();
+    const text = await element.getText();
 
-    return html.indexOf(message) > -1;
+    return text.indexOf(message) > -1;
   }
 }
 ```

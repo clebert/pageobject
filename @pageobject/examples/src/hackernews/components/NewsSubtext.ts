@@ -1,9 +1,8 @@
 import {PageObject} from '@pageobject/class';
-import {SeleniumAdapter, predicates} from '@pageobject/selenium-adapter';
+import {textEquals} from '@pageobject/predicates';
+import {SeleniumAdapter} from '@pageobject/selenium-adapter';
 import {WebElement} from 'selenium-webdriver';
 import {HideLoginPage} from '../pages/LoginPage';
-
-const {textEquals} = predicates;
 
 export class NewsSubtext extends PageObject<WebElement, SeleniumAdapter> {
   public static selector = 'td.subtext';

@@ -1,23 +1,6 @@
 import {inspect} from 'util';
-import {retryOnError} from './retryOnError';
-
-export interface Adapter<TElement> {
-  findElements(selector: string, parent?: TElement): Promise<TElement[]>;
-  getCurrentUrl(): Promise<string>;
-}
-
-export type Predicate<TElement, TAdapter extends Adapter<TElement>> = (
-  adapter: TAdapter,
-  element: TElement,
-  index: number,
-  elements: TElement[]
-) => Promise<boolean>;
-
-export interface PathSegment<TElement, TAdapter extends Adapter<TElement>> {
-  readonly selector: string;
-  readonly unique: boolean;
-  readonly predicate?: Predicate<TElement, TAdapter>;
-}
+import {Adapter, PathSegment} from '.';
+import {retryOnError} from './_retryOnError';
 
 class ElementFinder<TElement, TAdapter extends Adapter<TElement>> {
   private readonly adapter: TAdapter;
