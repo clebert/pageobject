@@ -33,7 +33,7 @@
     "coveralls": "^3.0.0",
     "custom-tslint-formatters": "^2.1.1",
     "git-latest-semver-tag": "^1.0.2",
-    "globby": "^6.1.0",
+    "globby": "^7.0.0",
     "husky": "^0.14.3",
     "jest": "^21.2.1",
     "lerna": "^2.5.1",
