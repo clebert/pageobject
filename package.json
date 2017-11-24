@@ -16,36 +16,35 @@
     "release": "./scripts/release.sh",
     "pretest": "npm run compile",
     "test": "npm run format:test && npm run lint && jest --no-cache",
-    "posttest": "lerna exec --scope @pageobject/examples -- npm test",
     "upgrade": "ncu -ua && lerna exec -- ncu -ua",
     "watch": "run-p watch:*",
     "watch:compile": "lerna exec --parallel --concurrency 99 -- tsc --project . --watch",
     "watch:test": "jest --watch"
   },
   "devDependencies": {
-    "@commitlint/cli": "^4.3.0",
-    "@commitlint/config-angular": "^4.3.0",
-    "@commitlint/config-lerna-scopes": "^4.3.0",
-    "@commitlint/prompt-cli": "^4.3.0",
-    "@types/jest": "^21.1.5",
-    "@types/node": "^8.0.50",
+    "@commitlint/cli": "^5.1.1",
+    "@commitlint/config-angular": "^5.1.1",
+    "@commitlint/config-lerna-scopes": "^5.1.1",
+    "@commitlint/prompt-cli": "^5.1.2",
+    "@types/jest": "^21.1.8",
+    "@types/node": "^8.0.53",
     "chromedriver": "^2.33.2",
     "coveralls": "^3.0.0",
     "custom-tslint-formatters": "^2.1.1",
     "git-latest-semver-tag": "^1.0.2",
-    "globby": "^6.1.0",
+    "globby": "^7.1.1",
     "husky": "^0.14.3",
     "jest": "^21.2.1",
     "lerna": "^2.5.1",
-    "lint-staged": "^4.3.0",
-    "markdownlint": "^0.6.1",
+    "lint-staged": "^5.0.0",
+    "markdownlint": "^0.6.4",
     "npm-check-updates": "^2.13.0",
     "npm-run-all": "^4.1.2",
-    "prettier": "^1.8.1",
+    "prettier": "^1.8.2",
     "ts-config": "^15.0.0",
-    "ts-jest": "^21.2.1",
+    "ts-jest": "^21.2.3",
     "tslint": "^5.8.0",
-    "typescript": "^2.6.1"
+    "typescript": "^2.6.2"
   },
   "jest": {
     "collectCoverage": true,
@@ -56,10 +55,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
+        "branches": 0,
+        "functions": 0,
+        "lines": 0,
+        "statements": 0
       }
     },
     "mapCoverage": true,
@@ -77,6 +76,7 @@
       ".ts": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "verbose": true,
+    "silent": false,
     "bail": false
   },
   "lint-staged": {

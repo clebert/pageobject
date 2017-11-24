@@ -1,3 +1,1 @@
-import {SeleniumAdapter} from './SeleniumAdapter';
-
-export {SeleniumAdapter};
+export * from './SeleniumAdapter';

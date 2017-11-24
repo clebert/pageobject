@@ -1,7 +1,5 @@
 # @pageobject/puppeteer-adapter [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-[**Getting Started**][repo-getting-started] | [**API References**](../../docs/api-references/index.md) | [**Examples**](../../docs/examples/index.md) | [**Guides**](../../docs/guides/index.md)
-
 An adapter for connecting page objects to [Puppeteer][puppeteer].
 
 ## Installation
@@ -29,7 +27,6 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 
-[repo-getting-started]: https://github.com/clebert/pageobject#using-puppeteer
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 
 [puppeteer]: https://github.com/GoogleChrome/puppeteer
