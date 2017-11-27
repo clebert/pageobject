@@ -1,12 +1,5 @@
-import {Adapter, PageClass, PageObject} from '@pageobject/class';
-import {
-  Browser,
-  ElementHandle,
-  LaunchOptions,
-  NavigationOptions,
-  Page,
-  launch
-} from 'puppeteer';
+import {Adapter} from '@pageobject/class';
+import {Browser, ElementHandle, LaunchOptions, Page, launch} from 'puppeteer';
 
 export class PuppeteerAdapter implements Adapter<ElementHandle> {
   public static async launchChrome(
@@ -26,15 +19,8 @@ export class PuppeteerAdapter implements Adapter<ElementHandle> {
     this.page = page;
   }
 
-  public async open<TPage extends PageObject<ElementHandle, PuppeteerAdapter>>(
-    /* tslint:disable-next-line no-shadowed-variable */
-    Page: PageClass<ElementHandle, PuppeteerAdapter, TPage>,
-    url: string,
-    options?: Partial<NavigationOptions>
-  ): Promise<TPage> {
-    await this.page.goto(url);
-
-    return PageObject.goto(Page, this as PuppeteerAdapter);
+  public async click(element: ElementHandle): Promise<void> {
+    await element.click();
   }
 
   /* tslint:disable no-any */
@@ -80,5 +66,13 @@ export class PuppeteerAdapter implements Adapter<ElementHandle> {
     await elementsHandle.dispose();
 
     return elements;
+  }
+
+  public async open(url: string): Promise<void> {
+    await this.page.goto(url);
+  }
+
+  public async quit(): Promise<void> {
+    await this.browser.close();
   }
 }

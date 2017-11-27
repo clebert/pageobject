@@ -1,101 +1,238 @@
-import {inspect} from 'util';
-import {Adapter, ComponentClass, PageClass, PathSegment, Predicate} from '.';
-import {findElement} from './_findElement';
+export interface Adapter<TElement> {
+  click(element: TElement): Promise<void>;
 
-export class PageObject<TElement, TAdapter extends Adapter<TElement>> {
-  public static async goto<
-    TElement,
-    TAdapter extends Adapter<TElement>,
-    TPage extends PageObject<TElement, TAdapter>
-  >(
-    Page: PageClass<TElement, TAdapter, TPage>,
-    adapter: TAdapter
-  ): Promise<TPage> {
-    const rootPath = [{selector: ':root', unique: true}];
+  /* tslint:disable no-any */
+  evaluate<TResult>(
+    script: (...args: any[]) => TResult,
+    ...args: any[]
+  ): Promise<TResult>;
+  /* tslint:enable no-any */
 
-    await findElement(rootPath, adapter);
+  findElements(selector: string, parent?: TElement): Promise<TElement[]>;
+  open(url: string): Promise<void>;
+  quit(): Promise<void>;
+}
 
-    for (const selector of Page.selectors) {
-      await findElement([...rootPath, {selector, unique: false}], adapter);
+export type Action<TComponent extends PageObject<TComponent>> = (
+  component: TComponent
+) => Promise<void>;
+
+export type Predicate<TComponent extends PageObject<TComponent>> = (
+  component: TComponent,
+  index: number,
+  components: TComponent[]
+) => Promise<boolean>;
+
+export interface Options<TComponent extends PageObject<TComponent>> {
+  readonly element?: object;
+  readonly parent?: PageObject<any> /* tslint:disable-line no-any */;
+  readonly predicate?: Predicate<TComponent>;
+}
+
+export interface ComponentClass<TComponent extends PageObject<TComponent>> {
+  readonly selector: string;
+
+  new (adapter: Adapter<object>, options?: Options<TComponent>): TComponent;
+}
+
+export class PageObject<T extends PageObject<T>> {
+  public static selectRoot<TComponent extends PageObject<TComponent>>(
+    Component: ComponentClass<TComponent>,
+    adapter: Adapter<object>,
+    predicate?: Predicate<TComponent>
+  ): TComponent {
+    return new Component(adapter, {predicate});
+  }
+
+  private readonly _Component: ComponentClass<T>;
+  private readonly _adapter: Adapter<object>;
+  private readonly _options: Options<T>;
+
+  public constructor(adapter: Adapter<object>, options: Options<T> = {}) {
+    /* tslint:disable-next-line no-any */
+    const {constructor} = this as any;
+
+    if (typeof constructor.selector !== 'string') {
+      throw new Error('Missing selector');
     }
 
-    const url = await adapter.evaluate(() => window.location.href);
+    this._Component = constructor;
+    this._adapter = adapter;
+    this._options = options;
+  }
 
-    if (!Page.url.test(url)) {
-      const actual = inspect(url);
-      const expected = inspect(Page.url);
+  public async click(): Promise<void> {
+    const element = await this._findElement();
 
-      throw new Error(
-        `No matching url found (actual=${actual}, expected=${expected})`
-      );
+    await this._adapter.evaluate(
+      (_element: HTMLElement) =>
+        _element.scrollIntoView({
+          behavior: 'instant',
+          block: 'center',
+          inline: 'center'
+        }),
+      element
+    );
+
+    await new Promise<void>(resolve => setTimeout(resolve, 250));
+
+    await this._adapter.click(element);
+  }
+
+  public async getAttribute(name: string): Promise<string> {
+    return this._adapter.evaluate(
+      (_element: HTMLElement, _name: string) => {
+        const value = _element.getAttribute(_name);
+
+        return value ? value.trim() : '';
+      },
+      await this._findElement(),
+      name
+    );
+  }
+
+  public async getHtml(): Promise<string> {
+    return this._adapter.evaluate(
+      (_element: HTMLElement) => _element.innerHTML.trim(),
+      await this._findElement()
+    );
+  }
+
+  public async getProperty(name: string): Promise<string> {
+    return this._adapter.evaluate(
+      (_element, _name) =>
+        (_element[_name] ? String(_element[_name]) : '').trim(),
+      await this._findElement(),
+      name
+    );
+  }
+
+  public async getText(): Promise<string> {
+    return this._adapter.evaluate(
+      (_element: HTMLElement) => _element.innerText.trim(),
+      await this._findElement()
+    );
+  }
+
+  /* https://stackoverflow.com/a/36737835 */
+  public async isVisible(): Promise<boolean> {
+    return this._adapter.evaluate((_element: HTMLElement) => {
+      if (!_element.offsetHeight && !_element.offsetWidth) {
+        return false;
+      }
+
+      if (getComputedStyle(_element).visibility === 'hidden') {
+        return false;
+      }
+
+      return true;
+    }, await this._findElement());
+  }
+
+  public async waitUntil(...actions: Action<T>[]): Promise<this> {
+    const maybeTimeout = process.env.WAIT_TIMEOUT;
+    const timeout = maybeTimeout ? parseInt(maybeTimeout, 10) : 10000;
+
+    let error = new Error(`Timeout after ${timeout} milliseconds`);
+    let expired = false;
+
+    /* tslint:disable no-any */
+    let timeoutId1: any;
+    let timeoutId2: any;
+    /* tslint:enable no-any */
+
+    return Promise.race([
+      (async () => {
+        while (!expired) {
+          try {
+            for (const action of actions) {
+              await action(this as any) /* tslint:disable-line no-any */;
+            }
+
+            clearTimeout(timeoutId2);
+
+            return this;
+          } catch (e) {
+            error = e;
+          }
+
+          await new Promise<void>(resolve => {
+            timeoutId1 = setTimeout(resolve, 40);
+          });
+        }
+
+        /* istanbul ignore next */
+        throw error;
+      })(),
+      (async () => {
+        await new Promise<void>(resolve => {
+          timeoutId2 = setTimeout(resolve, timeout);
+        });
+
+        expired = true;
+
+        clearTimeout(timeoutId1);
+
+        throw error;
+      })()
+    ]);
+  }
+
+  public toString(): string {
+    const {parent} = this._options;
+    const name = `${this.constructor.name}[${this._Component.selector}]`;
+
+    return parent ? `${parent.toString()} > ${name}` : name;
+  }
+
+  protected selectDescendant<TComponent extends PageObject<TComponent>>(
+    Component: ComponentClass<TComponent>,
+    predicate?: Predicate<TComponent>
+  ): TComponent {
+    return new Component(this._adapter, {parent: this, predicate});
+  }
+
+  private async _findElement(): Promise<object> {
+    const {element} = this._options;
+
+    if (element) {
+      return element;
     }
 
-    return new Page(rootPath, adapter);
+    const elements = await this._findElements();
+
+    if (elements.length === 0) {
+      throw new Error(`Element not found: ${this.toString()}`);
+    }
+
+    if (elements.length > 1) {
+      throw new Error(`Element not unique: ${this.toString()}`);
+    }
+
+    return elements[0];
   }
 
-  protected readonly adapter: TAdapter;
+  private async _findElements(): Promise<object[]> {
+    const Component = this._Component;
+    const adapter = this._adapter;
+    const options = this._options;
+    const {parent, predicate} = options;
 
-  private readonly path: PathSegment<TElement, TAdapter>[];
-
-  public constructor(
-    path: PathSegment<TElement, TAdapter>[],
-    adapter: TAdapter
-  ) {
-    this.path = path;
-    this.adapter = adapter;
-  }
-
-  protected async findSelf(): Promise<TElement> {
-    return findElement(this.path, this.adapter);
-  }
-
-  protected async findFirstDescendant(
-    selector: string,
-    predicate?: Predicate<TElement, TAdapter>
-  ): Promise<TElement> {
-    return findElement(
-      [...this.path, {selector, unique: false, predicate}],
-      this.adapter
+    const elements = await adapter.findElements(
+      Component.selector,
+      parent && (await parent._findElement())
     );
-  }
 
-  protected async findUniqueDescendant(
-    selector: string,
-    predicate?: Predicate<TElement, TAdapter>
-  ): Promise<TElement> {
-    return findElement(
-      [...this.path, {selector, unique: true, predicate}],
-      this.adapter
+    if (!predicate) {
+      return elements;
+    }
+
+    const results = await Promise.all(
+      elements
+        .map(element => new Component(adapter, {...options, element}))
+        .map(predicate)
     );
-  }
 
-  protected selectFirstDescendant<
-    TComponent extends PageObject<TElement, TAdapter>
-  >(
-    Component: ComponentClass<TElement, TAdapter, TComponent>,
-    predicate?: Predicate<TElement, TAdapter>
-  ): TComponent {
-    return new Component(
-      [...this.path, {selector: Component.selector, unique: false, predicate}],
-      this.adapter
-    );
-  }
-
-  protected selectUniqueDescendant<
-    TComponent extends PageObject<TElement, TAdapter>
-  >(
-    Component: ComponentClass<TElement, TAdapter, TComponent>,
-    predicate?: Predicate<TElement, TAdapter>
-  ): TComponent {
-    return new Component(
-      [...this.path, {selector: Component.selector, unique: true, predicate}],
-      this.adapter
-    );
-  }
-
-  protected async goto<TPage extends PageObject<TElement, TAdapter>>(
-    Page: PageClass<TElement, TAdapter, TPage>
-  ): Promise<TPage> {
-    return PageObject.goto(Page, this.adapter);
+    return elements.filter((element, index) => results[index]);
   }
 }

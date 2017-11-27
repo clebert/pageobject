@@ -1,3 +1,1 @@
-import {PuppeteerAdapter} from './PuppeteerAdapter';
-
-export {PuppeteerAdapter};
+export * from './PuppeteerAdapter';

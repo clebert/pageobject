@@ -1,6 +1,16 @@
 import * as assert from 'assert';
 import {join} from 'path';
-import {Adapter} from '.';
+import {Adapter} from './PageObject';
+
+/* tslint:disable no-any */
+async function getProperty<TElement, TAdapter extends Adapter<TElement>>(
+  adapter: TAdapter,
+  element: TElement,
+  name: string
+): Promise<any> {
+  return adapter.evaluate((_element, _name) => _element[_name], element, name);
+}
+/* tslint:enable no-any */
 
 async function getText<TElement, TAdapter extends Adapter<TElement>>(
   adapter: TAdapter,
@@ -16,16 +26,12 @@ export abstract class AdapterTestSuite<
   TElement,
   TAdapter extends Adapter<TElement>
 > {
-  public readonly initialSelectors = ['#foo', '#bar'];
-  public readonly urlPattern = /index\.html/;
-
-  public abstract async open(url: string): Promise<TAdapter>;
-  public abstract async quit(adapter: TAdapter): Promise<void>;
+  public abstract createAdapter(): Promise<TAdapter>;
 
   public async runTests(): Promise<void> {
-    const adapter = await this.open(
-      `file://${join(__dirname, '../fixtures/index.html')}`
-    );
+    const adapter = await this.createAdapter();
+
+    await adapter.open(`file://${join(__dirname, '../fixtures/index.html')}`);
 
     try {
       const allElements = await adapter.findElements('p');
@@ -45,8 +51,18 @@ export abstract class AdapterTestSuite<
       const noElements = await adapter.findElements('.unknown');
 
       assert.strictEqual(noElements.length, 0);
+
+      const radioElement = (await adapter.findElements(
+        'input[type="radio"]'
+      ))[0];
+
+      assert.ok(!await getProperty(adapter, radioElement, 'checked'));
+
+      await adapter.click(radioElement);
+
+      assert.ok(await getProperty(adapter, radioElement, 'checked'));
     } finally {
-      await this.quit(adapter);
+      await adapter.quit();
     }
   }
 }

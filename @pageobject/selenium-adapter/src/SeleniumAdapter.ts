@@ -1,11 +1,15 @@
-import {Adapter, PageClass, PageObject} from '@pageobject/class';
+import {Adapter} from '@pageobject/class';
 import {
   Builder,
   By,
   Capabilities,
   WebDriver,
-  WebElement
+  WebElement,
+  promise
 } from 'selenium-webdriver';
+
+/* https://github.com/SeleniumHQ/selenium/issues/2969#issuecomment-307917606 */
+promise.USE_PROMISE_MANAGER = false;
 
 export class SeleniumAdapter implements Adapter<WebElement> {
   public static async launchHeadlessChrome(): Promise<SeleniumAdapter> {
@@ -25,13 +29,8 @@ export class SeleniumAdapter implements Adapter<WebElement> {
     this.driver = driver;
   }
 
-  public async open<TPage extends PageObject<WebElement, SeleniumAdapter>>(
-    Page: PageClass<WebElement, SeleniumAdapter, TPage>,
-    url: string
-  ): Promise<TPage> {
-    await this.driver.navigate().to(url);
-
-    return PageObject.goto(Page, this as SeleniumAdapter);
+  public async click(element: WebElement): Promise<void> {
+    await element.click();
   }
 
   /* tslint:disable no-any */
@@ -48,5 +47,13 @@ export class SeleniumAdapter implements Adapter<WebElement> {
     parent?: WebElement
   ): Promise<WebElement[]> {
     return (parent || this.driver).findElements(By.css(selector));
+  }
+
+  public async open(url: string): Promise<void> {
+    await this.driver.navigate().to(url);
+  }
+
+  public async quit(): Promise<void> {
+    await this.driver.quit();
   }
 }
