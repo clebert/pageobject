@@ -6,8 +6,16 @@ class PuppeteerAdapterTestSuite extends AdapterTestSuite<
   ElementHandle,
   PuppeteerAdapter
 > {
-  public async createAdapter(): Promise<PuppeteerAdapter> {
-    return PuppeteerAdapter.launchChrome();
+  public async setUp(url: string): Promise<PuppeteerAdapter> {
+    const adapter = await PuppeteerAdapter.launchChrome();
+
+    await adapter.page.goto(url);
+
+    return adapter;
+  }
+
+  public async tearDown(adapter: PuppeteerAdapter): Promise<void> {
+    await adapter.browser.close();
   }
 }
 

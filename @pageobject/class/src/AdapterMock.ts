@@ -6,7 +6,5 @@ export class AdapterMock<TElement> implements Adapter<TElement> {
   public readonly evaluate: jest.Mock<Promise<any>> = jest.fn();
   public readonly findElements: jest.Mock<Promise<TElement[]>> = jest.fn();
   public readonly isVisible: jest.Mock<Promise<boolean>> = jest.fn();
-  public readonly open: jest.Mock<Promise<void>> = jest.fn();
-  public readonly quit: jest.Mock<Promise<void>> = jest.fn();
   public readonly type: jest.Mock<Promise<void>> = jest.fn();
 }
