@@ -26,12 +26,13 @@ export abstract class AdapterTestSuite<
   TElement,
   TAdapter extends Adapter<TElement>
 > {
-  public abstract createAdapter(): Promise<TAdapter>;
+  public abstract setUp(url: string): Promise<TAdapter>;
+  public abstract tearDown(adapter: TAdapter): Promise<void>;
 
   public async runTests(): Promise<void> {
-    const adapter = await this.createAdapter();
-
-    await adapter.open(`file://${join(__dirname, '../fixtures/index.html')}`);
+    const adapter = await this.setUp(
+      `file://${join(__dirname, '../fixtures/index.html')}`
+    );
 
     try {
       const allElements = await adapter.findElements('p');
@@ -73,7 +74,7 @@ export abstract class AdapterTestSuite<
         'foo bar baz'
       );
     } finally {
-      await adapter.quit();
+      await this.tearDown(adapter);
     }
   }
 }

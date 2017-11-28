@@ -9,8 +9,6 @@ export interface Adapter<TElement> {
   /* tslint:enable no-any */
 
   findElements(selector: string, parent?: TElement): Promise<TElement[]>;
-  open(url: string): Promise<void>;
-  quit(): Promise<void>;
   type(element: TElement, text: string, delay: number): Promise<void>;
 }
 

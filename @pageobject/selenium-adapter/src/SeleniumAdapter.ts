@@ -49,14 +49,6 @@ export class SeleniumAdapter implements Adapter<WebElement> {
     return (parent || this.driver).findElements(By.css(selector));
   }
 
-  public async open(url: string): Promise<void> {
-    await this.driver.navigate().to(url);
-  }
-
-  public async quit(): Promise<void> {
-    await this.driver.quit();
-  }
-
   public async type(
     element: WebElement,
     text: string,

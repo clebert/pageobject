@@ -9,8 +9,16 @@ class SeleniumAdapterTestSuite extends AdapterTestSuite<
   WebElement,
   SeleniumAdapter
 > {
-  public async createAdapter(): Promise<SeleniumAdapter> {
-    return SeleniumAdapter.launchHeadlessChrome();
+  public async setUp(url: string): Promise<SeleniumAdapter> {
+    const adapter = await SeleniumAdapter.launchHeadlessChrome();
+
+    await adapter.driver.navigate().to(url);
+
+    return adapter;
+  }
+
+  public async tearDown(adapter: SeleniumAdapter): Promise<void> {
+    await adapter.driver.quit();
   }
 }
 

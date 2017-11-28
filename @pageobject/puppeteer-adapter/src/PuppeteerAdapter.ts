@@ -68,14 +68,6 @@ export class PuppeteerAdapter implements Adapter<ElementHandle> {
     return elements;
   }
 
-  public async open(url: string): Promise<void> {
-    await this.page.goto(url);
-  }
-
-  public async quit(): Promise<void> {
-    await this.browser.close();
-  }
-
   public async type(
     element: ElementHandle,
     text: string,
