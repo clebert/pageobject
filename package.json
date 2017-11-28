@@ -17,9 +17,9 @@
     "pretest": "npm run compile",
     "test": "npm run format:test && npm run lint && jest --no-cache",
     "upgrade": "ncu -ua && lerna exec -- ncu -ua",
-    "watch": "run-p watch:*",
+    "watch": "run-p watch:compile \"watch:test -- {@}\" --",
     "watch:compile": "lerna exec --parallel --concurrency 99 -- tsc --project . --watch",
-    "watch:test": "jest --watch"
+    "watch:test": "jest --watchAll"
   },
   "devDependencies": {
     "@commitlint/cli": "^5.1.1",

@@ -148,7 +148,7 @@ export class PageObject<T extends PageObject<T>> {
 
   public async waitUntil(
     action: Action<T>,
-    callback?: (errorScreenshot: string) => Promise<void>
+    callback: (errorScreenshot: string) => Promise<void>
   ): Promise<this> {
     const maybeTimeout = process.env.WAIT_TIMEOUT;
     const timeout = maybeTimeout ? parseInt(maybeTimeout, 10) : 10000;
@@ -179,9 +179,7 @@ export class PageObject<T extends PageObject<T>> {
           });
         }
 
-        if (callback) {
-          await callback(await this._adapter.takeScreenshot());
-        }
+        await callback(await this._adapter.takeScreenshot());
 
         /* istanbul ignore next */
         throw error;
@@ -195,9 +193,7 @@ export class PageObject<T extends PageObject<T>> {
 
         clearTimeout(timeoutId1);
 
-        if (callback) {
-          await callback(await this._adapter.takeScreenshot());
-        }
+        await callback(await this._adapter.takeScreenshot());
 
         throw error;
       })()
