@@ -125,18 +125,6 @@ export function htmlMatches<TComponent extends PageObject<TComponent>>(
   };
 }
 
-export function propertyContains<TComponent extends PageObject<TComponent>>(
-  name: string,
-  value: string,
-  selector?: Selector<TComponent>
-): Predicate<TComponent> {
-  return async component => {
-    const selection = selector ? selector(component) : component;
-
-    return (await selection.getProperty(name)).indexOf(value) > -1;
-  };
-}
-
 export function propertyEquals<TComponent extends PageObject<TComponent>>(
   name: string,
   value: string,
@@ -149,15 +137,36 @@ export function propertyEquals<TComponent extends PageObject<TComponent>>(
   };
 }
 
-export function propertyMatches<TComponent extends PageObject<TComponent>>(
-  name: string,
-  value: RegExp,
+export function tagNameContains<TComponent extends PageObject<TComponent>>(
+  tagName: string,
   selector?: Selector<TComponent>
 ): Predicate<TComponent> {
   return async component => {
     const selection = selector ? selector(component) : component;
 
-    return value.test(await selection.getProperty(name));
+    return (await selection.getTagName()).indexOf(tagName) > -1;
+  };
+}
+
+export function tagNameEquals<TComponent extends PageObject<TComponent>>(
+  tagName: string,
+  selector?: Selector<TComponent>
+): Predicate<TComponent> {
+  return async component => {
+    const selection = selector ? selector(component) : component;
+
+    return (await selection.getTagName()) === tagName;
+  };
+}
+
+export function tagNameMatches<TComponent extends PageObject<TComponent>>(
+  tagName: RegExp,
+  selector?: Selector<TComponent>
+): Predicate<TComponent> {
+  return async component => {
+    const selection = selector ? selector(component) : component;
+
+    return tagName.test(await selection.getTagName());
   };
 }
 
@@ -192,6 +201,24 @@ export function textMatches<TComponent extends PageObject<TComponent>>(
 
     return text.test(await selection.getText());
   };
+}
+
+export function urlContains<TComponent extends PageObject<TComponent>>(
+  url: string
+): Predicate<TComponent> {
+  return async component => (await component.getUrl()).indexOf(url) > -1;
+}
+
+export function urlEquals<TComponent extends PageObject<TComponent>>(
+  url: string
+): Predicate<TComponent> {
+  return async component => (await component.getUrl()) === url;
+}
+
+export function urlMatches<TComponent extends PageObject<TComponent>>(
+  url: RegExp
+): Predicate<TComponent> {
+  return async component => url.test(await component.getUrl());
 }
 
 export function visible<TComponent extends PageObject<TComponent>>(): Predicate<

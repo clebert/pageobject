@@ -61,6 +61,17 @@ export abstract class AdapterTestSuite<
       await adapter.click(radioElement);
 
       assert.ok(await getProperty(adapter, radioElement, 'checked'));
+
+      const textElement = (await adapter.findElements('input[type="text"]'))[0];
+
+      assert.strictEqual(await getProperty(adapter, textElement, 'value'), '');
+
+      await adapter.type(textElement, 'foo bar baz', 0);
+
+      assert.strictEqual(
+        await getProperty(adapter, textElement, 'value'),
+        'foo bar baz'
+      );
     } finally {
       await adapter.quit();
     }

@@ -38,7 +38,7 @@ npm install
 npm run upgrade
 ```
 
-### Compiling sources and running unit tests continuously
+### Compiling sources and running tests continuously
 
 ```sh
 npm run watch
