@@ -73,6 +73,8 @@ export abstract class AdapterTestSuite<
         await getProperty(adapter, textElement, 'value'),
         'foo bar baz'
       );
+
+      assert.ok(/^iVBOR/.test(await adapter.takeScreenshot()));
     } finally {
       await this.tearDown(adapter);
     }

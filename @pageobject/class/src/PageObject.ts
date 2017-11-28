@@ -9,6 +9,7 @@ export interface Adapter<TElement> {
   /* tslint:enable no-any */
 
   findElements(selector: string, parent?: TElement): Promise<TElement[]>;
+  takeScreenshot(): Promise<string>;
   type(element: TElement, text: string, delay: number): Promise<void>;
 }
 
@@ -60,7 +61,11 @@ export class PageObject<T extends PageObject<T>> {
     this._options = options;
   }
 
-  public async click(): Promise<void> {
+  public async click(scrollIntoView: boolean = true): Promise<void> {
+    if (scrollIntoView) {
+      await this._scrollIntoView();
+    }
+
     await this._adapter.click(await this._findElement());
   }
 
@@ -69,20 +74,6 @@ export class PageObject<T extends PageObject<T>> {
       (_element: HTMLElement) => _element.focus(),
       await this._findElement()
     );
-  }
-
-  public async scrollIntoView(): Promise<void> {
-    await this._adapter.evaluate(
-      (_element: HTMLElement) =>
-        _element.scrollIntoView({
-          behavior: 'instant',
-          block: 'center',
-          inline: 'center'
-        }),
-      await this._findElement()
-    );
-
-    await new Promise<void>(resolve => setTimeout(resolve, 100));
   }
 
   public async type(text: string, delay: number = 100): Promise<void> {
@@ -155,7 +146,10 @@ export class PageObject<T extends PageObject<T>> {
     }, await this._findElement());
   }
 
-  public async waitUntil(action: Action<T>): Promise<this> {
+  public async waitUntil(
+    action: Action<T>,
+    callback?: (errorScreenshot: string) => Promise<void>
+  ): Promise<this> {
     const maybeTimeout = process.env.WAIT_TIMEOUT;
     const timeout = maybeTimeout ? parseInt(maybeTimeout, 10) : 10000;
 
@@ -185,6 +179,10 @@ export class PageObject<T extends PageObject<T>> {
           });
         }
 
+        if (callback) {
+          await callback(await this._adapter.takeScreenshot());
+        }
+
         /* istanbul ignore next */
         throw error;
       })(),
@@ -196,6 +194,10 @@ export class PageObject<T extends PageObject<T>> {
         expired = true;
 
         clearTimeout(timeoutId1);
+
+        if (callback) {
+          await callback(await this._adapter.takeScreenshot());
+        }
 
         throw error;
       })()
@@ -258,5 +260,19 @@ export class PageObject<T extends PageObject<T>> {
     );
 
     return elements.filter((element, index) => results[index]);
+  }
+
+  private async _scrollIntoView(): Promise<void> {
+    await this._adapter.evaluate(
+      (_element: HTMLElement) =>
+        _element.scrollIntoView({
+          behavior: 'instant',
+          block: 'center',
+          inline: 'center'
+        }),
+      await this._findElement()
+    );
+
+    await new Promise<void>(resolve => setTimeout(resolve, 100));
   }
 }

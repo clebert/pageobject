@@ -68,6 +68,10 @@ export class PuppeteerAdapter implements Adapter<ElementHandle> {
     return elements;
   }
 
+  public async takeScreenshot(): Promise<string> {
+    return (await this.page.screenshot()).toString('base64');
+  }
+
   public async type(
     element: ElementHandle,
     text: string,

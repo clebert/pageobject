@@ -49,6 +49,10 @@ export class SeleniumAdapter implements Adapter<WebElement> {
     return (parent || this.driver).findElements(By.css(selector));
   }
 
+  public async takeScreenshot(): Promise<string> {
+    return this.driver.takeScreenshot();
+  }
+
   public async type(
     element: WebElement,
     text: string,
