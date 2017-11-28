@@ -11,6 +11,7 @@ export interface Adapter<TElement> {
   findElements(selector: string, parent?: TElement): Promise<TElement[]>;
   open(url: string): Promise<void>;
   quit(): Promise<void>;
+  type(element: TElement, text: string, delay: number): Promise<void>;
 }
 
 export type Action<TComponent extends PageObject<TComponent>> = (
@@ -62,8 +63,17 @@ export class PageObject<T extends PageObject<T>> {
   }
 
   public async click(): Promise<void> {
-    const element = await this._findElement();
+    await this._adapter.click(await this._findElement());
+  }
 
+  public async focus(): Promise<void> {
+    await this._adapter.evaluate(
+      (_element: HTMLElement) => _element.focus(),
+      await this._findElement()
+    );
+  }
+
+  public async scrollIntoView(): Promise<void> {
     await this._adapter.evaluate(
       (_element: HTMLElement) =>
         _element.scrollIntoView({
@@ -71,21 +81,20 @@ export class PageObject<T extends PageObject<T>> {
           block: 'center',
           inline: 'center'
         }),
-      element
+      await this._findElement()
     );
 
-    await new Promise<void>(resolve => setTimeout(resolve, 250));
+    await new Promise<void>(resolve => setTimeout(resolve, 100));
+  }
 
-    await this._adapter.click(element);
+  public async type(text: string, delay: number = 100): Promise<void> {
+    await this._adapter.type(await this._findElement(), text, delay);
   }
 
   public async getAttribute(name: string): Promise<string> {
     return this._adapter.evaluate(
-      (_element: HTMLElement, _name: string) => {
-        const value = _element.getAttribute(_name);
-
-        return value ? value.trim() : '';
-      },
+      (_element: HTMLElement, _name: string) =>
+        (_element.getAttribute(_name) || '').trim(),
       await this._findElement(),
       name
     );
@@ -98,12 +107,27 @@ export class PageObject<T extends PageObject<T>> {
     );
   }
 
-  public async getProperty(name: string): Promise<string> {
+  public async getProperty<TValue>(name: string): Promise<TValue> {
     return this._adapter.evaluate(
-      (_element, _name) =>
-        (_element[_name] ? String(_element[_name]) : '').trim(),
+      (_element, _name) => _element[_name],
       await this._findElement(),
       name
+    );
+  }
+
+  public async setProperty<TValue>(name: string, value: TValue): Promise<void> {
+    await this._adapter.evaluate(
+      (_element, _name, _value) => (_element[_name] = _value),
+      await this._findElement(),
+      name,
+      value
+    );
+  }
+
+  public async getTagName(): Promise<string> {
+    return this._adapter.evaluate(
+      (_element: HTMLElement) => _element.tagName.trim(),
+      await this._findElement()
     );
   }
 
@@ -112,6 +136,10 @@ export class PageObject<T extends PageObject<T>> {
       (_element: HTMLElement) => _element.innerText.trim(),
       await this._findElement()
     );
+  }
+
+  public async getUrl(): Promise<string> {
+    return this._adapter.evaluate(() => window.location.href.trim());
   }
 
   /* https://stackoverflow.com/a/36737835 */
@@ -129,7 +157,7 @@ export class PageObject<T extends PageObject<T>> {
     }, await this._findElement());
   }
 
-  public async waitUntil(...actions: Action<T>[]): Promise<this> {
+  public async waitUntil(action: Action<T>): Promise<this> {
     const maybeTimeout = process.env.WAIT_TIMEOUT;
     const timeout = maybeTimeout ? parseInt(maybeTimeout, 10) : 10000;
 
@@ -145,9 +173,7 @@ export class PageObject<T extends PageObject<T>> {
       (async () => {
         while (!expired) {
           try {
-            for (const action of actions) {
-              await action(this as any) /* tslint:disable-line no-any */;
-            }
+            await action(this as any) /* tslint:disable-line no-any */;
 
             clearTimeout(timeoutId2);
 

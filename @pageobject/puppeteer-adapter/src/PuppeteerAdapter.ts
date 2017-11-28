@@ -75,4 +75,12 @@ export class PuppeteerAdapter implements Adapter<ElementHandle> {
   public async quit(): Promise<void> {
     await this.browser.close();
   }
+
+  public async type(
+    element: ElementHandle,
+    text: string,
+    delay: number
+  ): Promise<void> {
+    await element.type(text, {delay});
+  }
 }

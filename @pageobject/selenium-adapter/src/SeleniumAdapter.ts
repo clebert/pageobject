@@ -56,4 +56,16 @@ export class SeleniumAdapter implements Adapter<WebElement> {
   public async quit(): Promise<void> {
     await this.driver.quit();
   }
+
+  public async type(
+    element: WebElement,
+    text: string,
+    delay: number
+  ): Promise<void> {
+    for (const character of text.split('')) {
+      await element.sendKeys(character);
+
+      await new Promise<void>(resolve => setTimeout(resolve, delay));
+    }
+  }
 }
