@@ -8,6 +8,10 @@ A class-based implementation of the Page Object pattern for JavaScript.
 npm install @pageobject/class
 ```
 
+## API
+
+Please find the API documentation [here][repo-api-class].
+
 ---
 
 Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-license].
@@ -18,4 +22,5 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-npm-link]: https://www.npmjs.com/package/@pageobject/class
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
+[repo-api-class]: https://pageobject.js.org/api/class/
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE

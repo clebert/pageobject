@@ -21,5 +21,6 @@ module.exports = {
 
   theme: 'minimal',
   readme: 'none',
-  hideGenerator: true
+  hideGenerator: true,
+  gitRevision: 'master'
 };
