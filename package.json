@@ -7,7 +7,7 @@
     "commitmsg": "commitlint --edit",
     "precompile": "lerna exec -- rm -rf dist/",
     "compile": "lerna exec -- tsc --project .",
-    "docs": "./scripts/docs.sh",
+    "postcompile": "./scripts/docs.sh",
     "format": "prettier --single-quote --no-bracket-spacing --write '**/*.{js,json,jsx,md,ts,tsx}'",
     "format:test": "prettier --single-quote --no-bracket-spacing --list-different '**/*.{js,json,jsx,md,ts,tsx}'",
     "postinstall": "lerna bootstrap",
