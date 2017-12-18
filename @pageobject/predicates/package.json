@@ -24,10 +24,10 @@
     "url": "https://github.com/clebert/pageobject/issues"
   },
   "files": [
-    "lib"
+    "dist"
   ],
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "peerDependencies": {
     "@pageobject/class": "^0.13.0"
   },

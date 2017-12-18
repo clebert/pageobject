@@ -1,8 +1,8 @@
 {
   "search.exclude": {
     "**/coverage/**": true,
+    "**/dist/**": true,
     "**/lerna-debug.log": true,
-    "**/lib/**": true,
     "**/node_modules/**": true,
     "**/npm-debug.log": true,
     "**/package-lock.json": true
@@ -10,7 +10,6 @@
   "prettier.bracketSpacing": false,
   "prettier.parser": "typescript",
   "prettier.singleQuote": true,
-  "tslint.configFile": "./tslint.json",
   "tslint.enable": true,
   "tslint.ignoreDefinitionFiles": false,
   "typescript.tsdk": "./node_modules/typescript/lib/"

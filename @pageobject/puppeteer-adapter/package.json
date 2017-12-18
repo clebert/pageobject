@@ -25,17 +25,17 @@
     "url": "https://github.com/clebert/pageobject/issues"
   },
   "files": [
-    "lib"
+    "dist"
   ],
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "peerDependencies": {
     "@pageobject/class": "^0.13.0",
     "puppeteer": "^0.13.0"
   },
   "devDependencies": {
     "@pageobject/class": "^0.13.0",
-    "@types/puppeteer": "^0.13.3",
+    "@types/puppeteer": "^0.13.8",
     "puppeteer": "^0.13.0"
   }
 }

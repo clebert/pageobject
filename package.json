@@ -3,15 +3,13 @@
   "private": true,
   "scripts": {
     "clean": "./scripts/clean.sh",
-    "precommit": "lint-staged",
     "commit": "commit",
     "commitmsg": "commitlint --edit",
-    "precompile": "lerna exec -- rm -rf lib/",
+    "precompile": "lerna exec -- rm -rf dist/",
     "compile": "lerna exec -- tsc --project .",
-    "postcompile": "lerna exec -- rm -rf lib/__mocks__/ && rm -rf lib/__tests__/",
-    "format": "./scripts/prettier.sh --write",
-    "format:test": "./scripts/prettier.sh --list-different",
-    "postinstall": "./scripts/copy.sh && lerna bootstrap",
+    "format": "prettier --single-quote --no-bracket-spacing --write '**/*.{js,json,jsx,md,ts,tsx}'",
+    "format:test": "prettier --single-quote --no-bracket-spacing --list-different '**/*.{js,json,jsx,md,ts,tsx}'",
+    "postinstall": "lerna bootstrap",
     "lint": "node scripts/markdownlint.js && lerna exec -- ../../scripts/lerna/tslint.sh",
     "release": "./scripts/release.sh",
     "pretest": "npm run compile",
@@ -22,12 +20,12 @@
     "watch:test": "jest --watchAll"
   },
   "devDependencies": {
-    "@commitlint/cli": "^5.1.1",
+    "@commitlint/cli": "^5.2.5",
     "@commitlint/config-angular": "^5.1.1",
-    "@commitlint/config-lerna-scopes": "^5.1.1",
-    "@commitlint/prompt-cli": "^5.1.2",
+    "@commitlint/config-lerna-scopes": "^5.2.0",
+    "@commitlint/prompt-cli": "^5.2.5",
     "@types/jest": "^21.1.8",
-    "@types/node": "^8.0.53",
+    "@types/node": "^8.5.1",
     "chromedriver": "^2.33.2",
     "coveralls": "^3.0.0",
     "custom-tslint-formatters": "^2.1.1",
@@ -36,13 +34,12 @@
     "husky": "^0.14.3",
     "jest": "^21.2.1",
     "lerna": "^2.5.1",
-    "lint-staged": "^5.0.0",
     "markdownlint": "^0.6.4",
     "npm-check-updates": "^2.13.0",
     "npm-run-all": "^4.1.2",
-    "prettier": "^1.8.2",
+    "prettier": "^1.9.2",
     "ts-config": "^15.0.0",
-    "ts-jest": "^21.2.3",
+    "ts-jest": "^21.2.4",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2"
   },
@@ -78,15 +75,5 @@
     "verbose": true,
     "silent": false,
     "bail": false
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "prettier --single-quote --no-bracket-spacing --parser typescript --write",
-      "git add"
-    ],
-    "*.{js,jsx,json}": [
-      "prettier --single-quote --no-bracket-spacing --write",
-      "git add"
-    ]
   }
 }
