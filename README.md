@@ -72,6 +72,7 @@ npm run release
 ```
 
 ---
+
 Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-license].
 
 [badge-coveralls-image]: https://coveralls.io/repos/github/clebert/pageobject/badge.svg?branch=master
@@ -80,13 +81,11 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 [badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
 [badge-typescript-link]: https://www.typescriptlang.org/
-
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [repo-package-class]: https://github.com/clebert/pageobject/tree/master/@pageobject/class
 [repo-package-predicates]: https://github.com/clebert/pageobject/tree/master/@pageobject/predicates
 [repo-package-puppeteer-adapter]: https://github.com/clebert/pageobject/tree/master/@pageobject/puppeteer-adapter
 [repo-package-selenium-adapter]: https://github.com/clebert/pageobject/tree/master/@pageobject/selenium-adapter
-
 [githooks]: https://git-scm.com/docs/githooks
 [monorepo]: https://github.com/lerna/lerna#about
 [puppeteer]: https://github.com/GoogleChrome/puppeteer

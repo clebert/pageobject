@@ -45,7 +45,7 @@ module.exports = ({localProjectDir, projectCacheDir}) => {
     },
     preprocessors: {
       '**/*.{ts,tsx}': file =>
-        file.content.replace(/@pageobject\/(.*?)\/lib/g, '@pageobject/$1/src')
+        file.content.replace(/@pageobject\/(.*?)\/dist/g, '@pageobject/$1/src')
     },
     setup,
     testFramework: 'jest',

@@ -1,7 +1,5 @@
-@pageobject/*/tsconfig.json
-@pageobject/*/tslint.json
 coverage/
+dist/
 lerna.json
-lib/
 node_modules/
 package.json
