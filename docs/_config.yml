@@ -3,3 +3,8 @@ description: Readable. Stable. Maintainable. E2E testing using any browser autom
 url: https://pageobject.js.org/
 theme: jekyll-theme-minimal
 show_downloads: false
+include:
+- _pageobject_.pageobject.html
+- _pageobject_.adapter.html
+- _pageobject_.componentclass.html
+- _pageobject_.options.html
