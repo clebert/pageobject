@@ -1,5 +1,6 @@
 coverage/
 dist/
+docs/api/
 lerna.json
 node_modules/
 package.json
