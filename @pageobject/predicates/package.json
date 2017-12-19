@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/predicates",
-  "version": "0.14.0-0",
+  "version": "0.14.0-1",
   "description": "A collection of useful predicate functions.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -29,9 +29,9 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "peerDependencies": {
-    "@pageobject/class": "^0.14.0-0"
+    "@pageobject/class": "^0.14.0-1"
   },
   "devDependencies": {
-    "@pageobject/class": "^0.14.0-0"
+    "@pageobject/class": "^0.14.0-1"
   }
 }
