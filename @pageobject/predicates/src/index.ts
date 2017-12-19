@@ -63,9 +63,8 @@ export function attributeContains<TComponent extends PageObject<TComponent>>(
 ): Predicate<TComponent> {
   return async component => {
     const selection = selector ? selector(component) : component;
-    const element = await selection.findElement();
 
-    return (await element.getAttribute(name)).indexOf(value) > -1;
+    return (await selection.element.getAttribute(name)).indexOf(value) > -1;
   };
 }
 
@@ -76,9 +75,8 @@ export function attributeEquals<TComponent extends PageObject<TComponent>>(
 ): Predicate<TComponent> {
   return async component => {
     const selection = selector ? selector(component) : component;
-    const element = await selection.findElement();
 
-    return (await element.getAttribute(name)) === value;
+    return (await selection.element.getAttribute(name)) === value;
   };
 }
 
@@ -89,9 +87,8 @@ export function attributeMatches<TComponent extends PageObject<TComponent>>(
 ): Predicate<TComponent> {
   return async component => {
     const selection = selector ? selector(component) : component;
-    const element = await selection.findElement();
 
-    return value.test(await element.getAttribute(name));
+    return value.test(await selection.element.getAttribute(name));
   };
 }
 
@@ -100,9 +97,8 @@ export function displayed<TComponent extends PageObject<TComponent>>(
 ): Predicate<TComponent> {
   return async component => {
     const selection = selector ? selector(component) : component;
-    const element = await selection.findElement();
 
-    return element.isDisplayed();
+    return selection.element.isDisplayed();
   };
 }
 
@@ -112,9 +108,8 @@ export function tagNameContains<TComponent extends PageObject<TComponent>>(
 ): Predicate<TComponent> {
   return async component => {
     const selection = selector ? selector(component) : component;
-    const element = await selection.findElement();
 
-    return (await element.getTagName()).indexOf(tagName) > -1;
+    return (await selection.element.getTagName()).indexOf(tagName) > -1;
   };
 }
 
@@ -124,9 +119,8 @@ export function tagNameEquals<TComponent extends PageObject<TComponent>>(
 ): Predicate<TComponent> {
   return async component => {
     const selection = selector ? selector(component) : component;
-    const element = await selection.findElement();
 
-    return (await element.getTagName()) === tagName;
+    return (await selection.element.getTagName()) === tagName;
   };
 }
 
@@ -136,9 +130,8 @@ export function tagNameMatches<TComponent extends PageObject<TComponent>>(
 ): Predicate<TComponent> {
   return async component => {
     const selection = selector ? selector(component) : component;
-    const element = await selection.findElement();
 
-    return tagName.test(await element.getTagName());
+    return tagName.test(await selection.element.getTagName());
   };
 }
 
@@ -148,9 +141,8 @@ export function textContains<TComponent extends PageObject<TComponent>>(
 ): Predicate<TComponent> {
   return async component => {
     const selection = selector ? selector(component) : component;
-    const element = await selection.findElement();
 
-    return (await element.getText()).indexOf(text) > -1;
+    return (await selection.element.getText()).indexOf(text) > -1;
   };
 }
 
@@ -160,9 +152,8 @@ export function textEquals<TComponent extends PageObject<TComponent>>(
 ): Predicate<TComponent> {
   return async component => {
     const selection = selector ? selector(component) : component;
-    const element = await selection.findElement();
 
-    return (await element.getText()) === text;
+    return (await selection.element.getText()) === text;
   };
 }
 
@@ -172,8 +163,7 @@ export function textMatches<TComponent extends PageObject<TComponent>>(
 ): Predicate<TComponent> {
   return async component => {
     const selection = selector ? selector(component) : component;
-    const element = await selection.findElement();
 
-    return text.test(await element.getText());
+    return text.test(await selection.element.getText());
   };
 }

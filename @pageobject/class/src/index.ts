@@ -22,6 +22,24 @@ export interface ComponentClass<TComponent extends PageObject<TComponent>> {
   new (driver: selenium.WebDriver, options?: Options<TComponent>): TComponent;
 }
 
+export type LimitedWebElement = Pick<
+  selenium.WebElement,
+  | 'click'
+  | 'sendKeys'
+  | 'getTagName'
+  | 'getCssValue'
+  | 'getAttribute'
+  | 'getText'
+  | 'getSize'
+  | 'getLocation'
+  | 'isEnabled'
+  | 'isSelected'
+  | 'submit'
+  | 'clear'
+  | 'isDisplayed'
+  | 'takeScreenshot'
+>;
+
 export class PageObject<T extends PageObject<T>> {
   public static selectRoot<TComponent extends PageObject<TComponent>>(
     Component: ComponentClass<TComponent>,
@@ -48,24 +66,18 @@ export class PageObject<T extends PageObject<T>> {
     this._options = options;
   }
 
-  public async findElement(): Promise<selenium.WebElement> {
-    const {element} = this._options;
+  public get element(): LimitedWebElement {
+    /* tslint:disable no-any */
+    return new Proxy<LimitedWebElement>({} as any, {
+      get: (target, name) => async (...args: any[]) => {
+        const element = await this._findElement();
 
-    if (element) {
-      return element;
-    }
-
-    const elements = await this._findElements();
-
-    if (elements.length === 0) {
-      throw new Error(`Element not found: ${this.toString()}`);
-    }
-
-    if (elements.length > 1) {
-      throw new Error(`Element not unique: ${this.toString()}`);
-    }
-
-    return elements[0]; // TODO: Proxy?
+        return element[name as keyof LimitedWebElement].apply(element, [
+          ...args
+        ]);
+      }
+    });
+    /* tslint:enable no-any */
   }
 
   public async getNumberOfDescendants<
@@ -78,6 +90,13 @@ export class PageObject<T extends PageObject<T>> {
     const elements = await descendant._findElements();
 
     return elements.length;
+  }
+
+  public selectDescendant<TComponent extends PageObject<TComponent>>(
+    Component: ComponentClass<TComponent>,
+    predicate?: Predicate<TComponent>
+  ): TComponent {
+    return new Component(this._driver, {parent: this, predicate});
   }
 
   public async waitUntil(
@@ -141,11 +160,24 @@ export class PageObject<T extends PageObject<T>> {
     return parent ? `${parent.toString()} > ${name}` : name;
   }
 
-  protected selectDescendant<TComponent extends PageObject<TComponent>>(
-    Component: ComponentClass<TComponent>,
-    predicate?: Predicate<TComponent>
-  ): TComponent {
-    return new Component(this._driver, {parent: this, predicate});
+  private async _findElement(): Promise<selenium.WebElement> {
+    const {element} = this._options;
+
+    if (element) {
+      return element;
+    }
+
+    const elements = await this._findElements();
+
+    if (elements.length === 0) {
+      throw new Error(`Element not found: ${this.toString()}`);
+    }
+
+    if (elements.length > 1) {
+      throw new Error(`Element not unique: ${this.toString()}`);
+    }
+
+    return elements[0];
   }
 
   private async _findElements(): Promise<selenium.WebElement[]> {
@@ -153,7 +185,7 @@ export class PageObject<T extends PageObject<T>> {
     const driver = this._driver;
     const options = this._options;
     const {parent, predicate} = options;
-    const parentElement = parent && (await parent.findElement());
+    const parentElement = parent && (await parent._findElement());
 
     const elements = await (parentElement || driver).findElements(
       selenium.By.css(Component.selector)
