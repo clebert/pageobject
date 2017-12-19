@@ -1,11 +1,17 @@
 # @pageobject/class [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-A class-based implementation of the Page Object pattern for JavaScript.
+A [Selenium-compatible][selenium] implementation of the Page Object pattern for JavaScript.
 
 ## Installation
 
 ```sh
-npm install @pageobject/class
+npm install @pageobject/class selenium-webdriver
+```
+
+If you use [TypeScript][typescript], please install the types for Selenium as well:
+
+```sh
+npm install @types/selenium-webdriver
 ```
 
 ## API
@@ -24,3 +30,5 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 [repo-api-class]: https://pageobject.js.org/api/class/
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
+[selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
+[typescript]: https://www.typescriptlang.org/

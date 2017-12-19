@@ -27,7 +27,7 @@
     "@commitlint/prompt-cli": "^5.2.5",
     "@types/jest": "^21.1.8",
     "@types/node": "^8.5.1",
-    "chromedriver": "^2.33.2",
+    "chromedriver": "^2.34.0",
     "coveralls": "^3.0.0",
     "custom-tslint-formatters": "^2.1.1",
     "git-latest-semver-tag": "^1.0.2",
@@ -49,8 +49,7 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/@pageobject/*/src/**/*.{ts,tsx}",
-      "!**/@pageobject/*/src/**/*.test.{ts,tsx}",
-      "!**/@pageobject/class/src/AdapterTestSuite.ts"
+      "!**/@pageobject/*/src/**/*.test.{ts,tsx}"
     ],
     "coverageThreshold": {
       "global": {
@@ -63,8 +62,8 @@
     "mapCoverage": true,
     "moduleFileExtensions": [
       "js",
-      "jsx",
       "json",
+      "jsx",
       "ts",
       "tsx"
     ],

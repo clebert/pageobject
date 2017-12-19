@@ -6,7 +6,6 @@ module.exports = {
 
   /* Source file handling */
 
-  exclude: '**/index.ts',
   includeDeclarations: false,
   externalPattern: '**/node_modules/**/*',
   excludeExternals: true,
@@ -22,5 +21,6 @@ module.exports = {
   theme: 'minimal',
   readme: 'none',
   hideGenerator: true,
+  entryPoint: '"index"',
   gitRevision: 'master'
 };

@@ -10,19 +10,11 @@ This is a multi-package repository ([monorepo][monorepo]).
 
 ### [@pageobject/class][repo-package-class]
 
-A class-based implementation of the Page Object pattern for JavaScript.
+A [Selenium-compatible][selenium] implementation of the Page Object pattern for JavaScript.
 
 ### [@pageobject/predicates][repo-package-predicates]
 
 A collection of useful predicate functions.
-
-### [@pageobject/selenium-adapter][repo-package-selenium-adapter]
-
-An adapter for connecting page objects to [Selenium][selenium].
-
-### [@pageobject/puppeteer-adapter][repo-package-puppeteer-adapter]
-
-An adapter for connecting page objects to [Puppeteer][puppeteer].
 
 ## Development
 
@@ -84,9 +76,6 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [repo-package-class]: https://github.com/clebert/pageobject/tree/master/@pageobject/class
 [repo-package-predicates]: https://github.com/clebert/pageobject/tree/master/@pageobject/predicates
-[repo-package-puppeteer-adapter]: https://github.com/clebert/pageobject/tree/master/@pageobject/puppeteer-adapter
-[repo-package-selenium-adapter]: https://github.com/clebert/pageobject/tree/master/@pageobject/selenium-adapter
 [githooks]: https://git-scm.com/docs/githooks
 [monorepo]: https://github.com/lerna/lerna#about
-[puppeteer]: https://github.com/GoogleChrome/puppeteer
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
