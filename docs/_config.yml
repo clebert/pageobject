@@ -1,10 +1,9 @@
 title: PageObjectJS
-description: Readable. Stable. Maintainable. E2E testing using any browser automation framework.
+description: Readable. Stable. Maintainable. E2E testing using the Page Object pattern.
 url: https://pageobject.js.org/
 theme: jekyll-theme-minimal
 show_downloads: false
 include:
-- _pageobject_.pageobject.html
-- _pageobject_.adapter.html
-- _pageobject_.componentclass.html
-- _pageobject_.options.html
+- _index_.pageobject.html
+- _index_.componentclass.html
+- _index_.options.html

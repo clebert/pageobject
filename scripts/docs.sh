@@ -7,5 +7,5 @@ set -e
 
 rm -rf docs/api/
 
-"$(npm bin)"/typedoc --entryPoint \"PageObject\" --out docs/api/class ./@pageobject/class
-"$(npm bin)"/typedoc --entryPoint \"predicates\" --out docs/api/predicates ./@pageobject/predicates
+"$(npm bin)"/typedoc --out docs/api/class ./@pageobject/class
+"$(npm bin)"/typedoc --out docs/api/predicates ./@pageobject/predicates

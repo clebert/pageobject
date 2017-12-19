@@ -1,7 +1,7 @@
 {
   "name": "@pageobject/class",
-  "version": "0.13.0",
-  "description": "A class-based implementation of the Page Object pattern for JavaScript.",
+  "version": "0.14.0-1",
+  "description": "A Selenium-compatible implementation of the Page Object pattern for JavaScript.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
   "homepage": "https://pageobject.js.org/",
@@ -28,5 +28,12 @@
     "fixtures"
   ],
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts"
+  "typings": "dist/index.d.ts",
+  "peerDependencies": {
+    "selenium-webdriver": "^3.6.0"
+  },
+  "devDependencies": {
+    "@types/selenium-webdriver": "^3.0.8",
+    "selenium-webdriver": "^3.6.0"
+  }
 }
