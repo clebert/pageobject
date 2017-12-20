@@ -7,7 +7,9 @@ include:
 - _index_.adaptertestsuite.html
 - _index_.pageobject.html
 - _index_.adapter.html
+- _index_.clickoptions.html
 - _index_.componentclass.html
-- _index_.options.html
+- _index_.constructoroptions.html
+- _index_.typeoptions.html
 - _index_.puppeteeradapter.html
 - _index_.seleniumadapter.html
