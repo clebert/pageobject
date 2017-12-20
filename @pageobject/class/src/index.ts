@@ -23,16 +23,27 @@ export type Predicate<TComponent extends PageObject<TComponent>> = (
   components: TComponent[]
 ) => Promise<boolean>;
 
-export interface Options<TComponent extends PageObject<TComponent>> {
+export interface ClickOptions {
+  readonly dontScrollIntoView?: boolean;
+}
+
+export interface ConstructorOptions<TComponent extends PageObject<TComponent>> {
   readonly element?: object;
   readonly parent?: PageObject<any> /* tslint:disable-line no-any */;
   readonly predicate?: Predicate<TComponent>;
 }
 
+export interface TypeOptions {
+  readonly delay?: number;
+}
+
 export interface ComponentClass<TComponent extends PageObject<TComponent>> {
   readonly selector: string;
 
-  new (adapter: Adapter<object>, options?: Options<TComponent>): TComponent;
+  new (
+    adapter: Adapter<object>,
+    options?: ConstructorOptions<TComponent>
+  ): TComponent;
 }
 
 export class PageObject<T extends PageObject<T>> {
@@ -46,9 +57,12 @@ export class PageObject<T extends PageObject<T>> {
 
   private readonly _Component: ComponentClass<T>;
   private readonly _adapter: Adapter<object>;
-  private readonly _options: Options<T>;
+  private readonly _options: ConstructorOptions<T>;
 
-  public constructor(adapter: Adapter<object>, options: Options<T> = {}) {
+  public constructor(
+    adapter: Adapter<object>,
+    options: ConstructorOptions<T> = {}
+  ) {
     /* tslint:disable-next-line no-any */
     const {constructor} = this as any;
 
@@ -80,8 +94,8 @@ export class PageObject<T extends PageObject<T>> {
     return new Component(this._adapter, {parent: this, predicate});
   }
 
-  public async click(scrollIntoView: boolean = true): Promise<void> {
-    if (scrollIntoView) {
+  public async click(options: ClickOptions = {}): Promise<void> {
+    if (!options.dontScrollIntoView) {
       await this._scrollIntoView();
     }
 
@@ -95,7 +109,9 @@ export class PageObject<T extends PageObject<T>> {
     );
   }
 
-  public async type(text: string, delay: number = 100): Promise<void> {
+  public async type(text: string, options: TypeOptions = {}): Promise<void> {
+    const delay = options.delay !== undefined ? options.delay : 100;
+
     await this._adapter.type(await this._findElement(), text, delay);
   }
 
