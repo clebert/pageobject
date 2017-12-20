@@ -8,9 +8,13 @@ An adapter implementation for connecting page objects to [Selenium][selenium].
 npm install @pageobject/selenium-adapter
 ```
 
-If you use [TypeScript][typescript], please install the types for Selenium as well:
+```sh
+# Peer dependencies
+npm install @pageobject/class selenium-webdriver
+```
 
 ```sh
+# TypeScript types
 npm install @types/selenium-webdriver
 ```
 
@@ -31,4 +35,3 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [repo-api-selenium-adapter]: https://pageobject.js.org/api/selenium-adapter/
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
-[typescript]: https://www.typescriptlang.org/

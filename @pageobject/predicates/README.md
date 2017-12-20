@@ -5,7 +5,12 @@ A collection of useful predicate functions.
 ## Installation
 
 ```sh
-npm install @pageobject/class @pageobject/predicates
+npm install @pageobject/predicates
+```
+
+```sh
+# Peer dependencies
+npm install @pageobject/class
 ```
 
 ## API

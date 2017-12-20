@@ -29,11 +29,14 @@
   ],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "dependencies": {
+  "peerDependencies": {
     "@pageobject/class": "^0.16.0",
     "puppeteer": "^0.13.0"
   },
   "devDependencies": {
-    "@pageobject/adapter-test-suite": "^0.16.0"
+    "@pageobject/adapter-test-suite": "^0.16.0",
+    "@pageobject/class": "^0.16.0",
+    "@types/puppeteer": "^0.13.9",
+    "puppeteer": "^0.13.0"
   }
 }
