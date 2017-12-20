@@ -8,6 +8,10 @@ A test suite for testing the compatibility of adapter implementations.
 npm install @pageobject/adapter-test-suite
 ```
 
+## API
+
+Please find the API documentation [here][repo-api-adapter-test-suite].
+
 ---
 
 Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-license].
@@ -18,4 +22,5 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-npm-link]: https://www.npmjs.com/package/@pageobject/predicates
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
+[repo-api-adapter-test-suite]: https://pageobject.js.org/api/adapter-test-suite/
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE

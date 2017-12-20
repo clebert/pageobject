@@ -4,7 +4,10 @@ url: https://pageobject.js.org/
 theme: jekyll-theme-minimal
 show_downloads: false
 include:
+- _index_.adaptertestsuite.html
 - _index_.pageobject.html
 - _index_.adapter.html
 - _index_.componentclass.html
 - _index_.options.html
+- _index_.puppeteeradapter.html
+- _index_.seleniumadapter.html
