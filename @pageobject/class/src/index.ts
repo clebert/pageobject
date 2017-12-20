@@ -61,6 +61,25 @@ export class PageObject<T extends PageObject<T>> {
     this._options = options;
   }
 
+  public async getNumberOfDescendants<
+    TComponent extends PageObject<TComponent>
+  >(
+    Component: ComponentClass<TComponent>,
+    predicate?: Predicate<TComponent>
+  ): Promise<number> {
+    const component = this.selectDescendant(Component, predicate);
+    const elements = await component._findElements();
+
+    return elements.length;
+  }
+
+  public selectDescendant<TComponent extends PageObject<TComponent>>(
+    Component: ComponentClass<TComponent>,
+    predicate?: Predicate<TComponent>
+  ): TComponent {
+    return new Component(this._adapter, {parent: this, predicate});
+  }
+
   public async click(scrollIntoView: boolean = true): Promise<void> {
     if (scrollIntoView) {
       await this._scrollIntoView();
@@ -205,13 +224,6 @@ export class PageObject<T extends PageObject<T>> {
     const name = `${this.constructor.name}[${this._Component.selector}]`;
 
     return parent ? `${parent.toString()} > ${name}` : name;
-  }
-
-  protected selectDescendant<TComponent extends PageObject<TComponent>>(
-    Component: ComponentClass<TComponent>,
-    predicate?: Predicate<TComponent>
-  ): TComponent {
-    return new Component(this._adapter, {parent: this, predicate});
   }
 
   private async _findElement(): Promise<object> {
