@@ -8,9 +8,13 @@ An adapter implementation for connecting page objects to [Puppeteer][puppeteer].
 npm install @pageobject/puppeteer-adapter
 ```
 
-If you use [TypeScript][typescript], please install the types for Puppeteer as well:
+```sh
+# Peer dependencies
+npm install @pageobject/class puppeteer
+```
 
 ```sh
+# TypeScript types
 npm install @types/puppeteer
 ```
 
@@ -31,4 +35,3 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [repo-api-puppeteer-adapter]: https://pageobject.js.org/api/puppeteer-adapter/
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [puppeteer]: https://github.com/GoogleChrome/puppeteer
-[typescript]: https://www.typescriptlang.org/

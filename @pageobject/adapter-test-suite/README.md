@@ -8,6 +8,11 @@ A test suite for testing the compatibility of adapter implementations.
 npm install @pageobject/adapter-test-suite
 ```
 
+```sh
+# Peer dependencies
+npm install @pageobject/class
+```
+
 ## API
 
 Please find the API documentation [here][repo-api-adapter-test-suite].

@@ -30,12 +30,15 @@
   ],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "dependencies": {
+  "peerDependencies": {
     "@pageobject/class": "^0.16.0",
     "selenium-webdriver": "^3.6.0"
   },
   "devDependencies": {
     "@pageobject/adapter-test-suite": "^0.16.0",
-    "chromedriver": "^2.34.0"
+    "@pageobject/class": "^0.16.0",
+    "@types/selenium-webdriver": "^3.0.8",
+    "chromedriver": "^2.34.0",
+    "selenium-webdriver": "^3.6.0"
   }
 }
