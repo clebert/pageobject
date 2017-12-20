@@ -1,14 +1,11 @@
 # @pageobject/selenium-adapter [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-An adapter for connecting page objects to [Selenium][selenium].
+An adapter implementation for connecting page objects to [Selenium][selenium].
 
 ## Installation
 
 ```sh
-npm install \
-  @pageobject/class \
-  @pageobject/selenium-adapter \
-  selenium-webdriver
+npm install @pageobject/selenium-adapter
 ```
 
 If you use [TypeScript][typescript], please install the types for Selenium as well:

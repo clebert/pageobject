@@ -1,4 +1,4 @@
-import {AdapterTestSuite} from '@pageobject/class';
+import {AdapterTestSuite} from '@pageobject/adapter-test-suite';
 import {ElementHandle} from 'puppeteer';
 import {PuppeteerAdapter} from '..';
 
@@ -20,9 +20,7 @@ class PuppeteerAdapterTestSuite extends AdapterTestSuite<
 }
 
 describe('PuppeteerAdapter', () => {
-  it('should pass the test suite', async () => {
-    const testSuite = new PuppeteerAdapterTestSuite();
-
-    await testSuite.runTests();
+  it('should pass the adapter test suite', async () => {
+    await new PuppeteerAdapterTestSuite().run();
   });
 });

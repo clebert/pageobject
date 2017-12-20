@@ -24,8 +24,7 @@
     "url": "https://github.com/clebert/pageobject/issues"
   },
   "files": [
-    "dist",
-    "fixtures"
+    "dist"
   ],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts"

@@ -1,7 +1,7 @@
 {
   "name": "@pageobject/puppeteer-adapter",
   "version": "0.13.0",
-  "description": "An adapter for connecting page objects to Puppeteer.",
+  "description": "An adapter implementation for connecting page objects to Puppeteer.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
   "homepage": "https://pageobject.js.org/",
@@ -29,13 +29,11 @@
   ],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "peerDependencies": {
+  "dependencies": {
     "@pageobject/class": "^0.13.0",
     "puppeteer": "^0.13.0"
   },
   "devDependencies": {
-    "@pageobject/class": "^0.13.0",
-    "@types/puppeteer": "^0.13.8",
-    "puppeteer": "^0.13.0"
+    "@pageobject/adapter-test-suite": "^0.13.0"
   }
 }

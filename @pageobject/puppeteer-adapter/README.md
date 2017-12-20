@@ -1,14 +1,11 @@
 # @pageobject/puppeteer-adapter [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-An adapter for connecting page objects to [Puppeteer][puppeteer].
+An adapter implementation for connecting page objects to [Puppeteer][puppeteer].
 
 ## Installation
 
 ```sh
-npm install \
-  @pageobject/class \
-  @pageobject/puppeteer-adapter \
-  puppeteer
+npm install @pageobject/puppeteer-adapter
 ```
 
 If you use [TypeScript][typescript], please install the types for Puppeteer as well:
