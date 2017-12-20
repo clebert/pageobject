@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/adapter-test-suite",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "description": "A test suite for testing the compatibility of adapter implementations.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",

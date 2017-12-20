@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/selenium-adapter",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "description": "An adapter implementation for connecting page objects to Selenium.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -35,7 +35,7 @@
     "selenium-webdriver": "^3.6.0"
   },
   "devDependencies": {
-    "@pageobject/adapter-test-suite": "^0.16.0",
+    "@pageobject/adapter-test-suite": "^0.16.1",
     "@pageobject/class": "^0.16.0",
     "@types/selenium-webdriver": "^3.0.8",
     "chromedriver": "^2.34.0",

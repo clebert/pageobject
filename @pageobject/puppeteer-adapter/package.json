@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/puppeteer-adapter",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "description": "An adapter implementation for connecting page objects to Puppeteer.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -34,7 +34,7 @@
     "puppeteer": "^0.13.0"
   },
   "devDependencies": {
-    "@pageobject/adapter-test-suite": "^0.16.0",
+    "@pageobject/adapter-test-suite": "^0.16.1",
     "@pageobject/class": "^0.16.0",
     "@types/puppeteer": "^0.13.9",
     "puppeteer": "^0.13.0"

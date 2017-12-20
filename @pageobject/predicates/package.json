@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/predicates",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "description": "A collection of useful predicate functions.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
