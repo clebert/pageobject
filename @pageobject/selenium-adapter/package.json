@@ -1,7 +1,7 @@
 {
   "name": "@pageobject/selenium-adapter",
   "version": "0.13.0",
-  "description": "An adapter for connecting page objects to Selenium.",
+  "description": "An adapter implementation for connecting page objects to Selenium.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
   "homepage": "https://pageobject.js.org/",
@@ -30,13 +30,11 @@
   ],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "peerDependencies": {
+  "dependencies": {
     "@pageobject/class": "^0.13.0",
     "selenium-webdriver": "^3.6.0"
   },
   "devDependencies": {
-    "@pageobject/class": "^0.13.0",
-    "@types/selenium-webdriver": "^3.0.8",
-    "selenium-webdriver": "^3.6.0"
+    "@pageobject/adapter-test-suite": "^0.13.0"
   }
 }

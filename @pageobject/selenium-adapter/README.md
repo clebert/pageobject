@@ -1,14 +1,11 @@
 # @pageobject/selenium-adapter [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-An adapter for connecting page objects to [Selenium][selenium].
+An adapter implementation for connecting page objects to [Selenium][selenium].
 
 ## Installation
 
 ```sh
-npm install \
-  @pageobject/class \
-  @pageobject/selenium-adapter \
-  selenium-webdriver
+npm install @pageobject/selenium-adapter
 ```
 
 If you use [TypeScript][typescript], please install the types for Selenium as well:
@@ -16,6 +13,10 @@ If you use [TypeScript][typescript], please install the types for Selenium as we
 ```sh
 npm install @types/selenium-webdriver
 ```
+
+## API
+
+Please find the API documentation [here][repo-api-selenium-adapter].
 
 ---
 
@@ -27,6 +28,7 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-npm-link]: https://www.npmjs.com/package/@pageobject/selenium-adapter
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
+[repo-api-selenium-adapter]: https://pageobject.js.org/api/selenium-adapter/
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
 [typescript]: https://www.typescriptlang.org/

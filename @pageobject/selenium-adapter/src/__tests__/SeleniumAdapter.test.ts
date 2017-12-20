@@ -1,7 +1,7 @@
 /* tslint:disable-next-line no-implicit-dependencies no-import-side-effect */
 import 'chromedriver';
 
-import {AdapterTestSuite} from '@pageobject/class';
+import {AdapterTestSuite} from '@pageobject/adapter-test-suite';
 import {WebElement} from 'selenium-webdriver';
 import {SeleniumAdapter} from '..';
 
@@ -23,9 +23,7 @@ class SeleniumAdapterTestSuite extends AdapterTestSuite<
 }
 
 describe('SeleniumAdapter', () => {
-  it('should pass the test suite', async () => {
-    const testSuite = new SeleniumAdapterTestSuite();
-
-    await testSuite.runTests();
+  it('should pass the adapter test suite', async () => {
+    await new SeleniumAdapterTestSuite().run();
   });
 });

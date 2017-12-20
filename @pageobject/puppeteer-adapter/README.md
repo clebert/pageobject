@@ -1,14 +1,11 @@
 # @pageobject/puppeteer-adapter [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-An adapter for connecting page objects to [Puppeteer][puppeteer].
+An adapter implementation for connecting page objects to [Puppeteer][puppeteer].
 
 ## Installation
 
 ```sh
-npm install \
-  @pageobject/class \
-  @pageobject/puppeteer-adapter \
-  puppeteer
+npm install @pageobject/puppeteer-adapter
 ```
 
 If you use [TypeScript][typescript], please install the types for Puppeteer as well:
@@ -16,6 +13,10 @@ If you use [TypeScript][typescript], please install the types for Puppeteer as w
 ```sh
 npm install @types/puppeteer
 ```
+
+## API
+
+Please find the API documentation [here][repo-api-puppeteer-adapter].
 
 ---
 
@@ -27,6 +28,7 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-npm-link]: https://www.npmjs.com/package/@pageobject/puppeteer-adapter
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
+[repo-api-puppeteer-adapter]: https://pageobject.js.org/api/puppeteer-adapter/
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [puppeteer]: https://github.com/GoogleChrome/puppeteer
 [typescript]: https://www.typescriptlang.org/

@@ -1,6 +1,6 @@
+import {Adapter} from '@pageobject/class';
 import * as assert from 'assert';
 import {join} from 'path';
-import {Adapter} from './PageObject';
 
 /* tslint:disable no-any */
 async function getProperty<TElement, TAdapter extends Adapter<TElement>>(
@@ -29,7 +29,7 @@ export abstract class AdapterTestSuite<
   public abstract setUp(url: string): Promise<TAdapter>;
   public abstract tearDown(adapter: TAdapter): Promise<void>;
 
-  public async runTests(): Promise<void> {
+  public async run(): Promise<void> {
     const adapter = await this.setUp(
       `file://${join(__dirname, '../fixtures/index.html')}`
     );
