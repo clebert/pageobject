@@ -29,7 +29,6 @@
     "@types/node": "^8.5.2",
     "@types/puppeteer": "^0.13.9",
     "@types/selenium-webdriver": "^3.0.8",
-    "chromedriver": "^2.34.0",
     "coveralls": "^3.0.0",
     "custom-tslint-formatters": "^2.1.1",
     "git-latest-semver-tag": "^1.0.2",

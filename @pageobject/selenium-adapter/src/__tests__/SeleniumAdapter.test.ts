@@ -1,4 +1,3 @@
-/* tslint:disable-next-line no-implicit-dependencies no-import-side-effect */
 import 'chromedriver';
 
 import {AdapterTestSuite} from '@pageobject/adapter-test-suite';

@@ -1,6 +1,9 @@
 import {Adapter} from '@pageobject/class';
 import {Browser, ElementHandle, LaunchOptions, Page, launch} from 'puppeteer';
 
+/**
+ * `import {PuppeteerAdapter} from '@pageobject/puppeteer-adapter';`
+ */
 export class PuppeteerAdapter implements Adapter<ElementHandle> {
   public static async launchChrome(
     options?: LaunchOptions

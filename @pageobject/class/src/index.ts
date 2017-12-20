@@ -1,3 +1,6 @@
+/**
+ * `import {Adapter} from '@pageobject/class';`
+ */
 export interface Adapter<TElement> {
   click(element: TElement): Promise<void>;
 
@@ -13,30 +16,48 @@ export interface Adapter<TElement> {
   type(element: TElement, text: string, delay: number): Promise<void>;
 }
 
+/**
+ * `import {Action} from '@pageobject/class';`
+ */
 export type Action<TComponent extends PageObject<TComponent>> = (
   component: TComponent
 ) => Promise<void>;
 
+/**
+ * `import {Predicate} from '@pageobject/class';`
+ */
 export type Predicate<TComponent extends PageObject<TComponent>> = (
   component: TComponent,
   index: number,
   components: TComponent[]
 ) => Promise<boolean>;
 
+/**
+ * `import {ClickOptions} from '@pageobject/class';`
+ */
 export interface ClickOptions {
-  readonly dontScrollIntoView?: boolean;
+  readonly scrollIntoView?: boolean;
 }
 
+/**
+ * `import {ConstructorOptions} from '@pageobject/class';`
+ */
 export interface ConstructorOptions<TComponent extends PageObject<TComponent>> {
   readonly element?: object;
   readonly parent?: PageObject<any> /* tslint:disable-line no-any */;
   readonly predicate?: Predicate<TComponent>;
 }
 
+/**
+ * `import {TypeOptions} from '@pageobject/class';`
+ */
 export interface TypeOptions {
   readonly delay?: number;
 }
 
+/**
+ * `import {ComponentClass} from '@pageobject/class';`
+ */
 export interface ComponentClass<TComponent extends PageObject<TComponent>> {
   readonly selector: string;
 
@@ -46,6 +67,9 @@ export interface ComponentClass<TComponent extends PageObject<TComponent>> {
   ): TComponent;
 }
 
+/**
+ * `import {PageObject} from '@pageobject/class';`
+ */
 export class PageObject<T extends PageObject<T>> {
   public static selectRoot<TComponent extends PageObject<TComponent>>(
     Component: ComponentClass<TComponent>,
@@ -94,8 +118,12 @@ export class PageObject<T extends PageObject<T>> {
     return new Component(this._adapter, {parent: this, predicate});
   }
 
-  public async click(options: ClickOptions = {}): Promise<void> {
-    if (!options.dontScrollIntoView) {
+  public async click(
+    options: ClickOptions = {scrollIntoView: true}
+  ): Promise<void> {
+    const {scrollIntoView}: ClickOptions = {scrollIntoView: true, ...options};
+
+    if (scrollIntoView) {
       await this._scrollIntoView();
     }
 
@@ -109,8 +137,11 @@ export class PageObject<T extends PageObject<T>> {
     );
   }
 
-  public async type(text: string, options: TypeOptions = {}): Promise<void> {
-    const delay = options.delay !== undefined ? options.delay : 100;
+  public async type(
+    text: string,
+    options: TypeOptions = {delay: 100}
+  ): Promise<void> {
+    const {delay}: TypeOptions = {delay: 100, ...options};
 
     await this._adapter.type(await this._findElement(), text, delay);
   }

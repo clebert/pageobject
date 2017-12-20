@@ -22,11 +22,26 @@ async function getText<TElement, TAdapter extends Adapter<TElement>>(
   );
 }
 
+/**
+ * `import {AdapterTestSuite} from '@pageobject/adapter-test-suite';`
+ *
+ * @abstract
+ */
 export abstract class AdapterTestSuite<
   TElement,
   TAdapter extends Adapter<TElement>
 > {
+  /**
+   * @abstract
+   * @param url The URL to open.
+   * @return The adapter to be tested.
+   */
   public abstract setUp(url: string): Promise<TAdapter>;
+
+  /**
+   * @abstract
+   * @param adapter The tested adapter.
+   */
   public abstract tearDown(adapter: TAdapter): Promise<void>;
 
   public async run(): Promise<void> {
