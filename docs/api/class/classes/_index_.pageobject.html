@@ -966,11 +966,17 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
 			<a href="../interfaces/_index_.adapter.html" class="tsd-kind-icon">Adapter</a>
 		</li>
+		<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+			<a href="../interfaces/_index_.clickoptions.html" class="tsd-kind-icon">Click<wbr>Options</a>
+		</li>
 		<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
 			<a href="../interfaces/_index_.componentclass.html" class="tsd-kind-icon">Component<wbr>Class</a>
 		</li>
 		<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-			<a href="../interfaces/_index_.options.html" class="tsd-kind-icon">Options</a>
+			<a href="../interfaces/_index_.constructoroptions.html" class="tsd-kind-icon">Constructor<wbr>Options</a>
+		</li>
+		<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+			<a href="../interfaces/_index_.typeoptions.html" class="tsd-kind-icon">Type<wbr>Options</a>
 		</li>
 		<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
 			<a href="../index.html#action" class="tsd-kind-icon">Action</a>
@@ -1038,13 +1044,13 @@ img { max-width: 100%; }
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Page<wbr>Object<span class="tsd-signature-symbol">(</span>adapter<span class="tsd-signature-symbol">: </span><a href="../interfaces/_index_.adapter.html" class="tsd-signature-type">Adapter</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_index_.options.html" class="tsd-signature-type">Options</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_index_.pageobject.html" class="tsd-signature-type">PageObject</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Page<wbr>Object<span class="tsd-signature-symbol">(</span>adapter<span class="tsd-signature-symbol">: </span><a href="../interfaces/_index_.adapter.html" class="tsd-signature-type">Adapter</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_index_.constructoroptions.html" class="tsd-signature-type">ConstructorOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_index_.pageobject.html" class="tsd-signature-type">PageObject</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L49">index.ts:49</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L60">index.ts:60</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1053,7 +1059,7 @@ img { max-width: 100%; }
 								<h5>adapter: <a href="../interfaces/_index_.adapter.html" class="tsd-signature-type">Adapter</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="../interfaces/_index_.options.html" class="tsd-signature-type">Options</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="../interfaces/_index_.constructoroptions.html" class="tsd-signature-type">ConstructorOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="_index_.pageobject.html" class="tsd-signature-type">PageObject</a></h4>
@@ -1067,19 +1073,19 @@ img { max-width: 100%; }
 				<a name="click" class="tsd-anchor"></a>
 				<h3>click</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">click<span class="tsd-signature-symbol">(</span>scrollIntoView<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">click<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_index_.clickoptions.html" class="tsd-signature-type">ClickOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L83">index.ts:83</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L97">index.ts:97</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> scrollIntoView: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="../interfaces/_index_.clickoptions.html" class="tsd-signature-type">ClickOptions</a><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1096,7 +1102,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L91">index.ts:91</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L105">index.ts:105</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1113,7 +1119,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L102">index.ts:102</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L118">index.ts:118</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1136,7 +1142,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L111">index.ts:111</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L127">index.ts:127</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1153,7 +1159,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L64">index.ts:64</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L78">index.ts:78</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1185,7 +1191,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L118">index.ts:118</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L134">index.ts:134</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1214,7 +1220,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L135">index.ts:135</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L151">index.ts:151</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1231,7 +1237,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L142">index.ts:142</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L158">index.ts:158</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1248,7 +1254,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L149">index.ts:149</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L165">index.ts:165</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1265,7 +1271,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L154">index.ts:154</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L170">index.ts:170</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1282,7 +1288,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L76">index.ts:76</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L90">index.ts:90</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1314,7 +1320,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L126">index.ts:126</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L142">index.ts:142</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1346,7 +1352,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L222">index.ts:222</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L238">index.ts:238</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -1357,13 +1363,13 @@ img { max-width: 100%; }
 				<a name="type" class="tsd-anchor"></a>
 				<h3>type</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, delay<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_index_.typeoptions.html" class="tsd-signature-type">TypeOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L98">index.ts:98</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L112">index.ts:112</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1372,7 +1378,7 @@ img { max-width: 100%; }
 								<h5>text: <span class="tsd-signature-type">string</span></h5>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> delay: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;100</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="../interfaces/_index_.typeoptions.html" class="tsd-signature-type">TypeOptions</a><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1389,7 +1395,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L168">index.ts:168</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L184">index.ts:184</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1433,7 +1439,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L39">index.ts:39</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/class/src/index.ts#L50">index.ts:50</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
