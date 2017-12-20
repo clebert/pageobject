@@ -35,6 +35,7 @@
     "selenium-webdriver": "^3.6.0"
   },
   "devDependencies": {
-    "@pageobject/adapter-test-suite": "^0.15.0"
+    "@pageobject/adapter-test-suite": "^0.15.0",
+    "chromedriver": "^2.34.0"
   }
 }

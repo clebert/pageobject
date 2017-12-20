@@ -11,6 +11,9 @@ import {
 /* https://github.com/SeleniumHQ/selenium/issues/2969#issuecomment-307917606 */
 promise.USE_PROMISE_MANAGER = false;
 
+/**
+ * `import {SeleniumAdapter} from '@pageobject/selenium-adapter';`
+ */
 export class SeleniumAdapter implements Adapter<WebElement> {
   public static async launchHeadlessChrome(): Promise<SeleniumAdapter> {
     const capabilities = Capabilities.chrome().set('chromeOptions', {
