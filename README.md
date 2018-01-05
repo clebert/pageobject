@@ -8,25 +8,9 @@ The documentation follows as soon as the API can be kept stable.
 
 This is a multi-package repository ([monorepo][monorepo]).
 
-### [@pageobject/class][repo-package-class]
+### [@pageobject/core][repo-package-core]
 
-A class-based implementation of the Page Object pattern for JavaScript.
-
-### [@pageobject/predicates][repo-package-predicates]
-
-A collection of useful predicate functions.
-
-### [@pageobject/selenium-adapter][repo-package-selenium-adapter]
-
-An adapter implementation for connecting page objects to [Selenium][selenium].
-
-### [@pageobject/puppeteer-adapter][repo-package-puppeteer-adapter]
-
-An adapter implementation for connecting page objects to [Puppeteer][puppeteer].
-
-### [@pageobject/adapter-test-suite][repo-package-adapter-test-suite]
-
-A test suite for testing the compatibility of adapter implementations.
+TODO.
 
 ## Development
 
@@ -86,12 +70,6 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
 [badge-typescript-link]: https://www.typescriptlang.org/
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
-[repo-package-adapter-test-suite]: https://github.com/clebert/pageobject/tree/master/@pageobject/adapter-test-suite
-[repo-package-class]: https://github.com/clebert/pageobject/tree/master/@pageobject/class
-[repo-package-predicates]: https://github.com/clebert/pageobject/tree/master/@pageobject/predicates
-[repo-package-puppeteer-adapter]: https://github.com/clebert/pageobject/tree/master/@pageobject/puppeteer-adapter
-[repo-package-selenium-adapter]: https://github.com/clebert/pageobject/tree/master/@pageobject/selenium-adapter
+[repo-package-core]: https://github.com/clebert/pageobject/tree/master/@pageobject/core
 [githooks]: https://git-scm.com/docs/githooks
 [monorepo]: https://github.com/lerna/lerna#about
-[puppeteer]: https://github.com/GoogleChrome/puppeteer
-[selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html

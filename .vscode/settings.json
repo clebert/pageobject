@@ -2,6 +2,7 @@
   "search.exclude": {
     "**/coverage/**": true,
     "**/dist/**": true,
+    "**/docs/api/**": true,
     "**/lerna-debug.log": true,
     "**/node_modules/**": true,
     "**/npm-debug.log": true,
