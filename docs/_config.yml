@@ -3,16 +3,3 @@ description: Readable. Stable. Maintainable. E2E testing using any browser autom
 url: https://pageobject.js.org/
 theme: jekyll-theme-minimal
 show_downloads: false
-include:
-- _index_.adaptertestsuite.html
-- _index_.pageobject.html
-- _index_.adapter.html
-- _index_.clickoptions.html
-- _index_.componentclass.html
-- _index_.constructoroptions.html
-- _index_.typeoptions.html
-- _index_.abstractpageobject.html
-#- _index_.pageobject.html
-- _index_.pageobjectconstructor.html
-- _index_.puppeteeradapter.html
-- _index_.seleniumadapter.html

@@ -1,11 +1,12 @@
 /* https://github.com/TypeStrong/typedoc#usage */
 
 module.exports = {
-  mode: 'modules',
+  mode: 'file',
   ignoreCompilerErrors: false,
 
   /* Source file handling */
 
+  exclude: '**/__tests__/**/*',
   includeDeclarations: false,
   externalPattern: '**/node_modules/**/*',
   excludeExternals: true,
@@ -21,6 +22,5 @@ module.exports = {
   theme: 'minimal',
   readme: 'none',
   hideGenerator: true,
-  entryPoint: '"index"',
   gitRevision: 'master'
 };
