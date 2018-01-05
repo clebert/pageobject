@@ -11,5 +11,8 @@ include:
 - _index_.componentclass.html
 - _index_.constructoroptions.html
 - _index_.typeoptions.html
+- _index_.abstractpageobject.html
+#- _index_.pageobject.html
+- _index_.pageobjectconstructor.html
 - _index_.puppeteeradapter.html
 - _index_.seleniumadapter.html
