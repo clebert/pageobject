@@ -21,7 +21,7 @@
     "watch:test": "jest --watchAll"
   },
   "devDependencies": {
-    "@commitlint/cli": "^5.2.5",
+    "@commitlint/cli": "^6.0.1",
     "@commitlint/config-angular": "^5.1.1",
     "@commitlint/config-lerna-scopes": "^5.2.0",
     "@commitlint/prompt-cli": "^5.2.5",
