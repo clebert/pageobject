@@ -917,7 +917,7 @@ img { max-width: 100%; }
 					<a href="abstractpageobject.html#selector" class="tsd-kind-icon">selector</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="abstractpageobject.html#findelement" class="tsd-kind-icon">find<wbr>Element</a>
+					<a href="abstractpageobject.html#getelement" class="tsd-kind-icon">get<wbr>Element</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="abstractpageobject.html#getsize" class="tsd-kind-icon">get<wbr>Size</a>
@@ -937,7 +937,7 @@ img { max-width: 100%; }
 			<a href="../interfaces/pageobjectconstructor.html" class="tsd-kind-icon">Page<wbr>Object<wbr>Constructor</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
-			<a href="../index.html#elementfinder" class="tsd-kind-icon">Element<wbr>Finder</a>
+			<a href="../index.html#finder" class="tsd-kind-icon">Finder</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="../index.html#predicate" class="tsd-kind-icon">Predicate</a>
@@ -998,7 +998,7 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="abstractpageobject.html#findelement" class="tsd-kind-icon">find<wbr>Element</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="abstractpageobject.html#getelement" class="tsd-kind-icon">get<wbr>Element</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="abstractpageobject.html#getsize" class="tsd-kind-icon">get<wbr>Size</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="abstractpageobject.html#select" class="tsd-kind-icon">select</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="abstractpageobject.html#where" class="tsd-kind-icon">where</a></li>
@@ -1013,19 +1013,19 @@ img { max-width: 100%; }
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Abstract<wbr>Page<wbr>Object<span class="tsd-signature-symbol">(</span>finder<span class="tsd-signature-symbol">: </span><a href="../index.html#elementfinder" class="tsd-signature-type">ElementFinder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span>, parent<span class="tsd-signature-symbol">?: </span><a href="../interfaces/pageobject.html" class="tsd-signature-type">PageObject</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="abstractpageobject.html" class="tsd-signature-type">AbstractPageObject</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Abstract<wbr>Page<wbr>Object<span class="tsd-signature-symbol">(</span>finder<span class="tsd-signature-symbol">: </span><a href="../index.html#finder" class="tsd-signature-type">Finder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span>, parent<span class="tsd-signature-symbol">?: </span><a href="../interfaces/pageobject.html" class="tsd-signature-type">PageObject</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="abstractpageobject.html" class="tsd-signature-type">AbstractPageObject</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L50">index.ts:50</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L47">index.ts:47</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>finder: <a href="../index.html#elementfinder" class="tsd-signature-type">ElementFinder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>finder: <a href="../index.html#finder" class="tsd-signature-type">Finder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> parent: <a href="../interfaces/pageobject.html" class="tsd-signature-type">PageObject</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></h5>
@@ -1045,7 +1045,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Implementation of <a href="../interfaces/pageobject.html">PageObject</a>.<a href="../interfaces/pageobject.html#selector">selector</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L44">index.ts:44</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L41">index.ts:41</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1059,17 +1059,17 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="findelement" class="tsd-anchor"></a>
-				<h3>find<wbr>Element</h3>
+				<a name="getelement" class="tsd-anchor"></a>
+				<h3>get<wbr>Element</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">find<wbr>Element<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Element<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Implementation of <a href="../interfaces/pageobject.html">PageObject</a>.<a href="../interfaces/pageobject.html#findelement">findElement</a></p>
+							<p>Implementation of <a href="../interfaces/pageobject.html">PageObject</a>.<a href="../interfaces/pageobject.html#getelement">getElement</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L75">index.ts:75</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L69">index.ts:69</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1087,7 +1087,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/pageobject.html">PageObject</a>.<a href="../interfaces/pageobject.html#getsize">getSize</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L93">index.ts:93</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L87">index.ts:87</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1105,7 +1105,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/pageobject.html">PageObject</a>.<a href="../interfaces/pageobject.html#select">select</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L60">index.ts:60</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L54">index.ts:54</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1135,7 +1135,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/pageobject.html">PageObject</a>.<a href="../interfaces/pageobject.html#where">where</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L66">index.ts:66</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L60">index.ts:60</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>

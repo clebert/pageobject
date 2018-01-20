@@ -4,7 +4,7 @@ class Root extends AbstractPageObject<Element> {
   public readonly selector = 'div';
 
   public async getName(): Promise<string | null> {
-    return (await this.findElement()).getAttribute(
+    return (await this.getElement()).getAttribute(
       `${this.constructor.name}-name`
     );
   }
@@ -42,22 +42,22 @@ const root2 = root.where(nameEquals('root2', 6));
 const root3 = root.where(nameEquals('root3', 6));
 
 describe('Root', () => {
-  describe('findElement()', () => {
-    it('should fail to find the element of root', async () => {
+  describe('getElement()', () => {
+    it('should fail to get the element of root', async () => {
       await expect(root.getName()).rejects.toEqual(
         new Error('Element not unique (Root)')
       );
     });
 
-    it('should find the element of root1', async () => {
+    it('should get the element of root1', async () => {
       expect(await root1.getName()).toBe('root1');
     });
 
-    it('should find the element of root2', async () => {
+    it('should get the element of root2', async () => {
       expect(await root2.getName()).toBe('root2');
     });
 
-    it('should fail to find the element of root3', async () => {
+    it('should fail to get the element of root3', async () => {
       await expect(root3.getName()).rejects.toEqual(
         new Error('Element not found (Root)')
       );
@@ -89,22 +89,22 @@ const child2 = child.where(nameEquals('child2', 4));
 const child3 = child.where(nameEquals('child3', 4));
 
 describe('Child', () => {
-  describe('findElement()', () => {
-    it('should fail to find the element of child', async () => {
+  describe('getElement()', () => {
+    it('should fail to get the element of child', async () => {
       await expect(child.getName()).rejects.toEqual(
         new Error('Element not unique (Child)')
       );
     });
 
-    it('should find the element of child1', async () => {
+    it('should get the element of child1', async () => {
       expect(await child1.getName()).toBe('child1');
     });
 
-    it('should find the element of child2', async () => {
+    it('should get the element of child2', async () => {
       expect(await child2.getName()).toBe('child2');
     });
 
-    it('should fail to find the element of child3', async () => {
+    it('should fail to get the element of child3', async () => {
       await expect(child3.getName()).rejects.toEqual(
         new Error('Element not found (Child)')
       );
@@ -136,22 +136,22 @@ const grandchild2 = grandchild.where(nameEquals('grandchild2', 2));
 const grandchild3 = grandchild.where(nameEquals('grandchild3', 2));
 
 describe('Grandchild', () => {
-  describe('findElement()', () => {
-    it('should fail to find the element of grandchild', async () => {
+  describe('getElement()', () => {
+    it('should fail to get the element of grandchild', async () => {
       await expect(grandchild.getName()).rejects.toEqual(
         new Error('Element not unique (Grandchild)')
       );
     });
 
-    it('should find the element of grandchild1', async () => {
+    it('should get the element of grandchild1', async () => {
       expect(await grandchild1.getName()).toBe('grandchild1');
     });
 
-    it('should find the element of grandchild2', async () => {
+    it('should get the element of grandchild2', async () => {
       expect(await grandchild2.getName()).toBe('grandchild2');
     });
 
-    it('should fail to find the element of grandchild3', async () => {
+    it('should fail to get the element of grandchild3', async () => {
       await expect(grandchild3.getName()).rejects.toEqual(
         new Error('Element not found (Grandchild)')
       );

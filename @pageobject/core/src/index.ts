@@ -1,4 +1,4 @@
-export type ElementFinder<TElement> = (
+export type Finder<TElement> = (
   selector: string,
   parent?: TElement
 ) => Promise<TElement[]>;
@@ -13,10 +13,7 @@ export interface PageObjectConstructor<
   TElement,
   TPageObject extends PageObject<TElement>
 > {
-  new (
-    finder: ElementFinder<TElement>,
-    parent?: PageObject<TElement>
-  ): TPageObject;
+  new (finder: Finder<TElement>, parent?: PageObject<TElement>): TPageObject;
 }
 
 export interface PageObject<TElement> {
@@ -27,7 +24,7 @@ export interface PageObject<TElement> {
   ): TPageObject;
 
   where(condition?: Predicate<TElement, this>): this;
-  findElement(): Promise<TElement>;
+  getElement(): Promise<TElement>;
   getSize(): Promise<number>;
 }
 
@@ -43,16 +40,13 @@ export abstract class AbstractPageObject<TElement>
    */
   public abstract readonly selector: string;
 
-  private readonly _finder: ElementFinder<TElement>;
+  private readonly _finder: Finder<TElement>;
   private readonly _parent?: PageObject<TElement>;
 
   private _condition?: Predicate<TElement, this>;
   private _element?: TElement;
 
-  public constructor(
-    finder: ElementFinder<TElement>,
-    parent?: PageObject<TElement>
-  ) {
+  public constructor(finder: Finder<TElement>, parent?: PageObject<TElement>) {
     this._finder = finder;
     this._parent = parent;
   }
@@ -72,7 +66,7 @@ export abstract class AbstractPageObject<TElement>
     return pageObject;
   }
 
-  public async findElement(): Promise<TElement> {
+  public async getElement(): Promise<TElement> {
     if (this._element) {
       return this._element;
     }
@@ -96,7 +90,7 @@ export abstract class AbstractPageObject<TElement>
 
   private async _findElements(): Promise<TElement[]> {
     const {_condition, _finder, _parent, selector} = this;
-    const parentElement = _parent ? await _parent.findElement() : undefined;
+    const parentElement = _parent ? await _parent.getElement() : undefined;
     const elements = await _finder(selector, parentElement);
 
     if (!_condition || elements.length === 0) {
