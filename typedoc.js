@@ -6,7 +6,7 @@ module.exports = {
 
   /* Source file handling */
 
-  exclude: '**/__tests__/**/*',
+  exclude: '**/*.test.ts',
   includeDeclarations: false,
   externalPattern: '**/node_modules/**/*',
   excludeExternals: true,

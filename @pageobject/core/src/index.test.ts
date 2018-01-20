@@ -1,21 +1,21 @@
-import {AbstractPageObject, Predicate} from '..';
+import {AbstractPageObject, Predicate} from '.';
 
 class Root extends AbstractPageObject<Element> {
   public readonly selector = 'div';
 
-  public async getName(): Promise<string | undefined> {
-    const element = await this.findElement();
-
-    return element.getAttribute(`${this.constructor.name}-name`) || undefined;
+  public async getName(): Promise<string | null> {
+    return (await this.findElement()).getAttribute(
+      `${this.constructor.name}-name`
+    );
   }
 }
 
 class Child extends Root {}
 class Grandchild extends Child {}
 
-function nameEquals(name: string, length: number): Predicate<Element, Root> {
+function nameEquals(name: string, size: number): Predicate<Element, Root> {
   return async (pageObject, index, pageObjects) => {
-    expect(pageObjects.length).toBe(length);
+    expect(pageObjects.length).toBe(size);
     expect(pageObject).toBe(pageObjects[index]);
 
     return (await pageObject.getName()) === name;

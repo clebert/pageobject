@@ -23,7 +23,7 @@ export interface PageObject<TElement> {
   readonly selector: string;
 
   select<TPageObject extends PageObject<TElement>>(
-    constructor: PageObjectConstructor<TElement, TPageObject>
+    descendant: PageObjectConstructor<TElement, TPageObject>
   ): TPageObject;
 
   where(condition?: Predicate<TElement, this>): this;
@@ -91,9 +91,7 @@ export abstract class AbstractPageObject<TElement>
   }
 
   public async getSize(): Promise<number> {
-    const elements = await this._findElements();
-
-    return elements.length;
+    return (await this._findElements()).length;
   }
 
   private async _findElements(): Promise<TElement[]> {
