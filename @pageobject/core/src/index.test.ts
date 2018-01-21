@@ -42,6 +42,28 @@ const root2 = root.where(nameEquals('root2', 6));
 const root3 = root.where(nameEquals('root3', 6));
 
 describe('Root', () => {
+  describe('select()', () => {
+    it('should return a new instance using the given constructor', () => {
+      const newInstance = root.select(Child);
+
+      expect(newInstance).not.toBe(root);
+      expect(newInstance).toBeInstanceOf(Root);
+      expect(newInstance).toBeInstanceOf(Child);
+      expect(newInstance).not.toBeInstanceOf(Grandchild);
+    });
+  });
+
+  describe('where()', () => {
+    it('should return a new instance using its own constructor', () => {
+      const newInstance = root.where(jest.fn());
+
+      expect(newInstance).not.toBe(root);
+      expect(newInstance).toBeInstanceOf(Root);
+      expect(newInstance).not.toBeInstanceOf(Child);
+      expect(newInstance).not.toBeInstanceOf(Grandchild);
+    });
+  });
+
   describe('getElement()', () => {
     it('should fail to get the element of root', async () => {
       await expect(root.getName()).rejects.toEqual(
@@ -89,6 +111,28 @@ const child2 = child.where(nameEquals('child2', 4));
 const child3 = child.where(nameEquals('child3', 4));
 
 describe('Child', () => {
+  describe('select()', () => {
+    it('should return a new instance using the given constructor', () => {
+      const newInstance = child.select(Grandchild);
+
+      expect(newInstance).not.toBe(child);
+      expect(newInstance).toBeInstanceOf(Root);
+      expect(newInstance).toBeInstanceOf(Child);
+      expect(newInstance).toBeInstanceOf(Grandchild);
+    });
+  });
+
+  describe('where()', () => {
+    it('should return a new instance using its own constructor', () => {
+      const newInstance = child.where(jest.fn());
+
+      expect(newInstance).not.toBe(child);
+      expect(newInstance).toBeInstanceOf(Root);
+      expect(newInstance).toBeInstanceOf(Child);
+      expect(newInstance).not.toBeInstanceOf(Grandchild);
+    });
+  });
+
   describe('getElement()', () => {
     it('should fail to get the element of child', async () => {
       await expect(child.getName()).rejects.toEqual(

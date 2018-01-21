@@ -23,7 +23,7 @@ export interface PageObject<TElement> {
     descendant: PageObjectConstructor<TElement, TPageObject>
   ): TPageObject;
 
-  where(condition?: Predicate<TElement, this>): this;
+  where(condition: Predicate<TElement, this>): this;
   getElement(): Promise<TElement>;
   getSize(): Promise<number>;
 }
@@ -57,7 +57,7 @@ export abstract class AbstractPageObject<TElement>
     return new descendant(this._finder, this);
   }
 
-  public where(condition?: Predicate<TElement, this>): this {
+  public where(condition: Predicate<TElement, this>): this {
     const self = this.constructor as PageObjectConstructor<TElement, this>;
     const pageObject = new self(this._finder, this._parent);
 
