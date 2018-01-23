@@ -1,4 +1,4 @@
-import {AbstractPageObject, Predicate} from '.';
+import {AbstractPageObject, Predicate, perform} from '.';
 
 class Root extends AbstractPageObject<Element> {
   public readonly selector = 'div';
@@ -218,5 +218,152 @@ describe('Grandchild', () => {
     it('should get the size of grandchild3', async () => {
       expect(await grandchild3.getSize()).toBe(0);
     });
+  });
+});
+
+class ObservablePromise<T> {
+  public readonly promise: Promise<T>;
+
+  private _pending = true;
+
+  public constructor(promise: Promise<T>) {
+    this.promise = (async () => {
+      try {
+        return await promise;
+      } finally {
+        this._pending = false;
+      }
+    })();
+  }
+
+  public async isPending(): Promise<boolean> {
+    for (let i = 0; i < 100; i += 1) {
+      await Promise.resolve();
+    }
+
+    return this._pending;
+  }
+}
+
+async function observeTimeout<T>(
+  performable: () => Promise<T>,
+  value: number
+): Promise<void> {
+  jest.useFakeTimers();
+
+  try {
+    const performance = new ObservablePromise(performable());
+
+    for (let i = 0; i < value; i += 1) {
+      jest.runAllTicks();
+      jest.runAllImmediates();
+      jest.advanceTimersByTime(1);
+
+      if ((await performance.isPending()) !== i + 1 < value) {
+        throw new Error('To early timeout');
+      }
+    }
+
+    await performance.promise;
+  } finally {
+    jest.useRealTimers();
+  }
+}
+
+describe('perform()', () => {
+  const explicitTimeout = 10;
+  const implicitTimeout = 20;
+
+  const erroneous = (n?: number) => async () => {
+    throw new Error(n !== undefined ? `Action error ${n}` : 'Action error');
+  };
+
+  const neverending = async () => new Promise<void>(() => undefined);
+
+  beforeEach(() => {
+    process.env.IMPLICIT_TIMEOUT = String(implicitTimeout);
+  });
+
+  afterEach(() => {
+    process.env.IMPLICIT_TIMEOUT = undefined;
+  });
+
+  it('should throw a missing timeout-value error', async () => {
+    process.env.IMPLICIT_TIMEOUT = undefined;
+
+    await expect(perform(jest.fn())).rejects.toEqual(
+      new Error('Please specify an explicit or implicit timeout value')
+    );
+  });
+
+  it('should throw an invalid timeout-value error', async () => {
+    await expect(perform(jest.fn(), NaN)).rejects.toEqual(
+      new Error('Invalid timeout value')
+    );
+
+    process.env.IMPLICIT_TIMEOUT = 'NaN';
+
+    await expect(perform(jest.fn())).rejects.toEqual(
+      new Error('Invalid timeout value')
+    );
+  });
+
+  it('should perform the given action using an explicit timeout', async () => {
+    const action = jest
+      .fn()
+      .mockImplementationOnce(erroneous())
+      .mockImplementation(async () => 'result');
+
+    expect(await perform(action, explicitTimeout)).toBe('result');
+
+    expect(action).toHaveBeenCalledTimes(2);
+  });
+
+  it('should perform the given action using an implicit timeout', async () => {
+    const action = jest
+      .fn()
+      .mockImplementationOnce(erroneous())
+      .mockImplementation(async () => 'result');
+
+    expect(await perform(action)).toBe('result');
+
+    expect(action).toHaveBeenCalledTimes(2);
+  });
+
+  it('should fail to perform the given action using an explicit timeout', async () => {
+    const action = jest
+      .fn()
+      .mockImplementationOnce(erroneous(1))
+      .mockImplementationOnce(erroneous(2))
+      .mockImplementation(neverending);
+
+    await expect(
+      observeTimeout(
+        async () => perform(action, explicitTimeout),
+        explicitTimeout
+      )
+    ).rejects.toEqual(new Error('Action error 2'));
+
+    expect(action).toHaveBeenCalledTimes(3);
+  });
+
+  it('should fail to perform the given action using an implicit timeout', async () => {
+    const action = jest
+      .fn()
+      .mockImplementationOnce(erroneous(1))
+      .mockImplementationOnce(erroneous(2))
+      .mockImplementation(neverending);
+
+    await expect(
+      observeTimeout(async () => perform(action), implicitTimeout)
+    ).rejects.toEqual(new Error('Action error 2'));
+
+    expect(action).toHaveBeenCalledTimes(3);
+  });
+
+  it('should not throw an out-of-memory error', async () => {
+    const action = jest.fn().mockImplementation(erroneous());
+
+    await expect(perform(action)).rejects.toEqual(new Error('Action error'));
   });
 });
