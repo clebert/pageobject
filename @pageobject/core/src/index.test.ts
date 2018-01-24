@@ -72,11 +72,11 @@ describe('Root', () => {
     });
 
     it('should get the element of root1', async () => {
-      expect(await root1.getName()).toBe('root1');
+      await expect(root1.getName()).resolves.toBe('root1');
     });
 
     it('should get the element of root2', async () => {
-      expect(await root2.getName()).toBe('root2');
+      await expect(root2.getName()).resolves.toBe('root2');
     });
 
     it('should fail to get the element of root3', async () => {
@@ -88,19 +88,19 @@ describe('Root', () => {
 
   describe('getSize()', () => {
     it('should get the size of root', async () => {
-      expect(await root.getSize()).toBe(6);
+      await expect(root.getSize()).resolves.toBe(6);
     });
 
     it('should get the size of root1', async () => {
-      expect(await root1.getSize()).toBe(1);
+      await expect(root1.getSize()).resolves.toBe(1);
     });
 
     it('should get the size of root2', async () => {
-      expect(await root2.getSize()).toBe(1);
+      await expect(root2.getSize()).resolves.toBe(1);
     });
 
     it('should get the size of root3', async () => {
-      expect(await root3.getSize()).toBe(0);
+      await expect(root3.getSize()).resolves.toBe(0);
     });
   });
 });
@@ -141,11 +141,11 @@ describe('Child', () => {
     });
 
     it('should get the element of child1', async () => {
-      expect(await child1.getName()).toBe('child1');
+      await expect(child1.getName()).resolves.toBe('child1');
     });
 
     it('should get the element of child2', async () => {
-      expect(await child2.getName()).toBe('child2');
+      await expect(child2.getName()).resolves.toBe('child2');
     });
 
     it('should fail to get the element of child3', async () => {
@@ -157,19 +157,19 @@ describe('Child', () => {
 
   describe('getSize()', () => {
     it('should get the size of child', async () => {
-      expect(await child.getSize()).toBe(4);
+      await expect(child.getSize()).resolves.toBe(4);
     });
 
     it('should get the size of child1', async () => {
-      expect(await child1.getSize()).toBe(1);
+      await expect(child1.getSize()).resolves.toBe(1);
     });
 
     it('should get the size of child2', async () => {
-      expect(await child2.getSize()).toBe(1);
+      await expect(child2.getSize()).resolves.toBe(1);
     });
 
     it('should get the size of child3', async () => {
-      expect(await child3.getSize()).toBe(0);
+      await expect(child3.getSize()).resolves.toBe(0);
     });
   });
 });
@@ -188,11 +188,11 @@ describe('Grandchild', () => {
     });
 
     it('should get the element of grandchild1', async () => {
-      expect(await grandchild1.getName()).toBe('grandchild1');
+      await expect(grandchild1.getName()).resolves.toBe('grandchild1');
     });
 
     it('should get the element of grandchild2', async () => {
-      expect(await grandchild2.getName()).toBe('grandchild2');
+      await expect(grandchild2.getName()).resolves.toBe('grandchild2');
     });
 
     it('should fail to get the element of grandchild3', async () => {
@@ -204,19 +204,19 @@ describe('Grandchild', () => {
 
   describe('getSize()', () => {
     it('should get the size of grandchild', async () => {
-      expect(await grandchild.getSize()).toBe(2);
+      await expect(grandchild.getSize()).resolves.toBe(2);
     });
 
     it('should get the size of grandchild1', async () => {
-      expect(await grandchild1.getSize()).toBe(1);
+      await expect(grandchild1.getSize()).resolves.toBe(1);
     });
 
     it('should get the size of grandchild2', async () => {
-      expect(await grandchild2.getSize()).toBe(1);
+      await expect(grandchild2.getSize()).resolves.toBe(1);
     });
 
     it('should get the size of grandchild3', async () => {
-      expect(await grandchild3.getSize()).toBe(0);
+      await expect(grandchild3.getSize()).resolves.toBe(0);
     });
   });
 });
@@ -270,15 +270,15 @@ async function observeTimeout<T>(
   }
 }
 
+const erroneous = (n?: number) => async () => {
+  throw new Error(n !== undefined ? `Action error ${n}` : 'Action error');
+};
+
+const neverending = async () => new Promise<void>(() => undefined);
+
 describe('perform()', () => {
   const explicitTimeout = 10;
   const implicitTimeout = 20;
-
-  const erroneous = (n?: number) => async () => {
-    throw new Error(n !== undefined ? `Action error ${n}` : 'Action error');
-  };
-
-  const neverending = async () => new Promise<void>(() => undefined);
 
   beforeEach(() => {
     process.env.IMPLICIT_TIMEOUT = String(implicitTimeout);
@@ -314,7 +314,7 @@ describe('perform()', () => {
       .mockImplementationOnce(erroneous())
       .mockImplementation(async () => 'result');
 
-    expect(await perform(action, explicitTimeout)).toBe('result');
+    await expect(perform(action, explicitTimeout)).resolves.toBe('result');
 
     expect(action).toHaveBeenCalledTimes(2);
   });
@@ -325,7 +325,7 @@ describe('perform()', () => {
       .mockImplementationOnce(erroneous())
       .mockImplementation(async () => 'result');
 
-    expect(await perform(action)).toBe('result');
+    await expect(perform(action)).resolves.toBe('result');
 
     expect(action).toHaveBeenCalledTimes(2);
   });

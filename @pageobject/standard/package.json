@@ -1,0 +1,37 @@
+{
+  "name": "@pageobject/standard",
+  "version": "0.16.0",
+  "description": "TODO.",
+  "license": "MIT",
+  "author": "Clemens Akens <clebert@me.com>",
+  "homepage": "https://pageobject.js.org/",
+  "keywords": [
+    "javascript",
+    "node",
+    "web",
+    "test",
+    "testing",
+    "automation",
+    "end-to-end",
+    "e2e",
+    "pageobject"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clebert/pageobject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clebert/pageobject/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "peerDependencies": {
+    "@pageobject/core": "^0.16.0"
+  },
+  "devDependencies": {
+    "@pageobject/core": "^0.16.0"
+  }
+}

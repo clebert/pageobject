@@ -12,6 +12,10 @@ This is a multi-package repository ([monorepo][monorepo]).
 
 TODO.
 
+### [@pageobject/standard][repo-package-standard]
+
+TODO.
+
 ## Development
 
 ### Installing dependencies and bootstrapping packages
@@ -71,5 +75,6 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-typescript-link]: https://www.typescriptlang.org/
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [repo-package-core]: https://github.com/clebert/pageobject/tree/master/@pageobject/core
+[repo-package-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard
 [githooks]: https://git-scm.com/docs/githooks
 [monorepo]: https://github.com/lerna/lerna#about
