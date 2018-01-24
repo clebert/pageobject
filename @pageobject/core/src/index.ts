@@ -115,10 +115,10 @@ export abstract class AbstractPageObject<TElement>
   }
 }
 
-export async function perform<T>(
-  action: () => Promise<T>,
+export async function perform<TResult>(
+  action: () => Promise<TResult>,
   explicitTimeout: number | string | undefined = process.env.IMPLICIT_TIMEOUT
-): Promise<T> {
+): Promise<TResult> {
   if (explicitTimeout === undefined) {
     throw new Error('Please specify an explicit or implicit timeout value');
   }
