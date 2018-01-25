@@ -1,5 +1,5 @@
 {
-  "name": "@pageobject/standard",
+  "name": "@pageobject/engine",
   "version": "0.16.0",
   "description": "TODO.",
   "license": "MIT",
@@ -27,8 +27,5 @@
     "dist"
   ],
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "dependencies": {
-    "@pageobject/core": "^0.16.0"
-  }
+  "typings": "dist/index.d.ts"
 }
