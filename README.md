@@ -20,6 +20,10 @@ TODO.
 
 TODO.
 
+### [@pageobject/standard-selenium][repo-package-standard-selenium]
+
+TODO.
+
 ## Development
 
 ### Installing dependencies and bootstrapping packages
@@ -81,5 +85,6 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [repo-package-core]: https://github.com/clebert/pageobject/tree/master/@pageobject/core
 [repo-package-engine]: https://github.com/clebert/pageobject/tree/master/@pageobject/engine
 [repo-package-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard
+[repo-package-standard-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-selenium
 [githooks]: https://git-scm.com/docs/githooks
 [monorepo]: https://github.com/lerna/lerna#about
