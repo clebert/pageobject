@@ -47,6 +47,9 @@ module.exports = ({localProjectDir, projectCacheDir}) => {
     },
     setup,
     testFramework: 'jest',
-    tests: ['@pageobject/*/src/**/*.test.{ts,tsx}']
+    tests: [
+      '@pageobject/*/src/**/*.test.{ts,tsx}',
+      '!@pageobject/standard-selenium/src/**/*.test.{ts,tsx}'
+    ]
   };
 };

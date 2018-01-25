@@ -1,16 +1,13 @@
-import {StandardElement, StandardPageObject} from '.';
+import {StandardPageObject} from '.';
 
-interface MockElement extends StandardElement {
+interface MockElement {
   readonly click: jest.Mock;
-  readonly focus: jest.Mock;
   readonly type: jest.Mock;
   readonly getAttribute: jest.Mock;
   readonly getHTML: jest.Mock;
   readonly getProperty: jest.Mock;
-  readonly setProperty: jest.Mock;
   readonly getTagName: jest.Mock;
   readonly getText: jest.Mock;
-  readonly getURL: jest.Mock;
   readonly isVisible: jest.Mock;
 }
 
@@ -29,15 +26,12 @@ describe('StandardPageObject', () => {
   beforeEach(() => {
     element = {
       click: jest.fn(),
-      focus: jest.fn(),
       type: jest.fn(),
       getAttribute: jest.fn(),
       getHTML: jest.fn(),
       getProperty: jest.fn(),
-      setProperty: jest.fn(),
       getTagName: jest.fn(),
       getText: jest.fn(),
-      getURL: jest.fn(),
       isVisible: jest.fn()
     };
 
@@ -56,23 +50,6 @@ describe('StandardPageObject', () => {
       element.click.mockImplementation(erroneous());
 
       await expect(pageObject.click()).rejects.toEqual(
-        new Error('Element error')
-      );
-    });
-  });
-
-  describe('focus()', () => {
-    it('should focus the element', async () => {
-      await pageObject.focus();
-
-      expect(element.focus).toHaveBeenCalledTimes(1);
-      expect(element.focus).toHaveBeenLastCalledWith();
-    });
-
-    it('should fail to focus the element', async () => {
-      element.focus.mockImplementation(erroneous());
-
-      await expect(pageObject.focus()).rejects.toEqual(
         new Error('Element error')
       );
     });
@@ -147,23 +124,6 @@ describe('StandardPageObject', () => {
       element.getProperty.mockImplementation(erroneous());
 
       await expect(pageObject.getProperty('name')).rejects.toEqual(
-        new Error('Element error')
-      );
-    });
-  });
-
-  describe('setProperty()', () => {
-    it('should set a property of the element', async () => {
-      await pageObject.setProperty('name', 'value');
-
-      expect(element.setProperty).toHaveBeenCalledTimes(1);
-      expect(element.setProperty).toHaveBeenLastCalledWith('name', 'value');
-    });
-
-    it('should fail to set a property of the element', async () => {
-      element.setProperty.mockImplementation(erroneous());
-
-      await expect(pageObject.setProperty('name', 'value')).rejects.toEqual(
         new Error('Element error')
       );
     });

@@ -1,3 +1,6 @@
+/**
+ * `import {execute} from '@pageobject/engine';`
+ */
 export async function execute<TResult>(
   command: () => Promise<TResult>,
   explicitTimeout: number | string | undefined = process.env.IMPLICIT_TIMEOUT

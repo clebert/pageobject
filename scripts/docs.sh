@@ -8,4 +8,6 @@ set -e
 rm -rf docs/api/
 
 "$(npm bin)"/typedoc --out docs/api/core ./@pageobject/core
+"$(npm bin)"/typedoc --out docs/api/engine ./@pageobject/engine
 "$(npm bin)"/typedoc --out docs/api/standard ./@pageobject/standard
+"$(npm bin)"/typedoc --out docs/api/standard-selenium ./@pageobject/standard-selenium

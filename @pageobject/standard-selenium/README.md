@@ -8,6 +8,16 @@ TODO.
 npm install @pageobject/standard-selenium
 ```
 
+```sh
+# Peer dependencies
+npm install @pageobject/standard selenium-webdriver
+```
+
+```sh
+# TypeScript types
+npm install @types/selenium-webdriver
+```
+
 ## API
 
 Please find the API documentation [here][repo-api-standard-selenium].

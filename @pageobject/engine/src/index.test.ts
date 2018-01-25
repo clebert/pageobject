@@ -67,7 +67,7 @@ describe('execute()', () => {
     process.env.IMPLICIT_TIMEOUT = undefined;
   });
 
-  it('should throw a missing timeout-value error', async () => {
+  it('should throw a missing-timeout-value error', async () => {
     process.env.IMPLICIT_TIMEOUT = undefined;
 
     await expect(execute(jest.fn())).rejects.toEqual(
@@ -75,7 +75,7 @@ describe('execute()', () => {
     );
   });
 
-  it('should throw an invalid timeout-value error', async () => {
+  it('should throw an invalid-timeout-value error', async () => {
     await expect(execute(jest.fn(), NaN)).rejects.toEqual(
       new Error('Invalid timeout value')
     );
