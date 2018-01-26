@@ -48,7 +48,8 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/@pageobject/*/src/**/*.{ts,tsx}",
-      "!**/@pageobject/*/src/**/*.test.{ts,tsx}"
+      "!**/@pageobject/*/src/**/*.test.{ts,tsx}",
+      "!**/@pageobject/standard-test/src/index.ts"
     ],
     "coverageThreshold": {
       "global": {
