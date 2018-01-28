@@ -28,7 +28,10 @@
   ],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "dependencies": {
+  "peerDependencies": {
+    "@pageobject/core": "^0.16.0"
+  },
+  "devDependencies": {
     "@pageobject/core": "^0.16.0"
   }
 }

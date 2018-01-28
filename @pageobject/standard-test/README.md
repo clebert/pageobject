@@ -10,7 +10,7 @@ npm install @pageobject/standard-test
 
 ```sh
 # Peer dependencies
-npm install @pageobject/standard
+npm install @pageobject/core @pageobject/standard
 ```
 
 ## API

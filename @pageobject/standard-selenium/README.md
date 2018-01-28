@@ -10,7 +10,7 @@ npm install @pageobject/standard-selenium
 
 ```sh
 # Peer dependencies
-npm install @pageobject/standard selenium-webdriver
+npm install @pageobject/core @pageobject/standard selenium-webdriver
 ```
 
 ```sh

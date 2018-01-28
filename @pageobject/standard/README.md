@@ -8,6 +8,11 @@ TODO.
 npm install @pageobject/standard
 ```
 
+```sh
+# Peer dependencies
+npm install @pageobject/core
+```
+
 ## API
 
 Please find the API documentation [here][repo-api-standard].
