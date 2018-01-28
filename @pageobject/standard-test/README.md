@@ -1,16 +1,16 @@
-# @pageobject/standard-test [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
+# @pageobject/standard-test [![Package Version][badge-npm-image]][badge-yarn-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
 TODO.
 
 ## Installation
 
 ```sh
-npm install @pageobject/standard-test
+yarn install @pageobject/standard-test
 ```
 
 ```sh
 # Peer dependencies
-npm install @pageobject/core @pageobject/standard
+yarn install @pageobject/core @pageobject/standard
 ```
 
 ## API
@@ -24,7 +24,7 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-coveralls-image]: https://coveralls.io/repos/github/clebert/pageobject/badge.svg?branch=master
 [badge-coveralls-link]: https://coveralls.io/github/clebert/pageobject?branch=master
 [badge-npm-image]: https://img.shields.io/npm/v/@pageobject/standard-test.svg
-[badge-npm-link]: https://www.npmjs.com/package/@pageobject/standard-test
+[badge-yarn-link]: https://yarnpkg.com/en/package/@pageobject/standard-test
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 [repo-api-standard-test]: https://pageobject.js.org/api/standard-test/

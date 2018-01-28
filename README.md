@@ -37,25 +37,25 @@ TODO.
 ### Installing dependencies and bootstrapping packages
 
 ```sh
-npm install
+yarn install
 ```
 
 ### Upgrading dependencies
 
 ```sh
-npm run upgrade
+yarn run upgrade
 ```
 
 ### Compiling sources and running tests continuously
 
 ```sh
-npm run watch
+yarn run watch
 ```
 
 ### Running CI tests
 
 ```sh
-npm test
+yarn test
 ```
 
 ### Formatting sources
@@ -64,19 +64,19 @@ By default, a [Git Hook][githooks] is installed to automatically format all file
 Manually, it can be executed with the following command:
 
 ```sh
-npm run format
+yarn run format
 ```
 
 ### Committing a change
 
 ```sh
-npm run commit
+yarn run commit
 ```
 
 ### Releasing a new version
 
 ```sh
-npm run release
+yarn run release
 ```
 
 ---
