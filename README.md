@@ -16,6 +16,10 @@ TODO.
 
 TODO.
 
+### [@pageobject/predicates][repo-package-predicates]
+
+TODO.
+
 ### [@pageobject/standard][repo-package-standard]
 
 TODO.
@@ -88,6 +92,7 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [repo-package-core]: https://github.com/clebert/pageobject/tree/master/@pageobject/core
 [repo-package-engine]: https://github.com/clebert/pageobject/tree/master/@pageobject/engine
+[repo-package-predicates]: https://github.com/clebert/pageobject/tree/master/@pageobject/predicates
 [repo-package-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard
 [repo-package-standard-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-selenium
 [repo-package-standard-test]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-test

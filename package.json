@@ -10,11 +10,11 @@
     "postcompile": "./scripts/docs.sh",
     "format": "prettier --single-quote --no-bracket-spacing --write '**/*.{js,json,jsx,md,ts,tsx}'",
     "format:test": "prettier --single-quote --no-bracket-spacing --list-different '**/*.{js,json,jsx,md,ts,tsx}'",
-    "postinstall": "lerna bootstrap",
+    "postinstall": "lerna bootstrap --reject-cycles",
     "lint": "node scripts/markdownlint.js && lerna exec -- ../../scripts/lerna/tslint.sh",
     "release": "./scripts/release.sh",
     "pretest": "npm run compile",
-    "test": "npm run format:test && npm run lint && jest --no-cache",
+    "test": "npm run format:test && npm run lint && jest --no-cache --verbose",
     "upgrade": "ncu -ua && lerna exec -- ncu -ua",
     "watch": "run-p watch:compile \"watch:test -- {@}\" --",
     "watch:compile": "lerna exec --parallel --concurrency 99 -- tsc --project . --watch",
@@ -73,7 +73,7 @@
     "transform": {
       ".ts": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "verbose": true,
+    "verbose": false,
     "silent": false,
     "bail": false
   }

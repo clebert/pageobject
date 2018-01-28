@@ -1,3 +1,4 @@
+import {indexIsEqualTo} from '@pageobject/predicates';
 import {
   StandardElement,
   StandardFinder,
@@ -52,15 +53,8 @@ export function describeTests(createFinder: () => StandardFinder): void {
     beforeAll(() => {
       finder = createFinder();
       root = new Root(finder);
-
-      visibleContainer = root
-        .select(Container)
-        .where(async (_, index) => index === 0);
-
-      hiddenContainer = root
-        .select(Container)
-        .where(async (_, index) => index === 1);
-
+      visibleContainer = root.select(Container).where(indexIsEqualTo(0));
+      hiddenContainer = root.select(Container).where(indexIsEqualTo(1));
       radioInput = root.select(RadioInput);
       textInput = root.select(TextInput);
     });

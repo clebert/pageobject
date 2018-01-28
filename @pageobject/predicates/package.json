@@ -1,5 +1,5 @@
 {
-  "name": "@pageobject/standard-test",
+  "name": "@pageobject/predicates",
   "version": "0.16.0",
   "description": "TODO.",
   "license": "MIT",
@@ -24,18 +24,14 @@
     "url": "https://github.com/clebert/pageobject/issues"
   },
   "files": [
-    "dist",
-    "fixtures"
+    "dist"
   ],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "peerDependencies": {
-    "@pageobject/core": "^0.16.0",
-    "@pageobject/standard": "^0.16.0"
+    "@pageobject/core": "^0.16.0"
   },
   "devDependencies": {
-    "@pageobject/core": "^0.16.0",
-    "@pageobject/predicates": "^0.16.0",
-    "@pageobject/standard": "^0.16.0"
+    "@pageobject/core": "^0.16.0"
   }
 }
