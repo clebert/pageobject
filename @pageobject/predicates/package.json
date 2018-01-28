@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/predicates",
-  "version": "0.16.0",
+  "version": "1.0.0",
   "description": "TODO.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -29,9 +29,9 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "peerDependencies": {
-    "@pageobject/core": "^0.16.0"
+    "@pageobject/core": "^1.0.0"
   },
   "devDependencies": {
-    "@pageobject/core": "^0.16.0"
+    "@pageobject/core": "^1.0.0"
   }
 }
