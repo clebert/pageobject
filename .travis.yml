@@ -1,24 +1,22 @@
-dist: trusty
 addons:
   apt:
     packages:
-    - google-chrome-stable
-language: node_js
-cache:
-  directories:
-  - node_modules
-node_js:
-- '8'
-before_install:
-- 'npm prune'
-before_script:
-- '([ -f "$(git rev-parse --git-dir)"/shallow ] && git fetch --unshallow) || true'
-- '"$(npm bin)"/commitlint --from="$TRAVIS_BRANCH" --to="$TRAVIS_COMMIT"'
-- '"$(npm bin)"/commitlint --from="$TRAVIS_COMMIT"'
-script:
-- 'npm test'
+      - google-chrome-stable
 after_success:
-- '< coverage/lcov.info "$(npm bin)"/coveralls'
+  - < coverage/lcov.info "$(yarn bin)"/coveralls
+before_script:
+  - >-
+    ([ -f "$(git rev-parse --git-dir)"/shallow ] && git fetch --unshallow) ||
+    true
+  - '"$(yarn bin)"/commitlint --from="$TRAVIS_BRANCH" --to="$TRAVIS_COMMIT"'
+  - '"$(yarn bin)"/commitlint --from="$TRAVIS_COMMIT"'
+cache: yarn
+dist: trusty
 env:
-- DBUS_SESSION_BUS_ADDRESS=/dev/null
+  - DBUS_SESSION_BUS_ADDRESS=/dev/null
+language: node_js
+node_js:
+  - '8'
+script:
+  - yarn test
 sudo: required

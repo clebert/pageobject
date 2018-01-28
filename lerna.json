@@ -5,8 +5,10 @@
       "hoist": true
     }
   },
+  "npmClient": "yarn",
   "packages": [
     "@pageobject/*"
   ],
+  "useWorkspaces": true,
   "version": "0.16.1"
 }

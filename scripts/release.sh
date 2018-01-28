@@ -5,13 +5,13 @@ set -e
 # IMPORTANT: If you edit this file, please validate it using ShellCheck:
 # http://www.shellcheck.net/
 
-npm run clean
-npm install
-npm test
+yarn run clean
+yarn install
+yarn test
 
-PREVIOUS_RELEASE=$("$(npm bin)"/git-latest-semver-tag)
+PREVIOUS_RELEASE=$("$(yarn bin)"/git-latest-semver-tag)
 
 lerna publish --skip-npm
-lerna exec --ignore @pageobject/examples --since="${PREVIOUS_RELEASE}" -- npm publish --access=public
+lerna exec --ignore @pageobject/examples --since="${PREVIOUS_RELEASE}" -- yarn publish --access=public
 
 git push --follow-tags origin master
