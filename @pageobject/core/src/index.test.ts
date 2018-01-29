@@ -83,9 +83,7 @@ describe('Root', () => {
 
   describe('getElement()', () => {
     it('should fail to get the element of root', async () => {
-      await expect(root.getName()).rejects.toEqual(
-        new Error('Element not unique (Root)')
-      );
+      await expect(root.getName()).rejects.toThrow('Element not unique (Root)');
     });
 
     it('should get the element of root1', async () => {
@@ -97,9 +95,7 @@ describe('Root', () => {
     });
 
     it('should fail to get the element of root3', async () => {
-      await expect(root3.getName()).rejects.toEqual(
-        new Error('Element not found (Root)')
-      );
+      await expect(root3.getName()).rejects.toThrow('Element not found (Root)');
     });
   });
 
@@ -152,8 +148,8 @@ describe('Child', () => {
 
   describe('getElement()', () => {
     it('should fail to get the element of child', async () => {
-      await expect(child.getName()).rejects.toEqual(
-        new Error('Element not unique (Child)')
+      await expect(child.getName()).rejects.toThrow(
+        'Element not unique (Child)'
       );
     });
 
@@ -166,8 +162,8 @@ describe('Child', () => {
     });
 
     it('should fail to get the element of child3', async () => {
-      await expect(child3.getName()).rejects.toEqual(
-        new Error('Element not found (Child)')
+      await expect(child3.getName()).rejects.toThrow(
+        'Element not found (Child)'
       );
     });
   });
@@ -199,8 +195,8 @@ const grandchild3 = grandchild.where(nameEquals('grandchild3', 2));
 describe('Grandchild', () => {
   describe('getElement()', () => {
     it('should fail to get the element of grandchild', async () => {
-      await expect(grandchild.getName()).rejects.toEqual(
-        new Error('Element not unique (Grandchild)')
+      await expect(grandchild.getName()).rejects.toThrow(
+        'Element not unique (Grandchild)'
       );
     });
 
@@ -213,8 +209,8 @@ describe('Grandchild', () => {
     });
 
     it('should fail to get the element of grandchild3', async () => {
-      await expect(grandchild3.getName()).rejects.toEqual(
-        new Error('Element not found (Grandchild)')
+      await expect(grandchild3.getName()).rejects.toThrow(
+        'Element not found (Grandchild)'
       );
     });
   });

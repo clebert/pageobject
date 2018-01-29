@@ -62,7 +62,7 @@ export function describeTests(createFinder: () => StandardFinder): void {
     it('should throw an incompatible-parent-element error', async () => {
       await expect(
         finder('selector', new IncompatibleElement())
-      ).rejects.toEqual(new Error('Incompatible parent element'));
+      ).rejects.toThrow('Incompatible parent element');
     });
 
     it('should find an element that implements the standard API', async () => {
@@ -77,6 +77,12 @@ export function describeTests(createFinder: () => StandardFinder): void {
           'arg2'
         )
       ).resolves.toEqual(['HTML', 'arg1', 'arg2']);
+
+      await expect(
+        root.perform(() => {
+          throw new Error('Element error');
+        })
+      ).rejects.toThrow(/Element error/);
 
       await expect(
         radioInput.perform((_element: HTMLInputElement) => _element.checked)
