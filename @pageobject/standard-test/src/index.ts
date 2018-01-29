@@ -68,10 +68,10 @@ export function describeTests(createFinder: () => StandardFinder): void {
     it('should find an element that implements the standard API', async () => {
       await expect(
         root.perform(
-          (element: HTMLElement, arg1: string, arg2: string) => [
-            element.tagName,
-            arg1,
-            arg2
+          (_element: HTMLElement, _arg1: string, _arg2: string) => [
+            _element.tagName,
+            _arg1,
+            _arg2
           ],
           'arg1',
           'arg2'
