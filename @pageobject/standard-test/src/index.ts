@@ -1,4 +1,4 @@
-import {indexIsEqualTo} from '@pageobject/predicates';
+import {indexEquals} from '@pageobject/core';
 import {
   StandardElement,
   StandardFinder,
@@ -53,8 +53,8 @@ export function describeTests(createFinder: () => StandardFinder): void {
     beforeAll(() => {
       finder = createFinder();
       root = new Root(finder);
-      visibleContainer = root.select(Container).where(indexIsEqualTo(0));
-      hiddenContainer = root.select(Container).where(indexIsEqualTo(1));
+      visibleContainer = root.select(Container).where(indexEquals(0));
+      hiddenContainer = root.select(Container).where(indexEquals(1));
       radioInput = root.select(RadioInput);
       textInput = root.select(TextInput);
     });
@@ -68,8 +68,8 @@ export function describeTests(createFinder: () => StandardFinder): void {
     it('should find an element that implements the standard API', async () => {
       await expect(
         root.perform(
-          (self: HTMLElement, arg1: string, arg2: string) => [
-            self.tagName,
+          (element: HTMLElement, arg1: string, arg2: string) => [
+            element.tagName,
             arg1,
             arg2
           ],
@@ -79,23 +79,23 @@ export function describeTests(createFinder: () => StandardFinder): void {
       ).resolves.toEqual(['HTML', 'arg1', 'arg2']);
 
       await expect(
-        radioInput.perform((self: HTMLInputElement) => self.checked)
+        radioInput.perform((_element: HTMLInputElement) => _element.checked)
       ).resolves.toBe(false);
 
       await radioInput.click();
 
       await expect(
-        radioInput.perform((self: HTMLInputElement) => self.checked)
+        radioInput.perform((_element: HTMLInputElement) => _element.checked)
       ).resolves.toBe(true);
 
       await expect(
-        textInput.perform((self: HTMLInputElement) => self.value)
+        textInput.perform((_element: HTMLInputElement) => _element.value)
       ).resolves.toBe('');
 
       await textInput.type('Text');
 
       await expect(
-        textInput.perform((self: HTMLInputElement) => self.value)
+        textInput.perform((_element: HTMLInputElement) => _element.value)
       ).resolves.toBe('Text');
 
       await expect(visibleContainer.isVisible()).resolves.toBe(true);

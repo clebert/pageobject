@@ -29,7 +29,7 @@ export interface PageObject<TElement> {
 }
 
 /**
- * `import {AbstractPageObject} from '@pageobject/class';`
+ * `import {AbstractPageObject} from '@pageobject/core';`
  *
  * @abstract
  */
@@ -58,6 +58,10 @@ export abstract class AbstractPageObject<TElement>
   }
 
   public where(condition: Predicate<TElement, this>): this {
+    if (this._condition) {
+      throw new Error('A where-condition is already defined');
+    }
+
     const self = this.constructor as PageObjectConstructor<TElement, this>;
     const pageObject = new self(this._finder, this._parent);
 
@@ -113,4 +117,89 @@ export abstract class AbstractPageObject<TElement>
 
     return elements.filter((element, index) => results[index]);
   }
+}
+
+/**
+ * `import {and} from '@pageobject/core';`
+ */
+export function and<TElement, TPageObject extends PageObject<TElement>>(
+  a: Predicate<TElement, TPageObject>,
+  b: Predicate<TElement, TPageObject>
+): Predicate<TElement, TPageObject> {
+  return async (pageObject, index, pageObjects) =>
+    (await a(pageObject, index, pageObjects)) &&
+    /* tslint:disable-next-line no-return-await */
+    (await b(pageObject, index, pageObjects));
+}
+
+/**
+ * `import {or} from '@pageobject/core';`
+ */
+export function or<TElement, TPageObject extends PageObject<TElement>>(
+  a: Predicate<TElement, TPageObject>,
+  b: Predicate<TElement, TPageObject>
+): Predicate<TElement, TPageObject> {
+  return async (pageObject, index, pageObjects) =>
+    (await a(pageObject, index, pageObjects)) ||
+    /* tslint:disable-next-line no-return-await */
+    (await b(pageObject, index, pageObjects));
+}
+
+/**
+ * `import {not} from '@pageobject/core';`
+ */
+export function not<TElement, TPageObject extends PageObject<TElement>>(
+  predicate: Predicate<TElement, TPageObject>
+): Predicate<TElement, TPageObject> {
+  return async (pageObject, index, pageObjects) =>
+    !await predicate(pageObject, index, pageObjects);
+}
+
+/**
+ * `import {indexEquals} from '@pageobject/core';`
+ */
+export function indexEquals<TElement, TPageObject extends PageObject<TElement>>(
+  n: number
+): Predicate<TElement, TPageObject> {
+  return async (pageObject, index) => index === n;
+}
+
+/**
+ * `import {indexIsGreaterThan} from '@pageobject/core';`
+ */
+export function indexIsGreaterThan<
+  TElement,
+  TPageObject extends PageObject<TElement>
+>(n: number): Predicate<TElement, TPageObject> {
+  return async (pageObject, index) => index > n;
+}
+
+/**
+ * `import {indexIsGreaterThanOrEquals} from '@pageobject/core';`
+ */
+export function indexIsGreaterThanOrEquals<
+  TElement,
+  TPageObject extends PageObject<TElement>
+>(n: number): Predicate<TElement, TPageObject> {
+  return async (pageObject, index) => index >= n;
+}
+
+/**
+ * `import {indexIsLessThan} from '@pageobject/core';`
+ */
+export function indexIsLessThan<
+  TElement,
+  TPageObject extends PageObject<TElement>
+>(n: number): Predicate<TElement, TPageObject> {
+  return async (pageObject, index) => index < n;
+}
+
+/**
+ * `import {indexIsLessThanOrEquals} from '@pageobject/core';`
+ */
+export function indexIsLessThanOrEquals<
+  TElement,
+  TPageObject extends PageObject<TElement>
+>(n: number): Predicate<TElement, TPageObject> {
+  return async (pageObject, index) => index <= n;
 }

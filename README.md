@@ -14,10 +14,6 @@ This package is the basis for the PageObjectJS standard API.
 
 This package makes it possible to execute arbitrary commands reliably.
 
-### [@pageobject/predicates][repo-readme-predicates]
-
-This package provides a collection of basic predicate functions.
-
 ### [@pageobject/standard][repo-readme-standard]
 
 This package defines a standard API which can be implemented for any browser automation framework.
@@ -90,7 +86,6 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [repo-readme-core]: https://github.com/clebert/pageobject/tree/master/@pageobject/core
 [repo-readme-engine]: https://github.com/clebert/pageobject/tree/master/@pageobject/engine
-[repo-readme-predicates]: https://github.com/clebert/pageobject/tree/master/@pageobject/predicates
 [repo-readme-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard
 [repo-readme-standard-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-selenium
 [repo-readme-standard-test]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-test
