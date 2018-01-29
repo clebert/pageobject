@@ -81,7 +81,7 @@ export abstract class StandardPageObject extends AbstractPageObject<
     return this.perform((_element, _name: keyof Element) => {
       const value = _element[_name];
 
-      return typeof value === 'string' ? value : null;
+      return typeof value === 'string' ? value.trim() : null;
     }, name);
   }
 }

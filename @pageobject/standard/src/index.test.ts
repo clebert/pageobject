@@ -142,11 +142,9 @@ describe('StandardPageObject', () => {
 
   describe('getBooleanProperty()', () => {
     it('should get a boolean property of the element', async () => {
-      element.perform.mockImplementation(async () => 'value');
+      element.perform.mockImplementation(async () => false);
 
-      await expect(pageObject.getBooleanProperty('name')).resolves.toBe(
-        'value'
-      );
+      await expect(pageObject.getBooleanProperty('name')).resolves.toBe(false);
 
       expect(element.perform).toHaveBeenCalledTimes(1);
 
@@ -162,7 +160,7 @@ describe('StandardPageObject', () => {
       expect(action({name: 0}, 'name')).toBe(null);
       expect(action({name: 1}, 'name')).toBe(null);
       expect(action({name: ''}, 'name')).toBe(null);
-      expect(action({name: 'value'}, 'name')).toBe(null);
+      expect(action({name: ' value '}, 'name')).toBe(null);
       expect(action({name: undefined}, 'name')).toBe(null);
       expect(action({name: {}}, 'name')).toBe(null);
     });
@@ -178,9 +176,9 @@ describe('StandardPageObject', () => {
 
   describe('getNumberProperty()', () => {
     it('should get a number property of the element', async () => {
-      element.perform.mockImplementation(async () => 'value');
+      element.perform.mockImplementation(async () => 0);
 
-      await expect(pageObject.getNumberProperty('name')).resolves.toBe('value');
+      await expect(pageObject.getNumberProperty('name')).resolves.toBe(0);
 
       expect(element.perform).toHaveBeenCalledTimes(1);
 
@@ -196,7 +194,7 @@ describe('StandardPageObject', () => {
       expect(action({name: 0}, 'name')).toBe(0);
       expect(action({name: 1}, 'name')).toBe(1);
       expect(action({name: ''}, 'name')).toBe(null);
-      expect(action({name: 'value'}, 'name')).toBe(null);
+      expect(action({name: ' value '}, 'name')).toBe(null);
       expect(action({name: undefined}, 'name')).toBe(null);
       expect(action({name: {}}, 'name')).toBe(null);
     });
@@ -230,7 +228,7 @@ describe('StandardPageObject', () => {
       expect(action({name: 0}, 'name')).toBe(null);
       expect(action({name: 1}, 'name')).toBe(null);
       expect(action({name: ''}, 'name')).toBe('');
-      expect(action({name: 'value'}, 'name')).toBe('value');
+      expect(action({name: ' value '}, 'name')).toBe('value');
       expect(action({name: undefined}, 'name')).toBe(null);
       expect(action({name: {}}, 'name')).toBe(null);
     });
