@@ -3,7 +3,7 @@
 import {AbstractPageObject, Finder} from '@pageobject/core';
 
 export type StandardElementAction<TElement extends Element, TResult> = (
-  self: TElement,
+  element: TElement,
   ...args: any[]
 ) => TResult;
 
