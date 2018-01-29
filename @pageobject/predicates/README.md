@@ -1,6 +1,6 @@
 # @pageobject/predicates [![Package Version][badge-npm-image]][badge-yarn-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-TODO.
+This package provides a collection of basic predicate functions.
 
 ## Installation
 

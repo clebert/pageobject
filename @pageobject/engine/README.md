@@ -1,6 +1,6 @@
 # @pageobject/engine [![Package Version][badge-npm-image]][badge-yarn-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-TODO.
+This package makes it possible to execute arbitrary commands reliably.
 
 ## Installation
 

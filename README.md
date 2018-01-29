@@ -1,8 +1,6 @@
 # PageObjectJS [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link] [![TypeScript][badge-typescript-image]][badge-typescript-link]
 
-**⚠️ Currently the API is under active development and therefore very unstable.**
-
-The documentation follows as soon as the API can be kept stable.
+Readable. Stable. Maintainable. E2E testing using any browser automation framework.
 
 ## Packages
 
@@ -10,27 +8,27 @@ This is a multi-package repository ([monorepo][monorepo]).
 
 ### [@pageobject/core][repo-package-core]
 
-TODO.
+This package is the basis for the PageObjectJS standard API.
 
 ### [@pageobject/engine][repo-package-engine]
 
-TODO.
+This package makes it possible to execute arbitrary commands reliably.
 
 ### [@pageobject/predicates][repo-package-predicates]
 
-TODO.
+This package provides a collection of basic predicate functions.
 
 ### [@pageobject/standard][repo-package-standard]
 
-TODO.
+This package defines a standard API which can be implemented for any browser automation framework.
 
 ### [@pageobject/standard-selenium][repo-package-standard-selenium]
 
-TODO.
+This package implements the PageObjectJS standard API for Selenium.
 
 ### [@pageobject/standard-test][repo-package-standard-test]
 
-TODO.
+This package allows you to test the compatibility of your implementation of the PageObjectJS standard API.
 
 ## Development
 
