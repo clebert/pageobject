@@ -1,7 +1,7 @@
 {
   "name": "@pageobject/predicates",
-  "version": "0.16.1",
-  "description": "A collection of useful predicate functions.",
+  "version": "1.0.0",
+  "description": "This package provides a collection of basic predicate functions.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
   "homepage": "https://pageobject.js.org/",
@@ -29,9 +29,9 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "peerDependencies": {
-    "@pageobject/class": "^0.16.0"
+    "@pageobject/core": "^1.0.0"
   },
   "devDependencies": {
-    "@pageobject/class": "^0.16.0"
+    "@pageobject/core": "^1.0.0"
   }
 }

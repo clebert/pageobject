@@ -1,16 +1,16 @@
-# @pageobject/predicates [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
+# @pageobject/predicates [![Package Version][badge-npm-image]][badge-yarn-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-A collection of useful predicate functions.
+This package provides a collection of basic predicate functions.
 
 ## Installation
 
 ```sh
-npm install @pageobject/predicates
+yarn install @pageobject/predicates
 ```
 
 ```sh
 # Peer dependencies
-npm install @pageobject/class
+yarn install @pageobject/core
 ```
 
 ## API
@@ -24,7 +24,7 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-coveralls-image]: https://coveralls.io/repos/github/clebert/pageobject/badge.svg?branch=master
 [badge-coveralls-link]: https://coveralls.io/github/clebert/pageobject?branch=master
 [badge-npm-image]: https://img.shields.io/npm/v/@pageobject/predicates.svg
-[badge-npm-link]: https://www.npmjs.com/package/@pageobject/predicates
+[badge-yarn-link]: https://yarnpkg.com/en/package/@pageobject/predicates
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 [repo-api-predicates]: https://pageobject.js.org/api/predicates/

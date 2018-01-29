@@ -35,10 +35,8 @@ module.exports = ({localProjectDir, projectCacheDir}) => {
     debug: true,
     env: {type: 'node', runner: 'node'},
     files: [
-      '@pageobject/class/src/**/*.{ts,tsx}',
-      '@pageobject/predicates/src/**/*.{ts,tsx}',
-      '!@pageobject/class/src/**/*.test.{ts,tsx}',
-      '!@pageobject/predicates/src/**/*.test.{ts,tsx}'
+      '@pageobject/*/src/**/*.{ts,tsx}',
+      '!@pageobject/*/src/**/*.test.{ts,tsx}'
     ],
     hints: {
       ignoreCoverage: /istanbul ignore/
@@ -50,8 +48,8 @@ module.exports = ({localProjectDir, projectCacheDir}) => {
     setup,
     testFramework: 'jest',
     tests: [
-      '@pageobject/class/src/**/*.test.{ts,tsx}',
-      '@pageobject/predicates/src/**/*.test.{ts,tsx}'
+      '@pageobject/*/src/**/*.test.{ts,tsx}',
+      '!@pageobject/standard-selenium/src/**/*.test.{ts,tsx}'
     ]
   };
 };
