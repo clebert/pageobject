@@ -1,6 +1,6 @@
 # @pageobject/standard-selenium [![Package Version][badge-npm-image]][badge-yarn-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-This package implements the PageObjectJS standard API for Selenium.
+This package implements the [PageObjectJS standard API][repo-readme-standard] for [Selenium][selenium].
 
 ## Installation
 
@@ -34,3 +34,5 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 [repo-api-standard-selenium]: https://pageobject.js.org/api/standard-selenium/
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
+[repo-readme-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard
+[selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html

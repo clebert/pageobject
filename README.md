@@ -6,27 +6,27 @@ Readable. Stable. Maintainable. E2E testing using any browser automation framewo
 
 This is a multi-package repository ([monorepo][monorepo]).
 
-### [@pageobject/core][repo-package-core]
+### [@pageobject/core][repo-readme-core]
 
 This package is the basis for the PageObjectJS standard API.
 
-### [@pageobject/engine][repo-package-engine]
+### [@pageobject/engine][repo-readme-engine]
 
 This package makes it possible to execute arbitrary commands reliably.
 
-### [@pageobject/predicates][repo-package-predicates]
+### [@pageobject/predicates][repo-readme-predicates]
 
 This package provides a collection of basic predicate functions.
 
-### [@pageobject/standard][repo-package-standard]
+### [@pageobject/standard][repo-readme-standard]
 
 This package defines a standard API which can be implemented for any browser automation framework.
 
-### [@pageobject/standard-selenium][repo-package-standard-selenium]
+### [@pageobject/standard-selenium][repo-readme-standard-selenium]
 
-This package implements the PageObjectJS standard API for Selenium.
+This package implements the PageObjectJS standard API for [Selenium][selenium].
 
-### [@pageobject/standard-test][repo-package-standard-test]
+### [@pageobject/standard-test][repo-readme-standard-test]
 
 This package allows you to test the compatibility of your implementation of the PageObjectJS standard API.
 
@@ -88,11 +88,12 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
 [badge-typescript-link]: https://www.typescriptlang.org/
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
-[repo-package-core]: https://github.com/clebert/pageobject/tree/master/@pageobject/core
-[repo-package-engine]: https://github.com/clebert/pageobject/tree/master/@pageobject/engine
-[repo-package-predicates]: https://github.com/clebert/pageobject/tree/master/@pageobject/predicates
-[repo-package-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard
-[repo-package-standard-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-selenium
-[repo-package-standard-test]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-test
+[repo-readme-core]: https://github.com/clebert/pageobject/tree/master/@pageobject/core
+[repo-readme-engine]: https://github.com/clebert/pageobject/tree/master/@pageobject/engine
+[repo-readme-predicates]: https://github.com/clebert/pageobject/tree/master/@pageobject/predicates
+[repo-readme-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard
+[repo-readme-standard-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-selenium
+[repo-readme-standard-test]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-test
 [githooks]: https://git-scm.com/docs/githooks
 [monorepo]: https://github.com/lerna/lerna#about
+[selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
