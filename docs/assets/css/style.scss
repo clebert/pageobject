@@ -2,6 +2,10 @@
 ---
 @import "{{ site.theme }}";
 
-.site-footer {
+.page-header {
+  height: 100vh;
+}
+
+.main-content {
   display: none;
 }
