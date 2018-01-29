@@ -70,21 +70,19 @@ describe('execute()', () => {
   it('should throw a missing-timeout-value error', async () => {
     process.env.IMPLICIT_TIMEOUT = undefined;
 
-    await expect(execute(jest.fn())).rejects.toEqual(
-      new Error('Please specify an explicit or implicit timeout value')
+    await expect(execute(jest.fn())).rejects.toThrow(
+      'Please specify an explicit or implicit timeout value'
     );
   });
 
   it('should throw an invalid-timeout-value error', async () => {
-    await expect(execute(jest.fn(), NaN)).rejects.toEqual(
-      new Error('Invalid timeout value')
+    await expect(execute(jest.fn(), NaN)).rejects.toThrow(
+      'Invalid timeout value'
     );
 
     process.env.IMPLICIT_TIMEOUT = 'NaN';
 
-    await expect(execute(jest.fn())).rejects.toEqual(
-      new Error('Invalid timeout value')
-    );
+    await expect(execute(jest.fn())).rejects.toThrow('Invalid timeout value');
   });
 
   it('should execute the given command using an explicit timeout', async () => {
@@ -121,7 +119,7 @@ describe('execute()', () => {
         async () => execute(command, explicitTimeout),
         explicitTimeout
       )
-    ).rejects.toEqual(new Error('Command error 2'));
+    ).rejects.toThrow('Command error 2');
 
     expect(command).toHaveBeenCalledTimes(3);
   });
@@ -135,7 +133,7 @@ describe('execute()', () => {
 
     await expect(
       observeTimeout(async () => execute(command), implicitTimeout)
-    ).rejects.toEqual(new Error('Command error 2'));
+    ).rejects.toThrow('Command error 2');
 
     expect(command).toHaveBeenCalledTimes(3);
   });
@@ -143,6 +141,6 @@ describe('execute()', () => {
   it('should not throw an out-of-memory error', async () => {
     const command = jest.fn().mockImplementation(erroneous());
 
-    await expect(execute(command)).rejects.toEqual(new Error('Command error'));
+    await expect(execute(command)).rejects.toThrow('Command error');
   });
 });

@@ -41,9 +41,7 @@ describe('StandardPageObject', () => {
     it('should fail to click on the element', async () => {
       element.click.mockImplementation(erroneous());
 
-      await expect(pageObject.click()).rejects.toEqual(
-        new Error('Element error')
-      );
+      await expect(pageObject.click()).rejects.toThrow('Element error');
     });
   });
 
@@ -65,8 +63,8 @@ describe('StandardPageObject', () => {
     it('should fail to perform an action on the element', async () => {
       element.perform.mockImplementation(erroneous());
 
-      await expect(pageObject.perform(jest.fn())).rejects.toEqual(
-        new Error('Element error')
+      await expect(pageObject.perform(jest.fn())).rejects.toThrow(
+        'Element error'
       );
     });
   });
@@ -82,9 +80,7 @@ describe('StandardPageObject', () => {
     it('should fail to type into the element', async () => {
       element.type.mockImplementation(erroneous());
 
-      await expect(pageObject.type('text')).rejects.toEqual(
-        new Error('Element error')
-      );
+      await expect(pageObject.type('text')).rejects.toThrow('Element error');
     });
   });
 
@@ -101,8 +97,149 @@ describe('StandardPageObject', () => {
     it('should fail to get the visibility of the element', async () => {
       element.isVisible.mockImplementation(erroneous());
 
-      await expect(pageObject.isVisible()).rejects.toEqual(
-        new Error('Element error')
+      await expect(pageObject.isVisible()).rejects.toThrow('Element error');
+    });
+  });
+
+  describe('getAttribute()', () => {
+    it('should get an attribute of the element', async () => {
+      element.perform.mockImplementation(async () => 'value');
+
+      await expect(pageObject.getAttribute('name')).resolves.toBe('value');
+
+      expect(element.perform).toHaveBeenCalledTimes(1);
+
+      expect(element.perform).toHaveBeenLastCalledWith(
+        expect.any(Function),
+        'name'
+      );
+
+      const action = element.perform.mock.calls[0][0];
+      const getAttribute = jest.fn().mockReturnValue(' value ');
+
+      expect(action({getAttribute}, 'name')).toBe('value');
+
+      expect(getAttribute).toHaveBeenCalledTimes(1);
+      expect(getAttribute).toHaveBeenLastCalledWith('name');
+
+      expect(
+        action({getAttribute: jest.fn().mockReturnValue('')}, 'name')
+      ).toBe('');
+
+      expect(
+        action({getAttribute: jest.fn().mockReturnValue(null)}, 'name')
+      ).toBe(null);
+    });
+
+    it('should fail to get an attribute of the element', async () => {
+      element.perform.mockImplementation(erroneous());
+
+      await expect(pageObject.getAttribute('name')).rejects.toThrow(
+        'Element error'
+      );
+    });
+  });
+
+  describe('getBooleanProperty()', () => {
+    it('should get a boolean property of the element', async () => {
+      element.perform.mockImplementation(async () => 'value');
+
+      await expect(pageObject.getBooleanProperty('name')).resolves.toBe(
+        'value'
+      );
+
+      expect(element.perform).toHaveBeenCalledTimes(1);
+
+      expect(element.perform).toHaveBeenLastCalledWith(
+        expect.any(Function),
+        'name'
+      );
+
+      const action = element.perform.mock.calls[0][0];
+
+      expect(action({name: false}, 'name')).toBe(false);
+      expect(action({name: true}, 'name')).toBe(true);
+      expect(action({name: 0}, 'name')).toBe(null);
+      expect(action({name: 1}, 'name')).toBe(null);
+      expect(action({name: ''}, 'name')).toBe(null);
+      expect(action({name: 'value'}, 'name')).toBe(null);
+      expect(action({name: undefined}, 'name')).toBe(null);
+      expect(action({name: {}}, 'name')).toBe(null);
+    });
+
+    it('should fail to get a boolean property of the element', async () => {
+      element.perform.mockImplementation(erroneous());
+
+      await expect(pageObject.getBooleanProperty('name')).rejects.toThrow(
+        'Element error'
+      );
+    });
+  });
+
+  describe('getNumberProperty()', () => {
+    it('should get a number property of the element', async () => {
+      element.perform.mockImplementation(async () => 'value');
+
+      await expect(pageObject.getNumberProperty('name')).resolves.toBe('value');
+
+      expect(element.perform).toHaveBeenCalledTimes(1);
+
+      expect(element.perform).toHaveBeenLastCalledWith(
+        expect.any(Function),
+        'name'
+      );
+
+      const action = element.perform.mock.calls[0][0];
+
+      expect(action({name: false}, 'name')).toBe(null);
+      expect(action({name: true}, 'name')).toBe(null);
+      expect(action({name: 0}, 'name')).toBe(0);
+      expect(action({name: 1}, 'name')).toBe(1);
+      expect(action({name: ''}, 'name')).toBe(null);
+      expect(action({name: 'value'}, 'name')).toBe(null);
+      expect(action({name: undefined}, 'name')).toBe(null);
+      expect(action({name: {}}, 'name')).toBe(null);
+    });
+
+    it('should fail to get a number property of the element', async () => {
+      element.perform.mockImplementation(erroneous());
+
+      await expect(pageObject.getNumberProperty('name')).rejects.toThrow(
+        'Element error'
+      );
+    });
+  });
+
+  describe('getStringProperty()', () => {
+    it('should get a string property of the element', async () => {
+      element.perform.mockImplementation(async () => 'value');
+
+      await expect(pageObject.getStringProperty('name')).resolves.toBe('value');
+
+      expect(element.perform).toHaveBeenCalledTimes(1);
+
+      expect(element.perform).toHaveBeenLastCalledWith(
+        expect.any(Function),
+        'name'
+      );
+
+      const action = element.perform.mock.calls[0][0];
+
+      expect(action({name: false}, 'name')).toBe(null);
+      expect(action({name: true}, 'name')).toBe(null);
+      expect(action({name: 0}, 'name')).toBe(null);
+      expect(action({name: 1}, 'name')).toBe(null);
+      expect(action({name: ''}, 'name')).toBe('');
+      expect(action({name: 'value'}, 'name')).toBe('value');
+      expect(action({name: undefined}, 'name')).toBe(null);
+      expect(action({name: {}}, 'name')).toBe(null);
+    });
+
+    it('should fail to get a string property of the element', async () => {
+      element.perform.mockImplementation(erroneous());
+
+      await expect(pageObject.getStringProperty('name')).rejects.toThrow(
+        'Element error'
       );
     });
   });
