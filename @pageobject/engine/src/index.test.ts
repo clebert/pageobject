@@ -50,7 +50,7 @@ async function observeTimeout<T>(
 }
 
 const erroneous = (n?: number) => async () => {
-  throw new Error(n !== undefined ? `Command error ${n}` : 'Command error');
+  throw new Error(n !== undefined ? `commandError${n}` : 'commandError');
 };
 
 const neverending = async () => new Promise<void>(() => undefined);
@@ -85,7 +85,7 @@ describe('execute()', () => {
     await expect(execute(jest.fn())).rejects.toThrow('Invalid timeout value');
   });
 
-  it('should execute the given command using an explicit timeout', async () => {
+  it('should execute the specified command using an explicit timeout', async () => {
     const command = jest
       .fn()
       .mockImplementationOnce(erroneous())
@@ -96,7 +96,7 @@ describe('execute()', () => {
     expect(command).toHaveBeenCalledTimes(2);
   });
 
-  it('should execute the given command using an implicit timeout', async () => {
+  it('should execute the specified command using an implicit timeout', async () => {
     const command = jest
       .fn()
       .mockImplementationOnce(erroneous())
@@ -107,7 +107,7 @@ describe('execute()', () => {
     expect(command).toHaveBeenCalledTimes(2);
   });
 
-  it('should fail to execute the given command using an explicit timeout', async () => {
+  it('should fail to execute the specified command using an explicit timeout', async () => {
     const command = jest
       .fn()
       .mockImplementationOnce(erroneous(1))
@@ -119,12 +119,12 @@ describe('execute()', () => {
         async () => execute(command, explicitTimeout),
         explicitTimeout
       )
-    ).rejects.toThrow('Command error 2');
+    ).rejects.toThrow('commandError2');
 
     expect(command).toHaveBeenCalledTimes(3);
   });
 
-  it('should fail to execute the given command using an implicit timeout', async () => {
+  it('should fail to execute the specified command using an implicit timeout', async () => {
     const command = jest
       .fn()
       .mockImplementationOnce(erroneous(1))
@@ -133,7 +133,7 @@ describe('execute()', () => {
 
     await expect(
       observeTimeout(async () => execute(command), implicitTimeout)
-    ).rejects.toThrow('Command error 2');
+    ).rejects.toThrow('commandError2');
 
     expect(command).toHaveBeenCalledTimes(3);
   });
@@ -141,6 +141,6 @@ describe('execute()', () => {
   it('should not throw an out-of-memory error', async () => {
     const command = jest.fn().mockImplementation(erroneous());
 
-    await expect(execute(command)).rejects.toThrow('Command error');
+    await expect(execute(command)).rejects.toThrow('commandError');
   });
 });

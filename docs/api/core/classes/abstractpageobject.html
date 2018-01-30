@@ -1093,10 +1093,16 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/pageobject.html">PageObject</a>.<a href="../interfaces/pageobject.html#getelement">getElement</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L73">index.ts:73</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L94">index.ts:94</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<p>A promise that will be resolved with the representative of the
+							unique DOM element assigned to this page object or a promise that will be
+							rejected if the DOM element assigned to this page object cannot be
+						found or is not unique.</p>
 					</li>
 				</ul>
 			</section>
@@ -1111,10 +1117,14 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/pageobject.html">PageObject</a>.<a href="../interfaces/pageobject.html#getsize">getSize</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L91">index.ts:91</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L116">index.ts:116</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<p>A promise that will be resolved with the number of DOM elements
+						currently assigned to this page object.</p>
 					</li>
 				</ul>
 			</section>
@@ -1129,9 +1139,15 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/pageobject.html">PageObject</a>.<a href="../interfaces/pageobject.html#select">select</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L54">index.ts:54</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L60">index.ts:60</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>You can use this method to build a tree of page objects.
+								Each page object in the tree should be assignable to a unique DOM element.</p>
+							</div>
+						</div>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
 						<ul class="tsd-type-parameters">
 							<li>
@@ -1145,6 +1161,7 @@ img { max-width: 100%; }
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TPageObject</span></h4>
+						<p>A new page object as a descendant of this page object.</p>
 					</li>
 				</ul>
 			</section>
@@ -1159,9 +1176,21 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/pageobject.html">PageObject</a>.<a href="../interfaces/pageobject.html#where">where</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L60">index.ts:60</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L75">index.ts:75</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>If the position of this page object in a tree of page objects is not
+									sufficient to assign it a unique DOM element, you can use this method to
+								define a further selection criterion.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>throws</dt>
+								<dd><p>An error if this page object already has a selection criterion.</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -1169,6 +1198,7 @@ img { max-width: 100%; }
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						<p>A copy of this page object with an additional selection criterion.</p>
 					</li>
 				</ul>
 			</section>

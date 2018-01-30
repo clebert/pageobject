@@ -51,15 +51,30 @@ export abstract class AbstractPageObject<TElement>
     this._parent = parent;
   }
 
+  /**
+   * You can use this method to build a tree of page objects.
+   * Each page object in the tree should be assignable to a unique DOM element.
+   *
+   * @returns A new page object as a descendant of this page object.
+   */
   public select<TPageObject extends PageObject<TElement>>(
     descendant: PageObjectConstructor<TElement, TPageObject>
   ): TPageObject {
     return new descendant(this._finder, this);
   }
 
+  /**
+   * If the position of this page object in a tree of page objects is not
+   * sufficient to assign it a unique DOM element, you can use this method to
+   * define a further selection criterion.
+   *
+   * @returns A copy of this page object with an additional selection criterion.
+   *
+   * @throws An error if this page object already has a selection criterion.
+   */
   public where(condition: Predicate<TElement, this>): this {
     if (this._condition) {
-      throw new Error('A where-condition is already defined');
+      throw new Error('A selection criterion is already defined');
     }
 
     const self = this.constructor as PageObjectConstructor<TElement, this>;
@@ -70,6 +85,12 @@ export abstract class AbstractPageObject<TElement>
     return pageObject;
   }
 
+  /**
+   * @returns A promise that will be resolved with the representative of the
+   * unique DOM element assigned to this page object or a promise that will be
+   * rejected if the DOM element assigned to this page object cannot be
+   * found or is not unique.
+   */
   public async getElement(): Promise<TElement> {
     if (this._element) {
       return this._element;
@@ -78,16 +99,20 @@ export abstract class AbstractPageObject<TElement>
     const elements = await this._findElements();
 
     if (elements.length === 0) {
-      throw new Error(`Element not found (${this.constructor.name})`);
+      throw new Error(`DOM element not found (${this.constructor.name})`);
     }
 
     if (elements.length > 1) {
-      throw new Error(`Element not unique (${this.constructor.name})`);
+      throw new Error(`DOM element not unique (${this.constructor.name})`);
     }
 
     return elements[0];
   }
 
+  /**
+   * @returns A promise that will be resolved with the number of DOM elements
+   * currently assigned to this page object.
+   */
   public async getSize(): Promise<number> {
     return (await this._findElements()).length;
   }
@@ -159,9 +184,9 @@ export function not<TElement, TPageObject extends PageObject<TElement>>(
  * `import {indexEquals} from '@pageobject/core';`
  */
 export function indexEquals<TElement, TPageObject extends PageObject<TElement>>(
-  n: number
+  value: number
 ): Predicate<TElement, TPageObject> {
-  return async (pageObject, index) => index === n;
+  return async (pageObject, index) => index === value;
 }
 
 /**
@@ -170,8 +195,8 @@ export function indexEquals<TElement, TPageObject extends PageObject<TElement>>(
 export function indexIsGreaterThan<
   TElement,
   TPageObject extends PageObject<TElement>
->(n: number): Predicate<TElement, TPageObject> {
-  return async (pageObject, index) => index > n;
+>(value: number): Predicate<TElement, TPageObject> {
+  return async (pageObject, index) => index > value;
 }
 
 /**
@@ -180,8 +205,8 @@ export function indexIsGreaterThan<
 export function indexIsGreaterThanOrEquals<
   TElement,
   TPageObject extends PageObject<TElement>
->(n: number): Predicate<TElement, TPageObject> {
-  return async (pageObject, index) => index >= n;
+>(value: number): Predicate<TElement, TPageObject> {
+  return async (pageObject, index) => index >= value;
 }
 
 /**
@@ -190,8 +215,8 @@ export function indexIsGreaterThanOrEquals<
 export function indexIsLessThan<
   TElement,
   TPageObject extends PageObject<TElement>
->(n: number): Predicate<TElement, TPageObject> {
-  return async (pageObject, index) => index < n;
+>(value: number): Predicate<TElement, TPageObject> {
+  return async (pageObject, index) => index < value;
 }
 
 /**
@@ -200,6 +225,6 @@ export function indexIsLessThan<
 export function indexIsLessThanOrEquals<
   TElement,
   TPageObject extends PageObject<TElement>
->(n: number): Predicate<TElement, TPageObject> {
-  return async (pageObject, index) => index <= n;
+>(value: number): Predicate<TElement, TPageObject> {
+  return async (pageObject, index) => index <= value;
 }
