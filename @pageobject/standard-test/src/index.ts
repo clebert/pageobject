@@ -10,7 +10,6 @@ class IncompatibleElement implements StandardElement {
   public readonly click = jest.fn();
   public readonly perform = jest.fn();
   public readonly type = jest.fn();
-  public readonly isVisible = jest.fn();
 }
 
 class Root extends StandardPageObject {
@@ -19,10 +18,6 @@ class Root extends StandardPageObject {
 
 class Container extends StandardPageObject {
   public readonly selector = 'div';
-}
-
-class Paragraph extends StandardPageObject {
-  public readonly selector = 'p';
 }
 
 class RadioInput extends StandardPageObject {
@@ -45,16 +40,14 @@ export function describeTests(createFinder: () => StandardFinder): void {
   describe('finder()', () => {
     let finder: StandardFinder;
     let root: Root;
-    let visibleContainer: Container;
-    let hiddenContainer: Container;
+    let container: Container;
     let radioInput: RadioInput;
     let textInput: TextInput;
 
     beforeAll(() => {
       finder = createFinder();
       root = new Root(finder);
-      visibleContainer = root.select(Container).where(indexEquals(0));
-      hiddenContainer = root.select(Container).where(indexEquals(1));
+      container = root.select(Container).where(indexEquals(0));
       radioInput = root.select(RadioInput);
       textInput = root.select(TextInput);
     });
@@ -80,40 +73,24 @@ export function describeTests(createFinder: () => StandardFinder): void {
 
       await expect(
         root.perform(() => {
-          throw new Error('Element error');
+          throw new Error('actionError');
         })
-      ).rejects.toThrow(/Element error/);
+      ).rejects.toThrow(/actionError/);
 
-      await expect(
-        radioInput.perform((_element: HTMLInputElement) => _element.checked)
-      ).resolves.toBe(false);
+      await expect(radioInput.getProperty('checked')).resolves.toBe('false');
 
       await radioInput.click();
 
-      await expect(
-        radioInput.perform((_element: HTMLInputElement) => _element.checked)
-      ).resolves.toBe(true);
+      await expect(radioInput.getProperty('checked')).resolves.toBe('true');
 
-      await expect(
-        textInput.perform((_element: HTMLInputElement) => _element.value)
-      ).resolves.toBe('');
+      await expect(textInput.getProperty('value')).resolves.toBe('');
 
-      await textInput.type('Text');
+      await textInput.type('textValue');
 
-      await expect(
-        textInput.perform((_element: HTMLInputElement) => _element.value)
-      ).resolves.toBe('Text');
+      await expect(textInput.getProperty('value')).resolves.toBe('textValue');
 
-      await expect(visibleContainer.isVisible()).resolves.toBe(true);
-
-      await expect(
-        visibleContainer.select(Paragraph).isVisible()
-      ).resolves.toBe(true);
-
-      await expect(hiddenContainer.isVisible()).resolves.toBe(false);
-
-      await expect(hiddenContainer.select(Paragraph).isVisible()).resolves.toBe(
-        false
+      await expect(container.select(Container).getHTML()).resolves.toBe(
+        '<div>subcontainer</div>'
       );
     });
   });

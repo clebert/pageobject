@@ -54,7 +54,7 @@ const root3 = root.where(nameEquals('root3', 6));
 
 describe('Root', () => {
   describe('select()', () => {
-    it('should return a new instance using the given constructor', () => {
+    it('should return a new instance using the specified constructor', () => {
       const newInstance = root.select(Child);
 
       expect(newInstance).not.toBe(root);
@@ -74,16 +74,18 @@ describe('Root', () => {
       expect(newInstance).not.toBeInstanceOf(Grandchild);
     });
 
-    it('should throw a where-condition-already-defined error', () => {
+    it('should throw a selection-criterion-already-defined error', () => {
       expect(() => root.where(jest.fn()).where(jest.fn())).toThrow(
-        'A where-condition is already defined'
+        'A selection criterion is already defined'
       );
     });
   });
 
   describe('getElement()', () => {
     it('should fail to get the element of root', async () => {
-      await expect(root.getName()).rejects.toThrow('Element not unique (Root)');
+      await expect(root.getName()).rejects.toThrow(
+        'DOM element not unique (Root)'
+      );
     });
 
     it('should get the element of root1', async () => {
@@ -95,7 +97,9 @@ describe('Root', () => {
     });
 
     it('should fail to get the element of root3', async () => {
-      await expect(root3.getName()).rejects.toThrow('Element not found (Root)');
+      await expect(root3.getName()).rejects.toThrow(
+        'DOM element not found (Root)'
+      );
     });
   });
 
@@ -125,7 +129,7 @@ const child3 = child.where(nameEquals('child3', 4));
 
 describe('Child', () => {
   describe('select()', () => {
-    it('should return a new instance using the given constructor', () => {
+    it('should return a new instance using the specified constructor', () => {
       const newInstance = child.select(Grandchild);
 
       expect(newInstance).not.toBe(child);
@@ -149,7 +153,7 @@ describe('Child', () => {
   describe('getElement()', () => {
     it('should fail to get the element of child', async () => {
       await expect(child.getName()).rejects.toThrow(
-        'Element not unique (Child)'
+        'DOM element not unique (Child)'
       );
     });
 
@@ -163,7 +167,7 @@ describe('Child', () => {
 
     it('should fail to get the element of child3', async () => {
       await expect(child3.getName()).rejects.toThrow(
-        'Element not found (Child)'
+        'DOM element not found (Child)'
       );
     });
   });
@@ -196,7 +200,7 @@ describe('Grandchild', () => {
   describe('getElement()', () => {
     it('should fail to get the element of grandchild', async () => {
       await expect(grandchild.getName()).rejects.toThrow(
-        'Element not unique (Grandchild)'
+        'DOM element not unique (Grandchild)'
       );
     });
 
@@ -210,7 +214,7 @@ describe('Grandchild', () => {
 
     it('should fail to get the element of grandchild3', async () => {
       await expect(grandchild3.getName()).rejects.toThrow(
-        'Element not found (Grandchild)'
+        'DOM element not found (Grandchild)'
       );
     });
   });

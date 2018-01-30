@@ -1,6 +1,6 @@
 import {
+  StandardAction,
   StandardElement,
-  StandardElementAction,
   StandardFinder
 } from '@pageobject/standard';
 import {By, WebDriver, WebElement, promise} from 'selenium-webdriver';
@@ -20,7 +20,7 @@ class SeleniumElement implements StandardElement {
   }
 
   public async perform<TElement extends Element, TResult>(
-    action: StandardElementAction<TElement, TResult>,
+    action: StandardAction<TElement, TResult>,
     ...args: any[] /* tslint:disable-line no-any */
   ): Promise<TResult> {
     return this.adaptee
@@ -33,10 +33,6 @@ class SeleniumElement implements StandardElement {
       await this.adaptee.sendKeys(character);
       await new Promise<void>(resolve => setTimeout(resolve, 100));
     }
-  }
-
-  public async isVisible(): Promise<boolean> {
-    return this.adaptee.isDisplayed();
   }
 }
 

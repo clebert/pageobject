@@ -916,9 +916,6 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="standardelement.html#click" class="tsd-kind-icon">click</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-interface">
-					<a href="standardelement.html#isvisible" class="tsd-kind-icon">is<wbr>Visible</a>
-				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
 					<a href="standardelement.html#perform" class="tsd-kind-icon">perform</a>
 				</li>
@@ -928,7 +925,7 @@ img { max-width: 100%; }
 			</ul>
 		</li>
 		<li class=" tsd-kind-type-alias">
-			<a href="../index.html#standardelementaction" class="tsd-kind-icon">Standard<wbr>Element<wbr>Action</a>
+			<a href="../index.html#standardaction" class="tsd-kind-icon">Standard<wbr>Action</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="../index.html#standardfinder" class="tsd-kind-icon">Standard<wbr>Finder</a>
@@ -962,7 +959,6 @@ img { max-width: 100%; }
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="standardelement.html#click" class="tsd-kind-icon">click</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="standardelement.html#isvisible" class="tsd-kind-icon">is<wbr>Visible</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="standardelement.html#perform" class="tsd-kind-icon">perform</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="standardelement.html#type" class="tsd-kind-icon">type</a></li>
 						</ul>
@@ -989,28 +985,11 @@ img { max-width: 100%; }
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-				<a name="isvisible" class="tsd-anchor"></a>
-				<h3>is<wbr>Visible</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-					<li class="tsd-signature tsd-kind-icon">is<wbr>Visible<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L19">index.ts:19</a></li>
-							</ul>
-						</aside>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
-					</li>
-				</ul>
-			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
 				<a name="perform" class="tsd-anchor"></a>
 				<h3>perform</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
-					<li class="tsd-signature tsd-kind-icon">perform&lt;TElement, TResult&gt;<span class="tsd-signature-symbol">(</span>action<span class="tsd-signature-symbol">: </span><a href="../index.html#standardelementaction" class="tsd-signature-type">StandardElementAction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">perform&lt;TElement, TResult&gt;<span class="tsd-signature-symbol">(</span>action<span class="tsd-signature-symbol">: </span><a href="../index.html#standardaction" class="tsd-signature-type">StandardAction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
@@ -1031,7 +1010,7 @@ img { max-width: 100%; }
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>action: <a href="../index.html#standardelementaction" class="tsd-signature-type">StandardElementAction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>action: <a href="../index.html#standardaction" class="tsd-signature-type">StandardAction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
 								<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
