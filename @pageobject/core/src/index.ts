@@ -88,8 +88,7 @@ export abstract class AbstractPageObject<TElement>
   /**
    * @returns A promise that will be resolved with the representative of the
    * unique DOM element assigned to this page object or a promise that will be
-   * rejected if the DOM element assigned to this page object cannot be
-   * found or is not unique.
+   * rejected if there is no unique DOM element assignable to this page object.
    */
   public async getElement(): Promise<TElement> {
     if (this._element) {

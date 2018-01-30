@@ -73,33 +73,25 @@ export function describeTests(createFinder: () => StandardFinder): void {
 
       await expect(
         root.perform(() => {
-          throw new Error('elementError');
+          throw new Error('actionError');
         })
-      ).rejects.toThrow(/elementError/);
+      ).rejects.toThrow(/actionError/);
 
-      await expect(
-        radioInput.perform((_element: HTMLInputElement) => _element.checked)
-      ).resolves.toBe(false);
+      await expect(radioInput.getProperty('checked')).resolves.toBe('false');
 
       await radioInput.click();
 
-      await expect(
-        radioInput.perform((_element: HTMLInputElement) => _element.checked)
-      ).resolves.toBe(true);
+      await expect(radioInput.getProperty('checked')).resolves.toBe('true');
 
-      await expect(
-        textInput.perform((_element: HTMLInputElement) => _element.value)
-      ).resolves.toBe('');
+      await expect(textInput.getProperty('value')).resolves.toBe('');
 
       await textInput.type('textValue');
 
-      await expect(
-        textInput.perform((_element: HTMLInputElement) => _element.value)
-      ).resolves.toBe('textValue');
+      await expect(textInput.getProperty('value')).resolves.toBe('textValue');
 
-      await expect(
-        container.select(Container).perform(_element => _element.outerHTML)
-      ).resolves.toBe('<div>subcontainer</div>');
+      await expect(container.select(Container).getHTML()).resolves.toBe(
+        '<div>subcontainer</div>'
+      );
     });
   });
 }
