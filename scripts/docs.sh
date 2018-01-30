@@ -12,3 +12,5 @@ rm -rf docs/api/
 "$(yarn bin)"/typedoc --out docs/api/standard ./@pageobject/standard
 "$(yarn bin)"/typedoc --out docs/api/standard-selenium ./@pageobject/standard-selenium
 "$(yarn bin)"/typedoc --out docs/api/standard-test ./@pageobject/standard-test
+
+"$(yarn bin)"/replace-in-file '/Defined in .+node_modules./g' 'Defined in ' 'docs/**/*.html' --isRegex --verbose
