@@ -58,9 +58,9 @@ export abstract class AbstractPageObject<TElement>
    * @returns A new page object as a descendant of this page object.
    */
   public select<TPageObject extends PageObject<TElement>>(
-    descendant: PageObjectConstructor<TElement, TPageObject>
+    Descendant: PageObjectConstructor<TElement, TPageObject>
   ): TPageObject {
-    return new descendant(this._finder, this);
+    return new Descendant(this._finder, this);
   }
 
   /**
@@ -77,12 +77,12 @@ export abstract class AbstractPageObject<TElement>
       throw new Error('A selection criterion is already defined');
     }
 
-    const self = this.constructor as PageObjectConstructor<TElement, this>;
-    const pageObject = new self(this._finder, this._parent);
+    const Copy = this.constructor as PageObjectConstructor<TElement, this>;
+    const copy = new Copy(this._finder, this._parent);
 
-    pageObject._condition = condition;
+    copy._condition = condition;
 
-    return pageObject;
+    return copy;
   }
 
   /**
@@ -125,12 +125,12 @@ export abstract class AbstractPageObject<TElement>
       return elements;
     }
 
-    const self = this.constructor as PageObjectConstructor<TElement, this>;
+    const Copy = this.constructor as PageObjectConstructor<TElement, this>;
 
     const results = await Promise.all(
       elements
         .map(element => {
-          const pageObject = new self(_finder);
+          const pageObject = new Copy(_finder);
 
           pageObject._element = element;
 
