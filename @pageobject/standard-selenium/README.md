@@ -34,5 +34,5 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 [repo-api-standard-selenium]: https://pageobject.js.org/api/standard-selenium/
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
-[repo-readme-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard
+[repo-readme-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard/README.md
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html

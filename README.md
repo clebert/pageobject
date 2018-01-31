@@ -6,23 +6,33 @@ Readable. Stable. Maintainable. E2E testing using any browser automation framewo
 
 This is a multi-package repository ([monorepo][monorepo]).
 
-### [@pageobject/core][repo-readme-core]
+### @pageobject/core
+
+**[README][repo-readme-core] | [API][repo-api-core]**
 
 This package is the basis for the PageObjectJS standard API.
 
-### [@pageobject/engine][repo-readme-engine]
+### @pageobject/engine
+
+**[README][repo-readme-engine] | [API][repo-api-engine]**
 
 This package makes it possible to execute arbitrary commands reliably.
 
-### [@pageobject/standard][repo-readme-standard]
+### @pageobject/standard
+
+**[README][repo-readme-standard] | [API][repo-api-standard]**
 
 This package defines a standard API which can be implemented for any browser automation framework.
 
-### [@pageobject/standard-selenium][repo-readme-standard-selenium]
+### @pageobject/standard-selenium
+
+**[README][repo-readme-standard-selenium] | [API][repo-api-standard-selenium]**
 
 This package implements the PageObjectJS standard API for [Selenium][selenium].
 
-### [@pageobject/standard-test][repo-readme-standard-test]
+### @pageobject/standard-test
+
+**[README][repo-readme-standard-test] | [API][repo-api-standard-test]**
 
 This package allows you to test the compatibility of your implementation of the PageObjectJS standard API.
 
@@ -83,12 +93,17 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 [badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
 [badge-typescript-link]: https://www.typescriptlang.org/
+[repo-api-core]: https://pageobject.js.org/api/core/
+[repo-api-engine]: https://pageobject.js.org/api/engine/
+[repo-api-standard]: https://pageobject.js.org/api/standard/
+[repo-api-standard-selenium]: https://pageobject.js.org/api/standard-selenium/
+[repo-api-standard-test]: https://pageobject.js.org/api/standard-test/
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
-[repo-readme-core]: https://github.com/clebert/pageobject/tree/master/@pageobject/core
-[repo-readme-engine]: https://github.com/clebert/pageobject/tree/master/@pageobject/engine
-[repo-readme-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard
-[repo-readme-standard-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-selenium
-[repo-readme-standard-test]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-test
+[repo-readme-core]: https://github.com/clebert/pageobject/tree/master/@pageobject/core/README.md
+[repo-readme-engine]: https://github.com/clebert/pageobject/tree/master/@pageobject/engine/README.md
+[repo-readme-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard/README.md
+[repo-readme-standard-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-selenium/README.md
+[repo-readme-standard-test]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-test/README.md
 [githooks]: https://git-scm.com/docs/githooks
 [monorepo]: https://github.com/lerna/lerna#about
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
