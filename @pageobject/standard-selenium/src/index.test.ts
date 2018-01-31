@@ -4,19 +4,21 @@ import {StandardFinder} from '@pageobject/standard';
 import {describeTests, url} from '@pageobject/standard-test';
 import find = require('find-process');
 import {Builder, WebDriver} from 'selenium-webdriver';
-import * as chrome from 'selenium-webdriver/chrome';
+import {Options} from 'selenium-webdriver/chrome';
 import {createFinder} from '.';
+
+async function createDriver(): Promise<WebDriver> {
+  return new Builder()
+    .forBrowser('chrome')
+    .setChromeOptions(new Options().detachDriver(false).headless())
+    .build();
+}
 
 let driver: WebDriver;
 let finder: StandardFinder;
 
 beforeAll(async () => {
-  /* tslint:disable-next-line await-promise */
-  driver = await new Builder()
-    .forBrowser('chrome')
-    .setChromeOptions(new chrome.Options().detachDriver(false).headless())
-    .build();
-
+  driver = await createDriver();
   finder = createFinder(driver);
 
   await driver.navigate().to(url);

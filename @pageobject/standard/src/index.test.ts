@@ -7,6 +7,7 @@ interface MockDOMElement {
 
   readonly getAttribute: jest.Mock;
   readonly focus: jest.Mock;
+  readonly scrollIntoView: jest.Mock;
 }
 
 interface MockElement {
@@ -33,7 +34,8 @@ describe('StandardPageObject', () => {
       innerText: ' innerTextValue ',
       outerHTML: ' outerHTMLValue ',
       getAttribute: jest.fn(),
-      focus: jest.fn()
+      focus: jest.fn(),
+      scrollIntoView: jest.fn()
     };
 
     element = {
@@ -55,7 +57,7 @@ describe('StandardPageObject', () => {
 
   describe('click()', () => {
     it('should click on the DOM element', async () => {
-      element.click.mockImplementation(() => {
+      element.click.mockImplementation(async () => {
         throw new Error('clickError');
       });
 
@@ -84,7 +86,7 @@ describe('StandardPageObject', () => {
 
   describe('type()', () => {
     it('should type into the DOM element', async () => {
-      element.type.mockImplementation(() => {
+      element.type.mockImplementation(async () => {
         throw new Error('typeError');
       });
 
@@ -105,6 +107,28 @@ describe('StandardPageObject', () => {
 
       expect(domElement.focus).toHaveBeenCalledTimes(1);
       expect(domElement.focus).toHaveBeenLastCalledWith();
+    });
+  });
+
+  describe('scrollIntoView()', () => {
+    it('should scroll the DOM element into view', async () => {
+      domElement.scrollIntoView.mockImplementation(() => {
+        throw new Error('scrollIntoViewError');
+      });
+
+      await expect(pageObject.scrollIntoView()).rejects.toThrow(
+        'scrollIntoViewError'
+      );
+
+      expect(domElement.scrollIntoView).toHaveBeenCalledTimes(1);
+      expect(domElement.scrollIntoView).toHaveBeenLastCalledWith(true);
+
+      domElement.scrollIntoView.mockReset();
+
+      await pageObject.scrollIntoView(false);
+
+      expect(domElement.scrollIntoView).toHaveBeenCalledTimes(1);
+      expect(domElement.scrollIntoView).toHaveBeenLastCalledWith(false);
     });
   });
 
