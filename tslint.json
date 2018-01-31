@@ -1,5 +1,5 @@
 {
-  "extends": "./node_modules/ts-config/tslint.json",
+  "extends": "ts-config/tslint",
   "rules": {
     "no-redundant-jsdoc": false
   }
