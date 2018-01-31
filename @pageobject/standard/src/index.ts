@@ -1,6 +1,11 @@
 /* tslint:disable no-any */
 
-import {AbstractPageObject, Finder, Predicate} from '@pageobject/core';
+import {
+  AbstractPageObject,
+  Finder,
+  PageObjectConstructor,
+  Predicate
+} from '@pageobject/core';
 
 export type StandardAction<TElement extends Element, TResult> = (
   element: TElement,
@@ -19,6 +24,10 @@ export interface StandardElement {
 }
 
 export type StandardFinder = Finder<StandardElement>;
+
+export type StandardPageObjectConstructor<
+  TPageObject extends StandardPageObject
+> = PageObjectConstructor<StandardElement, TPageObject>;
 
 export type StandardPredicate<
   TPageObject extends StandardPageObject
@@ -47,8 +56,9 @@ export abstract class StandardPageObject extends AbstractPageObject<
    * This method sends the specified text as individual characters to the
    * unique DOM element assigned to this page object.
    *
-   * Between the sending of the individual characters, 100 ms are paused in each
-   * case, so that this method emulates the typing speed of a human user.
+   * Between the sending of the individual characters, 100 milliseconds are
+   * paused in each case, so that this method emulates the typing speed of a
+   * human user.
    */
   public async type(text: string): Promise<void> {
     return (await this.getElement()).type(text);
@@ -56,6 +66,13 @@ export abstract class StandardPageObject extends AbstractPageObject<
 
   public async focus(): Promise<void> {
     return this.perform((_element: HTMLElement) => _element.focus());
+  }
+
+  public async scrollIntoView(alignToTop: boolean = true): Promise<void> {
+    return this.perform(
+      (_element, _alignToTop) => _element.scrollIntoView(_alignToTop),
+      alignToTop
+    );
   }
 
   /**
