@@ -12,6 +12,6 @@ yarn test
 PREVIOUS_RELEASE=$("$(yarn bin)"/git-latest-semver-tag)
 
 lerna publish --skip-npm
-lerna exec --ignore @pageobject/examples --since="${PREVIOUS_RELEASE}" -- yarn publish --access=public
+lerna exec --ignore @pageobject/examples --since="${PREVIOUS_RELEASE}" -- npm publish --access=public
 
 git push --follow-tags origin master
