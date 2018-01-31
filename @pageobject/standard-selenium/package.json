@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/standard-selenium",
-  "version": "1.0.0",
+  "version": "1.0.0-beta",
   "description": "This package implements the PageObjectJS standard API for Selenium.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -34,9 +34,9 @@
     "selenium-webdriver": "^3.6.0"
   },
   "devDependencies": {
-    "@pageobject/core": "^1.0.0",
-    "@pageobject/standard": "^1.0.0",
-    "@pageobject/standard-test": "^1.0.0",
+    "@pageobject/core": "^1.0.0-beta",
+    "@pageobject/standard": "^1.0.0-beta",
+    "@pageobject/standard-test": "^1.0.0-beta",
     "@types/selenium-webdriver": "^3.0.8",
     "chromedriver": "^2.35.0",
     "find-process": "^1.1.0",

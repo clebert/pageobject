@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/standard",
-  "version": "1.0.0",
+  "version": "1.0.0-beta",
   "description": "This package defines a standard API which can be implemented for any browser automation framework.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -32,6 +32,6 @@
     "@pageobject/core": "^1.0.0"
   },
   "devDependencies": {
-    "@pageobject/core": "^1.0.0"
+    "@pageobject/core": "^1.0.0-beta"
   }
 }

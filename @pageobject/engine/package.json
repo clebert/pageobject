@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/engine",
-  "version": "1.0.0",
+  "version": "1.0.0-beta",
   "description": "This package makes it possible to execute arbitrary commands reliably.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",

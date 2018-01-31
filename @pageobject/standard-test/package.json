@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/standard-test",
-  "version": "1.0.0",
+  "version": "1.0.0-beta",
   "description": "This package allows you to test the compatibility of your implementation of the PageObjectJS standard API.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -34,7 +34,7 @@
     "@pageobject/standard": "^1.0.0"
   },
   "devDependencies": {
-    "@pageobject/core": "^1.0.0",
-    "@pageobject/standard": "^1.0.0"
+    "@pageobject/core": "^1.0.0-beta",
+    "@pageobject/standard": "^1.0.0-beta"
   }
 }
