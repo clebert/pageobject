@@ -44,12 +44,6 @@ This package allows you to test the compatibility of your implementation of the 
 yarn install
 ```
 
-### Upgrading dependencies
-
-```sh
-yarn run upgrade
-```
-
 ### Compiling sources and running tests continuously
 
 ```sh
