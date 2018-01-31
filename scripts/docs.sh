@@ -14,3 +14,10 @@ rm -rf docs/api/
 "$(yarn bin)"/typedoc --out docs/api/standard-test ./@pageobject/standard-test
 
 "$(yarn bin)"/replace-in-file '/Defined in .+node_modules./g' 'Defined in ' 'docs/**/*.html' --isRegex --verbose
+
+if test -n "$(git status --porcelain)"
+then
+  echo 'Working tree is dirty'
+
+  exit 1
+fi
