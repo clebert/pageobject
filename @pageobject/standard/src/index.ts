@@ -35,8 +35,6 @@ export type StandardPredicate<
 
 /**
  * `import {StandardPageObject} from '@pageobject/standard';`
- *
- * @abstract
  */
 export abstract class StandardPageObject extends AbstractPageObject<
   StandardElement

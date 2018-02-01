@@ -30,14 +30,9 @@ export interface PageObject<TElement> {
 
 /**
  * `import {AbstractPageObject} from '@pageobject/core';`
- *
- * @abstract
  */
 export abstract class AbstractPageObject<TElement>
   implements PageObject<TElement> {
-  /**
-   * @abstract
-   */
   public abstract readonly selector: string;
 
   private readonly _finder: Finder<TElement>;

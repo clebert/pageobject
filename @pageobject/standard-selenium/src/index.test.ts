@@ -2,7 +2,7 @@ import 'chromedriver'; /* tslint:disable-line no-import-side-effect */
 
 import {StandardFinder} from '@pageobject/standard';
 import {describeTests, url} from '@pageobject/standard-test';
-import find = require('find-process');
+import find from 'find-process';
 import {Builder, WebDriver} from 'selenium-webdriver';
 import {Options} from 'selenium-webdriver/chrome';
 import {createFinder} from '.';
