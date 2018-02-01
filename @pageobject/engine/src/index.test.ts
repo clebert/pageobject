@@ -1,4 +1,4 @@
-import {execute} from '.';
+import {createEngine} from '.';
 
 class ObservablePromise<T> {
   public readonly promise: Promise<T>;
@@ -55,19 +55,32 @@ const erroneous = (n?: number) => async () => {
 
 const neverending = async () => new Promise<void>(() => undefined);
 
-describe('execute()', () => {
-  it('should execute the specified command', async () => {
+const engine = createEngine(10);
+
+describe('engine()', () => {
+  it('should execute the specified command within the specified timeout', async () => {
     const command = jest
       .fn()
       .mockImplementationOnce(erroneous())
       .mockImplementation(async () => 'result');
 
-    await expect(execute(command, 10)).resolves.toBe('result');
+    await expect(engine(command, 20)).resolves.toBe('result');
 
     expect(command).toHaveBeenCalledTimes(2);
   });
 
-  it('should fail to execute the specified command', async () => {
+  it('should execute the specified command within the default timeout', async () => {
+    const command = jest
+      .fn()
+      .mockImplementationOnce(erroneous())
+      .mockImplementation(async () => 'result');
+
+    await expect(engine(command)).resolves.toBe('result');
+
+    expect(command).toHaveBeenCalledTimes(2);
+  });
+
+  it('should fail to execute the specified command within the specified timeout', async () => {
     const command = jest
       .fn()
       .mockImplementationOnce(erroneous(1))
@@ -75,7 +88,21 @@ describe('execute()', () => {
       .mockImplementation(neverending);
 
     await expect(
-      observeTimeout(async () => execute(command, 123), 123)
+      observeTimeout(async () => engine(command, 20), 20)
+    ).rejects.toThrow('commandError2');
+
+    expect(command).toHaveBeenCalledTimes(3);
+  });
+
+  it('should fail to execute the specified command within the default timeout', async () => {
+    const command = jest
+      .fn()
+      .mockImplementationOnce(erroneous(1))
+      .mockImplementationOnce(erroneous(2))
+      .mockImplementation(neverending);
+
+    await expect(
+      observeTimeout(async () => engine(command), 10)
     ).rejects.toThrow('commandError2');
 
     expect(command).toHaveBeenCalledTimes(3);
@@ -84,6 +111,6 @@ describe('execute()', () => {
   it('should not throw an out-of-memory error', async () => {
     const command = jest.fn().mockImplementation(erroneous());
 
-    await expect(execute(command, 10)).rejects.toThrow('commandError');
+    await expect(engine(command)).rejects.toThrow('commandError');
   });
 });
