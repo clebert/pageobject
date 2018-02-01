@@ -49,6 +49,7 @@ module.exports = ({localProjectDir, projectCacheDir}) => {
     testFramework: 'jest',
     tests: [
       '@pageobject/*/src/**/*.test.{ts,tsx}',
+      '!@pageobject/standard-puppeteer/src/**/*.test.{ts,tsx}',
       '!@pageobject/standard-selenium/src/**/*.test.{ts,tsx}'
     ]
   };
