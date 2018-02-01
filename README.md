@@ -24,6 +24,12 @@ This package makes it possible to execute arbitrary commands reliably.
 
 This package defines a standard API which can be implemented for any browser automation framework.
 
+### @pageobject/standard-puppeteer
+
+**[README][repo-readme-standard-puppeteer] | [API][repo-api-standard-puppeteer]**
+
+This package implements the PageObjectJS standard API for [Puppeteer][puppeteer].
+
 ### @pageobject/standard-selenium
 
 **[README][repo-readme-standard-selenium] | [API][repo-api-standard-selenium]**
@@ -90,14 +96,17 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [repo-api-core]: https://pageobject.js.org/api/core/
 [repo-api-engine]: https://pageobject.js.org/api/engine/
 [repo-api-standard]: https://pageobject.js.org/api/standard/
+[repo-api-standard-puppeteer]: https://pageobject.js.org/api/standard-puppeteer/
 [repo-api-standard-selenium]: https://pageobject.js.org/api/standard-selenium/
 [repo-api-standard-test]: https://pageobject.js.org/api/standard-test/
 [repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [repo-readme-core]: https://github.com/clebert/pageobject/tree/master/@pageobject/core/README.md
 [repo-readme-engine]: https://github.com/clebert/pageobject/tree/master/@pageobject/engine/README.md
 [repo-readme-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard/README.md
+[repo-readme-standard-puppeteer]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-puppeteer/README.md
 [repo-readme-standard-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-selenium/README.md
 [repo-readme-standard-test]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-test/README.md
 [githooks]: https://git-scm.com/docs/githooks
 [monorepo]: https://github.com/lerna/lerna#about
+[puppeteer]: https://github.com/GoogleChrome/puppeteer/blob/master/README.md
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
