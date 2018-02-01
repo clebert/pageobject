@@ -14,7 +14,10 @@
     "automation",
     "end-to-end",
     "e2e",
-    "pageobject"
+    "pageobject",
+    "puppeteer",
+    "selenium",
+    "webdriver"
   ],
   "repository": {
     "type": "git",
