@@ -5,12 +5,12 @@ This package defines a standard API which can be implemented for any browser aut
 ## Installation
 
 ```sh
-yarn install @pageobject/standard
+yarn add @pageobject/standard
 ```
 
 ```sh
 # Peer dependencies
-yarn install @pageobject/core
+yarn add @pageobject/core
 ```
 
 ## API

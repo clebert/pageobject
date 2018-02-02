@@ -5,7 +5,7 @@ This package is the basis for the PageObjectJS standard API.
 ## Installation
 
 ```sh
-yarn install @pageobject/core
+yarn add @pageobject/core
 ```
 
 ## API

@@ -5,17 +5,19 @@ This package implements the [PageObjectJS standard API][repo-readme-standard] fo
 ## Installation
 
 ```sh
-yarn install @pageobject/standard-selenium
+yarn add @pageobject/standard-selenium
 ```
 
 ```sh
 # Peer dependencies
-yarn install @pageobject/core @pageobject/standard selenium-webdriver
+yarn add @pageobject/core \
+         @pageobject/standard \
+         selenium-webdriver
 ```
 
 ```sh
 # TypeScript types
-yarn install @types/selenium-webdriver
+yarn add --dev @types/selenium-webdriver
 ```
 
 ## API

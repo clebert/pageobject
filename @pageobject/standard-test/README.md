@@ -5,12 +5,13 @@ This package allows you to test the compatibility of your implementation of the 
 ## Installation
 
 ```sh
-yarn install @pageobject/standard-test
+yarn add @pageobject/standard-test
 ```
 
 ```sh
 # Peer dependencies
-yarn install @pageobject/core @pageobject/standard
+yarn add @pageobject/core \
+         @pageobject/standard
 ```
 
 ## API

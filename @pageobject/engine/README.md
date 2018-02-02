@@ -5,7 +5,7 @@ This package makes it possible to execute arbitrary commands reliably.
 ## Installation
 
 ```sh
-yarn install @pageobject/engine
+yarn add @pageobject/engine
 ```
 
 ## API
