@@ -28,6 +28,10 @@ class TextInput extends StandardPageObject {
   public readonly selector = 'input[type="text"]';
 }
 
+class Unknown extends StandardPageObject {
+  public readonly selector = '.unknown';
+}
+
 /**
  * `import {url} from '@pageobject/standard-test';`
  */
@@ -43,6 +47,7 @@ export function describeTests(createFinder: () => StandardFinder): void {
     let container: Container;
     let radioInput: RadioInput;
     let textInput: TextInput;
+    let unknown: Unknown;
 
     beforeAll(() => {
       finder = createFinder();
@@ -50,6 +55,7 @@ export function describeTests(createFinder: () => StandardFinder): void {
       container = root.select(Container).where(indexEquals(0));
       radioInput = root.select(RadioInput);
       textInput = root.select(TextInput);
+      unknown = root.select(Unknown);
     });
 
     it('should throw an incompatible-parent-element error', async () => {
@@ -92,6 +98,8 @@ export function describeTests(createFinder: () => StandardFinder): void {
       await expect(container.select(Container).getHTML()).resolves.toBe(
         '<div>subcontainer</div>'
       );
+
+      await expect(unknown.getSize()).resolves.toBe(0);
     });
   });
 }
