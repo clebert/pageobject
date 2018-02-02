@@ -8,8 +8,9 @@ This package defines a standard API which can be implemented for any browser aut
 yarn add @pageobject/standard
 ```
 
+### Peer dependencies
+
 ```sh
-# Peer dependencies
 yarn add @pageobject/core
 ```
 

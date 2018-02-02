@@ -8,8 +8,9 @@ This package allows you to test the compatibility of your implementation of the 
 yarn add @pageobject/standard-test
 ```
 
+### Peer dependencies
+
 ```sh
-# Peer dependencies
 yarn add @pageobject/core \
          @pageobject/standard
 ```

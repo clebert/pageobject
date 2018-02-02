@@ -8,15 +8,17 @@ This package implements the [PageObjectJS standard API][repo-readme-standard] fo
 yarn add @pageobject/standard-puppeteer
 ```
 
+### Peer dependencies
+
 ```sh
-# Peer dependencies
 yarn add @pageobject/core \
          @pageobject/standard \
          puppeteer
 ```
 
+### TypeScript types
+
 ```sh
-# TypeScript types
 yarn add --dev @types/puppeteer
 ```
 
