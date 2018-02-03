@@ -1,6 +1,6 @@
 # @pageobject/standard [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-This package defines a standard API which can be implemented for any browser automation framework.
+This package defines a standard API that can be implemented for virtually any browser automation framework.
 
 ## Installation
 
