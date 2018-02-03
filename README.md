@@ -1,6 +1,6 @@
 # PageObjectJS [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link] [![TypeScript][badge-typescript-image]][badge-typescript-link]
 
-Readable. Stable. Maintainable. E2E testing using any browser automation framework.
+Readable, stable, maintainable E2E tests written using a browser automation framework of your choice.
 
 ## Packages
 
