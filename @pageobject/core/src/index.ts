@@ -23,7 +23,7 @@ export interface PageObject<TElement> {
     descendant: PageObjectConstructor<TElement, TPageObject>
   ): TPageObject;
 
-  where(condition: Predicate<TElement, this>): this;
+  where(selectionCriterion: Predicate<TElement, this>): this;
   getElement(): Promise<TElement>;
   getSize(): Promise<number>;
 }
@@ -38,7 +38,7 @@ export abstract class AbstractPageObject<TElement>
   private readonly _finder: Finder<TElement>;
   private readonly _parent?: PageObject<TElement>;
 
-  private _condition?: Predicate<TElement, this>;
+  private _selectionCriterion?: Predicate<TElement, this>;
   private _element?: TElement;
 
   public constructor(finder: Finder<TElement>, parent?: PageObject<TElement>) {
@@ -67,15 +67,15 @@ export abstract class AbstractPageObject<TElement>
    *
    * @throws An error if this page object already has a selection criterion.
    */
-  public where(condition: Predicate<TElement, this>): this {
-    if (this._condition) {
+  public where(selectionCriterion: Predicate<TElement, this>): this {
+    if (this._selectionCriterion) {
       throw new Error('A selection criterion is already defined');
     }
 
     const Copy = this.constructor as PageObjectConstructor<TElement, this>;
     const copy = new Copy(this._finder, this._parent);
 
-    copy._condition = condition;
+    copy._selectionCriterion = selectionCriterion;
 
     return copy;
   }
@@ -112,11 +112,11 @@ export abstract class AbstractPageObject<TElement>
   }
 
   private async _findElements(): Promise<TElement[]> {
-    const {_condition, _finder, _parent, selector} = this;
+    const {_selectionCriterion, _finder, _parent, selector} = this;
     const parentElement = _parent ? await _parent.getElement() : undefined;
     const elements = await _finder(selector, parentElement);
 
-    if (!_condition || elements.length === 0) {
+    if (!_selectionCriterion || elements.length === 0) {
       return elements;
     }
 
@@ -131,7 +131,7 @@ export abstract class AbstractPageObject<TElement>
 
           return pageObject;
         })
-        .map(_condition)
+        .map(_selectionCriterion)
     );
 
     return elements.filter((element, index) => results[index]);

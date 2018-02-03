@@ -1,6 +1,6 @@
 # PageObjectJS [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link] [![TypeScript][badge-typescript-image]][badge-typescript-link]
 
-Readable, stable, and maintainable E2E tests written using a browser automation framework of your choice.
+**Readable**, **stable**, and **maintainable** E2E tests written using a browser automation framework of your choice.
 
 ## Packages
 
@@ -16,7 +16,7 @@ This package is the basis for the PageObjectJS standard API.
 
 **[README][repo-readme-engine] | [API][repo-api-engine]**
 
-This package makes it possible to execute arbitrary commands reliably.
+This package allows you to execute unreliable, asynchronous, and [idempotent][wiki-idempotence] commands reliably.
 
 ### @pageobject/standard
 
@@ -110,3 +110,4 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [monorepo]: https://github.com/lerna/lerna#about
 [puppeteer]: https://github.com/GoogleChrome/puppeteer/blob/master/README.md
 [selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
+[wiki-idempotence]: https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning
