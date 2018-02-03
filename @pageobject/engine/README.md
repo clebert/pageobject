@@ -32,7 +32,6 @@ const {retryOnError} = createRetryEngine(defaultTimeout);
 
 ```js
 const erroneousTwoTimes = async () => /* ... */;
-const neverEnding = async () => /* ... */;
 ```
 
 In the following, the `erroneousTwoTimes` command is executed a total of 3 times. The third time the execution ends successfully.
@@ -41,6 +40,10 @@ In the following, the `erroneousTwoTimes` command is executed a total of 3 times
 retryOnError(erroneousTwoTimes).then(() => {
   console.log('Yeah!');
 });
+```
+
+```js
+const neverEnding = async () => /* ... */;
 ```
 
 The following execution of the `neverEnding` command results in a timeout error after 10 seconds.

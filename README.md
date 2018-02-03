@@ -2,6 +2,8 @@
 
 **Readable**, **stable**, and **maintainable** E2E tests written using a browser automation framework of your choice.
 
+⚠️ **This software is currently in beta stage. Breaking changes can happen at any time. There are no usage examples yet.**
+
 ## Packages
 
 This is a multi-package repository ([monorepo][monorepo]).
