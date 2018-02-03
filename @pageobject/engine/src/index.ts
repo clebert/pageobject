@@ -1,11 +1,23 @@
 export type Command<TResult> = () => Promise<TResult>;
 
 export interface RetryEngine<TResult> {
+  /**
+   * This method does not require a binding to `this` and can therefore
+   * be used independently of its instance. Example:
+   *
+   * ```js
+   * const {retryOnError} = createRetryEngine(10000);
+   *
+   * await retryOnError(someCommand);
+   * ```
+   */
   retryOnError(command: Command<TResult>, timeout?: number): Promise<TResult>;
 }
 
 /**
- * `import {createRetryEngine} from '@pageobject/engine';`
+ * ```js
+ * import {createRetryEngine} from '@pageobject/engine';
+ * ```
  */
 export function createRetryEngine<TResult = void>(
   defaultTimeout: number

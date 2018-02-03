@@ -33,12 +33,16 @@ class Unknown extends StandardPageObject {
 }
 
 /**
- * `import {url} from '@pageobject/standard-test';`
+ * ```js
+ * import {url} from '@pageobject/standard-test';
+ * ```
  */
 export const url = `file://${path.join(__dirname, '../fixtures/index.html')}`;
 
 /**
- * `import {describeTests} from '@pageobject/standard-test';`
+ * ```js
+ * import {describeTests} from '@pageobject/standard-test';
+ * ```
  */
 export function describeTests(createFinder: () => StandardFinder): void {
   describe('finder()', () => {

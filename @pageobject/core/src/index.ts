@@ -29,7 +29,9 @@ export interface PageObject<TElement> {
 }
 
 /**
- * `import {AbstractPageObject} from '@pageobject/core';`
+ * ```js
+ * import {AbstractPageObject} from '@pageobject/core';
+ * ```
  */
 export abstract class AbstractPageObject<TElement>
   implements PageObject<TElement> {
@@ -139,7 +141,9 @@ export abstract class AbstractPageObject<TElement>
 }
 
 /**
- * `import {and} from '@pageobject/core';`
+ * ```js
+ * import {and} from '@pageobject/core';
+ * ```
  */
 export function and<TElement, TPageObject extends PageObject<TElement>>(
   a: Predicate<TElement, TPageObject>,
@@ -152,7 +156,9 @@ export function and<TElement, TPageObject extends PageObject<TElement>>(
 }
 
 /**
- * `import {or} from '@pageobject/core';`
+ * ```js
+ * import {or} from '@pageobject/core';
+ * ```
  */
 export function or<TElement, TPageObject extends PageObject<TElement>>(
   a: Predicate<TElement, TPageObject>,
@@ -165,7 +171,9 @@ export function or<TElement, TPageObject extends PageObject<TElement>>(
 }
 
 /**
- * `import {not} from '@pageobject/core';`
+ * ```js
+ * import {not} from '@pageobject/core';
+ * ```
  */
 export function not<TElement, TPageObject extends PageObject<TElement>>(
   predicate: Predicate<TElement, TPageObject>
@@ -175,7 +183,9 @@ export function not<TElement, TPageObject extends PageObject<TElement>>(
 }
 
 /**
- * `import {indexEquals} from '@pageobject/core';`
+ * ```js
+ * import {indexEquals} from '@pageobject/core';
+ * ```
  */
 export function indexEquals<TElement, TPageObject extends PageObject<TElement>>(
   value: number
@@ -184,7 +194,9 @@ export function indexEquals<TElement, TPageObject extends PageObject<TElement>>(
 }
 
 /**
- * `import {indexIsGreaterThan} from '@pageobject/core';`
+ * ```js
+ * import {indexIsGreaterThan} from '@pageobject/core';
+ * ```
  */
 export function indexIsGreaterThan<
   TElement,
@@ -194,7 +206,9 @@ export function indexIsGreaterThan<
 }
 
 /**
- * `import {indexIsGreaterThanOrEquals} from '@pageobject/core';`
+ * ```js
+ * import {indexIsGreaterThanOrEquals} from '@pageobject/core';
+ * ```
  */
 export function indexIsGreaterThanOrEquals<
   TElement,
@@ -204,7 +218,9 @@ export function indexIsGreaterThanOrEquals<
 }
 
 /**
- * `import {indexIsLessThan} from '@pageobject/core';`
+ * ```js
+ * import {indexIsLessThan} from '@pageobject/core';
+ * ```
  */
 export function indexIsLessThan<
   TElement,
@@ -214,7 +230,9 @@ export function indexIsLessThan<
 }
 
 /**
- * `import {indexIsLessThanOrEquals} from '@pageobject/core';`
+ * ```js
+ * import {indexIsLessThanOrEquals} from '@pageobject/core';
+ * ```
  */
 export function indexIsLessThanOrEquals<
   TElement,

@@ -1,7 +1,7 @@
 {
   "name": "@pageobject/standard",
   "version": "1.0.0-beta-1",
-  "description": "This package defines a standard API that can be implemented for virtually any browser automation framework.",
+  "description": "This package defines an API that can be implemented for virtually any browser automation framework.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
   "homepage": "https://pageobject.js.org/",

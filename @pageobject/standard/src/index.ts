@@ -34,7 +34,9 @@ export type StandardPredicate<
 > = Predicate<StandardElement, TPageObject>;
 
 /**
- * `import {StandardPageObject} from '@pageobject/standard';`
+ * ```js
+ * import {StandardPageObject} from '@pageobject/standard';
+ * ```
  */
 export abstract class StandardPageObject extends AbstractPageObject<
   StandardElement
@@ -147,7 +149,7 @@ export abstract class StandardPageObject extends AbstractPageObject<
   }
 
   /**
-   * Note: This method uses the `window.getComputedStyle()` web API.
+   * This method uses the `window.getComputedStyle()` web API.
    *
    * @returns A promise that will be resolved with the trimmed value of the
    * specified style property of the unique DOM element assigned to this page
@@ -178,7 +180,7 @@ export abstract class StandardPageObject extends AbstractPageObject<
    * as long as it does not have the style properties `display: none` or
    * `visibility: hidden`.
    *
-   * Note: This method uses the `window.getComputedStyle()` web API.
+   * This method uses the `window.getComputedStyle()` web API.
    */
   public async isVisible(): Promise<boolean> {
     return (

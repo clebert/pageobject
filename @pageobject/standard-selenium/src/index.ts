@@ -37,7 +37,9 @@ class SeleniumElement implements StandardElement {
 }
 
 /**
- * `import {createFinder} from '@pageobject/standard-selenium';`
+ * ```js
+ * import {createFinder} from '@pageobject/standard-selenium';
+ * ```
  */
 export function createFinder(driver: WebDriver): StandardFinder {
   return async (selector, parent) => {

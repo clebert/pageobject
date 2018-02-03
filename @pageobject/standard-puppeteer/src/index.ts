@@ -32,7 +32,9 @@ class PuppeteerElement implements StandardElement {
 }
 
 /**
- * `import {createFinder} from '@pageobject/standard-puppeteer';`
+ * ```js
+ * import {createFinder} from '@pageobject/standard-puppeteer';
+ * ```
  */
 export function createFinder(page: Page): StandardFinder {
   return async (selector, parent) => {

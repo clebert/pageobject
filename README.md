@@ -24,7 +24,7 @@ This package allows you to execute unreliable, asynchronous, and [idempotent][wi
 
 **[README][repo-readme-standard] | [API][repo-api-standard]**
 
-This package defines a standard API that can be implemented for virtually any browser automation framework.
+This package defines an API that can be implemented for virtually any browser automation framework.
 
 ### @pageobject/standard-puppeteer
 
