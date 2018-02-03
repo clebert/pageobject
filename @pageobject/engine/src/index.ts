@@ -1,48 +1,51 @@
-export type Engine<TResult> = (
-  command: () => Promise<TResult>,
-  timeout?: number
-) => Promise<TResult>;
+export type Command<TResult> = () => Promise<TResult>;
+
+export interface RetryEngine<TResult> {
+  retryOnError(command: Command<TResult>, timeout?: number): Promise<TResult>;
+}
 
 /**
- * `import {createEngine} from '@pageobject/engine';`
+ * `import {createRetryEngine} from '@pageobject/engine';`
  */
-export function createEngine<TResult = void>(
+export function createRetryEngine<TResult = void>(
   defaultTimeout: number
-): Engine<TResult> {
-  return async (command, timeout = defaultTimeout) => {
-    let error = new Error(`Timeout after ${timeout} milliseconds`);
-    let resolved = false;
+): RetryEngine<TResult> {
+  return {
+    retryOnError: async (command, timeout = defaultTimeout) => {
+      let error = new Error(`Timeout after ${timeout} milliseconds`);
+      let resolved = false;
 
-    let timeoutID: any; /* tslint:disable-line no-any */
+      let timeoutID: any; /* tslint:disable-line no-any */
 
-    return Promise.race([
-      (async () => {
-        while (!resolved) {
-          try {
-            const result = await command();
+      return Promise.race([
+        (async () => {
+          while (!resolved) {
+            try {
+              const result = await command();
 
-            clearTimeout(timeoutID);
+              clearTimeout(timeoutID);
 
-            return result;
-          } catch (e) {
-            error = e;
+              return result;
+            } catch (e) {
+              error = e;
+            }
+
+            await new Promise<void>(setImmediate);
           }
 
-          await new Promise<void>(setImmediate);
-        }
+          /* istanbul ignore next */
+          throw error;
+        })(),
+        (async () => {
+          await new Promise<void>(resolve => {
+            timeoutID = setTimeout(resolve, timeout);
+          });
 
-        /* istanbul ignore next */
-        throw error;
-      })(),
-      (async () => {
-        await new Promise<void>(resolve => {
-          timeoutID = setTimeout(resolve, timeout);
-        });
+          resolved = true;
 
-        resolved = true;
-
-        throw error;
-      })()
-    ]);
+          throw error;
+        })()
+      ]);
+    }
   };
 }

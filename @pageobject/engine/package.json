@@ -1,7 +1,7 @@
 {
   "name": "@pageobject/engine",
   "version": "1.0.0-beta-1",
-  "description": "This package makes it possible to execute arbitrary commands reliably.",
+  "description": "This package allows you to execute unreliable, asynchronous, and idempotent commands reliably.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
   "homepage": "https://pageobject.js.org/",

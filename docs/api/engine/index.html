@@ -907,11 +907,14 @@ img { max-width: 100%; }
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
+		<li class=" tsd-kind-interface tsd-has-type-parameter">
+			<a href="interfaces/retryengine.html" class="tsd-kind-icon">Retry<wbr>Engine</a>
+		</li>
 		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
-			<a href="index.html#engine" class="tsd-kind-icon">Engine</a>
+			<a href="index.html#command" class="tsd-kind-icon">Command</a>
 		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter">
-			<a href="index.html#createengine" class="tsd-kind-icon">create<wbr>Engine</a>
+			<a href="index.html#createretryengine" class="tsd-kind-icon">create<wbr>Retry<wbr>Engine</a>
 		</li>
 	</ul>
 </nav>
@@ -922,15 +925,21 @@ img { max-width: 100%; }
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
+						<h3>Interfaces</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/retryengine.html" class="tsd-kind-icon">Retry<wbr>Engine</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
 						<h3>Type aliases</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="index.html#engine" class="tsd-kind-icon">Engine</a></li>
+							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="index.html#command" class="tsd-kind-icon">Command</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-function tsd-has-type-parameter"><a href="index.html#createengine" class="tsd-kind-icon">create<wbr>Engine</a></li>
+							<li class="tsd-kind-function tsd-has-type-parameter"><a href="index.html#createretryengine" class="tsd-kind-icon">create<wbr>Retry<wbr>Engine</a></li>
 						</ul>
 					</section>
 				</div>
@@ -939,9 +948,9 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Type aliases</h2>
 			<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
-				<a name="engine" class="tsd-anchor"></a>
-				<h3>Engine</h3>
-				<div class="tsd-signature tsd-kind-icon">Engine<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+				<a name="command" class="tsd-anchor"></a>
+				<h3>Command</h3>
+				<div class="tsd-signature tsd-kind-icon">Command<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
 						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/engine/src/index.ts#L1">index.ts:1</a></li>
@@ -952,31 +961,10 @@ img { max-width: 100%; }
 					<ul class="tsd-parameters">
 						<li class="tsd-parameter-siganture">
 							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
-								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>command<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, timeout<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></li>
+								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></li>
 							</ul>
 							<ul class="tsd-descriptions">
 								<li class="tsd-description">
-									<h4 class="tsd-parameters-title">Parameters</h4>
-									<ul class="tsd-parameters">
-										<li>
-											<h5>command: <span class="tsd-signature-type">function</span></h5>
-											<ul class="tsd-parameters">
-												<li class="tsd-parameter-siganture">
-													<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-														<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></li>
-													</ul>
-													<ul class="tsd-descriptions">
-														<li class="tsd-description">
-															<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
-														</li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-										<li>
-											<h5><span class="tsd-flag ts-flagOptional">Optional</span> timeout: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
-										</li>
-									</ul>
 									<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
 								</li>
 							</ul>
@@ -988,21 +976,21 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Functions</h2>
 			<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
-				<a name="createengine" class="tsd-anchor"></a>
-				<h3>create<wbr>Engine</h3>
+				<a name="createretryengine" class="tsd-anchor"></a>
+				<h3>create<wbr>Retry<wbr>Engine</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
-					<li class="tsd-signature tsd-kind-icon">create<wbr>Engine&lt;TResult&gt;<span class="tsd-signature-symbol">(</span>defaultTimeout<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.html#engine" class="tsd-signature-type">Engine</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">create<wbr>Retry<wbr>Engine&lt;TResult&gt;<span class="tsd-signature-symbol">(</span>defaultTimeout<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/retryengine.html" class="tsd-signature-type">RetryEngine</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/engine/src/index.ts#L9">index.ts:9</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/engine/src/index.ts#L10">index.ts:10</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p><code>import {createEngine} from &#39;@pageobject/engine&#39;;</code></p>
+								<p><code>import {createRetryEngine} from &#39;@pageobject/engine&#39;;</code></p>
 							</div>
 						</div>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1017,7 +1005,7 @@ img { max-width: 100%; }
 								<h5>defaultTimeout: <span class="tsd-signature-type">number</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <a href="index.html#engine" class="tsd-signature-type">Engine</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <a href="interfaces/retryengine.html" class="tsd-signature-type">RetryEngine</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
