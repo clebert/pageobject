@@ -45,7 +45,6 @@
     "@pageobject/standard-test": "^1.0.0-beta-1",
     "@types/selenium-webdriver": "^3.0.8",
     "chromedriver": "^2.35.0",
-    "find-process": "^1.1.0",
     "selenium-webdriver": "^3.6.0"
   }
 }

@@ -36,8 +36,10 @@ The **complete code** of this example can be found in the file [`example.js`][in
 
 ```js
 const driver = await new Builder()
-  .forBrowser('chrome')
-  .setChromeOptions(new Options().detachDriver(false).headless())
+  .withCapabilities({
+    browserName: 'chrome',
+    chromeOptions: {args: ['headless', 'disable-gpu']}
+  })
   .build();
 ```
 
