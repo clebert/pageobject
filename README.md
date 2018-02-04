@@ -6,41 +6,41 @@
 
 ## Packages
 
-This is a multi-package repository ([monorepo][monorepo]).
+This is a multi-package repository ([monorepo][external-monorepo]).
 
 ### @pageobject/core
 
-**[README][repo-readme-core] | [API][repo-api-core]**
+**[Installation][internal-installation-core] | [API][internal-api-core]**
 
 This package is the basis for the PageObjectJS standard API.
 
 ### @pageobject/engine
 
-**[README][repo-readme-engine] | [API][repo-api-engine]**
+**[Installation][internal-installation-engine] | [API][internal-api-engine] | [Usage][internal-usage-engine]**
 
-This package allows you to execute unreliable, asynchronous, and [idempotent][wiki-idempotence] commands reliably.
+This package allows you to execute unreliable, asynchronous, and [idempotent][external-wiki-idempotence] commands reliably.
 
 ### @pageobject/standard
 
-**[README][repo-readme-standard] | [API][repo-api-standard]**
+**[Installation][internal-installation-standard] | [API][internal-api-standard]**
 
 This package defines an API that can be implemented for virtually any browser automation framework.
 
 ### @pageobject/standard-puppeteer
 
-**[README][repo-readme-standard-puppeteer] | [API][repo-api-standard-puppeteer]**
+**[Installation][internal-installation-standard-puppeteer] | [API][internal-api-standard-puppeteer] | [Usage][internal-usage-standard-puppeteer]**
 
-This package implements the PageObjectJS standard API for [Puppeteer][puppeteer].
+This package implements the PageObjectJS standard API for [Puppeteer][external-puppeteer].
 
 ### @pageobject/standard-selenium
 
-**[README][repo-readme-standard-selenium] | [API][repo-api-standard-selenium]**
+**[Installation][internal-installation-standard-selenium] | [API][internal-api-standard-selenium] | [Usage][internal-usage-standard-selenium]**
 
-This package implements the PageObjectJS standard API for [Selenium][selenium].
+This package implements the PageObjectJS standard API for [Selenium][external-selenium].
 
 ### @pageobject/standard-test
 
-**[README][repo-readme-standard-test] | [API][repo-api-standard-test]**
+**[Installation][internal-installation-standard-test] | [API][internal-api-standard-test]**
 
 This package allows you to test the compatibility of your implementation of the PageObjectJS standard API.
 
@@ -66,7 +66,7 @@ yarn test
 
 ### Formatting sources
 
-By default, a [Git Hook][githooks] is installed to automatically format all files of a commit.
+By default, a [Git Hook][external-githooks] is installed to automatically format all files of a commit.
 Manually, it can be executed with the following command:
 
 ```sh
@@ -87,7 +87,7 @@ yarn run release
 
 ---
 
-Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-license].
+Built by (c) Clemens Akens. Released under the terms of the [MIT License][internal-license].
 
 [badge-coveralls-image]: https://coveralls.io/repos/github/clebert/pageobject/badge.svg?branch=master
 [badge-coveralls-link]: https://coveralls.io/github/clebert/pageobject?branch=master
@@ -95,21 +95,26 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 [badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
 [badge-typescript-link]: https://www.typescriptlang.org/
-[repo-api-core]: https://pageobject.js.org/api/core/
-[repo-api-engine]: https://pageobject.js.org/api/engine/
-[repo-api-standard]: https://pageobject.js.org/api/standard/
-[repo-api-standard-puppeteer]: https://pageobject.js.org/api/standard-puppeteer/
-[repo-api-standard-selenium]: https://pageobject.js.org/api/standard-selenium/
-[repo-api-standard-test]: https://pageobject.js.org/api/standard-test/
-[repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
-[repo-readme-core]: https://github.com/clebert/pageobject/tree/master/@pageobject/core/README.md
-[repo-readme-engine]: https://github.com/clebert/pageobject/tree/master/@pageobject/engine/README.md
-[repo-readme-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard/README.md
-[repo-readme-standard-puppeteer]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-puppeteer/README.md
-[repo-readme-standard-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-selenium/README.md
-[repo-readme-standard-test]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-test/README.md
-[githooks]: https://git-scm.com/docs/githooks
-[monorepo]: https://github.com/lerna/lerna#about
-[puppeteer]: https://github.com/GoogleChrome/puppeteer/blob/master/README.md
-[selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
-[wiki-idempotence]: https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning
+
+[internal-api-core]: https://pageobject.js.org/api/core/
+[internal-api-engine]: https://pageobject.js.org/api/engine/
+[internal-api-standard]: https://pageobject.js.org/api/standard/
+[internal-api-standard-puppeteer]: https://pageobject.js.org/api/standard-puppeteer/
+[internal-api-standard-selenium]: https://pageobject.js.org/api/standard-selenium/
+[internal-api-standard-test]: https://pageobject.js.org/api/standard-test/
+[internal-installation-core]: https://github.com/clebert/pageobject/tree/master/@pageobject/core/README.md#installation
+[internal-installation-engine]: https://github.com/clebert/pageobject/tree/master/@pageobject/engine/README.md#installation
+[internal-installation-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard/README.md#installation
+[internal-installation-standard-puppeteer]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-puppeteer/README.md#installation
+[internal-installation-standard-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-selenium/README.md#installation
+[internal-installation-standard-test]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-test/README.md#installation
+[internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
+[internal-usage-engine]: https://github.com/clebert/pageobject/blob/master/%40pageobject/engine/README.md#usage
+[internal-usage-standard-puppeteer]: https://github.com/clebert/pageobject/blob/master/%40pageobject/standard-puppeteer/README.md#usage
+[internal-usage-standard-selenium]: https://github.com/clebert/pageobject/blob/master/%40pageobject/standard-selenium/README.md#usage
+
+[external-githooks]: https://git-scm.com/docs/githooks
+[external-monorepo]: https://github.com/lerna/lerna#about
+[external-puppeteer]: https://github.com/GoogleChrome/puppeteer/blob/master/README.md
+[external-selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
+[external-wiki-idempotence]: https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning

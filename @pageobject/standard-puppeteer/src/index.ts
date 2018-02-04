@@ -1,9 +1,9 @@
 import {
   StandardAction,
   StandardElement,
-  StandardFinder
+  StandardPage
 } from '@pageobject/standard';
-import {ElementHandle, Page} from 'puppeteer';
+import {Browser, ElementHandle, Page} from 'puppeteer';
 
 class PuppeteerElement implements StandardElement {
   public readonly adaptee: ElementHandle;
@@ -33,16 +33,57 @@ class PuppeteerElement implements StandardElement {
 
 /**
  * ```js
- * import {createFinder} from '@pageobject/standard-puppeteer';
+ * // ES2015 modules
+ * import {PuppeteerPage} from '@pageobject/standard-puppeteer';
+ *
+ * // CommonJS
+ * const {PuppeteerPage} = require('@pageobject/standard-puppeteer');
  * ```
  */
-export function createFinder(page: Page): StandardFinder {
-  return async (selector, parent) => {
+export class PuppeteerPage implements StandardPage {
+  /**
+   * @param url The URL to navigate to.
+   * @param browser An instance of the class [Browser](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-browser).
+   */
+  public static async load(
+    url: string,
+    browser: Browser
+  ): Promise<PuppeteerPage> {
+    const page = new PuppeteerPage(await browser.newPage(), browser);
+
+    await page.adaptee.goto(url);
+
+    return page;
+  }
+
+  /**
+   * The [Page](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-page) instance adapted by this page.
+   */
+  public readonly adaptee: Page;
+
+  /**
+   * The parent [Browser](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-browser) instance for this page.
+   */
+  public readonly browser: Browser;
+
+  /**
+   * @param adaptee An instance of the class [Page](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-page).
+   * @param browser An instance of the class [Browser](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-browser).
+   */
+  public constructor(adaptee: Page, browser: Browser) {
+    this.adaptee = adaptee;
+    this.browser = browser;
+  }
+
+  public async findElements(
+    selector: string,
+    parent?: StandardElement
+  ): Promise<StandardElement[]> {
     if (parent && !(parent instanceof PuppeteerElement)) {
       throw new Error('Incompatible parent element');
     }
 
-    const elementsHandle = await page.evaluateHandle(
+    const elementsHandle = await this.adaptee.evaluateHandle(
       /* istanbul ignore next */
       (_selector: string, _parent: Element | undefined) =>
         (_parent || document).querySelectorAll(_selector),
@@ -71,6 +112,6 @@ export function createFinder(page: Page): StandardFinder {
 
     await elementsHandle.dispose();
 
-    return elements.map(element => new PuppeteerElement(element, page));
-  };
+    return elements.map(element => new PuppeteerElement(element, this.adaptee));
+  }
 }

@@ -16,7 +16,11 @@ export interface RetryEngine<TResult> {
 
 /**
  * ```js
+ * // ES2015 modules
  * import {createRetryEngine} from '@pageobject/engine';
+ *
+ * // CommonJS
+ * const {createRetryEngine} = require('@pageobject/engine');
  * ```
  */
 export function createRetryEngine<TResult = void>(

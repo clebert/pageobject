@@ -1,19 +1,18 @@
-export type Finder<TElement> = (
-  selector: string,
-  parent?: TElement
-) => Promise<TElement[]>;
-
 export type Predicate<TElement, TPageObject extends PageObject<TElement>> = (
   pageObject: TPageObject,
   index: number,
   pageObjects: TPageObject[]
 ) => Promise<boolean>;
 
+export interface Page<TElement> {
+  findElements(selector: string, parent?: TElement): Promise<TElement[]>;
+}
+
 export interface PageObjectConstructor<
   TElement,
   TPageObject extends PageObject<TElement>
 > {
-  new (finder: Finder<TElement>, parent?: PageObject<TElement>): TPageObject;
+  new (page: Page<TElement>, parent?: PageObject<TElement>): TPageObject;
 }
 
 export interface PageObject<TElement> {
@@ -30,21 +29,25 @@ export interface PageObject<TElement> {
 
 /**
  * ```js
+ * // ES2015 modules
  * import {AbstractPageObject} from '@pageobject/core';
+ *
+ * // CommonJS
+ * const {AbstractPageObject} = require('@pageobject/core');
  * ```
  */
 export abstract class AbstractPageObject<TElement>
   implements PageObject<TElement> {
   public abstract readonly selector: string;
 
-  private readonly _finder: Finder<TElement>;
+  private readonly _page: Page<TElement>;
   private readonly _parent?: PageObject<TElement>;
 
   private _selectionCriterion?: Predicate<TElement, this>;
   private _element?: TElement;
 
-  public constructor(finder: Finder<TElement>, parent?: PageObject<TElement>) {
-    this._finder = finder;
+  public constructor(page: Page<TElement>, parent?: PageObject<TElement>) {
+    this._page = page;
     this._parent = parent;
   }
 
@@ -57,7 +60,7 @@ export abstract class AbstractPageObject<TElement>
   public select<TPageObject extends PageObject<TElement>>(
     Descendant: PageObjectConstructor<TElement, TPageObject>
   ): TPageObject {
-    return new Descendant(this._finder, this);
+    return new Descendant(this._page, this);
   }
 
   /**
@@ -75,7 +78,7 @@ export abstract class AbstractPageObject<TElement>
     }
 
     const Copy = this.constructor as PageObjectConstructor<TElement, this>;
-    const copy = new Copy(this._finder, this._parent);
+    const copy = new Copy(this._page, this._parent);
 
     copy._selectionCriterion = selectionCriterion;
 
@@ -114,9 +117,9 @@ export abstract class AbstractPageObject<TElement>
   }
 
   private async _findElements(): Promise<TElement[]> {
-    const {_selectionCriterion, _finder, _parent, selector} = this;
+    const {_page, _parent, _selectionCriterion, selector} = this;
     const parentElement = _parent ? await _parent.getElement() : undefined;
-    const elements = await _finder(selector, parentElement);
+    const elements = await _page.findElements(selector, parentElement);
 
     if (!_selectionCriterion || elements.length === 0) {
       return elements;
@@ -127,7 +130,7 @@ export abstract class AbstractPageObject<TElement>
     const results = await Promise.all(
       elements
         .map(element => {
-          const pageObject = new Copy(_finder);
+          const pageObject = new Copy(_page);
 
           pageObject._element = element;
 
@@ -142,7 +145,11 @@ export abstract class AbstractPageObject<TElement>
 
 /**
  * ```js
+ * // ES2015 modules
  * import {and} from '@pageobject/core';
+ *
+ * // CommonJS
+ * const {and} = require('@pageobject/core');
  * ```
  */
 export function and<TElement, TPageObject extends PageObject<TElement>>(
@@ -157,7 +164,11 @@ export function and<TElement, TPageObject extends PageObject<TElement>>(
 
 /**
  * ```js
+ * // ES2015 modules
  * import {or} from '@pageobject/core';
+ *
+ * // CommonJS
+ * const {or} = require('@pageobject/core');
  * ```
  */
 export function or<TElement, TPageObject extends PageObject<TElement>>(
@@ -172,7 +183,11 @@ export function or<TElement, TPageObject extends PageObject<TElement>>(
 
 /**
  * ```js
+ * // ES2015 modules
  * import {not} from '@pageobject/core';
+ *
+ * // CommonJS
+ * const {not} = require('@pageobject/core');
  * ```
  */
 export function not<TElement, TPageObject extends PageObject<TElement>>(
@@ -184,7 +199,11 @@ export function not<TElement, TPageObject extends PageObject<TElement>>(
 
 /**
  * ```js
+ * // ES2015 modules
  * import {indexEquals} from '@pageobject/core';
+ *
+ * // CommonJS
+ * const {indexEquals} = require('@pageobject/core');
  * ```
  */
 export function indexEquals<TElement, TPageObject extends PageObject<TElement>>(
@@ -195,7 +214,11 @@ export function indexEquals<TElement, TPageObject extends PageObject<TElement>>(
 
 /**
  * ```js
+ * // ES2015 modules
  * import {indexIsGreaterThan} from '@pageobject/core';
+ *
+ * // CommonJS
+ * const {indexIsGreaterThan} = require('@pageobject/core');
  * ```
  */
 export function indexIsGreaterThan<
@@ -207,7 +230,11 @@ export function indexIsGreaterThan<
 
 /**
  * ```js
+ * // ES2015 modules
  * import {indexIsGreaterThanOrEquals} from '@pageobject/core';
+ *
+ * // CommonJS
+ * const {indexIsGreaterThanOrEquals} = require('@pageobject/core');
  * ```
  */
 export function indexIsGreaterThanOrEquals<
@@ -219,7 +246,11 @@ export function indexIsGreaterThanOrEquals<
 
 /**
  * ```js
+ * // ES2015 modules
  * import {indexIsLessThan} from '@pageobject/core';
+ *
+ * // CommonJS
+ * const {indexIsLessThan} = require('@pageobject/core');
  * ```
  */
 export function indexIsLessThan<
@@ -231,7 +262,11 @@ export function indexIsLessThan<
 
 /**
  * ```js
+ * // ES2015 modules
  * import {indexIsLessThanOrEquals} from '@pageobject/core';
+ *
+ * // CommonJS
+ * const {indexIsLessThanOrEquals} = require('@pageobject/core');
  * ```
  */
 export function indexIsLessThanOrEquals<

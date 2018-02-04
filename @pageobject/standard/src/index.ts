@@ -2,7 +2,7 @@
 
 import {
   AbstractPageObject,
-  Finder,
+  Page,
   PageObjectConstructor,
   Predicate
 } from '@pageobject/core';
@@ -23,7 +23,7 @@ export interface StandardElement {
   type(text: string): Promise<void>;
 }
 
-export type StandardFinder = Finder<StandardElement>;
+export type StandardPage = Page<StandardElement>;
 
 export type StandardPageObjectConstructor<
   TPageObject extends StandardPageObject
@@ -35,7 +35,11 @@ export type StandardPredicate<
 
 /**
  * ```js
+ * // ES2015 modules
  * import {StandardPageObject} from '@pageobject/standard';
+ *
+ * // CommonJS
+ * const {StandardPageObject} = require('@pageobject/standard');
  * ```
  */
 export abstract class StandardPageObject extends AbstractPageObject<

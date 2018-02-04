@@ -1,7 +1,7 @@
 import {
   StandardAction,
   StandardElement,
-  StandardFinder
+  StandardPage
 } from '@pageobject/standard';
 import {By, WebDriver, WebElement, promise} from 'selenium-webdriver';
 
@@ -38,17 +38,51 @@ class SeleniumElement implements StandardElement {
 
 /**
  * ```js
- * import {createFinder} from '@pageobject/standard-selenium';
+ * // ES2015 modules
+ * import {SeleniumPage} from '@pageobject/standard-selenium';
+ *
+ * // CommonJS
+ * const {SeleniumPage} = require('@pageobject/standard-selenium');
  * ```
  */
-export function createFinder(driver: WebDriver): StandardFinder {
-  return async (selector, parent) => {
+export class SeleniumPage implements StandardPage {
+  /**
+   * @param url The URL to navigate to.
+   * @param driver An instance of the class [WebDriver](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html).
+   */
+  public static async load(
+    url: string,
+    driver: WebDriver
+  ): Promise<SeleniumPage> {
+    const page = new SeleniumPage(driver);
+
+    await driver.navigate().to(url);
+
+    return page;
+  }
+
+  /**
+   * The parent [WebDriver](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html) instance for this page.
+   */
+  public readonly driver: WebDriver;
+
+  /**
+   * @param driver An instance of the class [WebDriver](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html).
+   */
+  public constructor(driver: WebDriver) {
+    this.driver = driver;
+  }
+
+  public async findElements(
+    selector: string,
+    parent?: StandardElement
+  ): Promise<StandardElement[]> {
     if (parent && !(parent instanceof SeleniumElement)) {
       throw new Error('Incompatible parent element');
     }
 
-    return (await ((parent && parent.adaptee) || driver).findElements(
+    return (await ((parent && parent.adaptee) || this.driver).findElements(
       By.css(selector)
     )).map(element => new SeleniumElement(element));
-  };
+  }
 }
