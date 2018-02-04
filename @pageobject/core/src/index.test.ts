@@ -250,136 +250,146 @@ describe('Grandchild', () => {
 const falsy = () => jest.fn().mockImplementation(async () => false);
 const truthy = () => jest.fn().mockImplementation(async () => true);
 
-describe('and()', () => {
-  it('should return true', async () => {
-    const predicateA = truthy();
-    const predicateB = truthy();
+describe('predicates', () => {
+  describe('and()', () => {
+    it('should return true', async () => {
+      const predicateA = truthy();
+      const predicateB = truthy();
 
-    await expect(and(predicateA, predicateB)(root, 123, [root])).resolves.toBe(
-      true
-    );
+      await expect(
+        and(predicateA, predicateB)(root, 123, [root])
+      ).resolves.toBe(true);
 
-    expect(predicateA).toHaveBeenCalledTimes(1);
-    expect(predicateA).toHaveBeenCalledWith(root, 123, [root]);
+      expect(predicateA).toHaveBeenCalledTimes(1);
+      expect(predicateA).toHaveBeenCalledWith(root, 123, [root]);
 
-    expect(predicateB).toHaveBeenCalledTimes(1);
-    expect(predicateB).toHaveBeenCalledWith(root, 123, [root]);
+      expect(predicateB).toHaveBeenCalledTimes(1);
+      expect(predicateB).toHaveBeenCalledWith(root, 123, [root]);
+    });
+
+    it('should return false', async () => {
+      await expect(and(falsy(), falsy())(root, 123, [root])).resolves.toBe(
+        false
+      );
+
+      await expect(and(falsy(), truthy())(root, 123, [root])).resolves.toBe(
+        false
+      );
+
+      await expect(and(truthy(), falsy())(root, 123, [root])).resolves.toBe(
+        false
+      );
+    });
   });
 
-  it('should return false', async () => {
-    await expect(and(falsy(), falsy())(root, 123, [root])).resolves.toBe(false);
+  describe('or()', () => {
+    it('should return true', async () => {
+      const predicateA = falsy();
+      const predicateB = truthy();
 
-    await expect(and(falsy(), truthy())(root, 123, [root])).resolves.toBe(
-      false
-    );
+      await expect(or(predicateA, predicateB)(root, 123, [root])).resolves.toBe(
+        true
+      );
 
-    await expect(and(truthy(), falsy())(root, 123, [root])).resolves.toBe(
-      false
-    );
-  });
-});
+      expect(predicateA).toHaveBeenCalledTimes(1);
+      expect(predicateA).toHaveBeenCalledWith(root, 123, [root]);
 
-describe('or()', () => {
-  it('should return true', async () => {
-    const predicateA = falsy();
-    const predicateB = truthy();
+      expect(predicateB).toHaveBeenCalledTimes(1);
+      expect(predicateB).toHaveBeenCalledWith(root, 123, [root]);
 
-    await expect(or(predicateA, predicateB)(root, 123, [root])).resolves.toBe(
-      true
-    );
+      await expect(or(truthy(), falsy())(root, 123, [root])).resolves.toBe(
+        true
+      );
 
-    expect(predicateA).toHaveBeenCalledTimes(1);
-    expect(predicateA).toHaveBeenCalledWith(root, 123, [root]);
+      await expect(or(truthy(), truthy())(root, 123, [root])).resolves.toBe(
+        true
+      );
+    });
 
-    expect(predicateB).toHaveBeenCalledTimes(1);
-    expect(predicateB).toHaveBeenCalledWith(root, 123, [root]);
-
-    await expect(or(truthy(), falsy())(root, 123, [root])).resolves.toBe(true);
-
-    await expect(or(truthy(), truthy())(root, 123, [root])).resolves.toBe(true);
+    it('should return false', async () => {
+      await expect(or(falsy(), falsy())(root, 123, [root])).resolves.toBe(
+        false
+      );
+    });
   });
 
-  it('should return false', async () => {
-    await expect(or(falsy(), falsy())(root, 123, [root])).resolves.toBe(false);
-  });
-});
+  describe('not()', () => {
+    it('should return true', async () => {
+      const predicate = falsy();
 
-describe('not()', () => {
-  it('should return true', async () => {
-    const predicate = falsy();
+      await expect(not(predicate)(root, 123, [root])).resolves.toBe(true);
 
-    await expect(not(predicate)(root, 123, [root])).resolves.toBe(true);
+      expect(predicate).toHaveBeenCalledTimes(1);
+      expect(predicate).toHaveBeenCalledWith(root, 123, [root]);
+    });
 
-    expect(predicate).toHaveBeenCalledTimes(1);
-    expect(predicate).toHaveBeenCalledWith(root, 123, [root]);
-  });
-
-  it('should return false', async () => {
-    await expect(not(truthy())(root, 123, [root])).resolves.toBe(false);
-  });
-});
-
-describe('indexEquals()', () => {
-  const predicate = indexEquals<Element, Root>(1);
-
-  it('should return true', async () => {
-    await expect(predicate(root, 1, [root])).resolves.toBe(true);
+    it('should return false', async () => {
+      await expect(not(truthy())(root, 123, [root])).resolves.toBe(false);
+    });
   });
 
-  it('should return false', async () => {
-    await expect(predicate(root, 0, [root])).resolves.toBe(false);
-    await expect(predicate(root, 2, [root])).resolves.toBe(false);
-  });
-});
+  describe('indexEquals()', () => {
+    const predicate = indexEquals<Element, Root>(1);
 
-describe('indexIsGreaterThan()', () => {
-  const predicate = indexIsGreaterThan<Element, Root>(1);
+    it('should return true', async () => {
+      await expect(predicate(root, 1, [root])).resolves.toBe(true);
+    });
 
-  it('should return true', async () => {
-    await expect(predicate(root, 2, [root])).resolves.toBe(true);
-  });
-
-  it('should return false', async () => {
-    await expect(predicate(root, 0, [root])).resolves.toBe(false);
-    await expect(predicate(root, 1, [root])).resolves.toBe(false);
-  });
-});
-
-describe('indexIsGreaterThanOrEquals()', () => {
-  const predicate = indexIsGreaterThanOrEquals<Element, Root>(1);
-
-  it('should return true', async () => {
-    await expect(predicate(root, 1, [root])).resolves.toBe(true);
-    await expect(predicate(root, 2, [root])).resolves.toBe(true);
+    it('should return false', async () => {
+      await expect(predicate(root, 0, [root])).resolves.toBe(false);
+      await expect(predicate(root, 2, [root])).resolves.toBe(false);
+    });
   });
 
-  it('should return false', async () => {
-    await expect(predicate(root, 0, [root])).resolves.toBe(false);
-  });
-});
+  describe('indexIsGreaterThan()', () => {
+    const predicate = indexIsGreaterThan<Element, Root>(1);
 
-describe('indexIsLessThan()', () => {
-  const predicate = indexIsLessThan<Element, Root>(1);
+    it('should return true', async () => {
+      await expect(predicate(root, 2, [root])).resolves.toBe(true);
+    });
 
-  it('should return true', async () => {
-    await expect(predicate(root, 0, [root])).resolves.toBe(true);
-  });
-
-  it('should return false', async () => {
-    await expect(predicate(root, 1, [root])).resolves.toBe(false);
-    await expect(predicate(root, 2, [root])).resolves.toBe(false);
-  });
-});
-
-describe('indexIsLessThanOrEquals()', () => {
-  const predicate = indexIsLessThanOrEquals<Element, Root>(1);
-
-  it('should return true', async () => {
-    await expect(predicate(root, 0, [root])).resolves.toBe(true);
-    await expect(predicate(root, 1, [root])).resolves.toBe(true);
+    it('should return false', async () => {
+      await expect(predicate(root, 0, [root])).resolves.toBe(false);
+      await expect(predicate(root, 1, [root])).resolves.toBe(false);
+    });
   });
 
-  it('should return false', async () => {
-    await expect(predicate(root, 2, [root])).resolves.toBe(false);
+  describe('indexIsGreaterThanOrEquals()', () => {
+    const predicate = indexIsGreaterThanOrEquals<Element, Root>(1);
+
+    it('should return true', async () => {
+      await expect(predicate(root, 1, [root])).resolves.toBe(true);
+      await expect(predicate(root, 2, [root])).resolves.toBe(true);
+    });
+
+    it('should return false', async () => {
+      await expect(predicate(root, 0, [root])).resolves.toBe(false);
+    });
+  });
+
+  describe('indexIsLessThan()', () => {
+    const predicate = indexIsLessThan<Element, Root>(1);
+
+    it('should return true', async () => {
+      await expect(predicate(root, 0, [root])).resolves.toBe(true);
+    });
+
+    it('should return false', async () => {
+      await expect(predicate(root, 1, [root])).resolves.toBe(false);
+      await expect(predicate(root, 2, [root])).resolves.toBe(false);
+    });
+  });
+
+  describe('indexIsLessThanOrEquals()', () => {
+    const predicate = indexIsLessThanOrEquals<Element, Root>(1);
+
+    it('should return true', async () => {
+      await expect(predicate(root, 0, [root])).resolves.toBe(true);
+      await expect(predicate(root, 1, [root])).resolves.toBe(true);
+    });
+
+    it('should return false', async () => {
+      await expect(predicate(root, 2, [root])).resolves.toBe(false);
+    });
   });
 });

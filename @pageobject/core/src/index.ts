@@ -44,6 +44,9 @@ export interface PageObject<TElement> {
  */
 export abstract class AbstractPageObject<TElement>
   implements PageObject<TElement> {
+  /**
+   * The [CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) describing this page object.
+   */
   public abstract readonly selector: string;
 
   private readonly _page: Page<TElement>;

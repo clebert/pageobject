@@ -2,7 +2,7 @@
 
 **Readable**, **stable**, and **maintainable** E2E tests written using a browser automation framework of your choice.
 
-⚠️ **This software is currently in beta stage. Breaking changes can happen at any time. There are no usage examples yet.**
+⚠️ **This software is currently in beta stage. Breaking changes can happen at any time.**
 
 ## Packages
 
@@ -109,9 +109,9 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [internal-installation-standard-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-selenium/README.md#installation
 [internal-installation-standard-test]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-test/README.md#installation
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
-[internal-usage-engine]: https://github.com/clebert/pageobject/blob/master/%40pageobject/engine/README.md#usage
-[internal-usage-standard-puppeteer]: https://github.com/clebert/pageobject/blob/master/%40pageobject/standard-puppeteer/README.md#usage
-[internal-usage-standard-selenium]: https://github.com/clebert/pageobject/blob/master/%40pageobject/standard-selenium/README.md#usage
+[internal-usage-engine]: https://github.com/clebert/pageobject/blob/master/@pageobject/engine/README.md#usage
+[internal-usage-standard-puppeteer]: https://github.com/clebert/pageobject/blob/master/@pageobject/standard-puppeteer/README.md#usage
+[internal-usage-standard-selenium]: https://github.com/clebert/pageobject/blob/master/@pageobject/standard-selenium/README.md#usage
 
 [external-githooks]: https://git-scm.com/docs/githooks
 [external-monorepo]: https://github.com/lerna/lerna#about
