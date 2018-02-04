@@ -57,60 +57,62 @@ const neverEnding = async () => new Promise<void>(() => undefined);
 
 const {retryOnError} = createRetryEngine(10);
 
-describe('retryOnError()', () => {
-  it('should execute the specified command within the specified timeout', async () => {
-    const command = jest
-      .fn()
-      .mockImplementationOnce(erroneous())
-      .mockImplementation(async () => 'result');
+describe('RetryEngine', () => {
+  describe('retryOnError()', () => {
+    it('should execute the specified command within the specified timeout', async () => {
+      const command = jest
+        .fn()
+        .mockImplementationOnce(erroneous())
+        .mockImplementation(async () => 'result');
 
-    await expect(retryOnError(command, 20)).resolves.toBe('result');
+      await expect(retryOnError(command, 20)).resolves.toBe('result');
 
-    expect(command).toHaveBeenCalledTimes(2);
-  });
+      expect(command).toHaveBeenCalledTimes(2);
+    });
 
-  it('should execute the specified command within the default timeout', async () => {
-    const command = jest
-      .fn()
-      .mockImplementationOnce(erroneous())
-      .mockImplementation(async () => 'result');
+    it('should execute the specified command within the default timeout', async () => {
+      const command = jest
+        .fn()
+        .mockImplementationOnce(erroneous())
+        .mockImplementation(async () => 'result');
 
-    await expect(retryOnError(command)).resolves.toBe('result');
+      await expect(retryOnError(command)).resolves.toBe('result');
 
-    expect(command).toHaveBeenCalledTimes(2);
-  });
+      expect(command).toHaveBeenCalledTimes(2);
+    });
 
-  it('should fail to successfully execute the specified command within the specified timeout', async () => {
-    const command = jest
-      .fn()
-      .mockImplementationOnce(erroneous(1))
-      .mockImplementationOnce(erroneous(2))
-      .mockImplementation(neverEnding);
+    it('should fail to successfully execute the specified command within the specified timeout', async () => {
+      const command = jest
+        .fn()
+        .mockImplementationOnce(erroneous(1))
+        .mockImplementationOnce(erroneous(2))
+        .mockImplementation(neverEnding);
 
-    await expect(
-      observeTimeout(async () => retryOnError(command, 20), 20)
-    ).rejects.toThrow('commandError2');
+      await expect(
+        observeTimeout(async () => retryOnError(command, 20), 20)
+      ).rejects.toThrow('commandError2');
 
-    expect(command).toHaveBeenCalledTimes(3);
-  });
+      expect(command).toHaveBeenCalledTimes(3);
+    });
 
-  it('should fail to successfully execute the specified command within the default timeout', async () => {
-    const command = jest
-      .fn()
-      .mockImplementationOnce(erroneous(1))
-      .mockImplementationOnce(erroneous(2))
-      .mockImplementation(neverEnding);
+    it('should fail to successfully execute the specified command within the default timeout', async () => {
+      const command = jest
+        .fn()
+        .mockImplementationOnce(erroneous(1))
+        .mockImplementationOnce(erroneous(2))
+        .mockImplementation(neverEnding);
 
-    await expect(
-      observeTimeout(async () => retryOnError(command), 10)
-    ).rejects.toThrow('commandError2');
+      await expect(
+        observeTimeout(async () => retryOnError(command), 10)
+      ).rejects.toThrow('commandError2');
 
-    expect(command).toHaveBeenCalledTimes(3);
-  });
+      expect(command).toHaveBeenCalledTimes(3);
+    });
 
-  it('should not throw an out-of-memory error', async () => {
-    const command = jest.fn().mockImplementation(erroneous());
+    it('should not throw an out-of-memory error', async () => {
+      const command = jest.fn().mockImplementation(erroneous());
 
-    await expect(retryOnError(command)).rejects.toThrow('commandError');
+      await expect(retryOnError(command)).rejects.toThrow('commandError');
+    });
   });
 });

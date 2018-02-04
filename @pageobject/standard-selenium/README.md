@@ -67,7 +67,7 @@ class Root extends StandardPageObject {
 const root = new Root(page);
 ```
 
-### Run the tests using the page object
+### Run the assertion using the page object
 
 ```js
 assert.strictEqual(await root.getPageTitle(), 'Example Domain');
@@ -85,7 +85,7 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 
 [internal-api-standard-selenium]: https://pageobject.js.org/api/standard-selenium/
-[internal-example-standard-selenium]: https://github.com/clebert/pageobject/blob/master/%40pageobject/standard-selenium/example.js
+[internal-example-standard-selenium]: https://github.com/clebert/pageobject/blob/master/@pageobject/standard-selenium/example.js
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [internal-readme-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard/README.md
 
