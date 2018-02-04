@@ -15,11 +15,15 @@ export interface RetryEngine<TResult> {
 }
 
 /**
- * ```js
- * // ES2015 modules
- * import {createRetryEngine} from '@pageobject/engine';
+ * **Import: ES2015 modules**
  *
- * // CommonJS
+ * ```js
+ * import {createRetryEngine} from '@pageobject/engine';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
  * const {createRetryEngine} = require('@pageobject/engine');
  * ```
  */

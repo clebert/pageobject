@@ -33,22 +33,30 @@ class Unknown extends StandardPageObject {
 }
 
 /**
- * ```js
- * // ES2015 modules
- * import {url} from '@pageobject/standard-test';
+ * **Import: ES2015 modules**
  *
- * // CommonJS
+ * ```js
+ * import {url} from '@pageobject/standard-test';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
  * const {url} = require('@pageobject/standard-test');
  * ```
  */
 export const url = `file://${path.join(__dirname, '../fixtures/index.html')}`;
 
 /**
- * ```js
- * // ES2015 modules
- * import {describePageTests} from '@pageobject/standard-test';
+ * **Import: ES2015 modules**
  *
- * // CommonJS
+ * ```js
+ * import {describePageTests} from '@pageobject/standard-test';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
  * const {describePageTests} = require('@pageobject/standard-test');
  * ```
  */

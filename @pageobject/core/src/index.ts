@@ -28,11 +28,17 @@ export interface PageObject<TElement> {
 }
 
 /**
- * ```js
- * // ES2015 modules
- * import {AbstractPageObject} from '@pageobject/core';
+ * ### Import
  *
- * // CommonJS
+ * **ES2015 modules**
+ *
+ * ```js
+ * import {AbstractPageObject} from '@pageobject/core';
+ * ```
+ *
+ * **CommonJS**
+ *
+ * ```js
  * const {AbstractPageObject} = require('@pageobject/core');
  * ```
  */
@@ -144,11 +150,15 @@ export abstract class AbstractPageObject<TElement>
 }
 
 /**
- * ```js
- * // ES2015 modules
- * import {and} from '@pageobject/core';
+ * **Import: ES2015 modules**
  *
- * // CommonJS
+ * ```js
+ * import {and} from '@pageobject/core';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
  * const {and} = require('@pageobject/core');
  * ```
  */
@@ -163,11 +173,15 @@ export function and<TElement, TPageObject extends PageObject<TElement>>(
 }
 
 /**
- * ```js
- * // ES2015 modules
- * import {or} from '@pageobject/core';
+ * **Import: ES2015 modules**
  *
- * // CommonJS
+ * ```js
+ * import {or} from '@pageobject/core';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
  * const {or} = require('@pageobject/core');
  * ```
  */
@@ -182,11 +196,15 @@ export function or<TElement, TPageObject extends PageObject<TElement>>(
 }
 
 /**
- * ```js
- * // ES2015 modules
- * import {not} from '@pageobject/core';
+ * **Import: ES2015 modules**
  *
- * // CommonJS
+ * ```js
+ * import {not} from '@pageobject/core';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
  * const {not} = require('@pageobject/core');
  * ```
  */
@@ -198,11 +216,15 @@ export function not<TElement, TPageObject extends PageObject<TElement>>(
 }
 
 /**
- * ```js
- * // ES2015 modules
- * import {indexEquals} from '@pageobject/core';
+ * **Import: ES2015 modules**
  *
- * // CommonJS
+ * ```js
+ * import {indexEquals} from '@pageobject/core';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
  * const {indexEquals} = require('@pageobject/core');
  * ```
  */
@@ -213,11 +235,15 @@ export function indexEquals<TElement, TPageObject extends PageObject<TElement>>(
 }
 
 /**
- * ```js
- * // ES2015 modules
- * import {indexIsGreaterThan} from '@pageobject/core';
+ * **Import: ES2015 modules**
  *
- * // CommonJS
+ * ```js
+ * import {indexIsGreaterThan} from '@pageobject/core';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
  * const {indexIsGreaterThan} = require('@pageobject/core');
  * ```
  */
@@ -229,11 +255,15 @@ export function indexIsGreaterThan<
 }
 
 /**
- * ```js
- * // ES2015 modules
- * import {indexIsGreaterThanOrEquals} from '@pageobject/core';
+ * **Import: ES2015 modules**
  *
- * // CommonJS
+ * ```js
+ * import {indexIsGreaterThanOrEquals} from '@pageobject/core';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
  * const {indexIsGreaterThanOrEquals} = require('@pageobject/core');
  * ```
  */
@@ -245,11 +275,15 @@ export function indexIsGreaterThanOrEquals<
 }
 
 /**
- * ```js
- * // ES2015 modules
- * import {indexIsLessThan} from '@pageobject/core';
+ * **Import: ES2015 modules**
  *
- * // CommonJS
+ * ```js
+ * import {indexIsLessThan} from '@pageobject/core';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
  * const {indexIsLessThan} = require('@pageobject/core');
  * ```
  */
@@ -261,11 +295,15 @@ export function indexIsLessThan<
 }
 
 /**
- * ```js
- * // ES2015 modules
- * import {indexIsLessThanOrEquals} from '@pageobject/core';
+ * **Import: ES2015 modules**
  *
- * // CommonJS
+ * ```js
+ * import {indexIsLessThanOrEquals} from '@pageobject/core';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
  * const {indexIsLessThanOrEquals} = require('@pageobject/core');
  * ```
  */

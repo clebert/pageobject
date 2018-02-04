@@ -37,11 +37,17 @@ class SeleniumElement implements StandardElement {
 }
 
 /**
- * ```js
- * // ES2015 modules
- * import {SeleniumPage} from '@pageobject/standard-selenium';
+ * ### Import
  *
- * // CommonJS
+ * **ES2015 modules**
+ *
+ * ```js
+ * import {SeleniumPage} from '@pageobject/standard-selenium';
+ * ```
+ *
+ * **CommonJS**
+ *
+ * ```js
  * const {SeleniumPage} = require('@pageobject/standard-selenium');
  * ```
  */

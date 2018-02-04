@@ -16,11 +16,15 @@ Please find the API documentation [here][internal-api-engine].
 
 ### Import the package
 
-```js
-// ES2015 modules
-import {createRetryEngine} from '@pageobject/engine';
+#### ES2015 modules
 
-// CommonJS
+```js
+import {createRetryEngine} from '@pageobject/engine';
+```
+
+#### CommonJS
+
+```js
 const {createRetryEngine} = require('@pageobject/engine');
 ```
 

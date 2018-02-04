@@ -32,11 +32,17 @@ class PuppeteerElement implements StandardElement {
 }
 
 /**
- * ```js
- * // ES2015 modules
- * import {PuppeteerPage} from '@pageobject/standard-puppeteer';
+ * ### Import
  *
- * // CommonJS
+ * **ES2015 modules**
+ *
+ * ```js
+ * import {PuppeteerPage} from '@pageobject/standard-puppeteer';
+ * ```
+ *
+ * **CommonJS**
+ *
+ * ```js
  * const {PuppeteerPage} = require('@pageobject/standard-puppeteer');
  * ```
  */

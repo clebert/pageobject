@@ -34,11 +34,17 @@ export type StandardPredicate<
 > = Predicate<StandardElement, TPageObject>;
 
 /**
- * ```js
- * // ES2015 modules
- * import {StandardPageObject} from '@pageobject/standard';
+ * ### Import
  *
- * // CommonJS
+ * **ES2015 modules**
+ *
+ * ```js
+ * import {StandardPageObject} from '@pageobject/standard';
+ * ```
+ *
+ * **CommonJS**
+ *
+ * ```js
  * const {StandardPageObject} = require('@pageobject/standard');
  * ```
  */
