@@ -1,7 +1,7 @@
 import {indexEquals} from '@pageobject/core';
 import {
   StandardElement,
-  StandardFinder,
+  StandardPage,
   StandardPageObject
 } from '@pageobject/standard';
 import * as path from 'path';
@@ -34,19 +34,27 @@ class Unknown extends StandardPageObject {
 
 /**
  * ```js
+ * // ES2015 modules
  * import {url} from '@pageobject/standard-test';
+ *
+ * // CommonJS
+ * const {url} = require('@pageobject/standard-test');
  * ```
  */
 export const url = `file://${path.join(__dirname, '../fixtures/index.html')}`;
 
 /**
  * ```js
- * import {describeTests} from '@pageobject/standard-test';
+ * // ES2015 modules
+ * import {describePageTests} from '@pageobject/standard-test';
+ *
+ * // CommonJS
+ * const {describePageTests} = require('@pageobject/standard-test');
  * ```
  */
-export function describeTests(createFinder: () => StandardFinder): void {
-  describe('finder()', () => {
-    let finder: StandardFinder;
+export function describePageTests(getPage: () => StandardPage): void {
+  describe('StandardPage', () => {
+    let page: StandardPage;
     let root: Root;
     let container: Container;
     let radioInput: RadioInput;
@@ -54,56 +62,58 @@ export function describeTests(createFinder: () => StandardFinder): void {
     let unknown: Unknown;
 
     beforeAll(() => {
-      finder = createFinder();
-      root = new Root(finder);
+      page = getPage();
+      root = new Root(page);
       container = root.select(Container).where(indexEquals(0));
       radioInput = root.select(RadioInput);
       textInput = root.select(TextInput);
       unknown = root.select(Unknown);
     });
 
-    it('should throw an incompatible-parent-element error', async () => {
-      await expect(
-        finder('selector', new IncompatibleElement())
-      ).rejects.toThrow('Incompatible parent element');
-    });
+    describe('findElements()', () => {
+      it('should throw an incompatible-parent-element error', async () => {
+        await expect(
+          page.findElements('selector', new IncompatibleElement())
+        ).rejects.toThrow('Incompatible parent element');
+      });
 
-    it('should find an element that implements the standard API', async () => {
-      await expect(
-        root.perform(
-          (_element: HTMLElement, _arg1: string, _arg2: string) => [
-            _element.tagName,
-            _arg1,
-            _arg2
-          ],
-          'arg1',
-          'arg2'
-        )
-      ).resolves.toEqual(['HTML', 'arg1', 'arg2']);
+      it('should find elements compatible with the standard API', async () => {
+        await expect(
+          root.perform(
+            (_element: HTMLElement, _arg1: string, _arg2: string) => [
+              _element.tagName,
+              _arg1,
+              _arg2
+            ],
+            'arg1',
+            'arg2'
+          )
+        ).resolves.toEqual(['HTML', 'arg1', 'arg2']);
 
-      await expect(
-        root.perform(() => {
-          throw new Error('actionError');
-        })
-      ).rejects.toThrow(/actionError/);
+        await expect(
+          root.perform(() => {
+            throw new Error('actionError');
+          })
+        ).rejects.toThrow(/actionError/);
 
-      await expect(radioInput.getProperty('checked')).resolves.toBe('false');
+        await expect(radioInput.getProperty('checked')).resolves.toBe('false');
 
-      await radioInput.click();
+        await radioInput.click();
 
-      await expect(radioInput.getProperty('checked')).resolves.toBe('true');
+        await expect(radioInput.getProperty('checked')).resolves.toBe('true');
 
-      await expect(textInput.getProperty('value')).resolves.toBe('');
+        await expect(textInput.getProperty('value')).resolves.toBe('');
 
-      await textInput.type('textValue');
+        await textInput.type('textValue');
 
-      await expect(textInput.getProperty('value')).resolves.toBe('textValue');
+        await expect(textInput.getProperty('value')).resolves.toBe('textValue');
 
-      await expect(container.select(Container).getHTML()).resolves.toBe(
-        '<div>subcontainer</div>'
-      );
+        await expect(container.select(Container).getHTML()).resolves.toBe(
+          '<div>subcontainer</div>'
+        );
 
-      await expect(unknown.getSize()).resolves.toBe(0);
+        await expect(unknown.getSize()).resolves.toBe(0);
+      });
     });
   });
 }

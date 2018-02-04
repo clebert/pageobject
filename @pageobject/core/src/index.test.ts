@@ -1,5 +1,6 @@
 import {
   AbstractPageObject,
+  Page,
   Predicate,
   and,
   indexEquals,
@@ -10,6 +11,17 @@ import {
   not,
   or
 } from '.';
+
+class JSDOMPage implements Page<Element> {
+  public async findElements(
+    selector: string,
+    parent?: Element
+  ): Promise<Element[]> {
+    return Array.from(
+      (parent || document.documentElement).querySelectorAll(selector)
+    );
+  }
+}
 
 class Root extends AbstractPageObject<Element> {
   public readonly selector = 'div';
@@ -44,10 +56,7 @@ document.body.innerHTML = `
   <div root-name="root2"></div>
 `;
 
-const root = new Root(async (selector: string, parent?: Element) =>
-  Array.from((parent || document.documentElement).querySelectorAll(selector))
-);
-
+const root = new Root(new JSDOMPage());
 const root1 = root.where(nameEquals('root1', 6));
 const root2 = root.where(nameEquals('root2', 6));
 const root3 = root.where(nameEquals('root3', 6));

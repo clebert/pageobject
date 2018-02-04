@@ -48,7 +48,7 @@ describe('StandardPageObject', () => {
       action(domElement, ...args)
     );
 
-    pageObject = new MockPageObject(async () => [element]);
+    pageObject = new MockPageObject({findElements: async () => [element]});
   });
 
   afterEach(() => {

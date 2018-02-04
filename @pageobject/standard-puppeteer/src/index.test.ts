@@ -1,23 +1,15 @@
-import {StandardFinder} from '@pageobject/standard';
-import {describeTests, url} from '@pageobject/standard-test';
-import {Browser, launch} from 'puppeteer';
-import {createFinder} from '.';
+import {describePageTests, url} from '@pageobject/standard-test';
+import {launch} from 'puppeteer';
+import {PuppeteerPage} from '.';
 
-let browser: Browser;
-let finder: StandardFinder;
+let page: PuppeteerPage;
 
 beforeAll(async () => {
-  browser = await launch();
-
-  const page = await browser.newPage();
-
-  finder = createFinder(page);
-
-  await page.goto(url);
+  page = await PuppeteerPage.load(url, await launch());
 });
 
 afterAll(async () => {
-  await browser.close();
+  await page.browser.close();
 });
 
-describeTests(() => finder);
+describePageTests(() => page);

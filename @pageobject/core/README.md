@@ -10,11 +10,11 @@ yarn add @pageobject/core
 
 ## API
 
-Please find the API documentation [here][repo-api-core].
+Please find the API documentation [here][internal-api-core].
 
 ---
 
-Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-license].
+Built by (c) Clemens Akens. Released under the terms of the [MIT License][internal-license].
 
 [badge-coveralls-image]: https://coveralls.io/repos/github/clebert/pageobject/badge.svg?branch=master
 [badge-coveralls-link]: https://coveralls.io/github/clebert/pageobject?branch=master
@@ -22,5 +22,6 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-npm-link]: https://yarnpkg.com/en/package/@pageobject/core
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
-[repo-api-core]: https://pageobject.js.org/api/core/
-[repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
+
+[internal-api-core]: https://pageobject.js.org/api/core/
+[internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE

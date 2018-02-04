@@ -1,6 +1,6 @@
 # @pageobject/engine [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-This package allows you to execute unreliable, asynchronous, and [idempotent][wiki-idempotence] commands reliably.
+This package allows you to execute unreliable, asynchronous, and [idempotent][external-wiki-idempotence] commands reliably.
 
 ## Installation
 
@@ -10,14 +10,18 @@ yarn add @pageobject/engine
 
 ## API
 
-Please find the API documentation [here][repo-api-engine].
+Please find the API documentation [here][internal-api-engine].
 
 ## Usage
 
 ### Import the package
 
 ```js
+// ES2015 modules
 import {createRetryEngine} from '@pageobject/engine';
+
+// CommonJS
+const {createRetryEngine} = require('@pageobject/engine');
 ```
 
 ### Create a retry engine
@@ -66,7 +70,7 @@ retryOnError(neverEnding, timeout).catch(() => {
 
 ---
 
-Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-license].
+Built by (c) Clemens Akens. Released under the terms of the [MIT License][internal-license].
 
 [badge-coveralls-image]: https://coveralls.io/repos/github/clebert/pageobject/badge.svg?branch=master
 [badge-coveralls-link]: https://coveralls.io/github/clebert/pageobject?branch=master
@@ -74,6 +78,8 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][repo-l
 [badge-npm-link]: https://yarnpkg.com/en/package/@pageobject/engine
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
-[repo-api-engine]: https://pageobject.js.org/api/engine/
-[repo-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
-[wiki-idempotence]: https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning
+
+[internal-api-engine]: https://pageobject.js.org/api/engine/
+[internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
+
+[external-wiki-idempotence]: https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning

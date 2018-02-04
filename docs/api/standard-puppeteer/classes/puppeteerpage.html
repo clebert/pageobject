@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PageObject | @pageobject/core</title>
+	<title>PuppeteerPage | @pageobject/standard-puppeteer</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -879,7 +879,7 @@ img { max-width: 100%; }
 		<div class="container">
 			<div class="table-wrap">
 				<div class="table-cell">
-					<strong><a href="../index.html">@pageobject/core</a></strong>
+					<strong><a href="../index.html">@pageobject/standard-puppeteer</a></strong>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -907,86 +907,57 @@ img { max-width: 100%; }
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
-		<li class=" tsd-kind-class tsd-has-type-parameter">
-			<a href="../classes/abstractpageobject.html" class="tsd-kind-icon">Abstract<wbr>Page<wbr>Object</a>
+		<li class=" tsd-kind-class tsd-is-not-exported">
+			<a href="puppeteerelement.html" class="tsd-kind-icon">Puppeteer<wbr>Element</a>
 		</li>
-		<li class=" tsd-kind-interface tsd-has-type-parameter">
-			<a href="page.html" class="tsd-kind-icon">Page</a>
-		</li>
-		<li class="current tsd-kind-interface tsd-has-type-parameter">
-			<a href="pageobject.html" class="tsd-kind-icon">Page<wbr>Object</a>
+		<li class="current tsd-kind-class">
+			<a href="puppeteerpage.html" class="tsd-kind-icon">Puppeteer<wbr>Page</a>
 			<ul>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="pageobject.html#selector" class="tsd-kind-icon">selector</a>
+				<li class=" tsd-kind-constructor tsd-parent-kind-class">
+					<a href="puppeteerpage.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-interface">
-					<a href="pageobject.html#getelement" class="tsd-kind-icon">get<wbr>Element</a>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="puppeteerpage.html#adaptee" class="tsd-kind-icon">adaptee</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-interface">
-					<a href="pageobject.html#getsize" class="tsd-kind-icon">get<wbr>Size</a>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="puppeteerpage.html#browser" class="tsd-kind-icon">browser</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
-					<a href="pageobject.html#select" class="tsd-kind-icon">select</a>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="puppeteerpage.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-interface">
-					<a href="pageobject.html#where" class="tsd-kind-icon">where</a>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a href="puppeteerpage.html#load" class="tsd-kind-icon">load</a>
 				</li>
 			</ul>
-		</li>
-		<li class=" tsd-kind-interface tsd-has-type-parameter">
-			<a href="pageobjectconstructor.html" class="tsd-kind-icon">Page<wbr>Object<wbr>Constructor</a>
-		</li>
-		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
-			<a href="../index.html#predicate" class="tsd-kind-icon">Predicate</a>
-		</li>
-		<li class=" tsd-kind-function tsd-has-type-parameter">
-			<a href="../index.html#and" class="tsd-kind-icon">and</a>
-		</li>
-		<li class=" tsd-kind-function tsd-has-type-parameter">
-			<a href="../index.html#indexequals" class="tsd-kind-icon">index<wbr>Equals</a>
-		</li>
-		<li class=" tsd-kind-function tsd-has-type-parameter">
-			<a href="../index.html#indexisgreaterthan" class="tsd-kind-icon">index<wbr>IsGreater<wbr>Than</a>
-		</li>
-		<li class=" tsd-kind-function tsd-has-type-parameter">
-			<a href="../index.html#indexisgreaterthanorequals" class="tsd-kind-icon">index<wbr>IsGreater<wbr>Than<wbr>OrEquals</a>
-		</li>
-		<li class=" tsd-kind-function tsd-has-type-parameter">
-			<a href="../index.html#indexislessthan" class="tsd-kind-icon">index<wbr>IsLess<wbr>Than</a>
-		</li>
-		<li class=" tsd-kind-function tsd-has-type-parameter">
-			<a href="../index.html#indexislessthanorequals" class="tsd-kind-icon">index<wbr>IsLess<wbr>Than<wbr>OrEquals</a>
-		</li>
-		<li class=" tsd-kind-function tsd-has-type-parameter">
-			<a href="../index.html#not" class="tsd-kind-icon">not</a>
-		</li>
-		<li class=" tsd-kind-function tsd-has-type-parameter">
-			<a href="../index.html#or" class="tsd-kind-icon">or</a>
 		</li>
 	</ul>
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
-		<section class="tsd-panel tsd-type-parameters">
-			<h3>Type parameters</h3>
-			<ul class="tsd-type-parameters">
-				<li>
-					<h4>TElement</h4>
-				</li>
-			</ul>
+		<section class="tsd-panel tsd-comment">
+			<div class="tsd-comment tsd-typography">
+				<div class="lead">
+					<p>```js
+						// ES2015 modules
+					import {PuppeteerPage} from &#39;@pageobject/standard-puppeteer&#39;;</p>
+				</div>
+				<p>// CommonJS
+					const {PuppeteerPage} = require(&#39;@pageobject/standard-puppeteer&#39;);
+				```</p>
+			</div>
 		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">PageObject</span>
+					<span class="target">PuppeteerPage</span>
 				</li>
 			</ul>
 		</section>
 		<section class="tsd-panel">
-			<h3>Implemented by</h3>
+			<h3>Implements</h3>
 			<ul class="tsd-hierarchy">
-				<li><a href="../classes/abstractpageobject.html" class="tsd-signature-type">AbstractPageObject</a></li>
+				<li><span class="tsd-signature-type">Page</span></li>
 			</ul>
 		</section>
 		<section class="tsd-panel-group tsd-index-group">
@@ -994,121 +965,161 @@ img { max-width: 100%; }
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
+						<h3>Constructors</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="puppeteerpage.html#constructor" class="tsd-kind-icon">constructor</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="pageobject.html#selector" class="tsd-kind-icon">selector</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="puppeteerpage.html#adaptee" class="tsd-kind-icon">adaptee</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="puppeteerpage.html#browser" class="tsd-kind-icon">browser</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="pageobject.html#getelement" class="tsd-kind-icon">get<wbr>Element</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="pageobject.html#getsize" class="tsd-kind-icon">get<wbr>Size</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="pageobject.html#select" class="tsd-kind-icon">select</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="pageobject.html#where" class="tsd-kind-icon">where</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="puppeteerpage.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="puppeteerpage.html#load" class="tsd-kind-icon">load</a></li>
 						</ul>
 					</section>
 				</div>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Constructors</h2>
+			<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<a name="constructor" class="tsd-anchor"></a>
+				<h3>constructor</h3>
+				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Puppeteer<wbr>Page<span class="tsd-signature-symbol">(</span>adaptee<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Page</span>, browser<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Browser</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="puppeteerpage.html" class="tsd-signature-type">PuppeteerPage</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard-puppeteer/src/index.ts#L67">index.ts:67</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>adaptee: <span class="tsd-signature-type">Page</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>An instance of the class <a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-page">Page</a>.</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<h5>browser: <span class="tsd-signature-type">Browser</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>An instance of the class <a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-browser">Browser</a>.</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="puppeteerpage.html" class="tsd-signature-type">PuppeteerPage</a></h4>
+					</li>
+				</ul>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="selector" class="tsd-anchor"></a>
-				<h3>selector</h3>
-				<div class="tsd-signature tsd-kind-icon">selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="adaptee" class="tsd-anchor"></a>
+				<h3>adaptee</h3>
+				<div class="tsd-signature tsd-kind-icon">adaptee<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Page</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L19">index.ts:19</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard-puppeteer/src/index.ts#L62">index.ts:62</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The <a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-page">Page</a> instance adapted by this page.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="browser" class="tsd-anchor"></a>
+				<h3>browser</h3>
+				<div class="tsd-signature tsd-kind-icon">browser<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Browser</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard-puppeteer/src/index.ts#L67">index.ts:67</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The parent <a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-browser">Browser</a> instance for this page.</p>
+					</div>
+				</div>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-				<a name="getelement" class="tsd-anchor"></a>
-				<h3>get<wbr>Element</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Element<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></li>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="findelements" class="tsd-anchor"></a>
+				<h3>find<wbr>Elements</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">find<wbr>Elements<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, parent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">StandardElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StandardElement</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L26">index.ts:26</a></li>
-							</ul>
-						</aside>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></h4>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-				<a name="getsize" class="tsd-anchor"></a>
-				<h3>get<wbr>Size</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Size<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L27">index.ts:27</a></li>
-							</ul>
-						</aside>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
-				<a name="select" class="tsd-anchor"></a>
-				<h3>select</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
-					<li class="tsd-signature tsd-kind-icon">select&lt;TPageObject&gt;<span class="tsd-signature-symbol">(</span>descendant<span class="tsd-signature-symbol">: </span><a href="pageobjectconstructor.html" class="tsd-signature-type">PageObjectConstructor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TPageObject</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L21">index.ts:21</a></li>
-							</ul>
-						</aside>
-						<h4 class="tsd-type-parameters-title">Type parameters</h4>
-						<ul class="tsd-type-parameters">
-							<li>
-								<h4>TPageObject<span class="tsd-signature-symbol">: </span><a href="pageobject.html" class="tsd-signature-type">PageObject</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							</li>
-						</ul>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5>descendant: <a href="pageobjectconstructor.html" class="tsd-signature-type">PageObjectConstructor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span></h5>
-							</li>
-						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TPageObject</span></h4>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-				<a name="where" class="tsd-anchor"></a>
-				<h3>where</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-					<li class="tsd-signature tsd-kind-icon">where<span class="tsd-signature-symbol">(</span>selectionCriterion<span class="tsd-signature-symbol">: </span><a href="../index.html#predicate" class="tsd-signature-type">Predicate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/core/src/index.ts#L25">index.ts:25</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard-puppeteer/src/index.ts#L78">index.ts:78</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>selectionCriterion: <a href="../index.html#predicate" class="tsd-signature-type">Predicate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>selector: <span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> parent: <span class="tsd-signature-type">StandardElement</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StandardElement</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+				<a name="load" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagStatic">Static</span> load</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<li class="tsd-signature tsd-kind-icon">load<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, browser<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Browser</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="puppeteerpage.html" class="tsd-signature-type">PuppeteerPage</a><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard-puppeteer/src/index.ts#L48">index.ts:48</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>url: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>The URL to navigate to.</p>
+								</div>
+							</li>
+							<li>
+								<h5>browser: <span class="tsd-signature-type">Browser</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>An instance of the class <a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-browser">Browser</a>.</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="puppeteerpage.html" class="tsd-signature-type">PuppeteerPage</a><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>

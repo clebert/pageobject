@@ -929,7 +929,7 @@ img { max-width: 100%; }
 			<a href="index.html#url" class="tsd-kind-icon">url</a>
 		</li>
 		<li class=" tsd-kind-function">
-			<a href="index.html#describetests" class="tsd-kind-icon">describe<wbr>Tests</a>
+			<a href="index.html#describepagetests" class="tsd-kind-icon">describe<wbr>Page<wbr>Tests</a>
 		</li>
 	</ul>
 </nav>
@@ -959,7 +959,7 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-function"><a href="index.html#describetests" class="tsd-kind-icon">describe<wbr>Tests</a></li>
+							<li class="tsd-kind-function"><a href="index.html#describepagetests" class="tsd-kind-icon">describe<wbr>Page<wbr>Tests</a></li>
 						</ul>
 					</section>
 				</div>
@@ -973,50 +973,58 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;file://${path.join(__dirname, &#x27;../fixtures/index.html&#x27;)}&#x60;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard-test/src/index.ts#L40">index.ts:40</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard-test/src/index.ts#L44">index.ts:44</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<pre><code class="lang-js"><span class="hljs-keyword">import</span> {url} <span class="hljs-keyword">from</span> <span class="hljs-string">'@pageobject/standard-test'</span>;
-</code></pre>
+						<p>```js
+							// ES2015 modules
+						import {url} from &#39;@pageobject/standard-test&#39;;</p>
 					</div>
+					<p>// CommonJS
+						const {url} = require(&#39;@pageobject/standard-test&#39;);
+					```</p>
 				</div>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Functions</h2>
 			<section class="tsd-panel tsd-member tsd-kind-function">
-				<a name="describetests" class="tsd-anchor"></a>
-				<h3>describe<wbr>Tests</h3>
+				<a name="describepagetests" class="tsd-anchor"></a>
+				<h3>describe<wbr>Page<wbr>Tests</h3>
 				<ul class="tsd-signatures tsd-kind-function">
-					<li class="tsd-signature tsd-kind-icon">describe<wbr>Tests<span class="tsd-signature-symbol">(</span>createFinder<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					<li class="tsd-signature tsd-kind-icon">describe<wbr>Page<wbr>Tests<span class="tsd-signature-symbol">(</span>getPage<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard-test/src/index.ts#L47">index.ts:47</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard-test/src/index.ts#L55">index.ts:55</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<pre><code class="lang-js"><span class="hljs-keyword">import</span> {describeTests} <span class="hljs-keyword">from</span> <span class="hljs-string">'@pageobject/standard-test'</span>;
-</code></pre>
+								<p>```js
+									// ES2015 modules
+								import {describePageTests} from &#39;@pageobject/standard-test&#39;;</p>
 							</div>
+							<p>// CommonJS
+								const {describePageTests} = require(&#39;@pageobject/standard-test&#39;);
+							```</p>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>createFinder: <span class="tsd-signature-type">function</span></h5>
+								<h5>getPage: <span class="tsd-signature-type">function</span></h5>
 								<ul class="tsd-parameters">
 									<li class="tsd-parameter-siganture">
 										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">StandardFinder</span></li>
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">StandardPage</span></li>
 										</ul>
 										<ul class="tsd-descriptions">
 											<li class="tsd-description">
-												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">StandardFinder</span></h4>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">StandardPage</span></h4>
 											</li>
 										</ul>
 									</li>
