@@ -18,7 +18,7 @@ Please find the API documentation [here][internal-api-standard].
 
 The PageObjectJS standard API defines the interface `StandardElement` as the representation of a DOM element and the interface `StandardPage` as the representation of the DOM. The abstract class `StandardPageObject` offers methods to comfortably use these representations.
 
-Page objects inheriting from the class `StandardPageObject` are compatible with any browser automation framework for which the PageObjectJS standard API can be implemented.
+Page objects inheriting from class `StandardPageObject` are compatible with any browser automation framework for which the PageObjectJS standard API can be implemented.
 
 **Compatible implementations already exist for [Puppeteer][external-puppeteer] and [Selenium][external-selenium]!**
 

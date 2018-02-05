@@ -78,9 +78,6 @@ yarn test
 
 ### Formatting sources
 
-By default, a [Git Hook][external-githooks] is installed to automatically format all files of a commit.
-Manually, it can be executed with the following command:
-
 ```sh
 yarn run format
 ```
@@ -131,7 +128,6 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [internal-usage-standard-selenium]: https://github.com/clebert/pageobject/blob/master/@pageobject/standard-selenium/README.md#usage
 [internal-usage-standard-test]: https://github.com/clebert/pageobject/blob/master/@pageobject/standard-test/README.md#usage
 
-[external-githooks]: https://git-scm.com/docs/githooks
 [external-monorepo]: https://github.com/lerna/lerna#about
 [external-puppeteer]: https://github.com/GoogleChrome/puppeteer/blob/master/README.md
 [external-selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
