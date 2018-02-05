@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@pageobject/core": "^1.0.0-beta-1",
+    "@pageobject/engine": "^1.0.0-beta-1",
     "@pageobject/standard": "^1.0.0-beta-1",
     "@pageobject/standard-test": "^1.0.0-beta-1",
     "@types/puppeteer": "^1.0.0",

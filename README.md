@@ -4,6 +4,12 @@
 
 ⚠️ **This software is currently in beta stage. Breaking changes can happen at any time.**
 
+## Getting started
+
+For a quick start look at either the [Puppeteer example][internal-usage-standard-puppeteer] or the [Selenium example][internal-usage-standard-selenium].
+
+A detailed guide can be found **here** (coming soon).
+
 ## Packages
 
 This is a multi-package repository ([monorepo][external-monorepo]).
