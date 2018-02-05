@@ -1,6 +1,6 @@
 # @pageobject/engine [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-This package allows you to execute unreliable, asynchronous, and [idempotent][external-wiki-idempotence] commands reliably.
+> This package allows you to execute unreliable, asynchronous, and [idempotent][external-wiki-idempotence] commands reliably.
 
 ## Installation
 

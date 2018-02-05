@@ -1,14 +1,14 @@
 # PageObjectJS [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link] [![TypeScript][badge-typescript-image]][badge-typescript-link]
 
-**Readable**, **stable**, and **maintainable** E2E tests written using a browser automation framework of your choice.
+> **Readable**, **stable**, and **maintainable** E2E tests written using a browser automation framework of your choice.
 
 ⚠️ **This software is currently in beta stage. Breaking changes can happen at any time.**
 
 ## Getting started
 
-For a quick start look at either the [Puppeteer example][internal-usage-standard-puppeteer] or the [Selenium example][internal-usage-standard-selenium].
+For a quick start, please have a look at either the [Puppeteer example][internal-usage-standard-puppeteer] or the [Selenium example][internal-usage-standard-selenium].
 
-A detailed guide can be found **here** (coming soon).
+For a more detailed example, please see **here** (coming soon).
 
 ## Packages
 
@@ -16,7 +16,7 @@ This is a multi-package repository ([monorepo][external-monorepo]).
 
 ### @pageobject/core
 
-**[Installation][internal-installation-core] | [API][internal-api-core]**
+**[Installation][internal-installation-core] | [API][internal-api-core] | [Usage][internal-usage-core]**
 
 This package is the basis for the PageObjectJS standard API.
 
@@ -26,9 +26,15 @@ This package is the basis for the PageObjectJS standard API.
 
 This package allows you to execute unreliable, asynchronous, and [idempotent][external-wiki-idempotence] commands reliably.
 
+### @pageobject/predicates
+
+**[Installation][internal-installation-predicates] | [API][internal-api-predicates] | [Usage][internal-usage-predicates]**
+
+This package provides a collection of useful predicate functions.
+
 ### @pageobject/standard
 
-**[Installation][internal-installation-standard] | [API][internal-api-standard]**
+**[Installation][internal-installation-standard] | [API][internal-api-standard] | [Usage][internal-usage-standard]**
 
 This package defines an API that can be implemented for virtually any browser automation framework.
 
@@ -46,7 +52,7 @@ This package implements the PageObjectJS standard API for [Selenium][external-se
 
 ### @pageobject/standard-test
 
-**[Installation][internal-installation-standard-test] | [API][internal-api-standard-test]**
+**[Installation][internal-installation-standard-test] | [API][internal-api-standard-test] | [Usage][internal-usage-standard-test]**
 
 This package allows you to test the compatibility of your implementation of the PageObjectJS standard API.
 
@@ -104,20 +110,26 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 
 [internal-api-core]: https://pageobject.js.org/api/core/
 [internal-api-engine]: https://pageobject.js.org/api/engine/
+[internal-api-predicates]: https://pageobject.js.org/api/predicates/
 [internal-api-standard]: https://pageobject.js.org/api/standard/
 [internal-api-standard-puppeteer]: https://pageobject.js.org/api/standard-puppeteer/
 [internal-api-standard-selenium]: https://pageobject.js.org/api/standard-selenium/
 [internal-api-standard-test]: https://pageobject.js.org/api/standard-test/
 [internal-installation-core]: https://github.com/clebert/pageobject/tree/master/@pageobject/core/README.md#installation
 [internal-installation-engine]: https://github.com/clebert/pageobject/tree/master/@pageobject/engine/README.md#installation
+[internal-installation-predicates]: https://github.com/clebert/pageobject/tree/master/@pageobject/predicates/README.md#installation
 [internal-installation-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard/README.md#installation
 [internal-installation-standard-puppeteer]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-puppeteer/README.md#installation
 [internal-installation-standard-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-selenium/README.md#installation
 [internal-installation-standard-test]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard-test/README.md#installation
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
+[internal-usage-core]: https://github.com/clebert/pageobject/blob/master/@pageobject/core/README.md#usage
 [internal-usage-engine]: https://github.com/clebert/pageobject/blob/master/@pageobject/engine/README.md#usage
+[internal-usage-predicates]: https://github.com/clebert/pageobject/blob/master/@pageobject/predicates/README.md#usage
+[internal-usage-standard]: https://github.com/clebert/pageobject/blob/master/@pageobject/standard/README.md#usage
 [internal-usage-standard-puppeteer]: https://github.com/clebert/pageobject/blob/master/@pageobject/standard-puppeteer/README.md#usage
 [internal-usage-standard-selenium]: https://github.com/clebert/pageobject/blob/master/@pageobject/standard-selenium/README.md#usage
+[internal-usage-standard-test]: https://github.com/clebert/pageobject/blob/master/@pageobject/standard-test/README.md#usage
 
 [external-githooks]: https://git-scm.com/docs/githooks
 [external-monorepo]: https://github.com/lerna/lerna#about

@@ -9,6 +9,7 @@ rm -rf docs/api/
 
 "$(yarn bin)"/typedoc --out docs/api/core ./@pageobject/core
 "$(yarn bin)"/typedoc --out docs/api/engine ./@pageobject/engine
+"$(yarn bin)"/typedoc --out docs/api/predicates ./@pageobject/predicates
 "$(yarn bin)"/typedoc --out docs/api/standard ./@pageobject/standard
 "$(yarn bin)"/typedoc --out docs/api/standard-puppeteer ./@pageobject/standard-puppeteer
 "$(yarn bin)"/typedoc --out docs/api/standard-selenium ./@pageobject/standard-selenium

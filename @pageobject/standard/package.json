@@ -34,10 +34,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "peerDependencies": {
-    "@pageobject/core": "^1.0.0"
-  },
-  "devDependencies": {
+  "dependencies": {
     "@pageobject/core": "^1.0.0-beta-1"
   }
 }
