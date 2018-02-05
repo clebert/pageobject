@@ -1,4 +1,4 @@
-import {indexEquals} from '@pageobject/core';
+import {indexEquals} from '@pageobject/predicates';
 import {
   StandardElement,
   StandardPage,

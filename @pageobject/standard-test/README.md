@@ -1,6 +1,6 @@
 # @pageobject/standard-test [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-This package allows you to test the compatibility of your implementation of the [PageObjectJS standard API][internal-readme-standard].
+> This package allows you to test the compatibility of your implementation of the [PageObjectJS standard API][internal-readme-standard].
 
 ## Installation
 
@@ -11,13 +11,16 @@ yarn add @pageobject/standard-test
 ### Peer dependencies
 
 ```sh
-yarn add @pageobject/core \
-         @pageobject/standard
+yarn add @pageobject/standard
 ```
 
 ## API
 
 Please find the API documentation [here][internal-api-standard-test].
+
+## Usage
+
+The existing tests for package [@pageobject/standard-puppeteer][internal-test-standard-puppeteer] and package [@pageobject/standard-selenium][internal-test-standard-selenium] can serve as examples.
 
 ---
 
@@ -33,3 +36,5 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [internal-api-standard-test]: https://pageobject.js.org/api/standard-test/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [internal-readme-standard]: https://github.com/clebert/pageobject/tree/master/@pageobject/standard/README.md
+[internal-test-standard-puppeteer]: https://github.com/clebert/pageobject/blob/master/@pageobject/standard-puppeteer/src/index.test.ts
+[internal-test-standard-selenium]: https://github.com/clebert/pageobject/blob/master/@pageobject/standard-selenium/src/index.test.ts

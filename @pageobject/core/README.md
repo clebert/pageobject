@@ -1,6 +1,6 @@
 # @pageobject/core [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-This package is the basis for the PageObjectJS standard API.
+> This package is the basis for the PageObjectJS standard API.
 
 ## Installation
 
@@ -11,6 +11,10 @@ yarn add @pageobject/core
 ## API
 
 Please find the API documentation [here][internal-api-core].
+
+## Usage
+
+As an end user, you will rarely want to consume this package directly. Instead, please take a look at package [@pageobject/standard][internal-usage-standard].
 
 ---
 
@@ -25,3 +29,4 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 
 [internal-api-core]: https://pageobject.js.org/api/core/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
+[internal-usage-standard]: https://github.com/clebert/pageobject/blob/master/@pageobject/standard/README.md#usage

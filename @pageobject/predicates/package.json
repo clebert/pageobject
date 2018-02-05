@@ -1,7 +1,7 @@
 {
-  "name": "@pageobject/standard-test",
+  "name": "@pageobject/predicates",
   "version": "1.0.0-beta-1",
-  "description": "This package allows you to test the compatibility of your implementation of the PageObjectJS standard API.",
+  "description": "This package provides a collection of useful predicate functions.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
   "homepage": "https://pageobject.js.org/",
@@ -27,8 +27,7 @@
     "url": "https://github.com/clebert/pageobject/issues"
   },
   "files": [
-    "dist",
-    "fixtures"
+    "dist"
   ],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -36,13 +35,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@pageobject/core": "^1.0.0-beta-1",
-    "@pageobject/predicates": "^1.0.0-beta-1"
-  },
-  "peerDependencies": {
-    "@pageobject/standard": "^1.0.0"
-  },
-  "devDependencies": {
-    "@pageobject/standard": "^1.0.0-beta-1"
+    "@pageobject/core": "^1.0.0-beta-1"
   }
 }

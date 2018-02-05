@@ -1,6 +1,6 @@
 # @pageobject/standard-selenium [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-This package implements the [PageObjectJS standard API][internal-readme-standard] for [Selenium][external-selenium].
+> This package implements the [PageObjectJS standard API][internal-readme-standard] for [Selenium][external-selenium].
 
 ## Installation
 
@@ -11,8 +11,7 @@ yarn add @pageobject/standard-selenium
 ### Peer dependencies
 
 ```sh
-yarn add @pageobject/core \
-         @pageobject/standard \
+yarn add @pageobject/standard \
          selenium-webdriver
 ```
 
