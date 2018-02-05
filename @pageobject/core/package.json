@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/core",
-  "version": "1.0.0-beta-1",
+  "version": "1.0.0-beta-2",
   "description": "This package is the basis for the PageObjectJS standard API.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
