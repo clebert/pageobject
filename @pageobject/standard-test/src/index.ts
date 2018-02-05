@@ -36,16 +36,19 @@ class Unknown extends StandardPageObject {
  * **Import: ES2015 modules**
  *
  * ```js
- * import {url} from '@pageobject/standard-test';
+ * import {testURL} from '@pageobject/standard-test';
  * ```
  *
  * **Import: CommonJS**
  *
  * ```js
- * const {url} = require('@pageobject/standard-test');
+ * const {testURL} = require('@pageobject/standard-test');
  * ```
  */
-export const url = `file://${path.join(__dirname, '../fixtures/index.html')}`;
+export const testURL = `file://${path.join(
+  __dirname,
+  '../fixtures/index.html'
+)}`;
 
 /**
  * **Import: ES2015 modules**
