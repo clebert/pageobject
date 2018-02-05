@@ -1,13 +1,10 @@
+require('chromedriver');
+
 const {createRetryEngine} = require('@pageobject/engine');
 const {StandardPageObject} = require('@pageobject/standard');
 const {SeleniumPage} = require('@pageobject/standard-selenium');
-
 const assert = require('assert');
-
-const {Builder, WebDriver} = require('selenium-webdriver');
-const {Options} = require('selenium-webdriver/chrome');
-
-require('chromedriver');
+const {Builder} = require('selenium-webdriver');
 
 class Root extends StandardPageObject {
   get selector() {
@@ -19,8 +16,10 @@ const {retryOnError} = createRetryEngine(5000);
 
 (async () => {
   const driver = await new Builder()
-    .forBrowser('chrome')
-    .setChromeOptions(new Options().detachDriver(false).headless())
+    .withCapabilities({
+      browserName: 'chrome',
+      chromeOptions: {args: ['headless', 'disable-gpu']}
+    })
     .build();
 
   try {

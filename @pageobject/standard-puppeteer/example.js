@@ -1,9 +1,7 @@
 const {createRetryEngine} = require('@pageobject/engine');
 const {StandardPageObject} = require('@pageobject/standard');
 const {PuppeteerPage} = require('@pageobject/standard-puppeteer');
-
 const assert = require('assert');
-
 const {launch} = require('puppeteer');
 
 class Root extends StandardPageObject {
