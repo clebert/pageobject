@@ -8,6 +8,7 @@ import * as path from 'path';
 
 class IncompatibleElement implements StandardElement {
   public readonly click = jest.fn();
+  public readonly doubleClick = jest.fn();
   public readonly perform = jest.fn();
   public readonly type = jest.fn();
 }
@@ -112,6 +113,10 @@ export function describePageTests(getPage: () => StandardPage): void {
         await radioInput.click();
 
         await expect(radioInput.getProperty('checked')).resolves.toBe('true');
+
+        await radioInput.doubleClick();
+
+        await expect(root.getPageTitle()).resolves.toBe('dblclick');
 
         await expect(textInput.getProperty('value')).resolves.toBe('');
 
