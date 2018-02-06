@@ -12,6 +12,14 @@
 
   <input type="radio">
   <input type="text">
+
+  <script>
+    const radioInput = document.querySelector('input[type="radio"]');
+
+    radioInput.addEventListener('dblclick', () => {
+      document.title = 'dblclick';
+    });
+  </script>
 </body>
 
 </html>

@@ -19,6 +19,14 @@ class SeleniumElement implements StandardElement {
     return this.adaptee.click();
   }
 
+  public async doubleClick(): Promise<void> {
+    return this.adaptee
+      .getDriver()
+      .actions()
+      .doubleClick()
+      .perform();
+  }
+
   public async perform<TElement extends Element, TResult>(
     action: StandardAction<TElement, TResult>,
     ...args: any[] /* tslint:disable-line no-any */

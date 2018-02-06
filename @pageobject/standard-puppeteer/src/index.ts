@@ -19,6 +19,11 @@ class PuppeteerElement implements StandardElement {
     return this.adaptee.click();
   }
 
+  public async doubleClick(): Promise<void> {
+    await this.adaptee.click();
+    await this.adaptee.click({clickCount: 2});
+  }
+
   public async perform<TElement extends Element, TResult>(
     action: StandardAction<TElement, TResult>,
     ...args: any[] /* tslint:disable-line no-any */

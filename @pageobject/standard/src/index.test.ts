@@ -12,6 +12,7 @@ interface MockDOMElement {
 
 interface MockElement {
   readonly click: jest.Mock;
+  readonly doubleClick: jest.Mock;
   readonly perform: jest.Mock;
   readonly type: jest.Mock;
 }
@@ -40,6 +41,7 @@ describe('StandardPageObject', () => {
 
     element = {
       click: jest.fn(),
+      doubleClick: jest.fn(),
       perform: jest.fn(),
       type: jest.fn()
     };
@@ -65,6 +67,21 @@ describe('StandardPageObject', () => {
 
       expect(element.click).toHaveBeenCalledTimes(1);
       expect(element.click).toHaveBeenLastCalledWith();
+    });
+  });
+
+  describe('doubleClick()', () => {
+    it('should double-click on the DOM element', async () => {
+      element.doubleClick.mockImplementation(async () => {
+        throw new Error('doubleClickError');
+      });
+
+      await expect(pageObject.doubleClick()).rejects.toThrow(
+        'doubleClickError'
+      );
+
+      expect(element.doubleClick).toHaveBeenCalledTimes(1);
+      expect(element.doubleClick).toHaveBeenLastCalledWith();
     });
   });
 

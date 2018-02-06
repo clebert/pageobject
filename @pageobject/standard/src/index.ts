@@ -14,6 +14,7 @@ export type StandardAction<TElement extends Element, TResult> = (
 
 export interface StandardElement {
   click(): Promise<void>;
+  doubleClick(): Promise<void>;
 
   perform<TElement extends Element, TResult>(
     action: StandardAction<TElement, TResult>,
@@ -53,6 +54,10 @@ export abstract class StandardPageObject extends AbstractPageObject<
 > implements StandardElement {
   public async click(): Promise<void> {
     return (await this.getElement()).click();
+  }
+
+  public async doubleClick(): Promise<void> {
+    return (await this.getElement()).doubleClick();
   }
 
   public async perform<TElement extends Element, TResult>(
