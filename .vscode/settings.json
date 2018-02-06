@@ -9,7 +9,6 @@
     "**/package-lock.json": true
   },
   "prettier.bracketSpacing": false,
-  "prettier.parser": "typescript",
   "prettier.singleQuote": true,
   "tslint.enable": true,
   "tslint.ignoreDefinitionFiles": false,
