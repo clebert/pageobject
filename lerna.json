@@ -1,10 +1,5 @@
 {
   "lerna": "2",
-  "commands": {
-    "bootstrap": {
-      "hoist": true
-    }
-  },
   "npmClient": "yarn",
   "packages": [
     "@pageobject/*"
