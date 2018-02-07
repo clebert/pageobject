@@ -19,6 +19,36 @@
     radioInput.addEventListener('dblclick', () => {
       document.title = 'dblclick';
     });
+
+    const textInput = document.querySelector('input[type="text"]');
+
+    textInput.addEventListener('keydown', event => {
+      const keyCode = event.which || event.keyCode || 0;
+
+      if (keyCode === 9) {
+        event.preventDefault();
+      }
+    });
+
+    textInput.addEventListener('keyup', event => {
+      switch (event.which || event.keyCode || 0) {
+        case 9: {
+          document.title = 'keyup: TAB';
+          break;
+        }
+        case 13: {
+          document.title = 'keyup: ENTER';
+          break;
+        }
+        case 27: {
+          document.title = 'keyup: ESCAPE';
+          break;
+        }
+        default: {
+          document.title = 'keyup: UNKNOWN';
+        }
+      }
+    });
   </script>
 </body>
 

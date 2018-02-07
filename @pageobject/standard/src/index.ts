@@ -12,6 +12,12 @@ export type StandardAction<TElement extends Element, TResult> = (
   ...args: any[]
 ) => TResult;
 
+export enum StandardKey {
+  TAB = 9,
+  ENTER = 13,
+  ESCAPE = 27
+}
+
 export interface StandardElement {
   click(): Promise<void>;
   doubleClick(): Promise<void>;
@@ -21,7 +27,8 @@ export interface StandardElement {
     ...args: any[]
   ): Promise<TResult>;
 
-  type(text: string): Promise<void>;
+  sendCharacter(character: string): Promise<void>;
+  sendKey(key: StandardKey): Promise<void>;
 }
 
 export type StandardPage = Page<StandardElement>;
@@ -67,16 +74,16 @@ export abstract class StandardPageObject extends AbstractPageObject<
     return (await this.getElement()).perform(action, ...args);
   }
 
-  /**
-   * This method sends the specified text as individual characters to the
-   * unique DOM element assigned to this page object.
-   *
-   * Between the sending of the individual characters, 100 milliseconds are
-   * paused in each case, so that this method emulates the typing speed of a
-   * human user.
-   */
-  public async type(text: string): Promise<void> {
-    return (await this.getElement()).type(text);
+  public async sendCharacter(character: string): Promise<void> {
+    return (await this.getElement()).sendCharacter(character);
+  }
+
+  public async sendKey(key: StandardKey): Promise<void> {
+    return (await this.getElement()).sendKey(key);
+  }
+
+  public async blur(): Promise<void> {
+    return this.perform((_element: HTMLElement) => _element.blur());
   }
 
   public async focus(): Promise<void> {
@@ -88,6 +95,26 @@ export abstract class StandardPageObject extends AbstractPageObject<
       (_element, _alignToTop) => _element.scrollIntoView(_alignToTop),
       alignToTop
     );
+  }
+
+  /**
+   * This method sends the specified text as individual characters to the
+   * unique DOM element assigned to this page object.
+   *
+   * Between the sending of the individual characters, 100 milliseconds are
+   * paused in each case, so that this method emulates the typing speed of a
+   * human user.
+   */
+  public async type(text: string): Promise<void> {
+    const characters = text.split('');
+
+    for (let i = 0; i < characters.length; i += 1) {
+      await this.sendCharacter(characters[i]);
+
+      if (i < characters.length - 1) {
+        await new Promise<void>(resolve => setTimeout(resolve, 100));
+      }
+    }
   }
 
   /**
@@ -191,11 +218,19 @@ export abstract class StandardPageObject extends AbstractPageObject<
   }
 
   /**
-   * The unique DOM element assigned to this page object is considered visible
-   * as long as it does not have the style properties `display: none` or
-   * `visibility: hidden`.
-   *
+   * @returns A promise that will be resolved with true if a unique DOM element
+   * is assigned to this page object.
+   */
+  public async isExisting(): Promise<boolean> {
+    return (await this.getSize()) === 1;
+  }
+
+  /**
    * This method uses the `window.getComputedStyle()` web API.
+   *
+   * @returns A promise that will be resolved with true if the unique DOM
+   * element assigned to this page object does not have the style properties
+   * `display: none` or `visibility: hidden`.
    */
   public async isVisible(): Promise<boolean> {
     return (

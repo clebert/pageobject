@@ -1,6 +1,7 @@
 import {
   StandardAction,
   StandardElement,
+  StandardKey,
   StandardPage
 } from '@pageobject/standard';
 import {Browser, ElementHandle, Page} from 'puppeteer';
@@ -31,8 +32,34 @@ class PuppeteerElement implements StandardElement {
     return this._page.evaluate(action, this.adaptee, ...args);
   }
 
-  public async type(text: string): Promise<void> {
-    return this.adaptee.type(text, {delay: 100});
+  public async sendCharacter(character: string): Promise<void> {
+    if (character.length !== 1) {
+      throw new Error('Invalid character');
+    }
+
+    await this._focus();
+
+    return this._page.keyboard.sendCharacter(character);
+  }
+
+  public async sendKey(key: StandardKey): Promise<void> {
+    await this._focus();
+
+    switch (key) {
+      case StandardKey.ENTER:
+        return this._page.keyboard.press('Enter');
+      case StandardKey.ESCAPE:
+        return this._page.keyboard.press('Escape');
+      case StandardKey.TAB: {
+        return this._page.keyboard.press('Tab');
+      }
+    }
+  }
+
+  private async _focus(): Promise<void> {
+    await this.perform(
+      /* istanbul ignore next */ (_element: HTMLElement) => _element.focus()
+    );
   }
 }
 

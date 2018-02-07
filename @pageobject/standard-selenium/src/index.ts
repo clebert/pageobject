@@ -1,9 +1,10 @@
 import {
   StandardAction,
   StandardElement,
+  StandardKey,
   StandardPage
 } from '@pageobject/standard';
-import {By, WebDriver, WebElement, promise} from 'selenium-webdriver';
+import {By, Key, WebDriver, WebElement, promise} from 'selenium-webdriver';
 
 /* https://github.com/SeleniumHQ/selenium/issues/2969#issuecomment-307917606 */
 promise.USE_PROMISE_MANAGER = false;
@@ -36,10 +37,23 @@ class SeleniumElement implements StandardElement {
       .executeScript<TResult>(action, this.adaptee, ...args);
   }
 
-  public async type(text: string): Promise<void> {
-    for (const character of text.split('')) {
-      await this.adaptee.sendKeys(character);
-      await new Promise<void>(resolve => setTimeout(resolve, 100));
+  public async sendCharacter(character: string): Promise<void> {
+    if (character.length !== 1) {
+      throw new Error('Invalid character');
+    }
+
+    return this.adaptee.sendKeys(character);
+  }
+
+  public async sendKey(key: StandardKey): Promise<void> {
+    switch (key) {
+      case StandardKey.ENTER:
+        return this.adaptee.sendKeys(Key.ENTER);
+      case StandardKey.ESCAPE:
+        return this.adaptee.sendKeys(Key.ESCAPE);
+      case StandardKey.TAB: {
+        return this.adaptee.sendKeys(Key.TAB);
+      }
     }
   }
 }

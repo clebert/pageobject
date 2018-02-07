@@ -1,4 +1,4 @@
-import {StandardPageObject} from '.';
+import {StandardKey, StandardPageObject} from '.';
 
 interface MockDOMElement {
   any: any /* tslint:disable-line no-any */;
@@ -6,6 +6,7 @@ interface MockDOMElement {
   outerHTML: string;
 
   readonly getAttribute: jest.Mock;
+  readonly blur: jest.Mock;
   readonly focus: jest.Mock;
   readonly scrollIntoView: jest.Mock;
 }
@@ -14,14 +15,22 @@ interface MockElement {
   readonly click: jest.Mock;
   readonly doubleClick: jest.Mock;
   readonly perform: jest.Mock;
-  readonly type: jest.Mock;
+  readonly sendCharacter: jest.Mock;
+  readonly sendKey: jest.Mock;
 }
 
 class MockPageObject extends StandardPageObject {
   public readonly selector = 'mock';
 }
 
+async function nap(): Promise<void> {
+  for (let i = 0; i < 10; i += 1) {
+    await Promise.resolve();
+  }
+}
+
 describe('StandardPageObject', () => {
+  let findElements: jest.Mock;
   let getComputedStyle: jest.SpyInstance;
   let domElement: MockDOMElement;
   let element: MockElement;
@@ -35,6 +44,7 @@ describe('StandardPageObject', () => {
       innerText: ' innerTextValue ',
       outerHTML: ' outerHTMLValue ',
       getAttribute: jest.fn(),
+      blur: jest.fn(),
       focus: jest.fn(),
       scrollIntoView: jest.fn()
     };
@@ -43,14 +53,17 @@ describe('StandardPageObject', () => {
       click: jest.fn(),
       doubleClick: jest.fn(),
       perform: jest.fn(),
-      type: jest.fn()
+      sendCharacter: jest.fn(),
+      sendKey: jest.fn()
     };
 
     element.perform.mockImplementation(async (action, ...args) =>
       action(domElement, ...args)
     );
 
-    pageObject = new MockPageObject({findElements: async () => [element]});
+    findElements = jest.fn().mockImplementation(async () => [element]);
+
+    pageObject = new MockPageObject({findElements});
   });
 
   afterEach(() => {
@@ -101,16 +114,46 @@ describe('StandardPageObject', () => {
     });
   });
 
-  describe('type()', () => {
-    it('should type into the DOM element', async () => {
-      element.type.mockImplementation(async () => {
-        throw new Error('typeError');
+  describe('sendCharacter()', () => {
+    it('should send the specified character to the DOM element', async () => {
+      element.sendCharacter.mockImplementation(async () => {
+        throw new Error('sendCharacterError');
       });
 
-      await expect(pageObject.type('textValue')).rejects.toThrow('typeError');
+      await expect(pageObject.sendCharacter('c')).rejects.toThrow(
+        'sendCharacterError'
+      );
 
-      expect(element.type).toHaveBeenCalledTimes(1);
-      expect(element.type).toHaveBeenLastCalledWith('textValue');
+      expect(element.sendCharacter).toHaveBeenCalledTimes(1);
+      expect(element.sendCharacter).toHaveBeenLastCalledWith('c');
+    });
+  });
+
+  describe('sendKey()', () => {
+    it('should send the specified key to the DOM element', async () => {
+      element.sendKey.mockImplementation(async () => {
+        throw new Error('sendKeyError');
+      });
+
+      await expect(pageObject.sendKey(StandardKey.ENTER)).rejects.toThrow(
+        'sendKeyError'
+      );
+
+      expect(element.sendKey).toHaveBeenCalledTimes(1);
+      expect(element.sendKey).toHaveBeenLastCalledWith(StandardKey.ENTER);
+    });
+  });
+
+  describe('blur()', () => {
+    it('should blur the DOM element', async () => {
+      domElement.blur.mockImplementation(() => {
+        throw new Error('blurError');
+      });
+
+      await expect(pageObject.blur()).rejects.toThrow('blurError');
+
+      expect(domElement.blur).toHaveBeenCalledTimes(1);
+      expect(domElement.blur).toHaveBeenLastCalledWith();
     });
   });
 
@@ -146,6 +189,56 @@ describe('StandardPageObject', () => {
 
       expect(domElement.scrollIntoView).toHaveBeenCalledTimes(1);
       expect(domElement.scrollIntoView).toHaveBeenLastCalledWith(false);
+    });
+  });
+
+  describe('type()', () => {
+    it('should type into the DOM element', async () => {
+      jest.useFakeTimers();
+
+      try {
+        const typePromise = pageObject.type('text');
+
+        await nap();
+
+        expect(element.sendCharacter).toHaveBeenCalledTimes(1);
+        expect(element.sendCharacter).toHaveBeenLastCalledWith('t');
+
+        jest.advanceTimersByTime(99);
+
+        await nap();
+
+        expect(element.sendCharacter).toHaveBeenCalledTimes(1);
+
+        jest.advanceTimersByTime(1);
+
+        await nap();
+
+        expect(element.sendCharacter).toHaveBeenCalledTimes(2);
+        expect(element.sendCharacter).toHaveBeenLastCalledWith('e');
+
+        jest.advanceTimersByTime(100);
+
+        await nap();
+
+        expect(element.sendCharacter).toHaveBeenCalledTimes(3);
+        expect(element.sendCharacter).toHaveBeenLastCalledWith('x');
+
+        jest.advanceTimersByTime(100);
+
+        await nap();
+
+        expect(element.sendCharacter).toHaveBeenCalledTimes(4);
+        expect(element.sendCharacter).toHaveBeenLastCalledWith('t');
+
+        await typePromise;
+
+        await pageObject.type('');
+
+        expect(element.sendCharacter).toHaveBeenCalledTimes(4);
+      } finally {
+        jest.useRealTimers();
+      }
     });
   });
 
@@ -243,6 +336,22 @@ describe('StandardPageObject', () => {
   describe('getText()', () => {
     it('should get the `innerText` property of the DOM element', async () => {
       await expect(pageObject.getText()).resolves.toBe('innerTextValue');
+    });
+  });
+
+  describe('isExisting()', () => {
+    it('should return true', async () => {
+      await expect(pageObject.isExisting()).resolves.toBe(true);
+    });
+
+    it('should return false', async () => {
+      findElements.mockImplementation(async () => []);
+
+      await expect(pageObject.isExisting()).resolves.toBe(false);
+
+      findElements.mockImplementation(async () => [element, element]);
+
+      await expect(pageObject.isExisting()).resolves.toBe(false);
     });
   });
 
