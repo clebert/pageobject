@@ -164,3 +164,136 @@ export function indexIsLessThanOrEquals<
 >(value: number): Predicate<TElement, TPageObject> {
   return async (pageObject, index) => index <= value;
 }
+
+/**
+ * **Import: ES2015 modules**
+ *
+ * ```js
+ * import {equals} from '@pageobject/predicates';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
+ * const {equals} = require('@pageobject/predicates');
+ * ```
+ */
+export function equals<
+  TElement,
+  TPageObject extends PageObject<TElement>,
+  TValue
+>(
+  actual: (pageObject: TPageObject) => Promise<TValue>,
+  expected: TValue
+): Predicate<TElement, TPageObject> {
+  return async pageObject => (await actual(pageObject)) === expected;
+}
+
+/**
+ * **Import: ES2015 modules**
+ *
+ * ```js
+ * import {matches} from '@pageobject/predicates';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
+ * const {matches} = require('@pageobject/predicates');
+ * ```
+ */
+export function matches<TElement, TPageObject extends PageObject<TElement>>(
+  actual: (pageObject: TPageObject) => Promise<string>,
+  expected: RegExp
+): Predicate<TElement, TPageObject> {
+  return async pageObject => expected.test(await actual(pageObject));
+}
+
+/**
+ * **Import: ES2015 modules**
+ *
+ * ```js
+ * import {isGreaterThan} from '@pageobject/predicates';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
+ * const {isGreaterThan} = require('@pageobject/predicates');
+ * ```
+ */
+export function isGreaterThan<
+  TElement,
+  TPageObject extends PageObject<TElement>
+>(
+  actual: (pageObject: TPageObject) => Promise<number>,
+  expected: number
+): Predicate<TElement, TPageObject> {
+  return async pageObject => (await actual(pageObject)) > expected;
+}
+
+/**
+ * **Import: ES2015 modules**
+ *
+ * ```js
+ * import {isGreaterThanOrEquals} from '@pageobject/predicates';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
+ * const {isGreaterThanOrEquals} = require('@pageobject/predicates');
+ * ```
+ */
+export function isGreaterThanOrEquals<
+  TElement,
+  TPageObject extends PageObject<TElement>
+>(
+  actual: (pageObject: TPageObject) => Promise<number>,
+  expected: number
+): Predicate<TElement, TPageObject> {
+  return async pageObject => (await actual(pageObject)) >= expected;
+}
+
+/**
+ * **Import: ES2015 modules**
+ *
+ * ```js
+ * import {isLessThan} from '@pageobject/predicates';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
+ * const {isLessThan} = require('@pageobject/predicates');
+ * ```
+ */
+export function isLessThan<TElement, TPageObject extends PageObject<TElement>>(
+  actual: (pageObject: TPageObject) => Promise<number>,
+  expected: number
+): Predicate<TElement, TPageObject> {
+  return async pageObject => (await actual(pageObject)) < expected;
+}
+
+/**
+ * **Import: ES2015 modules**
+ *
+ * ```js
+ * import {isLessThanOrEquals} from '@pageobject/predicates';
+ * ```
+ *
+ * **Import: CommonJS**
+ *
+ * ```js
+ * const {isLessThanOrEquals} = require('@pageobject/predicates');
+ * ```
+ */
+export function isLessThanOrEquals<
+  TElement,
+  TPageObject extends PageObject<TElement>
+>(
+  actual: (pageObject: TPageObject) => Promise<number>,
+  expected: number
+): Predicate<TElement, TPageObject> {
+  return async pageObject => (await actual(pageObject)) <= expected;
+}
