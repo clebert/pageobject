@@ -5,12 +5,17 @@ class TestPageObject extends AbstractPageObject<object> {
   public readonly selector = 'test';
 }
 
-const pageObject = new TestPageObject({findElements: async () => []});
-
-const falsy = () => jest.fn().mockImplementation(async () => false);
-const truthy = () => jest.fn().mockImplementation(async () => true);
-
 describe('predicates', () => {
+  const pageObject = new TestPageObject({findElements: async () => []});
+
+  const actual = jest.fn();
+  const falsy = () => jest.fn().mockImplementation(async () => false);
+  const truthy = () => jest.fn().mockImplementation(async () => true);
+
+  beforeEach(() => {
+    actual.mockReset();
+  });
+
   describe('and()', () => {
     it('should return true', async () => {
       const predicateA = truthy();
@@ -160,6 +165,136 @@ describe('predicates', () => {
 
     it('should return false', async () => {
       await expect(predicate(pageObject, 2, [pageObject])).resolves.toBe(false);
+    });
+  });
+
+  describe('equals()', () => {
+    const predicate = predicates.equals(actual, 'foo');
+
+    it('should return true', async () => {
+      actual.mockImplementation(async () => 'foo');
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(true);
+
+      expect(actual).toHaveBeenCalledTimes(1);
+      expect(actual).toHaveBeenLastCalledWith(pageObject);
+    });
+
+    it('should return false', async () => {
+      actual.mockImplementation(async () => 'foobar');
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(false);
+    });
+  });
+
+  describe('matches()', () => {
+    const predicate = predicates.matches(actual, /foo/);
+
+    it('should return true', async () => {
+      actual.mockImplementation(async () => 'foobar');
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(true);
+
+      expect(actual).toHaveBeenCalledTimes(1);
+      expect(actual).toHaveBeenLastCalledWith(pageObject);
+    });
+
+    it('should return false', async () => {
+      actual.mockImplementation(async () => 'bar');
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(false);
+    });
+  });
+
+  describe('isGreaterThan()', () => {
+    const predicate = predicates.isGreaterThan(actual, 1);
+
+    it('should return true', async () => {
+      actual.mockImplementation(async () => 2);
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(true);
+
+      expect(actual).toHaveBeenCalledTimes(1);
+      expect(actual).toHaveBeenLastCalledWith(pageObject);
+    });
+
+    it('should return false', async () => {
+      actual.mockImplementation(async () => 0);
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(false);
+
+      actual.mockImplementation(async () => 1);
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(false);
+    });
+  });
+
+  describe('isGreaterThanOrEquals()', () => {
+    const predicate = predicates.isGreaterThanOrEquals(actual, 1);
+
+    it('should return true', async () => {
+      actual.mockImplementation(async () => 1);
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(true);
+
+      expect(actual).toHaveBeenCalledTimes(1);
+      expect(actual).toHaveBeenLastCalledWith(pageObject);
+
+      actual.mockImplementation(async () => 2);
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(true);
+    });
+
+    it('should return false', async () => {
+      actual.mockImplementation(async () => 0);
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(false);
+    });
+  });
+
+  describe('isLessThan()', () => {
+    const predicate = predicates.isLessThan(actual, 1);
+
+    it('should return true', async () => {
+      actual.mockImplementation(async () => 0);
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(true);
+
+      expect(actual).toHaveBeenCalledTimes(1);
+      expect(actual).toHaveBeenLastCalledWith(pageObject);
+    });
+
+    it('should return false', async () => {
+      actual.mockImplementation(async () => 1);
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(false);
+
+      actual.mockImplementation(async () => 2);
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(false);
+    });
+  });
+
+  describe('isLessThanOrEquals()', () => {
+    const predicate = predicates.isLessThanOrEquals(actual, 1);
+
+    it('should return true', async () => {
+      actual.mockImplementation(async () => 0);
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(true);
+
+      expect(actual).toHaveBeenCalledTimes(1);
+      expect(actual).toHaveBeenLastCalledWith(pageObject);
+
+      actual.mockImplementation(async () => 1);
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(true);
+    });
+
+    it('should return false', async () => {
+      actual.mockImplementation(async () => 2);
+
+      await expect(predicate(pageObject, 0, [pageObject])).resolves.toBe(false);
     });
   });
 });
