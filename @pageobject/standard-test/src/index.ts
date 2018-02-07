@@ -1,6 +1,7 @@
 import {indexEquals} from '@pageobject/predicates';
 import {
   StandardElement,
+  StandardKey,
   StandardPage,
   StandardPageObject
 } from '@pageobject/standard';
@@ -10,7 +11,8 @@ class IncompatibleElement implements StandardElement {
   public readonly click = jest.fn();
   public readonly doubleClick = jest.fn();
   public readonly perform = jest.fn();
-  public readonly type = jest.fn();
+  public readonly sendCharacter = jest.fn();
+  public readonly sendKey = jest.fn();
 }
 
 class Root extends StandardPageObject {
@@ -89,7 +91,7 @@ export function describePageTests(getPage: () => StandardPage): void {
         ).rejects.toThrow('Incompatible parent element');
       });
 
-      it('should find elements compatible with the standard API', async () => {
+      it('should only find elements compatible with the standard API', async () => {
         await expect(
           root.perform(
             (_element: HTMLElement, _arg1: string, _arg2: string) => [
@@ -120,9 +122,43 @@ export function describePageTests(getPage: () => StandardPage): void {
 
         await expect(textInput.getProperty('value')).resolves.toBe('');
 
-        await textInput.type('textValue');
+        await textInput.sendCharacter('H');
+        await textInput.sendCharacter('e');
+        await textInput.sendCharacter('l');
+        await textInput.sendCharacter('l');
+        await textInput.sendCharacter('o');
+        await textInput.sendCharacter(',');
+        await textInput.sendCharacter(' ');
+        await textInput.sendCharacter('W');
+        await textInput.sendCharacter('o');
+        await textInput.sendCharacter('r');
+        await textInput.sendCharacter('l');
+        await textInput.sendCharacter('d');
+        await textInput.sendCharacter('!');
 
-        await expect(textInput.getProperty('value')).resolves.toBe('textValue');
+        await expect(textInput.getProperty('value')).resolves.toBe(
+          'Hello, World!'
+        );
+
+        await expect(textInput.sendCharacter('')).rejects.toThrow(
+          'Invalid character'
+        );
+
+        await expect(textInput.sendCharacter('text')).rejects.toThrow(
+          'Invalid character'
+        );
+
+        await textInput.sendKey(StandardKey.ENTER);
+
+        await expect(root.getPageTitle()).resolves.toBe('keyup: ENTER');
+
+        await textInput.sendKey(StandardKey.ESCAPE);
+
+        await expect(root.getPageTitle()).resolves.toBe('keyup: ESCAPE');
+
+        await textInput.sendKey(StandardKey.TAB);
+
+        await expect(root.getPageTitle()).resolves.toBe('keyup: TAB');
 
         await expect(container.select(Container).getHTML()).resolves.toBe(
           '<div>subcontainer</div>'
