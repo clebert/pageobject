@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/standard-puppeteer",
-  "version": "1.0.0-beta-2",
+  "version": "1.0.0-beta-3",
   "description": "This package implements the PageObjectJS standard API for Puppeteer.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -35,16 +35,16 @@
     "access": "public"
   },
   "dependencies": {
-    "@pageobject/core": "^1.0.0-beta-2"
+    "@pageobject/core": "^1.0.0-beta-3"
   },
   "peerDependencies": {
     "@pageobject/standard": "^1.0.0",
     "puppeteer": "^1.0.0"
   },
   "devDependencies": {
-    "@pageobject/engine": "^1.0.0-beta-2",
-    "@pageobject/standard": "^1.0.0-beta-2",
-    "@pageobject/standard-test": "^1.0.0-beta-2",
+    "@pageobject/engine": "^1.0.0-beta-3",
+    "@pageobject/standard": "^1.0.0-beta-3",
+    "@pageobject/standard-test": "^1.0.0-beta-3",
     "@types/puppeteer": "^1.0.0",
     "puppeteer": "^1.0.0"
   }

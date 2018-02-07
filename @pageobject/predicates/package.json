@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/predicates",
-  "version": "1.0.0-beta-2",
+  "version": "1.0.0-beta-3",
   "description": "This package provides a collection of useful predicate functions.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -35,6 +35,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@pageobject/core": "^1.0.0-beta-2"
+    "@pageobject/core": "^1.0.0-beta-3"
   }
 }
