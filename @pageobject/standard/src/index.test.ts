@@ -71,7 +71,7 @@ describe('StandardPageObject', () => {
   });
 
   describe('click()', () => {
-    it('should click on the DOM element', async () => {
+    it('should click on its DOM element', async () => {
       element.click.mockImplementation(async () => {
         throw new Error('clickError');
       });
@@ -84,7 +84,7 @@ describe('StandardPageObject', () => {
   });
 
   describe('doubleClick()', () => {
-    it('should double-click on the DOM element', async () => {
+    it('should double-click on its DOM element', async () => {
       element.doubleClick.mockImplementation(async () => {
         throw new Error('doubleClickError');
       });
@@ -99,7 +99,7 @@ describe('StandardPageObject', () => {
   });
 
   describe('perform()', () => {
-    it('should perform an action on the DOM element', async () => {
+    it('should perform an action on its DOM element', async () => {
       const action = jest.fn().mockReturnValue(' actionValue ');
 
       await expect(pageObject.perform(action)).resolves.toBe(' actionValue ');
@@ -115,7 +115,7 @@ describe('StandardPageObject', () => {
   });
 
   describe('sendCharacter()', () => {
-    it('should send the specified character to the DOM element', async () => {
+    it('should send the specified character to its DOM element', async () => {
       element.sendCharacter.mockImplementation(async () => {
         throw new Error('sendCharacterError');
       });
@@ -130,7 +130,7 @@ describe('StandardPageObject', () => {
   });
 
   describe('sendKey()', () => {
-    it('should send the specified key to the DOM element', async () => {
+    it('should send the specified key to its DOM element', async () => {
       element.sendKey.mockImplementation(async () => {
         throw new Error('sendKeyError');
       });
@@ -145,7 +145,7 @@ describe('StandardPageObject', () => {
   });
 
   describe('blur()', () => {
-    it('should blur the DOM element', async () => {
+    it('should blur its DOM element', async () => {
       domElement.blur.mockImplementation(() => {
         throw new Error('blurError');
       });
@@ -158,7 +158,7 @@ describe('StandardPageObject', () => {
   });
 
   describe('focus()', () => {
-    it('should focus the DOM element', async () => {
+    it('should focus its DOM element', async () => {
       domElement.focus.mockImplementation(() => {
         throw new Error('focusError');
       });
@@ -171,7 +171,7 @@ describe('StandardPageObject', () => {
   });
 
   describe('scrollIntoView()', () => {
-    it('should scroll the DOM element into view', async () => {
+    it('should scroll its DOM element into view', async () => {
       domElement.scrollIntoView.mockImplementation(() => {
         throw new Error('scrollIntoViewError');
       });
@@ -193,7 +193,7 @@ describe('StandardPageObject', () => {
   });
 
   describe('type()', () => {
-    it('should type into the DOM element', async () => {
+    it('should type into its DOM element', async () => {
       jest.useFakeTimers();
 
       try {
@@ -243,7 +243,7 @@ describe('StandardPageObject', () => {
   });
 
   describe('getAttribute()', () => {
-    it('should get the specified attribute of the DOM element', async () => {
+    it('should get the specified attribute of its DOM element', async () => {
       domElement.getAttribute.mockReturnValue(' attributeValue ');
 
       await expect(pageObject.getAttribute('attributeName')).resolves.toBe(
@@ -264,7 +264,7 @@ describe('StandardPageObject', () => {
   });
 
   describe('getHTML()', () => {
-    it('should get the `outerHTML` property of the DOM element', async () => {
+    it('should get the `outerHTML` property of its DOM element', async () => {
       await expect(pageObject.getHTML()).resolves.toBe('outerHTMLValue');
     });
   });
@@ -284,7 +284,7 @@ describe('StandardPageObject', () => {
   });
 
   describe('getProperty()', () => {
-    it('should get the specified property of the DOM element', async () => {
+    it('should get the specified property of its DOM element', async () => {
       await expect(pageObject.getProperty('any')).resolves.toBe('anyValue');
 
       domElement.any = false;
@@ -316,7 +316,7 @@ describe('StandardPageObject', () => {
   });
 
   describe('getStyle()', () => {
-    it('should get the specified style property of the DOM element', async () => {
+    it('should get the specified style property of its DOM element', async () => {
       const getPropertyValue = jest.fn().mockReturnValue(' styleValue ');
 
       getComputedStyle.mockImplementation(() => ({getPropertyValue}));
@@ -334,7 +334,7 @@ describe('StandardPageObject', () => {
   });
 
   describe('getText()', () => {
-    it('should get the `innerText` property of the DOM element', async () => {
+    it('should get the `innerText` property of its DOM element', async () => {
       await expect(pageObject.getText()).resolves.toBe('innerTextValue');
     });
   });
@@ -374,7 +374,7 @@ describe('StandardPageObject', () => {
       expect(getPropertyValue).toHaveBeenLastCalledWith('visibility');
     });
 
-    it('should return false if the DOM element has the style property `display: none`', async () => {
+    it('should return false if its DOM element has the style property `display: none`', async () => {
       const getPropertyValue = jest.fn().mockReturnValue('none');
 
       getComputedStyle.mockImplementation(() => ({getPropertyValue}));
@@ -388,7 +388,7 @@ describe('StandardPageObject', () => {
       expect(getPropertyValue).toHaveBeenLastCalledWith('display');
     });
 
-    it('should return false if the DOM element has the style property `visibility: hidden`', async () => {
+    it('should return false if its DOM element has the style property `visibility: hidden`', async () => {
       const getPropertyValue = jest
         .fn()
         .mockReturnValueOnce('block')

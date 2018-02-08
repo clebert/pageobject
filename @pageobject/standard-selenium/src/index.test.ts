@@ -23,4 +23,8 @@ afterAll(async () => {
   await page.driver.quit();
 });
 
+beforeEach(async () => {
+  await page.driver.navigate().refresh();
+});
+
 describePageTests(() => page);

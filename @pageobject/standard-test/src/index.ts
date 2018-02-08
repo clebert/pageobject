@@ -5,7 +5,7 @@ import {
   StandardPage,
   StandardPageObject
 } from '@pageobject/standard';
-import * as path from 'path';
+import {join} from 'path';
 
 class IncompatibleElement implements StandardElement {
   public readonly click = jest.fn();
@@ -15,24 +15,16 @@ class IncompatibleElement implements StandardElement {
   public readonly sendKey = jest.fn();
 }
 
+class Button extends StandardPageObject {
+  public readonly selector = 'button';
+}
+
 class Root extends StandardPageObject {
   public readonly selector = ':root';
 }
 
-class Container extends StandardPageObject {
-  public readonly selector = 'div';
-}
-
-class RadioInput extends StandardPageObject {
-  public readonly selector = 'input[type="radio"]';
-}
-
 class TextInput extends StandardPageObject {
   public readonly selector = 'input[type="text"]';
-}
-
-class Unknown extends StandardPageObject {
-  public readonly selector = '.unknown';
 }
 
 /**
@@ -48,10 +40,7 @@ class Unknown extends StandardPageObject {
  * const {testURL} = require('@pageobject/standard-test');
  * ```
  */
-export const testURL = `file://${path.join(
-  __dirname,
-  '../fixtures/index.html'
-)}`;
+export const testURL = `file://${join(__dirname, '../fixtures/index.html')}`;
 
 /**
  * **Import: ES2015 modules**
@@ -68,103 +57,145 @@ export const testURL = `file://${path.join(
  */
 export function describePageTests(getPage: () => StandardPage): void {
   describe('StandardPage', () => {
-    let page: StandardPage;
-    let root: Root;
-    let container: Container;
-    let radioInput: RadioInput;
-    let textInput: TextInput;
-    let unknown: Unknown;
-
-    beforeAll(() => {
-      page = getPage();
-      root = new Root(page);
-      container = root.select(Container).where(indexEquals(0));
-      radioInput = root.select(RadioInput);
-      textInput = root.select(TextInput);
-      unknown = root.select(Unknown);
-    });
-
     describe('findElements()', () => {
-      it('should throw an incompatible-parent-element error', async () => {
+      it('should use the specified parent element as the root node', async () => {
+        const elements = await getPage().findElements('div');
+
+        expect(elements).toHaveLength(2);
+
         await expect(
-          page.findElements('selector', new IncompatibleElement())
-        ).rejects.toThrow('Incompatible parent element');
+          getPage().findElements('div', elements[0])
+        ).resolves.toHaveLength(1);
+
+        await expect(
+          getPage().findElements('div', elements[1])
+        ).resolves.toHaveLength(0);
       });
 
-      it('should only find elements compatible with the standard API', async () => {
+      it('should handle a non-matching selector', async () => {
+        await expect(getPage().findElements('selector')).resolves.toEqual([]);
+      });
+
+      it('should throw an incompatible-parent-element error', async () => {
+        await expect(
+          getPage().findElements('selector', new IncompatibleElement())
+        ).rejects.toThrow('Incompatible parent element');
+      });
+    });
+  });
+
+  describe('StandardElement', () => {
+    describe('click()', () => {
+      it('should send a click event to a DOM element', async () => {
+        const button = new Button(getPage()).where(indexEquals(0));
+
+        await expect(button.getPageTitle()).resolves.toBe('Test');
+
+        await button.click();
+
+        await expect(button.getPageTitle()).resolves.toBe('Event: click');
+      });
+    });
+
+    describe('doubleClick()', () => {
+      it('should send a dblclick event to a DOM element', async () => {
+        const button = new Button(getPage()).where(indexEquals(1));
+
+        await expect(button.getPageTitle()).resolves.toBe('Test');
+
+        await button.doubleClick();
+
+        await expect(button.getPageTitle()).resolves.toBe('Event: dblclick');
+      });
+    });
+
+    describe('perform()', () => {
+      it('should perform an action on a DOM element', async () => {
+        const root = new Root(getPage());
+
         await expect(
           root.perform(
-            (_element: HTMLElement, _arg1: string, _arg2: string) => [
-              _element.tagName,
-              _arg1,
-              _arg2
-            ],
+            (_element, ..._args) => [_element.tagName, ..._args],
             'arg1',
             'arg2'
           )
         ).resolves.toEqual(['HTML', 'arg1', 'arg2']);
+      });
+
+      it('should throw an action error', async () => {
+        const root = new Root(getPage());
 
         await expect(
           root.perform(() => {
             throw new Error('actionError');
           })
         ).rejects.toThrow(/actionError/);
+      });
+    });
 
-        await expect(radioInput.getProperty('checked')).resolves.toBe('false');
-
-        await radioInput.click();
-
-        await expect(radioInput.getProperty('checked')).resolves.toBe('true');
-
-        await radioInput.doubleClick();
-
-        await expect(root.getPageTitle()).resolves.toBe('dblclick');
+    describe('sendCharacter()', () => {
+      it('should send a character to a DOM element', async () => {
+        const textInput = new TextInput(getPage());
 
         await expect(textInput.getProperty('value')).resolves.toBe('');
 
-        await textInput.sendCharacter('H');
-        await textInput.sendCharacter('e');
-        await textInput.sendCharacter('l');
-        await textInput.sendCharacter('l');
-        await textInput.sendCharacter('o');
-        await textInput.sendCharacter(',');
-        await textInput.sendCharacter(' ');
-        await textInput.sendCharacter('W');
-        await textInput.sendCharacter('o');
-        await textInput.sendCharacter('r');
-        await textInput.sendCharacter('l');
-        await textInput.sendCharacter('d');
-        await textInput.sendCharacter('!');
+        const expected = 'Hello, World!';
 
-        await expect(textInput.getProperty('value')).resolves.toBe(
-          'Hello, World!'
-        );
+        for (const character of expected.split('')) {
+          await textInput.sendCharacter(character);
+        }
+
+        await expect(textInput.getProperty('value')).resolves.toBe(expected);
+      });
+
+      it('should throw an invalid-character error', async () => {
+        const textInput = new TextInput(getPage());
 
         await expect(textInput.sendCharacter('')).rejects.toThrow(
           'Invalid character'
         );
 
-        await expect(textInput.sendCharacter('text')).rejects.toThrow(
+        await expect(textInput.sendCharacter('!!')).rejects.toThrow(
           'Invalid character'
         );
+      });
+    });
+
+    describe('sendKey()', () => {
+      it('should send the ENTER key to a DOM element', async () => {
+        const textInput = new TextInput(getPage());
+
+        await expect(textInput.getPageTitle()).resolves.toBe('Test');
 
         await textInput.sendKey(StandardKey.ENTER);
 
-        await expect(root.getPageTitle()).resolves.toBe('keyup: ENTER');
+        await expect(textInput.getPageTitle()).resolves.toBe(
+          `Event: keyup (${StandardKey.ENTER})`
+        );
+      });
+
+      it('should send the ESCAPE key to a DOM element', async () => {
+        const textInput = new TextInput(getPage());
+
+        await expect(textInput.getPageTitle()).resolves.toBe('Test');
 
         await textInput.sendKey(StandardKey.ESCAPE);
 
-        await expect(root.getPageTitle()).resolves.toBe('keyup: ESCAPE');
+        await expect(textInput.getPageTitle()).resolves.toBe(
+          `Event: keyup (${StandardKey.ESCAPE})`
+        );
+      });
+
+      it('should send the TAB key to a DOM element', async () => {
+        const textInput = new TextInput(getPage());
+
+        await expect(textInput.getPageTitle()).resolves.toBe('Test');
 
         await textInput.sendKey(StandardKey.TAB);
 
-        await expect(root.getPageTitle()).resolves.toBe('keyup: TAB');
-
-        await expect(container.select(Container).getHTML()).resolves.toBe(
-          '<div>subcontainer</div>'
+        await expect(textInput.getPageTitle()).resolves.toBe(
+          `Event: keyup (${StandardKey.TAB})`
         );
-
-        await expect(unknown.getSize()).resolves.toBe(0);
       });
     });
   });
