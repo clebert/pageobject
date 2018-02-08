@@ -4,10 +4,13 @@ import {
   StandardKey,
   StandardPage
 } from '@pageobject/standard';
-import {By, Key, WebDriver, WebElement, promise} from 'selenium-webdriver';
-
-/* https://github.com/SeleniumHQ/selenium/issues/2969#issuecomment-307917606 */
-promise.USE_PROMISE_MANAGER = false;
+import {
+  ActionSequence,
+  By,
+  Key,
+  WebDriver,
+  WebElement
+} from 'selenium-webdriver';
 
 class SeleniumElement implements StandardElement {
   public readonly adaptee: WebElement;
@@ -21,11 +24,12 @@ class SeleniumElement implements StandardElement {
   }
 
   public async doubleClick(): Promise<void> {
-    return this.adaptee
-      .getDriver()
-      .actions()
-      .doubleClick()
-      .perform();
+    /* tslint:disable-next-line no-any */
+    const actions: ActionSequence = (this.adaptee.getDriver() as any).actions({
+      bridge: true /* https://github.com/SeleniumHQ/selenium/blob/master/javascript/node/selenium-webdriver/CHANGES.md#v400-alpha1 */
+    });
+
+    return actions.doubleClick(this.adaptee).perform();
   }
 
   public async perform<TElement extends Element, TResult>(

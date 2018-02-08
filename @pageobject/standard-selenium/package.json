@@ -39,7 +39,7 @@
   },
   "peerDependencies": {
     "@pageobject/standard": "^1.0.0",
-    "selenium-webdriver": "^3.6.0"
+    "selenium-webdriver": "^4.0.0-alpha.1"
   },
   "devDependencies": {
     "@pageobject/engine": "^1.0.0-beta-3",
@@ -47,6 +47,6 @@
     "@pageobject/standard-test": "^1.0.0-beta-3",
     "@types/selenium-webdriver": "^3.0.8",
     "chromedriver": "^2.35.0",
-    "selenium-webdriver": "^3.6.0"
+    "selenium-webdriver": "^4.0.0-alpha.1"
   }
 }
