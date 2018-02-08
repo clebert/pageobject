@@ -12,4 +12,8 @@ afterAll(async () => {
   await page.browser.close();
 });
 
+beforeEach(async () => {
+  await page.adaptee.reload();
+});
+
 describePageTests(() => page);

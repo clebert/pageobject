@@ -2,52 +2,41 @@
 <html>
 
 <head>
-  <title>test</title>
+  <title>Test</title>
 </head>
 
 <body>
   <div>
-    <div>subcontainer</div>
+    <div>
+      <input type="text">
+      <button>click</button>
+      <button>dblclick</button>
+    </div>
   </div>
 
-  <input type="radio">
-  <input type="text">
-
   <script>
-    const radioInput = document.querySelector('input[type="radio"]');
+    const clickButton = document.querySelector('button:nth-child(2)');
 
-    radioInput.addEventListener('dblclick', () => {
-      document.title = 'dblclick';
+    clickButton.addEventListener('click', () => {
+      document.title = 'Event: click';
+    });
+
+    const dblclickButton = document.querySelector('button:nth-child(3)');
+
+    dblclickButton.addEventListener('dblclick', () => {
+      document.title = 'Event: dblclick';
     });
 
     const textInput = document.querySelector('input[type="text"]');
 
     textInput.addEventListener('keydown', event => {
-      const keyCode = event.which || event.keyCode || 0;
-
-      if (keyCode === 9) {
+      if (event.keyCode === 9) {
         event.preventDefault();
       }
     });
 
     textInput.addEventListener('keyup', event => {
-      switch (event.which || event.keyCode || 0) {
-        case 9: {
-          document.title = 'keyup: TAB';
-          break;
-        }
-        case 13: {
-          document.title = 'keyup: ENTER';
-          break;
-        }
-        case 27: {
-          document.title = 'keyup: ESCAPE';
-          break;
-        }
-        default: {
-          document.title = 'keyup: UNKNOWN';
-        }
-      }
+      document.title = `Event: keyup (${event.keyCode})`;
     });
   </script>
 </body>
