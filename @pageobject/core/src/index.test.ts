@@ -1,4 +1,4 @@
-import {AbstractPageObject, Page, Predicate} from '.';
+import {Page, PageObject, Predicate} from '.';
 
 class JSDOMPage implements Page<Element> {
   public async findElements(
@@ -11,7 +11,7 @@ class JSDOMPage implements Page<Element> {
   }
 }
 
-class Root extends AbstractPageObject<Element> {
+class Root extends PageObject<Element> {
   public readonly selector = 'div';
 
   public async getName(): Promise<string | null> {

@@ -931,7 +931,7 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
 					<a href="button.html#getattribute" class="tsd-kind-icon">get<wbr>Attribute</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-not-exported">
 					<a href="button.html#getelement" class="tsd-kind-icon">get<wbr>Element</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
@@ -1019,7 +1019,6 @@ img { max-width: 100%; }
 		<section class="tsd-panel">
 			<h3>Implements</h3>
 			<ul class="tsd-hierarchy">
-				<li><span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StandardElement</span><span class="tsd-signature-symbol">&gt;</span></li>
 				<li><span class="tsd-signature-type">StandardElement</span></li>
 			</ul>
 		</section>
@@ -1047,7 +1046,7 @@ img { max-width: 100%; }
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="button.html#doubleclick" class="tsd-kind-icon">double<wbr>Click</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="button.html#focus" class="tsd-kind-icon">focus</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="button.html#getattribute" class="tsd-kind-icon">get<wbr>Attribute</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="button.html#getelement" class="tsd-kind-icon">get<wbr>Element</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-not-exported"><a href="button.html#getelement" class="tsd-kind-icon">get<wbr>Element</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="button.html#gethtml" class="tsd-kind-icon">getHTML</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="button.html#getpagetitle" class="tsd-kind-icon">get<wbr>Page<wbr>Title</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="button.html#getpageurl" class="tsd-kind-icon">get<wbr>PageURL</a></li>
@@ -1075,23 +1074,20 @@ img { max-width: 100%; }
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Button<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Page</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StandardElement</span><span class="tsd-signature-symbol">&gt;</span>, parent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StandardElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="button.html" class="tsd-signature-type">Button</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Button<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Page</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StandardElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="button.html" class="tsd-signature-type">Button</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Inherited from AbstractPageObject.__constructor</p>
+							<p>Inherited from PageObject.__constructor</p>
 							<ul>
-								<li>Defined in @pageobject/core/dist/index.d.ts:38</li>
+								<li>Defined in @pageobject/core/dist/index.d.ts:31</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>page: <span class="tsd-signature-type">Page</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StandardElement</span><span class="tsd-signature-symbol">&gt;</span></h5>
-							</li>
-							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> parent: <span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StandardElement</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="button.html" class="tsd-signature-type">Button</a></h4>
@@ -1106,7 +1102,7 @@ img { max-width: 100%; }
 				<h3>selector</h3>
 				<div class="tsd-signature tsd-kind-icon">selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"button"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;button&quot;</span></div>
 				<aside class="tsd-sources">
-					<p>Overrides AbstractPageObject.selector</p>
+					<p>Overrides PageObject.selector</p>
 					<ul>
 						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard-test/src/index.ts#L19">index.ts:19</a></li>
 					</ul>
@@ -1219,18 +1215,18 @@ img { max-width: 100%; }
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-not-exported">
 				<a name="getelement" class="tsd-anchor"></a>
-				<h3>get<wbr>Element</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported">
+				<h3><span class="tsd-flag ts-flagProtected">Protected</span> get<wbr>Element</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-not-exported">
 					<li class="tsd-signature tsd-kind-icon">get<wbr>Element<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StandardElement</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Inherited from AbstractPageObject.getElement</p>
+							<p>Inherited from PageObject.getElement</p>
 							<ul>
-								<li>Defined in @pageobject/core/dist/index.d.ts:62</li>
+								<li>Defined in @pageobject/core/dist/index.d.ts:60</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1358,9 +1354,9 @@ img { max-width: 100%; }
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Inherited from AbstractPageObject.getSize</p>
+							<p>Inherited from PageObject.getSize</p>
 							<ul>
-								<li>Defined in @pageobject/core/dist/index.d.ts:67</li>
+								<li>Defined in @pageobject/core/dist/index.d.ts:54</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1543,9 +1539,9 @@ img { max-width: 100%; }
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Inherited from AbstractPageObject.select</p>
+							<p>Inherited from PageObject.select</p>
 							<ul>
-								<li>Defined in @pageobject/core/dist/index.d.ts:46</li>
+								<li>Defined in @pageobject/core/dist/index.d.ts:39</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1661,9 +1657,9 @@ img { max-width: 100%; }
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Inherited from AbstractPageObject.where</p>
+							<p>Inherited from PageObject.where</p>
 							<ul>
-								<li>Defined in @pageobject/core/dist/index.d.ts:56</li>
+								<li>Defined in @pageobject/core/dist/index.d.ts:49</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

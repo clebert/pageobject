@@ -1,4 +1,5 @@
 {
+  "problems.decorations.enabled": false,
   "search.exclude": {
     "**/coverage/**": true,
     "**/dist/**": true,

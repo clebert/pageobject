@@ -12,19 +12,7 @@ export interface PageObjectConstructor<
   TElement,
   TPageObject extends PageObject<TElement>
 > {
-  new (page: Page<TElement>, parent?: PageObject<TElement>): TPageObject;
-}
-
-export interface PageObject<TElement> {
-  readonly selector: string;
-
-  select<TPageObject extends PageObject<TElement>>(
-    descendant: PageObjectConstructor<TElement, TPageObject>
-  ): TPageObject;
-
-  where(selectionCriterion: Predicate<TElement, this>): this;
-  getElement(): Promise<TElement>;
-  getSize(): Promise<number>;
+  new (page: Page<TElement>): TPageObject;
 }
 
 /**
@@ -33,31 +21,31 @@ export interface PageObject<TElement> {
  * **ES2015 modules**
  *
  * ```js
- * import {AbstractPageObject} from '@pageobject/core';
+ * import {PageObject} from '@pageobject/core';
  * ```
  *
  * **CommonJS**
  *
  * ```js
- * const {AbstractPageObject} = require('@pageobject/core');
+ * const {PageObject} = require('@pageobject/core');
  * ```
  */
-export abstract class AbstractPageObject<TElement>
-  implements PageObject<TElement> {
+export abstract class PageObject<TElement> {
   /**
    * The [CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) describing this page object.
    */
   public abstract readonly selector: string;
 
   private readonly _page: Page<TElement>;
-  private readonly _parent?: PageObject<TElement>;
 
-  private _selectionCriterion?: Predicate<TElement, this>;
   private _element?: TElement;
+  private _parent?: PageObject<TElement>;
 
-  public constructor(page: Page<TElement>, parent?: PageObject<TElement>) {
+  /* tslint:disable-next-line no-any */
+  private _selectionCriterion?: Predicate<TElement, any>;
+
+  public constructor(page: Page<TElement>) {
     this._page = page;
-    this._parent = parent;
   }
 
   /**
@@ -69,7 +57,11 @@ export abstract class AbstractPageObject<TElement>
   public select<TPageObject extends PageObject<TElement>>(
     Descendant: PageObjectConstructor<TElement, TPageObject>
   ): TPageObject {
-    return new Descendant(this._page, this);
+    const descendant = new Descendant(this._page);
+
+    descendant._parent = this;
+
+    return descendant;
   }
 
   /**
@@ -87,11 +79,20 @@ export abstract class AbstractPageObject<TElement>
     }
 
     const Copy = this.constructor as PageObjectConstructor<TElement, this>;
-    const copy = new Copy(this._page, this._parent);
+    const copy = new Copy(this._page);
 
+    copy._parent = this._parent;
     copy._selectionCriterion = selectionCriterion;
 
     return copy;
+  }
+
+  /**
+   * @returns A promise that will be resolved with the number of DOM elements
+   * currently assigned to this page object.
+   */
+  public async getSize(): Promise<number> {
+    return (await this._findElements()).length;
   }
 
   /**
@@ -99,7 +100,7 @@ export abstract class AbstractPageObject<TElement>
    * unique DOM element assigned to this page object or a promise that will be
    * rejected if there is no unique DOM element assignable to this page object.
    */
-  public async getElement(): Promise<TElement> {
+  protected async getElement(): Promise<TElement> {
     if (this._element) {
       return this._element;
     }
@@ -115,14 +116,6 @@ export abstract class AbstractPageObject<TElement>
     }
 
     return elements[0];
-  }
-
-  /**
-   * @returns A promise that will be resolved with the number of DOM elements
-   * currently assigned to this page object.
-   */
-  public async getSize(): Promise<number> {
-    return (await this._findElements()).length;
   }
 
   private async _findElements(): Promise<TElement[]> {

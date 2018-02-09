@@ -1,7 +1,7 @@
-import {AbstractPageObject} from '@pageobject/core';
+import {PageObject} from '@pageobject/core';
 import * as predicates from '.';
 
-class TestPageObject extends AbstractPageObject<object> {
+class TestPageObject extends PageObject<object> {
   public readonly selector = 'test';
 }
 
