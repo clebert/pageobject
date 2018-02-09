@@ -12,6 +12,11 @@ import {
   WebElement
 } from 'selenium-webdriver';
 
+/* https://github.com/SeleniumHQ/selenium/blob/master/javascript/node/selenium-webdriver/CHANGES.md#v400-alpha1 */
+interface WebDriver4 extends WebDriver {
+  actions(options?: {bridge: boolean}): ActionSequence;
+}
+
 class SeleniumElement implements StandardElement {
   public readonly adaptee: WebElement;
 
@@ -24,12 +29,12 @@ class SeleniumElement implements StandardElement {
   }
 
   public async doubleClick(): Promise<void> {
-    /* tslint:disable-next-line no-any */
-    const actions: ActionSequence = (this.adaptee.getDriver() as any).actions({
-      bridge: true /* https://github.com/SeleniumHQ/selenium/blob/master/javascript/node/selenium-webdriver/CHANGES.md#v400-alpha1 */
-    });
+    const driver: WebDriver4 = this.adaptee.getDriver();
 
-    return actions.doubleClick(this.adaptee).perform();
+    return driver
+      .actions({bridge: true})
+      .doubleClick(this.adaptee)
+      .perform();
   }
 
   public async perform<TElement extends Element, TResult>(

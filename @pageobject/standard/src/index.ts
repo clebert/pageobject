@@ -1,8 +1,8 @@
 /* tslint:disable no-any */
 
 import {
-  AbstractPageObject,
   Page,
+  PageObject,
   PageObjectConstructor,
   Predicate
 } from '@pageobject/core';
@@ -56,9 +56,8 @@ export type StandardPredicate<
  * const {StandardPageObject} = require('@pageobject/standard');
  * ```
  */
-export abstract class StandardPageObject extends AbstractPageObject<
-  StandardElement
-> implements StandardElement {
+export abstract class StandardPageObject extends PageObject<StandardElement>
+  implements StandardElement {
   public async click(): Promise<void> {
     return (await this.getElement()).click();
   }

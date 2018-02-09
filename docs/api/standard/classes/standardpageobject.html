@@ -934,7 +934,7 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="standardpageobject.html#getattribute" class="tsd-kind-icon">get<wbr>Attribute</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a href="standardpageobject.html#getelement" class="tsd-kind-icon">get<wbr>Element</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -1023,7 +1023,7 @@ img { max-width: 100%; }
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="tsd-signature-type">AbstractPageObject</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/standardelement.html" class="tsd-signature-type">StandardElement</a><span class="tsd-signature-symbol">&gt;</span>
+					<span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/standardelement.html" class="tsd-signature-type">StandardElement</a><span class="tsd-signature-symbol">&gt;</span>
 					<ul class="tsd-hierarchy">
 						<li>
 							<span class="target">StandardPageObject</span>
@@ -1035,7 +1035,6 @@ img { max-width: 100%; }
 		<section class="tsd-panel">
 			<h3>Implements</h3>
 			<ul class="tsd-hierarchy">
-				<li><span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/standardelement.html" class="tsd-signature-type">StandardElement</a><span class="tsd-signature-symbol">&gt;</span></li>
 				<li><a href="../interfaces/standardelement.html" class="tsd-signature-type">StandardElement</a></li>
 			</ul>
 		</section>
@@ -1063,7 +1062,7 @@ img { max-width: 100%; }
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="standardpageobject.html#doubleclick" class="tsd-kind-icon">double<wbr>Click</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="standardpageobject.html#focus" class="tsd-kind-icon">focus</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="standardpageobject.html#getattribute" class="tsd-kind-icon">get<wbr>Attribute</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="standardpageobject.html#getelement" class="tsd-kind-icon">get<wbr>Element</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="standardpageobject.html#getelement" class="tsd-kind-icon">get<wbr>Element</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="standardpageobject.html#gethtml" class="tsd-kind-icon">getHTML</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="standardpageobject.html#getpagetitle" class="tsd-kind-icon">get<wbr>Page<wbr>Title</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="standardpageobject.html#getpageurl" class="tsd-kind-icon">get<wbr>PageURL</a></li>
@@ -1091,23 +1090,20 @@ img { max-width: 100%; }
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Standard<wbr>Page<wbr>Object<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Page</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/standardelement.html" class="tsd-signature-type">StandardElement</a><span class="tsd-signature-symbol">&gt;</span>, parent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/standardelement.html" class="tsd-signature-type">StandardElement</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="standardpageobject.html" class="tsd-signature-type">StandardPageObject</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Standard<wbr>Page<wbr>Object<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Page</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/standardelement.html" class="tsd-signature-type">StandardElement</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="standardpageobject.html" class="tsd-signature-type">StandardPageObject</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Inherited from AbstractPageObject.__constructor</p>
+							<p>Inherited from PageObject.__constructor</p>
 							<ul>
-								<li>Defined in @pageobject/core/dist/index.d.ts:38</li>
+								<li>Defined in @pageobject/core/dist/index.d.ts:31</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>page: <span class="tsd-signature-type">Page</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/standardelement.html" class="tsd-signature-type">StandardElement</a><span class="tsd-signature-symbol">&gt;</span></h5>
-							</li>
-							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> parent: <span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/standardelement.html" class="tsd-signature-type">StandardElement</a><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="standardpageobject.html" class="tsd-signature-type">StandardPageObject</a></h4>
@@ -1122,9 +1118,9 @@ img { max-width: 100%; }
 				<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> selector</h3>
 				<div class="tsd-signature tsd-kind-icon">selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
-					<p>Inherited from AbstractPageObject.selector</p>
+					<p>Inherited from PageObject.selector</p>
 					<ul>
-						<li>Defined in @pageobject/core/dist/index.d.ts:34</li>
+						<li>Defined in @pageobject/core/dist/index.d.ts:27</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1146,7 +1142,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L85">index.ts:85</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L84">index.ts:84</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1164,7 +1160,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/standardelement.html">StandardElement</a>.<a href="../interfaces/standardelement.html#click">click</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L62">index.ts:62</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L61">index.ts:61</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1182,7 +1178,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/standardelement.html">StandardElement</a>.<a href="../interfaces/standardelement.html#doubleclick">doubleClick</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L66">index.ts:66</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L65">index.ts:65</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1199,7 +1195,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L89">index.ts:89</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L88">index.ts:88</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1216,7 +1212,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L127">index.ts:127</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L126">index.ts:126</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1237,18 +1233,18 @@ img { max-width: 100%; }
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 				<a name="getelement" class="tsd-anchor"></a>
-				<h3>get<wbr>Element</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<h3><span class="tsd-flag ts-flagProtected">Protected</span> get<wbr>Element</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<li class="tsd-signature tsd-kind-icon">get<wbr>Element<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/standardelement.html" class="tsd-signature-type">StandardElement</a><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Inherited from AbstractPageObject.getElement</p>
+							<p>Inherited from PageObject.getElement</p>
 							<ul>
-								<li>Defined in @pageobject/core/dist/index.d.ts:62</li>
+								<li>Defined in @pageobject/core/dist/index.d.ts:60</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1270,7 +1266,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L139">index.ts:139</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L138">index.ts:138</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1292,7 +1288,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L147">index.ts:147</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L146">index.ts:146</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1313,7 +1309,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L155">index.ts:155</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L154">index.ts:154</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1334,7 +1330,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L173">index.ts:173</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L172">index.ts:172</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1372,9 +1368,9 @@ img { max-width: 100%; }
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Inherited from AbstractPageObject.getSize</p>
+							<p>Inherited from PageObject.getSize</p>
 							<ul>
-								<li>Defined in @pageobject/core/dist/index.d.ts:67</li>
+								<li>Defined in @pageobject/core/dist/index.d.ts:54</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1395,7 +1391,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L200">index.ts:200</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L199">index.ts:199</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1426,7 +1422,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L216">index.ts:216</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L215">index.ts:215</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1448,7 +1444,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L224">index.ts:224</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L223">index.ts:223</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1469,7 +1465,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L235">index.ts:235</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L234">index.ts:234</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1495,7 +1491,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/standardelement.html">StandardElement</a>.<a href="../interfaces/standardelement.html#perform">perform</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L70">index.ts:70</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L69">index.ts:69</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1530,7 +1526,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L93">index.ts:93</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L92">index.ts:92</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1552,9 +1548,9 @@ img { max-width: 100%; }
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Inherited from AbstractPageObject.select</p>
+							<p>Inherited from PageObject.select</p>
 							<ul>
-								<li>Defined in @pageobject/core/dist/index.d.ts:46</li>
+								<li>Defined in @pageobject/core/dist/index.d.ts:39</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1591,7 +1587,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/standardelement.html">StandardElement</a>.<a href="../interfaces/standardelement.html#sendcharacter">sendCharacter</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L77">index.ts:77</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L76">index.ts:76</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1615,7 +1611,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/standardelement.html">StandardElement</a>.<a href="../interfaces/standardelement.html#sendkey">sendKey</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L81">index.ts:81</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L80">index.ts:80</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1638,7 +1634,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L108">index.ts:108</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/standard/src/index.ts#L107">index.ts:107</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1669,9 +1665,9 @@ img { max-width: 100%; }
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Inherited from AbstractPageObject.where</p>
+							<p>Inherited from PageObject.where</p>
 							<ul>
-								<li>Defined in @pageobject/core/dist/index.d.ts:56</li>
+								<li>Defined in @pageobject/core/dist/index.d.ts:49</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
