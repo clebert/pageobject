@@ -4,11 +4,13 @@ interface MockDOMElement {
   any: any /* tslint:disable-line no-any */;
   innerText: string;
   outerHTML: string;
+  offsetHeight: number;
+  offsetWidth: number;
 
   readonly getAttribute: jest.Mock;
+  readonly getBoundingClientRect: jest.Mock;
   readonly blur: jest.Mock;
   readonly focus: jest.Mock;
-  readonly scrollIntoView: jest.Mock;
 }
 
 interface MockElement {
@@ -32,21 +34,25 @@ async function nap(): Promise<void> {
 describe('StandardPageObject', () => {
   let findElements: jest.Mock;
   let getComputedStyle: jest.SpyInstance;
+  let scrollBy: jest.SpyInstance;
   let domElement: MockDOMElement;
   let element: MockElement;
   let pageObject: MockPageObject;
 
   beforeEach(() => {
     getComputedStyle = jest.spyOn(window, 'getComputedStyle');
+    scrollBy = jest.spyOn(window, 'scrollBy');
 
     domElement = {
       any: ' anyValue ',
       innerText: ' innerTextValue ',
       outerHTML: ' outerHTMLValue ',
+      offsetHeight: 1,
+      offsetWidth: 1,
       getAttribute: jest.fn(),
+      getBoundingClientRect: jest.fn(),
       blur: jest.fn(),
-      focus: jest.fn(),
-      scrollIntoView: jest.fn()
+      focus: jest.fn()
     };
 
     element = {
@@ -68,6 +74,7 @@ describe('StandardPageObject', () => {
 
   afterEach(() => {
     getComputedStyle.mockRestore();
+    scrollBy.mockRestore();
   });
 
   describe('click()', () => {
@@ -172,23 +179,23 @@ describe('StandardPageObject', () => {
 
   describe('scrollIntoView()', () => {
     it('should scroll its DOM element into view', async () => {
-      domElement.scrollIntoView.mockImplementation(() => {
-        throw new Error('scrollIntoViewError');
+      domElement.getBoundingClientRect.mockReturnValue({
+        height: 25,
+        left: 500,
+        top: 300,
+        width: 50
+      });
+
+      scrollBy.mockImplementation(() => {
+        throw new Error('scrollByError');
       });
 
       await expect(pageObject.scrollIntoView()).rejects.toThrow(
-        'scrollIntoViewError'
+        'scrollByError'
       );
 
-      expect(domElement.scrollIntoView).toHaveBeenCalledTimes(1);
-      expect(domElement.scrollIntoView).toHaveBeenLastCalledWith(true);
-
-      domElement.scrollIntoView.mockReset();
-
-      await pageObject.scrollIntoView(false);
-
-      expect(domElement.scrollIntoView).toHaveBeenCalledTimes(1);
-      expect(domElement.scrollIntoView).toHaveBeenLastCalledWith(false);
+      expect(scrollBy).toHaveBeenCalledTimes(1);
+      expect(scrollBy).toHaveBeenLastCalledWith(13, -71.5);
     });
   });
 
@@ -355,55 +362,89 @@ describe('StandardPageObject', () => {
     });
   });
 
+  describe('isInView()', () => {
+    it('should return true', async () => {
+      domElement.getBoundingClientRect.mockReturnValue({
+        bottom: 0,
+        left: 0,
+        right: 0,
+        top: 0
+      });
+
+      await expect(pageObject.isInView()).resolves.toBe(true);
+
+      domElement.getBoundingClientRect.mockReturnValue({
+        bottom: window.innerHeight,
+        left: 0,
+        right: window.innerWidth,
+        top: 0
+      });
+
+      await expect(pageObject.isInView()).resolves.toBe(true);
+    });
+
+    it('should return false', async () => {
+      domElement.getBoundingClientRect.mockReturnValue({
+        bottom: window.innerHeight,
+        left: 0,
+        right: window.innerWidth,
+        top: -1
+      });
+
+      await expect(pageObject.isInView()).resolves.toBe(false);
+
+      domElement.getBoundingClientRect.mockReturnValue({
+        bottom: window.innerHeight,
+        left: -1,
+        right: window.innerWidth,
+        top: 0
+      });
+
+      await expect(pageObject.isInView()).resolves.toBe(false);
+
+      domElement.getBoundingClientRect.mockReturnValue({
+        bottom: window.innerHeight + 1,
+        left: 0,
+        right: window.innerWidth,
+        top: 0
+      });
+
+      await expect(pageObject.isInView()).resolves.toBe(false);
+
+      domElement.getBoundingClientRect.mockReturnValue({
+        bottom: window.innerHeight,
+        left: 0,
+        right: window.innerWidth + 1,
+        top: 0
+      });
+
+      await expect(pageObject.isInView()).resolves.toBe(false);
+    });
+  });
+
   describe('isVisible()', () => {
     it('should return true', async () => {
-      const getPropertyValue = jest
-        .fn()
-        .mockReturnValueOnce('block')
-        .mockReturnValueOnce('visible');
-
-      getComputedStyle.mockImplementation(() => ({getPropertyValue}));
+      domElement.offsetHeight = 1;
+      domElement.offsetWidth = 0;
 
       await expect(pageObject.isVisible()).resolves.toBe(true);
 
-      expect(getComputedStyle).toHaveBeenCalledTimes(2);
-      expect(getComputedStyle).toHaveBeenLastCalledWith(domElement);
+      domElement.offsetHeight = 0;
+      domElement.offsetWidth = 1;
 
-      expect(getPropertyValue).toHaveBeenCalledTimes(2);
-      expect(getPropertyValue).toHaveBeenCalledWith('display');
-      expect(getPropertyValue).toHaveBeenLastCalledWith('visibility');
+      await expect(pageObject.isVisible()).resolves.toBe(true);
+
+      domElement.offsetHeight = 1;
+      domElement.offsetWidth = 1;
+
+      await expect(pageObject.isVisible()).resolves.toBe(true);
     });
 
-    it('should return false if its DOM element has the style property `display: none`', async () => {
-      const getPropertyValue = jest.fn().mockReturnValue('none');
-
-      getComputedStyle.mockImplementation(() => ({getPropertyValue}));
-
-      await expect(pageObject.isVisible()).resolves.toBe(false);
-
-      expect(getComputedStyle).toHaveBeenCalledTimes(1);
-      expect(getComputedStyle).toHaveBeenLastCalledWith(domElement);
-
-      expect(getPropertyValue).toHaveBeenCalledTimes(1);
-      expect(getPropertyValue).toHaveBeenLastCalledWith('display');
-    });
-
-    it('should return false if its DOM element has the style property `visibility: hidden`', async () => {
-      const getPropertyValue = jest
-        .fn()
-        .mockReturnValueOnce('block')
-        .mockReturnValueOnce('hidden');
-
-      getComputedStyle.mockImplementation(() => ({getPropertyValue}));
+    it('should return false', async () => {
+      domElement.offsetHeight = 0;
+      domElement.offsetWidth = 0;
 
       await expect(pageObject.isVisible()).resolves.toBe(false);
-
-      expect(getComputedStyle).toHaveBeenCalledTimes(2);
-      expect(getComputedStyle).toHaveBeenLastCalledWith(domElement);
-
-      expect(getPropertyValue).toHaveBeenCalledTimes(2);
-      expect(getPropertyValue).toHaveBeenCalledWith('display');
-      expect(getPropertyValue).toHaveBeenLastCalledWith('visibility');
     });
   });
 });

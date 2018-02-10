@@ -58,10 +58,18 @@ export type StandardPredicate<
  */
 export abstract class StandardPageObject extends PageObject<StandardElement>
   implements StandardElement {
+  /**
+   * Before you click on a page object, please make sure that the unique DOM
+   * element assigned to it is visible in the view.
+   */
   public async click(): Promise<void> {
     return (await this.getElement()).click();
   }
 
+  /**
+   * Before you double click on a page object, please make sure that the unique
+   * DOM element assigned to it is visible in the view.
+   */
   public async doubleClick(): Promise<void> {
     return (await this.getElement()).doubleClick();
   }
@@ -89,11 +97,21 @@ export abstract class StandardPageObject extends PageObject<StandardElement>
     return this.perform((_element: HTMLElement) => _element.focus());
   }
 
-  public async scrollIntoView(alignToTop: boolean = true): Promise<void> {
-    return this.perform(
-      (_element, _alignToTop) => _element.scrollIntoView(_alignToTop),
-      alignToTop
-    );
+  /**
+   * This method scrolls the unique DOM element assigned to this page object to
+   * the center of the view. This mechanism does not work for DOM elements
+   * inside an `overflow: scroll | auto` container.
+   */
+  public async scrollIntoView(): Promise<void> {
+    return this.perform(_element => {
+      const {height, left, top, width} = _element.getBoundingClientRect();
+      const {innerHeight, innerWidth} = window;
+
+      window.scrollBy(
+        left - innerWidth / 2 + width / 2,
+        top - innerHeight / 2 + height / 2
+      );
+    });
   }
 
   /**
@@ -217,24 +235,40 @@ export abstract class StandardPageObject extends PageObject<StandardElement>
   }
 
   /**
-   * @returns A promise that will be resolved with true if a unique DOM element
-   * is assigned to this page object.
+   * @returns A promise that will be resolved with `true` if a unique DOM
+   * element is assigned to this page object.
    */
   public async isExisting(): Promise<boolean> {
     return (await this.getSize()) === 1;
   }
 
   /**
-   * This method uses the `window.getComputedStyle()` web API.
+   * @returns A promise that will be resolved with `true` if the unique DOM
+   * element assigned to this page object is in the view, visible or not.
+   */
+  public async isInView(): Promise<boolean> {
+    return this.perform(_element => {
+      const {bottom, left, right, top} = _element.getBoundingClientRect();
+      const {innerHeight, innerWidth} = window;
+
+      return (
+        top >= 0 && left >= 0 && bottom <= innerHeight && right <= innerWidth
+      );
+    });
+  }
+
+  /**
+   * DOM elements are considered visible if they consume space in the document.
    *
-   * @returns A promise that will be resolved with true if the unique DOM
-   * element assigned to this page object does not have the style properties
-   * `display: none` or `visibility: hidden`.
+   * @returns A promise that will be resolved with `true` if the unique DOM
+   * element assigned to this page object has an `offsetWidth` or `offsetHeight`
+   * greater than zero.
    */
   public async isVisible(): Promise<boolean> {
-    return (
-      (await this.getStyle('display')) !== 'none' &&
-      (await this.getStyle('visibility')) !== 'hidden'
-    );
+    return this.perform((_element: HTMLElement) => {
+      const {offsetHeight, offsetWidth} = _element;
+
+      return Boolean(offsetHeight || offsetWidth);
+    });
   }
 }
