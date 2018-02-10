@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/engine",
-  "version": "1.0.0-beta-3",
+  "version": "1.0.0-beta-4",
   "description": "This package allows you to execute unreliable, asynchronous, and idempotent commands reliably.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
