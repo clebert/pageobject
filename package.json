@@ -30,7 +30,7 @@
     "@types/node": "^9.4.0",
     "coveralls": "^3.0.0",
     "custom-tslint-formatters": "^2.1.1",
-    "globby": "^7.1.1",
+    "globby": "^8.0.0",
     "husky": "^0.14.3",
     "jest": "^22.1.4",
     "lerna": "^2.8.0",
