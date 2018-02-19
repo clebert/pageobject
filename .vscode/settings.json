@@ -7,7 +7,9 @@
     "**/lerna-debug.log": true,
     "**/node_modules/**": true,
     "**/npm-debug.log": true,
-    "**/package-lock.json": true
+    "**/package-lock.json": true,
+    "**/temp/**": true,
+    "**/todo.tasks": true
   },
   "prettier.bracketSpacing": false,
   "prettier.singleQuote": true,
