@@ -444,34 +444,6 @@ describe('FlexiblePageObject', () => {
     });
   });
 
-  describe('isUnique()', () => {
-    it('should return a condition that sets <unique> to true', async () => {
-      await expect(
-        pageObject.isUnique(equals(true)).evaluate()
-      ).resolves.toEqual({
-        description: '((<unique> = true) EQUALS true)',
-        result: true
-      });
-    });
-
-    it('should return a condition that sets <unique> to false', async () => {
-      findElements.mockImplementation(async () => []);
-
-      await expect(
-        pageObject.isUnique(equals(false)).evaluate()
-      ).resolves.toEqual({
-        description: '((<unique> = false) EQUALS false)',
-        result: true
-      });
-
-      findElements.mockImplementation(async () => [element, element]);
-
-      await expect(pageObject.isUnique(equals(false)).test()).resolves.toBe(
-        true
-      );
-    });
-  });
-
   describe('isVisible()', () => {
     it('should return a condition that sets <visible> to true', async () => {
       domElement.offsetHeight = 1;
