@@ -1,6 +1,6 @@
 # PageObjectJS [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link] [![TypeScript][badge-typescript-image]][badge-typescript-link]
 
-> **Reliable**, **stable**, but **flexible** web UI testing.
+> **Reliable**, **stable**, and **flexible** web UI testing.
 
 ⚠️ **This software is currently in beta stage. Breaking changes can happen at any time.**
 
