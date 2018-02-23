@@ -38,44 +38,6 @@ TODO.
 
 TODO.
 
-## Development
-
-### Installing dependencies and bootstrapping packages
-
-```sh
-yarn install
-```
-
-### Compiling sources and running tests continuously
-
-```sh
-yarn run watch
-```
-
-### Running CI tests
-
-```sh
-yarn test
-```
-
-### Formatting sources
-
-```sh
-yarn run format
-```
-
-### Committing a change
-
-```sh
-yarn run commit
-```
-
-### Releasing a new version
-
-```sh
-yarn run release
-```
-
 ---
 
 Built by (c) Clemens Akens. Released under the terms of the [MIT License][internal-license].
