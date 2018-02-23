@@ -204,22 +204,6 @@ export abstract class FlexiblePageObject extends PageObject<FlexibleElement> {
     );
   }
 
-  public isUnique(operator: Operator<boolean>): Condition<boolean> {
-    return new Condition(
-      operator,
-      async () => {
-        try {
-          await this.findElement();
-
-          return true;
-        } catch {
-          return false;
-        }
-      },
-      'unique'
-    );
-  }
-
   public isVisible(operator: Operator<boolean>): Condition<boolean> {
     return new Condition(
       operator,

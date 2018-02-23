@@ -66,6 +66,14 @@ export abstract class PageObject<TElement> {
     );
   }
 
+  public isUnique(operator: Operator<boolean>): Condition<boolean> {
+    return new Condition(
+      operator,
+      async () => (await this._findElements()).length === 1,
+      'unique'
+    );
+  }
+
   public async findElement(): Promise<TElement> {
     if (this._element) {
       return this._element;

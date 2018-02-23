@@ -111,30 +111,60 @@ describe('Root', () => {
   });
 
   describe('getSize()', () => {
-    it('should return a condition that sets the <size> of root to 6', async () => {
+    it('should return a condition that sets <size> of root to 6', async () => {
       await expect(root.getSize(equals(6)).evaluate()).resolves.toEqual({
         description: '((<size> = 6) EQUALS 6)',
         result: true
       });
     });
 
-    it('should return a condition that sets the <size> of root1 to 1', async () => {
+    it('should return a condition that sets <size> of root1 to 1', async () => {
       await expect(root1.getSize(equals(1)).evaluate()).resolves.toEqual({
         description: '((<size> = 1) EQUALS 1)',
         result: true
       });
     });
 
-    it('should return a condition that sets the <size> of root2 to 1', async () => {
+    it('should return a condition that sets <size> of root2 to 1', async () => {
       await expect(root2.getSize(equals(1)).evaluate()).resolves.toEqual({
         description: '((<size> = 1) EQUALS 1)',
         result: true
       });
     });
 
-    it('should return a condition that sets the <size> of root3 to 0', async () => {
+    it('should return a condition that sets <size> of root3 to 0', async () => {
       await expect(root3.getSize(equals(0)).evaluate()).resolves.toEqual({
         description: '((<size> = 0) EQUALS 0)',
+        result: true
+      });
+    });
+  });
+
+  describe('isUnique()', () => {
+    it('should return a condition that sets <unique> of root to false', async () => {
+      await expect(root.isUnique(equals(false)).evaluate()).resolves.toEqual({
+        description: '((<unique> = false) EQUALS false)',
+        result: true
+      });
+    });
+
+    it('should return a condition that sets <unique> of root1 to true', async () => {
+      await expect(root1.isUnique(equals(true)).evaluate()).resolves.toEqual({
+        description: '((<unique> = true) EQUALS true)',
+        result: true
+      });
+    });
+
+    it('should return a condition that sets <unique> of root2 to true', async () => {
+      await expect(root2.isUnique(equals(true)).evaluate()).resolves.toEqual({
+        description: '((<unique> = true) EQUALS true)',
+        result: true
+      });
+    });
+
+    it('should return a condition that sets <unique> of root3 to false', async () => {
+      await expect(root3.isUnique(equals(false)).evaluate()).resolves.toEqual({
+        description: '((<unique> = false) EQUALS false)',
         result: true
       });
     });
@@ -205,30 +235,60 @@ describe('Child', () => {
   });
 
   describe('getSize()', () => {
-    it('should return a condition that sets the <size> of child to 4', async () => {
+    it('should return a condition that sets <size> of child to 4', async () => {
       await expect(child.getSize(equals(4)).evaluate()).resolves.toEqual({
         description: '((<size> = 4) EQUALS 4)',
         result: true
       });
     });
 
-    it('should return a condition that sets the <size> of child1 to 1', async () => {
+    it('should return a condition that sets <size> of child1 to 1', async () => {
       await expect(child1.getSize(equals(1)).evaluate()).resolves.toEqual({
         description: '((<size> = 1) EQUALS 1)',
         result: true
       });
     });
 
-    it('should return a condition that sets the <size> of child2 to 1', async () => {
+    it('should return a condition that sets <size> of child2 to 1', async () => {
       await expect(child2.getSize(equals(1)).evaluate()).resolves.toEqual({
         description: '((<size> = 1) EQUALS 1)',
         result: true
       });
     });
 
-    it('should return a condition that sets the <size> of child3 to 0', async () => {
+    it('should return a condition that sets <size> of child3 to 0', async () => {
       await expect(child3.getSize(equals(0)).evaluate()).resolves.toEqual({
         description: '((<size> = 0) EQUALS 0)',
+        result: true
+      });
+    });
+  });
+
+  describe('isUnique()', () => {
+    it('should return a condition that sets <unique> of child to false', async () => {
+      await expect(child.isUnique(equals(false)).evaluate()).resolves.toEqual({
+        description: '((<unique> = false) EQUALS false)',
+        result: true
+      });
+    });
+
+    it('should return a condition that sets <unique> of child1 to true', async () => {
+      await expect(child1.isUnique(equals(true)).evaluate()).resolves.toEqual({
+        description: '((<unique> = true) EQUALS true)',
+        result: true
+      });
+    });
+
+    it('should return a condition that sets <unique> of child2 to true', async () => {
+      await expect(child2.isUnique(equals(true)).evaluate()).resolves.toEqual({
+        description: '((<unique> = true) EQUALS true)',
+        result: true
+      });
+    });
+
+    it('should return a condition that sets <unique> of child3 to false', async () => {
+      await expect(child3.isUnique(equals(false)).evaluate()).resolves.toEqual({
+        description: '((<unique> = false) EQUALS false)',
         result: true
       });
     });
@@ -281,30 +341,68 @@ describe('Grandchild', () => {
   });
 
   describe('getSize()', () => {
-    it('should return a condition that sets the <size> of grandchild to 2', async () => {
+    it('should return a condition that sets <size> of grandchild to 2', async () => {
       await expect(grandchild.getSize(equals(2)).evaluate()).resolves.toEqual({
         description: '((<size> = 2) EQUALS 2)',
         result: true
       });
     });
 
-    it('should return a condition that sets the <size> of grandchild1 to 1', async () => {
+    it('should return a condition that sets <size> of grandchild1 to 1', async () => {
       await expect(grandchild1.getSize(equals(1)).evaluate()).resolves.toEqual({
         description: '((<size> = 1) EQUALS 1)',
         result: true
       });
     });
 
-    it('should return a condition that sets the <size> of grandchild2 to 1', async () => {
+    it('should return a condition that sets <size> of grandchild2 to 1', async () => {
       await expect(grandchild2.getSize(equals(1)).evaluate()).resolves.toEqual({
         description: '((<size> = 1) EQUALS 1)',
         result: true
       });
     });
 
-    it('should return a condition that sets the <size> of grandchild3 to 0', async () => {
+    it('should return a condition that sets <size> of grandchild3 to 0', async () => {
       await expect(grandchild3.getSize(equals(0)).evaluate()).resolves.toEqual({
         description: '((<size> = 0) EQUALS 0)',
+        result: true
+      });
+    });
+  });
+
+  describe('isUnique()', () => {
+    it('should return a condition that sets <unique> of grandchild to false', async () => {
+      await expect(
+        grandchild.isUnique(equals(false)).evaluate()
+      ).resolves.toEqual({
+        description: '((<unique> = false) EQUALS false)',
+        result: true
+      });
+    });
+
+    it('should return a condition that sets <unique> of grandchild1 to true', async () => {
+      await expect(
+        grandchild1.isUnique(equals(true)).evaluate()
+      ).resolves.toEqual({
+        description: '((<unique> = true) EQUALS true)',
+        result: true
+      });
+    });
+
+    it('should return a condition that sets <unique> of grandchild2 to true', async () => {
+      await expect(
+        grandchild2.isUnique(equals(true)).evaluate()
+      ).resolves.toEqual({
+        description: '((<unique> = true) EQUALS true)',
+        result: true
+      });
+    });
+
+    it('should return a condition that sets <unique> of grandchild3 to false', async () => {
+      await expect(
+        grandchild3.isUnique(equals(false)).evaluate()
+      ).resolves.toEqual({
+        description: '((<unique> = false) EQUALS false)',
         result: true
       });
     });
