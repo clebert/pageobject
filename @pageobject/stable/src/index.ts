@@ -1,13 +1,5 @@
 import {Condition, Operator} from '@pageobject/reliable';
 
-export type SelectionCriterion<
-  TElement,
-  TPageObject extends PageObject<TElement>
-> = (
-  pageObject: TPageObject,
-  index: (operator: Operator<number>) => Condition<number>
-) => Condition<any>; /* tslint:disable-line no-any */
-
 export interface Page<TElement> {
   findElements(selector: string, parent?: TElement): Promise<TElement[]>;
 }
@@ -18,6 +10,14 @@ export interface PageObjectConstructor<
 > {
   new (page: Page<TElement>): TPageObject;
 }
+
+export type SelectionCriterion<
+  TElement,
+  TPageObject extends PageObject<TElement>
+> = (
+  pageObject: TPageObject,
+  index: (operator: Operator<number>) => Condition<number>
+) => Condition<any>; /* tslint:disable-line no-any */
 
 export abstract class PageObject<TElement> {
   public abstract readonly selector: string;

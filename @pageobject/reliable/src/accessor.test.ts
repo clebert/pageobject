@@ -62,7 +62,7 @@ describe('reliable()', () => {
       .mockImplementationOnce(erroneous())
       .mockImplementation(async () => 'value');
 
-    await expect(reliable(accessor, 0)()).resolves.toBe('value');
+    await expect(reliable(accessor, 100)()).resolves.toBe('value');
 
     expect(accessor).toHaveBeenCalledTimes(2);
   });
