@@ -7,13 +7,11 @@ set -e
 
 rm -rf docs/api/
 
-"$(yarn bin)"/typedoc --out docs/api/core ./@pageobject/core
-"$(yarn bin)"/typedoc --out docs/api/engine ./@pageobject/engine
-"$(yarn bin)"/typedoc --out docs/api/predicates ./@pageobject/predicates
-"$(yarn bin)"/typedoc --out docs/api/standard ./@pageobject/standard
-"$(yarn bin)"/typedoc --out docs/api/standard-puppeteer ./@pageobject/standard-puppeteer
-"$(yarn bin)"/typedoc --out docs/api/standard-selenium ./@pageobject/standard-selenium
-"$(yarn bin)"/typedoc --out docs/api/standard-test ./@pageobject/standard-test
+"$(yarn bin)"/typedoc --out docs/api/flexible ./@pageobject/flexible
+"$(yarn bin)"/typedoc --out docs/api/flexible-puppeteer ./@pageobject/flexible-puppeteer
+"$(yarn bin)"/typedoc --out docs/api/flexible-selenium ./@pageobject/flexible-selenium
+"$(yarn bin)"/typedoc --out docs/api/reliable ./@pageobject/reliable
+"$(yarn bin)"/typedoc --out docs/api/stable ./@pageobject/stable
 
 "$(yarn bin)"/replace-in-file '/Defined in .+node_modules./g' 'Defined in ' 'docs/**/*.html' --isRegex --verbose
 

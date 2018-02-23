@@ -15,34 +15,34 @@
     "postrelease": "git push --follow-tags origin master",
     "pretest": "yarn run compile",
     "test": "yarn run format:test && yarn run lint && jest --no-cache --verbose",
-    "posttest": "lerna exec --scope '@pageobject/standard-*' --ignore @pageobject/standard-test -- node example.js && ./scripts/typedoc.sh",
+    "posttest": "./scripts/typedoc.sh",
     "prewatch": "yarn run compile",
     "watch": "run-p watch:compile \"watch:test -- {@}\" --",
     "watch:compile": "lerna exec --parallel --concurrency 99 -- tsc --project . --watch",
     "watch:test": "jest --watchAll"
   },
   "devDependencies": {
-    "@commitlint/cli": "^6.1.0",
-    "@commitlint/config-angular": "^6.1.0",
-    "@commitlint/config-lerna-scopes": "^6.1.0",
-    "@commitlint/prompt-cli": "^6.1.0",
-    "@types/jest": "^22.1.1",
-    "@types/node": "^9.4.0",
+    "@commitlint/cli": "^6.1.2",
+    "@commitlint/config-angular": "^6.1.2",
+    "@commitlint/config-lerna-scopes": "^6.1.2",
+    "@commitlint/prompt-cli": "^6.1.2",
+    "@types/jest": "^22.1.3",
+    "@types/node": "^9.4.6",
     "coveralls": "^3.0.0",
-    "custom-tslint-formatters": "^2.1.1",
-    "globby": "^7.1.1",
+    "custom-tslint-formatters": "^2.2.0",
+    "globby": "^8.0.1",
     "husky": "^0.14.3",
-    "jest": "^22.1.4",
-    "lerna": "^2.8.0",
+    "jest": "^22.4.2",
+    "lerna": "^2.9.0",
     "markdownlint": "^0.7.0",
     "npm-run-all": "^4.1.2",
     "prettier": "^1.10.2",
     "replace-in-file": "^3.1.1",
     "ts-config": "^17.0.0",
-    "ts-jest": "^22.0.3",
+    "ts-jest": "^22.0.4",
     "tslint": "^5.9.1",
     "typedoc": "^0.10.0",
-    "typescript": "^2.7.1"
+    "typescript": "^2.7.2"
   },
   "workspaces": [
     "@pageobject/*"
@@ -52,7 +52,7 @@
     "collectCoverageFrom": [
       "**/@pageobject/*/src/**/*.{ts,tsx}",
       "!**/@pageobject/*/src/**/*.test.{ts,tsx}",
-      "!**/@pageobject/standard-test/src/index.ts"
+      "!**/@pageobject/flexible/src/tests.ts"
     ],
     "coverageThreshold": {
       "global": {
@@ -62,7 +62,6 @@
         "statements": 100
       }
     },
-    "mapCoverage": true,
     "moduleFileExtensions": [
       "js",
       "jsx",
