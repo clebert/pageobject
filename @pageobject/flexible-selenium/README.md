@@ -8,18 +8,6 @@
 yarn add @pageobject/flexible-selenium
 ```
 
-### Peer Dependencies
-
-```sh
-yarn add selenium-webdriver
-```
-
-### TypeScript Dependencies
-
-```sh
-yarn add --dev @types/selenium-webdriver
-```
-
 ## API
 
 Please find the API documentation [here][internal-api-flexible-selenium].

@@ -52,7 +52,7 @@
     "collectCoverageFrom": [
       "**/@pageobject/*/src/**/*.{ts,tsx}",
       "!**/@pageobject/*/src/**/*.test.{ts,tsx}",
-      "!**/@pageobject/flexible/src/tests.ts"
+      "!**/@pageobject/flexible/src/FlexibleTestSuite.ts"
     ],
     "coverageThreshold": {
       "global": {

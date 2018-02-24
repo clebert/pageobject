@@ -910,9 +910,6 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-enum">
 			<a href="../enums/flexiblekey.html" class="tsd-kind-icon">Flexible<wbr>Key</a>
 		</li>
-		<li class=" tsd-kind-class tsd-is-not-exported">
-			<a href="elementmock.html" class="tsd-kind-icon">Element<wbr>Mock</a>
-		</li>
 		<li class="current tsd-kind-class">
 			<a href="flexiblepageobject.html" class="tsd-kind-icon">Flexible<wbr>Page<wbr>Object</a>
 			<ul>
@@ -920,7 +917,7 @@ img { max-width: 100%; }
 					<a href="flexiblepageobject.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a href="flexiblepageobject.html#page" class="tsd-kind-icon">page</a>
+					<a href="flexiblepageobject.html#browser" class="tsd-kind-icon">browser</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a href="flexiblepageobject.html#selector" class="tsd-kind-icon">selector</a>
@@ -977,6 +974,9 @@ img { max-width: 100%; }
 					<a href="flexiblepageobject.html#isvisible" class="tsd-kind-icon">is<wbr>Visible</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="flexiblepageobject.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="flexiblepageobject.html#scrollintoview" class="tsd-kind-icon">scroll<wbr>Into<wbr>View</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
@@ -993,29 +993,23 @@ img { max-width: 100%; }
 				</li>
 			</ul>
 		</li>
-		<li class=" tsd-kind-class tsd-is-not-exported">
-			<a href="testbutton.html" class="tsd-kind-icon">Test<wbr>Button</a>
+		<li class=" tsd-kind-class">
+			<a href="flexibletestsuite.html" class="tsd-kind-icon">Flexible<wbr>Test<wbr>Suite</a>
 		</li>
-		<li class=" tsd-kind-class tsd-is-not-exported">
-			<a href="testroot.html" class="tsd-kind-icon">Test<wbr>Root</a>
-		</li>
-		<li class=" tsd-kind-class tsd-is-not-exported">
-			<a href="testtextinput.html" class="tsd-kind-icon">Test<wbr>Text<wbr>Input</a>
+		<li class=" tsd-kind-interface">
+			<a href="../interfaces/flexiblebrowser.html" class="tsd-kind-icon">Flexible<wbr>Browser</a>
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="../interfaces/flexibleelement.html" class="tsd-kind-icon">Flexible<wbr>Element</a>
 		</li>
-		<li class=" tsd-kind-type-alias">
-			<a href="../index.html#flexiblepage" class="tsd-kind-icon">Flexible<wbr>Page</a>
+		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+			<a href="../index.html#flexiblepageobjectconstructor" class="tsd-kind-icon">Flexible<wbr>Page<wbr>Object<wbr>Constructor</a>
 		</li>
 		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="../index.html#script" class="tsd-kind-icon">Script</a>
 		</li>
-		<li class=" tsd-kind-variable">
-			<a href="../index.html#testurl" class="tsd-kind-icon">testURL</a>
-		</li>
-		<li class=" tsd-kind-function">
-			<a href="../index.html#describetests" class="tsd-kind-icon">describe<wbr>Tests</a>
+		<li class=" tsd-kind-variable tsd-is-not-exported">
+			<a href="../index.html#url" class="tsd-kind-icon">url</a>
 		</li>
 	</ul>
 </nav>
@@ -1025,21 +1019,10 @@ img { max-width: 100%; }
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">&gt;</span>
+					<span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">&gt;</span>
 					<ul class="tsd-hierarchy">
 						<li>
 							<span class="target">FlexiblePageObject</span>
-							<ul class="tsd-hierarchy">
-								<li>
-									<a href="testbutton.html" class="tsd-signature-type">TestButton</a>
-								</li>
-								<li>
-									<a href="testroot.html" class="tsd-signature-type">TestRoot</a>
-								</li>
-								<li>
-									<a href="testtextinput.html" class="tsd-signature-type">TestTextInput</a>
-								</li>
-							</ul>
 						</li>
 					</ul>
 				</li>
@@ -1058,7 +1041,7 @@ img { max-width: 100%; }
 					<section class="tsd-index-section tsd-is-inherited">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#page" class="tsd-kind-icon">page</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#browser" class="tsd-kind-icon">browser</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#selector" class="tsd-kind-icon">selector</a></li>
 						</ul>
 					</section>
@@ -1082,6 +1065,7 @@ img { max-width: 100%; }
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#isinview" class="tsd-kind-icon">is<wbr>InView</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#isunique" class="tsd-kind-icon">is<wbr>Unique</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#isvisible" class="tsd-kind-icon">is<wbr>Visible</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#scrollintoview" class="tsd-kind-icon">scroll<wbr>Into<wbr>View</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited"><a href="flexiblepageobject.html#select" class="tsd-kind-icon">select</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#sendkey" class="tsd-kind-icon">send<wbr>Key</a></li>
@@ -1098,20 +1082,20 @@ img { max-width: 100%; }
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Flexible<wbr>Page<wbr>Object<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Page</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="flexiblepageobject.html" class="tsd-signature-type">FlexiblePageObject</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Flexible<wbr>Page<wbr>Object<span class="tsd-signature-symbol">(</span>browser<span class="tsd-signature-symbol">: </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="flexiblepageobject.html" class="tsd-signature-type">FlexiblePageObject</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Inherited from PageObject.__constructor</p>
 							<ul>
-								<li>Defined in @pageobject/stable/dist/index.d.ts:14</li>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:14</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>page: <span class="tsd-signature-type">Page</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>browser: <a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="flexiblepageobject.html" class="tsd-signature-type">FlexiblePageObject</a></h4>
@@ -1122,13 +1106,13 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-				<a name="page" class="tsd-anchor"></a>
-				<h3>page</h3>
-				<div class="tsd-signature tsd-kind-icon">page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Page</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">&gt;</span></div>
+				<a name="browser" class="tsd-anchor"></a>
+				<h3>browser</h3>
+				<div class="tsd-signature tsd-kind-icon">browser<span class="tsd-signature-symbol">:</span> <a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a></div>
 				<aside class="tsd-sources">
-					<p>Inherited from PageObject.page</p>
+					<p>Inherited from PageObject.browser</p>
 					<ul>
-						<li>Defined in @pageobject/stable/dist/index.d.ts:11</li>
+						<li>Defined in @pageobject/stable/dist/PageObject.d.ts:11</li>
 					</ul>
 				</aside>
 			</section>
@@ -1139,7 +1123,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from PageObject.selector</p>
 					<ul>
-						<li>Defined in @pageobject/stable/dist/index.d.ts:10</li>
+						<li>Defined in @pageobject/stable/dist/PageObject.d.ts:10</li>
 					</ul>
 				</aside>
 			</section>
@@ -1156,7 +1140,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L43">api.ts:43</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L70">FlexiblePageObject.ts:70</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TestStep</span></h4>
@@ -1173,7 +1157,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L31">api.ts:31</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L40">FlexiblePageObject.ts:40</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TestStep</span></h4>
@@ -1190,7 +1174,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L35">api.ts:35</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L44">FlexiblePageObject.ts:44</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TestStep</span></h4>
@@ -1208,7 +1192,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from PageObject.findElement</p>
 							<ul>
-								<li>Defined in @pageobject/stable/dist/index.d.ts:20</li>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:20</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1225,7 +1209,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L50">api.ts:50</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L77">FlexiblePageObject.ts:77</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TestStep</span></h4>
@@ -1242,7 +1226,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L84">api.ts:84</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L97">FlexiblePageObject.ts:97</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1268,7 +1252,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L158">api.ts:158</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L171">FlexiblePageObject.ts:171</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1294,7 +1278,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L99">api.ts:99</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L112">FlexiblePageObject.ts:112</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1317,7 +1301,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L110">api.ts:110</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L123">FlexiblePageObject.ts:123</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1340,7 +1324,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L118">api.ts:118</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L131">FlexiblePageObject.ts:131</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1363,7 +1347,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L127">api.ts:127</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L140">FlexiblePageObject.ts:140</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1389,7 +1373,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L177">api.ts:177</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L190">FlexiblePageObject.ts:190</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1413,7 +1397,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from PageObject.getSize</p>
 							<ul>
-								<li>Defined in @pageobject/stable/dist/index.d.ts:18</li>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:18</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1436,7 +1420,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L188">api.ts:188</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L201">FlexiblePageObject.ts:201</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1459,7 +1443,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L199">api.ts:199</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L212">FlexiblePageObject.ts:212</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1483,7 +1467,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from PageObject.isUnique</p>
 							<ul>
-								<li>Defined in @pageobject/stable/dist/index.d.ts:19</li>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:19</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1506,7 +1490,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L218">api.ts:218</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L231">FlexiblePageObject.ts:231</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1520,6 +1504,29 @@ img { max-width: 100%; }
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="navigateto" class="tsd-anchor"></a>
+				<h3>navigate<wbr>To</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">navigate<wbr>To<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TestStep</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L48">FlexiblePageObject.ts:48</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>url: <span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TestStep</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="scrollintoview" class="tsd-anchor"></a>
 				<h3>scroll<wbr>Into<wbr>View</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -1529,7 +1536,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L57">api.ts:57</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L84">FlexiblePageObject.ts:84</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TestStep</span></h4>
@@ -1540,26 +1547,26 @@ img { max-width: 100%; }
 				<a name="select" class="tsd-anchor"></a>
 				<h3>select</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
-					<li class="tsd-signature tsd-kind-icon">select&lt;TPageObject&gt;<span class="tsd-signature-symbol">(</span>Descendant<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PageObjectConstructor</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TPageObject</span></li>
+					<li class="tsd-signature tsd-kind-icon">select&lt;TPageObject&gt;<span class="tsd-signature-symbol">(</span>Descendant<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PageObjectConstructor</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TPageObject</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Inherited from PageObject.select</p>
 							<ul>
-								<li>Defined in @pageobject/stable/dist/index.d.ts:16</li>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:16</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
 						<ul class="tsd-type-parameters">
 							<li>
-								<h4>TPageObject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">&gt;</span></h4>
+								<h4>TPageObject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">&gt;</span></h4>
 							</li>
 						</ul>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>Descendant: <span class="tsd-signature-type">PageObjectConstructor</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>Descendant: <span class="tsd-signature-type">PageObjectConstructor</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TPageObject</span></h4>
@@ -1576,7 +1583,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L39">api.ts:39</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L66">FlexiblePageObject.ts:66</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1599,7 +1606,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/api.ts#L70">api.ts:70</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L52">FlexiblePageObject.ts:52</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1616,20 +1623,20 @@ img { max-width: 100%; }
 				<a name="where" class="tsd-anchor"></a>
 				<h3>where</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<li class="tsd-signature tsd-kind-icon">where<span class="tsd-signature-symbol">(</span>selectionCriterion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SelectionCriterion</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					<li class="tsd-signature tsd-kind-icon">where<span class="tsd-signature-symbol">(</span>selectionCriterion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SelectionCriterion</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Inherited from PageObject.where</p>
 							<ul>
-								<li>Defined in @pageobject/stable/dist/index.d.ts:17</li>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:17</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>selectionCriterion: <span class="tsd-signature-type">SelectionCriterion</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>selectionCriterion: <span class="tsd-signature-type">SelectionCriterion</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>

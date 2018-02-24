@@ -8,18 +8,6 @@
 yarn add @pageobject/flexible-puppeteer
 ```
 
-### Peer Dependencies
-
-```sh
-yarn add puppeteer
-```
-
-### TypeScript Dependencies
-
-```sh
-yarn add --dev @types/puppeteer
-```
-
 ## API
 
 Please find the API documentation [here][internal-api-flexible-puppeteer].

@@ -1,7 +1,7 @@
 import {Condition, Operator, equals} from '@pageobject/reliable';
-import {Page, PageObject} from '.';
+import {Browser, PageObject} from '.';
 
-class JSDOMPage implements Page<Element> {
+class JSDOMBrowser implements Browser<Element> {
   public async findElements(
     selector: string,
     parent?: Element
@@ -12,7 +12,7 @@ class JSDOMPage implements Page<Element> {
   }
 }
 
-class Root extends PageObject<Element> {
+class Root extends PageObject<Element, JSDOMBrowser> {
   public readonly selector = 'div';
 
   public getName(operator: Operator<string>): Condition<string | null> {
@@ -41,7 +41,7 @@ document.body.innerHTML = `
   <div root-name="root2"></div>
 `;
 
-const root = new Root(new JSDOMPage());
+const root = new Root(new JSDOMBrowser());
 
 const root1 = root.where(pageObject => pageObject.getName(equals('root1')));
 

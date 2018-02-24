@@ -1,10 +1,16 @@
 import {Condition, Operator, TestStep} from '@pageobject/reliable';
-import {Page, PageObject} from '@pageobject/stable';
+import {Browser, PageObject, PageObjectConstructor} from '@pageobject/stable';
 
 export type Script<TElement extends Element, TResult> = (
   element: TElement,
   ...args: any[] /* tslint:disable-line no-any */
 ) => TResult;
+
+export enum FlexibleKey {
+  TAB = 9,
+  ENTER = 13,
+  ESCAPE = 27
+}
 
 export interface FlexibleElement {
   click(): Promise<void>;
@@ -19,21 +25,42 @@ export interface FlexibleElement {
   sendKey(key: FlexibleKey): Promise<void>;
 }
 
-export enum FlexibleKey {
-  TAB = 9,
-  ENTER = 13,
-  ESCAPE = 27
+export interface FlexibleBrowser extends Browser<FlexibleElement> {
+  navigateTo(url: string): Promise<void>;
 }
 
-export type FlexiblePage = Page<FlexibleElement>;
+export type FlexiblePageObjectConstructor<
+  TPageObject extends FlexiblePageObject
+> = PageObjectConstructor<FlexibleElement, FlexibleBrowser, TPageObject>;
 
-export abstract class FlexiblePageObject extends PageObject<FlexibleElement> {
+export abstract class FlexiblePageObject extends PageObject<
+  FlexibleElement,
+  FlexibleBrowser
+> {
   public click(): TestStep {
     return async () => (await this.findElement()).click();
   }
 
   public doubleClick(): TestStep {
     return async () => (await this.findElement()).doubleClick();
+  }
+
+  public navigateTo(url: string): TestStep {
+    return async () => this.browser.navigateTo(url);
+  }
+
+  public type(text: string): TestStep {
+    return async () => {
+      const characters = text.split('');
+
+      for (let i = 0; i < characters.length; i += 1) {
+        await (await this.findElement()).sendCharacter(characters[i]);
+
+        if (i < characters.length - 1) {
+          await new Promise<void>(resolve => setTimeout(resolve, 100));
+        }
+      }
+    };
   }
 
   public sendKey(key: FlexibleKey): TestStep {
@@ -65,20 +92,6 @@ export abstract class FlexiblePageObject extends PageObject<FlexibleElement> {
           top - innerHeight / 2 + height / 2
         );
       });
-  }
-
-  public type(text: string): TestStep {
-    return async () => {
-      const characters = text.split('');
-
-      for (let i = 0; i < characters.length; i += 1) {
-        await (await this.findElement()).sendCharacter(characters[i]);
-
-        if (i < characters.length - 1) {
-          await new Promise<void>(resolve => setTimeout(resolve, 100));
-        }
-      }
-    };
   }
 
   public getAttribute(
