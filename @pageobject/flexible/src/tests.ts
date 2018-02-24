@@ -32,6 +32,8 @@ export const testURL = `file://${join(__dirname, '../fixtures/index.html')}`;
 export function describeTests(getPage: () => FlexiblePage): void {
   let testCase: TestCase;
 
+  jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
   beforeEach(() => {
     testCase = new TestCase(1000);
   });

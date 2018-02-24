@@ -16,7 +16,7 @@ interface DOMElementMock {
   readonly focus: jest.Mock;
 }
 
-interface ElementMock {
+interface FlexibleElementMock {
   readonly click: jest.Mock;
   readonly doubleClick: jest.Mock;
   readonly execute: jest.Mock;
@@ -36,13 +36,21 @@ async function nap(): Promise<void> {
 
 describe('FlexiblePageObject', () => {
   let findElements: jest.Mock;
+  let getActiveElement: jest.Mock;
   let getComputedStyle: jest.SpyInstance;
   let scrollBy: jest.SpyInstance;
   let domElement: DOMElementMock;
-  let element: ElementMock;
+  let element: FlexibleElementMock;
   let pageObject: PageObjectMock;
 
   beforeEach(() => {
+    getActiveElement = jest.fn();
+
+    Object.defineProperty(document, 'activeElement', {
+      get: getActiveElement,
+      configurable: true
+    });
+
     getComputedStyle = jest.spyOn(window, 'getComputedStyle');
     scrollBy = jest.spyOn(window, 'scrollBy');
 
@@ -57,6 +65,8 @@ describe('FlexiblePageObject', () => {
       blur: jest.fn(),
       focus: jest.fn()
     };
+
+    getActiveElement.mockReturnValue(domElement);
 
     element = {
       click: jest.fn(),
@@ -361,6 +371,28 @@ describe('FlexiblePageObject', () => {
       ).resolves.toEqual({
         description:
           "((<renderedText> = 'innerTextValue') EQUALS 'innerTextValue')",
+        result: true
+      });
+    });
+  });
+
+  describe('hasFocus()', () => {
+    it('should return a condition that sets <focus> to true', async () => {
+      await expect(
+        pageObject.hasFocus(equals(true)).evaluate()
+      ).resolves.toEqual({
+        description: '((<focus> = true) EQUALS true)',
+        result: true
+      });
+    });
+
+    it('should return a condition that sets <focus> to false', async () => {
+      getActiveElement.mockReturnValue({});
+
+      await expect(
+        pageObject.hasFocus(equals(false)).evaluate()
+      ).resolves.toEqual({
+        description: '((<focus> = false) EQUALS false)',
         result: true
       });
     });

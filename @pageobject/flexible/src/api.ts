@@ -185,6 +185,17 @@ export abstract class FlexiblePageObject extends PageObject<FlexibleElement> {
     );
   }
 
+  public hasFocus(operator: Operator<boolean>): Condition<boolean> {
+    return new Condition(
+      operator,
+      async () =>
+        (await this.findElement()).execute(
+          _element => document.activeElement === _element
+        ),
+      'focus'
+    );
+  }
+
   public isInView(operator: Operator<boolean>): Condition<boolean> {
     return new Condition(
       operator,
