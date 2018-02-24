@@ -8,13 +8,13 @@
 yarn add @pageobject/flexible-selenium
 ```
 
-### Peer dependencies
+### Peer Dependencies
 
 ```sh
 yarn add selenium-webdriver
 ```
 
-### TypeScript types
+### TypeScript Dependencies
 
 ```sh
 yarn add --dev @types/selenium-webdriver

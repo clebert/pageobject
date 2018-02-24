@@ -8,13 +8,13 @@
 yarn add @pageobject/flexible-puppeteer
 ```
 
-### Peer dependencies
+### Peer Dependencies
 
 ```sh
 yarn add puppeteer
 ```
 
-### TypeScript types
+### TypeScript Dependencies
 
 ```sh
 yarn add --dev @types/puppeteer

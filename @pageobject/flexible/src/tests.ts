@@ -7,7 +7,7 @@ import {
   FlexiblePageObject
 } from '.';
 
-class IncompatibleElement implements FlexibleElement {
+class ElementMock implements FlexibleElement {
   public readonly click = jest.fn();
   public readonly doubleClick = jest.fn();
   public readonly execute = jest.fn();
@@ -15,15 +15,15 @@ class IncompatibleElement implements FlexibleElement {
   public readonly sendKey = jest.fn();
 }
 
-class Button extends FlexiblePageObject {
+class TestButton extends FlexiblePageObject {
   public readonly selector = 'button';
 }
 
-class Root extends FlexiblePageObject {
+class TestRoot extends FlexiblePageObject {
   public readonly selector = ':root';
 }
 
-class TextInput extends FlexiblePageObject {
+class TestTextInput extends FlexiblePageObject {
   public readonly selector = 'input[type="text"]';
 }
 
@@ -58,7 +58,7 @@ export function describeTests(getPage: () => FlexiblePage): void {
 
       it('should throw an incompatible-parent-element error', async () => {
         await expect(
-          getPage().findElements('selector', new IncompatibleElement())
+          getPage().findElements('selector', new ElementMock())
         ).rejects.toThrow('Incompatible parent element');
       });
     });
@@ -67,7 +67,7 @@ export function describeTests(getPage: () => FlexiblePage): void {
   describe('FlexibleElement', () => {
     describe('click()', () => {
       it('should send a click event to a DOM element', async () => {
-        const button = new Button(getPage()).where((_, index) =>
+        const button = new TestButton(getPage()).where((_, index) =>
           index(equals(0))
         );
 
@@ -81,7 +81,7 @@ export function describeTests(getPage: () => FlexiblePage): void {
 
     describe('doubleClick()', () => {
       it('should send a dblclick event to a DOM element', async () => {
-        const button = new Button(getPage()).where((_, index) =>
+        const button = new TestButton(getPage()).where((_, index) =>
           index(equals(1))
         );
 
@@ -95,7 +95,7 @@ export function describeTests(getPage: () => FlexiblePage): void {
 
     describe('execute()', () => {
       it('should execute a script', async () => {
-        const root = new Root(getPage());
+        const root = new TestRoot(getPage());
 
         await expect(
           (await root.findElement()).execute(
@@ -107,7 +107,7 @@ export function describeTests(getPage: () => FlexiblePage): void {
       });
 
       it('should throw a script error', async () => {
-        const root = new Root(getPage());
+        const root = new TestRoot(getPage());
 
         await expect(
           (await root.findElement()).execute(() => {
@@ -119,7 +119,7 @@ export function describeTests(getPage: () => FlexiblePage): void {
 
     describe('sendCharacter()', () => {
       it('should send a character to a DOM element', async () => {
-        const textInput = new TextInput(getPage());
+        const textInput = new TestTextInput(getPage());
 
         await testCase
           .assert(textInput.getProperty('value', equals('')))
@@ -129,7 +129,7 @@ export function describeTests(getPage: () => FlexiblePage): void {
       });
 
       it('should throw an invalid-character error', async () => {
-        const textInput = new TextInput(getPage());
+        const textInput = new TestTextInput(getPage());
 
         await expect(
           (await textInput.findElement()).sendCharacter('')
@@ -143,7 +143,7 @@ export function describeTests(getPage: () => FlexiblePage): void {
 
     describe('sendKey()', () => {
       it('should send the ENTER key to a DOM element', async () => {
-        const textInput = new TextInput(getPage());
+        const textInput = new TestTextInput(getPage());
 
         await testCase
           .assert(textInput.getPageTitle(equals('Test')))
@@ -157,7 +157,7 @@ export function describeTests(getPage: () => FlexiblePage): void {
       });
 
       it('should send the ESCAPE key to a DOM element', async () => {
-        const textInput = new TextInput(getPage());
+        const textInput = new TestTextInput(getPage());
 
         await testCase
           .assert(textInput.getPageTitle(equals('Test')))
@@ -171,7 +171,7 @@ export function describeTests(getPage: () => FlexiblePage): void {
       });
 
       it('should send the TAB key to a DOM element', async () => {
-        const textInput = new TextInput(getPage());
+        const textInput = new TestTextInput(getPage());
 
         await testCase
           .assert(textInput.getPageTitle(equals('Test')))
