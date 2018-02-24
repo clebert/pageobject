@@ -35,12 +35,13 @@ async function nap(): Promise<void> {
 }
 
 describe('FlexiblePageObject', () => {
-  let findElements: jest.Mock;
   let getActiveElement: jest.Mock;
   let getComputedStyle: jest.SpyInstance;
   let scrollBy: jest.SpyInstance;
   let domElement: DOMElementMock;
   let element: FlexibleElementMock;
+  let findElements: jest.Mock;
+  let navigateTo: jest.Mock;
   let pageObject: PageObjectMock;
 
   beforeEach(() => {
@@ -55,9 +56,9 @@ describe('FlexiblePageObject', () => {
     scrollBy = jest.spyOn(window, 'scrollBy');
 
     domElement = {
-      any: ' anyValue ',
-      innerText: ' innerTextValue ',
-      outerHTML: ' outerHTMLValue ',
+      any: ' any ',
+      innerText: ' innerText ',
+      outerHTML: ' outerHTML ',
       offsetHeight: 1,
       offsetWidth: 1,
       getAttribute: jest.fn(),
@@ -81,8 +82,9 @@ describe('FlexiblePageObject', () => {
     );
 
     findElements = jest.fn().mockImplementation(async () => [element]);
+    navigateTo = jest.fn();
 
-    pageObject = new PageObjectMock({findElements});
+    pageObject = new PageObjectMock({findElements, navigateTo});
   });
 
   afterEach(() => {
@@ -93,10 +95,10 @@ describe('FlexiblePageObject', () => {
   describe('click()', () => {
     it('should return an action', async () => {
       element.click.mockImplementation(async () => {
-        throw new Error('clickError');
+        throw new Error('click error');
       });
 
-      await expect(pageObject.click()()).rejects.toThrow('clickError');
+      await expect(pageObject.click()()).rejects.toThrow('click error');
 
       expect(element.click).toHaveBeenCalledTimes(1);
       expect(element.click).toHaveBeenLastCalledWith();
@@ -106,11 +108,11 @@ describe('FlexiblePageObject', () => {
   describe('doubleClick()', () => {
     it('should return an action', async () => {
       element.doubleClick.mockImplementation(async () => {
-        throw new Error('doubleClickError');
+        throw new Error('doubleClick error');
       });
 
       await expect(pageObject.doubleClick()()).rejects.toThrow(
-        'doubleClickError'
+        'doubleClick error'
       );
 
       expect(element.doubleClick).toHaveBeenCalledTimes(1);
@@ -118,14 +120,29 @@ describe('FlexiblePageObject', () => {
     });
   });
 
+  describe('navigateTo()', () => {
+    it('should return an action', async () => {
+      navigateTo.mockImplementation(async () => {
+        throw new Error('navigateTo error');
+      });
+
+      await expect(pageObject.navigateTo('url')()).rejects.toThrow(
+        'navigateTo error'
+      );
+
+      expect(navigateTo).toHaveBeenCalledTimes(1);
+      expect(navigateTo).toHaveBeenLastCalledWith('url');
+    });
+  });
+
   describe('sendKey()', () => {
     it('should return an action', async () => {
       element.sendKey.mockImplementation(async () => {
-        throw new Error('sendKeyError');
+        throw new Error('sendKey error');
       });
 
       await expect(pageObject.sendKey(FlexibleKey.ENTER)()).rejects.toThrow(
-        'sendKeyError'
+        'sendKey error'
       );
 
       expect(element.sendKey).toHaveBeenCalledTimes(1);
@@ -136,10 +153,10 @@ describe('FlexiblePageObject', () => {
   describe('blur()', () => {
     it('should return an action', async () => {
       domElement.blur.mockImplementation(() => {
-        throw new Error('blurError');
+        throw new Error('blur error');
       });
 
-      await expect(pageObject.blur()()).rejects.toThrow('blurError');
+      await expect(pageObject.blur()()).rejects.toThrow('blur error');
 
       expect(domElement.blur).toHaveBeenCalledTimes(1);
       expect(domElement.blur).toHaveBeenLastCalledWith();
@@ -149,10 +166,10 @@ describe('FlexiblePageObject', () => {
   describe('focus()', () => {
     it('should return an action', async () => {
       domElement.focus.mockImplementation(() => {
-        throw new Error('focusError');
+        throw new Error('focus error');
       });
 
-      await expect(pageObject.focus()()).rejects.toThrow('focusError');
+      await expect(pageObject.focus()()).rejects.toThrow('focus error');
 
       expect(domElement.focus).toHaveBeenCalledTimes(1);
       expect(domElement.focus).toHaveBeenLastCalledWith();
@@ -169,11 +186,11 @@ describe('FlexiblePageObject', () => {
       });
 
       scrollBy.mockImplementation(() => {
-        throw new Error('scrollByError');
+        throw new Error('scrollBy error');
       });
 
       await expect(pageObject.scrollIntoView()()).rejects.toThrow(
-        'scrollByError'
+        'scrollBy error'
       );
 
       expect(scrollBy).toHaveBeenCalledTimes(1);
@@ -263,9 +280,9 @@ describe('FlexiblePageObject', () => {
   describe('getHTML()', () => {
     it('should return a condition', async () => {
       await expect(
-        pageObject.getHTML(equals('outerHTMLValue')).evaluate()
+        pageObject.getHTML(equals('outerHTML')).evaluate()
       ).resolves.toEqual({
-        description: "((<html> = 'outerHTMLValue') EQUALS 'outerHTMLValue')",
+        description: "((<html> = 'outerHTML') EQUALS 'outerHTML')",
         result: true
       });
     });
@@ -298,9 +315,9 @@ describe('FlexiblePageObject', () => {
   describe('getProperty()', () => {
     it('should return a condition', async () => {
       await expect(
-        pageObject.getProperty('any', equals('anyValue')).evaluate()
+        pageObject.getProperty('any', equals('any')).evaluate()
       ).resolves.toEqual({
-        description: "((<property.any> = 'anyValue') EQUALS 'anyValue')",
+        description: "((<property.any> = 'any') EQUALS 'any')",
         result: true
       });
 
@@ -367,10 +384,9 @@ describe('FlexiblePageObject', () => {
   describe('getRenderedText()', () => {
     it('should return a condition', async () => {
       await expect(
-        pageObject.getRenderedText(equals('innerTextValue')).evaluate()
+        pageObject.getRenderedText(equals('innerText')).evaluate()
       ).resolves.toEqual({
-        description:
-          "((<renderedText> = 'innerTextValue') EQUALS 'innerTextValue')",
+        description: "((<renderedText> = 'innerText') EQUALS 'innerText')",
         result: true
       });
     });

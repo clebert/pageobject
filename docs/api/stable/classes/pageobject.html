@@ -914,7 +914,7 @@ img { max-width: 100%; }
 					<a href="pageobject.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="pageobject.html#page" class="tsd-kind-icon">page</a>
+					<a href="pageobject.html#browser" class="tsd-kind-icon">browser</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
 					<a href="pageobject.html#selector" class="tsd-kind-icon">selector</a>
@@ -937,7 +937,7 @@ img { max-width: 100%; }
 			</ul>
 		</li>
 		<li class=" tsd-kind-interface tsd-has-type-parameter">
-			<a href="../interfaces/page.html" class="tsd-kind-icon">Page</a>
+			<a href="../interfaces/browser.html" class="tsd-kind-icon">Browser</a>
 		</li>
 		<li class=" tsd-kind-interface tsd-has-type-parameter">
 			<a href="../interfaces/pageobjectconstructor.html" class="tsd-kind-icon">Page<wbr>Object<wbr>Constructor</a>
@@ -954,6 +954,9 @@ img { max-width: 100%; }
 			<ul class="tsd-type-parameters">
 				<li>
 					<h4>TElement</h4>
+				</li>
+				<li>
+					<h4>TBrowser<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.html" class="tsd-signature-type">Browser</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></h4>
 				</li>
 			</ul>
 		</section>
@@ -978,7 +981,7 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="pageobject.html#page" class="tsd-kind-icon">page</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="pageobject.html#browser" class="tsd-kind-icon">browser</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="pageobject.html#selector" class="tsd-kind-icon">selector</a></li>
 						</ul>
 					</section>
@@ -1001,19 +1004,19 @@ img { max-width: 100%; }
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Page<wbr>Object<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">: </span><a href="../interfaces/page.html" class="tsd-signature-type">Page</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="pageobject.html" class="tsd-signature-type">PageObject</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Page<wbr>Object<span class="tsd-signature-symbol">(</span>browser<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TBrowser</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="pageobject.html" class="tsd-signature-type">PageObject</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/index.ts#L31">index.ts:31</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L33">PageObject.ts:33</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>page: <a href="../interfaces/page.html" class="tsd-signature-type">Page</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>browser: <span class="tsd-signature-type">TBrowser</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="pageobject.html" class="tsd-signature-type">PageObject</a></h4>
@@ -1024,12 +1027,12 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="page" class="tsd-anchor"></a>
-				<h3>page</h3>
-				<div class="tsd-signature tsd-kind-icon">page<span class="tsd-signature-symbol">:</span> <a href="../interfaces/page.html" class="tsd-signature-type">Page</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<a name="browser" class="tsd-anchor"></a>
+				<h3>browser</h3>
+				<div class="tsd-signature tsd-kind-icon">browser<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TBrowser</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/index.ts#L25">index.ts:25</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L27">PageObject.ts:27</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1039,7 +1042,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/index.ts#L23">index.ts:23</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L25">PageObject.ts:25</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1056,7 +1059,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/index.ts#L77">index.ts:77</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L86">PageObject.ts:86</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1073,7 +1076,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/index.ts#L61">index.ts:61</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L70">PageObject.ts:70</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1096,7 +1099,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/index.ts#L69">index.ts:69</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L78">PageObject.ts:78</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1113,25 +1116,25 @@ img { max-width: 100%; }
 				<a name="select" class="tsd-anchor"></a>
 				<h3>select</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-					<li class="tsd-signature tsd-kind-icon">select&lt;TPageObject&gt;<span class="tsd-signature-symbol">(</span>Descendant<span class="tsd-signature-symbol">: </span><a href="../interfaces/pageobjectconstructor.html" class="tsd-signature-type">PageObjectConstructor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TPageObject</span></li>
+					<li class="tsd-signature tsd-kind-icon">select&lt;TPageObject&gt;<span class="tsd-signature-symbol">(</span>Descendant<span class="tsd-signature-symbol">: </span><a href="../interfaces/pageobjectconstructor.html" class="tsd-signature-type">PageObjectConstructor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TBrowser</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TPageObject</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/index.ts#L37">index.ts:37</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L39">PageObject.ts:39</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
 						<ul class="tsd-type-parameters">
 							<li>
-								<h4>TPageObject<span class="tsd-signature-symbol">: </span><a href="pageobject.html" class="tsd-signature-type">PageObject</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								<h4>TPageObject<span class="tsd-signature-symbol">: </span><a href="pageobject.html" class="tsd-signature-type">PageObject</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TBrowser</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							</li>
 						</ul>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>Descendant: <a href="../interfaces/pageobjectconstructor.html" class="tsd-signature-type">PageObjectConstructor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>Descendant: <a href="../interfaces/pageobjectconstructor.html" class="tsd-signature-type">PageObjectConstructor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TBrowser</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TPageObject</span></h4>
@@ -1142,19 +1145,19 @@ img { max-width: 100%; }
 				<a name="where" class="tsd-anchor"></a>
 				<h3>where</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">where<span class="tsd-signature-symbol">(</span>selectionCriterion<span class="tsd-signature-symbol">: </span><a href="../index.html#selectioncriterion" class="tsd-signature-type">SelectionCriterion</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					<li class="tsd-signature tsd-kind-icon">where<span class="tsd-signature-symbol">(</span>selectionCriterion<span class="tsd-signature-symbol">: </span><a href="../index.html#selectioncriterion" class="tsd-signature-type">SelectionCriterion</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TBrowser</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/index.ts#L47">index.ts:47</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L49">PageObject.ts:49</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>selectionCriterion: <a href="../index.html#selectioncriterion" class="tsd-signature-type">SelectionCriterion</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>selectionCriterion: <a href="../index.html#selectioncriterion" class="tsd-signature-type">SelectionCriterion</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TBrowser</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>

@@ -1,2 +1,2 @@
-export * from './api';
-export * from './tests';
+export * from './FlexiblePageObject';
+export * from './FlexibleTestSuite';

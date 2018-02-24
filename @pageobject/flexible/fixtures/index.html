@@ -9,13 +9,13 @@
   <div>
     <div>
       <input type="text">
-      <button>click</button>
-      <button>dblclick</button>
+      <button class="click">click</button>
+      <button class="dblclick">dblclick</button>
     </div>
   </div>
 
   <script>
-    const textInput = document.querySelector('input[type="text"]');
+    const textInput = document.querySelector('input');
 
     textInput.addEventListener('keydown', event => {
       if (event.keyCode === 9) {
@@ -27,13 +27,13 @@
       document.title = `Event: keyup (${event.keyCode})`;
     });
 
-    const clickButton = document.querySelector('button:nth-child(2)');
+    const clickButton = document.querySelector('.click');
 
     clickButton.addEventListener('click', () => {
       document.title = 'Event: click';
     });
 
-    const dblclickButton = document.querySelector('button:nth-child(3)');
+    const dblclickButton = document.querySelector('.dblclick');
 
     dblclickButton.addEventListener('dblclick', () => {
       document.title = 'Event: dblclick';

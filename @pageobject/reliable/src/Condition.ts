@@ -1,14 +1,9 @@
 import {inspect} from 'util';
-import {Accessor, reliable} from '.';
+import {Accessor, Operator, reliable} from '.';
 
 export interface Evaluation {
   readonly description: string;
   readonly result: boolean;
-}
-
-export interface Operator<TValue> {
-  describe(valueName: string): string;
-  test(value: TValue): boolean;
 }
 
 function reliableIfRequired<TValue>(
