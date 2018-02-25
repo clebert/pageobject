@@ -1,6 +1,48 @@
-import {Condition} from '.';
+import {Accessor, Condition} from '.';
 
 export type TestStep = () => Promise<void>;
+
+function reliable<TValue>(
+  accessor: Accessor<TValue>,
+  timeout: number
+): Accessor<TValue> {
+  return async () => {
+    let error = new Error(`Assertion timeout after ${timeout} milliseconds`);
+    let resolved = false;
+
+    let timeoutID: any; /* tslint:disable-line no-any */
+
+    return Promise.race([
+      (async () => {
+        while (!resolved) {
+          try {
+            const result = await accessor();
+
+            clearTimeout(timeoutID);
+
+            return result;
+          } catch (e) {
+            error = e;
+          }
+
+          await new Promise<void>(setImmediate);
+        }
+
+        /* istanbul ignore next */
+        throw error;
+      })(),
+      (async () => {
+        await new Promise<void>(resolve => {
+          timeoutID = setTimeout(resolve, timeout);
+        });
+
+        resolved = true;
+
+        throw error;
+      })()
+    ]);
+  };
+}
 
 export class TestCase {
   public readonly testStepTimeout: number;
@@ -13,33 +55,15 @@ export class TestCase {
 
   /* tslint:disable-next-line no-any */
   public assert(condition: Condition<any>): this {
-    this._testSteps.push(async () => condition.assert(this.testStepTimeout));
+    this._testSteps.push(
+      reliable(async () => condition.assert(), this.testStepTimeout)
+    );
 
     return this;
   }
 
   public perform(action: TestStep): this {
     this._testSteps.push(action);
-
-    return this;
-  }
-
-  public when(
-    condition: Condition<any> /* tslint:disable-line no-any */,
-    then: (then: TestCase) => void,
-    otherwise: (otherwise: TestCase) => void = () => undefined
-  ): this {
-    this._testSteps.push(async () => {
-      const subTestCase = new TestCase(this.testStepTimeout);
-
-      if (await condition.test(this.testStepTimeout)) {
-        then(subTestCase);
-      } else {
-        otherwise(subTestCase);
-      }
-
-      await subTestCase.run();
-    });
 
     return this;
   }

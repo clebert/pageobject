@@ -916,6 +916,15 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-constructor tsd-parent-kind-class">
 					<a href="condition.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="condition.html#operator" class="tsd-kind-icon">operator</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="condition.html#valueaccessor" class="tsd-kind-icon">value<wbr>Accessor</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="condition.html#valuename" class="tsd-kind-icon">value<wbr>Name</a>
+				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="condition.html#assert" class="tsd-kind-icon">assert</a>
 				</li>
@@ -1005,11 +1014,8 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-function tsd-has-type-parameter">
 			<a href="../index.html#or" class="tsd-kind-icon">or</a>
 		</li>
-		<li class=" tsd-kind-function tsd-has-type-parameter">
-			<a href="../index.html#reliable" class="tsd-kind-icon">reliable</a>
-		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
-			<a href="../index.html#reliableifrequired" class="tsd-kind-icon">reliable<wbr>IfRequired</a>
+			<a href="../index.html#reliable" class="tsd-kind-icon">reliable</a>
 		</li>
 		<li class=" tsd-kind-function tsd-is-not-exported">
 			<a href="../index.html#serialize" class="tsd-kind-icon">serialize</a>
@@ -1045,6 +1051,14 @@ img { max-width: 100%; }
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
+						<h3>Properties</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="condition.html#operator" class="tsd-kind-icon">operator</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="condition.html#valueaccessor" class="tsd-kind-icon">value<wbr>Accessor</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="condition.html#valuename" class="tsd-kind-icon">value<wbr>Name</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="condition.html#assert" class="tsd-kind-icon">assert</a></li>
@@ -1068,7 +1082,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/Condition.ts#L24">Condition.ts:24</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/Condition.ts#L19">Condition.ts:19</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1089,26 +1103,53 @@ img { max-width: 100%; }
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Properties</h2>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="operator" class="tsd-anchor"></a>
+				<h3>operator</h3>
+				<div class="tsd-signature tsd-kind-icon">operator<span class="tsd-signature-symbol">:</span> <a href="../interfaces/operator.html" class="tsd-signature-type">Operator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/Condition.ts#L17">Condition.ts:17</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="valueaccessor" class="tsd-anchor"></a>
+				<h3>value<wbr>Accessor</h3>
+				<div class="tsd-signature tsd-kind-icon">value<wbr>Accessor<span class="tsd-signature-symbol">:</span> <a href="../index.html#accessor" class="tsd-signature-type">Accessor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/Condition.ts#L18">Condition.ts:18</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="valuename" class="tsd-anchor"></a>
+				<h3>value<wbr>Name</h3>
+				<div class="tsd-signature tsd-kind-icon">value<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/Condition.ts#L19">Condition.ts:19</a></li>
+					</ul>
+				</aside>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="assert" class="tsd-anchor"></a>
 				<h3>assert</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">assert<span class="tsd-signature-symbol">(</span>timeout<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">assert<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/Condition.ts#L40">Condition.ts:40</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/Condition.ts#L35">Condition.ts:35</a></li>
 							</ul>
 						</aside>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> timeout: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
-							</li>
-						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
@@ -1123,7 +1164,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/Condition.ts#L36">Condition.ts:36</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/Condition.ts#L31">Condition.ts:31</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -1134,21 +1175,15 @@ img { max-width: 100%; }
 				<a name="evaluate" class="tsd-anchor"></a>
 				<h3>evaluate</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">evaluate<span class="tsd-signature-symbol">(</span>timeout<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/evaluation.html" class="tsd-signature-type">Evaluation</a><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">evaluate<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/evaluation.html" class="tsd-signature-type">Evaluation</a><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/Condition.ts#L48">Condition.ts:48</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/Condition.ts#L43">Condition.ts:43</a></li>
 							</ul>
 						</aside>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> timeout: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
-							</li>
-						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/evaluation.html" class="tsd-signature-type">Evaluation</a><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
@@ -1157,21 +1192,15 @@ img { max-width: 100%; }
 				<a name="test" class="tsd-anchor"></a>
 				<h3>test</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">test<span class="tsd-signature-symbol">(</span>timeout<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">test<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/Condition.ts#L59">Condition.ts:59</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/Condition.ts#L54">Condition.ts:54</a></li>
 							</ul>
 						</aside>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> timeout: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
-							</li>
-						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
