@@ -922,6 +922,9 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a href="flexiblepageobject.html#selector" class="tsd-kind-icon">selector</a>
 				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a href="flexiblepageobject.html#at" class="tsd-kind-icon">at</a>
+				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="flexiblepageobject.html#blur" class="tsd-kind-icon">blur</a>
 				</li>
@@ -967,9 +970,6 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="flexiblepageobject.html#isinview" class="tsd-kind-icon">is<wbr>InView</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<a href="flexiblepageobject.html#isunique" class="tsd-kind-icon">is<wbr>Unique</a>
-				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="flexiblepageobject.html#isvisible" class="tsd-kind-icon">is<wbr>Visible</a>
 				</li>
@@ -984,6 +984,9 @@ img { max-width: 100%; }
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="flexiblepageobject.html#sendkey" class="tsd-kind-icon">send<wbr>Key</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a href="flexiblepageobject.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="flexiblepageobject.html#type" class="tsd-kind-icon">type</a>
@@ -1003,7 +1006,7 @@ img { max-width: 100%; }
 			<a href="../interfaces/flexibleelement.html" class="tsd-kind-icon">Flexible<wbr>Element</a>
 		</li>
 		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
-			<a href="../index.html#flexiblepageobjectconstructor" class="tsd-kind-icon">Flexible<wbr>Page<wbr>Object<wbr>Constructor</a>
+			<a href="../index.html#flexiblepageobjectclass" class="tsd-kind-icon">Flexible<wbr>Page<wbr>Object<wbr>Class</a>
 		</li>
 		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="../index.html#script" class="tsd-kind-icon">Script</a>
@@ -1048,6 +1051,7 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#at" class="tsd-kind-icon">at</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#blur" class="tsd-kind-icon">blur</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#click" class="tsd-kind-icon">click</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#doubleclick" class="tsd-kind-icon">double<wbr>Click</a></li>
@@ -1063,12 +1067,12 @@ img { max-width: 100%; }
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#getsize" class="tsd-kind-icon">get<wbr>Size</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#hasfocus" class="tsd-kind-icon">has<wbr>Focus</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#isinview" class="tsd-kind-icon">is<wbr>InView</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#isunique" class="tsd-kind-icon">is<wbr>Unique</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#isvisible" class="tsd-kind-icon">is<wbr>Visible</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#scrollintoview" class="tsd-kind-icon">scroll<wbr>Into<wbr>View</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited"><a href="flexiblepageobject.html#select" class="tsd-kind-icon">select</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#sendkey" class="tsd-kind-icon">send<wbr>Key</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#type" class="tsd-kind-icon">type</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#where" class="tsd-kind-icon">where</a></li>
 						</ul>
@@ -1089,7 +1093,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from PageObject.__constructor</p>
 							<ul>
-								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:14</li>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:15</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1130,6 +1134,30 @@ img { max-width: 100%; }
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<a name="at" class="tsd-anchor"></a>
+				<h3>at</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">at<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from PageObject.at</p>
+							<ul>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:18</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>index: <span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="blur" class="tsd-anchor"></a>
 				<h3>blur</h3>
@@ -1192,7 +1220,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from PageObject.findElement</p>
 							<ul>
-								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:20</li>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:21</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1397,7 +1425,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from PageObject.getSize</p>
 							<ul>
-								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:18</li>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:20</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1444,30 +1472,6 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<ul>
 								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L212">FlexiblePageObject.ts:212</a></li>
-							</ul>
-						</aside>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5>operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h5>
-							</li>
-						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-				<a name="isunique" class="tsd-anchor"></a>
-				<h3>is<wbr>Unique</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<li class="tsd-signature tsd-kind-icon">is<wbr>Unique<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<p>Inherited from PageObject.isUnique</p>
-							<ul>
-								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:19</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1547,14 +1551,14 @@ img { max-width: 100%; }
 				<a name="select" class="tsd-anchor"></a>
 				<h3>select</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
-					<li class="tsd-signature tsd-kind-icon">select&lt;TPageObject&gt;<span class="tsd-signature-symbol">(</span>Descendant<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PageObjectConstructor</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TPageObject</span></li>
+					<li class="tsd-signature tsd-kind-icon">select&lt;TPageObject&gt;<span class="tsd-signature-symbol">(</span>Descendant<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PageObjectClass</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TPageObject</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Inherited from PageObject.select</p>
 							<ul>
-								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:16</li>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:17</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1566,7 +1570,7 @@ img { max-width: 100%; }
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>Descendant: <span class="tsd-signature-type">PageObjectConstructor</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>Descendant: <span class="tsd-signature-type">PageObjectClass</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TPageObject</span></h4>
@@ -1593,6 +1597,24 @@ img { max-width: 100%; }
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TestStep</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<a name="tostring" class="tsd-anchor"></a>
+				<h3>to<wbr>String</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from PageObject.toString</p>
+							<ul>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:22</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1630,7 +1652,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from PageObject.where</p>
 							<ul>
-								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:17</li>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:19</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>

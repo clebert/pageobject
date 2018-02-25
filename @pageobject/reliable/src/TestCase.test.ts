@@ -7,25 +7,118 @@ class ConditionMock {
   public readonly test = jest.fn();
 }
 
+class ObservablePromise<T> {
+  public readonly promise: Promise<T>;
+
+  private _pending = true;
+
+  public constructor(promise: Promise<T>) {
+    this.promise = (async () => {
+      try {
+        return await promise;
+      } finally {
+        this._pending = false;
+      }
+    })();
+  }
+
+  public async isPending(): Promise<boolean> {
+    for (let i = 0; i < 100; i += 1) {
+      await Promise.resolve();
+    }
+
+    return this._pending;
+  }
+}
+
+async function observeTimeout<T>(
+  executable: () => Promise<T>,
+  value: number
+): Promise<void> {
+  jest.useFakeTimers();
+
+  try {
+    const execution = new ObservablePromise(executable());
+
+    for (let i = 0; i < value; i += 1) {
+      jest.runAllTicks();
+      jest.runAllImmediates();
+      jest.advanceTimersByTime(1);
+
+      if ((await execution.isPending()) !== i + 1 < value) {
+        throw new Error('To early timeout');
+      }
+    }
+
+    await execution.promise;
+  } finally {
+    jest.useRealTimers();
+  }
+}
+
+const erroneous = (id?: number) => async () => {
+  throw new Error(id !== undefined ? `Error ${id}` : 'Error');
+};
+
+const neverEnding = async () => new Promise<void>(() => undefined);
+
 describe('TestCase', () => {
   let testCase: TestCase;
 
   beforeEach(() => {
-    testCase = new TestCase(10000);
+    testCase = new TestCase(100);
   });
 
-  describe('assert()', () => {
+  describe('assert().run()', () => {
     it('should assert the specified condition', async () => {
       const condition = new ConditionMock();
 
+      condition.assert.mockImplementationOnce(erroneous());
+
       await testCase.assert(condition as any).run();
 
+      expect(condition.assert).toHaveBeenCalledTimes(2);
+    });
+
+    it('should throw an assertion error', async () => {
+      const condition = new ConditionMock();
+
+      condition.assert
+        .mockImplementationOnce(erroneous(1))
+        .mockImplementationOnce(erroneous(2))
+        .mockImplementation(neverEnding);
+
+      await expect(
+        observeTimeout(async () => testCase.assert(condition as any).run(), 100)
+      ).rejects.toEqual(new Error('Error 2'));
+
+      expect(condition.assert).toHaveBeenCalledTimes(3);
+    });
+
+    it('should throw an assertion-timeout error', async () => {
+      const condition = new ConditionMock();
+
+      condition.assert.mockImplementation(neverEnding);
+
+      await expect(
+        observeTimeout(async () => testCase.assert(condition as any).run(), 100)
+      ).rejects.toEqual(new Error('Assertion timeout after 100 milliseconds'));
+
       expect(condition.assert).toHaveBeenCalledTimes(1);
-      expect(condition.assert).toHaveBeenCalledWith(10000);
+    });
+
+    it('should not throw an out-of-memory error', async () => {
+      const condition = new ConditionMock();
+
+      condition.assert.mockImplementation(erroneous());
+
+      await expect(testCase.assert(condition as any).run()).rejects.toEqual(
+        new Error('Error')
+      );
     });
   });
 
-  describe('perform()', () => {
+  describe('perform().run()', () => {
     it('should perform the specified action', async () => {
       const action = jest.fn();
 
@@ -34,78 +127,15 @@ describe('TestCase', () => {
       expect(action).toHaveBeenCalledTimes(1);
       expect(action).toHaveBeenCalledWith();
     });
-  });
 
-  describe('when()', () => {
-    describe('if the specified condition evaluates to true', () => {
-      it('should run the primary specified test steps', async () => {
-        const truthy = new ConditionMock();
+    it('should throw an action error', async () => {
+      const action = jest.fn();
 
-        truthy.test.mockImplementation(async () => true);
+      action.mockImplementationOnce(erroneous());
 
-        const conditionalCondition1 = new ConditionMock();
-        const conditionalCondition2 = new ConditionMock();
-
-        await testCase
-          .when(
-            truthy as any,
-            then => then.assert(conditionalCondition1 as any),
-            otherwise => otherwise.assert(conditionalCondition2 as any)
-          )
-          .run();
-
-        expect(truthy.test).toHaveBeenCalledTimes(1);
-        expect(truthy.test).toHaveBeenCalledWith(10000);
-
-        expect(conditionalCondition1.assert).toHaveBeenCalledTimes(1);
-        expect(conditionalCondition1.assert).toHaveBeenCalledWith(10000);
-
-        expect(conditionalCondition2.assert).toHaveBeenCalledTimes(0);
-      });
-    });
-
-    describe('if the specified condition evaluates to false', () => {
-      it('should run the secondary specified test steps', async () => {
-        const falsy = new ConditionMock();
-
-        falsy.test.mockImplementation(async () => false);
-
-        const conditionalCondition1 = new ConditionMock();
-        const conditionalCondition2 = new ConditionMock();
-
-        await testCase
-          .when(
-            falsy as any,
-            then => then.assert(conditionalCondition1 as any),
-            otherwise => otherwise.assert(conditionalCondition2 as any)
-          )
-          .run();
-
-        expect(falsy.test).toHaveBeenCalledTimes(1);
-        expect(falsy.test).toHaveBeenCalledWith(10000);
-
-        expect(conditionalCondition1.assert).toHaveBeenCalledTimes(0);
-
-        expect(conditionalCondition2.assert).toHaveBeenCalledTimes(1);
-        expect(conditionalCondition2.assert).toHaveBeenCalledWith(10000);
-      });
-
-      it('should run no test steps', async () => {
-        const falsy = new ConditionMock();
-
-        falsy.test.mockImplementation(async () => false);
-
-        const conditionalCondition = new ConditionMock();
-
-        await testCase
-          .when(falsy as any, then => then.assert(conditionalCondition as any))
-          .run();
-
-        expect(falsy.test).toHaveBeenCalledTimes(1);
-        expect(falsy.test).toHaveBeenCalledWith(10000);
-
-        expect(conditionalCondition.assert).toHaveBeenCalledTimes(0);
-      });
+      await expect(testCase.perform(action).run()).rejects.toEqual(
+        new Error('Error')
+      );
     });
   });
 
@@ -119,16 +149,6 @@ describe('TestCase', () => {
         calls.push('assert()');
       });
 
-      const truthy = new ConditionMock();
-
-      truthy.test.mockImplementation(async () => true);
-
-      const conditionalAction = jest.fn();
-
-      conditionalAction.mockImplementation(async () => {
-        calls.push('when()');
-      });
-
       const action = jest.fn();
 
       action.mockImplementation(async () => {
@@ -137,53 +157,10 @@ describe('TestCase', () => {
 
       await testCase
         .assert(condition as any)
-        .when(truthy as any, then => then.perform(conditionalAction))
         .perform(action)
         .run();
 
-      expect(calls).toEqual(['assert()', 'when()', 'perform()']);
+      expect(calls).toEqual(['assert()', 'perform()']);
     });
-  });
-
-  it('should throw an assertion error', async () => {
-    const condition = new ConditionMock();
-
-    condition.assert.mockImplementation(async () => {
-      throw new Error('Assertion error');
-    });
-
-    await expect(testCase.assert(condition as any).run()).rejects.toThrow(
-      'Assertion error'
-    );
-  });
-
-  it('should throw an action error', async () => {
-    const action = jest.fn();
-
-    action.mockImplementation(async () => {
-      throw new Error('Action error');
-    });
-
-    await expect(testCase.perform(action).run()).rejects.toThrow(
-      'Action error'
-    );
-  });
-
-  it('should throw a conditional error', async () => {
-    const truthy = new ConditionMock();
-
-    truthy.test.mockImplementation(async () => true);
-
-    const conditionalAction = jest.fn();
-
-    conditionalAction.mockImplementation(async () => {
-      throw new Error('Action error');
-    });
-
-    await expect(
-      testCase
-        .when(truthy as any, then => then.perform(conditionalAction))
-        .run()
-    ).rejects.toThrow('Action error');
   });
 });

@@ -1,5 +1,5 @@
 import {Condition, Operator, TestStep} from '@pageobject/reliable';
-import {Browser, PageObject, PageObjectConstructor} from '@pageobject/stable';
+import {Browser, PageObject, PageObjectClass} from '@pageobject/stable';
 
 export type Script<TElement extends Element, TResult> = (
   element: TElement,
@@ -29,9 +29,9 @@ export interface FlexibleBrowser extends Browser<FlexibleElement> {
   navigateTo(url: string): Promise<void>;
 }
 
-export type FlexiblePageObjectConstructor<
+export type FlexiblePageObjectClass<
   TPageObject extends FlexiblePageObject
-> = PageObjectConstructor<FlexibleElement, FlexibleBrowser, TPageObject>;
+> = PageObjectClass<FlexibleElement, FlexibleBrowser, TPageObject>;
 
 export abstract class FlexiblePageObject extends PageObject<
   FlexibleElement,
@@ -105,7 +105,7 @@ export abstract class FlexiblePageObject extends PageObject<
           (_element, _name) => (_element.getAttribute(_name) || '').trim(),
           name
         ),
-      `attribute.${name}`
+      `attribute: ${name}`
     );
   }
 
@@ -161,10 +161,10 @@ export abstract class FlexiblePageObject extends PageObject<
           }
 
           throw new Error(
-            `Unable to access the non-primitive property <${name}>`
+            `Unable to access the non-primitive property: ${name}`
           );
         }, name),
-      `property.${name}`
+      `property: ${name}`
     );
   }
 
@@ -183,7 +183,7 @@ export abstract class FlexiblePageObject extends PageObject<
               .trim(),
           name
         ),
-      `computedStyle.${name}`
+      `computedStyle: ${name}`
     );
   }
 

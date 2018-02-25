@@ -98,7 +98,9 @@ describe('FlexiblePageObject', () => {
         throw new Error('click error');
       });
 
-      await expect(pageObject.click()()).rejects.toThrow('click error');
+      await expect(pageObject.click()()).rejects.toEqual(
+        new Error('click error')
+      );
 
       expect(element.click).toHaveBeenCalledTimes(1);
       expect(element.click).toHaveBeenLastCalledWith();
@@ -111,8 +113,8 @@ describe('FlexiblePageObject', () => {
         throw new Error('doubleClick error');
       });
 
-      await expect(pageObject.doubleClick()()).rejects.toThrow(
-        'doubleClick error'
+      await expect(pageObject.doubleClick()()).rejects.toEqual(
+        new Error('doubleClick error')
       );
 
       expect(element.doubleClick).toHaveBeenCalledTimes(1);
@@ -126,8 +128,8 @@ describe('FlexiblePageObject', () => {
         throw new Error('navigateTo error');
       });
 
-      await expect(pageObject.navigateTo('url')()).rejects.toThrow(
-        'navigateTo error'
+      await expect(pageObject.navigateTo('url')()).rejects.toEqual(
+        new Error('navigateTo error')
       );
 
       expect(navigateTo).toHaveBeenCalledTimes(1);
@@ -141,8 +143,8 @@ describe('FlexiblePageObject', () => {
         throw new Error('sendKey error');
       });
 
-      await expect(pageObject.sendKey(FlexibleKey.ENTER)()).rejects.toThrow(
-        'sendKey error'
+      await expect(pageObject.sendKey(FlexibleKey.ENTER)()).rejects.toEqual(
+        new Error('sendKey error')
       );
 
       expect(element.sendKey).toHaveBeenCalledTimes(1);
@@ -156,7 +158,9 @@ describe('FlexiblePageObject', () => {
         throw new Error('blur error');
       });
 
-      await expect(pageObject.blur()()).rejects.toThrow('blur error');
+      await expect(pageObject.blur()()).rejects.toEqual(
+        new Error('blur error')
+      );
 
       expect(domElement.blur).toHaveBeenCalledTimes(1);
       expect(domElement.blur).toHaveBeenLastCalledWith();
@@ -169,7 +173,9 @@ describe('FlexiblePageObject', () => {
         throw new Error('focus error');
       });
 
-      await expect(pageObject.focus()()).rejects.toThrow('focus error');
+      await expect(pageObject.focus()()).rejects.toEqual(
+        new Error('focus error')
+      );
 
       expect(domElement.focus).toHaveBeenCalledTimes(1);
       expect(domElement.focus).toHaveBeenLastCalledWith();
@@ -189,8 +195,8 @@ describe('FlexiblePageObject', () => {
         throw new Error('scrollBy error');
       });
 
-      await expect(pageObject.scrollIntoView()()).rejects.toThrow(
-        'scrollBy error'
+      await expect(pageObject.scrollIntoView()()).rejects.toEqual(
+        new Error('scrollBy error')
       );
 
       expect(scrollBy).toHaveBeenCalledTimes(1);
@@ -252,13 +258,14 @@ describe('FlexiblePageObject', () => {
     it('should return a condition', async () => {
       domElement.getAttribute.mockReturnValue(' attributeValue ');
 
-      await expect(
-        pageObject.getAttribute('name', equals('attributeValue')).evaluate()
-      ).resolves.toEqual({
-        description:
-          "((<attribute.name> = 'attributeValue') EQUALS 'attributeValue')",
-        result: true
-      });
+      const condition = pageObject.getAttribute(
+        'name',
+        equals('attributeValue')
+      );
+
+      expect(condition.valueName).toBe('attribute: name');
+
+      await expect(condition.test()).resolves.toBe(true);
 
       expect(domElement.getAttribute).toHaveBeenCalledTimes(1);
       expect(domElement.getAttribute).toHaveBeenLastCalledWith('name');
@@ -279,12 +286,11 @@ describe('FlexiblePageObject', () => {
 
   describe('getHTML()', () => {
     it('should return a condition', async () => {
-      await expect(
-        pageObject.getHTML(equals('outerHTML')).evaluate()
-      ).resolves.toEqual({
-        description: "((<html> = 'outerHTML') EQUALS 'outerHTML')",
-        result: true
-      });
+      const condition = pageObject.getHTML(equals('outerHTML'));
+
+      expect(condition.valueName).toBe('html');
+
+      await expect(condition.test()).resolves.toBe(true);
     });
   });
 
@@ -292,34 +298,31 @@ describe('FlexiblePageObject', () => {
     it('should return a condition', async () => {
       document.title = ' titleValue ';
 
-      await expect(
-        pageObject.getPageTitle(equals('titleValue')).evaluate()
-      ).resolves.toEqual({
-        description: "((<pageTitle> = 'titleValue') EQUALS 'titleValue')",
-        result: true
-      });
+      const condition = pageObject.getPageTitle(equals('titleValue'));
+
+      expect(condition.valueName).toBe('pageTitle');
+
+      await expect(condition.test()).resolves.toBe(true);
     });
   });
 
   describe('getPageURL()', () => {
     it('should return a condition', async () => {
-      await expect(
-        pageObject.getPageURL(equals('about:blank')).evaluate()
-      ).resolves.toEqual({
-        description: "((<pageURL> = 'about:blank') EQUALS 'about:blank')",
-        result: true
-      });
+      const condition = pageObject.getPageURL(equals('about:blank'));
+
+      expect(condition.valueName).toBe('pageURL');
+
+      await expect(condition.test()).resolves.toBe(true);
     });
   });
 
   describe('getProperty()', () => {
     it('should return a condition', async () => {
-      await expect(
-        pageObject.getProperty('any', equals('any')).evaluate()
-      ).resolves.toEqual({
-        description: "((<property.any> = 'any') EQUALS 'any')",
-        result: true
-      });
+      const condition = pageObject.getProperty('any', equals('any'));
+
+      expect(condition.valueName).toBe('property: any');
+
+      await expect(condition.test()).resolves.toBe(true);
 
       domElement.any = false;
 
@@ -355,7 +358,9 @@ describe('FlexiblePageObject', () => {
 
       await expect(
         pageObject.getProperty('any', equals('{}')).test()
-      ).rejects.toThrow('Unable to access the non-primitive property <any>');
+      ).rejects.toEqual(
+        new Error('Unable to access the non-primitive property: any')
+      );
     });
   });
 
@@ -365,13 +370,14 @@ describe('FlexiblePageObject', () => {
 
       getComputedStyle.mockImplementation(() => ({getPropertyValue}));
 
-      await expect(
-        pageObject.getComputedStyle('name', equals('styleValue')).evaluate()
-      ).resolves.toEqual({
-        description:
-          "((<computedStyle.name> = 'styleValue') EQUALS 'styleValue')",
-        result: true
-      });
+      const condition = pageObject.getComputedStyle(
+        'name',
+        equals('styleValue')
+      );
+
+      expect(condition.valueName).toBe('computedStyle: name');
+
+      await expect(condition.test()).resolves.toBe(true);
 
       expect(getComputedStyle).toHaveBeenCalledTimes(1);
       expect(getComputedStyle).toHaveBeenLastCalledWith(domElement);
@@ -383,34 +389,29 @@ describe('FlexiblePageObject', () => {
 
   describe('getRenderedText()', () => {
     it('should return a condition', async () => {
-      await expect(
-        pageObject.getRenderedText(equals('innerText')).evaluate()
-      ).resolves.toEqual({
-        description: "((<renderedText> = 'innerText') EQUALS 'innerText')",
-        result: true
-      });
+      const condition = pageObject.getRenderedText(equals('innerText'));
+
+      expect(condition.valueName).toBe('renderedText');
+
+      await expect(condition.test()).resolves.toBe(true);
     });
   });
 
   describe('hasFocus()', () => {
     it('should return a condition that sets <focus> to true', async () => {
-      await expect(
-        pageObject.hasFocus(equals(true)).evaluate()
-      ).resolves.toEqual({
-        description: '((<focus> = true) EQUALS true)',
-        result: true
-      });
+      const condition = pageObject.hasFocus(equals(true));
+
+      expect(condition.valueName).toBe('focus');
+
+      await expect(condition.test()).resolves.toBe(true);
     });
 
     it('should return a condition that sets <focus> to false', async () => {
       getActiveElement.mockReturnValue({});
 
-      await expect(
-        pageObject.hasFocus(equals(false)).evaluate()
-      ).resolves.toEqual({
-        description: '((<focus> = false) EQUALS false)',
-        result: true
-      });
+      await expect(pageObject.hasFocus(equals(false)).test()).resolves.toBe(
+        true
+      );
     });
   });
 
@@ -423,12 +424,11 @@ describe('FlexiblePageObject', () => {
         top: 0
       });
 
-      await expect(
-        pageObject.isInView(equals(true)).evaluate()
-      ).resolves.toEqual({
-        description: '((<inView> = true) EQUALS true)',
-        result: true
-      });
+      const condition = pageObject.isInView(equals(true));
+
+      expect(condition.valueName).toBe('inView');
+
+      await expect(condition.test()).resolves.toBe(true);
 
       domElement.getBoundingClientRect.mockReturnValue({
         bottom: window.innerHeight,
@@ -450,12 +450,9 @@ describe('FlexiblePageObject', () => {
         top: -1
       });
 
-      await expect(
-        pageObject.isInView(equals(false)).evaluate()
-      ).resolves.toEqual({
-        description: '((<inView> = false) EQUALS false)',
-        result: true
-      });
+      await expect(pageObject.isInView(equals(false)).test()).resolves.toBe(
+        true
+      );
 
       domElement.getBoundingClientRect.mockReturnValue({
         bottom: window.innerHeight,
@@ -497,12 +494,11 @@ describe('FlexiblePageObject', () => {
       domElement.offsetHeight = 1;
       domElement.offsetWidth = 0;
 
-      await expect(
-        pageObject.isVisible(equals(true)).evaluate()
-      ).resolves.toEqual({
-        description: '((<visible> = true) EQUALS true)',
-        result: true
-      });
+      const condition = pageObject.isVisible(equals(true));
+
+      expect(condition.valueName).toBe('visible');
+
+      await expect(condition.test()).resolves.toBe(true);
 
       domElement.offsetHeight = 0;
       domElement.offsetWidth = 1;
@@ -523,12 +519,9 @@ describe('FlexiblePageObject', () => {
       domElement.offsetHeight = 0;
       domElement.offsetWidth = 0;
 
-      await expect(
-        pageObject.isVisible(equals(false)).evaluate()
-      ).resolves.toEqual({
-        description: '((<visible> = false) EQUALS false)',
-        result: true
-      });
+      await expect(pageObject.isVisible(equals(false)).test()).resolves.toBe(
+        true
+      );
     });
   });
 });

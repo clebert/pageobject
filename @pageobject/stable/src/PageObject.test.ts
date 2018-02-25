@@ -12,399 +12,356 @@ class JSDOMBrowser implements Browser<Element> {
   }
 }
 
-class Root extends PageObject<Element, JSDOMBrowser> {
+class A extends PageObject<Element, JSDOMBrowser> {
   public readonly selector = 'div';
+}
 
-  public getName(operator: Operator<string>): Condition<string | null> {
+class B extends PageObject<Element, JSDOMBrowser> {
+  public readonly selector = 'p';
+
+  public b(operator: Operator<string>): Condition<string> {
     return new Condition(
       operator,
-      async () =>
-        (await this.findElement()).getAttribute(
-          `${this.constructor.name}-name`
-        ),
-      'name'
+      async () => (await this.findElement()).id,
+      'b'
     );
   }
 }
 
-class Child extends Root {}
-class Grandchild extends Child {}
+const browser = new JSDOMBrowser();
 
-document.body.innerHTML = `
-  <div root-name="root1">
-    <div child-name="child1"></div>
-    <div child-name="child2">
-      <div grandchild-name="grandchild1"></div>
-      <div grandchild-name="grandchild2"></div>
-    </div>
-  </div>
-  <div root-name="root2"></div>
-`;
-
-const root = new Root(new JSDOMBrowser());
-
-const root1 = root.where(pageObject => pageObject.getName(equals('root1')));
-
-const root2 = root.where((_, index) => {
-  const condition = index(equals(5));
-
-  expect(condition.describe()).toBe('(<index> EQUALS 5)');
-
-  return condition;
+beforeEach(() => {
+  document.body.innerHTML = '';
 });
 
-const root3 = root.where(pageObject => pageObject.getName(equals('root3')));
+/*
+Tested:
 
-describe('Root', () => {
-  describe('select()', () => {
-    it('should return a new instance using the specified constructor', () => {
-      const newInstance = root.select(Child);
+A
+A > B
+A > B[0]
+A > B[1]
+A > B(b EQUALS 'b')
 
-      expect(newInstance).not.toBe(root);
-      expect(newInstance).toBeInstanceOf(Root);
-      expect(newInstance).toBeInstanceOf(Child);
-      expect(newInstance).not.toBeInstanceOf(Grandchild);
+Not tested:
+
+A(a EQUALS 'a')
+A(a EQUALS 'a') > B
+A(a EQUALS 'a') > B[0]
+A(a EQUALS 'a') > B[1]
+A(a EQUALS 'a') > B(b EQUALS 'b')
+
+A[0]
+A[0] > B
+A[0] > B[0]
+A[0] > B[1]
+A[0] > B(b EQUALS 'b')
+
+A[1]
+A[1] > B
+A[1] > B[0]
+A[1] > B[1]
+A[1] > B(b EQUALS 'b')
+*/
+
+describe('PageObject: A', () => {
+  const pageObject = new A(browser);
+
+  describe('getSize()', () => {
+    it('should return a condition that sets <size> to 1', async () => {
+      document.body.innerHTML = '<div></div>';
+
+      const condition = pageObject.getSize(equals(1));
+
+      expect(condition.valueName).toBe('size');
+
+      await expect(condition.test()).resolves.toBe(true);
+    });
+
+    it('should return a condition that sets <size> to 0', async () => {
+      await expect(pageObject.getSize(equals(0)).test()).resolves.toBe(true);
+    });
+
+    it('should return a condition that sets <size> to 2', async () => {
+      document.body.innerHTML = '<div></div><div></div>';
+
+      await expect(pageObject.getSize(equals(2)).test()).resolves.toBe(true);
+    });
+  });
+
+  describe('findElement()', () => {
+    it('should return an element', async () => {
+      document.body.innerHTML = '<div></div>';
+
+      await expect(pageObject.findElement()).resolves.toBe(
+        document.querySelector('div')
+      );
+    });
+
+    it('should throw an element-not-found error', async () => {
+      await expect(pageObject.findElement()).rejects.toEqual(
+        new Error('Element not found: A')
+      );
+    });
+
+    it('should throw an element-not-unique error', async () => {
+      document.body.innerHTML = '<div></div><div></div>';
+
+      await expect(pageObject.findElement()).rejects.toEqual(
+        new Error('Element not unique: A')
+      );
+    });
+  });
+});
+
+describe('PageObject: A > B', () => {
+  const pageObject = new A(browser).select(B);
+
+  describe('getSize()', () => {
+    it('should return a condition that sets <size> to 1', async () => {
+      document.body.innerHTML = '<p></p><div><p></p></div>';
+
+      const condition = pageObject.getSize(equals(1));
+
+      expect(condition.valueName).toBe('size');
+
+      await expect(condition.test()).resolves.toBe(true);
+    });
+
+    it('should return a condition that sets <size> to 0', async () => {
+      document.body.innerHTML = '<div></div>';
+
+      await expect(pageObject.getSize(equals(0)).test()).resolves.toBe(true);
+    });
+
+    it('should return a condition that sets <size> to 2', async () => {
+      document.body.innerHTML = '<div><p></p><p></p></div>';
+
+      await expect(pageObject.getSize(equals(2)).test()).resolves.toBe(true);
+    });
+  });
+
+  describe('findElement()', () => {
+    it('should return an element', async () => {
+      document.body.innerHTML = '<p></p><div><p></p></div>';
+
+      await expect(pageObject.findElement()).resolves.toBe(
+        document.querySelector('div > p')
+      );
+    });
+
+    it('should throw an element-not-found error', async () => {
+      document.body.innerHTML = '<div></div>';
+
+      await expect(pageObject.findElement()).rejects.toEqual(
+        new Error('Element not found: A > B')
+      );
+    });
+
+    it('should throw an element-not-unique error', async () => {
+      document.body.innerHTML = '<div><p></p><p></p></div>';
+
+      await expect(pageObject.findElement()).rejects.toEqual(
+        new Error('Element not unique: A > B')
+      );
+    });
+  });
+});
+
+describe('PageObject: A > B[0]', () => {
+  const pageObject = new A(browser).select(B).at(0);
+
+  describe('at()', () => {
+    it('should throw a selection-criterion-exists error', () => {
+      expect(() => pageObject.at(1)).toThrow(
+        'Selection criterion already exists: A > B[0]'
+      );
     });
   });
 
   describe('where()', () => {
-    it('should return a new instance using its own constructor', () => {
-      const newInstance = root.where(jest.fn());
-
-      expect(newInstance).not.toBe(root);
-      expect(newInstance).toBeInstanceOf(Root);
-      expect(newInstance).not.toBeInstanceOf(Child);
-      expect(newInstance).not.toBeInstanceOf(Grandchild);
-    });
-
-    it('should throw a selection-criterion-already-defined error', () => {
-      expect(() => root.where(jest.fn()).where(jest.fn())).toThrow(
-        'A selection criterion is already defined'
-      );
-    });
-  });
-
-  describe('findElement()', () => {
-    it('should fail to find the element of root', async () => {
-      await expect(root.findElement()).rejects.toThrow(
-        'DOM element not unique (Root)'
-      );
-    });
-
-    it('should find the element of root1', async () => {
-      const element = await root1.findElement();
-
-      expect(element.getAttribute('root-name')).toBe('root1');
-    });
-
-    it('should find the element of root2', async () => {
-      const element = await root2.findElement();
-
-      expect(element.getAttribute('root-name')).toBe('root2');
-    });
-
-    it('should fail to find the element of root3', async () => {
-      await expect(root3.findElement()).rejects.toThrow(
-        'DOM element not found (Root)'
+    it('should throw a selection-criterion-exists error', () => {
+      expect(() => pageObject.where(self => self.getSize(equals(1)))).toThrow(
+        'Selection criterion already exists: A > B[0]'
       );
     });
   });
 
   describe('getSize()', () => {
-    it('should return a condition that sets <size> of root to 6', async () => {
-      await expect(root.getSize(equals(6)).evaluate()).resolves.toEqual({
-        description: '((<size> = 6) EQUALS 6)',
-        result: true
-      });
+    it('should return a condition that sets <size> to 1', async () => {
+      document.body.innerHTML = '<p></p><div><p></p><p></p></div>';
+
+      const condition = pageObject.getSize(equals(1));
+
+      expect(condition.valueName).toBe('size');
+
+      await expect(condition.test()).resolves.toBe(true);
     });
 
-    it('should return a condition that sets <size> of root1 to 1', async () => {
-      await expect(root1.getSize(equals(1)).evaluate()).resolves.toEqual({
-        description: '((<size> = 1) EQUALS 1)',
-        result: true
-      });
-    });
+    it('should return a condition that sets <size> to 0', async () => {
+      document.body.innerHTML = '<div></div>';
 
-    it('should return a condition that sets <size> of root2 to 1', async () => {
-      await expect(root2.getSize(equals(1)).evaluate()).resolves.toEqual({
-        description: '((<size> = 1) EQUALS 1)',
-        result: true
-      });
-    });
-
-    it('should return a condition that sets <size> of root3 to 0', async () => {
-      await expect(root3.getSize(equals(0)).evaluate()).resolves.toEqual({
-        description: '((<size> = 0) EQUALS 0)',
-        result: true
-      });
+      await expect(pageObject.getSize(equals(0)).test()).resolves.toBe(true);
     });
   });
 
-  describe('isUnique()', () => {
-    it('should return a condition that sets <unique> of root to false', async () => {
-      await expect(root.isUnique(equals(false)).evaluate()).resolves.toEqual({
-        description: '((<unique> = false) EQUALS false)',
-        result: true
-      });
+  describe('findElement()', () => {
+    it('should return an element', async () => {
+      document.body.innerHTML = '<p></p><div><p></p><p></p></div>';
+
+      await expect(pageObject.findElement()).resolves.toBe(
+        document.querySelector('div > p:nth-child(1)')
+      );
     });
 
-    it('should return a condition that sets <unique> of root1 to true', async () => {
-      await expect(root1.isUnique(equals(true)).evaluate()).resolves.toEqual({
-        description: '((<unique> = true) EQUALS true)',
-        result: true
-      });
-    });
+    it('should throw an element-not-found error', async () => {
+      document.body.innerHTML = '<div></div>';
 
-    it('should return a condition that sets <unique> of root2 to true', async () => {
-      await expect(root2.isUnique(equals(true)).evaluate()).resolves.toEqual({
-        description: '((<unique> = true) EQUALS true)',
-        result: true
-      });
-    });
-
-    it('should return a condition that sets <unique> of root3 to false', async () => {
-      await expect(root3.isUnique(equals(false)).evaluate()).resolves.toEqual({
-        description: '((<unique> = false) EQUALS false)',
-        result: true
-      });
+      await expect(pageObject.findElement()).rejects.toEqual(
+        new Error('Element not found: A > B[0]')
+      );
     });
   });
 });
 
-const child = root1.select(Child);
+describe('PageObject: A > B[1]', () => {
+  const pageObject = new A(browser).select(B).at(1);
 
-const child1 = child.where(pageObject => pageObject.getName(equals('child1')));
-
-const child2 = child.where((_, index) => {
-  const condition = index(equals(1));
-
-  expect(condition.describe()).toBe('(<index> EQUALS 1)');
-
-  return condition;
-});
-
-const child3 = child.where(pageObject => pageObject.getName(equals('child3')));
-
-describe('Child', () => {
-  describe('select()', () => {
-    it('should return a new instance using the specified constructor', () => {
-      const newInstance = child.select(Grandchild);
-
-      expect(newInstance).not.toBe(child);
-      expect(newInstance).toBeInstanceOf(Root);
-      expect(newInstance).toBeInstanceOf(Child);
-      expect(newInstance).toBeInstanceOf(Grandchild);
+  describe('at()', () => {
+    it('should throw a selection-criterion-exists error', () => {
+      expect(() => pageObject.at(0)).toThrow(
+        'Selection criterion already exists: A > B[1]'
+      );
     });
   });
 
   describe('where()', () => {
-    it('should return a new instance using its own constructor', () => {
-      const newInstance = child.where(jest.fn());
-
-      expect(newInstance).not.toBe(child);
-      expect(newInstance).toBeInstanceOf(Root);
-      expect(newInstance).toBeInstanceOf(Child);
-      expect(newInstance).not.toBeInstanceOf(Grandchild);
-    });
-  });
-
-  describe('findElement()', () => {
-    it('should fail to find the element of child', async () => {
-      await expect(child.findElement()).rejects.toThrow(
-        'DOM element not unique (Child)'
-      );
-    });
-
-    it('should find the element of child1', async () => {
-      const element = await child1.findElement();
-
-      expect(element.getAttribute('child-name')).toBe('child1');
-    });
-
-    it('should find the element of child2', async () => {
-      const element = await child2.findElement();
-
-      expect(element.getAttribute('child-name')).toBe('child2');
-    });
-
-    it('should fail to find the element of child3', async () => {
-      await expect(child3.findElement()).rejects.toThrow(
-        'DOM element not found (Child)'
+    it('should throw a selection-criterion-exists error', () => {
+      expect(() => pageObject.where(self => self.getSize(equals(1)))).toThrow(
+        'Selection criterion already exists: A > B[1]'
       );
     });
   });
 
   describe('getSize()', () => {
-    it('should return a condition that sets <size> of child to 4', async () => {
-      await expect(child.getSize(equals(4)).evaluate()).resolves.toEqual({
-        description: '((<size> = 4) EQUALS 4)',
-        result: true
-      });
+    it('should return a condition that sets <size> to 1', async () => {
+      document.body.innerHTML = '<p></p><div><p></p><p></p></div>';
+
+      const condition = pageObject.getSize(equals(1));
+
+      expect(condition.valueName).toBe('size');
+
+      await expect(condition.test()).resolves.toBe(true);
     });
 
-    it('should return a condition that sets <size> of child1 to 1', async () => {
-      await expect(child1.getSize(equals(1)).evaluate()).resolves.toEqual({
-        description: '((<size> = 1) EQUALS 1)',
-        result: true
-      });
-    });
+    it('should return a condition that sets <size> to 0', async () => {
+      document.body.innerHTML = '<div><p></p></div>';
 
-    it('should return a condition that sets <size> of child2 to 1', async () => {
-      await expect(child2.getSize(equals(1)).evaluate()).resolves.toEqual({
-        description: '((<size> = 1) EQUALS 1)',
-        result: true
-      });
-    });
-
-    it('should return a condition that sets <size> of child3 to 0', async () => {
-      await expect(child3.getSize(equals(0)).evaluate()).resolves.toEqual({
-        description: '((<size> = 0) EQUALS 0)',
-        result: true
-      });
+      await expect(pageObject.getSize(equals(0)).test()).resolves.toBe(true);
     });
   });
 
-  describe('isUnique()', () => {
-    it('should return a condition that sets <unique> of child to false', async () => {
-      await expect(child.isUnique(equals(false)).evaluate()).resolves.toEqual({
-        description: '((<unique> = false) EQUALS false)',
-        result: true
-      });
-    });
-
-    it('should return a condition that sets <unique> of child1 to true', async () => {
-      await expect(child1.isUnique(equals(true)).evaluate()).resolves.toEqual({
-        description: '((<unique> = true) EQUALS true)',
-        result: true
-      });
-    });
-
-    it('should return a condition that sets <unique> of child2 to true', async () => {
-      await expect(child2.isUnique(equals(true)).evaluate()).resolves.toEqual({
-        description: '((<unique> = true) EQUALS true)',
-        result: true
-      });
-    });
-
-    it('should return a condition that sets <unique> of child3 to false', async () => {
-      await expect(child3.isUnique(equals(false)).evaluate()).resolves.toEqual({
-        description: '((<unique> = false) EQUALS false)',
-        result: true
-      });
-    });
-  });
-});
-
-const grandchild = child2.select(Grandchild);
-
-const grandchild1 = grandchild.where((_, index) => {
-  const condition = index(equals(0));
-
-  expect(condition.describe()).toBe('(<index> EQUALS 0)');
-
-  return condition;
-});
-
-const grandchild2 = grandchild.where(pageObject =>
-  pageObject.getName(equals('grandchild2'))
-);
-
-const grandchild3 = grandchild.where(pageObject =>
-  pageObject.getName(equals('grandchild3'))
-);
-
-describe('Grandchild', () => {
   describe('findElement()', () => {
-    it('should fail to find the element of grandchild', async () => {
-      await expect(grandchild.findElement()).rejects.toThrow(
-        'DOM element not unique (Grandchild)'
+    it('should return an element', async () => {
+      document.body.innerHTML = '<p></p><div><p></p><p></p></div>';
+
+      await expect(pageObject.findElement()).resolves.toBe(
+        document.querySelector('p:nth-child(2)')
       );
     });
 
-    it('should find the element of grandchild1', async () => {
-      const element = await grandchild1.findElement();
+    it('should throw an element-not-found error', async () => {
+      document.body.innerHTML = '<div><p></p></div>';
 
-      expect(element.getAttribute('grandchild-name')).toBe('grandchild1');
+      await expect(pageObject.findElement()).rejects.toEqual(
+        new Error('Element not found: A > B[1]')
+      );
     });
+  });
+});
 
-    it('should find the element of grandchild2', async () => {
-      const element = await grandchild2.findElement();
+describe("PageObject: A > B(b EQUALS 'b')", () => {
+  const pageObject = new A(browser).select(B).where(b => b.b(equals('b')));
 
-      expect(element.getAttribute('grandchild-name')).toBe('grandchild2');
+  describe('at()', () => {
+    it('should throw a selection-criterion-exists error', () => {
+      expect(() => pageObject.at(0)).toThrow(
+        "Selection criterion already exists: A > B(b EQUALS 'b')"
+      );
     });
+  });
 
-    it('should fail to find the element of grandchild3', async () => {
-      await expect(grandchild3.findElement()).rejects.toThrow(
-        'DOM element not found (Grandchild)'
+  describe('where()', () => {
+    it('should throw a selection-criterion-exists error', () => {
+      expect(() => pageObject.where(self => self.getSize(equals(1)))).toThrow(
+        "Selection criterion already exists: A > B(b EQUALS 'b')"
       );
     });
   });
 
   describe('getSize()', () => {
-    it('should return a condition that sets <size> of grandchild to 2', async () => {
-      await expect(grandchild.getSize(equals(2)).evaluate()).resolves.toEqual({
-        description: '((<size> = 2) EQUALS 2)',
-        result: true
-      });
+    it('should return a condition that sets <size> to 1', async () => {
+      document.body.innerHTML =
+        '<p id="b"></p><div><p id="b"></p><p></p></div>';
+
+      const condition = pageObject.getSize(equals(1));
+
+      expect(condition.valueName).toBe('size');
+
+      await expect(condition.test()).resolves.toBe(true);
     });
 
-    it('should return a condition that sets <size> of grandchild1 to 1', async () => {
-      await expect(grandchild1.getSize(equals(1)).evaluate()).resolves.toEqual({
-        description: '((<size> = 1) EQUALS 1)',
-        result: true
-      });
+    it('should return a condition that sets <size> to 0', async () => {
+      document.body.innerHTML = '<div></div>';
+
+      await expect(pageObject.getSize(equals(0)).test()).resolves.toBe(true);
+
+      document.body.innerHTML = '<div><p></p><p id="a"></p></div>';
+
+      await expect(pageObject.getSize(equals(0)).test()).resolves.toBe(true);
     });
 
-    it('should return a condition that sets <size> of grandchild2 to 1', async () => {
-      await expect(grandchild2.getSize(equals(1)).evaluate()).resolves.toEqual({
-        description: '((<size> = 1) EQUALS 1)',
-        result: true
-      });
-    });
+    it('should return a condition that sets <size> to 2', async () => {
+      document.body.innerHTML = '<div><p id="b"></p><p id="b"></p></div>';
 
-    it('should return a condition that sets <size> of grandchild3 to 0', async () => {
-      await expect(grandchild3.getSize(equals(0)).evaluate()).resolves.toEqual({
-        description: '((<size> = 0) EQUALS 0)',
-        result: true
-      });
+      await expect(pageObject.getSize(equals(2)).test()).resolves.toBe(true);
     });
   });
 
-  describe('isUnique()', () => {
-    it('should return a condition that sets <unique> of grandchild to false', async () => {
-      await expect(
-        grandchild.isUnique(equals(false)).evaluate()
-      ).resolves.toEqual({
-        description: '((<unique> = false) EQUALS false)',
-        result: true
-      });
+  describe('findElement()', () => {
+    it('should return an element', async () => {
+      document.body.innerHTML =
+        '<p id="b"></p><div><p id="b"></p><p></p></div>';
+
+      await expect(pageObject.findElement()).resolves.toBe(
+        document.querySelector('div > #b')
+      );
     });
 
-    it('should return a condition that sets <unique> of grandchild1 to true', async () => {
-      await expect(
-        grandchild1.isUnique(equals(true)).evaluate()
-      ).resolves.toEqual({
-        description: '((<unique> = true) EQUALS true)',
-        result: true
-      });
+    it('should throw an element-not-found error', async () => {
+      document.body.innerHTML = '<div></div>';
+
+      await expect(pageObject.findElement()).rejects.toEqual(
+        new Error("Element not found: A > B(b EQUALS 'b')")
+      );
     });
 
-    it('should return a condition that sets <unique> of grandchild2 to true', async () => {
-      await expect(
-        grandchild2.isUnique(equals(true)).evaluate()
-      ).resolves.toEqual({
-        description: '((<unique> = true) EQUALS true)',
-        result: true
-      });
+    it('should throw an element-not-unique error', async () => {
+      document.body.innerHTML = '<div><p id="b"></p><p id="b"></p></div>';
+
+      await expect(pageObject.findElement()).rejects.toEqual(
+        new Error("Element not unique: A > B(b EQUALS 'b')")
+      );
     });
 
-    it('should return a condition that sets <unique> of grandchild3 to false', async () => {
-      await expect(
-        grandchild3.isUnique(equals(false)).evaluate()
-      ).resolves.toEqual({
-        description: '((<unique> = false) EQUALS false)',
-        result: true
-      });
+    it('should throw an element-not-matching error', async () => {
+      document.body.innerHTML = '<div><p></p><p id="a"></p></div>';
+
+      await expect(pageObject.findElement()).rejects.toEqual(
+        new Error(
+          "Element not matching: A > B(b EQUALS 'b')\n  • ((b = '') EQUALS 'b')\n  • ((b = 'a') EQUALS 'b')"
+        )
+      );
     });
   });
 });

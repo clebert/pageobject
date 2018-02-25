@@ -4,7 +4,7 @@ export interface Browser<TElement> {
   findElements(selector: string, parent?: TElement): Promise<TElement[]>;
 }
 
-export interface PageObjectConstructor<
+export interface PageObjectClass<
   TElement,
   TBrowser extends Browser<TElement>,
   TPageObject extends PageObject<TElement, TBrowser>
@@ -17,9 +17,13 @@ export type SelectionCriterion<
   TBrowser extends Browser<TElement>,
   TPageObject extends PageObject<TElement, TBrowser>
 > = (
-  pageObject: TPageObject,
-  index: (operator: Operator<number>) => Condition<number>
+  pageObject: TPageObject
 ) => Condition<any>; /* tslint:disable-line no-any */
+
+interface SearchResult<TElement> {
+  readonly descriptions: string[];
+  readonly elements: TElement[];
+}
 
 export abstract class PageObject<TElement, TBrowser extends Browser<TElement>> {
   public abstract readonly selector: string;
@@ -27,6 +31,7 @@ export abstract class PageObject<TElement, TBrowser extends Browser<TElement>> {
   public readonly browser: TBrowser;
 
   private _element?: TElement;
+  private _index?: number;
   private _parent?: PageObject<TElement, TBrowser>;
 
   /* tslint:disable-next-line no-any */
@@ -37,7 +42,7 @@ export abstract class PageObject<TElement, TBrowser extends Browser<TElement>> {
   }
 
   public select<TPageObject extends PageObject<TElement, TBrowser>>(
-    Descendant: PageObjectConstructor<TElement, TBrowser, TPageObject>
+    Descendant: PageObjectClass<TElement, TBrowser, TPageObject>
   ): TPageObject {
     const descendant = new Descendant(this.browser);
 
@@ -46,19 +51,28 @@ export abstract class PageObject<TElement, TBrowser extends Browser<TElement>> {
     return descendant;
   }
 
+  public at(index: number): this {
+    if (this._index !== undefined || this._selectionCriterion) {
+      throw new Error(`Selection criterion already exists: ${this.toString()}`);
+    }
+
+    const Copy = this.constructor as PageObjectClass<TElement, TBrowser, this>;
+    const copy = new Copy(this.browser);
+
+    copy._index = index;
+    copy._parent = this._parent;
+
+    return copy;
+  }
+
   public where(
     selectionCriterion: SelectionCriterion<TElement, TBrowser, this>
   ): this {
-    if (this._selectionCriterion) {
-      throw new Error('A selection criterion is already defined');
+    if (this._index !== undefined || this._selectionCriterion) {
+      throw new Error(`Selection criterion already exists: ${this.toString()}`);
     }
 
-    const Copy = this.constructor as PageObjectConstructor<
-      TElement,
-      TBrowser,
-      this
-    >;
-
+    const Copy = this.constructor as PageObjectClass<TElement, TBrowser, this>;
     const copy = new Copy(this.browser);
 
     copy._parent = this._parent;
@@ -70,16 +84,8 @@ export abstract class PageObject<TElement, TBrowser extends Browser<TElement>> {
   public getSize(operator: Operator<number>): Condition<number> {
     return new Condition(
       operator,
-      async () => (await this._findElements()).length,
+      async () => (await this._findElements()).elements.length,
       'size'
-    );
-  }
-
-  public isUnique(operator: Operator<boolean>): Condition<boolean> {
-    return new Condition(
-      operator,
-      async () => (await this._findElements()).length === 1,
-      'unique'
     );
   }
 
@@ -88,52 +94,67 @@ export abstract class PageObject<TElement, TBrowser extends Browser<TElement>> {
       return this._element;
     }
 
-    const elements = await this._findElements();
+    const {descriptions, elements} = await this._findElements();
 
     if (elements.length === 0) {
-      throw new Error(`DOM element not found (${this.constructor.name})`);
+      if (descriptions.length > 0) {
+        throw new Error(
+          `Element not matching: ${this.toString()}\n  ${descriptions
+            .map(description => `• ${description}`)
+            .join('\n  ')}`
+        );
+      }
+
+      throw new Error(`Element not found: ${this.toString()}`);
     }
 
     if (elements.length > 1) {
-      throw new Error(`DOM element not unique (${this.constructor.name})`);
+      throw new Error(`Element not unique: ${this.toString()}`);
     }
 
     return elements[0];
   }
 
-  private async _findElements(): Promise<TElement[]> {
-    const {browser, _parent, _selectionCriterion, selector} = this;
+  public toString(): string {
+    const {constructor, _index, _parent, _selectionCriterion} = this;
+    const {name} = constructor;
+
+    const description = _selectionCriterion
+      ? `${name}${_selectionCriterion(this).describe()}`
+      : _index !== undefined ? `${name}[${_index}]` : name;
+
+    return _parent ? `${_parent.toString()} > ${description}` : description;
+  }
+
+  private async _findElements(): Promise<SearchResult<TElement>> {
+    const {browser, constructor, _parent, _selectionCriterion, selector} = this;
     const parentElement = _parent ? await _parent.findElement() : undefined;
     const elements = await browser.findElements(selector, parentElement);
 
     if (!_selectionCriterion || elements.length === 0) {
-      return elements;
+      return {
+        descriptions: [],
+        elements: elements.filter(
+          (element, index) => this._index === undefined || this._index === index
+        )
+      };
     }
 
-    const Copy = this.constructor as PageObjectConstructor<
-      TElement,
-      TBrowser,
-      this
-    >;
+    const Copy = constructor as PageObjectClass<TElement, TBrowser, this>;
 
     const evaluations = await Promise.all(
-      elements
-        .map(element => {
-          const pageObject = new Copy(browser);
+      elements.map(async element => {
+        const pageObject = new Copy(browser);
 
-          pageObject._element = element;
+        pageObject._element = element;
 
-          return pageObject;
-        })
-        .map(async (pageObject, index) =>
-          _selectionCriterion(
-            pageObject,
-            (operator: Operator<number>) =>
-              new Condition(operator, async () => index, 'index')
-          ).evaluate()
-        )
+        return _selectionCriterion(pageObject).evaluate();
+      })
     );
 
-    return elements.filter((element, index) => evaluations[index].result);
+    return {
+      descriptions: evaluations.map(({description}) => description),
+      elements: elements.filter((element, index) => evaluations[index].result)
+    };
   }
 }

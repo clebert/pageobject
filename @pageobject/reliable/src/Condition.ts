@@ -1,16 +1,11 @@
 import {inspect} from 'util';
-import {Accessor, Operator, reliable} from '.';
+import {Operator} from '.';
+
+export type Accessor<TValue> = () => Promise<TValue>;
 
 export interface Evaluation {
   readonly description: string;
   readonly result: boolean;
-}
-
-function reliableIfRequired<TValue>(
-  accessor: Accessor<TValue>,
-  timeout: number | undefined
-): Accessor<TValue> {
-  return typeof timeout === 'number' ? reliable(accessor, timeout) : accessor;
 }
 
 /* tslint:disable-next-line no-any */
@@ -19,46 +14,44 @@ function serialize(value: any): string {
 }
 
 export class Condition<TValue> {
-  private readonly _operator: Operator<TValue>;
-  private readonly _valueAccessor: Accessor<TValue>;
-  private readonly _valueName: string;
+  public readonly operator: Operator<TValue>;
+  public readonly valueAccessor: Accessor<TValue>;
+  public readonly valueName: string;
 
   public constructor(
     operator: Operator<TValue>,
     valueAccessor: Accessor<TValue>,
     valueName: string
   ) {
-    this._operator = operator;
-    this._valueAccessor = valueAccessor;
-    this._valueName = valueName;
+    this.operator = operator;
+    this.valueAccessor = valueAccessor;
+    this.valueName = valueName;
   }
 
   public describe(): string {
-    return this._operator.describe(`<${this._valueName}>`);
+    return this.operator.describe(this.valueName);
   }
 
-  public async assert(timeout?: number): Promise<void> {
-    const evaluation = await this.evaluate(timeout);
+  public async assert(): Promise<void> {
+    const evaluation = await this.evaluate();
 
     if (!evaluation.result) {
       throw new Error(`Assertion failed: ${evaluation.description}`);
     }
   }
 
-  public async evaluate(timeout?: number): Promise<Evaluation> {
-    const value = await reliableIfRequired(this._valueAccessor, timeout)();
+  public async evaluate(): Promise<Evaluation> {
+    const value = await this.valueAccessor();
 
     return {
-      description: this._operator.describe(
-        `(<${this._valueName}> = ${serialize(value)})`
+      description: this.operator.describe(
+        `(${this.valueName} = ${serialize(value)})`
       ),
-      result: this._operator.test(value)
+      result: this.operator.test(value)
     };
   }
 
-  public async test(timeout?: number): Promise<boolean> {
-    return this._operator.test(
-      await reliableIfRequired(this._valueAccessor, timeout)()
-    );
+  public async test(): Promise<boolean> {
+    return this.operator.test(await this.valueAccessor());
   }
 }
