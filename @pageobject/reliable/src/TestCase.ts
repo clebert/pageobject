@@ -1,11 +1,8 @@
-import {Accessor, Condition} from '.';
+import {Condition} from '.';
 
 export type TestStep = () => Promise<void>;
 
-function reliable<TValue>(
-  accessor: Accessor<TValue>,
-  timeout: number
-): Accessor<TValue> {
+function reliable(assertion: TestStep, timeout: number): TestStep {
   return async () => {
     let error = new Error(`Assertion timeout after ${timeout} milliseconds`);
     let resolved = false;
@@ -16,11 +13,11 @@ function reliable<TValue>(
       (async () => {
         while (!resolved) {
           try {
-            const result = await accessor();
+            await assertion();
 
             clearTimeout(timeoutID);
 
-            return result;
+            return;
           } catch (e) {
             error = e;
           }

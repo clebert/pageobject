@@ -20,7 +20,7 @@ export type SelectionCriterion<
   pageObject: TPageObject
 ) => Condition<any>; /* tslint:disable-line no-any */
 
-export interface SearchResult<TElement> {
+interface SearchResult<TElement> {
   readonly descriptions: string[];
   readonly elements: TElement[];
 }
