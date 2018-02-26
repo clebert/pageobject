@@ -910,6 +910,9 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-enum">
 			<a href="../enums/flexiblekey.html" class="tsd-kind-icon">Flexible<wbr>Key</a>
 		</li>
+		<li class=" tsd-kind-class">
+			<a href="flexibleadaptertestsuite.html" class="tsd-kind-icon">Flexible<wbr>Adapter<wbr>Test<wbr>Suite</a>
+		</li>
 		<li class="current tsd-kind-class">
 			<a href="flexiblepageobject.html" class="tsd-kind-icon">Flexible<wbr>Page<wbr>Object</a>
 			<ul>
@@ -917,7 +920,7 @@ img { max-width: 100%; }
 					<a href="flexiblepageobject.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a href="flexiblepageobject.html#browser" class="tsd-kind-icon">browser</a>
+					<a href="flexiblepageobject.html#adapter" class="tsd-kind-icon">adapter</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a href="flexiblepageobject.html#selector" class="tsd-kind-icon">selector</a>
@@ -996,11 +999,8 @@ img { max-width: 100%; }
 				</li>
 			</ul>
 		</li>
-		<li class=" tsd-kind-class">
-			<a href="flexibletestsuite.html" class="tsd-kind-icon">Flexible<wbr>Test<wbr>Suite</a>
-		</li>
 		<li class=" tsd-kind-interface">
-			<a href="../interfaces/flexiblebrowser.html" class="tsd-kind-icon">Flexible<wbr>Browser</a>
+			<a href="../interfaces/flexibleadapter.html" class="tsd-kind-icon">Flexible<wbr>Adapter</a>
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="../interfaces/flexibleelement.html" class="tsd-kind-icon">Flexible<wbr>Element</a>
@@ -1022,7 +1022,7 @@ img { max-width: 100%; }
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">&gt;</span>
+					<span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexibleadapter.html" class="tsd-signature-type">FlexibleAdapter</a><span class="tsd-signature-symbol">&gt;</span>
 					<ul class="tsd-hierarchy">
 						<li>
 							<span class="target">FlexiblePageObject</span>
@@ -1044,7 +1044,7 @@ img { max-width: 100%; }
 					<section class="tsd-index-section tsd-is-inherited">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#browser" class="tsd-kind-icon">browser</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#adapter" class="tsd-kind-icon">adapter</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#selector" class="tsd-kind-icon">selector</a></li>
 						</ul>
 					</section>
@@ -1086,7 +1086,7 @@ img { max-width: 100%; }
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Flexible<wbr>Page<wbr>Object<span class="tsd-signature-symbol">(</span>browser<span class="tsd-signature-symbol">: </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="flexiblepageobject.html" class="tsd-signature-type">FlexiblePageObject</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Flexible<wbr>Page<wbr>Object<span class="tsd-signature-symbol">(</span>adapter<span class="tsd-signature-symbol">: </span><a href="../interfaces/flexibleadapter.html" class="tsd-signature-type">FlexibleAdapter</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="flexiblepageobject.html" class="tsd-signature-type">FlexiblePageObject</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
@@ -1099,7 +1099,7 @@ img { max-width: 100%; }
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>browser: <a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a></h5>
+								<h5>adapter: <a href="../interfaces/flexibleadapter.html" class="tsd-signature-type">FlexibleAdapter</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="flexiblepageobject.html" class="tsd-signature-type">FlexiblePageObject</a></h4>
@@ -1110,11 +1110,11 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-				<a name="browser" class="tsd-anchor"></a>
-				<h3>browser</h3>
-				<div class="tsd-signature tsd-kind-icon">browser<span class="tsd-signature-symbol">:</span> <a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a></div>
+				<a name="adapter" class="tsd-anchor"></a>
+				<h3>adapter</h3>
+				<div class="tsd-signature tsd-kind-icon">adapter<span class="tsd-signature-symbol">:</span> <a href="../interfaces/flexibleadapter.html" class="tsd-signature-type">FlexibleAdapter</a></div>
 				<aside class="tsd-sources">
-					<p>Inherited from PageObject.browser</p>
+					<p>Inherited from PageObject.adapter</p>
 					<ul>
 						<li>Defined in @pageobject/stable/dist/PageObject.d.ts:11</li>
 					</ul>
@@ -1551,7 +1551,7 @@ img { max-width: 100%; }
 				<a name="select" class="tsd-anchor"></a>
 				<h3>select</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
-					<li class="tsd-signature tsd-kind-icon">select&lt;TPageObject&gt;<span class="tsd-signature-symbol">(</span>Descendant<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PageObjectClass</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TPageObject</span></li>
+					<li class="tsd-signature tsd-kind-icon">select&lt;TPageObject&gt;<span class="tsd-signature-symbol">(</span>Descendant<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PageObjectClass</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexibleadapter.html" class="tsd-signature-type">FlexibleAdapter</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TPageObject</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
@@ -1564,13 +1564,13 @@ img { max-width: 100%; }
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
 						<ul class="tsd-type-parameters">
 							<li>
-								<h4>TPageObject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">&gt;</span></h4>
+								<h4>TPageObject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PageObject</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexibleadapter.html" class="tsd-signature-type">FlexibleAdapter</a><span class="tsd-signature-symbol">&gt;</span></h4>
 							</li>
 						</ul>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>Descendant: <span class="tsd-signature-type">PageObjectClass</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>Descendant: <span class="tsd-signature-type">PageObjectClass</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexibleadapter.html" class="tsd-signature-type">FlexibleAdapter</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TPageObject</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TPageObject</span></h4>
@@ -1645,7 +1645,7 @@ img { max-width: 100%; }
 				<a name="where" class="tsd-anchor"></a>
 				<h3>where</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<li class="tsd-signature tsd-kind-icon">where<span class="tsd-signature-symbol">(</span>selectionCriterion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SelectionCriterion</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					<li class="tsd-signature tsd-kind-icon">where<span class="tsd-signature-symbol">(</span>selectionCriterion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SelectionCriterion</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexibleadapter.html" class="tsd-signature-type">FlexibleAdapter</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
@@ -1658,7 +1658,7 @@ img { max-width: 100%; }
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>selectionCriterion: <span class="tsd-signature-type">SelectionCriterion</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexiblebrowser.html" class="tsd-signature-type">FlexibleBrowser</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>selectionCriterion: <span class="tsd-signature-type">SelectionCriterion</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/flexibleadapter.html" class="tsd-signature-type">FlexibleAdapter</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>

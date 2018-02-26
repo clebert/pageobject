@@ -1,2 +1,2 @@
 export * from './FlexiblePageObject';
-export * from './FlexibleTestSuite';
+export * from './FlexibleAdapterTestSuite';

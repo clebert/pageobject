@@ -1,21 +1,21 @@
 import {Condition, Operator} from '@pageobject/reliable';
 
-export interface Browser<TElement> {
+export interface Adapter<TElement> {
   findElements(selector: string, parent?: TElement): Promise<TElement[]>;
 }
 
 export interface PageObjectClass<
   TElement,
-  TBrowser extends Browser<TElement>,
-  TPageObject extends PageObject<TElement, TBrowser>
+  TAdapter extends Adapter<TElement>,
+  TPageObject extends PageObject<TElement, TAdapter>
 > {
-  new (browser: TBrowser): TPageObject;
+  new (adapter: TAdapter): TPageObject;
 }
 
 export type SelectionCriterion<
   TElement,
-  TBrowser extends Browser<TElement>,
-  TPageObject extends PageObject<TElement, TBrowser>
+  TAdapter extends Adapter<TElement>,
+  TPageObject extends PageObject<TElement, TAdapter>
 > = (
   pageObject: TPageObject
 ) => Condition<any>; /* tslint:disable-line no-any */
@@ -25,26 +25,26 @@ interface SearchResult<TElement> {
   readonly elements: TElement[];
 }
 
-export abstract class PageObject<TElement, TBrowser extends Browser<TElement>> {
+export abstract class PageObject<TElement, TAdapter extends Adapter<TElement>> {
   public abstract readonly selector: string;
 
-  public readonly browser: TBrowser;
+  public readonly adapter: TAdapter;
 
   private _element?: TElement;
   private _index?: number;
-  private _parent?: PageObject<TElement, TBrowser>;
+  private _parent?: PageObject<TElement, TAdapter>;
 
   /* tslint:disable-next-line no-any */
-  private _selectionCriterion?: SelectionCriterion<TElement, TBrowser, any>;
+  private _selectionCriterion?: SelectionCriterion<TElement, TAdapter, any>;
 
-  public constructor(browser: TBrowser) {
-    this.browser = browser;
+  public constructor(adapter: TAdapter) {
+    this.adapter = adapter;
   }
 
-  public select<TPageObject extends PageObject<TElement, TBrowser>>(
-    Descendant: PageObjectClass<TElement, TBrowser, TPageObject>
+  public select<TPageObject extends PageObject<TElement, TAdapter>>(
+    Descendant: PageObjectClass<TElement, TAdapter, TPageObject>
   ): TPageObject {
-    const descendant = new Descendant(this.browser);
+    const descendant = new Descendant(this.adapter);
 
     descendant._parent = this;
 
@@ -56,8 +56,8 @@ export abstract class PageObject<TElement, TBrowser extends Browser<TElement>> {
       throw new Error(`Selection criterion already exists: ${this.toString()}`);
     }
 
-    const Copy = this.constructor as PageObjectClass<TElement, TBrowser, this>;
-    const copy = new Copy(this.browser);
+    const Copy = this.constructor as PageObjectClass<TElement, TAdapter, this>;
+    const copy = new Copy(this.adapter);
 
     copy._index = index;
     copy._parent = this._parent;
@@ -66,14 +66,14 @@ export abstract class PageObject<TElement, TBrowser extends Browser<TElement>> {
   }
 
   public where(
-    selectionCriterion: SelectionCriterion<TElement, TBrowser, this>
+    selectionCriterion: SelectionCriterion<TElement, TAdapter, this>
   ): this {
     if (this._index !== undefined || this._selectionCriterion) {
       throw new Error(`Selection criterion already exists: ${this.toString()}`);
     }
 
-    const Copy = this.constructor as PageObjectClass<TElement, TBrowser, this>;
-    const copy = new Copy(this.browser);
+    const Copy = this.constructor as PageObjectClass<TElement, TAdapter, this>;
+    const copy = new Copy(this.adapter);
 
     copy._parent = this._parent;
     copy._selectionCriterion = selectionCriterion;
@@ -127,9 +127,9 @@ export abstract class PageObject<TElement, TBrowser extends Browser<TElement>> {
   }
 
   private async _findElements(): Promise<SearchResult<TElement>> {
-    const {browser, constructor, _parent, _selectionCriterion, selector} = this;
+    const {adapter, constructor, _parent, _selectionCriterion, selector} = this;
     const parentElement = _parent ? await _parent.findElement() : undefined;
-    const elements = await browser.findElements(selector, parentElement);
+    const elements = await adapter.findElements(selector, parentElement);
 
     if (!_selectionCriterion || elements.length === 0) {
       return {
@@ -140,11 +140,11 @@ export abstract class PageObject<TElement, TBrowser extends Browser<TElement>> {
       };
     }
 
-    const Copy = constructor as PageObjectClass<TElement, TBrowser, this>;
+    const Copy = constructor as PageObjectClass<TElement, TAdapter, this>;
 
     const evaluations = await Promise.all(
       elements.map(async element => {
-        const pageObject = new Copy(browser);
+        const pageObject = new Copy(adapter);
 
         pageObject._element = element;
 

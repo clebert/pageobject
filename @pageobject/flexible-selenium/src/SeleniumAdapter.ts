@@ -1,5 +1,5 @@
 import {
-  FlexibleBrowser,
+  FlexibleAdapter,
   FlexibleElement,
   FlexibleKey,
   Script
@@ -71,9 +71,9 @@ async function createDriver(capabilities: object): Promise<WebDriver> {
   return new Builder().withCapabilities(capabilities).build();
 }
 
-export class SeleniumBrowser implements FlexibleBrowser {
-  public static async open(capabilities: object): Promise<SeleniumBrowser> {
-    return new SeleniumBrowser(await createDriver(capabilities));
+export class SeleniumAdapter implements FlexibleAdapter {
+  public static async create(capabilities: object): Promise<SeleniumAdapter> {
+    return new SeleniumAdapter(await createDriver(capabilities));
   }
 
   public readonly driver: WebDriver;

@@ -42,18 +42,18 @@ function reliable(assertion: TestStep, timeout: number): TestStep {
 }
 
 export class TestCase {
-  public readonly testStepTimeout: number;
+  public readonly assertionTimeout: number;
 
   private readonly _testSteps: TestStep[] = [];
 
-  public constructor(testStepTimeout: number) {
-    this.testStepTimeout = testStepTimeout;
+  public constructor(assertionTimeout: number) {
+    this.assertionTimeout = assertionTimeout;
   }
 
   /* tslint:disable-next-line no-any */
   public assert(condition: Condition<any>): this {
     this._testSteps.push(
-      reliable(async () => condition.assert(), this.testStepTimeout)
+      reliable(async () => condition.assert(), this.assertionTimeout)
     );
 
     return this;

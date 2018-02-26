@@ -1,5 +1,5 @@
 import {
-  FlexibleBrowser,
+  FlexibleAdapter,
   FlexibleElement,
   FlexibleKey,
   Script
@@ -62,18 +62,20 @@ class PuppeteerElement implements FlexibleElement {
   }
 }
 
-export class PuppeteerBrowser implements FlexibleBrowser {
-  public static async open(options?: LaunchOptions): Promise<PuppeteerBrowser> {
+export class PuppeteerAdapter implements FlexibleAdapter {
+  public static async create(
+    options?: LaunchOptions
+  ): Promise<PuppeteerAdapter> {
     const browser = await launch(options);
 
-    return new PuppeteerBrowser(browser, await browser.newPage());
+    return new PuppeteerAdapter(browser, await browser.newPage());
   }
 
-  public readonly adaptee: Browser;
+  public readonly browser: Browser;
   public readonly page: Page;
 
-  public constructor(adaptee: Browser, page: Page) {
-    this.adaptee = adaptee;
+  public constructor(browser: Browser, page: Page) {
+    this.browser = browser;
     this.page = page;
   }
 

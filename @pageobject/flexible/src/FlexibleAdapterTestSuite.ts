@@ -1,14 +1,14 @@
 import {fail, ok, strictEqual} from 'assert';
 import {join} from 'path';
-import {FlexibleBrowser, FlexibleKey} from '.';
+import {FlexibleAdapter, FlexibleKey} from '.';
 
 const url = `file://${join(__dirname, '../fixtures/index.html')}`;
 
-export class FlexibleTestSuite {
-  public readonly browser: FlexibleBrowser;
+export class FlexibleAdapterTestSuite {
+  public readonly adapter: FlexibleAdapter;
 
-  public constructor(browser: FlexibleBrowser) {
-    this.browser = browser;
+  public constructor(adapter: FlexibleAdapter) {
+    this.adapter = adapter;
   }
 
   public async testAll(): Promise<void> {
@@ -21,20 +21,20 @@ export class FlexibleTestSuite {
   }
 
   public async testFindElements(): Promise<void> {
-    await this.browser.navigateTo(url);
+    await this.adapter.navigateTo(url);
 
-    const divs = await this.browser.findElements('div');
+    const divs = await this.adapter.findElements('div');
 
     strictEqual(divs.length, 2);
 
-    strictEqual((await this.browser.findElements('div', divs[0])).length, 1);
-    strictEqual((await this.browser.findElements('div', divs[1])).length, 0);
+    strictEqual((await this.adapter.findElements('div', divs[0])).length, 1);
+    strictEqual((await this.adapter.findElements('div', divs[1])).length, 0);
 
-    strictEqual((await this.browser.findElements('unknown')).length, 0);
+    strictEqual((await this.adapter.findElements('unknown')).length, 0);
 
     try {
       /* tslint:disable-next-line no-any */
-      await this.browser.findElements('div', {} as any);
+      await this.adapter.findElements('div', {} as any);
 
       fail('Missing incompatible-parent-element error');
     } catch (error) {
@@ -43,9 +43,9 @@ export class FlexibleTestSuite {
   }
 
   public async testElementClick(): Promise<void> {
-    await this.browser.navigateTo(url);
+    await this.adapter.navigateTo(url);
 
-    const button = (await this.browser.findElements('.click'))[0];
+    const button = (await this.adapter.findElements('.click'))[0];
 
     strictEqual(await button.execute(() => document.title), 'Test');
 
@@ -55,9 +55,9 @@ export class FlexibleTestSuite {
   }
 
   public async testElementDoubleClick(): Promise<void> {
-    await this.browser.navigateTo(url);
+    await this.adapter.navigateTo(url);
 
-    const button = (await this.browser.findElements('.dblclick'))[0];
+    const button = (await this.adapter.findElements('.dblclick'))[0];
 
     strictEqual(await button.execute(() => document.title), 'Test');
 
@@ -67,9 +67,9 @@ export class FlexibleTestSuite {
   }
 
   public async testElementExecute(): Promise<void> {
-    await this.browser.navigateTo(url);
+    await this.adapter.navigateTo(url);
 
-    const root = (await this.browser.findElements(':root'))[0];
+    const root = (await this.adapter.findElements(':root'))[0];
 
     strictEqual(
       await root.execute(
@@ -92,9 +92,9 @@ export class FlexibleTestSuite {
   }
 
   public async testElementSendCharacter(): Promise<void> {
-    await this.browser.navigateTo(url);
+    await this.adapter.navigateTo(url);
 
-    const textInput = (await this.browser.findElements('input'))[0];
+    const textInput = (await this.adapter.findElements('input'))[0];
 
     strictEqual(
       await textInput.execute(
@@ -142,9 +142,9 @@ export class FlexibleTestSuite {
   }
 
   public async testElementSendKey(): Promise<void> {
-    await this.browser.navigateTo(url);
+    await this.adapter.navigateTo(url);
 
-    const textInput = (await this.browser.findElements('input'))[0];
+    const textInput = (await this.adapter.findElements('input'))[0];
 
     strictEqual(await textInput.execute(() => document.title), 'Test');
 
