@@ -1,5 +1,5 @@
 import {Condition, Operator, TestStep} from '@pageobject/reliable';
-import {Browser, PageObject, PageObjectClass} from '@pageobject/stable';
+import {Adapter, PageObject, PageObjectClass} from '@pageobject/stable';
 
 export type Script<TElement extends Element, TResult> = (
   element: TElement,
@@ -25,17 +25,17 @@ export interface FlexibleElement {
   sendKey(key: FlexibleKey): Promise<void>;
 }
 
-export interface FlexibleBrowser extends Browser<FlexibleElement> {
+export interface FlexibleAdapter extends Adapter<FlexibleElement> {
   navigateTo(url: string): Promise<void>;
 }
 
 export type FlexiblePageObjectClass<
   TPageObject extends FlexiblePageObject
-> = PageObjectClass<FlexibleElement, FlexibleBrowser, TPageObject>;
+> = PageObjectClass<FlexibleElement, FlexibleAdapter, TPageObject>;
 
 export abstract class FlexiblePageObject extends PageObject<
   FlexibleElement,
-  FlexibleBrowser
+  FlexibleAdapter
 > {
   public click(): TestStep {
     return async () => (await this.findElement()).click();
@@ -46,7 +46,7 @@ export abstract class FlexiblePageObject extends PageObject<
   }
 
   public navigateTo(url: string): TestStep {
-    return async () => this.browser.navigateTo(url);
+    return async () => this.adapter.navigateTo(url);
   }
 
   public type(text: string): TestStep {

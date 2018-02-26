@@ -1,7 +1,7 @@
 import {Condition, Operator, equals} from '@pageobject/reliable';
-import {Browser, PageObject} from '.';
+import {Adapter, PageObject} from '.';
 
-class JSDOMBrowser implements Browser<Element> {
+class JSDOMAdapter implements Adapter<Element> {
   public async findElements(
     selector: string,
     parent?: Element
@@ -12,11 +12,11 @@ class JSDOMBrowser implements Browser<Element> {
   }
 }
 
-class A extends PageObject<Element, JSDOMBrowser> {
+class A extends PageObject<Element, JSDOMAdapter> {
   public readonly selector = 'div';
 }
 
-class B extends PageObject<Element, JSDOMBrowser> {
+class B extends PageObject<Element, JSDOMAdapter> {
   public readonly selector = 'p';
 
   public b(operator: Operator<string>): Condition<string> {
@@ -28,7 +28,7 @@ class B extends PageObject<Element, JSDOMBrowser> {
   }
 }
 
-const browser = new JSDOMBrowser();
+const adapter = new JSDOMAdapter();
 
 beforeEach(() => {
   document.body.innerHTML = '';
@@ -65,7 +65,7 @@ A[1] > B(b EQUALS 'b')
 */
 
 describe('PageObject: A', () => {
-  const pageObject = new A(browser);
+  const pageObject = new A(adapter);
 
   describe('getSize()', () => {
     it('should return a condition that sets <size> to 1', async () => {
@@ -115,7 +115,7 @@ describe('PageObject: A', () => {
 });
 
 describe('PageObject: A > B', () => {
-  const pageObject = new A(browser).select(B);
+  const pageObject = new A(adapter).select(B);
 
   describe('getSize()', () => {
     it('should return a condition that sets <size> to 1', async () => {
@@ -169,7 +169,7 @@ describe('PageObject: A > B', () => {
 });
 
 describe('PageObject: A > B[0]', () => {
-  const pageObject = new A(browser).select(B).at(0);
+  const pageObject = new A(adapter).select(B).at(0);
 
   describe('at()', () => {
     it('should throw a selection-criterion-exists error', () => {
@@ -225,7 +225,7 @@ describe('PageObject: A > B[0]', () => {
 });
 
 describe('PageObject: A > B[1]', () => {
-  const pageObject = new A(browser).select(B).at(1);
+  const pageObject = new A(adapter).select(B).at(1);
 
   describe('at()', () => {
     it('should throw a selection-criterion-exists error', () => {
@@ -281,7 +281,7 @@ describe('PageObject: A > B[1]', () => {
 });
 
 describe("PageObject: A > B(b EQUALS 'b')", () => {
-  const pageObject = new A(browser).select(B).where(b => b.b(equals('b')));
+  const pageObject = new A(adapter).select(B).where(b => b.b(equals('b')));
 
   describe('at()', () => {
     it('should throw a selection-criterion-exists error', () => {

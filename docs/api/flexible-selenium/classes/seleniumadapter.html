@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PuppeteerBrowser | @pageobject/flexible-puppeteer</title>
+	<title>SeleniumAdapter | @pageobject/flexible-selenium</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -879,7 +879,7 @@ img { max-width: 100%; }
 		<div class="container">
 			<div class="table-wrap">
 				<div class="table-cell">
-					<strong><a href="../index.html">@pageobject/flexible-puppeteer</a></strong>
+					<strong><a href="../index.html">@pageobject/flexible-selenium</a></strong>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -908,30 +908,33 @@ img { max-width: 100%; }
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class="current tsd-kind-class">
-			<a href="puppeteerbrowser.html" class="tsd-kind-icon">Puppeteer<wbr>Browser</a>
+			<a href="seleniumadapter.html" class="tsd-kind-icon">Selenium<wbr>Adapter</a>
 			<ul>
 				<li class=" tsd-kind-constructor tsd-parent-kind-class">
-					<a href="puppeteerbrowser.html#constructor" class="tsd-kind-icon">constructor</a>
+					<a href="seleniumadapter.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="puppeteerbrowser.html#adaptee" class="tsd-kind-icon">adaptee</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="puppeteerbrowser.html#page" class="tsd-kind-icon">page</a>
+					<a href="seleniumadapter.html#driver" class="tsd-kind-icon">driver</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="puppeteerbrowser.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a>
+					<a href="seleniumadapter.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="puppeteerbrowser.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a>
+					<a href="seleniumadapter.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a href="puppeteerbrowser.html#open" class="tsd-kind-icon">open</a>
+					<a href="seleniumadapter.html#create" class="tsd-kind-icon">create</a>
 				</li>
 			</ul>
 		</li>
 		<li class=" tsd-kind-class tsd-is-not-exported">
-			<a href="puppeteerelement.html" class="tsd-kind-icon">Puppeteer<wbr>Element</a>
+			<a href="seleniumelement.html" class="tsd-kind-icon">Selenium<wbr>Element</a>
+		</li>
+		<li class=" tsd-kind-interface tsd-is-not-exported">
+			<a href="../interfaces/webdriver4.html" class="tsd-kind-icon">Web<wbr>Driver4</a>
+		</li>
+		<li class=" tsd-kind-function tsd-is-not-exported">
+			<a href="../index.html#createdriver" class="tsd-kind-icon">create<wbr>Driver</a>
 		</li>
 	</ul>
 </nav>
@@ -941,14 +944,14 @@ img { max-width: 100%; }
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">PuppeteerBrowser</span>
+					<span class="target">SeleniumAdapter</span>
 				</li>
 			</ul>
 		</section>
 		<section class="tsd-panel">
 			<h3>Implements</h3>
 			<ul class="tsd-hierarchy">
-				<li><span class="tsd-signature-type">FlexibleBrowser</span></li>
+				<li><span class="tsd-signature-type">FlexibleAdapter</span></li>
 			</ul>
 		</section>
 		<section class="tsd-panel-group tsd-index-group">
@@ -958,22 +961,21 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Constructors</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="puppeteerbrowser.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="seleniumadapter.html#constructor" class="tsd-kind-icon">constructor</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="puppeteerbrowser.html#adaptee" class="tsd-kind-icon">adaptee</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="puppeteerbrowser.html#page" class="tsd-kind-icon">page</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="seleniumadapter.html#driver" class="tsd-kind-icon">driver</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="puppeteerbrowser.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="puppeteerbrowser.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="puppeteerbrowser.html#open" class="tsd-kind-icon">open</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="seleniumadapter.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="seleniumadapter.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="seleniumadapter.html#create" class="tsd-kind-icon">create</a></li>
 						</ul>
 					</section>
 				</div>
@@ -985,25 +987,22 @@ img { max-width: 100%; }
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Puppeteer<wbr>Browser<span class="tsd-signature-symbol">(</span>adaptee<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Browser</span>, page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Page</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="puppeteerbrowser.html" class="tsd-signature-type">PuppeteerBrowser</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Selenium<wbr>Adapter<span class="tsd-signature-symbol">(</span>driver<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WebDriver</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="seleniumadapter.html" class="tsd-signature-type">SeleniumAdapter</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible-puppeteer/src/PuppeteerBrowser.ts#L73">PuppeteerBrowser.ts:73</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible-selenium/src/SeleniumAdapter.ts#L79">SeleniumAdapter.ts:79</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>adaptee: <span class="tsd-signature-type">Browser</span></h5>
-							</li>
-							<li>
-								<h5>page: <span class="tsd-signature-type">Page</span></h5>
+								<h5>driver: <span class="tsd-signature-type">WebDriver</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <a href="puppeteerbrowser.html" class="tsd-signature-type">PuppeteerBrowser</a></h4>
+						<h4 class="tsd-returns-title">Returns <a href="seleniumadapter.html" class="tsd-signature-type">SeleniumAdapter</a></h4>
 					</li>
 				</ul>
 			</section>
@@ -1011,22 +1010,12 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="adaptee" class="tsd-anchor"></a>
-				<h3>adaptee</h3>
-				<div class="tsd-signature tsd-kind-icon">adaptee<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Browser</span></div>
+				<a name="driver" class="tsd-anchor"></a>
+				<h3>driver</h3>
+				<div class="tsd-signature tsd-kind-icon">driver<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WebDriver</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible-puppeteer/src/PuppeteerBrowser.ts#L72">PuppeteerBrowser.ts:72</a></li>
-					</ul>
-				</aside>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="page" class="tsd-anchor"></a>
-				<h3>page</h3>
-				<div class="tsd-signature tsd-kind-icon">page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Page</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible-puppeteer/src/PuppeteerBrowser.ts#L73">PuppeteerBrowser.ts:73</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible-selenium/src/SeleniumAdapter.ts#L79">SeleniumAdapter.ts:79</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1043,7 +1032,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible-puppeteer/src/PuppeteerBrowser.ts#L80">PuppeteerBrowser.ts:80</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible-selenium/src/SeleniumAdapter.ts#L85">SeleniumAdapter.ts:85</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1069,7 +1058,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible-puppeteer/src/PuppeteerBrowser.ts#L120">PuppeteerBrowser.ts:120</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible-selenium/src/SeleniumAdapter.ts#L98">SeleniumAdapter.ts:98</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1083,25 +1072,25 @@ img { max-width: 100%; }
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-				<a name="open" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagStatic">Static</span> open</h3>
+				<a name="create" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagStatic">Static</span> create</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<li class="tsd-signature tsd-kind-icon">open<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">LaunchOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="puppeteerbrowser.html" class="tsd-signature-type">PuppeteerBrowser</a><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>capabilities<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="seleniumadapter.html" class="tsd-signature-type">SeleniumAdapter</a><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible-puppeteer/src/PuppeteerBrowser.ts#L66">PuppeteerBrowser.ts:66</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible-selenium/src/SeleniumAdapter.ts#L75">SeleniumAdapter.ts:75</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">LaunchOptions</span></h5>
+								<h5>capabilities: <span class="tsd-signature-type">object</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="puppeteerbrowser.html" class="tsd-signature-type">PuppeteerBrowser</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="seleniumadapter.html" class="tsd-signature-type">SeleniumAdapter</a><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>

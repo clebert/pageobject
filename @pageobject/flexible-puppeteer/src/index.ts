@@ -1,1 +1,1 @@
-export * from './PuppeteerBrowser';
+export * from './PuppeteerAdapter';
