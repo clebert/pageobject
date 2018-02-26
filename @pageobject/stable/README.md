@@ -1,6 +1,6 @@
 # @pageobject/stable [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-> TODO.
+> Write **stable** tests using a sophisticated implementation of the [page object pattern][external-pageobject].
 
 ## Installation
 
@@ -25,3 +25,5 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 
 [internal-api-stable]: https://pageobject.js.org/api/stable/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
+
+[external-pageobject]: https://martinfowler.com/bliki/PageObject.html

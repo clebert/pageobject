@@ -1,7 +1,7 @@
 {
   "name": "@pageobject/flexible",
   "version": "1.0.0-beta-4",
-  "description": "TODO.",
+  "description": "Write flexible tests using a @pageobject/stable-based API which is adaptable for different browser automation frameworks.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
   "homepage": "https://pageobject.js.org/",

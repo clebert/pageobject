@@ -12,31 +12,31 @@ This is a multi-package repository ([monorepo][external-monorepo]).
 
 **[Installation][internal-installation-reliable] | [API][internal-api-reliable]**
 
-TODO.
+Write **reliable** tests in a declarative programming style.
 
 ### @pageobject/stable
 
 **[Installation][internal-installation-stable] | [API][internal-api-stable]**
 
-TODO.
+Write **stable** tests using a sophisticated implementation of the [page object pattern][external-pageobject].
 
 ### @pageobject/flexible
 
 **[Installation][internal-installation-flexible] | [API][internal-api-flexible]**
 
-TODO.
+Write **flexible** tests using a @pageobject/stable-based API which is adaptable for different browser automation frameworks.
 
 ### @pageobject/flexible-puppeteer
 
 **[Installation][internal-installation-flexible-puppeteer] | [API][internal-api-flexible-puppeteer]**
 
-TODO.
+Run your @pageobject/flexible-based tests using [Puppeteer][external-puppeteer].
 
 ### @pageobject/flexible-selenium
 
 **[Installation][internal-installation-flexible-selenium] | [API][internal-api-flexible-selenium]**
 
-TODO.
+Run your @pageobject/flexible-based tests using [Selenium][external-selenium].
 
 ---
 
@@ -64,3 +64,6 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 
 [external-monorepo]: https://github.com/lerna/lerna#about
+[external-pageobject]: https://martinfowler.com/bliki/PageObject.html
+[external-puppeteer]: https://github.com/GoogleChrome/puppeteer/blob/master/README.md
+[external-selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html

@@ -1,6 +1,6 @@
 # @pageobject/reliable [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-> TODO.
+> Write **reliable** tests in a declarative programming style.
 
 ## Installation
 
