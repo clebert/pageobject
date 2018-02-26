@@ -4,6 +4,28 @@
 
 ⚠️ **This software is currently in beta stage. Breaking changes can happen at any time.**
 
+## Getting Started
+
+**Example:** Navigate to `example.com` and assert that the page title equals `Example Domain`.
+
+```js
+class Root extends FlexiblePageObject {
+  constructor(adapter) {
+    super(adapter);
+
+    this.selector = ':root';
+  }
+}
+
+function describe(testCase, root) {
+  testCase
+    .perform(root.navigateTo('http://example.com/'))
+    .assert(root.getPageTitle(equals('Example Domain')));
+}
+```
+
+You can find the complete code of the example [here][internal-example]. It can be executed with Node.js 8 or higher.
+
 ## Packages
 
 This is a multi-package repository ([monorepo][external-monorepo]).
@@ -54,6 +76,8 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [internal-api-flexible-selenium]: https://pageobject.js.org/api/flexible-selenium/
 [internal-api-reliable]: https://pageobject.js.org/api/reliable/
 [internal-api-stable]: https://pageobject.js.org/api/stable/
+
+[internal-example]: https://github.com/clebert/pageobject/blob/master/example.js
 
 [internal-installation-flexible]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible/README.md#installation
 [internal-installation-flexible-puppeteer]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible-puppeteer/README.md#installation
