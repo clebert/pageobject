@@ -168,13 +168,17 @@ describe('PageObject: A > B', () => {
   });
 });
 
-describe('PageObject: A > B[0]', () => {
-  const pageObject = new A(adapter).select(B).at(0);
+describe('PageObject: A > B[1]', () => {
+  const pageObject = new A(adapter).select(B).nth(1);
 
-  describe('at()', () => {
+  describe('nth()', () => {
+    it('should throw a position-one-based error', () => {
+      expect(() => pageObject.nth(0)).toThrow('Position must be one-based');
+    });
+
     it('should throw a selection-criterion-exists error', () => {
-      expect(() => pageObject.at(1)).toThrow(
-        'Selection criterion already exists: A > B[0]'
+      expect(() => pageObject.nth(1)).toThrow(
+        'Selection criterion already exists: A > B[1]'
       );
     });
   });
@@ -182,7 +186,7 @@ describe('PageObject: A > B[0]', () => {
   describe('where()', () => {
     it('should throw a selection-criterion-exists error', () => {
       expect(() => pageObject.where(self => self.getSize(equals(1)))).toThrow(
-        'Selection criterion already exists: A > B[0]'
+        'Selection criterion already exists: A > B[1]'
       );
     });
   });
@@ -218,19 +222,23 @@ describe('PageObject: A > B[0]', () => {
       document.body.innerHTML = '<div></div>';
 
       await expect(pageObject.findElement()).rejects.toEqual(
-        new Error('Element not found: A > B[0]')
+        new Error('Element not found: A > B[1]')
       );
     });
   });
 });
 
-describe('PageObject: A > B[1]', () => {
-  const pageObject = new A(adapter).select(B).at(1);
+describe('PageObject: A > B[2]', () => {
+  const pageObject = new A(adapter).select(B).nth(2);
 
-  describe('at()', () => {
+  describe('nth()', () => {
+    it('should throw a position-one-based error', () => {
+      expect(() => pageObject.nth(0)).toThrow('Position must be one-based');
+    });
+
     it('should throw a selection-criterion-exists error', () => {
-      expect(() => pageObject.at(0)).toThrow(
-        'Selection criterion already exists: A > B[1]'
+      expect(() => pageObject.nth(1)).toThrow(
+        'Selection criterion already exists: A > B[2]'
       );
     });
   });
@@ -238,7 +246,7 @@ describe('PageObject: A > B[1]', () => {
   describe('where()', () => {
     it('should throw a selection-criterion-exists error', () => {
       expect(() => pageObject.where(self => self.getSize(equals(1)))).toThrow(
-        'Selection criterion already exists: A > B[1]'
+        'Selection criterion already exists: A > B[2]'
       );
     });
   });
@@ -274,7 +282,7 @@ describe('PageObject: A > B[1]', () => {
       document.body.innerHTML = '<div><p></p></div>';
 
       await expect(pageObject.findElement()).rejects.toEqual(
-        new Error('Element not found: A > B[1]')
+        new Error('Element not found: A > B[2]')
       );
     });
   });
@@ -283,9 +291,13 @@ describe('PageObject: A > B[1]', () => {
 describe("PageObject: A > B(b EQUALS 'b')", () => {
   const pageObject = new A(adapter).select(B).where(b => b.b(equals('b')));
 
-  describe('at()', () => {
+  describe('nth()', () => {
+    it('should throw a position-one-based error', () => {
+      expect(() => pageObject.nth(0)).toThrow('Position must be one-based');
+    });
+
     it('should throw a selection-criterion-exists error', () => {
-      expect(() => pageObject.at(0)).toThrow(
+      expect(() => pageObject.nth(1)).toThrow(
         "Selection criterion already exists: A > B(b EQUALS 'b')"
       );
     });
