@@ -1,5 +1,6 @@
-import {Condition, Operator, TestStep} from '@pageobject/reliable';
+import {Action, Condition, Operator} from '@pageobject/reliable';
 import {Adapter, PageObject, PageObjectClass} from '@pageobject/stable';
+import {inspect} from 'util';
 
 export type Script<TElement extends Element, TResult> = (
   element: TElement,
@@ -33,65 +34,105 @@ export type FlexiblePageObjectClass<
   TPageObject extends FlexiblePageObject
 > = PageObjectClass<FlexibleElement, FlexibleAdapter, TPageObject>;
 
+/* tslint:disable-next-line no-any */
+function serialize(value: any): string {
+  return inspect(value, false, null);
+}
+
+function lookup(key: FlexibleKey): string {
+  switch (key) {
+    case FlexibleKey.ENTER:
+      return 'ENTER';
+    case FlexibleKey.ESCAPE:
+      return 'ESCAPE';
+    case FlexibleKey.TAB:
+      return 'TAB';
+  }
+}
+
 export abstract class FlexiblePageObject extends PageObject<
   FlexibleElement,
   FlexibleAdapter
 > {
-  public click(): TestStep {
-    return async () => (await this.findElement()).click();
+  public click(): Action {
+    return {
+      description: 'Click',
+      perform: async () => (await this.findElement()).click()
+    };
   }
 
-  public doubleClick(): TestStep {
-    return async () => (await this.findElement()).doubleClick();
+  public doubleClick(): Action {
+    return {
+      description: 'Double-click',
+      perform: async () => (await this.findElement()).doubleClick()
+    };
   }
 
-  public navigateTo(url: string): TestStep {
-    return async () => this.adapter.navigateTo(url);
+  public navigateTo(url: string): Action {
+    return {
+      description: `Navigate to ${serialize(url)}`,
+      perform: async () => this.adapter.navigateTo(url)
+    };
   }
 
-  public type(text: string): TestStep {
-    return async () => {
-      const characters = text.split('');
+  public type(text: string): Action {
+    return {
+      description: `Type ${serialize(text)}`,
+      perform: async () => {
+        const characters = text.split('');
 
-      for (let i = 0; i < characters.length; i += 1) {
-        await (await this.findElement()).sendCharacter(characters[i]);
+        for (let i = 0; i < characters.length; i += 1) {
+          await (await this.findElement()).sendCharacter(characters[i]);
 
-        if (i < characters.length - 1) {
-          await new Promise<void>(resolve => setTimeout(resolve, 100));
+          if (i < characters.length - 1) {
+            await new Promise<void>(resolve => setTimeout(resolve, 100));
+          }
         }
       }
     };
   }
 
-  public sendKey(key: FlexibleKey): TestStep {
-    return async () => (await this.findElement()).sendKey(key);
+  public sendKey(key: FlexibleKey): Action {
+    return {
+      description: `Send key ${lookup(key)}`,
+      perform: async () => (await this.findElement()).sendKey(key)
+    };
   }
 
-  public blur(): TestStep {
-    return async () =>
-      (await this.findElement()).execute((_element: HTMLElement) =>
-        _element.blur()
-      );
+  public blur(): Action {
+    return {
+      description: 'Blur',
+      perform: async () =>
+        (await this.findElement()).execute((_element: HTMLElement) =>
+          _element.blur()
+        )
+    };
   }
 
-  public focus(): TestStep {
-    return async () =>
-      (await this.findElement()).execute((_element: HTMLElement) =>
-        _element.focus()
-      );
+  public focus(): Action {
+    return {
+      description: 'Focus',
+      perform: async () =>
+        (await this.findElement()).execute((_element: HTMLElement) =>
+          _element.focus()
+        )
+    };
   }
 
-  public scrollIntoView(): TestStep {
-    return async () =>
-      (await this.findElement()).execute(_element => {
-        const {height, left, top, width} = _element.getBoundingClientRect();
-        const {innerHeight, innerWidth} = window;
+  public scrollIntoView(): Action {
+    return {
+      description: 'Scroll into view',
+      perform: async () =>
+        (await this.findElement()).execute(_element => {
+          const {height, left, top, width} = _element.getBoundingClientRect();
+          const {innerHeight, innerWidth} = window;
 
-        window.scrollBy(
-          left - innerWidth / 2 + width / 2,
-          top - innerHeight / 2 + height / 2
-        );
-      });
+          window.scrollBy(
+            left - innerWidth / 2 + width / 2,
+            top - innerHeight / 2 + height / 2
+          );
+        })
+    };
   }
 
   public getAttribute(

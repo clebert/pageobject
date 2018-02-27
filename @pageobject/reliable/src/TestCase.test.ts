@@ -4,7 +4,13 @@ import {TestCase} from '.';
 
 class ConditionMock {
   public readonly assert = jest.fn();
+  public readonly describe = jest.fn().mockReturnValue('description');
   public readonly test = jest.fn();
+}
+
+class ActionMock {
+  public readonly description = 'description';
+  public readonly perform = jest.fn();
 }
 
 class ObservablePromise<T> {
@@ -90,19 +96,40 @@ describe('TestCase', () => {
 
       await expect(
         observeTimeout(async () => testCase.assert(condition as any).run(), 100)
-      ).rejects.toEqual(new Error('Error 2'));
+      ).rejects.toEqual(new Error('Assert: description\n  Cause: Error 2'));
 
       expect(condition.assert).toHaveBeenCalledTimes(3);
     });
 
-    it('should throw an assertion-timeout error', async () => {
+    it('should throw a default-timeout error', async () => {
       const condition = new ConditionMock();
 
       condition.assert.mockImplementation(neverEnding);
 
       await expect(
         observeTimeout(async () => testCase.assert(condition as any).run(), 100)
-      ).rejects.toEqual(new Error('Assertion timeout after 100 milliseconds'));
+      ).rejects.toEqual(
+        new Error(
+          'Assert: description\n  Cause: Timeout after 100 milliseconds'
+        )
+      );
+
+      expect(condition.assert).toHaveBeenCalledTimes(1);
+    });
+
+    it('should throw a custom-timeout error', async () => {
+      const condition = new ConditionMock();
+
+      condition.assert.mockImplementation(neverEnding);
+
+      await expect(
+        observeTimeout(
+          async () => testCase.assert(condition as any, 50).run(),
+          50
+        )
+      ).rejects.toEqual(
+        new Error('Assert: description\n  Cause: Timeout after 50 milliseconds')
+      );
 
       expect(condition.assert).toHaveBeenCalledTimes(1);
     });
@@ -113,28 +140,53 @@ describe('TestCase', () => {
       condition.assert.mockImplementation(erroneous());
 
       await expect(testCase.assert(condition as any).run()).rejects.toEqual(
-        new Error('Error')
+        new Error('Assert: description\n  Cause: Error')
       );
     });
   });
 
   describe('perform().run()', () => {
     it('should perform the specified action', async () => {
-      const action = jest.fn();
+      const action = new ActionMock();
 
       await testCase.perform(action).run();
 
-      expect(action).toHaveBeenCalledTimes(1);
-      expect(action).toHaveBeenCalledWith();
+      expect(action.perform).toHaveBeenCalledTimes(1);
     });
 
     it('should throw an action error', async () => {
-      const action = jest.fn();
+      const action = new ActionMock();
 
-      action.mockImplementationOnce(erroneous());
+      action.perform.mockImplementationOnce(erroneous());
 
       await expect(testCase.perform(action).run()).rejects.toEqual(
-        new Error('Error')
+        new Error('Perfom: description\n  Cause: Error')
+      );
+    });
+
+    it('should throw a default-timeout error', async () => {
+      const action = new ActionMock();
+
+      action.perform.mockImplementationOnce(neverEnding);
+
+      await expect(
+        observeTimeout(async () => testCase.perform(action).run(), 100)
+      ).rejects.toEqual(
+        new Error(
+          'Perfom: description\n  Cause: Timeout after 100 milliseconds'
+        )
+      );
+    });
+
+    it('should throw a custom-timeout error', async () => {
+      const action = new ActionMock();
+
+      action.perform.mockImplementationOnce(neverEnding);
+
+      await expect(
+        observeTimeout(async () => testCase.perform(action, 50).run(), 50)
+      ).rejects.toEqual(
+        new Error('Perfom: description\n  Cause: Timeout after 50 milliseconds')
       );
     });
   });
@@ -149,9 +201,9 @@ describe('TestCase', () => {
         calls.push('assert()');
       });
 
-      const action = jest.fn();
+      const action = new ActionMock();
 
-      action.mockImplementation(async () => {
+      action.perform.mockImplementation(async () => {
         calls.push('perform()');
       });
 
