@@ -419,7 +419,7 @@ describe('FlexiblePageObject', () => {
 
   describe('hasFocus()', () => {
     it('should return a condition that sets <focus> to true', async () => {
-      const condition = pageObject.hasFocus(equals(true));
+      const condition = pageObject.hasFocus();
 
       expect(condition.valueName).toBe('focus');
 
@@ -435,86 +435,12 @@ describe('FlexiblePageObject', () => {
     });
   });
 
-  describe('isInView()', () => {
-    it('should return a condition that sets <inView> to true', async () => {
-      domElement.getBoundingClientRect.mockReturnValue({
-        bottom: 0,
-        left: 0,
-        right: 0,
-        top: 0
-      });
-
-      const condition = pageObject.isInView(equals(true));
-
-      expect(condition.valueName).toBe('inView');
-
-      await expect(condition.test()).resolves.toBe(true);
-
-      domElement.getBoundingClientRect.mockReturnValue({
-        bottom: window.innerHeight,
-        left: 0,
-        right: window.innerWidth,
-        top: 0
-      });
-
-      await expect(pageObject.isInView(equals(true)).test()).resolves.toBe(
-        true
-      );
-    });
-
-    it('should return a condition that sets <inView> to false', async () => {
-      domElement.getBoundingClientRect.mockReturnValue({
-        bottom: window.innerHeight,
-        left: 0,
-        right: window.innerWidth,
-        top: -1
-      });
-
-      await expect(pageObject.isInView(equals(false)).test()).resolves.toBe(
-        true
-      );
-
-      domElement.getBoundingClientRect.mockReturnValue({
-        bottom: window.innerHeight,
-        left: -1,
-        right: window.innerWidth,
-        top: 0
-      });
-
-      await expect(pageObject.isInView(equals(false)).test()).resolves.toBe(
-        true
-      );
-
-      domElement.getBoundingClientRect.mockReturnValue({
-        bottom: window.innerHeight + 1,
-        left: 0,
-        right: window.innerWidth,
-        top: 0
-      });
-
-      await expect(pageObject.isInView(equals(false)).test()).resolves.toBe(
-        true
-      );
-
-      domElement.getBoundingClientRect.mockReturnValue({
-        bottom: window.innerHeight,
-        left: 0,
-        right: window.innerWidth + 1,
-        top: 0
-      });
-
-      await expect(pageObject.isInView(equals(false)).test()).resolves.toBe(
-        true
-      );
-    });
-  });
-
   describe('isVisible()', () => {
     it('should return a condition that sets <visible> to true', async () => {
       domElement.offsetHeight = 1;
       domElement.offsetWidth = 0;
 
-      const condition = pageObject.isVisible(equals(true));
+      const condition = pageObject.isVisible();
 
       expect(condition.valueName).toBe('visible');
 
@@ -523,16 +449,12 @@ describe('FlexiblePageObject', () => {
       domElement.offsetHeight = 0;
       domElement.offsetWidth = 1;
 
-      await expect(pageObject.isVisible(equals(true)).test()).resolves.toBe(
-        true
-      );
+      await expect(pageObject.isVisible().test()).resolves.toBe(true);
 
       domElement.offsetHeight = 1;
       domElement.offsetWidth = 1;
 
-      await expect(pageObject.isVisible(equals(true)).test()).resolves.toBe(
-        true
-      );
+      await expect(pageObject.isVisible().test()).resolves.toBe(true);
     });
 
     it('should return a condition that sets <visible> to false', async () => {
