@@ -1,3 +1,4 @@
+import {deepStrictEqual} from 'assert';
 import {inspect} from 'util';
 
 export interface Operator<TValue> {
@@ -119,7 +120,13 @@ class EqualsOperator<TValue> extends RelationalOperator<TValue, TValue> {
   protected readonly name = 'EQUALS';
 
   public test(value: TValue): boolean {
-    return value === this.expectedValue;
+    try {
+      deepStrictEqual(value, this.expectedValue);
+
+      return true;
+    } catch {
+      return false;
+    }
   }
 }
 
