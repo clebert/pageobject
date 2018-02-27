@@ -364,49 +364,23 @@ describe('FlexiblePageObject', () => {
 
   describe('getProperty()', () => {
     it('should return a condition', async () => {
-      const condition = pageObject.getProperty('any', equals('any'));
+      const condition = pageObject.getProperty('any', equals(' any '));
 
       expect(condition.valueName).toBe('property: any');
 
       await expect(condition.test()).resolves.toBe(true);
 
-      domElement.any = false;
-
-      await expect(
-        pageObject.getProperty('any', equals('false')).test()
-      ).resolves.toBe(true);
-
-      domElement.any = 0;
-
-      await expect(
-        pageObject.getProperty('any', equals('0')).test()
-      ).resolves.toBe(true);
-
-      domElement.any = '';
-
-      await expect(
-        pageObject.getProperty('any', equals('')).test()
-      ).resolves.toBe(true);
-
-      domElement.any = null;
-
-      await expect(
-        pageObject.getProperty('any', equals('')).test()
-      ).resolves.toBe(true);
-
-      domElement.any = undefined;
-
-      await expect(
-        pageObject.getProperty('any', equals('')).test()
-      ).resolves.toBe(true);
-
       domElement.any = {};
 
       await expect(
-        pageObject.getProperty('any', equals('{}')).test()
-      ).rejects.toEqual(
-        new Error('Unable to access the non-primitive property: any')
-      );
+        pageObject.getProperty('any', equals({})).test()
+      ).resolves.toBe(true);
+
+      domElement.any = () => undefined;
+
+      await expect(
+        pageObject.getProperty('any', equals('() => undefined')).test()
+      ).rejects.toEqual(new Error('Unable to access function property: any'));
     });
   });
 

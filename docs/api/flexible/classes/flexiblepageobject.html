@@ -958,7 +958,7 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="flexiblepageobject.html#getpageurl" class="tsd-kind-icon">get<wbr>PageURL</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class">
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 					<a href="flexiblepageobject.html#getproperty" class="tsd-kind-icon">get<wbr>Property</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -1068,7 +1068,7 @@ img { max-width: 100%; }
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#gethtml" class="tsd-kind-icon">getHTML</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#getpagetitle" class="tsd-kind-icon">get<wbr>Page<wbr>Title</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#getpageurl" class="tsd-kind-icon">get<wbr>PageURL</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#getproperty" class="tsd-kind-icon">get<wbr>Property</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="flexiblepageobject.html#getproperty" class="tsd-kind-icon">get<wbr>Property</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#getrenderedtext" class="tsd-kind-icon">get<wbr>Rendered<wbr>Text</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#getsize" class="tsd-kind-icon">get<wbr>Size</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#hasfocus" class="tsd-kind-icon">has<wbr>Focus</a></li>
@@ -1286,7 +1286,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L212">FlexiblePageObject.ts:212</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L202">FlexiblePageObject.ts:202</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1371,11 +1371,11 @@ img { max-width: 100%; }
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 				<a name="getproperty" class="tsd-anchor"></a>
 				<h3>get<wbr>Property</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Property<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Property&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
@@ -1384,16 +1384,22 @@ img { max-width: 100%; }
 								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L181">FlexiblePageObject.ts:181</a></li>
 							</ul>
 						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>TValue</h4>
+							</li>
+						</ul>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>name: <span class="tsd-signature-type">string</span></h5>
 							</li>
 							<li>
-								<h5>operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1407,7 +1413,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L231">FlexiblePageObject.ts:231</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L221">FlexiblePageObject.ts:221</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1454,7 +1460,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L242">FlexiblePageObject.ts:242</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L232">FlexiblePageObject.ts:232</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1477,7 +1483,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L253">FlexiblePageObject.ts:253</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L243">FlexiblePageObject.ts:243</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1500,7 +1506,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L272">FlexiblePageObject.ts:272</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L262">FlexiblePageObject.ts:262</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>

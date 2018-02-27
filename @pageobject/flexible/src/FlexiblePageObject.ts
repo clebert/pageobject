@@ -178,10 +178,10 @@ export abstract class FlexiblePageObject extends PageObject<
     );
   }
 
-  public getProperty(
+  public getProperty<TValue>(
     name: string,
-    operator: Operator<string>
-  ): Condition<string> {
+    operator: Operator<TValue>
+  ): Condition<TValue> {
     return new Condition(
       operator,
       async () =>
@@ -189,21 +189,11 @@ export abstract class FlexiblePageObject extends PageObject<
           /* tslint:disable-next-line no-any */
           const value = (_element as any)[_name];
 
-          if (value === null || value === undefined) {
-            return '';
+          if (typeof value === 'function') {
+            throw new Error(`Unable to access function property: ${name}`);
           }
 
-          switch (typeof value) {
-            case 'boolean':
-            case 'number':
-            case 'string': {
-              return String(value).trim();
-            }
-          }
-
-          throw new Error(
-            `Unable to access the non-primitive property: ${name}`
-          );
+          return value;
         }, name),
       `property: ${name}`
     );

@@ -136,11 +136,13 @@ describe('RelationalOperator', () => {
     describe('test()', () => {
       it('should return true', () => {
         expect(operator.test('foo')).toBe(true);
+        expect(equals({}).test({})).toBe(true);
       });
 
       it('should return false', () => {
         expect(operator.test('foobar')).toBe(false);
         expect(operator.test('bar')).toBe(false);
+        expect(equals({}).test([])).toBe(false);
       });
     });
   });
