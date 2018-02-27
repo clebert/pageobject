@@ -4,7 +4,14 @@ import {
   FlexibleKey,
   Script
 } from '@pageobject/flexible';
-import {Browser, ElementHandle, LaunchOptions, Page, launch} from 'puppeteer';
+import {
+  Browser,
+  ElementHandle,
+  LaunchOptions,
+  NavigationOptions,
+  Page,
+  launch
+} from 'puppeteer';
 
 class PuppeteerElement implements FlexibleElement {
   public readonly adaptee: ElementHandle;
@@ -64,19 +71,31 @@ class PuppeteerElement implements FlexibleElement {
 
 export class PuppeteerAdapter implements FlexibleAdapter {
   public static async create(
-    options?: LaunchOptions
+    launchOptions?: LaunchOptions,
+    navigationOptions?: NavigationOptions
   ): Promise<PuppeteerAdapter> {
-    const browser = await launch(options);
+    const browser = await launch(launchOptions);
 
-    return new PuppeteerAdapter(browser, await browser.newPage());
+    return new PuppeteerAdapter(
+      browser,
+      await browser.newPage(),
+      navigationOptions
+    );
   }
 
   public readonly browser: Browser;
   public readonly page: Page;
 
-  public constructor(browser: Browser, page: Page) {
+  private readonly _navigationOptions?: NavigationOptions;
+
+  public constructor(
+    browser: Browser,
+    page: Page,
+    navigationOptions?: NavigationOptions
+  ) {
     this.browser = browser;
     this.page = page;
+    this._navigationOptions = navigationOptions;
   }
 
   public async findElements(
@@ -120,6 +139,6 @@ export class PuppeteerAdapter implements FlexibleAdapter {
   }
 
   public async navigateTo(url: string): Promise<void> {
-    await this.page.goto(url);
+    await this.page.goto(url, this._navigationOptions);
   }
 }
