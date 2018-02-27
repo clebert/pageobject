@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/stable",
-  "version": "1.0.0-beta-5",
+  "version": "1.0.0-beta-6",
   "description": "Write stable tests using a sophisticated implementation of the page object pattern.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -21,6 +21,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@pageobject/reliable": "^1.0.0-beta-5"
+    "@pageobject/reliable": "^1.0.0-beta-6"
   }
 }
