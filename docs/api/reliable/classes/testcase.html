@@ -953,7 +953,7 @@ img { max-width: 100%; }
 					<a href="testcase.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="testcase.html#assertiontimeout" class="tsd-kind-icon">assertion<wbr>Timeout</a>
+					<a href="testcase.html#defaulttimeout" class="tsd-kind-icon">default<wbr>Timeout</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="testcase.html#assert" class="tsd-kind-icon">assert</a>
@@ -967,6 +967,9 @@ img { max-width: 100%; }
 			</ul>
 		</li>
 		<li class=" tsd-kind-interface">
+			<a href="../interfaces/action.html" class="tsd-kind-icon">Action</a>
+		</li>
+		<li class=" tsd-kind-interface">
 			<a href="../interfaces/evaluation.html" class="tsd-kind-icon">Evaluation</a>
 		</li>
 		<li class=" tsd-kind-interface tsd-has-type-parameter">
@@ -975,11 +978,14 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="../index.html#accessor" class="tsd-kind-icon">Accessor</a>
 		</li>
-		<li class=" tsd-kind-type-alias">
+		<li class=" tsd-kind-type-alias tsd-is-not-exported">
 			<a href="../index.html#teststep" class="tsd-kind-icon">Test<wbr>Step</a>
 		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter">
 			<a href="../index.html#and" class="tsd-kind-icon">and</a>
+		</li>
+		<li class=" tsd-kind-function tsd-is-not-exported">
+			<a href="../index.html#createerror" class="tsd-kind-icon">create<wbr>Error</a>
 		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter">
 			<a href="../index.html#equals" class="tsd-kind-icon">equals</a>
@@ -1004,9 +1010,6 @@ img { max-width: 100%; }
 		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter">
 			<a href="../index.html#or" class="tsd-kind-icon">or</a>
-		</li>
-		<li class=" tsd-kind-function tsd-is-not-exported">
-			<a href="../index.html#reliable" class="tsd-kind-icon">reliable</a>
 		</li>
 		<li class=" tsd-kind-function tsd-is-not-exported">
 			<a href="../index.html#serialize" class="tsd-kind-icon">serialize</a>
@@ -1036,7 +1039,7 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="testcase.html#assertiontimeout" class="tsd-kind-icon">assertion<wbr>Timeout</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="testcase.html#defaulttimeout" class="tsd-kind-icon">default<wbr>Timeout</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
@@ -1056,19 +1059,19 @@ img { max-width: 100%; }
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Test<wbr>Case<span class="tsd-signature-symbol">(</span>assertionTimeout<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="testcase.html" class="tsd-signature-type">TestCase</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Test<wbr>Case<span class="tsd-signature-symbol">(</span>defaultTimeout<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="testcase.html" class="tsd-signature-type">TestCase</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/TestCase.ts#L47">TestCase.ts:47</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/TestCase.ts#L18">TestCase.ts:18</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>assertionTimeout: <span class="tsd-signature-type">number</span></h5>
+								<h5>defaultTimeout: <span class="tsd-signature-type">number</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="testcase.html" class="tsd-signature-type">TestCase</a></h4>
@@ -1079,12 +1082,12 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="assertiontimeout" class="tsd-anchor"></a>
-				<h3>assertion<wbr>Timeout</h3>
-				<div class="tsd-signature tsd-kind-icon">assertion<wbr>Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<a name="defaulttimeout" class="tsd-anchor"></a>
+				<h3>default<wbr>Timeout</h3>
+				<div class="tsd-signature tsd-kind-icon">default<wbr>Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/TestCase.ts#L45">TestCase.ts:45</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/TestCase.ts#L16">TestCase.ts:16</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1095,19 +1098,22 @@ img { max-width: 100%; }
 				<a name="assert" class="tsd-anchor"></a>
 				<h3>assert</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">assert<span class="tsd-signature-symbol">(</span>condition<span class="tsd-signature-symbol">: </span><a href="condition.html" class="tsd-signature-type">Condition</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					<li class="tsd-signature tsd-kind-icon">assert<span class="tsd-signature-symbol">(</span>condition<span class="tsd-signature-symbol">: </span><a href="condition.html" class="tsd-signature-type">Condition</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, timeout<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/TestCase.ts#L54">TestCase.ts:54</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/TestCase.ts#L24">TestCase.ts:24</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>condition: <a href="condition.html" class="tsd-signature-type">Condition</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> timeout: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.defaultTimeout</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1118,19 +1124,22 @@ img { max-width: 100%; }
 				<a name="perform" class="tsd-anchor"></a>
 				<h3>perform</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">perform<span class="tsd-signature-symbol">(</span>action<span class="tsd-signature-symbol">: </span><a href="../index.html#teststep" class="tsd-signature-type">TestStep</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					<li class="tsd-signature tsd-kind-icon">perform<span class="tsd-signature-symbol">(</span>action<span class="tsd-signature-symbol">: </span><a href="../interfaces/action.html" class="tsd-signature-type">Action</a>, timeout<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/TestCase.ts#L62">TestCase.ts:62</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/TestCase.ts#L64">TestCase.ts:64</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>action: <a href="../index.html#teststep" class="tsd-signature-type">TestStep</a></h5>
+								<h5>action: <a href="../interfaces/action.html" class="tsd-signature-type">Action</a></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> timeout: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.defaultTimeout</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1147,7 +1156,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/TestCase.ts#L68">TestCase.ts:68</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/reliable/src/TestCase.ts#L95">TestCase.ts:95</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>

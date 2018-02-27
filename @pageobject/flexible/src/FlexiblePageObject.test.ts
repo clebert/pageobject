@@ -98,9 +98,11 @@ describe('FlexiblePageObject', () => {
         throw new Error('click error');
       });
 
-      await expect(pageObject.click()()).rejects.toEqual(
-        new Error('click error')
-      );
+      const action = pageObject.click();
+
+      expect(action.description).toBe('Click');
+
+      await expect(action.perform()).rejects.toEqual(new Error('click error'));
 
       expect(element.click).toHaveBeenCalledTimes(1);
       expect(element.click).toHaveBeenLastCalledWith();
@@ -113,7 +115,11 @@ describe('FlexiblePageObject', () => {
         throw new Error('doubleClick error');
       });
 
-      await expect(pageObject.doubleClick()()).rejects.toEqual(
+      const action = pageObject.doubleClick();
+
+      expect(action.description).toBe('Double-click');
+
+      await expect(action.perform()).rejects.toEqual(
         new Error('doubleClick error')
       );
 
@@ -128,79 +134,22 @@ describe('FlexiblePageObject', () => {
         throw new Error('navigateTo error');
       });
 
-      await expect(pageObject.navigateTo('url')()).rejects.toEqual(
+      const action = pageObject.navigateTo('url');
+
+      expect(action.description).toBe("Navigate to 'url'");
+
+      await expect(action.perform()).rejects.toEqual(
         new Error('navigateTo error')
       );
 
       expect(navigateTo).toHaveBeenCalledTimes(1);
       expect(navigateTo).toHaveBeenLastCalledWith('url');
-    });
-  });
 
-  describe('sendKey()', () => {
-    it('should return an action', async () => {
-      element.sendKey.mockImplementation(async () => {
-        throw new Error('sendKey error');
-      });
+      expect(pageObject.navigateTo('').description).toBe("Navigate to ''");
 
-      await expect(pageObject.sendKey(FlexibleKey.ENTER)()).rejects.toEqual(
-        new Error('sendKey error')
+      expect(pageObject.navigateTo("''").description).toBe(
+        "Navigate to '\\'\\''"
       );
-
-      expect(element.sendKey).toHaveBeenCalledTimes(1);
-      expect(element.sendKey).toHaveBeenLastCalledWith(FlexibleKey.ENTER);
-    });
-  });
-
-  describe('blur()', () => {
-    it('should return an action', async () => {
-      domElement.blur.mockImplementation(() => {
-        throw new Error('blur error');
-      });
-
-      await expect(pageObject.blur()()).rejects.toEqual(
-        new Error('blur error')
-      );
-
-      expect(domElement.blur).toHaveBeenCalledTimes(1);
-      expect(domElement.blur).toHaveBeenLastCalledWith();
-    });
-  });
-
-  describe('focus()', () => {
-    it('should return an action', async () => {
-      domElement.focus.mockImplementation(() => {
-        throw new Error('focus error');
-      });
-
-      await expect(pageObject.focus()()).rejects.toEqual(
-        new Error('focus error')
-      );
-
-      expect(domElement.focus).toHaveBeenCalledTimes(1);
-      expect(domElement.focus).toHaveBeenLastCalledWith();
-    });
-  });
-
-  describe('scrollIntoView()', () => {
-    it('should return an action', async () => {
-      domElement.getBoundingClientRect.mockReturnValue({
-        height: 25,
-        left: 500,
-        top: 300,
-        width: 50
-      });
-
-      scrollBy.mockImplementation(() => {
-        throw new Error('scrollBy error');
-      });
-
-      await expect(pageObject.scrollIntoView()()).rejects.toEqual(
-        new Error('scrollBy error')
-      );
-
-      expect(scrollBy).toHaveBeenCalledTimes(1);
-      expect(scrollBy).toHaveBeenLastCalledWith(13, -71.5);
     });
   });
 
@@ -209,7 +158,11 @@ describe('FlexiblePageObject', () => {
       jest.useFakeTimers();
 
       try {
-        const typePromise = pageObject.type('text')();
+        const action1 = pageObject.type('text');
+
+        expect(action1.description).toBe("Type 'text'");
+
+        const promise = action1.perform();
 
         await nap();
 
@@ -243,14 +196,107 @@ describe('FlexiblePageObject', () => {
         expect(element.sendCharacter).toHaveBeenCalledTimes(4);
         expect(element.sendCharacter).toHaveBeenLastCalledWith('t');
 
-        await typePromise;
+        await promise;
 
-        await pageObject.type('')();
+        const action2 = pageObject.type('');
+
+        expect(action2.description).toBe("Type ''");
+
+        await action2.perform();
 
         expect(element.sendCharacter).toHaveBeenCalledTimes(4);
+
+        expect(pageObject.type("''").description).toBe("Type '\\'\\''");
       } finally {
         jest.useRealTimers();
       }
+    });
+  });
+
+  describe('sendKey()', () => {
+    it('should return an action', async () => {
+      element.sendKey.mockImplementation(async () => {
+        throw new Error('sendKey error');
+      });
+
+      const action = pageObject.sendKey(FlexibleKey.ENTER);
+
+      expect(action.description).toBe('Send key ENTER');
+
+      await expect(action.perform()).rejects.toEqual(
+        new Error('sendKey error')
+      );
+
+      expect(element.sendKey).toHaveBeenCalledTimes(1);
+      expect(element.sendKey).toHaveBeenLastCalledWith(FlexibleKey.ENTER);
+
+      expect(pageObject.sendKey(FlexibleKey.ESCAPE).description).toBe(
+        'Send key ESCAPE'
+      );
+
+      expect(pageObject.sendKey(FlexibleKey.TAB).description).toBe(
+        'Send key TAB'
+      );
+    });
+  });
+
+  describe('blur()', () => {
+    it('should return an action', async () => {
+      domElement.blur.mockImplementation(() => {
+        throw new Error('blur error');
+      });
+
+      const action = pageObject.blur();
+
+      expect(action.description).toBe('Blur');
+
+      await expect(action.perform()).rejects.toEqual(new Error('blur error'));
+
+      expect(domElement.blur).toHaveBeenCalledTimes(1);
+      expect(domElement.blur).toHaveBeenLastCalledWith();
+    });
+  });
+
+  describe('focus()', () => {
+    it('should return an action', async () => {
+      domElement.focus.mockImplementation(() => {
+        throw new Error('focus error');
+      });
+
+      const action = pageObject.focus();
+
+      expect(action.description).toBe('Focus');
+
+      await expect(action.perform()).rejects.toEqual(new Error('focus error'));
+
+      expect(domElement.focus).toHaveBeenCalledTimes(1);
+      expect(domElement.focus).toHaveBeenLastCalledWith();
+    });
+  });
+
+  describe('scrollIntoView()', () => {
+    it('should return an action', async () => {
+      domElement.getBoundingClientRect.mockReturnValue({
+        height: 25,
+        left: 500,
+        top: 300,
+        width: 50
+      });
+
+      scrollBy.mockImplementation(() => {
+        throw new Error('scrollBy error');
+      });
+
+      const action = pageObject.scrollIntoView();
+
+      expect(action.description).toBe('Scroll into view');
+
+      await expect(action.perform()).rejects.toEqual(
+        new Error('scrollBy error')
+      );
+
+      expect(scrollBy).toHaveBeenCalledTimes(1);
+      expect(scrollBy).toHaveBeenLastCalledWith(13, -71.5);
     });
   });
 
