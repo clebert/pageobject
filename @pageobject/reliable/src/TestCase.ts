@@ -17,6 +17,8 @@ export class TestCase {
 
   private readonly _testSteps: TestStep[] = [];
 
+  private _alreadyRun = false;
+
   public constructor(defaultTimeout: number) {
     this.defaultTimeout = defaultTimeout;
   }
@@ -93,6 +95,14 @@ export class TestCase {
   }
 
   public async run(): Promise<void> {
+    if (this._alreadyRun) {
+      throw new Error(
+        'This test case has already been run, please create a new one'
+      );
+    }
+
+    this._alreadyRun = true;
+
     for (const testStep of this._testSteps) {
       await testStep();
     }

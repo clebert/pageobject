@@ -214,5 +214,15 @@ describe('TestCase', () => {
 
       expect(calls).toEqual(['assert()', 'perform()']);
     });
+
+    it('should throw an already-run error', async () => {
+      testCase.run();
+
+      await expect(testCase.run()).rejects.toEqual(
+        new Error(
+          'This test case has already been run, please create a new one'
+        )
+      );
+    });
   });
 });
