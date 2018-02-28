@@ -120,12 +120,14 @@ export abstract class PageObject<TElement, TAdapter extends Adapter<TElement>> {
   }
 
   public toString(): string {
-    const {constructor, _position, _selectionCriterion} = this;
+    const {constructor, _parent, _position, _selectionCriterion} = this;
     const {name} = constructor;
 
-    return _selectionCriterion
+    const description = _selectionCriterion
       ? `${name}${_selectionCriterion(this).describe()}`
       : _position ? `${name}[${_position}]` : name;
+
+    return _parent ? `${_parent.toString()} > ${description}` : description;
   }
 
   private async _findElements(): Promise<SearchResult<TElement>> {

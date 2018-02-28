@@ -28,6 +28,10 @@ class B extends PageObject<Element, JSDOMAdapter> {
   }
 }
 
+class C extends PageObject<Element, JSDOMAdapter> {
+  public readonly selector = 'span';
+}
+
 const adapter = new JSDOMAdapter();
 
 beforeEach(() => {
@@ -96,7 +100,7 @@ describe('PageObject: A', () => {
   });
 });
 
-describe('PageObject: B', () => {
+describe('PageObject: A > B', () => {
   const pageObject = new A(adapter).select(B);
 
   describe('getSize()', () => {
@@ -136,7 +140,7 @@ describe('PageObject: B', () => {
       document.body.innerHTML = '<div></div>';
 
       await expect(pageObject.findElement()).rejects.toEqual(
-        new Error('Element not found: B')
+        new Error('Element not found: A > B')
       );
     });
 
@@ -144,25 +148,25 @@ describe('PageObject: B', () => {
       document.body.innerHTML = '<div><p></p><p></p></div>';
 
       await expect(pageObject.findElement()).rejects.toEqual(
-        new Error('Element not unique: B')
+        new Error('Element not unique: A > B')
       );
     });
   });
 
   describe('toString()', () => {
     it('should return a description', () => {
-      expect(pageObject.toString()).toBe('B');
+      expect(pageObject.toString()).toBe('A > B');
     });
   });
 });
 
-describe('PageObject: B[1]', () => {
+describe('PageObject: A > B[1]', () => {
   const pageObject = new A(adapter).select(B).nth(1);
 
   describe('nth()', () => {
     it('should throw a selection-criterion-exists error', () => {
       expect(() => pageObject.nth(1)).toThrow(
-        'Selection criterion already exists: B[1]'
+        'Selection criterion already exists: A > B[1]'
       );
     });
   });
@@ -170,7 +174,7 @@ describe('PageObject: B[1]', () => {
   describe('where()', () => {
     it('should throw a selection-criterion-exists error', () => {
       expect(() => pageObject.where(self => self.getSize(equals(1)))).toThrow(
-        'Selection criterion already exists: B[1]'
+        'Selection criterion already exists: A > B[1]'
       );
     });
   });
@@ -206,19 +210,19 @@ describe('PageObject: B[1]', () => {
       document.body.innerHTML = '<div></div>';
 
       await expect(pageObject.findElement()).rejects.toEqual(
-        new Error('Element not found: B[1]')
+        new Error('Element not found: A > B[1]')
       );
     });
   });
 
   describe('toString()', () => {
     it('should return a description', () => {
-      expect(pageObject.toString()).toBe('B[1]');
+      expect(pageObject.toString()).toBe('A > B[1]');
     });
   });
 });
 
-describe('PageObject: B[2]', () => {
+describe('PageObject: A > B[2]', () => {
   const pageObject = new A(adapter).select(B).nth(2);
 
   describe('getSize()', () => {
@@ -252,25 +256,25 @@ describe('PageObject: B[2]', () => {
       document.body.innerHTML = '<div><p></p></div>';
 
       await expect(pageObject.findElement()).rejects.toEqual(
-        new Error('Element not found: B[2]')
+        new Error('Element not found: A > B[2]')
       );
     });
   });
 
   describe('toString()', () => {
     it('should return a description', () => {
-      expect(pageObject.toString()).toBe('B[2]');
+      expect(pageObject.toString()).toBe('A > B[2]');
     });
   });
 });
 
-describe("PageObject: B(b EQUALS 'b')", () => {
+describe("PageObject: A > B(b EQUALS 'b')", () => {
   const pageObject = new A(adapter).select(B).where(b => b.b(equals('b')));
 
   describe('nth()', () => {
     it('should throw a selection-criterion-exists error', () => {
       expect(() => pageObject.nth(1)).toThrow(
-        "Selection criterion already exists: B(b EQUALS 'b')"
+        "Selection criterion already exists: A > B(b EQUALS 'b')"
       );
     });
   });
@@ -278,7 +282,7 @@ describe("PageObject: B(b EQUALS 'b')", () => {
   describe('where()', () => {
     it('should throw a selection-criterion-exists error', () => {
       expect(() => pageObject.where(self => self.getSize(equals(1)))).toThrow(
-        "Selection criterion already exists: B(b EQUALS 'b')"
+        "Selection criterion already exists: A > B(b EQUALS 'b')"
       );
     });
   });
@@ -326,7 +330,7 @@ describe("PageObject: B(b EQUALS 'b')", () => {
       document.body.innerHTML = '<div></div>';
 
       await expect(pageObject.findElement()).rejects.toEqual(
-        new Error("Element not found: B(b EQUALS 'b')")
+        new Error("Element not found: A > B(b EQUALS 'b')")
       );
     });
 
@@ -334,7 +338,7 @@ describe("PageObject: B(b EQUALS 'b')", () => {
       document.body.innerHTML = '<div><p id="b"></p><p id="b"></p></div>';
 
       await expect(pageObject.findElement()).rejects.toEqual(
-        new Error("Element not unique: B(b EQUALS 'b')")
+        new Error("Element not unique: A > B(b EQUALS 'b')")
       );
     });
 
@@ -343,7 +347,7 @@ describe("PageObject: B(b EQUALS 'b')", () => {
 
       await expect(pageObject.findElement()).rejects.toEqual(
         new Error(
-          "Element not matching: B(b EQUALS 'b')\n  • ((b = '') EQUALS 'b')\n  • ((b = 'a') EQUALS 'b')"
+          "Element not matching: A > B(b EQUALS 'b')\n  • ((b = '') EQUALS 'b')\n  • ((b = 'a') EQUALS 'b')"
         )
       );
     });
@@ -351,7 +355,21 @@ describe("PageObject: B(b EQUALS 'b')", () => {
 
   describe('toString()', () => {
     it('should return a description', () => {
-      expect(pageObject.toString()).toBe("B(b EQUALS 'b')");
+      expect(pageObject.toString()).toBe("A > B(b EQUALS 'b')");
+    });
+  });
+});
+
+describe("PageObject: A[1] > B(b EQUALS 'b') > C", () => {
+  const pageObject = new A(adapter)
+    .nth(1)
+    .select(B)
+    .where(b => b.b(equals('b')))
+    .select(C);
+
+  describe('toString()', () => {
+    it('should return a description', () => {
+      expect(pageObject.toString()).toBe("A[1] > B(b EQUALS 'b') > C");
     });
   });
 });
