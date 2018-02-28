@@ -1,4 +1,4 @@
-import {Action, Condition, Operator} from '@pageobject/reliable';
+import {Action, Condition, Operator, equals} from '@pageobject/reliable';
 import {Adapter, PageObject, PageObjectClass} from '@pageobject/stable';
 import {inspect} from 'util';
 
@@ -229,7 +229,9 @@ export abstract class FlexiblePageObject extends PageObject<
     );
   }
 
-  public hasFocus(operator: Operator<boolean>): Condition<boolean> {
+  public hasFocus(
+    operator: Operator<boolean> = equals(true)
+  ): Condition<boolean> {
     return new Condition(
       operator,
       async () =>
@@ -240,26 +242,9 @@ export abstract class FlexiblePageObject extends PageObject<
     );
   }
 
-  public isInView(operator: Operator<boolean>): Condition<boolean> {
-    return new Condition(
-      operator,
-      async () =>
-        (await this.findElement()).execute(_element => {
-          const {bottom, left, right, top} = _element.getBoundingClientRect();
-          const {innerHeight, innerWidth} = window;
-
-          return (
-            top >= 0 &&
-            left >= 0 &&
-            bottom <= innerHeight &&
-            right <= innerWidth
-          );
-        }),
-      'inView'
-    );
-  }
-
-  public isVisible(operator: Operator<boolean>): Condition<boolean> {
+  public isVisible(
+    operator: Operator<boolean> = equals(true)
+  ): Condition<boolean> {
     return new Condition(
       operator,
       async () =>

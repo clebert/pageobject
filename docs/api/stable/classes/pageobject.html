@@ -920,13 +920,13 @@ img { max-width: 100%; }
 					<a href="pageobject.html#selector" class="tsd-kind-icon">selector</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="pageobject.html#at" class="tsd-kind-icon">at</a>
-				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="pageobject.html#findelement" class="tsd-kind-icon">find<wbr>Element</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="pageobject.html#getsize" class="tsd-kind-icon">get<wbr>Size</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="pageobject.html#nth" class="tsd-kind-icon">nth</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 					<a href="pageobject.html#select" class="tsd-kind-icon">select</a>
@@ -994,9 +994,9 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="pageobject.html#at" class="tsd-kind-icon">at</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="pageobject.html#findelement" class="tsd-kind-icon">find<wbr>Element</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="pageobject.html#getsize" class="tsd-kind-icon">get<wbr>Size</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="pageobject.html#nth" class="tsd-kind-icon">nth</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="pageobject.html#select" class="tsd-kind-icon">select</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="pageobject.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="pageobject.html#where" class="tsd-kind-icon">where</a></li>
@@ -1057,29 +1057,6 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="at" class="tsd-anchor"></a>
-				<h3>at</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">at<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L54">PageObject.ts:54</a></li>
-							</ul>
-						</aside>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5>index: <span class="tsd-signature-type">number</span></h5>
-							</li>
-						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="findelement" class="tsd-anchor"></a>
 				<h3>find<wbr>Element</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -1089,7 +1066,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L92">PageObject.ts:92</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L96">PageObject.ts:96</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1106,7 +1083,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L84">PageObject.ts:84</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L88">PageObject.ts:88</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1116,6 +1093,29 @@ img { max-width: 100%; }
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="nth" class="tsd-anchor"></a>
+				<h3>nth</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">nth<span class="tsd-signature-symbol">(</span>position<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L54">PageObject.ts:54</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>position: <span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1158,7 +1158,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L118">PageObject.ts:118</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L122">PageObject.ts:122</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -1175,7 +1175,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L68">PageObject.ts:68</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/stable/src/PageObject.ts#L72">PageObject.ts:72</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>

@@ -5,17 +5,19 @@ import {SeleniumAdapter} from '.';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
-test('SeleniumAdapter', async () => {
-  const adapter = await SeleniumAdapter.create({
-    browserName: 'chrome',
-    chromeOptions: {args: ['headless', 'disable-gpu']}
+describe('SeleniumAdapter', () => {
+  it('should pass the FlexibleAdapterTestSuite successfully', async () => {
+    const adapter = await SeleniumAdapter.create({
+      browserName: 'chrome',
+      chromeOptions: {args: ['headless', 'disable-gpu']}
+    });
+
+    try {
+      const testSuite = new FlexibleAdapterTestSuite(adapter);
+
+      await testSuite.testAll();
+    } finally {
+      await adapter.driver.quit();
+    }
   });
-
-  try {
-    const testSuite = new FlexibleAdapterTestSuite(adapter);
-
-    await testSuite.testAll();
-  } finally {
-    await adapter.driver.quit();
-  }
 });

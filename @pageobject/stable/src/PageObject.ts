@@ -31,8 +31,8 @@ export abstract class PageObject<TElement, TAdapter extends Adapter<TElement>> {
   public readonly adapter: TAdapter;
 
   private _element?: TElement;
-  private _index?: number;
   private _parent?: PageObject<TElement, TAdapter>;
+  private _position?: number;
 
   /* tslint:disable-next-line no-any */
   private _selectionCriterion?: SelectionCriterion<TElement, TAdapter, any>;
@@ -51,16 +51,20 @@ export abstract class PageObject<TElement, TAdapter extends Adapter<TElement>> {
     return descendant;
   }
 
-  public at(index: number): this {
-    if (this._index !== undefined || this._selectionCriterion) {
+  public nth(position: number): this {
+    if (position < 1) {
+      throw new Error('Position must be one-based');
+    }
+
+    if (this._position || this._selectionCriterion) {
       throw new Error(`Selection criterion already exists: ${this.toString()}`);
     }
 
     const Copy = this.constructor as PageObjectClass<TElement, TAdapter, this>;
     const copy = new Copy(this.adapter);
 
-    copy._index = index;
     copy._parent = this._parent;
+    copy._position = position;
 
     return copy;
   }
@@ -68,7 +72,7 @@ export abstract class PageObject<TElement, TAdapter extends Adapter<TElement>> {
   public where(
     selectionCriterion: SelectionCriterion<TElement, TAdapter, this>
   ): this {
-    if (this._index !== undefined || this._selectionCriterion) {
+    if (this._position || this._selectionCriterion) {
       throw new Error(`Selection criterion already exists: ${this.toString()}`);
     }
 
@@ -116,12 +120,12 @@ export abstract class PageObject<TElement, TAdapter extends Adapter<TElement>> {
   }
 
   public toString(): string {
-    const {constructor, _index, _parent, _selectionCriterion} = this;
+    const {constructor, _parent, _position, _selectionCriterion} = this;
     const {name} = constructor;
 
     const description = _selectionCriterion
       ? `${name}${_selectionCriterion(this).describe()}`
-      : _index !== undefined ? `${name}[${_index}]` : name;
+      : _position ? `${name}[${_position}]` : name;
 
     return _parent ? `${_parent.toString()} > ${description}` : description;
   }
@@ -135,7 +139,7 @@ export abstract class PageObject<TElement, TAdapter extends Adapter<TElement>> {
       return {
         descriptions: [],
         elements: elements.filter(
-          (element, index) => this._index === undefined || this._index === index
+          (element, index) => !this._position || this._position === index + 1
         )
       };
     }
