@@ -191,6 +191,123 @@ describe('TestCase', () => {
     });
   });
 
+  describe('when()', () => {
+    it('should only run the then-test-case', async () => {
+      const condition = new ConditionMock();
+
+      condition.test.mockImplementation(async => true);
+
+      const thenAction = new ActionMock();
+      const otherwiseAction = new ActionMock();
+
+      await testCase
+        .when(condition as any, (then, otherwise) => {
+          expect(then.defaultTimeout).toBe(testCase.defaultTimeout);
+
+          then.perform(thenAction);
+          otherwise.perform(otherwiseAction);
+        })
+        .run();
+
+      expect(condition.test).toHaveBeenCalledTimes(1);
+      expect(thenAction.perform).toHaveBeenCalledTimes(1);
+      expect(otherwiseAction.perform).toHaveBeenCalledTimes(0);
+    });
+
+    it('should only run the otherwise-test-case', async () => {
+      const condition = new ConditionMock();
+
+      condition.test.mockImplementation(async => false);
+
+      const thenAction = new ActionMock();
+      const otherwiseAction = new ActionMock();
+
+      await testCase
+        .when(condition as any, (then, otherwise) => {
+          expect(otherwise.defaultTimeout).toBe(testCase.defaultTimeout);
+
+          then.perform(thenAction);
+          otherwise.perform(otherwiseAction);
+        })
+        .run();
+
+      expect(condition.test).toHaveBeenCalledTimes(1);
+      expect(thenAction.perform).toHaveBeenCalledTimes(0);
+      expect(otherwiseAction.perform).toHaveBeenCalledTimes(1);
+    });
+
+    it('should throw a condition-test error', async () => {
+      const condition = new ConditionMock();
+
+      condition.test.mockImplementation(erroneous());
+
+      const thenAction = new ActionMock();
+      const otherwiseAction = new ActionMock();
+
+      await expect(
+        testCase
+          .when(condition as any, (then, otherwise) => {
+            then.perform(thenAction);
+            otherwise.perform(otherwiseAction);
+          })
+          .run()
+      ).rejects.toEqual(new Error('When: description\n  Cause: Error'));
+
+      expect(condition.test).toHaveBeenCalledTimes(1);
+      expect(thenAction.perform).toHaveBeenCalledTimes(0);
+      expect(otherwiseAction.perform).toHaveBeenCalledTimes(0);
+    });
+
+    it('should throw a then-test-case error', async () => {
+      const condition = new ConditionMock();
+
+      condition.test.mockImplementation(async => true);
+
+      const thenAction = new ActionMock();
+
+      thenAction.perform.mockImplementationOnce(erroneous());
+
+      const otherwiseAction = new ActionMock();
+
+      await expect(
+        testCase
+          .when(condition as any, (then, otherwise) => {
+            then.perform(thenAction);
+            otherwise.perform(otherwiseAction);
+          })
+          .run()
+      ).rejects.toEqual(new Error('Perfom: description\n  Cause: Error'));
+
+      expect(condition.test).toHaveBeenCalledTimes(1);
+      expect(thenAction.perform).toHaveBeenCalledTimes(1);
+      expect(otherwiseAction.perform).toHaveBeenCalledTimes(0);
+    });
+
+    it('should throw an otherwise-test-case error', async () => {
+      const condition = new ConditionMock();
+
+      condition.test.mockImplementation(async => false);
+
+      const thenAction = new ActionMock();
+      const otherwiseAction = new ActionMock();
+
+      otherwiseAction.perform.mockImplementationOnce(erroneous());
+
+      await expect(
+        testCase
+          .when(condition as any, (then, otherwise) => {
+            then.perform(thenAction);
+            otherwise.perform(otherwiseAction);
+          })
+          .run()
+      ).rejects.toEqual(new Error('Perfom: description\n  Cause: Error'));
+
+      expect(condition.test).toHaveBeenCalledTimes(1);
+      expect(thenAction.perform).toHaveBeenCalledTimes(0);
+      expect(otherwiseAction.perform).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('run()', async () => {
     it('should run the test steps sequentially', async () => {
       const calls: string[] = [];
@@ -207,12 +324,21 @@ describe('TestCase', () => {
         calls.push('perform()');
       });
 
+      condition.test.mockImplementation(async () => true);
+
+      const conditionalAction = new ActionMock();
+
+      conditionalAction.perform.mockImplementation(async () => {
+        calls.push('when()');
+      });
+
       await testCase
         .assert(condition as any)
+        .when(condition as any, then => then.perform(conditionalAction))
         .perform(action)
         .run();
 
-      expect(calls).toEqual(['assert()', 'perform()']);
+      expect(calls).toEqual(['assert()', 'when()', 'perform()']);
     });
 
     it('should throw an already-run error', async () => {

@@ -94,6 +94,34 @@ export class TestCase {
     return this;
   }
 
+  public when(
+    condition: Condition<any> /* tslint:disable-line no-any */,
+    callback: (then: TestCase, otherwise: TestCase) => void
+  ): this {
+    this._testSteps.push(async () => {
+      const thenTestCase = new TestCase(this.defaultTimeout);
+      const otherwiseTestCase = new TestCase(this.defaultTimeout);
+
+      callback(thenTestCase, otherwiseTestCase);
+
+      let result: boolean;
+
+      try {
+        result = await condition.test();
+      } catch (e) {
+        throw createError('When', condition.describe(), e.message);
+      }
+
+      if (result) {
+        await thenTestCase.run();
+      } else {
+        await otherwiseTestCase.run();
+      }
+    });
+
+    return this;
+  }
+
   public async run(): Promise<void> {
     if (this._alreadyRun) {
       throw new Error(
