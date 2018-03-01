@@ -6,6 +6,17 @@ export interface Operator<TValue> {
   test(value: TValue): boolean;
 }
 
+export function map<TFromValue, TToValue>(
+  operator: Operator<TToValue>,
+  mappedValueName: string,
+  mapper: (value: TFromValue) => TToValue
+): Operator<TFromValue> {
+  return {
+    describe: () => operator.describe(mappedValueName),
+    test: value => operator.test(mapper(value))
+  };
+}
+
 /* LogicalOperator ************************************************************/
 
 abstract class LogicalBinaryOperator<TValue> implements Operator<TValue> {

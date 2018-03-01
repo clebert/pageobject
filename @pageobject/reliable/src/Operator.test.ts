@@ -8,10 +8,39 @@ import {
   greaterThanOrEquals,
   lessThan,
   lessThanOrEquals,
+  map,
   matches,
   not,
   or
 } from '.';
+
+describe('map()', () => {
+  describe('numberToBoolean()', () => {
+    const operator = map<number, boolean>(
+      equals(true),
+      'mappedValueName',
+      n => !!n
+    );
+
+    describe('describe()', () => {
+      it('should return a description', () => {
+        expect(operator.describe('valueName')).toBe(
+          '(mappedValueName EQUALS true)'
+        );
+      });
+    });
+
+    describe('test()', () => {
+      it('should return true', () => {
+        expect(operator.test(1)).toBe(true);
+      });
+
+      it('should return false', () => {
+        expect(operator.test(0)).toBe(false);
+      });
+    });
+  });
+});
 
 describe('LogicalOperator', () => {
   class FalsyOperator implements Operator<any> {
