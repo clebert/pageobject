@@ -15,9 +15,9 @@ function createError(name: string, description: string, cause: string): Error {
 async function execute<TResult>(
   fn: () => Promise<TResult>,
   retryOnError: boolean,
-  timeout: number
+  timeoutInSeconds: number
 ): Promise<TResult> {
-  let message = `Timeout after ${timeout} milliseconds`;
+  let message = `Timeout after ${timeoutInSeconds} seconds`;
   let resolved = false;
   let timeoutID: any; /* tslint:disable-line no-any */
 
@@ -47,7 +47,7 @@ async function execute<TResult>(
     })(),
     (async () => {
       await new Promise<void>(resolve => {
-        timeoutID = setTimeout(resolve, timeout);
+        timeoutID = setTimeout(resolve, timeoutInSeconds * 1000);
       });
 
       resolved = true;
@@ -58,23 +58,23 @@ async function execute<TResult>(
 }
 
 export class TestCase {
-  public readonly defaultTimeout: number;
+  public readonly defaultTimeoutInSeconds: number;
 
   private readonly _testSteps: TestStep[] = [];
 
   private _alreadyRun = false;
 
-  public constructor(defaultTimeout: number) {
-    this.defaultTimeout = defaultTimeout;
+  public constructor(defaultTimeoutInSeconds: number) {
+    this.defaultTimeoutInSeconds = defaultTimeoutInSeconds;
   }
 
   public assert(
-    condition: Condition<any> /* tslint:disable-line no-any */,
-    timeout: number = this.defaultTimeout
+    condition: Condition,
+    timeoutInSeconds: number = this.defaultTimeoutInSeconds
   ): this {
     this._testSteps.push(async () => {
       try {
-        await execute(async () => condition.assert(), true, timeout);
+        await execute(async () => condition.assert(), true, timeoutInSeconds);
       } catch (e) {
         throw createError('Assert', condition.describe(), e.message);
       }
@@ -83,10 +83,13 @@ export class TestCase {
     return this;
   }
 
-  public perform(action: Action, timeout: number = this.defaultTimeout): this {
+  public perform(
+    action: Action,
+    timeoutInSeconds: number = this.defaultTimeoutInSeconds
+  ): this {
     this._testSteps.push(async () => {
       try {
-        await execute(async () => action.perform(), false, timeout);
+        await execute(async () => action.perform(), false, timeoutInSeconds);
       } catch (e) {
         throw createError('Perform', action.description, e.message);
       }
@@ -96,20 +99,20 @@ export class TestCase {
   }
 
   public when(
-    condition: Condition<any> /* tslint:disable-line no-any */,
+    condition: Condition,
     callback: (then: TestCase, otherwise: TestCase) => void,
-    timeout: number = this.defaultTimeout
+    timeoutInSeconds: number = this.defaultTimeoutInSeconds
   ): this {
     this._testSteps.push(async () => {
       try {
         const result = await execute(
           async () => condition.test(),
           true,
-          timeout
+          timeoutInSeconds
         );
 
-        const then = new TestCase(this.defaultTimeout);
-        const otherwise = new TestCase(this.defaultTimeout);
+        const then = new TestCase(this.defaultTimeoutInSeconds);
+        const otherwise = new TestCase(this.defaultTimeoutInSeconds);
 
         callback(then, otherwise);
 

@@ -39,19 +39,21 @@ class ObservablePromise<T> {
 
 async function observeTimeout<T>(
   executable: () => Promise<T>,
-  value: number
+  valueInSeconds: number
 ): Promise<void> {
+  const valueInMilliseconds = valueInSeconds * 1000;
+
   jest.useFakeTimers();
 
   try {
     const execution = new ObservablePromise(executable());
 
-    for (let i = 0; i < value; i += 1) {
+    for (let i = 0; i < valueInMilliseconds; i += 1) {
       jest.runAllTicks();
       jest.runAllImmediates();
       jest.advanceTimersByTime(1);
 
-      if ((await execution.isPending()) !== i + 1 < value) {
+      if ((await execution.isPending()) !== i + 1 < valueInMilliseconds) {
         throw new Error('To early timeout');
       }
     }
@@ -72,7 +74,7 @@ describe('TestCase', () => {
   let testCase: TestCase;
 
   beforeEach(() => {
-    testCase = new TestCase(100);
+    testCase = new TestCase(0.1);
   });
 
   describe('assert().run()', () => {
@@ -95,7 +97,10 @@ describe('TestCase', () => {
         .mockImplementationOnce(neverEnding);
 
       await expect(
-        observeTimeout(async () => testCase.assert(condition as any).run(), 100)
+        observeTimeout(
+          async () => testCase.assert(condition as any).run(),
+          testCase.defaultTimeoutInSeconds
+        )
       ).rejects.toEqual(new Error('Assert: description\n  Cause: Error 2'));
 
       expect(condition.assert).toHaveBeenCalledTimes(3);
@@ -107,11 +112,12 @@ describe('TestCase', () => {
       condition.assert.mockImplementationOnce(neverEnding);
 
       await expect(
-        observeTimeout(async () => testCase.assert(condition as any).run(), 100)
-      ).rejects.toEqual(
-        new Error(
-          'Assert: description\n  Cause: Timeout after 100 milliseconds'
+        observeTimeout(
+          async () => testCase.assert(condition as any).run(),
+          testCase.defaultTimeoutInSeconds
         )
+      ).rejects.toEqual(
+        new Error('Assert: description\n  Cause: Timeout after 0.1 seconds')
       );
 
       expect(condition.assert).toHaveBeenCalledTimes(1);
@@ -124,11 +130,11 @@ describe('TestCase', () => {
 
       await expect(
         observeTimeout(
-          async () => testCase.assert(condition as any, 50).run(),
-          50
+          async () => testCase.assert(condition as any, 0.2).run(),
+          0.2
         )
       ).rejects.toEqual(
-        new Error('Assert: description\n  Cause: Timeout after 50 milliseconds')
+        new Error('Assert: description\n  Cause: Timeout after 0.2 seconds')
       );
 
       expect(condition.assert).toHaveBeenCalledTimes(1);
@@ -170,11 +176,12 @@ describe('TestCase', () => {
       action.perform.mockImplementationOnce(neverEnding);
 
       await expect(
-        observeTimeout(async () => testCase.perform(action).run(), 100)
-      ).rejects.toEqual(
-        new Error(
-          'Perform: description\n  Cause: Timeout after 100 milliseconds'
+        observeTimeout(
+          async () => testCase.perform(action).run(),
+          testCase.defaultTimeoutInSeconds
         )
+      ).rejects.toEqual(
+        new Error('Perform: description\n  Cause: Timeout after 0.1 seconds')
       );
     });
 
@@ -184,11 +191,9 @@ describe('TestCase', () => {
       action.perform.mockImplementationOnce(neverEnding);
 
       await expect(
-        observeTimeout(async () => testCase.perform(action, 50).run(), 50)
+        observeTimeout(async () => testCase.perform(action, 0.2).run(), 0.2)
       ).rejects.toEqual(
-        new Error(
-          'Perform: description\n  Cause: Timeout after 50 milliseconds'
-        )
+        new Error('Perform: description\n  Cause: Timeout after 0.2 seconds')
       );
     });
   });
@@ -258,7 +263,7 @@ describe('TestCase', () => {
                 otherwise.perform(otherwiseAction);
               })
               .run(),
-          100
+          testCase.defaultTimeoutInSeconds
         )
       ).rejects.toEqual(new Error('When: description\n  Cause: Error 2'));
 
@@ -275,10 +280,10 @@ describe('TestCase', () => {
       await expect(
         observeTimeout(
           async () => testCase.when(condition as any, () => undefined).run(),
-          100
+          testCase.defaultTimeoutInSeconds
         )
       ).rejects.toEqual(
-        new Error('When: description\n  Cause: Timeout after 100 milliseconds')
+        new Error('When: description\n  Cause: Timeout after 0.1 seconds')
       );
 
       expect(condition.test).toHaveBeenCalledTimes(1);
@@ -292,11 +297,11 @@ describe('TestCase', () => {
       await expect(
         observeTimeout(
           async () =>
-            testCase.when(condition as any, () => undefined, 50).run(),
-          50
+            testCase.when(condition as any, () => undefined, 0.2).run(),
+          0.2
         )
       ).rejects.toEqual(
-        new Error('When: description\n  Cause: Timeout after 50 milliseconds')
+        new Error('When: description\n  Cause: Timeout after 0.2 seconds')
       );
 
       expect(condition.test).toHaveBeenCalledTimes(1);
