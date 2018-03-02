@@ -955,7 +955,7 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="flexiblepageobject.html#getpageurl" class="tsd-kind-icon">get<wbr>PageURL</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="flexiblepageobject.html#getproperty" class="tsd-kind-icon">get<wbr>Property</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -966,6 +966,9 @@ img { max-width: 100%; }
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="flexiblepageobject.html#hasfocus" class="tsd-kind-icon">has<wbr>Focus</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a href="flexiblepageobject.html#isexisting" class="tsd-kind-icon">is<wbr>Existing</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="flexiblepageobject.html#isvisible" class="tsd-kind-icon">is<wbr>Visible</a>
@@ -1064,10 +1067,11 @@ img { max-width: 100%; }
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#gethtml" class="tsd-kind-icon">getHTML</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#getpagetitle" class="tsd-kind-icon">get<wbr>Page<wbr>Title</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#getpageurl" class="tsd-kind-icon">get<wbr>PageURL</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="flexiblepageobject.html#getproperty" class="tsd-kind-icon">get<wbr>Property</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#getproperty" class="tsd-kind-icon">get<wbr>Property</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#getrenderedtext" class="tsd-kind-icon">get<wbr>Rendered<wbr>Text</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#getsize" class="tsd-kind-icon">get<wbr>Size</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#hasfocus" class="tsd-kind-icon">has<wbr>Focus</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#isexisting" class="tsd-kind-icon">is<wbr>Existing</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#isvisible" class="tsd-kind-icon">is<wbr>Visible</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="flexiblepageobject.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="flexiblepageobject.html#nth" class="tsd-kind-icon">nth</a></li>
@@ -1198,7 +1202,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from PageObject.findElement</p>
 							<ul>
-								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:21</li>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:22</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/flexibleelement.html" class="tsd-signature-type">FlexibleElement</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1226,7 +1230,7 @@ img { max-width: 100%; }
 				<a name="getattribute" class="tsd-anchor"></a>
 				<h3>get<wbr>Attribute</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Attribute<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Attribute<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
@@ -1244,7 +1248,7 @@ img { max-width: 100%; }
 								<h5>operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1252,13 +1256,13 @@ img { max-width: 100%; }
 				<a name="getcomputedstyle" class="tsd-anchor"></a>
 				<h3>get<wbr>Computed<wbr>Style</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Computed<wbr>Style<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Computed<wbr>Style<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L202">FlexiblePageObject.ts:202</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L197">FlexiblePageObject.ts:197</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1270,7 +1274,7 @@ img { max-width: 100%; }
 								<h5>operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1278,13 +1282,13 @@ img { max-width: 100%; }
 				<a name="gethtml" class="tsd-anchor"></a>
 				<h3>getHTML</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">getHTML<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">getHTML<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L153">FlexiblePageObject.ts:153</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L150">FlexiblePageObject.ts:150</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1293,7 +1297,7 @@ img { max-width: 100%; }
 								<h5>operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1301,13 +1305,13 @@ img { max-width: 100%; }
 				<a name="getpagetitle" class="tsd-anchor"></a>
 				<h3>get<wbr>Page<wbr>Title</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Page<wbr>Title<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Page<wbr>Title<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L164">FlexiblePageObject.ts:164</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L161">FlexiblePageObject.ts:161</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1316,7 +1320,7 @@ img { max-width: 100%; }
 								<h5>operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1324,13 +1328,13 @@ img { max-width: 100%; }
 				<a name="getpageurl" class="tsd-anchor"></a>
 				<h3>get<wbr>PageURL</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>PageURL<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>PageURL<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L172">FlexiblePageObject.ts:172</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L169">FlexiblePageObject.ts:169</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1339,39 +1343,33 @@ img { max-width: 100%; }
 								<h5>operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span></h4>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="getproperty" class="tsd-anchor"></a>
 				<h3>get<wbr>Property</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Property&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Property<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L181">FlexiblePageObject.ts:181</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L179">FlexiblePageObject.ts:179</a></li>
 							</ul>
 						</aside>
-						<h4 class="tsd-type-parameters-title">Type parameters</h4>
-						<ul class="tsd-type-parameters">
-							<li>
-								<h4>TValue</h4>
-							</li>
-						</ul>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>name: <span class="tsd-signature-type">string</span></h5>
 							</li>
 							<li>
-								<h5>operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1379,13 +1377,13 @@ img { max-width: 100%; }
 				<a name="getrenderedtext" class="tsd-anchor"></a>
 				<h3>get<wbr>Rendered<wbr>Text</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Rendered<wbr>Text<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Rendered<wbr>Text<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L221">FlexiblePageObject.ts:221</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L213">FlexiblePageObject.ts:213</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1394,7 +1392,7 @@ img { max-width: 100%; }
 								<h5>operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1402,7 +1400,7 @@ img { max-width: 100%; }
 				<a name="getsize" class="tsd-anchor"></a>
 				<h3>get<wbr>Size</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Size<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Size<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
@@ -1418,7 +1416,7 @@ img { max-width: 100%; }
 								<h5>operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1426,13 +1424,13 @@ img { max-width: 100%; }
 				<a name="hasfocus" class="tsd-anchor"></a>
 				<h3>has<wbr>Focus</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">has<wbr>Focus<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">has<wbr>Focus<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L232">FlexiblePageObject.ts:232</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L224">FlexiblePageObject.ts:224</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1441,7 +1439,31 @@ img { max-width: 100%; }
 								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;equals(true)</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<a name="isexisting" class="tsd-anchor"></a>
+				<h3>is<wbr>Existing</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">is<wbr>Existing<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from PageObject.isExisting</p>
+							<ul>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:21</li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1449,13 +1471,13 @@ img { max-width: 100%; }
 				<a name="isvisible" class="tsd-anchor"></a>
 				<h3>is<wbr>Visible</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">is<wbr>Visible<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">is<wbr>Visible<span class="tsd-signature-symbol">(</span>operator<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Condition</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L245">FlexiblePageObject.ts:245</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible/src/FlexiblePageObject.ts#L235">FlexiblePageObject.ts:235</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1464,7 +1486,7 @@ img { max-width: 100%; }
 								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> operator: <span class="tsd-signature-type">Operator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;equals(true)</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Condition</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1596,7 +1618,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from PageObject.toString</p>
 							<ul>
-								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:22</li>
+								<li>Defined in @pageobject/stable/dist/PageObject.d.ts:23</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>

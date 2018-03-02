@@ -17,7 +17,7 @@ function describe(testCase, root) {
 }
 
 (async () => {
-  const testCase = new TestCase(3000);
+  const testCase = new TestCase(3);
   const root = new Root(await PuppeteerAdapter.create());
 
   try {

@@ -1,4 +1,4 @@
-import {Condition, Operator} from '@pageobject/reliable';
+import {Condition, Operator, equals} from '@pageobject/reliable';
 
 export interface Adapter<TElement> {
   findElements(selector: string, parent?: TElement): Promise<TElement[]>;
@@ -16,9 +16,7 @@ export type SelectionCriterion<
   TElement,
   TAdapter extends Adapter<TElement>,
   TPageObject extends PageObject<TElement, TAdapter>
-> = (
-  pageObject: TPageObject
-) => Condition<any>; /* tslint:disable-line no-any */
+> = (pageObject: TPageObject) => Condition;
 
 interface SearchResult<TElement> {
   readonly descriptions: string[];
@@ -85,11 +83,19 @@ export abstract class PageObject<TElement, TAdapter extends Adapter<TElement>> {
     return copy;
   }
 
-  public getSize(operator: Operator<number>): Condition<number> {
+  public getSize(operator: Operator<number>): Condition {
     return new Condition(
       operator,
       async () => (await this._findElements()).elements.length,
       'size'
+    );
+  }
+
+  public isExisting(operator: Operator<boolean> = equals(true)): Condition {
+    return new Condition(
+      operator,
+      async () => (await this._findElements()).elements.length === 1,
+      'existing'
     );
   }
 

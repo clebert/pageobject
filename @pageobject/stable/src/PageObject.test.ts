@@ -19,7 +19,7 @@ class A extends PageObject<Element, JSDOMAdapter> {
 class B extends PageObject<Element, JSDOMAdapter> {
   public readonly selector = 'p';
 
-  public b(operator: Operator<string>): Condition<string> {
+  public b(operator: Operator<string>): Condition {
     return new Condition(
       operator,
       async () => (await this.findElement()).id,
@@ -66,6 +66,30 @@ describe('PageObject: A', () => {
       document.body.innerHTML = '<div></div><div></div>';
 
       await expect(pageObject.getSize(equals(2)).test()).resolves.toBe(true);
+    });
+  });
+
+  describe('isExisting()', () => {
+    it('should return a condition that sets <existing> to true', async () => {
+      document.body.innerHTML = '<div></div>';
+
+      const condition = pageObject.isExisting();
+
+      expect(condition.valueName).toBe('existing');
+
+      await expect(condition.test()).resolves.toBe(true);
+    });
+
+    it('should return a condition that sets <existing> to false', async () => {
+      await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
+        true
+      );
+
+      document.body.innerHTML = '<div></div><div></div>';
+
+      await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
+        true
+      );
     });
   });
 
@@ -124,6 +148,32 @@ describe('PageObject: A > B', () => {
       document.body.innerHTML = '<div><p></p><p></p></div>';
 
       await expect(pageObject.getSize(equals(2)).test()).resolves.toBe(true);
+    });
+  });
+
+  describe('isExisting()', () => {
+    it('should return a condition that sets <existing> to true', async () => {
+      document.body.innerHTML = '<p></p><div><p></p></div>';
+
+      const condition = pageObject.isExisting();
+
+      expect(condition.valueName).toBe('existing');
+
+      await expect(condition.test()).resolves.toBe(true);
+    });
+
+    it('should return a condition that sets <existing> to false', async () => {
+      document.body.innerHTML = '<div></div>';
+
+      await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
+        true
+      );
+
+      document.body.innerHTML = '<div><p></p><p></p></div>';
+
+      await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
+        true
+      );
     });
   });
 
@@ -197,6 +247,26 @@ describe('PageObject: A > B[1]', () => {
     });
   });
 
+  describe('isExisting()', () => {
+    it('should return a condition that sets <existing> to true', async () => {
+      document.body.innerHTML = '<p></p><div><p></p><p></p></div>';
+
+      const condition = pageObject.isExisting();
+
+      expect(condition.valueName).toBe('existing');
+
+      await expect(condition.test()).resolves.toBe(true);
+    });
+
+    it('should return a condition that sets <existing> to false', async () => {
+      document.body.innerHTML = '<div></div>';
+
+      await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
+        true
+      );
+    });
+  });
+
   describe('findElement()', () => {
     it('should return an element', async () => {
       document.body.innerHTML = '<p></p><div><p></p><p></p></div>';
@@ -240,6 +310,26 @@ describe('PageObject: A > B[2]', () => {
       document.body.innerHTML = '<div><p></p></div>';
 
       await expect(pageObject.getSize(equals(0)).test()).resolves.toBe(true);
+    });
+  });
+
+  describe('isExisting()', () => {
+    it('should return a condition that sets <existing> to true', async () => {
+      document.body.innerHTML = '<p></p><div><p></p><p></p></div>';
+
+      const condition = pageObject.isExisting();
+
+      expect(condition.valueName).toBe('existing');
+
+      await expect(condition.test()).resolves.toBe(true);
+    });
+
+    it('should return a condition that sets <existing> to false', async () => {
+      document.body.innerHTML = '<div><p></p></div>';
+
+      await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
+        true
+      );
     });
   });
 
@@ -313,6 +403,39 @@ describe("PageObject: A > B(b EQUALS 'b')", () => {
       document.body.innerHTML = '<div><p id="b"></p><p id="b"></p></div>';
 
       await expect(pageObject.getSize(equals(2)).test()).resolves.toBe(true);
+    });
+  });
+
+  describe('isExisting()', () => {
+    it('should return a condition that sets <existing> to true', async () => {
+      document.body.innerHTML =
+        '<p id="b"></p><div><p id="b"></p><p></p></div>';
+
+      const condition = pageObject.isExisting();
+
+      expect(condition.valueName).toBe('existing');
+
+      await expect(condition.test()).resolves.toBe(true);
+    });
+
+    it('should return a condition that sets <existing> to false', async () => {
+      document.body.innerHTML = '<div></div>';
+
+      await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
+        true
+      );
+
+      document.body.innerHTML = '<div><p></p><p id="a"></p></div>';
+
+      await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
+        true
+      );
+
+      document.body.innerHTML = '<div><p id="b"></p><p id="b"></p></div>';
+
+      await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
+        true
+      );
     });
   });
 

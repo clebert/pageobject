@@ -135,10 +135,7 @@ export abstract class FlexiblePageObject extends PageObject<
     };
   }
 
-  public getAttribute(
-    name: string,
-    operator: Operator<string>
-  ): Condition<string> {
+  public getAttribute(name: string, operator: Operator<string>): Condition {
     return new Condition(
       operator,
       async () =>
@@ -150,7 +147,7 @@ export abstract class FlexiblePageObject extends PageObject<
     );
   }
 
-  public getHTML(operator: Operator<string>): Condition<string> {
+  public getHTML(operator: Operator<string>): Condition {
     return new Condition(
       operator,
       async () =>
@@ -161,7 +158,7 @@ export abstract class FlexiblePageObject extends PageObject<
     );
   }
 
-  public getPageTitle(operator: Operator<string>): Condition<string> {
+  public getPageTitle(operator: Operator<string>): Condition {
     return new Condition(
       operator,
       async () => (await this.findElement()).execute(() => document.title),
@@ -169,7 +166,7 @@ export abstract class FlexiblePageObject extends PageObject<
     );
   }
 
-  public getPageURL(operator: Operator<string>): Condition<string> {
+  public getPageURL(operator: Operator<string>): Condition {
     return new Condition(
       operator,
       async () =>
@@ -178,10 +175,8 @@ export abstract class FlexiblePageObject extends PageObject<
     );
   }
 
-  public getProperty<TValue>(
-    name: string,
-    operator: Operator<TValue>
-  ): Condition<TValue> {
+  /* tslint:disable-next-line no-any */
+  public getProperty(name: string, operator: Operator<any>): Condition {
     return new Condition(
       operator,
       async () =>
@@ -199,10 +194,7 @@ export abstract class FlexiblePageObject extends PageObject<
     );
   }
 
-  public getComputedStyle(
-    name: string,
-    operator: Operator<string>
-  ): Condition<string> {
+  public getComputedStyle(name: string, operator: Operator<string>): Condition {
     return new Condition(
       operator,
       async () =>
@@ -218,7 +210,7 @@ export abstract class FlexiblePageObject extends PageObject<
     );
   }
 
-  public getRenderedText(operator: Operator<string>): Condition<string> {
+  public getRenderedText(operator: Operator<string>): Condition {
     return new Condition(
       operator,
       async () =>
@@ -229,9 +221,7 @@ export abstract class FlexiblePageObject extends PageObject<
     );
   }
 
-  public hasFocus(
-    operator: Operator<boolean> = equals(true)
-  ): Condition<boolean> {
+  public hasFocus(operator: Operator<boolean> = equals(true)): Condition {
     return new Condition(
       operator,
       async () =>
@@ -242,9 +232,7 @@ export abstract class FlexiblePageObject extends PageObject<
     );
   }
 
-  public isVisible(
-    operator: Operator<boolean> = equals(true)
-  ): Condition<boolean> {
+  public isVisible(operator: Operator<boolean> = equals(true)): Condition {
     return new Condition(
       operator,
       async () =>

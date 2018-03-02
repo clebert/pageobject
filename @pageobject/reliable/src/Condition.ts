@@ -13,7 +13,8 @@ function serialize(value: any): string {
   return inspect(value, false, null);
 }
 
-export class Condition<TValue> {
+/* tslint:disable-next-line no-any */
+export class Condition<TValue = any> {
   public readonly operator: Operator<TValue>;
   public readonly valueAccessor: Accessor<TValue>;
   public readonly valueName: string;
