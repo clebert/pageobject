@@ -460,7 +460,11 @@ describe("PageObject: A > B(b EQUALS 'b')", () => {
 
       await expect(pageObject.findElement()).rejects.toEqual(
         new Error(
-          "Element not matching: A > B(b EQUALS 'b')\n  • ((b = 'a') EQUALS 'b')\n  • ((b = '') EQUALS 'b')"
+          [
+            "Element not matching: A > B(b EQUALS 'b')",
+            "  • Comparison failed: ((b = 'a') EQUALS 'b')",
+            "  • Comparison failed: ((b = '') EQUALS 'b')"
+          ].join('\n')
         )
       );
     });

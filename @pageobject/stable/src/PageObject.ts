@@ -110,7 +110,7 @@ export abstract class PageObject<TElement, TAdapter extends Adapter<TElement>> {
       if (descriptions.length > 0) {
         throw new Error(
           `Element not matching: ${this.toString()}\n  ${descriptions
-            .map(description => `• ${description}`)
+            .map(description => `• Comparison failed: ${description}`)
             .join('\n  ')}`
         );
       }
