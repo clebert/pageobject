@@ -20,7 +20,8 @@ function describe(testCase, page) {
 }
 ```
 
-You can find the complete code of the example [here][internal-example]. It can be executed with Node.js 8 or higher.
+You can find the complete code of the example [here][internal-example-getting-started].
+It can be executed with Node.js 8 or higher.
 
 ## Packages
 
@@ -73,7 +74,7 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [internal-api-reliable]: https://pageobject.js.org/api/reliable/
 [internal-api-stable]: https://pageobject.js.org/api/stable/
 
-[internal-example]: https://github.com/clebert/pageobject/blob/master/example.js
+[internal-example-getting-started]: https://github.com/clebert/pageobject/blob/master/docs/examples/getting-started.js
 
 [internal-installation-flexible]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible/README.md#installation
 [internal-installation-flexible-puppeteer]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible-puppeteer/README.md#installation
