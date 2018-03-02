@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/reliable",
-  "version": "1.0.0-beta-9",
+  "version": "1.0.0-beta-10",
   "description": "Write reliable tests in a declarative programming style.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",

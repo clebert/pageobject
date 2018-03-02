@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/flexible",
-  "version": "1.0.0-beta-9",
+  "version": "1.0.0-beta-10",
   "description": "Write flexible tests using a @pageobject/stable-based API which is adaptable for different browser automation frameworks.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -22,7 +22,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pageobject/reliable": "^1.0.0-beta-9",
-    "@pageobject/stable": "^1.0.0-beta-9"
+    "@pageobject/reliable": "^1.0.0-beta-10",
+    "@pageobject/stable": "^1.0.0-beta-10"
   }
 }
