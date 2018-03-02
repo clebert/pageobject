@@ -8,10 +8,8 @@
 
 ```js
 class Root extends FlexiblePageObject {
-  constructor(adapter) {
-    super(adapter);
-
-    this.selector = ':root';
+  get selector() {
+    return ':root';
   }
 }
 

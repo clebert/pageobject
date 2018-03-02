@@ -3,10 +3,8 @@ const {PuppeteerAdapter} = require('@pageobject/flexible-puppeteer');
 const {TestCase, equals} = require('@pageobject/reliable');
 
 class Root extends FlexiblePageObject {
-  constructor(adapter) {
-    super(adapter);
-
-    this.selector = ':root';
+  get selector() {
+    return ':root';
   }
 }
 
