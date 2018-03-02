@@ -130,6 +130,9 @@ class EqualsOperator<TValue> extends RelationalOperator<TValue, TValue> {
   }
 }
 
+/**
+ * This operator tests for deep, strict equality.
+ */
 export function equals<TValue>(expectedValue: TValue): Operator<TValue> {
   return new EqualsOperator(expectedValue);
 }

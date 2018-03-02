@@ -2,8 +2,6 @@
 
 > **Reliable**, **stable**, and **flexible** web UI testing.
 
-⚠️ **This software is currently in beta stage. Breaking changes can happen at any time.**
-
 ## Getting Started
 
 **Example:** Navigate to `example.com` and assert that the page title equals `Example Domain`.
