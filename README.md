@@ -4,7 +4,7 @@
 
 ## Getting Started
 
-**Example:** Navigate to `example.com` and assert that the page title equals `Example Domain`.
+**Example:** Navigate to [example.com][external-example-domain] and assert that the page title equals "Example Domain".
 
 ```js
 class Page extends FlexiblePageObject {
@@ -84,6 +84,7 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 
+[external-example-domain]: http://example.com/
 [external-monorepo]: https://github.com/lerna/lerna#about
 [external-pageobject]: https://martinfowler.com/bliki/PageObject.html
 [external-puppeteer]: https://github.com/GoogleChrome/puppeteer/blob/master/README.md
