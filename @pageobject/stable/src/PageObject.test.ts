@@ -39,6 +39,10 @@ beforeEach(() => {
 });
 
 describe('PageObject: A', () => {
+  const existingHTML = '<div></div>';
+  const notFoundHTML = '';
+  const notUniqueHTML = '<div></div><div></div>';
+
   const pageObject = new A(adapter);
 
   describe('nth()', () => {
@@ -49,7 +53,7 @@ describe('PageObject: A', () => {
 
   describe('getSize()', () => {
     it('should return a condition that sets <size> to 1', async () => {
-      document.body.innerHTML = '<div></div>';
+      document.body.innerHTML = existingHTML;
 
       const condition = pageObject.getSize(equals(1));
 
@@ -59,11 +63,13 @@ describe('PageObject: A', () => {
     });
 
     it('should return a condition that sets <size> to 0', async () => {
+      document.body.innerHTML = notFoundHTML;
+
       await expect(pageObject.getSize(equals(0)).test()).resolves.toBe(true);
     });
 
     it('should return a condition that sets <size> to 2', async () => {
-      document.body.innerHTML = '<div></div><div></div>';
+      document.body.innerHTML = notUniqueHTML;
 
       await expect(pageObject.getSize(equals(2)).test()).resolves.toBe(true);
     });
@@ -71,7 +77,7 @@ describe('PageObject: A', () => {
 
   describe('isExisting()', () => {
     it('should return a condition that sets <existing> to true', async () => {
-      document.body.innerHTML = '<div></div>';
+      document.body.innerHTML = existingHTML;
 
       const condition = pageObject.isExisting();
 
@@ -81,11 +87,13 @@ describe('PageObject: A', () => {
     });
 
     it('should return a condition that sets <existing> to false', async () => {
+      document.body.innerHTML = notFoundHTML;
+
       await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
         true
       );
 
-      document.body.innerHTML = '<div></div><div></div>';
+      document.body.innerHTML = notUniqueHTML;
 
       await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
         true
@@ -95,7 +103,7 @@ describe('PageObject: A', () => {
 
   describe('findElement()', () => {
     it('should return an element', async () => {
-      document.body.innerHTML = '<div></div>';
+      document.body.innerHTML = existingHTML;
 
       await expect(pageObject.findElement()).resolves.toBe(
         document.querySelector('div')
@@ -103,13 +111,15 @@ describe('PageObject: A', () => {
     });
 
     it('should throw an element-not-found error', async () => {
+      document.body.innerHTML = notFoundHTML;
+
       await expect(pageObject.findElement()).rejects.toEqual(
         new Error('Element not found: A')
       );
     });
 
     it('should throw an element-not-unique error', async () => {
-      document.body.innerHTML = '<div></div><div></div>';
+      document.body.innerHTML = notUniqueHTML;
 
       await expect(pageObject.findElement()).rejects.toEqual(
         new Error('Element not unique: A')
@@ -125,27 +135,27 @@ describe('PageObject: A', () => {
 });
 
 describe('PageObject: A > B', () => {
+  const existingHTML = '<p></p><div><p></p></div>';
+  const notFoundHTML = '<div></div>';
+  const notUniqueHTML = '<div><p></p><p></p></div>';
+
   const pageObject = new A(adapter).select(B);
 
   describe('getSize()', () => {
     it('should return a condition that sets <size> to 1', async () => {
-      document.body.innerHTML = '<p></p><div><p></p></div>';
+      document.body.innerHTML = existingHTML;
 
-      const condition = pageObject.getSize(equals(1));
-
-      expect(condition.valueName).toBe('size');
-
-      await expect(condition.test()).resolves.toBe(true);
+      await expect(pageObject.getSize(equals(1)).test()).resolves.toBe(true);
     });
 
     it('should return a condition that sets <size> to 0', async () => {
-      document.body.innerHTML = '<div></div>';
+      document.body.innerHTML = notFoundHTML;
 
       await expect(pageObject.getSize(equals(0)).test()).resolves.toBe(true);
     });
 
     it('should return a condition that sets <size> to 2', async () => {
-      document.body.innerHTML = '<div><p></p><p></p></div>';
+      document.body.innerHTML = notUniqueHTML;
 
       await expect(pageObject.getSize(equals(2)).test()).resolves.toBe(true);
     });
@@ -153,23 +163,19 @@ describe('PageObject: A > B', () => {
 
   describe('isExisting()', () => {
     it('should return a condition that sets <existing> to true', async () => {
-      document.body.innerHTML = '<p></p><div><p></p></div>';
+      document.body.innerHTML = existingHTML;
 
-      const condition = pageObject.isExisting();
-
-      expect(condition.valueName).toBe('existing');
-
-      await expect(condition.test()).resolves.toBe(true);
+      await expect(pageObject.isExisting().test()).resolves.toBe(true);
     });
 
     it('should return a condition that sets <existing> to false', async () => {
-      document.body.innerHTML = '<div></div>';
+      document.body.innerHTML = notFoundHTML;
 
       await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
         true
       );
 
-      document.body.innerHTML = '<div><p></p><p></p></div>';
+      document.body.innerHTML = notUniqueHTML;
 
       await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
         true
@@ -179,7 +185,7 @@ describe('PageObject: A > B', () => {
 
   describe('findElement()', () => {
     it('should return an element', async () => {
-      document.body.innerHTML = '<p></p><div><p></p></div>';
+      document.body.innerHTML = existingHTML;
 
       await expect(pageObject.findElement()).resolves.toBe(
         document.querySelector('div > p')
@@ -187,7 +193,7 @@ describe('PageObject: A > B', () => {
     });
 
     it('should throw an element-not-found error', async () => {
-      document.body.innerHTML = '<div></div>';
+      document.body.innerHTML = notFoundHTML;
 
       await expect(pageObject.findElement()).rejects.toEqual(
         new Error('Element not found: A > B')
@@ -195,7 +201,7 @@ describe('PageObject: A > B', () => {
     });
 
     it('should throw an element-not-unique error', async () => {
-      document.body.innerHTML = '<div><p></p><p></p></div>';
+      document.body.innerHTML = notUniqueHTML;
 
       await expect(pageObject.findElement()).rejects.toEqual(
         new Error('Element not unique: A > B')
@@ -211,6 +217,9 @@ describe('PageObject: A > B', () => {
 });
 
 describe('PageObject: A > B[1]', () => {
+  const existingHTML = '<p></p><div><p></p><p></p></div>';
+  const notFoundHTML = '<div></div>';
+
   const pageObject = new A(adapter).select(B).nth(1);
 
   describe('nth()', () => {
@@ -231,17 +240,13 @@ describe('PageObject: A > B[1]', () => {
 
   describe('getSize()', () => {
     it('should return a condition that sets <size> to 1', async () => {
-      document.body.innerHTML = '<p></p><div><p></p><p></p></div>';
+      document.body.innerHTML = existingHTML;
 
-      const condition = pageObject.getSize(equals(1));
-
-      expect(condition.valueName).toBe('size');
-
-      await expect(condition.test()).resolves.toBe(true);
+      await expect(pageObject.getSize(equals(1)).test()).resolves.toBe(true);
     });
 
     it('should return a condition that sets <size> to 0', async () => {
-      document.body.innerHTML = '<div></div>';
+      document.body.innerHTML = notFoundHTML;
 
       await expect(pageObject.getSize(equals(0)).test()).resolves.toBe(true);
     });
@@ -249,17 +254,13 @@ describe('PageObject: A > B[1]', () => {
 
   describe('isExisting()', () => {
     it('should return a condition that sets <existing> to true', async () => {
-      document.body.innerHTML = '<p></p><div><p></p><p></p></div>';
+      document.body.innerHTML = existingHTML;
 
-      const condition = pageObject.isExisting();
-
-      expect(condition.valueName).toBe('existing');
-
-      await expect(condition.test()).resolves.toBe(true);
+      await expect(pageObject.isExisting().test()).resolves.toBe(true);
     });
 
     it('should return a condition that sets <existing> to false', async () => {
-      document.body.innerHTML = '<div></div>';
+      document.body.innerHTML = notFoundHTML;
 
       await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
         true
@@ -269,7 +270,7 @@ describe('PageObject: A > B[1]', () => {
 
   describe('findElement()', () => {
     it('should return an element', async () => {
-      document.body.innerHTML = '<p></p><div><p></p><p></p></div>';
+      document.body.innerHTML = existingHTML;
 
       await expect(pageObject.findElement()).resolves.toBe(
         document.querySelector('div > p:nth-child(1)')
@@ -277,7 +278,7 @@ describe('PageObject: A > B[1]', () => {
     });
 
     it('should throw an element-not-found error', async () => {
-      document.body.innerHTML = '<div></div>';
+      document.body.innerHTML = notFoundHTML;
 
       await expect(pageObject.findElement()).rejects.toEqual(
         new Error('Element not found: A > B[1]')
@@ -293,21 +294,20 @@ describe('PageObject: A > B[1]', () => {
 });
 
 describe('PageObject: A > B[2]', () => {
+  const existingHTML = '<p></p><div><p></p><p></p></div>';
+  const notFoundHTML = '<div><p></p></div>';
+
   const pageObject = new A(adapter).select(B).nth(2);
 
   describe('getSize()', () => {
     it('should return a condition that sets <size> to 1', async () => {
-      document.body.innerHTML = '<p></p><div><p></p><p></p></div>';
+      document.body.innerHTML = existingHTML;
 
-      const condition = pageObject.getSize(equals(1));
-
-      expect(condition.valueName).toBe('size');
-
-      await expect(condition.test()).resolves.toBe(true);
+      await expect(pageObject.getSize(equals(1)).test()).resolves.toBe(true);
     });
 
     it('should return a condition that sets <size> to 0', async () => {
-      document.body.innerHTML = '<div><p></p></div>';
+      document.body.innerHTML = notFoundHTML;
 
       await expect(pageObject.getSize(equals(0)).test()).resolves.toBe(true);
     });
@@ -315,17 +315,13 @@ describe('PageObject: A > B[2]', () => {
 
   describe('isExisting()', () => {
     it('should return a condition that sets <existing> to true', async () => {
-      document.body.innerHTML = '<p></p><div><p></p><p></p></div>';
+      document.body.innerHTML = existingHTML;
 
-      const condition = pageObject.isExisting();
-
-      expect(condition.valueName).toBe('existing');
-
-      await expect(condition.test()).resolves.toBe(true);
+      await expect(pageObject.isExisting().test()).resolves.toBe(true);
     });
 
     it('should return a condition that sets <existing> to false', async () => {
-      document.body.innerHTML = '<div><p></p></div>';
+      document.body.innerHTML = notFoundHTML;
 
       await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
         true
@@ -335,7 +331,7 @@ describe('PageObject: A > B[2]', () => {
 
   describe('findElement()', () => {
     it('should return an element', async () => {
-      document.body.innerHTML = '<p></p><div><p></p><p></p></div>';
+      document.body.innerHTML = existingHTML;
 
       await expect(pageObject.findElement()).resolves.toBe(
         document.querySelector('p:nth-child(2)')
@@ -343,7 +339,7 @@ describe('PageObject: A > B[2]', () => {
     });
 
     it('should throw an element-not-found error', async () => {
-      document.body.innerHTML = '<div><p></p></div>';
+      document.body.innerHTML = notFoundHTML;
 
       await expect(pageObject.findElement()).rejects.toEqual(
         new Error('Element not found: A > B[2]')
@@ -359,6 +355,11 @@ describe('PageObject: A > B[2]', () => {
 });
 
 describe("PageObject: A > B(b EQUALS 'b')", () => {
+  const existingHTML = '<p id="b"></p><div><p></p><p id="b"></p></div>';
+  const notFoundHTML = '<div></div>';
+  const notUniqueHTML = '<div><p id="b"></p><p id="b"></p></div>';
+  const notMatching = '<div><p id="a"></p><p></p></div>';
+
   const pageObject = new A(adapter).select(B).where(b => b.b(equals('b')));
 
   describe('nth()', () => {
@@ -379,28 +380,23 @@ describe("PageObject: A > B(b EQUALS 'b')", () => {
 
   describe('getSize()', () => {
     it('should return a condition that sets <size> to 1', async () => {
-      document.body.innerHTML =
-        '<p id="b"></p><div><p id="b"></p><p></p></div>';
+      document.body.innerHTML = existingHTML;
 
-      const condition = pageObject.getSize(equals(1));
-
-      expect(condition.valueName).toBe('size');
-
-      await expect(condition.test()).resolves.toBe(true);
+      await expect(pageObject.getSize(equals(1)).test()).resolves.toBe(true);
     });
 
     it('should return a condition that sets <size> to 0', async () => {
-      document.body.innerHTML = '<div></div>';
+      document.body.innerHTML = notFoundHTML;
 
       await expect(pageObject.getSize(equals(0)).test()).resolves.toBe(true);
 
-      document.body.innerHTML = '<div><p></p><p id="a"></p></div>';
+      document.body.innerHTML = notMatching;
 
       await expect(pageObject.getSize(equals(0)).test()).resolves.toBe(true);
     });
 
     it('should return a condition that sets <size> to 2', async () => {
-      document.body.innerHTML = '<div><p id="b"></p><p id="b"></p></div>';
+      document.body.innerHTML = notUniqueHTML;
 
       await expect(pageObject.getSize(equals(2)).test()).resolves.toBe(true);
     });
@@ -408,30 +404,25 @@ describe("PageObject: A > B(b EQUALS 'b')", () => {
 
   describe('isExisting()', () => {
     it('should return a condition that sets <existing> to true', async () => {
-      document.body.innerHTML =
-        '<p id="b"></p><div><p id="b"></p><p></p></div>';
+      document.body.innerHTML = existingHTML;
 
-      const condition = pageObject.isExisting();
-
-      expect(condition.valueName).toBe('existing');
-
-      await expect(condition.test()).resolves.toBe(true);
+      await expect(pageObject.isExisting().test()).resolves.toBe(true);
     });
 
     it('should return a condition that sets <existing> to false', async () => {
-      document.body.innerHTML = '<div></div>';
+      document.body.innerHTML = notFoundHTML;
 
       await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
         true
       );
 
-      document.body.innerHTML = '<div><p></p><p id="a"></p></div>';
+      document.body.innerHTML = notUniqueHTML;
 
       await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
         true
       );
 
-      document.body.innerHTML = '<div><p id="b"></p><p id="b"></p></div>';
+      document.body.innerHTML = notMatching;
 
       await expect(pageObject.isExisting(equals(false)).test()).resolves.toBe(
         true
@@ -441,8 +432,7 @@ describe("PageObject: A > B(b EQUALS 'b')", () => {
 
   describe('findElement()', () => {
     it('should return an element', async () => {
-      document.body.innerHTML =
-        '<p id="b"></p><div><p id="b"></p><p></p></div>';
+      document.body.innerHTML = existingHTML;
 
       await expect(pageObject.findElement()).resolves.toBe(
         document.querySelector('div > #b')
@@ -450,7 +440,7 @@ describe("PageObject: A > B(b EQUALS 'b')", () => {
     });
 
     it('should throw an element-not-found error', async () => {
-      document.body.innerHTML = '<div></div>';
+      document.body.innerHTML = notFoundHTML;
 
       await expect(pageObject.findElement()).rejects.toEqual(
         new Error("Element not found: A > B(b EQUALS 'b')")
@@ -458,7 +448,7 @@ describe("PageObject: A > B(b EQUALS 'b')", () => {
     });
 
     it('should throw an element-not-unique error', async () => {
-      document.body.innerHTML = '<div><p id="b"></p><p id="b"></p></div>';
+      document.body.innerHTML = notUniqueHTML;
 
       await expect(pageObject.findElement()).rejects.toEqual(
         new Error("Element not unique: A > B(b EQUALS 'b')")
@@ -466,11 +456,11 @@ describe("PageObject: A > B(b EQUALS 'b')", () => {
     });
 
     it('should throw an element-not-matching error', async () => {
-      document.body.innerHTML = '<div><p></p><p id="a"></p></div>';
+      document.body.innerHTML = notMatching;
 
       await expect(pageObject.findElement()).rejects.toEqual(
         new Error(
-          "Element not matching: A > B(b EQUALS 'b')\n  • ((b = '') EQUALS 'b')\n  • ((b = 'a') EQUALS 'b')"
+          "Element not matching: A > B(b EQUALS 'b')\n  • ((b = 'a') EQUALS 'b')\n  • ((b = '') EQUALS 'b')"
         )
       );
     });
