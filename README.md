@@ -7,16 +7,16 @@
 **Example:** Navigate to `example.com` and assert that the page title equals `Example Domain`.
 
 ```js
-class Root extends FlexiblePageObject {
+class Page extends FlexiblePageObject {
   get selector() {
-    return ':root';
+    return ':root'; // https://developer.mozilla.org/en-US/docs/Web/CSS/:root
   }
 }
 
-function describe(testCase, root) {
+function describe(testCase, page) {
   testCase
-    .perform(root.navigateTo('http://example.com/'))
-    .assert(root.getPageTitle(equals('Example Domain')));
+    .perform(page.navigateTo('http://example.com/'))
+    .assert(page.getPageTitle(equals('Example Domain')));
 }
 ```
 

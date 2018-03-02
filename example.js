@@ -2,30 +2,30 @@ const {FlexiblePageObject} = require('@pageobject/flexible');
 const {PuppeteerAdapter} = require('@pageobject/flexible-puppeteer');
 const {TestCase, equals} = require('@pageobject/reliable');
 
-class Root extends FlexiblePageObject {
+class Page extends FlexiblePageObject {
   get selector() {
-    return ':root';
+    return ':root'; // https://developer.mozilla.org/en-US/docs/Web/CSS/:root
   }
 }
 
-function describe(testCase, root) {
+function describe(testCase, page) {
   testCase
-    .perform(root.navigateTo('http://example.com/'))
-    .assert(root.getPageTitle(equals('Example Domain')));
+    .perform(page.navigateTo('http://example.com/'))
+    .assert(page.getPageTitle(equals('Example Domain')));
 }
 
 (async () => {
   const testCase = new TestCase(3);
-  const root = new Root(await PuppeteerAdapter.create());
+  const page = new Page(await PuppeteerAdapter.create());
 
   try {
-    describe(testCase, root);
+    describe(testCase, page);
 
     await testCase.run();
 
     console.log('OK');
   } finally {
-    await root.adapter.browser.close();
+    await page.adapter.browser.close();
   }
 })().catch(error => {
   console.error(error.toString());
