@@ -5,11 +5,11 @@ In this example we write a [test case](../index.md#test-case) for the [TodoMVC][
 ## Page objects
 
 - **TodoApp**
-- TodoApp > [NewTodo](./page-objects/2-new-todo.md#page-object-newtodo)
-- TodoApp > [TodoList](./page-objects/3-todo-list.md#page-object-todolist)
-- TodoApp > TodoList > [Todo](./page-objects/4-todo.md#page-object-todo)[ ]
-- TodoApp > TodoList > Todo[ ] > [Label](./page-objects/5-label.md#page-object-label)
-- TodoApp > TodoList > Todo[ ] > [Toggle](./page-objects/6-toggle.md#page-object-toggle)
+- TodoApp > [NewTodo](./2-new-todo.md#page-object-newtodo)
+- TodoApp > [TodoList](./3-todo-list.md#page-object-todolist)
+- TodoApp > TodoList > [Todo](./4-todo.md#page-object-todo)[ ]
+- TodoApp > TodoList > Todo[ ] > [Label](./5-label.md#page-object-label)
+- TodoApp > TodoList > Todo[ ] > [Toggle](./6-toggle.md#page-object-toggle)
 
 ## Page object: TodoApp
 
@@ -18,8 +18,8 @@ In this example we write a [test case](../index.md#test-case) for the [TodoMVC][
 ### Choosing a CSS selector
 
 ```html
-<html> <!-- No page object (implementation detail) -->
-  <body> <!-- No page object (implementation detail) -->
+<html> <!-- Absolute root -->
+  <body>
     <section class="todoapp"> <!-- TodoApp -->
 ```
 

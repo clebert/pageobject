@@ -4,12 +4,12 @@ In this example we write a [test case](../index.md#test-case) for the [TodoMVC][
 
 ## Page objects
 
-- [TodoApp](./page-objects/1-todo-app.md#page-object-todoapp)
-- TodoApp > [NewTodo](./page-objects/2-new-todo.md#page-object-newtodo)
+- [TodoApp](./1-todo-app.md#page-object-todoapp)
+- TodoApp > [NewTodo](./2-new-todo.md#page-object-newtodo)
 - TodoApp > **TodoList**
-- TodoApp > TodoList > [Todo](./page-objects/4-todo.md#page-object-todo)[ ]
-- TodoApp > TodoList > Todo[ ] > [Label](./page-objects/5-label.md#page-object-label)
-- TodoApp > TodoList > Todo[ ] > [Toggle](./page-objects/6-toggle.md#page-object-toggle)
+- TodoApp > TodoList > [Todo](./4-todo.md#page-object-todo)[ ]
+- TodoApp > TodoList > Todo[ ] > [Label](./5-label.md#page-object-label)
+- TodoApp > TodoList > Todo[ ] > [Toggle](./6-toggle.md#page-object-toggle)
 
 ## Page object: TodoList
 
@@ -18,9 +18,9 @@ In this example we write a [test case](../index.md#test-case) for the [TodoMVC][
 ### Choosing a CSS selector
 
 ```html
-<section class="todoapp"> <!-- TodoApp (relative root) -->
-  <div> <!-- No page object (implementation detail) -->
-    <section class="main"> <!-- No page object (implementation detail) -->
+<section class="todoapp"> <!-- Relative root (TodoApp) -->
+  <div>
+    <section class="main">
       <ul class="todo-list"> <!-- TodoList -->
 ```
 
