@@ -1,4 +1,4 @@
-# Page object: `TodoApp` > `TodoList` > `Todo`[ ] > `Label`
+# Page object: TodoApp > TodoList > Todo[ ] > Label
 
 ![label](../images/label.png)
 

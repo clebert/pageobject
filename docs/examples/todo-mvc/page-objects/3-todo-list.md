@@ -1,4 +1,4 @@
-# Page object: `TodoApp` > `TodoList`
+# Page object: TodoApp > TodoList
 
 ![todo-list](../images/todo-list.png)
 

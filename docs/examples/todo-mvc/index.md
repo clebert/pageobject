@@ -4,12 +4,12 @@
 
 ## Page objects
 
-- [`TodoApp`](./page-objects/1-todo-app.md)
-- `TodoApp` > [`NewTodo`](./page-objects/2-new-todo.md)
-- `TodoApp` > [`TodoList`](./page-objects/3-todo-list.md)
-- `TodoApp` > `TodoList` > [`Todo`](./page-objects/4-todo.md)[ ]
-- `TodoApp` > `TodoList` > `Todo`[ ] > [`Label`](./page-objects/5-label.md)
-- `TodoApp` > `TodoList` > `Todo`[ ] > [`Toggle`](./page-objects/6-toggle.md)
+- [TodoApp](./page-objects/1-todo-app.md)
+- TodoApp > [NewTodo](./page-objects/2-new-todo.md)
+- TodoApp > [TodoList](./page-objects/3-todo-list.md)
+- TodoApp > TodoList > [Todo](./page-objects/4-todo.md)[ ]
+- TodoApp > TodoList > Todo[ ] > [Label](./page-objects/5-label.md)
+- TodoApp > TodoList > Todo[ ] > [Toggle](./page-objects/6-toggle.md)
 
 ## Test case
 

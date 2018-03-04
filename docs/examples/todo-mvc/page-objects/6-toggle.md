@@ -1,4 +1,4 @@
-# Page object: `TodoApp` > `TodoList` > `Todo`[ ] > `Toggle`
+# Page object: TodoApp > TodoList > Todo[ ] > Toggle
 
 ![toggle](../images/toggle.png)
 
