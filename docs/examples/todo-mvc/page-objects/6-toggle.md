@@ -1,8 +1,21 @@
-# Page object: TodoApp > TodoList > Todo[ ] > Toggle
+# Example: TodoMVC
+
+In this example we write a [test case](../index.md#test-case) for the [TodoMVC][external-todomvc] application.
+
+## Page objects
+
+- [TodoApp](./page-objects/1-todo-app.md#page-object-todoapp)
+- TodoApp > [NewTodo](./page-objects/2-new-todo.md#page-object-newtodo)
+- TodoApp > [TodoList](./page-objects/3-todo-list.md#page-object-todolist)
+- TodoApp > TodoList > [Todo](./page-objects/4-todo.md#page-object-todo)[ ]
+- TodoApp > TodoList > Todo[ ] > [Label](./page-objects/5-label.md#page-object-label)
+- TodoApp > TodoList > Todo[ ] > **Toggle**
+
+## Page object: Toggle
 
 ![toggle](../images/toggle.png)
 
-## Choosing a CSS selector
+### Choosing a CSS selector
 
 ```html
 <li> <!-- Todo (relative root) -->
@@ -10,7 +23,7 @@
     <input class="toggle" type="checkbox"> <!-- Toggle -->
 ```
 
-## Implementing the page object
+### Implementing the page object
 
 ```js
 class Toggle extends FlexiblePageObject {
@@ -24,7 +37,7 @@ class Toggle extends FlexiblePageObject {
 }
 ```
 
-## Integrating the page object
+### Integrating the page object
 
 ```js
 class Todo extends FlexiblePageObject {
@@ -41,3 +54,5 @@ class Todo extends FlexiblePageObject {
   }
 }
 ```
+
+[external-todomvc]: http://todomvc.com/examples/react/#/
