@@ -2,27 +2,6 @@
 
 > **Reliable**, **stable**, and **flexible** web UI testing.
 
-## Getting Started
-
-**Example:** Navigate to [example.com][external-example-domain] and assert that the page title equals "Example Domain".
-
-```js
-class Page extends FlexiblePageObject {
-  get selector() {
-    return ':root'; // https://developer.mozilla.org/en-US/docs/Web/CSS/:root
-  }
-}
-
-function describe(testCase, page) {
-  testCase
-    .perform(page.navigateTo('http://example.com/'))
-    .assert(page.getPageTitle(equals('Example Domain')));
-}
-```
-
-You can find the complete code of the example [here][internal-example-getting-started].
-It can be executed with Node.js 8 or higher.
-
 ## Packages
 
 This is a multi-package repository ([monorepo][external-monorepo]).
@@ -74,8 +53,6 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [internal-api-reliable]: https://pageobject.js.org/api/reliable/
 [internal-api-stable]: https://pageobject.js.org/api/stable/
 
-[internal-example-getting-started]: https://github.com/clebert/pageobject/blob/master/docs/examples/getting-started.js
-
 [internal-installation-flexible]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible/README.md#installation
 [internal-installation-flexible-puppeteer]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible-puppeteer/README.md#installation
 [internal-installation-flexible-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible-selenium/README.md#installation
@@ -84,7 +61,6 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 
-[external-example-domain]: http://example.com/
 [external-monorepo]: https://github.com/lerna/lerna#about
 [external-pageobject]: https://martinfowler.com/bliki/PageObject.html
 [external-puppeteer]: https://github.com/GoogleChrome/puppeteer/blob/master/README.md

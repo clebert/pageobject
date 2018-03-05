@@ -15,7 +15,7 @@
     "postrelease": "git push --follow-tags origin master",
     "pretest": "yarn run compile",
     "test": "yarn run format:test && yarn run lint && jest --no-cache --verbose",
-    "posttest": "node docs/examples/getting-started.js && ./scripts/typedoc.sh",
+    "posttest": "node docs/examples/getting-started.js && node docs/examples/todo-mvc/index.js && ./scripts/typedoc.sh",
     "prewatch": "yarn run compile",
     "watch": "run-p watch:compile \"watch:test -- {@}\" --",
     "watch:compile": "lerna exec --parallel --concurrency 99 -- tsc --project . --watch",
