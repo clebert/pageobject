@@ -15,8 +15,11 @@ export class ChromeDriver {
     process.env.SELENIUM_REMOTE_URL = `http://localhost:${port}${urlBase}`;
 
     return new Promise<void>((resolve, reject) => {
-      childProcess.stdout.on('data', resolve);
-      childProcess.on('error', reject);
+      childProcess.stdout.once('data', () => {
+        setTimeout(resolve, 500);
+      });
+
+      childProcess.once('error', reject);
     });
   }
 
