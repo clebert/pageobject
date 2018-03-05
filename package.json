@@ -10,7 +10,7 @@
     "format:test": "prettier --list-different '**/*.{js,json,jsx,ts,tsx}'",
     "lint": "node scripts/markdownlint.js && lerna exec -- ../../scripts/tslint.sh",
     "prerelease": "yarn run clean && yarn install && yarn test",
-    "release": "lerna publish",
+    "release": "lerna publish --conventional-commits",
     "postrelease": "git push --follow-tags origin master",
     "pretest": "yarn run compile",
     "test": "yarn run format:test && yarn run lint && jest --no-cache --verbose",
