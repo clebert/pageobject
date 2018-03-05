@@ -39,6 +39,7 @@ We will create several page objects and learn about different design principles.
 - [@pageobject/reliable](./api/reliable/index.html)
 - [@pageobject/stable](./api/stable/index.html)
 - [@pageobject/flexible](./api/flexible/index.html)
+- [@pageobject/flexible-protractor](./api/flexible-protractor/index.html)
 - [@pageobject/flexible-puppeteer](./api/flexible-puppeteer/index.html)
 - [@pageobject/flexible-selenium](./api/flexible-selenium/index.html)
 
