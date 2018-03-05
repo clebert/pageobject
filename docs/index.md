@@ -1,5 +1,9 @@
 # PageObjectJS
 
+- [Getting started](#getting-started)
+- [Tutorial: TodoMVC](#tutorial-todomvc)
+- [API documentation](#api-documentation)
+
 ## Getting started
 
 In this example we navigate to [example.com][external-example-domain] and assert that the page title equals "Example Domain".
@@ -21,13 +25,22 @@ function describe(testCase, page) {
 *You can find the complete code for this example [here][internal-example-code-getting-started].*
 *It can be executed with Node.js 8 or higher.*
 
-## Example: TodoMVC
+## Tutorial: TodoMVC
 
-In this example we write a test case for the TodoMVC application.
+In this tutorial we write a test case for the TodoMVC application.
+We will create several page objects and learn about different design principles.
 
-![page](./examples/todo-mvc/images/todo-mvc.png)
+![todo-mvc](./examples/todo-mvc/images/todo-mvc.png)
 
 **You can find the step-by-step instructions [here](./examples/todo-mvc/index.md).**
+
+## API documentation
+
+- [@pageobject/reliable](./api/reliable/index.html)
+- [@pageobject/stable](./api/stable/index.html)
+- [@pageobject/flexible](./api/flexible/index.html)
+- [@pageobject/flexible-puppeteer](./api/flexible-puppeteer/index.html)
+- [@pageobject/flexible-selenium](./api/flexible-selenium/index.html)
 
 [internal-example-code-getting-started]: https://github.com/clebert/pageobject/tree/master/docs/examples/getting-started.js
 

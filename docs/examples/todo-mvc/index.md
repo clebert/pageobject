@@ -1,8 +1,9 @@
-# Example: TodoMVC
+# Tutorial: TodoMVC
 
-In this example we write a test case for the [TodoMVC][external-todomvc] application.
+In this tutorial we write a test case for the [TodoMVC][external-todomvc] application.
+We will create several page objects and learn about different design principles.
 
-![page](./images/todo-mvc.png)
+![todo-mvc](./images/todo-mvc.png)
 
 *You can find the complete code for this example [here][internal-example-code-todo-mvc].*
 *It can be executed with Node.js 8 or higher.*
