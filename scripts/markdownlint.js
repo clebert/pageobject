@@ -3,10 +3,13 @@ const markdownlint = require('markdownlint');
 
 const options = {
   config: require(__dirname + '/../.markdownlint.json'),
-  files: sync(['**/*.md', '!**/node_modules/**/*', '!**/temp/**/*'], {
-    nodir: true,
-    realpath: true
-  })
+  files: sync(
+    ['**/*.md', '!**/CHANGELOG.md', '!**/node_modules/**/*', '!**/temp/**/*'],
+    {
+      nodir: true,
+      realpath: true
+    }
+  )
 };
 
 console.log(options.files.join('\n'));
