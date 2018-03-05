@@ -10,6 +10,9 @@ rm -rf node_modules/@types/lodash
 rm -rf docs/api/flexible
 "$(yarn bin)"/typedoc --out docs/api/flexible ./@pageobject/flexible
 
+rm -rf docs/api/flexible-protractor
+"$(yarn bin)"/typedoc --out docs/api/flexible-protractor ./@pageobject/flexible-protractor
+
 rm -rf docs/api/flexible-puppeteer
 "$(yarn bin)"/typedoc --out docs/api/flexible-puppeteer ./@pageobject/flexible-puppeteer
 

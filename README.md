@@ -24,6 +24,12 @@ Write **stable** tests using a sophisticated implementation of the [page object 
 
 Write **flexible** tests using a @pageobject/stable-based API which is adaptable for different browser automation frameworks.
 
+### @pageobject/flexible-protractor
+
+**[Installation][internal-installation-flexible-protractor] | [API][internal-api-flexible-protractor]**
+
+Run your @pageobject/flexible-based tests using [Protractor][external-protractor].
+
 ### @pageobject/flexible-puppeteer
 
 **[Installation][internal-installation-flexible-puppeteer] | [API][internal-api-flexible-puppeteer]**
@@ -48,12 +54,14 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [badge-typescript-link]: https://www.typescriptlang.org/
 
 [internal-api-flexible]: https://pageobject.js.org/api/flexible/
+[internal-api-flexible-protractor]: https://pageobject.js.org/api/flexible-protractor/
 [internal-api-flexible-puppeteer]: https://pageobject.js.org/api/flexible-puppeteer/
 [internal-api-flexible-selenium]: https://pageobject.js.org/api/flexible-selenium/
 [internal-api-reliable]: https://pageobject.js.org/api/reliable/
 [internal-api-stable]: https://pageobject.js.org/api/stable/
 
 [internal-installation-flexible]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible/README.md#installation
+[internal-installation-flexible-protractor]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible-protractor/README.md#installation
 [internal-installation-flexible-puppeteer]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible-puppeteer/README.md#installation
 [internal-installation-flexible-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible-selenium/README.md#installation
 [internal-installation-reliable]: https://github.com/clebert/pageobject/tree/master/@pageobject/reliable/README.md#installation
@@ -63,5 +71,6 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 
 [external-monorepo]: https://github.com/lerna/lerna#about
 [external-pageobject]: https://martinfowler.com/bliki/PageObject.html
+[external-protractor]: https://www.protractortest.org/#/
 [external-puppeteer]: https://github.com/GoogleChrome/puppeteer/blob/master/README.md
 [external-selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html
