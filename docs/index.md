@@ -27,7 +27,7 @@ In this example we write a test case for the TodoMVC application.
 
 ![page](./examples/todo-mvc/images/todo-mvc.png)
 
-You can find the step-by-step instructions [here](./examples/todo-mvc/index.md).
+**You can find the step-by-step instructions [here](./examples/todo-mvc/index.md).**
 
 [internal-example-code-getting-started]: https://github.com/clebert/pageobject/tree/master/docs/examples/getting-started.js
 
