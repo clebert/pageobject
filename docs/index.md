@@ -30,9 +30,9 @@ function describe(testCase, page) {
 In this tutorial we write a test case for the TodoMVC application.
 We will create several page objects and learn about different design principles.
 
-![todo-mvc](./examples/todo-mvc/images/todo-mvc.png)
-
 **You can find the step-by-step instructions [here](./examples/todo-mvc/index.md).**
+
+![todo-mvc](./examples/todo-mvc/images/todo-mvc.png)
 
 ## API documentation
 
