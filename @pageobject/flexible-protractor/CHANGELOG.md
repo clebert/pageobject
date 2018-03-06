@@ -7,14 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 # [1.1.0](https://github.com/clebert/pageobject/compare/v1.0.0...v1.1.0) (2018-03-06)
 
 
+### Features
 
-
-**Note:** Version bump only for package @pageobject/flexible-selenium
-
-<a name="1.0.0"></a>
-# [1.0.0](https://github.com/clebert/pageobject/compare/v1.0.0-beta-10...v1.0.0) (2018-03-05)
-
-
-
-
-**Note:** Version bump only for package @pageobject/flexible-selenium
+* **flexible-protractor:** add new package ([#153](https://github.com/clebert/pageobject/issues/153)) ([90abb4e](https://github.com/clebert/pageobject/commit/90abb4e))

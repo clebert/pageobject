@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/flexible-selenium",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Run your @pageobject/flexible-based tests using Selenium.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
