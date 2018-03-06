@@ -5332,7 +5332,7 @@ webdriver-js-extender@^1.0.0:
     "@types/selenium-webdriver" "^2.53.35"
     selenium-webdriver "^2.53.2"
 
-webdriver-manager@^12.0.6:
+webdriver-manager@*, webdriver-manager@^12.0.6:
   version "12.0.6"
   resolved "https://registry.yarnpkg.com/webdriver-manager/-/webdriver-manager-12.0.6.tgz#3df1a481977010b4cbf8c9d85c7a577828c0e70b"
   dependencies:
