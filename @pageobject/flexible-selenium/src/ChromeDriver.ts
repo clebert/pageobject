@@ -1,6 +1,5 @@
 import {ChildProcess, spawn} from 'child_process';
 
-/* tslint:disable-next-line no-implicit-dependencies */
 const updateConfig = require('webdriver-manager/selenium/update-config.json');
 
 export class ChromeDriver {

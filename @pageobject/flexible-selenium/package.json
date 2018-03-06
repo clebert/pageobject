@@ -24,5 +24,8 @@
     "@pageobject/flexible": "^1.0.0",
     "@types/selenium-webdriver": "^3.0.8",
     "selenium-webdriver": "^4.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "webdriver-manager": "*"
   }
 }
