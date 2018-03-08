@@ -2,22 +2,19 @@
   "name": "pageobject",
   "private": true,
   "scripts": {
-    "clean": "./scripts/clean.sh",
-    "commit": "commit",
     "commitmsg": "commitlint --edit",
-    "compile": "lerna exec -- tsc --project .",
-    "format": "prettier --write '**/*.{js,json,jsx,ts,tsx}'",
-    "format:test": "prettier --list-different '**/*.{js,json,jsx,ts,tsx}'",
-    "postinstall": "webdriver-manager update",
-    "lint": "node scripts/markdownlint.js && lerna exec -- ../../scripts/tslint.sh",
-    "prerelease": "yarn run clean && yarn install && yarn test",
+    "format": "prettier --write '**/*.{js,json,md,ts}'",
+    "prerelease": "make clean && yarn test",
     "release": "lerna publish --conventional-commits",
-    "postrelease": "git push --follow-tags origin master",
-    "pretest": "yarn run compile",
-    "test": "yarn run format:test && yarn run lint && jest --no-cache --verbose && lerna run test",
-    "posttest": "node docs/examples/getting-started.js && node docs/examples/todo-mvc/index.js && ./scripts/typedoc.sh",
-    "prewatch": "yarn run compile",
-    "watch": "run-p watch:compile \"watch:test -- {@}\" --",
+    "pretest": "make",
+    "test": "run-s test:*",
+    "test:examples": "node docs/examples/getting-started.js && node docs/examples/todo-mvc/index.js",
+    "test:jest": "jest --no-cache --verbose",
+    "test:prettier": "prettier --list-different '**/*.{js,json,md,ts}'",
+    "test:protractor": "protractor protractor.config.js",
+    "test:tslint": "lerna exec -- tslint --config tslint.json --project tsconfig.json --formatters-dir ../../node_modules/custom-tslint-formatters/formatters --format grouped",
+    "prewatch": "make dist",
+    "watch": "run-p watch:*",
     "watch:compile": "lerna exec --parallel --concurrency 99 -- tsc --project . --watch",
     "watch:test": "jest --watchAll"
   },
@@ -25,19 +22,16 @@
     "@commitlint/cli": "^6.1.3",
     "@commitlint/config-angular": "^6.1.3",
     "@commitlint/config-lerna-scopes": "^6.1.3",
-    "@commitlint/prompt-cli": "^6.1.3",
-    "@types/jest": "^22.1.4",
+    "@types/jest": "^22.2.0",
     "@types/node": "^9.4.6",
     "coveralls": "^3.0.0",
     "custom-tslint-formatters": "^2.3.0",
-    "globby": "^8.0.1",
     "husky": "^0.14.3",
     "jest": "^22.4.2",
     "lerna": "^2.9.0",
-    "markdownlint": "^0.7.0",
     "npm-run-all": "^4.1.2",
     "prettier": "^1.11.1",
-    "replace-in-file": "^3.1.1",
+    "replace-in-file": "^3.2.0",
     "ts-config": "^17.0.0",
     "ts-jest": "^22.4.1",
     "tslint": "^5.9.1",
@@ -50,10 +44,10 @@
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/@pageobject/*/src/**/*.{ts,tsx}",
-      "!**/@pageobject/*/src/**/*.test.{ts,tsx}",
+      "**/@pageobject/*/src/**/*.ts",
+      "!**/@pageobject/*/src/**/*.test.ts",
       "!**/@pageobject/flexible/src/FlexibleAdapterTestSuite.ts",
-      "!**/@pageobject/flexible-protractor/src/**/*.{ts,tsx}"
+      "!**/@pageobject/flexible-protractor/src/**/*.ts"
     ],
     "coverageThreshold": {
       "global": {
@@ -65,13 +59,11 @@
     },
     "moduleFileExtensions": [
       "js",
-      "jsx",
       "json",
-      "ts",
-      "tsx"
+      "ts"
     ],
     "testMatch": [
-      "<rootDir>/@pageobject/*/src/**/*.test.{ts,tsx}"
+      "<rootDir>/@pageobject/*/src/**/*.test.ts"
     ],
     "transform": {
       ".ts": "<rootDir>/node_modules/ts-jest/preprocessor.js"

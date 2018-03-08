@@ -18,5 +18,6 @@ language: node_js
 node_js:
   - '8'
 script:
-  - yarn test
+  - make clean && yarn test
+  - if test -n "$(git status --porcelain)"; then echo 'Working tree is dirty' && exit 1; fi
 sudo: required

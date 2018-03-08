@@ -52,23 +52,19 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 [badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
 [badge-typescript-link]: https://www.typescriptlang.org/
-
 [internal-api-flexible]: https://pageobject.js.org/api/flexible/
 [internal-api-flexible-protractor]: https://pageobject.js.org/api/flexible-protractor/
 [internal-api-flexible-puppeteer]: https://pageobject.js.org/api/flexible-puppeteer/
 [internal-api-flexible-selenium]: https://pageobject.js.org/api/flexible-selenium/
 [internal-api-reliable]: https://pageobject.js.org/api/reliable/
 [internal-api-stable]: https://pageobject.js.org/api/stable/
-
 [internal-installation-flexible]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible/README.md#installation
 [internal-installation-flexible-protractor]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible-protractor/README.md#installation
 [internal-installation-flexible-puppeteer]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible-puppeteer/README.md#installation
 [internal-installation-flexible-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible-selenium/README.md#installation
 [internal-installation-reliable]: https://github.com/clebert/pageobject/tree/master/@pageobject/reliable/README.md#installation
 [internal-installation-stable]: https://github.com/clebert/pageobject/tree/master/@pageobject/stable/README.md#installation
-
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
-
 [external-monorepo]: https://github.com/lerna/lerna#about
 [external-pageobject]: https://martinfowler.com/bliki/PageObject.html
 [external-protractor]: https://www.protractortest.org/#/
