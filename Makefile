@@ -32,7 +32,7 @@ docs/api/%: @pageobject/%/src/*.ts | dist
 	$(BIN)/replace-in-file '/Defined in .+node_modules./g' 'Defined in ' 'docs/api/$*/**/*.html' --isRegex --verbose
 
 node_modules: package.json @pageobject/*/package.json
-	yarn install --check-files
+	yarn install
 	touch $@
 
 node_modules/webdriver-manager/selenium:

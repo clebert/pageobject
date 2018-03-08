@@ -17,7 +17,6 @@
     "watch": "run-p watch:*",
     "watch:compile": "lerna exec --parallel --concurrency 99 -- tsc --project . --watch",
     "watch:test": "jest --watchAll"
-
   },
   "devDependencies": {
     "@commitlint/cli": "^6.1.3",
