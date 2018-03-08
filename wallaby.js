@@ -34,10 +34,7 @@ module.exports = ({localProjectDir, projectCacheDir}) => {
   return {
     debug: true,
     env: {type: 'node', runner: 'node'},
-    files: [
-      '@pageobject/*/src/**/*.ts',
-      '!@pageobject/*/src/**/*.test.ts'
-    ],
+    files: ['@pageobject/*/src/**/*.ts', '!@pageobject/*/src/**/*.test.ts'],
     hints: {
       ignoreCoverage: /istanbul ignore/
     },

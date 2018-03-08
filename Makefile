@@ -18,7 +18,10 @@ dist: $(DIST)
 .PHONY: docs
 docs: $(DOCS)
 
-@pageobject/%/dist: @pageobject/%/src/*.ts | node_modules
+.PHONY: install
+install: node_modules node_modules/webdriver-manager/selenium
+
+@pageobject/%/dist: @pageobject/%/src/*.ts | install
 	$(BIN)/tsc --project @pageobject/$*
 	touch $@
 
@@ -31,3 +34,6 @@ docs/api/%: @pageobject/%/src/*.ts | dist
 node_modules: package.json @pageobject/*/package.json
 	yarn install --check-files
 	touch $@
+
+node_modules/webdriver-manager/selenium:
+	$(BIN)/webdriver-manager update
