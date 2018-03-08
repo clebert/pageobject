@@ -35,23 +35,23 @@ module.exports = ({localProjectDir, projectCacheDir}) => {
     debug: true,
     env: {type: 'node', runner: 'node'},
     files: [
-      '@pageobject/*/src/**/*.{ts,tsx}',
-      '!@pageobject/*/src/**/*.test.{ts,tsx}'
+      '@pageobject/*/src/**/*.ts',
+      '!@pageobject/*/src/**/*.test.ts'
     ],
     hints: {
       ignoreCoverage: /istanbul ignore/
     },
     preprocessors: {
-      '**/*.{ts,tsx}': file =>
+      '**/*.ts': file =>
         file.content.replace(/@pageobject\/(.*?)\/dist/g, '@pageobject/$1/src')
     },
     setup,
     testFramework: 'jest',
     tests: [
-      '@pageobject/*/src/**/*.test.{ts,tsx}',
-      '!@pageobject/flexible-protractor/src/**/*.test.{ts,tsx}',
-      '!@pageobject/flexible-puppeteer/src/**/*.test.{ts,tsx}',
-      '!@pageobject/flexible-selenium/src/**/*.test.{ts,tsx}'
+      '@pageobject/*/src/**/*.test.ts',
+      '!@pageobject/flexible-protractor/src/**/*.test.ts',
+      '!@pageobject/flexible-puppeteer/src/**/*.test.ts',
+      '!@pageobject/flexible-selenium/src/**/*.test.ts'
     ]
   };
 };

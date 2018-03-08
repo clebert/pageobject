@@ -5,26 +5,29 @@ DIST := $(patsubst %,@pageobject/%/dist,$(PKGS))
 DOCS := $(addprefix docs/api/,$(PKGS))
 
 .PHONY: default
-default: $(DOCS)
+default: docs
 
 .PHONY: clean
 clean:
 	rm -rf @pageobject/*/dist
-	rm -rf @pageobject/*/node_modules
 	rm -rf docs/api/*
-	rm -rf node_modules
 
-docs/api/%: @pageobject/%/src/*.ts | $(DIST)
-	rm -rf $@
-	rm -rf node_modules/@types/lodash
-	$(BIN)/typedoc --out $@ ./@pageobject/$*
-	$(BIN)/replace-in-file '/Defined in .+node_modules./g' 'Defined in ' 'docs/api/$*/**/*.html' --isRegex --verbose
+.PHONY: dist
+dist: $(DIST)
+
+.PHONY: docs
+docs: $(DOCS)
 
 @pageobject/%/dist: @pageobject/%/src/*.ts | node_modules
 	$(BIN)/tsc --project @pageobject/$*
 	touch $@
 
+docs/api/%: @pageobject/%/src/*.ts | dist
+	rm -rf $@
+	rm -rf node_modules/@types/lodash
+	$(BIN)/typedoc --out $@ ./@pageobject/$*
+	$(BIN)/replace-in-file '/Defined in .+node_modules./g' 'Defined in ' 'docs/api/$*/**/*.html' --isRegex --verbose
+
 node_modules: package.json @pageobject/*/package.json
 	yarn install --check-files
-	$(BIN)/webdriver-manager update
 	touch $@
