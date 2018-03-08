@@ -18,7 +18,7 @@ docs/api/%: @pageobject/%/src/*.ts | $(DIST)
 	rm -rf $@
 	rm -rf node_modules/@types/lodash
 	$(BIN)/typedoc --out $@ ./@pageobject/$*
-	$(BIN)/replace-in-file '/Defined in .+node_modules./g' 'Defined in ' 'docs/**/*.html' --isRegex --verbose
+	$(BIN)/replace-in-file '/Defined in .+node_modules./g' 'Defined in ' 'docs/api/$*/**/*.html' --isRegex --verbose
 
 @pageobject/%/dist: @pageobject/%/src/*.ts | node_modules
 	$(BIN)/tsc --project @pageobject/$*
