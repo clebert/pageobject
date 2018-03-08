@@ -5,17 +5,17 @@ We will create several page objects and learn about different design principles.
 
 ![todo-mvc](./images/todo-mvc.png)
 
-*You can find the complete code for this example [here][internal-example-code-todo-mvc].*
-*It can be executed with Node.js 8 or higher.*
+_You can find the complete code for this example [here][internal-example-code-todo-mvc]._
+_It can be executed with Node.js 8 or higher._
 
 ## Page objects
 
-- [TodoApp](#page-object-todoapp)
-- TodoApp > [NewTodo](#page-object-newtodo)
-- TodoApp > [TodoList](#page-object-todolist)
-- TodoApp > TodoList > [Todo](#page-object-todo)[ ]
-- TodoApp > TodoList > Todo[ ] > [Label](#page-object-label)
-- TodoApp > TodoList > Todo[ ] > [Toggle](#page-object-toggle)
+* [TodoApp](#page-object-todoapp)
+* TodoApp > [NewTodo](#page-object-newtodo)
+* TodoApp > [TodoList](#page-object-todolist)
+* TodoApp > TodoList > [Todo](#page-object-todo)[ ]
+* TodoApp > TodoList > Todo[ ] > [Label](#page-object-label)
+* TodoApp > TodoList > Todo[ ] > [Toggle](#page-object-toggle)
 
 ## Test case
 
@@ -271,5 +271,4 @@ class Todo extends FlexiblePageObject {
 ```
 
 [internal-example-code-todo-mvc]: https://github.com/clebert/pageobject/blob/master/docs/examples/todo-mvc/index.js
-
 [external-todomvc]: http://todomvc.com/examples/react/#/

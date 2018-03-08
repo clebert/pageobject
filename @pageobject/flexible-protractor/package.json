@@ -20,9 +20,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {
-    "test": "protractor protractor.config.js"
-  },
   "dependencies": {
     "@pageobject/flexible": "^1.0.0",
     "protractor": "^5.3.0"

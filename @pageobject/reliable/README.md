@@ -22,6 +22,5 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [badge-npm-link]: https://yarnpkg.com/en/package/@pageobject/reliable
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
-
 [internal-api-reliable]: https://pageobject.js.org/api/reliable/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
