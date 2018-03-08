@@ -8,7 +8,7 @@
     "release": "lerna publish --conventional-commits",
     "pretest": "make",
     "test": "run-s test:*",
-    "test:examples": "node docs/examples/getting-started.js && node docs/examples/todo-mvc/index.js",
+    "test:examples": "node docs/examples/getting-started/index.js && node docs/examples/todo-mvc/index.js",
     "test:jest": "jest --no-cache --verbose",
     "test:prettier": "prettier --list-different '**/*.{js,json,md,ts}'",
     "test:protractor": "protractor protractor.config.js",

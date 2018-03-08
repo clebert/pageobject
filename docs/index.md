@@ -43,5 +43,5 @@ We will create several page objects and learn about different design principles.
 * [@pageobject/flexible-puppeteer](./api/flexible-puppeteer/index.html)
 * [@pageobject/flexible-selenium](./api/flexible-selenium/index.html)
 
-[internal-example-code-getting-started]: https://github.com/clebert/pageobject/tree/master/docs/examples/getting-started.js
+[internal-example-code-getting-started]: https://github.com/clebert/pageobject/tree/master/docs/examples/getting-started/index.js
 [external-example-domain]: http://example.com/
