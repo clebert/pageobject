@@ -1,6 +1,6 @@
 # @pageobject/flexible-puppeteer [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-> Run your [@pageobject/flexible][internal-readme-flexible]-based tests using [Puppeteer][external-puppeteer].
+> Run your [@pageobject/flexible][internal-api-flexible]-based tests using [Puppeteer][external-puppeteer].
 
 ## Installation
 
@@ -22,7 +22,7 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [badge-npm-link]: https://yarnpkg.com/en/package/@pageobject/flexible-puppeteer
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
+[internal-api-flexible]: https://pageobject.js.org/api/flexible/
 [internal-api-flexible-puppeteer]: https://pageobject.js.org/api/flexible-puppeteer/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
-[internal-readme-flexible]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible/README.md
 [external-puppeteer]: https://github.com/GoogleChrome/puppeteer/blob/master/README.md
