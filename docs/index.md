@@ -1,4 +1,8 @@
-# PageObjectJS [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link] [![TypeScript][badge-typescript-image]][badge-typescript-link]
+# PageObjectJS
+
+[![Build Status][badge-travis-image]][badge-travis-link]
+[![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
+[![TypeScript][badge-typescript-image]][badge-typescript-link]
 
 > **Reliable**, **stable**, and **flexible** web UI testing.
 
@@ -75,8 +79,8 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [internal-api-reliable]: https://pageobject.js.org/api/reliable/
 [internal-api-stable]: https://pageobject.js.org/api/stable/
 [internal-example-code-getting-started]: https://github.com/clebert/pageobject/tree/master/docs/examples/getting-started/index.js
-[internal-example-docs-todo-mvc]: https://pageobject.js.org/examples/todo-mvc/images/todo-mvc.png
-[internal-example-image-todo-mvc]: https://pageobject.js.org/examples/todo-mvc/
+[internal-example-docs-todo-mvc]: https://pageobject.js.org/examples/todo-mvc/
+[internal-example-image-todo-mvc]: https://pageobject.js.org/examples/todo-mvc/images/todo-mvc.png
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [external-example-domain]: http://example.com/
 [external-pageobject]: https://martinfowler.com/bliki/PageObject.html
