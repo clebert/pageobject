@@ -8,8 +8,12 @@ export interface Action {
 
 type TestStep = () => Promise<void>;
 
-function createError(name: string, description: string, cause: string): Error {
-  return new Error(`${name}: ${description}\n  Cause: ${cause}`);
+function createError(
+  description: string,
+  cause: string,
+  prefix: string = ''
+): Error {
+  return new Error(`${prefix}${description}\n  Cause: ${cause}`);
 }
 
 async function execute<TResult>(
@@ -68,6 +72,14 @@ export class TestCase {
     this.defaultTimeoutInSeconds = defaultTimeoutInSeconds;
   }
 
+  /**
+   * Adds an assertion as the next test step to this test case.
+   *
+   * When this test case is run, then
+   * - the evaluation of the `condition` is repeated as long as it evaluates to false or errors occur,
+   *   but not longer than the `timeoutInSeconds`
+   * - an error is thrown when the `timeoutInSeconds` is exceeded
+   */
   public assert(
     condition: Condition,
     timeoutInSeconds: number = this.defaultTimeoutInSeconds
@@ -76,29 +88,33 @@ export class TestCase {
       try {
         await execute(async () => condition.assert(), true, timeoutInSeconds);
       } catch (e) {
-        throw createError('Assert', condition.describe(), e.message);
+        throw createError(condition.describe(), e.message, 'Assert ');
       }
     });
 
     return this;
   }
 
-  public perform(
-    action: Action,
-    timeoutInSeconds: number = this.defaultTimeoutInSeconds
-  ): this {
-    this._testSteps.push(async () => {
-      try {
-        await execute(async () => action.perform(), false, timeoutInSeconds);
-      } catch (e) {
-        throw createError('Perform', action.description, e.message);
-      }
-    });
-
-    return this;
-  }
-
-  public when(
+  /**
+   * Adds a conditional sub test case as the next test step to this test case.
+   *
+   * When this test case is run, then
+   * - the evaluation of the `condition` is repeated as long as errors occur,
+   *   but not longer than the `timeoutInSeconds`
+   * - an error is thrown when the `timeoutInSeconds` is exceeded
+   * - the `then` sub test case is run only when the `condition` evaluates to true
+   * - the `otherwise` sub test case is run only when the `condition` evaluates to false
+   * - the `timeoutInSeconds` does not affect the running of the conditional sub test case
+   *
+   * Example:
+   *
+   * ```js
+   * testCase.if(webPage.lightboxAd.isExisting(), then =>
+   *   then.perform(webPage.lightboxAd.closeButton.click())
+   * );
+   * ```
+   */
+  public if(
     condition: Condition,
     callback: (then: TestCase, otherwise: TestCase) => void,
     timeoutInSeconds: number = this.defaultTimeoutInSeconds
@@ -122,13 +138,38 @@ export class TestCase {
           await otherwise.run();
         }
       } catch (e) {
-        throw createError('When', condition.describe(), e.message);
+        throw createError(condition.describe(), e.message, 'If ');
       }
     });
 
     return this;
   }
 
+  /**
+   * Adds a performance as the next test step to this test case.
+   *
+   * When this test case is run, then
+   * - the `action` is performed once
+   * - an error is thrown when the `action` fails or the `timeoutInSeconds` is exceeded
+   */
+  public perform(
+    action: Action,
+    timeoutInSeconds: number = this.defaultTimeoutInSeconds
+  ): this {
+    this._testSteps.push(async () => {
+      try {
+        await execute(async () => action.perform(), false, timeoutInSeconds);
+      } catch (e) {
+        throw createError(action.description, e.message);
+      }
+    });
+
+    return this;
+  }
+
+  /**
+   * Runs all test steps of this test case sequentially in the order in which they were added.
+   */
   public async run(): Promise<void> {
     if (this._alreadyRun) {
       throw new Error(

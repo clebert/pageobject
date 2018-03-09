@@ -4,12 +4,12 @@ import {TestCase} from '.';
 
 class ConditionMock {
   public readonly assert = jest.fn();
-  public readonly describe = jest.fn().mockReturnValue('description');
+  public readonly describe = jest.fn().mockReturnValue('conditionDescription');
   public readonly test = jest.fn();
 }
 
 class ActionMock {
-  public readonly description = 'description';
+  public readonly description = 'actionDescription';
   public readonly perform = jest.fn();
 }
 
@@ -70,15 +70,21 @@ const erroneous = (id?: number) => async () => {
 
 const neverEnding = async () => new Promise<void>(() => undefined);
 
+const defaultTimeoutInSeconds = 0.025;
+const defaultTimeoutMessage = `Timeout after ${defaultTimeoutInSeconds} seconds`;
+
+const customTimeoutInSeconds = defaultTimeoutInSeconds * 2;
+const customTimeoutMessage = `Timeout after ${customTimeoutInSeconds} seconds`;
+
 describe('TestCase', () => {
   let testCase: TestCase;
 
   beforeEach(() => {
-    testCase = new TestCase(0.1);
+    testCase = new TestCase(defaultTimeoutInSeconds);
   });
 
   describe('assert().run()', () => {
-    it('should assert the specified condition', async () => {
+    it('should assert the <condition>', async () => {
       const condition = new ConditionMock();
 
       condition.assert.mockImplementationOnce(erroneous());
@@ -96,17 +102,14 @@ describe('TestCase', () => {
         .mockImplementationOnce(erroneous(2))
         .mockImplementationOnce(neverEnding);
 
-      await expect(
-        observeTimeout(
-          async () => testCase.assert(condition as any).run(),
-          testCase.defaultTimeoutInSeconds
-        )
-      ).rejects.toEqual(new Error('Assert: description\n  Cause: Error 2'));
+      await expect(testCase.assert(condition as any).run()).rejects.toEqual(
+        new Error('Assert conditionDescription\n  Cause: Error 2')
+      );
 
       expect(condition.assert).toHaveBeenCalledTimes(3);
     });
 
-    it('should throw a default-timeout error', async () => {
+    it('should throw a default timeout error', async () => {
       const condition = new ConditionMock();
 
       condition.assert.mockImplementationOnce(neverEnding);
@@ -114,27 +117,32 @@ describe('TestCase', () => {
       await expect(
         observeTimeout(
           async () => testCase.assert(condition as any).run(),
-          testCase.defaultTimeoutInSeconds
+          defaultTimeoutInSeconds
         )
       ).rejects.toEqual(
-        new Error('Assert: description\n  Cause: Timeout after 0.1 seconds')
+        new Error(
+          `Assert conditionDescription\n  Cause: ${defaultTimeoutMessage}`
+        )
       );
 
       expect(condition.assert).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw a custom-timeout error', async () => {
+    it('should throw a custom timeout error', async () => {
       const condition = new ConditionMock();
 
       condition.assert.mockImplementationOnce(neverEnding);
 
       await expect(
         observeTimeout(
-          async () => testCase.assert(condition as any, 0.2).run(),
-          0.2
+          async () =>
+            testCase.assert(condition as any, customTimeoutInSeconds).run(),
+          customTimeoutInSeconds
         )
       ).rejects.toEqual(
-        new Error('Assert: description\n  Cause: Timeout after 0.2 seconds')
+        new Error(
+          `Assert conditionDescription\n  Cause: ${customTimeoutMessage}`
+        )
       );
 
       expect(condition.assert).toHaveBeenCalledTimes(1);
@@ -146,60 +154,65 @@ describe('TestCase', () => {
       condition.assert.mockImplementation(erroneous());
 
       await expect(testCase.assert(condition as any).run()).rejects.toEqual(
-        new Error('Assert: description\n  Cause: Error')
+        new Error('Assert conditionDescription\n  Cause: Error')
       );
     });
   });
 
-  describe('perform().run()', () => {
-    it('should perform the specified action', async () => {
-      const action = new ActionMock();
+  describe('if().run()', () => {
+    it('should throw a <condition> error', async () => {
+      const condition = new ConditionMock();
 
-      await testCase.perform(action).run();
+      condition.test
+        .mockImplementationOnce(erroneous(1))
+        .mockImplementationOnce(erroneous(2))
+        .mockImplementationOnce(neverEnding);
 
-      expect(action.perform).toHaveBeenCalledTimes(1);
+      await expect(
+        testCase.if(condition as any, () => undefined).run()
+      ).rejects.toEqual(new Error('If conditionDescription\n  Cause: Error 2'));
+
+      expect(condition.test).toHaveBeenCalledTimes(3);
     });
 
-    it('should throw an action error', async () => {
-      const action = new ActionMock();
+    it('should throw a default timeout error', async () => {
+      const condition = new ConditionMock();
 
-      action.perform.mockImplementationOnce(erroneous());
-
-      await expect(testCase.perform(action).run()).rejects.toEqual(
-        new Error('Perform: description\n  Cause: Error')
-      );
-    });
-
-    it('should throw a default-timeout error', async () => {
-      const action = new ActionMock();
-
-      action.perform.mockImplementationOnce(neverEnding);
+      condition.test.mockImplementationOnce(neverEnding);
 
       await expect(
         observeTimeout(
-          async () => testCase.perform(action).run(),
-          testCase.defaultTimeoutInSeconds
+          async () => testCase.if(condition as any, () => undefined).run(),
+          defaultTimeoutInSeconds
         )
       ).rejects.toEqual(
-        new Error('Perform: description\n  Cause: Timeout after 0.1 seconds')
+        new Error(`If conditionDescription\n  Cause: ${defaultTimeoutMessage}`)
       );
+
+      expect(condition.test).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw a custom-timeout error', async () => {
-      const action = new ActionMock();
+    it('should throw a custom timeout error', async () => {
+      const condition = new ConditionMock();
 
-      action.perform.mockImplementationOnce(neverEnding);
+      condition.test.mockImplementationOnce(neverEnding);
 
       await expect(
-        observeTimeout(async () => testCase.perform(action, 0.2).run(), 0.2)
+        observeTimeout(
+          async () =>
+            testCase
+              .if(condition as any, () => undefined, customTimeoutInSeconds)
+              .run(),
+          customTimeoutInSeconds
+        )
       ).rejects.toEqual(
-        new Error('Perform: description\n  Cause: Timeout after 0.2 seconds')
+        new Error(`If conditionDescription\n  Cause: ${customTimeoutMessage}`)
       );
-    });
-  });
 
-  describe('when().run()', () => {
-    it('should run the then-test-case', async () => {
+      expect(condition.test).toHaveBeenCalledTimes(1);
+    });
+
+    it('should run the <then> sub test case', async () => {
       const condition = new ConditionMock();
 
       condition.test
@@ -210,7 +223,7 @@ describe('TestCase', () => {
       const otherwiseAction = new ActionMock();
 
       await testCase
-        .when(condition as any, (then, otherwise) => {
+        .if(condition as any, (then, otherwise) => {
           then.perform(thenAction);
           otherwise.perform(otherwiseAction);
         })
@@ -221,7 +234,31 @@ describe('TestCase', () => {
       expect(otherwiseAction.perform).toHaveBeenCalledTimes(0);
     });
 
-    it('should run the otherwise-test-case', async () => {
+    it('should run the <then> sub test case and throw a default timeout error', async () => {
+      const condition = new ConditionMock();
+
+      condition.test.mockImplementationOnce(async () => true);
+
+      const action = new ActionMock();
+
+      action.perform.mockImplementationOnce(neverEnding);
+
+      await expect(
+        testCase
+          .if(
+            condition as any,
+            then => then.perform(action),
+            customTimeoutInSeconds
+          )
+          .run()
+      ).rejects.toEqual(
+        new Error(
+          `If conditionDescription\n  Cause: actionDescription\n  Cause: ${defaultTimeoutMessage}`
+        )
+      );
+    });
+
+    it('should run the <otherwise> sub test case', async () => {
       const condition = new ConditionMock();
 
       condition.test
@@ -232,7 +269,7 @@ describe('TestCase', () => {
       const otherwiseAction = new ActionMock();
 
       await testCase
-        .when(condition as any, (then, otherwise) => {
+        .if(condition as any, (then, otherwise) => {
           then.perform(thenAction);
           otherwise.perform(otherwiseAction);
         })
@@ -243,68 +280,28 @@ describe('TestCase', () => {
       expect(otherwiseAction.perform).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw a test-condition error', async () => {
+    it('should run the <otherwise> sub test case and throw a default timeout error', async () => {
       const condition = new ConditionMock();
 
-      condition.test
-        .mockImplementationOnce(erroneous(1))
-        .mockImplementationOnce(erroneous(2))
-        .mockImplementationOnce(neverEnding);
+      condition.test.mockImplementationOnce(async () => false);
 
-      const thenAction = new ActionMock();
-      const otherwiseAction = new ActionMock();
+      const action = new ActionMock();
+
+      action.perform.mockImplementationOnce(neverEnding);
 
       await expect(
-        observeTimeout(
-          async () =>
-            testCase
-              .when(condition as any, (then, otherwise) => {
-                then.perform(thenAction);
-                otherwise.perform(otherwiseAction);
-              })
-              .run(),
-          testCase.defaultTimeoutInSeconds
-        )
-      ).rejects.toEqual(new Error('When: description\n  Cause: Error 2'));
-
-      expect(condition.test).toHaveBeenCalledTimes(3);
-      expect(thenAction.perform).toHaveBeenCalledTimes(0);
-      expect(otherwiseAction.perform).toHaveBeenCalledTimes(0);
-    });
-
-    it('should throw a default-timeout error', async () => {
-      const condition = new ConditionMock();
-
-      condition.test.mockImplementationOnce(neverEnding);
-
-      await expect(
-        observeTimeout(
-          async () => testCase.when(condition as any, () => undefined).run(),
-          testCase.defaultTimeoutInSeconds
-        )
+        testCase
+          .if(
+            condition as any,
+            (then, otherwise) => otherwise.perform(action),
+            customTimeoutInSeconds
+          )
+          .run()
       ).rejects.toEqual(
-        new Error('When: description\n  Cause: Timeout after 0.1 seconds')
-      );
-
-      expect(condition.test).toHaveBeenCalledTimes(1);
-    });
-
-    it('should throw a custom-timeout error', async () => {
-      const condition = new ConditionMock();
-
-      condition.test.mockImplementationOnce(neverEnding);
-
-      await expect(
-        observeTimeout(
-          async () =>
-            testCase.when(condition as any, () => undefined, 0.2).run(),
-          0.2
+        new Error(
+          `If conditionDescription\n  Cause: actionDescription\n  Cause: ${defaultTimeoutMessage}`
         )
-      ).rejects.toEqual(
-        new Error('When: description\n  Cause: Timeout after 0.2 seconds')
       );
-
-      expect(condition.test).toHaveBeenCalledTimes(1);
     });
 
     it('should not throw an out-of-memory error', async () => {
@@ -313,8 +310,58 @@ describe('TestCase', () => {
       condition.test.mockImplementation(erroneous());
 
       await expect(
-        testCase.when(condition as any, () => undefined).run()
-      ).rejects.toEqual(new Error('When: description\n  Cause: Error'));
+        testCase.if(condition as any, () => undefined).run()
+      ).rejects.toEqual(new Error('If conditionDescription\n  Cause: Error'));
+    });
+  });
+
+  describe('perform().run()', () => {
+    it('should perform the <action>', async () => {
+      const action = new ActionMock();
+
+      await testCase.perform(action).run();
+
+      expect(action.perform).toHaveBeenCalledTimes(1);
+    });
+
+    it('should throw an <action> error', async () => {
+      const action = new ActionMock();
+
+      action.perform.mockImplementationOnce(erroneous());
+
+      await expect(testCase.perform(action).run()).rejects.toEqual(
+        new Error('actionDescription\n  Cause: Error')
+      );
+    });
+
+    it('should throw a default timeout error', async () => {
+      const action = new ActionMock();
+
+      action.perform.mockImplementationOnce(neverEnding);
+
+      await expect(
+        observeTimeout(
+          async () => testCase.perform(action).run(),
+          defaultTimeoutInSeconds
+        )
+      ).rejects.toEqual(
+        new Error(`actionDescription\n  Cause: ${defaultTimeoutMessage}`)
+      );
+    });
+
+    it('should throw a custom timeout error', async () => {
+      const action = new ActionMock();
+
+      action.perform.mockImplementationOnce(neverEnding);
+
+      await expect(
+        observeTimeout(
+          async () => testCase.perform(action, customTimeoutInSeconds).run(),
+          customTimeoutInSeconds
+        )
+      ).rejects.toEqual(
+        new Error(`actionDescription\n  Cause: ${customTimeoutMessage}`)
+      );
     });
   });
 
@@ -333,7 +380,7 @@ describe('TestCase', () => {
       const conditionalAction = new ActionMock();
 
       conditionalAction.perform.mockImplementationOnce(async () => {
-        calls.push('when()');
+        calls.push('if()');
       });
 
       const action = new ActionMock();
@@ -344,11 +391,11 @@ describe('TestCase', () => {
 
       await testCase
         .assert(condition as any)
-        .when(condition as any, then => then.perform(conditionalAction))
+        .if(condition as any, then => then.perform(conditionalAction))
         .perform(action)
         .run();
 
-      expect(calls).toEqual(['assert()', 'when()', 'perform()']);
+      expect(calls).toEqual(['assert()', 'if()', 'perform()']);
     });
 
     it('should throw an already-run error', async () => {
