@@ -16,7 +16,7 @@ import {
 describe('LogicalOperator', () => {
   class FalsyOperator implements Operator<any> {
     public describe(valueName: string): string {
-      return `(${valueName} IS FALSY)`;
+      return `(${valueName} is falsy)`;
     }
 
     public test(value: any): boolean {
@@ -30,7 +30,7 @@ describe('LogicalOperator', () => {
 
   class TruthyOperator implements Operator<any> {
     public describe(valueName: string): string {
-      return `(${valueName} IS TRUTHY)`;
+      return `(${valueName} is truthy)`;
     }
 
     public test(value: any): boolean {
@@ -46,7 +46,7 @@ describe('LogicalOperator', () => {
     describe('describe()', () => {
       it('should return a description', () => {
         expect(and(falsy(), truthy()).describe('valueName')).toBe(
-          '((valueName IS FALSY) AND (valueName IS TRUTHY))'
+          '((valueName is falsy) && (valueName is truthy))'
         );
       });
     });
@@ -75,7 +75,7 @@ describe('LogicalOperator', () => {
     describe('describe()', () => {
       it('should return a description', () => {
         expect(or(falsy(), truthy()).describe('valueName')).toBe(
-          '((valueName IS FALSY) OR (valueName IS TRUTHY))'
+          '((valueName is falsy) || (valueName is truthy))'
         );
       });
     });
@@ -104,7 +104,7 @@ describe('LogicalOperator', () => {
     describe('describe()', () => {
       it('should return a description', () => {
         expect(not(falsy()).describe('valueName')).toBe(
-          '(NOT (valueName IS FALSY))'
+          '!(valueName is falsy)'
         );
       });
     });
@@ -129,7 +129,7 @@ describe('RelationalOperator', () => {
 
     describe('describe()', () => {
       it('should return a description', () => {
-        expect(operator.describe('valueName')).toBe("(valueName EQUALS 'foo')");
+        expect(operator.describe('valueName')).toBe("(valueName == 'foo')");
       });
     });
 
@@ -152,9 +152,7 @@ describe('RelationalOperator', () => {
 
     describe('describe()', () => {
       it('should return a description', () => {
-        expect(operator.describe('valueName')).toBe(
-          '(valueName GREATER THAN 1)'
-        );
+        expect(operator.describe('valueName')).toBe('(valueName > 1)');
       });
     });
 
@@ -175,9 +173,7 @@ describe('RelationalOperator', () => {
 
     describe('describe()', () => {
       it('should return a description', () => {
-        expect(operator.describe('valueName')).toBe(
-          '(valueName GREATER THAN OR EQUALS 1)'
-        );
+        expect(operator.describe('valueName')).toBe('(valueName >= 1)');
       });
     });
 
@@ -198,7 +194,7 @@ describe('RelationalOperator', () => {
 
     describe('describe()', () => {
       it('should return a description', () => {
-        expect(operator.describe('valueName')).toBe('(valueName LESS THAN 1)');
+        expect(operator.describe('valueName')).toBe('(valueName < 1)');
       });
     });
 
@@ -219,9 +215,7 @@ describe('RelationalOperator', () => {
 
     describe('describe()', () => {
       it('should return a description', () => {
-        expect(operator.describe('valueName')).toBe(
-          '(valueName LESS THAN OR EQUALS 1)'
-        );
+        expect(operator.describe('valueName')).toBe('(valueName <= 1)');
       });
     });
 
@@ -242,9 +236,7 @@ describe('RelationalOperator', () => {
 
     describe('describe()', () => {
       it('should return a description', () => {
-        expect(operator.describe('valueName')).toBe(
-          '(valueName MATCHES /foo/)'
-        );
+        expect(operator.describe('valueName')).toBe('(valueName =~ /foo/)');
       });
     });
 
