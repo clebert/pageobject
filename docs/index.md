@@ -64,7 +64,7 @@ We will create several page objects and learn about different design principles.
 
 ---
 
-Built by (c) Clemens Akens. Released under the terms of the [MIT License][internal-license].
+Copyright (c) 2017-present, Clemens Akens. Released under the terms of the [MIT License][internal-license].
 
 [badge-coveralls-image]: https://coveralls.io/repos/github/clebert/pageobject/badge.svg?branch=master
 [badge-coveralls-link]: https://coveralls.io/github/clebert/pageobject?branch=master
