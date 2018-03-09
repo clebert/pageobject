@@ -270,5 +270,10 @@ class Todo extends FlexiblePageObject {
 }
 ```
 
+---
+
+Copyright (c) 2017-present, Clemens Akens. Released under the terms of the [MIT License][internal-license].
+
 [internal-example-code-todo-mvc]: https://github.com/clebert/pageobject/blob/master/docs/examples/todo-mvc/index.js
+[internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [external-todomvc]: http://todomvc.com/examples/react/#/
