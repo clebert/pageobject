@@ -1,4 +1,9 @@
-# @pageobject/reliable [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
+# @pageobject/reliable
+
+[![Package Version][badge-npm-image]][badge-npm-link]
+[![Build Status][badge-travis-image]][badge-travis-link]
+[![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
+[![TypeScript][badge-typescript-image]][badge-typescript-link]
 
 > Write **reliable** tests in a declarative programming style.
 
@@ -8,7 +13,7 @@
 yarn add @pageobject/reliable
 ```
 
-## API
+## API documentation
 
 Please find the API documentation [here][internal-api-reliable].
 
@@ -22,5 +27,7 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [badge-npm-link]: https://yarnpkg.com/en/package/@pageobject/reliable
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
+[badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
+[badge-typescript-link]: https://www.typescriptlang.org/
 [internal-api-reliable]: https://pageobject.js.org/api/reliable/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
