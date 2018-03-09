@@ -7,6 +7,8 @@
 
 > Write **reliable** tests in a declarative programming style.
 
+**This package is part of [PageObjectJS][internal-homepage].**
+
 ## Installation
 
 ```sh
@@ -30,4 +32,5 @@ Copyright (c) 2017-present, Clemens Akens. Released under the terms of the [MIT 
 [badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
 [badge-typescript-link]: https://www.typescriptlang.org/
 [internal-api-reliable]: https://pageobject.js.org/api/reliable/
+[internal-homepage]: https://pageobject.js.org/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
