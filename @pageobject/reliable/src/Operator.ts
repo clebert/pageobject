@@ -42,14 +42,14 @@ abstract class LogicalUnaryOperator<TValue> implements Operator<TValue> {
   public describe(valueName: string): string {
     const {name, operand} = this;
 
-    return `(${name} ${operand.describe(valueName)})`;
+    return `${name}${operand.describe(valueName)}`;
   }
 
   public abstract test(value: TValue): boolean;
 }
 
 class AndOperator<TValue> extends LogicalBinaryOperator<TValue> {
-  protected readonly name = 'AND';
+  protected readonly name = '&&';
 
   public test(value: TValue): boolean {
     return this.operandA.test(value) && this.operandB.test(value);
@@ -64,7 +64,7 @@ export function and<TValue>(
 }
 
 class OrOperator<TValue> extends LogicalBinaryOperator<TValue> {
-  protected readonly name = 'OR';
+  protected readonly name = '||';
 
   public test(value: TValue): boolean {
     return this.operandA.test(value) || this.operandB.test(value);
@@ -79,7 +79,7 @@ export function or<TValue>(
 }
 
 class NotOperator<TValue> extends LogicalUnaryOperator<TValue> {
-  protected readonly name = 'NOT';
+  protected readonly name = '!';
 
   public test(value: TValue): boolean {
     return !this.operand.test(value);
@@ -117,7 +117,7 @@ abstract class RelationalOperator<TActualValue, TExpectedValue>
 }
 
 class EqualsOperator<TValue> extends RelationalOperator<TValue, TValue> {
-  protected readonly name = 'EQUALS';
+  protected readonly name = '==';
 
   public test(value: TValue): boolean {
     try {
@@ -138,7 +138,7 @@ export function equals<TValue>(expectedValue: TValue): Operator<TValue> {
 }
 
 class GreaterThanOperator extends RelationalOperator<number, number> {
-  protected readonly name = 'GREATER THAN';
+  protected readonly name = '>';
 
   public test(value: number): boolean {
     return value > this.expectedValue;
@@ -150,7 +150,7 @@ export function greaterThan(expectedValue: number): Operator<number> {
 }
 
 class GreaterThanOrEqualsOperator extends RelationalOperator<number, number> {
-  protected readonly name = 'GREATER THAN OR EQUALS';
+  protected readonly name = '>=';
 
   public test(value: number): boolean {
     return value >= this.expectedValue;
@@ -162,7 +162,7 @@ export function greaterThanOrEquals(expectedValue: number): Operator<number> {
 }
 
 class LessThanOperator extends RelationalOperator<number, number> {
-  protected readonly name = 'LESS THAN';
+  protected readonly name = '<';
 
   public test(value: number): boolean {
     return value < this.expectedValue;
@@ -174,7 +174,7 @@ export function lessThan(expectedValue: number): Operator<number> {
 }
 
 class LessThanOrEqualsOperator extends RelationalOperator<number, number> {
-  protected readonly name = 'LESS THAN OR EQUALS';
+  protected readonly name = '<=';
 
   public test(value: number): boolean {
     return value <= this.expectedValue;
@@ -186,7 +186,7 @@ export function lessThanOrEquals(expectedValue: number): Operator<number> {
 }
 
 class MatchesOperator extends RelationalOperator<string, RegExp> {
-  protected readonly name = 'MATCHES';
+  protected readonly name = '=~';
 
   public test(value: string): boolean {
     return this.expectedValue.test(value);

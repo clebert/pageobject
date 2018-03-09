@@ -365,7 +365,7 @@ describe("PageObject: A > B(b EQUALS 'b')", () => {
   describe('nth()', () => {
     it('should throw a selection-criterion-exists error', () => {
       expect(() => pageObject.nth(1)).toThrow(
-        "Selection criterion already exists: A > B(b EQUALS 'b')"
+        "Selection criterion already exists: A > B(b == 'b')"
       );
     });
   });
@@ -373,7 +373,7 @@ describe("PageObject: A > B(b EQUALS 'b')", () => {
   describe('where()', () => {
     it('should throw a selection-criterion-exists error', () => {
       expect(() => pageObject.where(self => self.getSize(equals(1)))).toThrow(
-        "Selection criterion already exists: A > B(b EQUALS 'b')"
+        "Selection criterion already exists: A > B(b == 'b')"
       );
     });
   });
@@ -443,7 +443,7 @@ describe("PageObject: A > B(b EQUALS 'b')", () => {
       document.body.innerHTML = notFoundHTML;
 
       await expect(pageObject.findElement()).rejects.toEqual(
-        new Error("Element not found: A > B(b EQUALS 'b')")
+        new Error("Element not found: A > B(b == 'b')")
       );
     });
 
@@ -451,7 +451,7 @@ describe("PageObject: A > B(b EQUALS 'b')", () => {
       document.body.innerHTML = notUniqueHTML;
 
       await expect(pageObject.findElement()).rejects.toEqual(
-        new Error("Element not unique: A > B(b EQUALS 'b')")
+        new Error("Element not unique: A > B(b == 'b')")
       );
     });
 
@@ -461,9 +461,9 @@ describe("PageObject: A > B(b EQUALS 'b')", () => {
       await expect(pageObject.findElement()).rejects.toEqual(
         new Error(
           [
-            "Element not matching: A > B(b EQUALS 'b')",
-            "  • Comparison failed: ((b = 'a') EQUALS 'b')",
-            "  • Comparison failed: ((b = '') EQUALS 'b')"
+            "Element not matching: A > B(b == 'b')",
+            "  • Comparison failed: ((b = 'a') == 'b')",
+            "  • Comparison failed: ((b = '') == 'b')"
           ].join('\n')
         )
       );
@@ -472,7 +472,7 @@ describe("PageObject: A > B(b EQUALS 'b')", () => {
 
   describe('toString()', () => {
     it('should return a description', () => {
-      expect(pageObject.toString()).toBe("A > B(b EQUALS 'b')");
+      expect(pageObject.toString()).toBe("A > B(b == 'b')");
     });
   });
 });
@@ -486,7 +486,7 @@ describe("PageObject: A[1] > B(b EQUALS 'b') > C", () => {
 
   describe('toString()', () => {
     it('should return a description', () => {
-      expect(pageObject.toString()).toBe("A[1] > B(b EQUALS 'b') > C");
+      expect(pageObject.toString()).toBe("A[1] > B(b == 'b') > C");
     });
   });
 });
