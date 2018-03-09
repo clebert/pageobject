@@ -1,6 +1,6 @@
 # @pageobject/flexible [![Package Version][badge-npm-image]][badge-npm-link] [![Build Status][badge-travis-image]][badge-travis-link] [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 
-> Write **flexible** tests using a [@pageobject/stable][internal-readme-stable]-based API which is adaptable for different browser automation frameworks.
+> Write **flexible** tests using a [@pageobject/stable][internal-api-stable]-based API which is adaptable for different browser automation frameworks.
 
 ## Installation
 
@@ -23,5 +23,5 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 [internal-api-flexible]: https://pageobject.js.org/api/flexible/
+[internal-api-stable]: https://pageobject.js.org/api/stable/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
-[internal-readme-stable]: https://github.com/clebert/pageobject/tree/master/@pageobject/stable/README.md

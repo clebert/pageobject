@@ -232,6 +232,9 @@ export abstract class FlexiblePageObject extends PageObject<
     );
   }
 
+  /**
+   * This page object is considered visible if the corresponding DOM element consumes space in the document.
+   */
   public isVisible(operator: Operator<boolean> = equals(true)): Condition {
     return new Condition(
       operator,

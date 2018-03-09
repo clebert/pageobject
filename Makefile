@@ -2,7 +2,7 @@ BIN := "$(shell yarn bin)"
 PKGS := reliable stable flexible flexible-protractor flexible-puppeteer flexible-selenium
 
 .PHONY: docs
-docs: $(addprefix docs/api/,$(PKGS))
+docs: $(addprefix docs/api/,$(PKGS)) docs/index.md
 
 .PHONY: dist
 dist: $(patsubst %,@pageobject/%/dist,$(PKGS))
@@ -16,11 +16,14 @@ clean:
 	$(BIN)/tsc --project @pageobject/$*
 	touch $@
 
-docs/api/%: @pageobject/%/src/*.ts | dist
+docs/api/%: @pageobject/%/README.md @pageobject/%/src/*.ts | dist
 	rm -rf $@
 	rm -rf node_modules/@types/lodash
-	$(BIN)/typedoc --out $@ ./@pageobject/$*
+	$(BIN)/typedoc --out $@ --readme @pageobject/$*/README.md ./@pageobject/$*
 	$(BIN)/replace-in-file '/Defined in .+node_modules./g' 'Defined in ' 'docs/api/$*/**/*.html' --isRegex --verbose
+
+docs/index.md: README.md
+	cp $< $@
 
 node_modules: package.json @pageobject/*/package.json
 	yarn install --check-files

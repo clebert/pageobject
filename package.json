@@ -10,7 +10,7 @@
     "test": "run-s test:*",
     "test:examples": "for example in docs/examples/*/index.js; do node \"$example\"; done",
     "test:jest": "jest --no-cache --verbose",
-    "test:markdownlint": "markdownlint --config markdownlint.config.json --ignore '**/CHANGELOG.md' --ignore '**/node_modules/**/*' --ignore '**/temp/**/*' '**/*.md'",
+    "test:markdownlint": "markdownlint --config .markdownlint.json --ignore '**/CHANGELOG.md' --ignore '**/node_modules/**/*' --ignore '**/temp/**/*' '**/*.md'",
     "test:prettier": "prettier --list-different '**/*.{js,json,md,ts}'",
     "test:protractor": "protractor protractor.config.js",
     "test:tslint": "lerna exec -- tslint --config tslint.json --project tsconfig.json --formatters-dir ../../node_modules/custom-tslint-formatters/formatters --format grouped",

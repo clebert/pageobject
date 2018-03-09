@@ -2,45 +2,61 @@
 
 > **Reliable**, **stable**, and **flexible** web UI testing.
 
-## Packages
+## Getting started
 
-This is a multi-package repository ([monorepo][external-monorepo]).
+In this example we navigate to [example.com][external-example-domain] and assert that the page title equals "Example Domain".
 
-### @pageobject/reliable
+```js
+class Page extends FlexiblePageObject {
+  get selector() {
+    return ':root'; // https://developer.mozilla.org/en-US/docs/Web/CSS/:root
+  }
+}
 
-**[Installation][internal-installation-reliable] | [API][internal-api-reliable]**
+function describe(testCase, page) {
+  testCase
+    .perform(page.navigateTo('http://example.com/'))
+    .assert(page.getPageTitle(equals('Example Domain')));
+}
+```
+
+_You can find the complete code for this example [here][internal-example-code-getting-started]._
+_It can be executed with Node.js 8 or higher._
+
+## API documentation
+
+### [@pageobject/reliable][internal-api-reliable]
 
 Write **reliable** tests in a declarative programming style.
 
-### @pageobject/stable
-
-**[Installation][internal-installation-stable] | [API][internal-api-stable]**
+### [@pageobject/stable][internal-api-stable]
 
 Write **stable** tests using a sophisticated implementation of the [page object pattern][external-pageobject].
 
-### @pageobject/flexible
-
-**[Installation][internal-installation-flexible] | [API][internal-api-flexible]**
+### [@pageobject/flexible][internal-api-flexible]
 
 Write **flexible** tests using a @pageobject/stable-based API which is adaptable for different browser automation frameworks.
 
-### @pageobject/flexible-protractor
-
-**[Installation][internal-installation-flexible-protractor] | [API][internal-api-flexible-protractor]**
+### [@pageobject/flexible-protractor][internal-api-flexible-protractor]
 
 Run your @pageobject/flexible-based tests using [Protractor][external-protractor].
 
-### @pageobject/flexible-puppeteer
-
-**[Installation][internal-installation-flexible-puppeteer] | [API][internal-api-flexible-puppeteer]**
+### [@pageobject/flexible-puppeteer][internal-api-flexible-puppeteer]
 
 Run your @pageobject/flexible-based tests using [Puppeteer][external-puppeteer].
 
-### @pageobject/flexible-selenium
-
-**[Installation][internal-installation-flexible-selenium] | [API][internal-api-flexible-selenium]**
+### [@pageobject/flexible-selenium][internal-api-flexible-selenium]
 
 Run your @pageobject/flexible-based tests using [Selenium][external-selenium].
+
+## Tutorial: TodoMVC
+
+In this tutorial we write a test case for the TodoMVC application.
+We will create several page objects and learn about different design principles.
+
+**You can find the step-by-step instructions [here][internal-example-docs-todo-mvc].**
+
+![todo-mvc][internal-example-image-todo-mvc]
 
 ---
 
@@ -58,14 +74,11 @@ Built by (c) Clemens Akens. Released under the terms of the [MIT License][intern
 [internal-api-flexible-selenium]: https://pageobject.js.org/api/flexible-selenium/
 [internal-api-reliable]: https://pageobject.js.org/api/reliable/
 [internal-api-stable]: https://pageobject.js.org/api/stable/
-[internal-installation-flexible]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible/README.md#installation
-[internal-installation-flexible-protractor]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible-protractor/README.md#installation
-[internal-installation-flexible-puppeteer]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible-puppeteer/README.md#installation
-[internal-installation-flexible-selenium]: https://github.com/clebert/pageobject/tree/master/@pageobject/flexible-selenium/README.md#installation
-[internal-installation-reliable]: https://github.com/clebert/pageobject/tree/master/@pageobject/reliable/README.md#installation
-[internal-installation-stable]: https://github.com/clebert/pageobject/tree/master/@pageobject/stable/README.md#installation
+[internal-example-code-getting-started]: https://github.com/clebert/pageobject/tree/master/docs/examples/getting-started/index.js
+[internal-example-docs-todo-mvc]: https://pageobject.js.org/examples/todo-mvc/images/todo-mvc.png
+[internal-example-image-todo-mvc]: https://pageobject.js.org/examples/todo-mvc/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
-[external-monorepo]: https://github.com/lerna/lerna#about
+[external-example-domain]: http://example.com/
 [external-pageobject]: https://martinfowler.com/bliki/PageObject.html
 [external-protractor]: https://www.protractortest.org/#/
 [external-puppeteer]: https://github.com/GoogleChrome/puppeteer/blob/master/README.md
