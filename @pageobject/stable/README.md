@@ -7,6 +7,8 @@
 
 > Write **stable** tests using a sophisticated implementation of the [page object pattern][external-pageobject].
 
+**This package is part of [PageObjectJS][internal-homepage].**
+
 ## Installation
 
 ```sh
@@ -30,5 +32,6 @@ Copyright (c) 2017-present, Clemens Akens. Released under the terms of the [MIT 
 [badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
 [badge-typescript-link]: https://www.typescriptlang.org/
 [internal-api-stable]: https://pageobject.js.org/api/stable/
+[internal-homepage]: https://pageobject.js.org/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [external-pageobject]: https://martinfowler.com/bliki/PageObject.html

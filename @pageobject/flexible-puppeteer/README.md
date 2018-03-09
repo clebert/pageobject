@@ -7,6 +7,8 @@
 
 > Run your [@pageobject/flexible][internal-api-flexible]-based tests using [Puppeteer][external-puppeteer].
 
+**This package is part of [PageObjectJS][internal-homepage].**
+
 ## Installation
 
 ```sh
@@ -31,5 +33,6 @@ Copyright (c) 2017-present, Clemens Akens. Released under the terms of the [MIT 
 [badge-typescript-link]: https://www.typescriptlang.org/
 [internal-api-flexible]: https://pageobject.js.org/api/flexible/
 [internal-api-flexible-puppeteer]: https://pageobject.js.org/api/flexible-puppeteer/
+[internal-homepage]: https://pageobject.js.org/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
 [external-puppeteer]: https://github.com/GoogleChrome/puppeteer/blob/master/README.md
