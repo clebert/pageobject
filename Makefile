@@ -12,7 +12,7 @@ clean:
 	rm -rf @pageobject/*/dist
 	rm -rf docs/api/*
 
-@pageobject/%/dist: @pageobject/%/src/*.ts | node_modules
+@pageobject/%/dist: @pageobject/%/src/*.ts | node_modules node_modules/webdriver-manager/selenium
 	$(BIN)/tsc --project @pageobject/$*
 	touch $@
 
@@ -24,5 +24,7 @@ docs/api/%: @pageobject/%/src/*.ts | dist
 
 node_modules: package.json @pageobject/*/package.json
 	yarn install --check-files
-	$(BIN)/webdriver-manager update --gecko false
 	touch $@
+
+node_modules/webdriver-manager/selenium:
+	$(BIN)/webdriver-manager update --gecko false
