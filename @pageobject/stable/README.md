@@ -15,6 +15,20 @@
 yarn add @pageobject/stable
 ```
 
+## Usage
+
+### TypeScript/ES modules
+
+```js
+import {PageObject} from '@pageobject/stable';
+```
+
+### CommonJS
+
+```js
+const {PageObject} = require('@pageobject/stable');
+```
+
 ## API documentation
 
 Please find the API documentation [here][internal-api-stable].

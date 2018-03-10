@@ -15,6 +15,20 @@
 yarn add @pageobject/flexible-protractor
 ```
 
+## Usage
+
+### TypeScript/ES modules
+
+```js
+import {ProtractorAdapter} from '@pageobject/flexible-protractor';
+```
+
+### CommonJS
+
+```js
+const {ProtractorAdapter} = require('@pageobject/flexible-protractor');
+```
+
 ## API documentation
 
 Please find the API documentation [here][internal-api-flexible-protractor].
