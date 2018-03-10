@@ -60,7 +60,7 @@ We will create several page objects and learn about different design principles.
 
 **You can find the step-by-step instructions [here][internal-example-docs-todo-mvc].**
 
-![todo-mvc][internal-example-image-todo-mvc]
+[![todo-mvc][internal-example-image-todo-mvc]][internal-example-docs-todo-mvc]
 
 ---
 
