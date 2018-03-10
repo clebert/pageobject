@@ -15,6 +15,20 @@
 yarn add @pageobject/flexible-selenium
 ```
 
+## Usage
+
+### TypeScript/ES modules
+
+```js
+import {SeleniumAdapter} from '@pageobject/flexible-selenium';
+```
+
+### CommonJS
+
+```js
+const {SeleniumAdapter} = require('@pageobject/flexible-selenium');
+```
+
 ## API documentation
 
 Please find the API documentation [here][internal-api-flexible-selenium].

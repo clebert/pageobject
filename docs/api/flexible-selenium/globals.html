@@ -908,9 +908,6 @@ img { max-width: 100%; }
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class=" tsd-kind-class">
-			<a href="classes/chromedriver.html" class="tsd-kind-icon">Chrome<wbr>Driver</a>
-		</li>
-		<li class=" tsd-kind-class">
 			<a href="classes/seleniumadapter.html" class="tsd-kind-icon">Selenium<wbr>Adapter</a>
 		</li>
 		<li class=" tsd-kind-class tsd-is-not-exported">
@@ -918,9 +915,6 @@ img { max-width: 100%; }
 		</li>
 		<li class=" tsd-kind-interface tsd-is-not-exported">
 			<a href="interfaces/webdriver4.html" class="tsd-kind-icon">Web<wbr>Driver4</a>
-		</li>
-		<li class=" tsd-kind-variable tsd-is-not-exported">
-			<a href="globals.html#updateconfig" class="tsd-kind-icon">update<wbr>Config</a>
 		</li>
 		<li class=" tsd-kind-function tsd-is-not-exported">
 			<a href="globals.html#createdriver" class="tsd-kind-icon">create<wbr>Driver</a>
@@ -942,6 +936,13 @@ img { max-width: 100%; }
 			<h2 id="installation">Installation</h2>
 			<pre><code class="lang-sh">yarn add @pageobject/flexible-selenium
 </code></pre>
+			<h2 id="usage">Usage</h2>
+			<h3 id="typescript-es-modules">TypeScript/ES modules</h3>
+			<pre><code class="lang-js"><span class="hljs-keyword">import</span> {SeleniumAdapter} <span class="hljs-keyword">from</span> <span class="hljs-string">'@pageobject/flexible-selenium'</span>;
+</code></pre>
+			<h3 id="commonjs">CommonJS</h3>
+			<pre><code class="lang-js"><span class="hljs-keyword">const</span> {SeleniumAdapter} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@pageobject/flexible-selenium'</span>);
+</code></pre>
 			<h2 id="api-documentation">API documentation</h2>
 			<p>Please find the API documentation <a href="https://pageobject.js.org/api/flexible-selenium/">here</a>.</p>
 			<hr>
@@ -954,7 +955,6 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Classes</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-class"><a href="classes/chromedriver.html" class="tsd-kind-icon">Chrome<wbr>Driver</a></li>
 							<li class="tsd-kind-class"><a href="classes/seleniumadapter.html" class="tsd-kind-icon">Selenium<wbr>Adapter</a></li>
 							<li class="tsd-kind-class tsd-is-not-exported"><a href="classes/seleniumelement.html" class="tsd-kind-icon">Selenium<wbr>Element</a></li>
 						</ul>
@@ -966,31 +966,12 @@ img { max-width: 100%; }
 						</ul>
 					</section>
 					<section class="tsd-index-section tsd-is-not-exported">
-						<h3>Variables</h3>
-						<ul class="tsd-index-list">
-							<li class="tsd-kind-variable tsd-is-not-exported"><a href="globals.html#updateconfig" class="tsd-kind-icon">update<wbr>Config</a></li>
-						</ul>
-					</section>
-					<section class="tsd-index-section tsd-is-not-exported">
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-function tsd-is-not-exported"><a href="globals.html#createdriver" class="tsd-kind-icon">create<wbr>Driver</a></li>
 						</ul>
 					</section>
 				</div>
-			</section>
-		</section>
-		<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-			<h2>Variables</h2>
-			<section class="tsd-panel tsd-member tsd-kind-variable tsd-is-not-exported">
-				<a name="updateconfig" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagConst">Const</span> update<wbr>Config</h3>
-				<div class="tsd-signature tsd-kind-icon">update<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require(&#x27;webdriver-manager/selenium/update-config.json&#x27;)</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/flexible-selenium/src/ChromeDriver.ts#L3">ChromeDriver.ts:3</a></li>
-					</ul>
-				</aside>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">

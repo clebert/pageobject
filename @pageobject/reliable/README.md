@@ -15,6 +15,20 @@
 yarn add @pageobject/reliable
 ```
 
+## Usage
+
+### TypeScript/ES modules
+
+```js
+import {Condition, TestCase, and /* ... */} from '@pageobject/reliable';
+```
+
+### CommonJS
+
+```js
+const {Condition, TestCase, and /* ... */} = require('@pageobject/reliable');
+```
+
 ## API documentation
 
 Please find the API documentation [here][internal-api-reliable].

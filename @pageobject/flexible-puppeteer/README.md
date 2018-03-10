@@ -15,6 +15,20 @@
 yarn add @pageobject/flexible-puppeteer
 ```
 
+## Usage
+
+### TypeScript/ES modules
+
+```js
+import {PuppeteerAdapter} from '@pageobject/flexible-puppeteer';
+```
+
+### CommonJS
+
+```js
+const {PuppeteerAdapter} = require('@pageobject/flexible-puppeteer');
+```
+
 ## API documentation
 
 Please find the API documentation [here][internal-api-flexible-puppeteer].

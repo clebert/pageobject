@@ -15,6 +15,28 @@
 yarn add @pageobject/flexible
 ```
 
+## Usage
+
+### TypeScript/ES modules
+
+```js
+import {
+  FlexibleAdapterTestSuite,
+  FlexibleKey,
+  FlexiblePageObject
+} from '@pageobject/flexible';
+```
+
+### CommonJS
+
+```js
+const {
+  FlexibleAdapterTestSuite,
+  FlexibleKey,
+  FlexiblePageObject
+} = require('@pageobject/flexible');
+```
+
 ## API documentation
 
 Please find the API documentation [here][internal-api-flexible].
