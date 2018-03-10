@@ -27,7 +27,6 @@ class ChromeDriver {
   public stop(): void {
     process.env.SELENIUM_REMOTE_URL = undefined;
 
-    /* istanbul ignore next */
     if (this._childProcess) {
       this._childProcess.kill();
     }
