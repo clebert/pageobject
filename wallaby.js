@@ -50,7 +50,9 @@ module.exports = ({localProjectDir, projectCacheDir}) => {
     testFramework: 'jest',
     tests: [
       '@pageobject/*/src/**/*.test.ts',
-      '!@pageobject/webdriver-*/src/**/*.test.ts'
+      '!@pageobject/protractor/src/**/*.test.ts',
+      '!@pageobject/puppeteer/src/**/*.test.ts',
+      '!@pageobject/selenium-webdriver/src/**/*.test.ts'
     ]
   };
 };

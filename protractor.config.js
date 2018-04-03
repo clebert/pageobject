@@ -12,5 +12,5 @@ const chromeArgs =
 exports.config = {
   capabilities: {browserName: 'chrome', chromeOptions: {args: chromeArgs}},
   directConnect: true,
-  specs: ['@pageobject/webdriver-protractor/dist/ProtractorWebDriver.spec.js']
+  specs: ['@pageobject/protractor/dist/ProtractorWebDriver.spec.js']
 };

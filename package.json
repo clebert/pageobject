@@ -46,7 +46,7 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/@pageobject/*/src/**/*.ts",
-      "!**/@pageobject/webdriver-protractor/src/**/*.ts"
+      "!**/@pageobject/protractor/src/**/*.ts"
     ],
     "coverageThreshold": {
       "global": {

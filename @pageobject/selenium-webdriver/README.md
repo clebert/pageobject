@@ -1,4 +1,4 @@
-# @pageobject/webdriver-selenium
+# @pageobject/selenium-webdriver
 
 [![Package Version][badge-npm-image]][badge-npm-link]
 [![Build Status][badge-travis-image]][badge-travis-link]
@@ -12,12 +12,12 @@
 ## Installation
 
 ```sh
-yarn add @pageobject/webdriver-selenium
+yarn add @pageobject/selenium-webdriver
 ```
 
 ## API documentation
 
-Please find the API documentation [here][internal-api-webdriver-selenium].
+Please find the API documentation [here][internal-api-selenium-webdriver].
 
 ---
 
@@ -25,12 +25,12 @@ Copyright (c) 2017-present, Clemens Akens. Released under the terms of the [MIT 
 
 [badge-coveralls-image]: https://coveralls.io/repos/github/clebert/pageobject/badge.svg?branch=master
 [badge-coveralls-link]: https://coveralls.io/github/clebert/pageobject?branch=master
-[badge-npm-image]: https://img.shields.io/npm/v/@pageobject/webdriver-selenium.svg
-[badge-npm-link]: https://yarnpkg.com/en/package/@pageobject/webdriver-selenium
+[badge-npm-image]: https://img.shields.io/npm/v/@pageobject/selenium-webdriver.svg
+[badge-npm-link]: https://yarnpkg.com/en/package/@pageobject/selenium-webdriver
 [badge-travis-image]: https://travis-ci.org/clebert/pageobject.svg?branch=master
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 [badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
 [badge-typescript-link]: https://www.typescriptlang.org/
-[internal-api-webdriver-selenium]: https://pageobject.js.org/api/webdriver-selenium/
+[internal-api-selenium-webdriver]: https://pageobject.js.org/api/selenium-webdriver/
 [internal-homepage]: https://pageobject.js.org/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
