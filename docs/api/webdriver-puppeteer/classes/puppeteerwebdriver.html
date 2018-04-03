@@ -913,12 +913,6 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-constructor tsd-parent-kind-class">
 					<a href="puppeteerwebdriver.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="puppeteerwebdriver.html#browser" class="tsd-kind-icon">browser</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="puppeteerwebdriver.html#page" class="tsd-kind-icon">page</a>
-				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 					<a href="puppeteerwebdriver.html#execute" class="tsd-kind-icon">execute</a>
 				</li>
@@ -930,6 +924,9 @@ img { max-width: 100%; }
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="puppeteerwebdriver.html#press" class="tsd-kind-icon">press</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="puppeteerwebdriver.html#quit" class="tsd-kind-icon">quit</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 					<a href="puppeteerwebdriver.html#create" class="tsd-kind-icon">create</a>
@@ -977,19 +974,13 @@ img { max-width: 100%; }
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
-						<h3>Properties</h3>
-						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="puppeteerwebdriver.html#browser" class="tsd-kind-icon">browser</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="puppeteerwebdriver.html#page" class="tsd-kind-icon">page</a></li>
-						</ul>
-					</section>
-					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="puppeteerwebdriver.html#execute" class="tsd-kind-icon">execute</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="puppeteerwebdriver.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="puppeteerwebdriver.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="puppeteerwebdriver.html#press" class="tsd-kind-icon">press</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="puppeteerwebdriver.html#quit" class="tsd-kind-icon">quit</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="puppeteerwebdriver.html#create" class="tsd-kind-icon">create</a></li>
 						</ul>
 					</section>
@@ -1008,7 +999,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/webdriver-puppeteer/src/PuppeteerWebDriver.ts#L63">PuppeteerWebDriver.ts:63</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/webdriver-puppeteer/src/PuppeteerWebDriver.ts#L62">PuppeteerWebDriver.ts:62</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1046,29 +1037,6 @@ img { max-width: 100%; }
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
-			<h2>Properties</h2>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="browser" class="tsd-anchor"></a>
-				<h3>browser</h3>
-				<div class="tsd-signature tsd-kind-icon">browser<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Browser</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/webdriver-puppeteer/src/PuppeteerWebDriver.ts#L60">PuppeteerWebDriver.ts:60</a></li>
-					</ul>
-				</aside>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="page" class="tsd-anchor"></a>
-				<h3>page</h3>
-				<div class="tsd-signature tsd-kind-icon">page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Page</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/webdriver-puppeteer/src/PuppeteerWebDriver.ts#L61">PuppeteerWebDriver.ts:61</a></li>
-					</ul>
-				</aside>
-			</section>
-		</section>
-		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 				<a name="execute" class="tsd-anchor"></a>
@@ -1080,7 +1048,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/webdriver-puppeteer/src/PuppeteerWebDriver.ts#L81">PuppeteerWebDriver.ts:81</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/webdriver-puppeteer/src/PuppeteerWebDriver.ts#L79">PuppeteerWebDriver.ts:79</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1130,7 +1098,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/webdriver-puppeteer/src/PuppeteerWebDriver.ts#L88">PuppeteerWebDriver.ts:88</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/webdriver-puppeteer/src/PuppeteerWebDriver.ts#L86">PuppeteerWebDriver.ts:86</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1188,6 +1156,23 @@ img { max-width: 100%; }
 								<h5>key: <span class="tsd-signature-type">Key</span></h5>
 							</li>
 						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="quit" class="tsd-anchor"></a>
+				<h3>quit</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">quit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/webdriver-puppeteer/src/PuppeteerWebDriver.ts#L132">PuppeteerWebDriver.ts:132</a></li>
+							</ul>
+						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>

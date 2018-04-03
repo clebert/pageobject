@@ -78,7 +78,7 @@ export class JSDOMWebDriver implements WebDriver {
   }
 
   public async navigateTo(url: string): Promise<void> {
-    this._jsdom.window.close();
+    await this.quit();
 
     const options: FromFileOptions = {runScripts: 'dangerously'};
 
@@ -103,5 +103,9 @@ export class JSDOMWebDriver implements WebDriver {
     this._jsdom.window.document.dispatchEvent(
       new this._jsdom.window.KeyboardEvent('keyup', options)
     );
+  }
+
+  public async quit(): Promise<void> {
+    this._jsdom.window.close();
   }
 }

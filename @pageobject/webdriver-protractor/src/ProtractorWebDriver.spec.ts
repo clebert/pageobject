@@ -4,6 +4,6 @@ import {ProtractorWebDriver} from '.';
 
 describe('ProtractorWebDriver', () => {
   it('should pass the WebDriverTest successfully', async () => {
-    await new WebDriverTest(new ProtractorWebDriver(browser)).testAll();
+    await new WebDriverTest(new ProtractorWebDriver(browser)).run();
   });
 });

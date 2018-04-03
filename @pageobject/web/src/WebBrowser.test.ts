@@ -6,6 +6,7 @@ class TestDriver implements WebDriver {
   public readonly findElements = jest.fn();
   public readonly navigateTo = jest.fn();
   public readonly press = jest.fn();
+  public readonly quit = jest.fn();
 }
 
 describe('WebBrowser', () => {

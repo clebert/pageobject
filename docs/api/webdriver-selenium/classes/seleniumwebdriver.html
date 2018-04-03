@@ -913,9 +913,6 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-constructor tsd-parent-kind-class">
 					<a href="seleniumwebdriver.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="seleniumwebdriver.html#adaptee" class="tsd-kind-icon">adaptee</a>
-				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 					<a href="seleniumwebdriver.html#execute" class="tsd-kind-icon">execute</a>
 				</li>
@@ -927,6 +924,9 @@ img { max-width: 100%; }
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="seleniumwebdriver.html#press" class="tsd-kind-icon">press</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="seleniumwebdriver.html#quit" class="tsd-kind-icon">quit</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 					<a href="seleniumwebdriver.html#create" class="tsd-kind-icon">create</a>
@@ -977,18 +977,13 @@ img { max-width: 100%; }
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
-						<h3>Properties</h3>
-						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="seleniumwebdriver.html#adaptee" class="tsd-kind-icon">adaptee</a></li>
-						</ul>
-					</section>
-					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="seleniumwebdriver.html#execute" class="tsd-kind-icon">execute</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="seleniumwebdriver.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="seleniumwebdriver.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="seleniumwebdriver.html#press" class="tsd-kind-icon">press</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="seleniumwebdriver.html#quit" class="tsd-kind-icon">quit</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="seleniumwebdriver.html#create" class="tsd-kind-icon">create</a></li>
 						</ul>
 					</section>
@@ -1026,19 +1021,6 @@ img { max-width: 100%; }
 						<h4 class="tsd-returns-title">Returns <a href="seleniumwebdriver.html" class="tsd-signature-type">SeleniumWebDriver</a></h4>
 					</li>
 				</ul>
-			</section>
-		</section>
-		<section class="tsd-panel-group tsd-member-group ">
-			<h2>Properties</h2>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="adaptee" class="tsd-anchor"></a>
-				<h3>adaptee</h3>
-				<div class="tsd-signature tsd-kind-icon">adaptee<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WebDriver</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/webdriver-selenium/src/SeleniumWebDriver.ts#L52">SeleniumWebDriver.ts:52</a></li>
-					</ul>
-				</aside>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
@@ -1161,6 +1143,23 @@ img { max-width: 100%; }
 								<h5>key: <span class="tsd-signature-type">Key</span></h5>
 							</li>
 						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="quit" class="tsd-anchor"></a>
+				<h3>quit</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">quit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/webdriver-selenium/src/SeleniumWebDriver.ts#L110">SeleniumWebDriver.ts:110</a></li>
+							</ul>
+						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>

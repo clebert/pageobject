@@ -48,15 +48,11 @@ describe('SeleniumWebDriver', () => {
   });
 
   it('should pass the WebDriverTest successfully', async () => {
-    const driver = await SeleniumWebDriver.create({
-      browserName: 'chrome',
-      chromeOptions: {args: ['headless', 'disable-gpu']}
-    });
-
-    try {
-      await new WebDriverTest(driver).testAll();
-    } finally {
-      await driver.adaptee.quit();
-    }
+    await new WebDriverTest(
+      await SeleniumWebDriver.create({
+        browserName: 'chrome',
+        chromeOptions: {args: ['headless', 'disable-gpu']}
+      })
+    ).run();
   });
 });

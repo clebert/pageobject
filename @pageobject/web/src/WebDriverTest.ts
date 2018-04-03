@@ -4,11 +4,6 @@ import {WebDriver} from '.';
 
 const url = `file://${join(__dirname, '../fixtures/index.html')}`;
 
-async function getPageTitle(driver: WebDriver): Promise<string> {
-  // istanbul ignore next
-  return driver.execute(() => document.title);
-}
-
 export class WebDriverTest {
   private readonly _driver: WebDriver;
 
@@ -16,18 +11,27 @@ export class WebDriverTest {
     this._driver = driver;
   }
 
-  public async testAll(): Promise<void> {
-    await this.testDriverExecute();
-    await this.testDriverFindElements();
-    await this.testDriverNavigateTo();
-    await this.testDriverPress();
+  public async run(): Promise<void> {
+    try {
+      await this._testDriverExecute();
+      await this._testDriverFindElements();
+      await this._testDriverNavigateTo();
+      await this._testDriverPress();
 
-    await this.testElementClick();
-    await this.testElementDoubleClick();
-    await this.testElementExecute();
+      await this._testElementClick();
+      await this._testElementDoubleClick();
+      await this._testElementExecute();
+    } finally {
+      await this._driver.quit();
+    }
   }
 
-  public async testDriverExecute(): Promise<void> {
+  private async _getPageTitle(): Promise<string> {
+    // istanbul ignore next
+    return this._driver.execute(() => document.title);
+  }
+
+  private async _testDriverExecute(): Promise<void> {
     await this._driver.navigateTo(url);
 
     // istanbul ignore next
@@ -54,7 +58,7 @@ export class WebDriverTest {
     ok(/execute/.test(scriptError.message));
   }
 
-  public async testDriverFindElements(): Promise<void> {
+  private async _testDriverFindElements(): Promise<void> {
     await this._driver.navigateTo(url);
 
     const divs = await this._driver.findElements('div');
@@ -67,75 +71,72 @@ export class WebDriverTest {
     strictEqual((await this._driver.findElements('unknown')).length, 0);
   }
 
-  public async testDriverNavigateTo(): Promise<void> {
+  private async _testDriverNavigateTo(): Promise<void> {
     await this._driver.navigateTo(url);
 
-    strictEqual(await getPageTitle(this._driver), 'Test');
+    strictEqual(await this._getPageTitle(), 'Test');
 
     await this._driver.navigateTo('http://example.com');
 
-    strictEqual(await getPageTitle(this._driver), 'Example Domain');
+    strictEqual(await this._getPageTitle(), 'Example Domain');
   }
 
-  public async testDriverPress(): Promise<void> {
+  private async _testDriverPress(): Promise<void> {
     await this._driver.navigateTo(url);
 
-    strictEqual(await getPageTitle(this._driver), 'Test');
+    strictEqual(await this._getPageTitle(), 'Test');
 
     await this._driver.press('a');
 
     strictEqual(
-      await getPageTitle(this._driver),
+      await this._getPageTitle(),
       'Event: keydown a, keypress a, keyup a'
     );
 
     await this._driver.press('Enter');
 
     strictEqual(
-      await getPageTitle(this._driver),
+      await this._getPageTitle(),
       'Event: keydown Enter, keypress Enter, keyup Enter'
     );
 
     await this._driver.press('Escape');
 
     strictEqual(
-      await getPageTitle(this._driver),
+      await this._getPageTitle(),
       'Event: keydown Escape, keyup Escape'
     );
 
     await this._driver.press('Tab');
 
-    strictEqual(
-      await getPageTitle(this._driver),
-      'Event: keydown Tab, keyup Tab'
-    );
+    strictEqual(await this._getPageTitle(), 'Event: keydown Tab, keyup Tab');
   }
 
-  public async testElementClick(): Promise<void> {
+  private async _testElementClick(): Promise<void> {
     await this._driver.navigateTo(url);
 
     const button = (await this._driver.findElements('#click'))[0];
 
-    strictEqual(await getPageTitle(this._driver), 'Test');
+    strictEqual(await this._getPageTitle(), 'Test');
 
     await button.click();
 
-    strictEqual(await getPageTitle(this._driver), 'Event: click');
+    strictEqual(await this._getPageTitle(), 'Event: click');
   }
 
-  public async testElementDoubleClick(): Promise<void> {
+  private async _testElementDoubleClick(): Promise<void> {
     await this._driver.navigateTo(url);
 
     const button = (await this._driver.findElements('#dblclick'))[0];
 
-    strictEqual(await getPageTitle(this._driver), 'Test');
+    strictEqual(await this._getPageTitle(), 'Test');
 
     await button.doubleClick();
 
-    strictEqual(await getPageTitle(this._driver), 'Event: dblclick');
+    strictEqual(await this._getPageTitle(), 'Event: dblclick');
   }
 
-  public async testElementExecute(): Promise<void> {
+  private async _testElementExecute(): Promise<void> {
     await this._driver.navigateTo(url);
 
     const root = (await this._driver.findElements('#text'))[0];

@@ -57,10 +57,9 @@ export class PuppeteerWebDriver implements WebDriver {
     );
   }
 
-  public readonly browser: Browser;
-  public readonly page: Page;
-
+  private readonly _browser: Browser;
   private readonly _navigationOptions?: NavigationOptions;
+  private readonly _page: Page;
 
   /**
    * @param browser https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-browser
@@ -72,24 +71,23 @@ export class PuppeteerWebDriver implements WebDriver {
     page: Page,
     navigationOptions?: NavigationOptions
   ) {
-    this.browser = browser;
-    this.page = page;
-
+    this._browser = browser;
     this._navigationOptions = navigationOptions;
+    this._page = page;
   }
 
   public async execute<TResult>(
     script: (...args: Argument[]) => TResult,
     ...args: Argument[]
   ): Promise<TResult> {
-    return this.page.evaluate(script, ...args);
+    return this._page.evaluate(script, ...args);
   }
 
   public async findElements(
     selector: string,
     parent?: WebElement
   ): Promise<WebElement[]> {
-    const elementsHandle = await this.page.evaluateHandle(
+    const elementsHandle = await this._page.evaluateHandle(
       // istanbul ignore next
       (_selector: string, _parent: Element | undefined) =>
         (_parent || document).querySelectorAll(_selector),
@@ -118,14 +116,20 @@ export class PuppeteerWebDriver implements WebDriver {
 
     await elementsHandle.dispose();
 
-    return elements.map(element => new PuppeteerWebElement(element, this.page));
+    return elements.map(
+      element => new PuppeteerWebElement(element, this._page)
+    );
   }
 
   public async navigateTo(url: string): Promise<void> {
-    await this.page.goto(url, this._navigationOptions);
+    await this._page.goto(url, this._navigationOptions);
   }
 
   public async press(key: Key): Promise<void> {
-    return this.page.keyboard.press(key);
+    return this._page.keyboard.press(key);
+  }
+
+  public async quit(): Promise<void> {
+    return this._browser.close();
   }
 }

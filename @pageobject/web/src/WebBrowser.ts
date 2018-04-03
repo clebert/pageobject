@@ -11,6 +11,7 @@ export interface WebDriver extends Driver<WebElement> {
 
   navigateTo(url: string): Promise<void>;
   press(key: Key): Promise<void>;
+  quit(): Promise<void>;
 }
 
 export class WebBrowser implements Describable {
