@@ -1,5 +1,5 @@
 {
-  "name": "@pageobject/webdriver-selenium",
+  "name": "@pageobject/puppeteer",
   "version": "2.0.0",
   "description": "TODO.",
   "license": "MIT",
@@ -22,11 +22,7 @@
   },
   "dependencies": {
     "@pageobject/web": "^2.0.0",
-    "@types/selenium-webdriver": "^3.0.8",
-    "selenium-webdriver": "^4.0.0-alpha.1"
-  },
-  "devDependencies": {
-    "get-port": "^3.2.0",
-    "webdriver-manager": "*"
+    "@types/puppeteer": "^1.2.0",
+    "puppeteer": "^1.2.0"
   }
 }

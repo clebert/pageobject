@@ -1,5 +1,5 @@
 {
-  "name": "@pageobject/webdriver-puppeteer",
+  "name": "@pageobject/protractor",
   "version": "2.0.0",
   "description": "TODO.",
   "license": "MIT",
@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "@pageobject/web": "^2.0.0",
-    "@types/puppeteer": "^1.2.0",
-    "puppeteer": "^1.2.0"
+    "protractor": "^5.3.0"
   }
 }

@@ -20,15 +20,15 @@ TODO.
 
 TODO.
 
-### [@pageobject/webdriver-protractor][internal-api-webdriver-protractor]
+### [@pageobject/protractor][internal-api-protractor]
 
 TODO.
 
-### [@pageobject/webdriver-puppeteer][internal-api-webdriver-puppeteer]
+### [@pageobject/puppeteer][internal-api-puppeteer]
 
 TODO.
 
-### [@pageobject/webdriver-selenium][internal-api-webdriver-selenium]
+### [@pageobject/selenium-webdriver][internal-api-selenium-webdriver]
 
 TODO.
 
@@ -43,8 +43,8 @@ Copyright (c) 2017-present, Clemens Akens. Released under the terms of the [MIT 
 [badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
 [badge-typescript-link]: https://www.typescriptlang.org/
 [internal-api-main]: https://pageobject.js.org/api/main/
+[internal-api-protractor]: https://pageobject.js.org/api/protractor/
+[internal-api-puppeteer]: https://pageobject.js.org/api/puppeteer/
+[internal-api-selenium-webdriver]: https://pageobject.js.org/api/selenium-webdriver/
 [internal-api-web]: https://pageobject.js.org/api/web/
-[internal-api-webdriver-protractor]: https://pageobject.js.org/api/webdriver-protractor/
-[internal-api-webdriver-puppeteer]: https://pageobject.js.org/api/webdriver-puppeteer/
-[internal-api-webdriver-selenium]: https://pageobject.js.org/api/webdriver-selenium/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
