@@ -4,33 +4,33 @@
 [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 [![TypeScript][badge-typescript-image]][badge-typescript-link]
 
-> **Reliable**, **stable**, and **flexible** web UI testing.
+> A platform- and framework-independent test automation library.
 
 ## Getting started
 
-TODO.
+TODO
 
 ## API documentation
 
-### [@pageobject/main][internal-api-main]
+### [@pageobject/base][internal-api-base]
 
-TODO.
+A declarative API for platform- and framework-independent test automation.
 
 ### [@pageobject/web][internal-api-web]
 
-TODO.
+A declarative API for framework-independent web test automation.
 
 ### [@pageobject/protractor][internal-api-protractor]
 
-TODO.
+A web testing framework adapter for Protractor.
 
 ### [@pageobject/puppeteer][internal-api-puppeteer]
 
-TODO.
+A web testing framework adapter for Puppeteer.
 
 ### [@pageobject/selenium-webdriver][internal-api-selenium-webdriver]
 
-TODO.
+A web testing framework adapter for Selenium.
 
 ---
 
@@ -42,7 +42,7 @@ Copyright (c) 2017-present, Clemens Akens. Released under the terms of the [MIT 
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 [badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
 [badge-typescript-link]: https://www.typescriptlang.org/
-[internal-api-main]: https://pageobject.js.org/api/main/
+[internal-api-base]: https://pageobject.js.org/api/base/
 [internal-api-protractor]: https://pageobject.js.org/api/protractor/
 [internal-api-puppeteer]: https://pageobject.js.org/api/puppeteer/
 [internal-api-selenium-webdriver]: https://pageobject.js.org/api/selenium-webdriver/

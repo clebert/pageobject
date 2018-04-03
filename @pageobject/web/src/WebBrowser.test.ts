@@ -1,4 +1,4 @@
-import {Effect} from '@pageobject/main';
+import {Effect} from '@pageobject/base';
 import {WebBrowser, WebDriver} from '.';
 
 class TestDriver implements WebDriver {

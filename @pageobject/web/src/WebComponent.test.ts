@@ -1,4 +1,4 @@
-import {Effect, Locator} from '@pageobject/main';
+import {Effect, Locator} from '@pageobject/base';
 import {WebComponent, WebDriver, WebElement} from '.';
 
 class TestComponent extends WebComponent {
