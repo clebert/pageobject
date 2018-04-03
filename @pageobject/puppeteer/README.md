@@ -5,7 +5,7 @@
 [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 [![TypeScript][badge-typescript-image]][badge-typescript-link]
 
-> TODO.
+> A web testing framework adapter for [Puppeteer][external-puppeteer].
 
 **This package is part of [PageObjectJS][internal-homepage].**
 
@@ -31,6 +31,7 @@ Copyright (c) 2017-present, Clemens Akens. Released under the terms of the [MIT 
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 [badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
 [badge-typescript-link]: https://www.typescriptlang.org/
+[external-puppeteer]: https://github.com/GoogleChrome/puppeteer
 [internal-api-puppeteer]: https://pageobject.js.org/api/puppeteer/
 [internal-homepage]: https://pageobject.js.org/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE

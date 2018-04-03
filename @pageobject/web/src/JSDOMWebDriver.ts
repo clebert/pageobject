@@ -1,4 +1,4 @@
-import {serialize} from '@pageobject/main';
+import {serialize} from '@pageobject/base';
 import {FromFileOptions, JSDOM} from 'jsdom';
 import {Script} from 'vm';
 import {Argument, Key, WebDriver, WebElement} from '.';

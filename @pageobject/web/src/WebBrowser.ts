@@ -1,4 +1,4 @@
-import {Describable, Driver, Effect, serialize} from '@pageobject/main';
+import {Describable, Driver, Effect, serialize} from '@pageobject/base';
 import {Argument, WebElement} from '.';
 
 export type Key = 'Enter' | 'Escape' | 'Tab' | string;

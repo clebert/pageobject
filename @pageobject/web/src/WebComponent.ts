@@ -1,4 +1,4 @@
-import {Component, Effect} from '@pageobject/main';
+import {Component, Effect} from '@pageobject/base';
 
 export type Argument = any; // tslint:disable-line no-any
 

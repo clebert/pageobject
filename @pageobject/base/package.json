@@ -1,7 +1,7 @@
 {
-  "name": "@pageobject/web",
+  "name": "@pageobject/base",
   "version": "2.0.0",
-  "description": "A declarative API for framework-independent web test automation.",
+  "description": "A declarative API for platform- and framework-independent test automation.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
   "homepage": "https://pageobject.js.org/",
@@ -13,19 +13,11 @@
     "url": "https://github.com/clebert/pageobject/issues"
   },
   "files": [
-    "dist",
-    "fixtures"
+    "dist"
   ],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "@pageobject/base": "^2.0.0",
-    "jsdom": "^11.7.0"
-  },
-  "devDependencies": {
-    "@types/jsdom": "^11.0.4"
   }
 }
