@@ -48,10 +48,21 @@ describe('SeleniumWebDriver', () => {
   });
 
   it('should pass the WebDriverTest successfully', async () => {
+    const chromeArgs =
+      process.env.CI === 'true'
+        ? [
+            '--headless',
+            '--disable-gpu',
+            '--disable-dev-shm-usage',
+            '--disable-setuid-sandbox',
+            '--no-sandbox'
+          ]
+        : ['--headless', '--disable-gpu'];
+
     await new WebDriverTest(
       await SeleniumWebDriver.create({
         browserName: 'chrome',
-        chromeOptions: {args: ['headless', 'disable-gpu']}
+        chromeOptions: {args: chromeArgs}
       })
     ).run();
   });
