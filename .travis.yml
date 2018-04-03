@@ -20,4 +20,4 @@ node_js:
 script:
   - make clean && yarn test
   - if test -n "$(git status --porcelain)"; then echo 'Working tree is dirty' && exit 1; fi
-sudo: required
+sudo: false

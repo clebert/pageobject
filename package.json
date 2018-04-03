@@ -8,7 +8,6 @@
     "release": "lerna publish --conventional-commits",
     "pretest": "make",
     "test": "run-s test:*",
-    "test:examples": "for example in docs/examples/*/index.js; do node \"$example\"; done",
     "test:jest": "jest --no-cache --verbose",
     "test:markdownlint": "markdownlint --config .markdownlint.json --ignore '**/CHANGELOG.md' --ignore '**/node_modules/**/*' --ignore '**/temp/**/*' '**/*.md'",
     "test:prettier": "prettier --list-different '**/*.{js,json,md,ts}'",
@@ -23,22 +22,22 @@
     "@commitlint/cli": "^6.1.3",
     "@commitlint/config-angular": "^6.1.3",
     "@commitlint/config-lerna-scopes": "^6.1.3",
-    "@types/jest": "^22.2.0",
-    "@types/node": "^9.4.6",
+    "@types/jest": "^22.2.2",
+    "@types/node": "^9.6.1",
     "coveralls": "^3.0.0",
     "custom-tslint-formatters": "^2.3.0",
     "husky": "^0.14.3",
-    "jest": "^22.4.2",
-    "lerna": "^2.9.0",
-    "markdownlint-cli": "^0.7.1",
+    "jest": "^22.4.3",
+    "lerna": "^2.9.1",
+    "markdownlint-cli": "^0.8.1",
     "npm-run-all": "^4.1.2",
     "prettier": "^1.11.1",
-    "replace-in-file": "^3.2.0",
-    "ts-config": "^17.0.0",
-    "ts-jest": "^22.4.1",
+    "replace-in-file": "^3.4.0",
+    "ts-config": "^18.0.0",
+    "ts-jest": "^22.4.2",
     "tslint": "^5.9.1",
-    "typedoc": "^0.11.0",
-    "typescript": "^2.7.2"
+    "typedoc": "^0.11.1",
+    "typescript": "^2.8.1"
   },
   "workspaces": [
     "@pageobject/*"
@@ -47,9 +46,7 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/@pageobject/*/src/**/*.ts",
-      "!**/@pageobject/*/src/**/*.test.ts",
-      "!**/@pageobject/flexible/src/FlexibleAdapterTestSuite.ts",
-      "!**/@pageobject/flexible-protractor/src/**/*.ts"
+      "!**/@pageobject/webdriver-protractor/src/**/*.ts"
     ],
     "coverageThreshold": {
       "global": {

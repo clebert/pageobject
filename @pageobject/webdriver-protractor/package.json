@@ -1,0 +1,27 @@
+{
+  "name": "@pageobject/webdriver-protractor",
+  "version": "2.0.0",
+  "description": "TODO.",
+  "license": "MIT",
+  "author": "Clemens Akens <clebert@me.com>",
+  "homepage": "https://pageobject.js.org/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clebert/pageobject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clebert/pageobject/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@pageobject/web": "^2.0.0",
+    "protractor": "^5.3.0"
+  }
+}

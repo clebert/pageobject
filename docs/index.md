@@ -8,59 +8,29 @@
 
 ## Getting started
 
-In this example we navigate to [example.com][external-example-domain] and assert that the page title equals "Example Domain".
-
-```js
-class Page extends FlexiblePageObject {
-  get selector() {
-    return ':root'; // https://developer.mozilla.org/en-US/docs/Web/CSS/:root
-  }
-}
-
-function describe(testCase, page) {
-  testCase
-    .perform(page.navigateTo('http://example.com/'))
-    .assert(page.getPageTitle(equals('Example Domain')));
-}
-```
-
-_You can find the complete code for this example [here][internal-example-code-getting-started]._
-_It can be executed with Node.js 8 or higher._
+TODO.
 
 ## API documentation
 
-### [@pageobject/reliable][internal-api-reliable]
+### [@pageobject/main][internal-api-main]
 
-Write **reliable** tests in a declarative programming style.
+TODO.
 
-### [@pageobject/stable][internal-api-stable]
+### [@pageobject/web][internal-api-web]
 
-Write **stable** tests using a sophisticated implementation of the [page object pattern][external-pageobject].
+TODO.
 
-### [@pageobject/flexible][internal-api-flexible]
+### [@pageobject/webdriver-protractor][internal-api-webdriver-protractor]
 
-Write **flexible** tests using a @pageobject/stable-based API which is adaptable for different browser automation frameworks.
+TODO.
 
-### [@pageobject/flexible-protractor][internal-api-flexible-protractor]
+### [@pageobject/webdriver-puppeteer][internal-api-webdriver-puppeteer]
 
-Run your @pageobject/flexible-based tests using [Protractor][external-protractor].
+TODO.
 
-### [@pageobject/flexible-puppeteer][internal-api-flexible-puppeteer]
+### [@pageobject/webdriver-selenium][internal-api-webdriver-selenium]
 
-Run your @pageobject/flexible-based tests using [Puppeteer][external-puppeteer].
-
-### [@pageobject/flexible-selenium][internal-api-flexible-selenium]
-
-Run your @pageobject/flexible-based tests using [Selenium][external-selenium].
-
-## Tutorial: TodoMVC
-
-In this tutorial we write a test case for the TodoMVC application.
-We will create several page objects and learn about different design principles.
-
-**You can find the step-by-step instructions [here][internal-example-docs-todo-mvc].**
-
-[![todo-mvc][internal-example-image-todo-mvc]][internal-example-docs-todo-mvc]
+TODO.
 
 ---
 
@@ -72,18 +42,9 @@ Copyright (c) 2017-present, Clemens Akens. Released under the terms of the [MIT 
 [badge-travis-link]: https://travis-ci.org/clebert/pageobject
 [badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
 [badge-typescript-link]: https://www.typescriptlang.org/
-[internal-api-flexible]: https://pageobject.js.org/api/flexible/
-[internal-api-flexible-protractor]: https://pageobject.js.org/api/flexible-protractor/
-[internal-api-flexible-puppeteer]: https://pageobject.js.org/api/flexible-puppeteer/
-[internal-api-flexible-selenium]: https://pageobject.js.org/api/flexible-selenium/
-[internal-api-reliable]: https://pageobject.js.org/api/reliable/
-[internal-api-stable]: https://pageobject.js.org/api/stable/
-[internal-example-code-getting-started]: https://github.com/clebert/pageobject/tree/master/docs/examples/getting-started/index.js
-[internal-example-docs-todo-mvc]: https://pageobject.js.org/examples/todo-mvc/
-[internal-example-image-todo-mvc]: https://pageobject.js.org/examples/todo-mvc/images/todo-mvc.png
+[internal-api-main]: https://pageobject.js.org/api/main/
+[internal-api-web]: https://pageobject.js.org/api/web/
+[internal-api-webdriver-protractor]: https://pageobject.js.org/api/webdriver-protractor/
+[internal-api-webdriver-puppeteer]: https://pageobject.js.org/api/webdriver-puppeteer/
+[internal-api-webdriver-selenium]: https://pageobject.js.org/api/webdriver-selenium/
 [internal-license]: https://github.com/clebert/pageobject/blob/master/LICENSE
-[external-example-domain]: http://example.com/
-[external-pageobject]: https://martinfowler.com/bliki/PageObject.html
-[external-protractor]: https://www.protractortest.org/#/
-[external-puppeteer]: https://github.com/GoogleChrome/puppeteer/blob/master/README.md
-[external-selenium]: http://seleniumhq.github.io/selenium/docs/api/javascript/index.html

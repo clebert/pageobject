@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Test</title>
+</head>
+
+<body>
+  <div>
+    <div>
+      <span id="text">text</span>
+      <button id="click">click</button>
+      <button id="dblclick">dblclick</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('keydown', event => {
+      document.title = `Event: keydown ${event.key}`;
+    });
+
+    document.addEventListener('keypress', event => {
+      document.title += `, keypress ${event.key}`;
+    });
+
+    document.addEventListener('keyup', event => {
+      document.title += `, keyup ${event.key}`;
+    });
+
+    document.querySelector('#click').addEventListener('click', () => {
+      document.title = 'Event: click';
+    });
+
+    document.querySelector('#dblclick').addEventListener('dblclick', () => {
+      document.title = 'Event: dblclick';
+    });
+  </script>
+</body>
+
+</html>

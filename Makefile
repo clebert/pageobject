@@ -1,5 +1,5 @@
 BIN := "$(shell yarn bin)"
-PKGS := reliable stable flexible flexible-protractor flexible-puppeteer flexible-selenium
+PKGS := main web webdriver-protractor webdriver-puppeteer webdriver-selenium
 
 .PHONY: docs
 docs: $(addprefix docs/api/,$(PKGS)) docs/index.md
@@ -16,7 +16,7 @@ clean:
 	$(BIN)/tsc --project @pageobject/$*
 	touch $@
 
-docs/api/%: @pageobject/%/README.md @pageobject/%/src/*.ts | dist
+docs/api/%: @pageobject/%/README.md @pageobject/%/src/*.ts typedoc.js | dist
 	rm -rf $@
 	rm -rf node_modules/@types/lodash
 	$(BIN)/typedoc --out $@ --readme @pageobject/$*/README.md ./@pageobject/$*
