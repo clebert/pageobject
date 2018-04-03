@@ -1,0 +1,31 @@
+{
+  "name": "@pageobject/web",
+  "version": "2.0.0",
+  "description": "TODO.",
+  "license": "MIT",
+  "author": "Clemens Akens <clebert@me.com>",
+  "homepage": "https://pageobject.js.org/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clebert/pageobject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clebert/pageobject/issues"
+  },
+  "files": [
+    "dist",
+    "fixtures"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@pageobject/main": "^2.0.0",
+    "jsdom": "^11.7.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^11.0.4"
+  }
+}

@@ -4,5 +4,5 @@ exports.config = {
     chromeOptions: {args: ['headless', 'disable-gpu']}
   },
   directConnect: true,
-  specs: ['@pageobject/flexible-protractor/dist/ProtractorAdapter.spec.js']
+  specs: ['@pageobject/webdriver-protractor/dist/ProtractorWebDriver.spec.js']
 };
