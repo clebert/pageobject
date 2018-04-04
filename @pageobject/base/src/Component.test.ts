@@ -1,4 +1,4 @@
-import {Adapter, Component, Effect, Operator} from '.';
+import {Adapter, Component, FunctionCall, Operator} from '.';
 
 class TestAdapter implements Adapter<HTMLElement> {
   public async findElements(
@@ -12,22 +12,31 @@ class TestAdapter implements Adapter<HTMLElement> {
 abstract class TestComponent extends Component<HTMLElement> {
   public readonly type = this.constructor.name;
 
-  public getID(): Effect<string> {
-    const trigger = async () => (await this.findElement()).id;
-
-    return {context: this, description: 'getID()', trigger};
+  public getID(): FunctionCall<string> {
+    return new FunctionCall(
+      this,
+      this.getID.name,
+      arguments,
+      async () => (await this.findElement()).id
+    );
   }
 
-  public getText(): Effect<string | null> {
-    const trigger = async () => (await this.findElement()).textContent;
-
-    return {context: this, description: 'getText()', trigger};
+  public getText(): FunctionCall<string | null> {
+    return new FunctionCall(
+      this,
+      this.getText.name,
+      arguments,
+      async () => (await this.findElement()).textContent
+    );
   }
 
-  public getType(): Effect<string> {
-    const trigger = async () => this.type;
-
-    return {context: this, description: 'getType()', trigger};
+  public getType(): FunctionCall<string> {
+    return new FunctionCall(
+      this,
+      this.getType.name,
+      arguments,
+      async () => this.type
+    );
   }
 }
 
@@ -151,11 +160,11 @@ function describeErroneousTests<TComponent extends TestComponent>(
         expect(descriptor.component.description).toBe(descriptor.description);
       });
 
-      describe('getElementCount() => Effect.trigger()', () => {
-        const effect = descriptor.component.getElementCount();
-
+      describe('getElementCount() => FunctionCall.executable()', () => {
         it('should return the element count', async () => {
-          await expect(effect.trigger()).resolves.toBe(ambiguous ? 2 : 0);
+          await expect(
+            descriptor.component.getElementCount().executable()
+          ).resolves.toBe(ambiguous ? 2 : 0);
         });
       });
     });
@@ -168,11 +177,11 @@ function describeErroneousTests<TComponent extends TestComponent>(
           expect(b.description).toBe(`${descriptor.description}.select(B)`);
         });
 
-        describe('getElementCount() => Effect.trigger()', () => {
-          const effect = b.getElementCount();
-
+        describe('getElementCount() => FunctionCall.executable()', () => {
           it('should throw an error', async () => {
-            await expect(effect.trigger()).rejects.toThrow(error);
+            await expect(b.getElementCount().executable()).rejects.toThrow(
+              error
+            );
           });
         });
       });
@@ -211,47 +220,47 @@ function describeTests<TComponent extends TestComponent>(
         });
       });
 
-      describe('getElementCount() => Effect', () => {
-        const effect = descriptor.component.getElementCount();
+      describe('getElementCount() => FunctionCall', () => {
+        const getter = descriptor.component.getElementCount();
 
         it('should have a context', () => {
-          expect(effect.context).toBe(descriptor.component);
+          expect(getter.context).toBe(descriptor.component);
         });
 
         it('should have a description', () => {
-          expect(effect.description).toBe('getElementCount()');
+          expect(getter.description).toBe('getElementCount()');
         });
 
-        describe('trigger()', () => {
+        describe('executable()', () => {
           it('should return the element count', async () => {
-            await expect(effect.trigger()).resolves.toBe(1);
+            await expect(getter.executable()).resolves.toBe(1);
           });
         });
       });
 
-      describe('getText() => Effect.trigger()', () => {
-        const effect = descriptor.component.getText();
-
+      describe('getText() => FunctionCall.executable()', () => {
         it('should return the text of the element', async () => {
+          const result = descriptor.component.getText().executable();
+
           if (!parentDescriptor) {
             if (position === 1) {
-              await expect(effect.trigger()).resolves.toContain('1');
-              await expect(effect.trigger()).resolves.toContain('2');
-              await expect(effect.trigger()).resolves.not.toContain('3');
+              await expect(result).resolves.toContain('1');
+              await expect(result).resolves.toContain('2');
+              await expect(result).resolves.not.toContain('3');
             } else {
-              await expect(effect.trigger()).resolves.not.toContain('1');
-              await expect(effect.trigger()).resolves.not.toContain('2');
-              await expect(effect.trigger()).resolves.toContain('3');
+              await expect(result).resolves.not.toContain('1');
+              await expect(result).resolves.not.toContain('2');
+              await expect(result).resolves.toContain('3');
             }
           } else {
             if (position === 1) {
-              await expect(effect.trigger()).resolves.toContain('1');
-              await expect(effect.trigger()).resolves.not.toContain('2');
-              await expect(effect.trigger()).resolves.not.toContain('3');
+              await expect(result).resolves.toContain('1');
+              await expect(result).resolves.not.toContain('2');
+              await expect(result).resolves.not.toContain('3');
             } else {
-              await expect(effect.trigger()).resolves.not.toContain('1');
-              await expect(effect.trigger()).resolves.toContain('2');
-              await expect(effect.trigger()).resolves.not.toContain('3');
+              await expect(result).resolves.not.toContain('1');
+              await expect(result).resolves.toContain('2');
+              await expect(result).resolves.not.toContain('3');
             }
           }
         });

@@ -1,4 +1,4 @@
-import {Adapter, Describable, Effect, serialize} from '@pageobject/base';
+import {Adapter, Describable, FunctionCall} from '@pageobject/base';
 import {Argument, WebElement} from '.';
 
 export type Key = 'Enter' | 'Escape' | 'Tab' | string;
@@ -23,27 +23,25 @@ export class WebBrowser implements Describable {
     this._adapter = adapter;
   }
 
-  public getPageTitle(): Effect<string> {
-    const trigger = async () => this._adapter.execute(() => document.title);
-
-    return {context: this, description: 'getPageTitle()', trigger};
+  public getPageTitle(): FunctionCall<string> {
+    return new FunctionCall(this, this.getPageTitle.name, arguments, async () =>
+      this._adapter.execute(() => document.title)
+    );
   }
 
-  public getPageURL(): Effect<string> {
-    const trigger = async () =>
-      this._adapter.execute(() => window.location.href);
-
-    return {context: this, description: 'getPageURL()', trigger};
+  public getPageURL(): FunctionCall<string> {
+    return new FunctionCall(this, this.getPageURL.name, arguments, async () =>
+      this._adapter.execute(() => window.location.href)
+    );
   }
 
-  public navigateTo(url: string): Effect<void> {
-    const description = `navigateTo(${serialize(url)})`;
-    const trigger = async () => this._adapter.navigateTo(url);
-
-    return {context: this, description, trigger};
+  public navigateTo(url: string): FunctionCall<void> {
+    return new FunctionCall(this, this.navigateTo.name, arguments, async () =>
+      this._adapter.navigateTo(url)
+    );
   }
 
-  public press(key: Key): Effect<void> {
+  public press(key: Key): FunctionCall<void> {
     if (key.length !== 1) {
       switch (key) {
         case 'Enter':
@@ -59,8 +57,8 @@ export class WebBrowser implements Describable {
       }
     }
 
-    const trigger = async () => this._adapter.press(key);
-
-    return {context: this, description: `press(${serialize(key)})`, trigger};
+    return new FunctionCall(this, this.press.name, arguments, async () =>
+      this._adapter.press(key)
+    );
   }
 }
