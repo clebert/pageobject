@@ -5,7 +5,7 @@
 [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 [![TypeScript][badge-typescript-image]][badge-typescript-link]
 
-> A web testing framework adapter for [Protractor][external-protractor].
+> A web API adapter for [Protractor][external-protractor].
 
 **This package is part of [PageObjectJS][internal-homepage].**
 
