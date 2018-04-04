@@ -29,38 +29,34 @@ export interface ComponentFactory<
   TElement,
   TComponent extends Component<TElement>
 > {
-  create(
+  new (
     adapter: Adapter<TElement>,
     locator?: Locator<TElement, TComponent>
   ): TComponent;
 }
 
-export class Component<TElement> implements Describable {
+export abstract class Component<TElement> implements Describable {
+  public abstract readonly selector: string;
+
   public readonly description: string;
 
   private readonly _adapter: Adapter<TElement>;
   private readonly _locator: Locator<TElement, this>;
-  private readonly _ownFactory: ComponentFactory<TElement, this>;
-  private readonly _selector: string;
 
-  protected constructor(
+  public constructor(
     adapter: Adapter<TElement>,
-    locator: Locator<TElement, any> = {}, // tslint:disable-line no-any
-    ownFactory: ComponentFactory<TElement, any>, // tslint:disable-line no-any
-    selector: string
+    locator: Locator<TElement, any> = {} // tslint:disable-line no-any
   ) {
     this._adapter = adapter;
     this._locator = locator;
-    this._ownFactory = ownFactory;
-    this._selector = selector;
 
     this.description = this._describe();
   }
 
   public select<TDescendant extends Component<TElement>>(
-    descendantFactory: ComponentFactory<TElement, TDescendant>
+    Descendant: ComponentFactory<TElement, TDescendant>
   ): TDescendant {
-    return descendantFactory.create(this._adapter, {parent: this});
+    return new Descendant(this._adapter, {parent: this});
   }
 
   public nth(position: number): this {
@@ -72,29 +68,31 @@ export class Component<TElement> implements Describable {
       throw new Error('Position is already set');
     }
 
-    return this._ownFactory.create(this._adapter, {...this._locator, position});
+    const Self = this.constructor as ComponentFactory<TElement, this>;
+
+    return new Self(this._adapter, {...this._locator, position});
   }
 
   public where<TValue>(
     accessor: Accessor<TElement, this, TValue>,
     operator: Operator<TValue>
   ): this {
-    const {filters} = this._locator;
+    const Self = this.constructor as ComponentFactory<TElement, this>;
 
-    return this._ownFactory.create(this._adapter, {
+    return new Self(this._adapter, {
       ...this._locator,
-      filters: [...(filters || []), {accessor, operator}]
+      filters: [...(this._locator.filters || []), {accessor, operator}]
     });
   }
 
   public getElementCount(): Effect<number> {
-    const trigger = async () => (await this.findElements()).length;
+    const trigger = async () => (await this._findElements()).length;
 
     return {context: this, description: 'getElementCount()', trigger};
   }
 
   protected async findElement(): Promise<TElement> {
-    const elements = await this.findElements();
+    const elements = await this._findElements();
 
     if (elements.length === 0) {
       throw new Error('Element not found');
@@ -105,19 +103,6 @@ export class Component<TElement> implements Describable {
     }
 
     return elements[0];
-  }
-
-  protected async findElements(): Promise<TElement[]> {
-    const elements = await this._filterElements();
-    const {position} = this._locator;
-
-    if (position) {
-      const index = position - 1;
-
-      return index < elements.length ? [elements[index]] : [];
-    }
-
-    return elements;
   }
 
   private _describe(): string {
@@ -144,7 +129,7 @@ export class Component<TElement> implements Describable {
     const {filters, parent} = this._locator;
 
     const elements = await this._adapter.findElements(
-      this._selector,
+      this.selector,
       parent ? await parent.findElement() : undefined
     );
 
@@ -154,7 +139,9 @@ export class Component<TElement> implements Describable {
 
     const results = await Promise.all(
       elements.map(async element => {
-        const instance = this._ownFactory.create({
+        const Self = this.constructor as ComponentFactory<TElement, this>;
+
+        const instance = new Self({
           findElements: async () => [element]
         });
 
@@ -167,5 +154,18 @@ export class Component<TElement> implements Describable {
     );
 
     return elements.filter((element, index) => results[index]);
+  }
+
+  private async _findElements(): Promise<TElement[]> {
+    const elements = await this._filterElements();
+    const {position} = this._locator;
+
+    if (position) {
+      const index = position - 1;
+
+      return index < elements.length ? [elements[index]] : [];
+    }
+
+    return elements;
   }
 }

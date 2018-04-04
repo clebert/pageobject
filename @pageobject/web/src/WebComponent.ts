@@ -12,7 +12,7 @@ export interface WebElement {
   ): Promise<TResult>;
 }
 
-export class WebComponent extends Component<WebElement> {
+export abstract class WebComponent extends Component<WebElement> {
   public click(): Effect<void> {
     const trigger = async () => (await this.findElement()).click();
 

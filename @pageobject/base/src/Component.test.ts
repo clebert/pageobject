@@ -1,4 +1,4 @@
-import {Adapter, Component, Effect, Locator, Operator} from '.';
+import {Adapter, Component, Effect, Operator} from '.';
 
 class TestAdapter implements Adapter<HTMLElement> {
   public async findElements(
@@ -9,7 +9,7 @@ class TestAdapter implements Adapter<HTMLElement> {
   }
 }
 
-class TestComponent extends Component<HTMLElement> {
+abstract class TestComponent extends Component<HTMLElement> {
   public readonly type = this.constructor.name;
 
   public getID(): Effect<string> {
@@ -53,21 +53,11 @@ class Descriptor<TComponent extends TestComponent> {
 }
 
 class A extends TestComponent {
-  public static create(
-    adapter: Adapter<HTMLElement>,
-    locator?: Locator<HTMLElement, A>
-  ): A {
-    return new A(adapter, locator, A, '.a');
-  }
+  public readonly selector: string = '.a';
 }
 
 class B extends TestComponent {
-  public static create(
-    adapter: Adapter<HTMLElement>,
-    locator?: Locator<HTMLElement, B>
-  ): B {
-    return new B(adapter, locator, B, '.b');
-  }
+  public readonly selector: string = '.b';
 }
 
 function describeExistingVariants<TComponent extends TestComponent>(
@@ -293,7 +283,7 @@ describe('Component', () => {
     <div class="a" id="A2">3</div>
   `;
 
-  const a = A.create(new TestAdapter());
+  const a = new A(new TestAdapter());
 
   describeTests(a, undefined, 1);
   describeTests(a, undefined, 2);
