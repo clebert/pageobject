@@ -150,7 +150,7 @@ export abstract class Component<TElement> implements Describable {
 
         return (await Promise.all(
           filters.map(async filter =>
-            filter.operator.test(await filter.accessor(instance).executable())
+            filter.operator.test(await filter.accessor(instance).effect())
           )
         )).every(result => result);
       })

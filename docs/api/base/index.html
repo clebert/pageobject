@@ -983,7 +983,7 @@ img { max-width: 100%; }
 			<a href="globals.html#accessor" class="tsd-kind-icon">Accessor</a>
 		</li>
 		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
-			<a href="globals.html#executable" class="tsd-kind-icon">Executable</a>
+			<a href="globals.html#effect" class="tsd-kind-icon">Effect</a>
 		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
 			<a href="globals.html#execute" class="tsd-kind-icon">execute</a>
@@ -1056,7 +1056,7 @@ img { max-width: 100%; }
 						<h3>Type aliases</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#accessor" class="tsd-kind-icon">Accessor</a></li>
-							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#executable" class="tsd-kind-icon">Executable</a></li>
+							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#effect" class="tsd-kind-icon">Effect</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
@@ -1103,9 +1103,9 @@ img { max-width: 100%; }
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
-				<a name="executable" class="tsd-anchor"></a>
-				<h3>Executable</h3>
-				<div class="tsd-signature tsd-kind-icon">Executable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+				<a name="effect" class="tsd-anchor"></a>
+				<h3>Effect</h3>
+				<div class="tsd-signature tsd-kind-icon">Effect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
 						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/FunctionCall.ts#L7">FunctionCall.ts:7</a></li>
@@ -1134,7 +1134,7 @@ img { max-width: 100%; }
 				<a name="execute" class="tsd-anchor"></a>
 				<h3>execute</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
-					<li class="tsd-signature tsd-kind-icon">execute&lt;TResult&gt;<span class="tsd-signature-symbol">(</span>executable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, retryOnError<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, timeoutInSeconds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">execute&lt;TResult&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><a href="globals.html#effect" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span>, retryOnError<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, timeoutInSeconds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
@@ -1152,19 +1152,7 @@ img { max-width: 100%; }
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>executable: <span class="tsd-signature-type">function</span></h5>
-								<ul class="tsd-parameters">
-									<li class="tsd-parameter-siganture">
-										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></li>
-										</ul>
-										<ul class="tsd-descriptions">
-											<li class="tsd-description">
-												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
-											</li>
-										</ul>
-									</li>
-								</ul>
+								<h5>effect: <a href="globals.html#effect" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
 								<h5>retryOnError: <span class="tsd-signature-type">boolean</span></h5>

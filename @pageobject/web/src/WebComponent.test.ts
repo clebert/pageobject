@@ -73,11 +73,11 @@ describe('WebComponent', () => {
       expect(method.description).toBe('click()');
     });
 
-    describe('executable()', () => {
+    describe('effect()', () => {
       it('should click on the element', async () => {
         element.click.mockRejectedValue(new Error('click'));
 
-        await expect(method.executable()).rejects.toThrow('click');
+        await expect(method.effect()).rejects.toThrow('click');
 
         expect(element.click).toHaveBeenCalledTimes(1);
       });
@@ -99,11 +99,11 @@ describe('WebComponent', () => {
       expect(method.description).toBe('doubleClick()');
     });
 
-    describe('executable()', () => {
+    describe('effect()', () => {
       it('should double-click on the element', async () => {
         element.doubleClick.mockRejectedValue(new Error('doubleClick'));
 
-        await expect(method.executable()).rejects.toThrow('doubleClick');
+        await expect(method.effect()).rejects.toThrow('doubleClick');
 
         expect(element.doubleClick).toHaveBeenCalledTimes(1);
       });
@@ -125,9 +125,9 @@ describe('WebComponent', () => {
       expect(getter.description).toBe('getText()');
     });
 
-    describe('executable()', () => {
+    describe('effect()', () => {
       it('should return the text of the element', async () => {
-        await expect(getter.executable()).resolves.toBe('text');
+        await expect(getter.effect()).resolves.toBe('text');
       });
     });
   });
@@ -147,13 +147,13 @@ describe('WebComponent', () => {
       expect(getter.description).toBe('hasFocus()');
     });
 
-    describe('executable()', () => {
+    describe('effect()', () => {
       it('should return the focus of the element', async () => {
-        await expect(getter.executable()).resolves.toBe(false);
+        await expect(getter.effect()).resolves.toBe(false);
 
         getActiveElement.mockReturnValue(htmlElement);
 
-        await expect(getter.executable()).resolves.toBe(true);
+        await expect(getter.effect()).resolves.toBe(true);
       });
     });
   });
@@ -173,24 +173,24 @@ describe('WebComponent', () => {
       expect(getter.description).toBe('isVisible()');
     });
 
-    describe('executable()', () => {
+    describe('effect()', () => {
       it('should return the visibility of the element', async () => {
-        await expect(getter.executable()).resolves.toBe(false);
+        await expect(getter.effect()).resolves.toBe(false);
 
         htmlElement.offsetHeight = 1;
         htmlElement.offsetWidth = 0;
 
-        await expect(getter.executable()).resolves.toBe(true);
+        await expect(getter.effect()).resolves.toBe(true);
 
         htmlElement.offsetHeight = 0;
         htmlElement.offsetWidth = 1;
 
-        await expect(getter.executable()).resolves.toBe(true);
+        await expect(getter.effect()).resolves.toBe(true);
 
         htmlElement.offsetHeight = 1;
         htmlElement.offsetWidth = 1;
 
-        await expect(getter.executable()).resolves.toBe(true);
+        await expect(getter.effect()).resolves.toBe(true);
       });
     });
   });
@@ -210,7 +210,7 @@ describe('WebComponent', () => {
       expect(method.description).toBe('scrollIntoView()');
     });
 
-    describe('executable()', () => {
+    describe('effect()', () => {
       it('should scroll the element into view', async () => {
         expect(window.innerHeight).toBe(768);
         expect(window.innerWidth).toBe(1024);
@@ -226,7 +226,7 @@ describe('WebComponent', () => {
           throw new Error('scrollIntoView');
         });
 
-        await expect(method.executable()).rejects.toEqual(
+        await expect(method.effect()).rejects.toEqual(
           new Error('scrollIntoView')
         );
 
