@@ -41,11 +41,11 @@ describe('WebBrowser', () => {
       expect(getter.description).toBe('getPageTitle()');
     });
 
-    describe('executable()', () => {
+    describe('effect()', () => {
       it('should return the page title', async () => {
         document.title = 'pageTitle';
 
-        await expect(getter.executable()).resolves.toBe('pageTitle');
+        await expect(getter.effect()).resolves.toBe('pageTitle');
       });
     });
   });
@@ -65,9 +65,9 @@ describe('WebBrowser', () => {
       expect(getter.description).toBe('getPageURL()');
     });
 
-    describe('executable()', () => {
+    describe('effect()', () => {
       it('should return the page URL', async () => {
-        await expect(getter.executable()).resolves.toBe('about:blank');
+        await expect(getter.effect()).resolves.toBe('about:blank');
       });
     });
   });
@@ -87,11 +87,11 @@ describe('WebBrowser', () => {
       expect(method.description).toBe("navigateTo('about:blank')");
     });
 
-    describe('executable()', () => {
+    describe('effect()', () => {
       it('should navigate to the specified url', async () => {
         adapter.navigateTo.mockRejectedValue(new Error('navigateTo'));
 
-        await expect(method.executable()).rejects.toThrow('navigateTo');
+        await expect(method.effect()).rejects.toThrow('navigateTo');
 
         expect(adapter.navigateTo).toHaveBeenCalledTimes(1);
         expect(adapter.navigateTo).toHaveBeenCalledWith('about:blank');
@@ -127,11 +127,11 @@ describe('WebBrowser', () => {
         expect(browser.press('Tab').description).toBe("press('Tab')");
       });
 
-      describe('executable()', () => {
+      describe('effect()', () => {
         it('should press the specified key', async () => {
           adapter.press.mockRejectedValue(new Error('press'));
 
-          await expect(method.executable()).rejects.toThrow('press');
+          await expect(method.effect()).rejects.toThrow('press');
 
           expect(adapter.press).toHaveBeenCalledTimes(1);
           expect(adapter.press).toHaveBeenCalledWith('a');

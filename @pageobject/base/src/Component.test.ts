@@ -160,10 +160,10 @@ function describeErroneousTests<TComponent extends TestComponent>(
         expect(descriptor.component.description).toBe(descriptor.description);
       });
 
-      describe('getElementCount() => FunctionCall.executable()', () => {
+      describe('getElementCount() => FunctionCall.effect()', () => {
         it('should return the element count', async () => {
           await expect(
-            descriptor.component.getElementCount().executable()
+            descriptor.component.getElementCount().effect()
           ).resolves.toBe(ambiguous ? 2 : 0);
         });
       });
@@ -177,11 +177,9 @@ function describeErroneousTests<TComponent extends TestComponent>(
           expect(b.description).toBe(`${descriptor.description}.select(B)`);
         });
 
-        describe('getElementCount() => FunctionCall.executable()', () => {
+        describe('getElementCount() => FunctionCall.effect()', () => {
           it('should throw an error', async () => {
-            await expect(b.getElementCount().executable()).rejects.toThrow(
-              error
-            );
+            await expect(b.getElementCount().effect()).rejects.toThrow(error);
           });
         });
       });
@@ -231,16 +229,16 @@ function describeTests<TComponent extends TestComponent>(
           expect(getter.description).toBe('getElementCount()');
         });
 
-        describe('executable()', () => {
+        describe('effect()', () => {
           it('should return the element count', async () => {
-            await expect(getter.executable()).resolves.toBe(1);
+            await expect(getter.effect()).resolves.toBe(1);
           });
         });
       });
 
-      describe('getText() => FunctionCall.executable()', () => {
+      describe('getText() => FunctionCall.effect()', () => {
         it('should return the text of the element', async () => {
-          const result = descriptor.component.getText().executable();
+          const result = descriptor.component.getText().effect();
 
           if (!parentDescriptor) {
             if (position === 1) {

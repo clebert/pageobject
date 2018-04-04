@@ -4,7 +4,7 @@ export interface Describable {
   readonly description: string;
 }
 
-export type Executable<TResult> = () => Promise<TResult>;
+export type Effect<TResult> = () => Promise<TResult>;
 
 // tslint:disable-next-line no-any
 export function serialize(value: any): string {
@@ -14,16 +14,16 @@ export function serialize(value: any): string {
 export class FunctionCall<TResult> implements Describable {
   public readonly context: Describable;
   public readonly description: string;
-  public readonly executable: Executable<TResult>;
+  public readonly effect: Effect<TResult>;
 
   public constructor(
     context: Describable,
     name: string,
     args: IArguments | any[], // tslint:disable-line no-any
-    executable: Executable<TResult>
+    effect: Effect<TResult>
   ) {
     this.context = context;
     this.description = `${name}(${[...args].map(serialize).join(', ')})`;
-    this.executable = executable;
+    this.effect = effect;
   }
 }

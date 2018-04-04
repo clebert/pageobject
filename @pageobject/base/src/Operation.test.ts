@@ -1,6 +1,6 @@
 // tslint:disable no-any
 
-import {FunctionCall, Operation, Operator} from '.';
+import {Effect, FunctionCall, Operation, Operator} from '.';
 
 class ObservablePromise<T> {
   public readonly promise: Promise<T>;
@@ -27,17 +27,17 @@ class ObservablePromise<T> {
 }
 
 async function useFakeTimers<TResult>(
-  executable: () => Promise<TResult>,
+  effect: Effect<TResult>,
   expectedTimeoutInSeconds?: number
 ): Promise<TResult> {
   jest.useFakeTimers();
 
   try {
-    const execution = new ObservablePromise(executable());
+    const result = new ObservablePromise(effect());
 
     let actualTimeoutInMilliseconds = 0;
 
-    while (await execution.isPending()) {
+    while (await result.isPending()) {
       jest.runAllTicks();
       jest.runAllImmediates();
       jest.advanceTimersByTime(1);
@@ -49,7 +49,7 @@ async function useFakeTimers<TResult>(
       expect(actualTimeoutInMilliseconds).toBe(expectedTimeoutInSeconds * 1000);
     }
 
-    return execution.promise;
+    return result.promise;
   } finally {
     jest.useRealTimers();
   }
@@ -72,29 +72,20 @@ async function neverEnding(): Promise<never> {
 const {defaultTimeoutInSeconds} = Operation;
 
 describe('Operation', () => {
-  let getterExecutable: jest.Mock;
-  let methodExecutable: jest.Mock;
+  let getterEffect: jest.Mock;
+  let methodEffect: jest.Mock;
 
   let getter: FunctionCall<string>;
   let method: FunctionCall<void>;
 
   beforeEach(() => {
-    getterExecutable = jest.fn();
-    methodExecutable = jest.fn();
+    getterEffect = jest.fn();
+    methodEffect = jest.fn();
 
-    getter = new FunctionCall(
-      {description: 'Object'},
-      'getter',
-      [],
-      getterExecutable
-    );
+    const context = {description: 'Object'};
 
-    method = new FunctionCall(
-      {description: 'Object'},
-      'method',
-      [],
-      methodExecutable
-    );
+    getter = new FunctionCall(context, 'getter', [], getterEffect);
+    method = new FunctionCall(context, 'method', [], methodEffect);
 
     Operation.defaultTimeoutInSeconds = 0.01;
   });
@@ -109,9 +100,9 @@ describe('Operation', () => {
 
   describe('assert() => Operation.execute()', () => {
     it('should return without errors', async () => {
-      getterExecutable.mockImplementationOnce(erroneous(1));
-      getterExecutable.mockImplementationOnce(erroneous(2));
-      getterExecutable.mockImplementationOnce(fooValue);
+      getterEffect.mockImplementationOnce(erroneous(1));
+      getterEffect.mockImplementationOnce(erroneous(2));
+      getterEffect.mockImplementationOnce(fooValue);
 
       const operation = Operation.assert(getter, Operator.equals('foo'));
 
@@ -119,13 +110,13 @@ describe('Operation', () => {
         useFakeTimers(async () => operation.execute())
       ).resolves.toEqual([]);
 
-      expect(getterExecutable).toHaveBeenCalledTimes(3);
+      expect(getterEffect).toHaveBeenCalledTimes(3);
     });
 
     it('should throw an assertion error', async () => {
-      getterExecutable.mockImplementationOnce(erroneous(1));
-      getterExecutable.mockImplementationOnce(erroneous(2));
-      getterExecutable.mockImplementation(fooValue);
+      getterEffect.mockImplementationOnce(erroneous(1));
+      getterEffect.mockImplementationOnce(erroneous(2));
+      getterEffect.mockImplementation(fooValue);
 
       const operation = Operation.assert(getter, Operator.equals('bar'));
 
@@ -135,13 +126,13 @@ describe('Operation', () => {
         "Assert: (getter() == 'bar')\n  Context: Object\n  Cause: Assertion failed: ((getter() => 'foo') == 'bar')"
       );
 
-      expect(getterExecutable.mock.calls.length).toBeGreaterThan(3);
+      expect(getterEffect.mock.calls.length).toBeGreaterThan(3);
     });
 
-    it('should throw an executable error', async () => {
-      getterExecutable.mockImplementationOnce(erroneous(1));
-      getterExecutable.mockImplementationOnce(erroneous(2));
-      getterExecutable.mockImplementationOnce(neverEnding);
+    it('should throw an effect error', async () => {
+      getterEffect.mockImplementationOnce(erroneous(1));
+      getterEffect.mockImplementationOnce(erroneous(2));
+      getterEffect.mockImplementationOnce(neverEnding);
 
       const operation = Operation.assert(getter, Operator.equals('foo'));
 
@@ -151,11 +142,11 @@ describe('Operation', () => {
         "Assert: (getter() == 'foo')\n  Context: Object\n  Cause: Error2"
       );
 
-      expect(getterExecutable).toHaveBeenCalledTimes(3);
+      expect(getterEffect).toHaveBeenCalledTimes(3);
     });
 
     it('should throw a default timeout error', async () => {
-      getterExecutable.mockImplementationOnce(neverEnding);
+      getterEffect.mockImplementationOnce(neverEnding);
 
       const operation = Operation.assert(getter, Operator.equals('foo'));
 
@@ -165,11 +156,11 @@ describe('Operation', () => {
         "Assert: (getter() == 'foo')\n  Context: Object\n  Cause: Timeout after 0.01 seconds"
       );
 
-      expect(getterExecutable).toHaveBeenCalledTimes(1);
+      expect(getterEffect).toHaveBeenCalledTimes(1);
     });
 
     it('should throw a custom timeout error', async () => {
-      getterExecutable.mockImplementationOnce(neverEnding);
+      getterEffect.mockImplementationOnce(neverEnding);
 
       const operation = Operation.assert(getter, Operator.equals('foo'), 1);
 
@@ -179,15 +170,15 @@ describe('Operation', () => {
         "Assert: (getter() == 'foo')\n  Context: Object\n  Cause: Timeout after 1 second"
       );
 
-      expect(getterExecutable).toHaveBeenCalledTimes(1);
+      expect(getterEffect).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('if() => Operation.execute()', () => {
     it('should return the specified then-operations', async () => {
-      getterExecutable.mockImplementationOnce(erroneous(1));
-      getterExecutable.mockImplementationOnce(erroneous(2));
-      getterExecutable.mockImplementationOnce(fooValue);
+      getterEffect.mockImplementationOnce(erroneous(1));
+      getterEffect.mockImplementationOnce(erroneous(2));
+      getterEffect.mockImplementationOnce(fooValue);
 
       const thenOperations: Operation[] = [];
 
@@ -201,13 +192,13 @@ describe('Operation', () => {
         useFakeTimers(async () => operation.execute())
       ).resolves.toBe(thenOperations);
 
-      expect(getterExecutable).toHaveBeenCalledTimes(3);
+      expect(getterEffect).toHaveBeenCalledTimes(3);
     });
 
     it('should return the default else-operations', async () => {
-      getterExecutable.mockImplementationOnce(erroneous(1));
-      getterExecutable.mockImplementationOnce(erroneous(2));
-      getterExecutable.mockImplementationOnce(fooValue);
+      getterEffect.mockImplementationOnce(erroneous(1));
+      getterEffect.mockImplementationOnce(erroneous(2));
+      getterEffect.mockImplementationOnce(fooValue);
 
       const thenOperations: Operation[] = [];
 
@@ -224,13 +215,13 @@ describe('Operation', () => {
       expect(elseOperations).toEqual([]);
       expect(elseOperations).not.toBe(thenOperations);
 
-      expect(getterExecutable).toHaveBeenCalledTimes(3);
+      expect(getterEffect).toHaveBeenCalledTimes(3);
     });
 
     it('should return the specified else-operations', async () => {
-      getterExecutable.mockImplementationOnce(erroneous(1));
-      getterExecutable.mockImplementationOnce(erroneous(2));
-      getterExecutable.mockImplementationOnce(fooValue);
+      getterEffect.mockImplementationOnce(erroneous(1));
+      getterEffect.mockImplementationOnce(erroneous(2));
+      getterEffect.mockImplementationOnce(fooValue);
 
       const elseOperations: Operation[] = [];
 
@@ -245,13 +236,13 @@ describe('Operation', () => {
         useFakeTimers(async () => operation.execute())
       ).resolves.toBe(elseOperations);
 
-      expect(getterExecutable).toHaveBeenCalledTimes(3);
+      expect(getterEffect).toHaveBeenCalledTimes(3);
     });
 
-    it('should throw an executable error', async () => {
-      getterExecutable.mockImplementationOnce(erroneous(1));
-      getterExecutable.mockImplementationOnce(erroneous(2));
-      getterExecutable.mockImplementationOnce(neverEnding);
+    it('should throw an effect error', async () => {
+      getterEffect.mockImplementationOnce(erroneous(1));
+      getterEffect.mockImplementationOnce(erroneous(2));
+      getterEffect.mockImplementationOnce(neverEnding);
 
       const operation = Operation.if(getter, Operator.equals('foo'), []);
 
@@ -261,11 +252,11 @@ describe('Operation', () => {
         "If: (getter() == 'foo')\n  Context: Object\n  Cause: Error2"
       );
 
-      expect(getterExecutable).toHaveBeenCalledTimes(3);
+      expect(getterEffect).toHaveBeenCalledTimes(3);
     });
 
     it('should throw a default timeout error', async () => {
-      getterExecutable.mockImplementationOnce(neverEnding);
+      getterEffect.mockImplementationOnce(neverEnding);
 
       const operation = Operation.if(getter, Operator.equals('foo'), []);
 
@@ -275,11 +266,11 @@ describe('Operation', () => {
         "If: (getter() == 'foo')\n  Context: Object\n  Cause: Timeout after 0.01 seconds"
       );
 
-      expect(getterExecutable).toHaveBeenCalledTimes(1);
+      expect(getterEffect).toHaveBeenCalledTimes(1);
     });
 
     it('should throw a custom timeout error', async () => {
-      getterExecutable.mockImplementationOnce(neverEnding);
+      getterEffect.mockImplementationOnce(neverEnding);
 
       const operation = Operation.if(getter, Operator.equals('foo'), [], [], 1);
 
@@ -289,7 +280,7 @@ describe('Operation', () => {
         "If: (getter() == 'foo')\n  Context: Object\n  Cause: Timeout after 1 second"
       );
 
-      expect(getterExecutable).toHaveBeenCalledTimes(1);
+      expect(getterEffect).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -301,12 +292,12 @@ describe('Operation', () => {
         useFakeTimers(async () => operation.execute())
       ).resolves.toEqual([]);
 
-      expect(methodExecutable).toHaveBeenCalledTimes(1);
+      expect(methodEffect).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw an executable error', async () => {
-      methodExecutable.mockImplementationOnce(erroneous(1));
-      methodExecutable.mockImplementationOnce(erroneous(2));
+    it('should throw an effect error', async () => {
+      methodEffect.mockImplementationOnce(erroneous(1));
+      methodEffect.mockImplementationOnce(erroneous(2));
 
       const operation = Operation.perform(method);
 
@@ -316,11 +307,11 @@ describe('Operation', () => {
         'Perform: method()\n  Context: Object\n  Cause: Error1'
       );
 
-      expect(methodExecutable).toHaveBeenCalledTimes(1);
+      expect(methodEffect).toHaveBeenCalledTimes(1);
     });
 
     it('should throw a default timeout error', async () => {
-      methodExecutable.mockImplementationOnce(neverEnding);
+      methodEffect.mockImplementationOnce(neverEnding);
 
       const operation = Operation.perform(method);
 
@@ -330,11 +321,11 @@ describe('Operation', () => {
         'Perform: method()\n  Context: Object\n  Cause: Timeout after 0.01 seconds'
       );
 
-      expect(methodExecutable).toHaveBeenCalledTimes(1);
+      expect(methodEffect).toHaveBeenCalledTimes(1);
     });
 
     it('should throw a custom timeout error', async () => {
-      methodExecutable.mockImplementationOnce(neverEnding);
+      methodEffect.mockImplementationOnce(neverEnding);
 
       const operation = Operation.perform(method, 1);
 
@@ -344,13 +335,13 @@ describe('Operation', () => {
         'Perform: method()\n  Context: Object\n  Cause: Timeout after 1 second'
       );
 
-      expect(methodExecutable).toHaveBeenCalledTimes(1);
+      expect(methodEffect).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('executeAll()', () => {
     it('should execute all specified operations in sequence', async () => {
-      getterExecutable.mockImplementation(fooValue);
+      getterEffect.mockImplementation(fooValue);
 
       const calls: number[] = [];
 
@@ -358,10 +349,10 @@ describe('Operation', () => {
         Operation.assert(
           {
             ...getter,
-            executable: async () => {
+            effect: async () => {
               calls.push(1);
 
-              return getter.executable();
+              return getter.effect();
             }
           },
           Operator.equals('foo')
@@ -370,10 +361,10 @@ describe('Operation', () => {
           Operation.assert(
             {
               ...getter,
-              executable: async () => {
+              effect: async () => {
                 calls.push(2);
 
-                return getter.executable();
+                return getter.effect();
               }
             },
             Operator.equals('foo')
@@ -381,7 +372,7 @@ describe('Operation', () => {
           Operation.if(getter, Operator.equals('foo'), [
             Operation.perform({
               ...method,
-              executable: async () => {
+              effect: async () => {
                 calls.push(3);
               }
             })
@@ -389,7 +380,7 @@ describe('Operation', () => {
         ]),
         Operation.perform({
           ...method,
-          executable: async () => {
+          effect: async () => {
             calls.push(4);
           }
         })

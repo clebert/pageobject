@@ -2,10 +2,10 @@ import {FunctionCall} from '.';
 
 describe('FunctionCall', () => {
   const context = {description: 'Object'};
-  const executable = jest.fn();
+  const effect = jest.fn();
 
   function fn(...args: string[]): FunctionCall<void> {
-    return new FunctionCall(context, 'fn', arguments, executable);
+    return new FunctionCall(context, 'fn', arguments, effect);
   }
 
   it('should have the specified context', () => {
@@ -18,7 +18,7 @@ describe('FunctionCall', () => {
     expect(fn('arg1', 'arg2').description).toBe("fn('arg1', 'arg2')");
   });
 
-  it('should have the specified executable', () => {
-    expect(fn().executable).toBe(executable);
+  it('should have the specified effect', () => {
+    expect(fn().effect).toBe(effect);
   });
 });

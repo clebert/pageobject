@@ -1,6 +1,6 @@
 // tslint:disable no-use-before-declare
 
-import {FunctionCall, Operator, serialize} from '.';
+import {Effect, FunctionCall, Operator, serialize} from '.';
 
 export abstract class Operation {
   public static defaultTimeoutInSeconds = 5;
@@ -54,7 +54,7 @@ export abstract class Operation {
 }
 
 async function execute<TResult>(
-  executable: () => Promise<TResult>,
+  effect: Effect<TResult>,
   retryOnError: boolean,
   timeoutInSeconds: number
 ): Promise<TResult> {
@@ -69,7 +69,7 @@ async function execute<TResult>(
     (async () => {
       while (!resolved) {
         try {
-          const result = await executable();
+          const result = await effect();
 
           clearTimeout(timeoutID);
 
@@ -115,7 +115,7 @@ class Action extends Operation {
 
   public async execute(): Promise<Operation[]> {
     try {
-      await execute(this.method.executable, false, this.timeoutInSeconds);
+      await execute(this.method.effect, false, this.timeoutInSeconds);
 
       return [];
     } catch (error) {
@@ -147,7 +147,7 @@ class Assertion<TValue> extends Operation {
     try {
       await execute(
         async () => {
-          const value = await this.getter.executable();
+          const value = await this.getter.effect();
 
           if (!this.operator.test(value)) {
             const message = `Assertion failed: ${this.operator.describe(
@@ -199,7 +199,7 @@ class Conditional<TValue> extends Operation {
     try {
       return await execute(
         async () =>
-          this.operator.test(await this.getter.executable())
+          this.operator.test(await this.getter.effect())
             ? this.thenOperations
             : this.elseOperations,
         true,
