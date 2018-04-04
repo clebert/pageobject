@@ -1,13 +1,8 @@
-import {Adapter, Effect, Locator} from '@pageobject/base';
+import {Adapter, Effect} from '@pageobject/base';
 import {WebComponent, WebElement} from '.';
 
 class TestComponent extends WebComponent {
-  public static create(
-    adapter: Adapter<WebElement>,
-    locator?: Locator<WebElement, TestComponent>
-  ): TestComponent {
-    return new TestComponent(adapter, locator, TestComponent, ':root');
-  }
+  public readonly selector: string = ':root';
 }
 
 class TestAdapter implements Adapter<WebElement> {
@@ -39,7 +34,7 @@ describe('WebComponent', () => {
 
   beforeEach(() => {
     adapter = new TestAdapter();
-    component = TestComponent.create(adapter);
+    component = new TestComponent(adapter);
     element = new TestElement();
     htmlElement = new TestHTMLElement();
 

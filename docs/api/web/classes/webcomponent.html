@@ -922,11 +922,14 @@ img { max-width: 100%; }
 		<li class="current tsd-kind-class">
 			<a href="webcomponent.html" class="tsd-kind-icon">Web<wbr>Component</a>
 			<ul>
-				<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+				<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
 					<a href="webcomponent.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a href="webcomponent.html#description" class="tsd-kind-icon">description</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a href="webcomponent.html#selector" class="tsd-kind-icon">selector</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="webcomponent.html#click" class="tsd-kind-icon">click</a>
@@ -936,9 +939,6 @@ img { max-width: 100%; }
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a href="webcomponent.html#findelement" class="tsd-kind-icon">find<wbr>Element</a>
-				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-					<a href="webcomponent.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a href="webcomponent.html#getelementcount" class="tsd-kind-icon">get<wbr>Element<wbr>Count</a>
@@ -1008,16 +1008,17 @@ img { max-width: 100%; }
 			<h2>Index</h2>
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
-					<section class="tsd-index-section tsd-is-inherited tsd-is-private-protected">
+					<section class="tsd-index-section tsd-is-inherited">
 						<h3>Constructors</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="webcomponent.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="webcomponent.html#constructor" class="tsd-kind-icon">constructor</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section tsd-is-inherited">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="webcomponent.html#description" class="tsd-kind-icon">description</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="webcomponent.html#selector" class="tsd-kind-icon">selector</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
@@ -1026,7 +1027,6 @@ img { max-width: 100%; }
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="webcomponent.html#click" class="tsd-kind-icon">click</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="webcomponent.html#doubleclick" class="tsd-kind-icon">double<wbr>Click</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="webcomponent.html#findelement" class="tsd-kind-icon">find<wbr>Element</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="webcomponent.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="webcomponent.html#getelementcount" class="tsd-kind-icon">get<wbr>Element<wbr>Count</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="webcomponent.html#gettext" class="tsd-kind-icon">get<wbr>Text</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="webcomponent.html#hasfocus" class="tsd-kind-icon">has<wbr>Focus</a></li>
@@ -1040,20 +1040,20 @@ img { max-width: 100%; }
 				</div>
 			</section>
 		</section>
-		<section class="tsd-panel-group tsd-member-group tsd-is-inherited tsd-is-private-protected">
+		<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 			<h2>Constructors</h2>
-			<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+			<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
 				<a name="constructor" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagProtected">Protected</span> constructor</h3>
-				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Web<wbr>Component<span class="tsd-signature-symbol">(</span>adapter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Adapter</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">&gt;</span>, locator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Locator</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, ownFactory<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComponentFactory</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="webcomponent.html" class="tsd-signature-type">WebComponent</a></li>
+				<h3>constructor</h3>
+				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Web<wbr>Component<span class="tsd-signature-symbol">(</span>adapter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Adapter</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">&gt;</span>, locator<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Locator</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="webcomponent.html" class="tsd-signature-type">WebComponent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Inherited from Component.__constructor</p>
 							<ul>
-								<li>Defined in @pageobject/base/dist/Component.d.ts:23</li>
+								<li>Defined in @pageobject/base/dist/Component.d.ts:22</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1062,13 +1062,7 @@ img { max-width: 100%; }
 								<h5>adapter: <span class="tsd-signature-type">Adapter</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
-								<h5>locator: <span class="tsd-signature-type">Locator</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
-							</li>
-							<li>
-								<h5>ownFactory: <span class="tsd-signature-type">ComponentFactory</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
-							</li>
-							<li>
-								<h5>selector: <span class="tsd-signature-type">string</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> locator: <span class="tsd-signature-type">Locator</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="webcomponent.html" class="tsd-signature-type">WebComponent</a></h4>
@@ -1084,6 +1078,17 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<p>Inherited from Component.description</p>
+					<ul>
+						<li>Defined in @pageobject/base/dist/Component.d.ts:20</li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+				<a name="selector" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> selector</h3>
+				<div class="tsd-signature tsd-kind-icon">selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<p>Inherited from Component.selector</p>
 					<ul>
 						<li>Defined in @pageobject/base/dist/Component.d.ts:19</li>
 					</ul>
@@ -1137,28 +1142,10 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from Component.findElement</p>
 							<ul>
-								<li>Defined in @pageobject/base/dist/Component.d.ts:29</li>
+								<li>Defined in @pageobject/base/dist/Component.d.ts:28</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">&gt;</span></h4>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-				<a name="findelements" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagProtected">Protected</span> find<wbr>Elements</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-					<li class="tsd-signature tsd-kind-icon">find<wbr>Elements<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<p>Inherited from Component.findElements</p>
-							<ul>
-								<li>Defined in @pageobject/base/dist/Component.d.ts:30</li>
-							</ul>
-						</aside>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1173,7 +1160,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from Component.getElementCount</p>
 							<ul>
-								<li>Defined in @pageobject/base/dist/Component.d.ts:28</li>
+								<li>Defined in @pageobject/base/dist/Component.d.ts:27</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Effect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1250,7 +1237,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from Component.nth</p>
 							<ul>
-								<li>Defined in @pageobject/base/dist/Component.d.ts:26</li>
+								<li>Defined in @pageobject/base/dist/Component.d.ts:25</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1284,14 +1271,14 @@ img { max-width: 100%; }
 				<a name="select" class="tsd-anchor"></a>
 				<h3>select</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
-					<li class="tsd-signature tsd-kind-icon">select&lt;TDescendant&gt;<span class="tsd-signature-symbol">(</span>descendantFactory<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComponentFactory</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TDescendant</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TDescendant</span></li>
+					<li class="tsd-signature tsd-kind-icon">select&lt;TDescendant&gt;<span class="tsd-signature-symbol">(</span>Descendant<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComponentFactory</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TDescendant</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TDescendant</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Inherited from Component.select</p>
 							<ul>
-								<li>Defined in @pageobject/base/dist/Component.d.ts:25</li>
+								<li>Defined in @pageobject/base/dist/Component.d.ts:24</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1303,7 +1290,7 @@ img { max-width: 100%; }
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>descendantFactory: <span class="tsd-signature-type">ComponentFactory</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TDescendant</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>Descendant: <span class="tsd-signature-type">ComponentFactory</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TDescendant</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TDescendant</span></h4>
@@ -1321,7 +1308,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from Component.where</p>
 							<ul>
-								<li>Defined in @pageobject/base/dist/Component.d.ts:27</li>
+								<li>Defined in @pageobject/base/dist/Component.d.ts:26</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
