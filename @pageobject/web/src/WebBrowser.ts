@@ -1,9 +1,9 @@
-import {Describable, Driver, Effect, serialize} from '@pageobject/base';
+import {Adapter, Describable, Effect, serialize} from '@pageobject/base';
 import {Argument, WebElement} from '.';
 
 export type Key = 'Enter' | 'Escape' | 'Tab' | string;
 
-export interface WebDriver extends Driver<WebElement> {
+export interface WebAdapter extends Adapter<WebElement> {
   execute<TResult>(
     script: (...args: Argument[]) => TResult,
     ...args: Argument[]
@@ -17,28 +17,28 @@ export interface WebDriver extends Driver<WebElement> {
 export class WebBrowser implements Describable {
   public readonly description = this.constructor.name;
 
-  private readonly _driver: WebDriver;
+  private readonly _adapter: WebAdapter;
 
-  public constructor(driver: WebDriver) {
-    this._driver = driver;
+  public constructor(adapter: WebAdapter) {
+    this._adapter = adapter;
   }
 
   public getPageTitle(): Effect<string> {
-    const trigger = async () => this._driver.execute(() => document.title);
+    const trigger = async () => this._adapter.execute(() => document.title);
 
     return {context: this, description: 'getPageTitle()', trigger};
   }
 
   public getPageURL(): Effect<string> {
     const trigger = async () =>
-      this._driver.execute(() => window.location.href);
+      this._adapter.execute(() => window.location.href);
 
     return {context: this, description: 'getPageURL()', trigger};
   }
 
   public navigateTo(url: string): Effect<void> {
     const description = `navigateTo(${serialize(url)})`;
-    const trigger = async () => this._driver.navigateTo(url);
+    const trigger = async () => this._adapter.navigateTo(url);
 
     return {context: this, description, trigger};
   }
@@ -59,7 +59,7 @@ export class WebBrowser implements Describable {
       }
     }
 
-    const trigger = async () => this._driver.press(key);
+    const trigger = async () => this._adapter.press(key);
 
     return {context: this, description: `press(${serialize(key)})`, trigger};
   }

@@ -1,1 +1,1 @@
-export * from './PuppeteerWebDriver';
+export * from './PuppeteerAdapter';

@@ -1,7 +1,7 @@
-import {WebDriverTest} from '@pageobject/web';
+import {WebAdapterTest} from '@pageobject/web';
 import {ChildProcess, spawn} from 'child_process';
 import getPort from 'get-port';
-import {SeleniumWebDriver} from '.';
+import {SeleniumAdapter} from '.';
 
 const updateConfig = require('webdriver-manager/selenium/update-config.json');
 
@@ -36,7 +36,7 @@ class ChromeDriver {
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
-describe('SeleniumWebDriver', () => {
+describe('SeleniumAdapter', () => {
   const chromeDriver = new ChromeDriver();
 
   beforeAll(async () => {
@@ -47,7 +47,7 @@ describe('SeleniumWebDriver', () => {
     chromeDriver.stop();
   });
 
-  it('should pass the WebDriverTest successfully', async () => {
+  it('should pass the WebAdapterTest successfully', async () => {
     const chromeArgs =
       process.env.CI === 'true'
         ? [
@@ -59,8 +59,8 @@ describe('SeleniumWebDriver', () => {
           ]
         : ['--headless', '--disable-gpu'];
 
-    await new WebDriverTest(
-      await SeleniumWebDriver.create({
+    await new WebAdapterTest(
+      await SeleniumAdapter.create({
         browserName: 'chrome',
         chromeOptions: {args: chromeArgs}
       })

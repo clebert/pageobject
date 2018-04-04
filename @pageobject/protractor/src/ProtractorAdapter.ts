@@ -1,9 +1,9 @@
 // tslint:disable no-redundant-jsdoc
 
-import {Argument, Key, WebDriver, WebElement} from '@pageobject/web';
+import {Argument, Key, WebAdapter, WebElement} from '@pageobject/web';
 import * as protractor from 'protractor';
 
-class ProtractorWebElement implements WebElement {
+class ProtractorElement implements WebElement {
   public readonly adaptee: protractor.WebElement;
 
   public constructor(adaptee: protractor.WebElement) {
@@ -33,9 +33,9 @@ class ProtractorWebElement implements WebElement {
 }
 
 /**
- * @implements https://pageobject.js.org/api/web/interfaces/webdriver.html
+ * @implements https://pageobject.js.org/api/web/interfaces/webadapter.html
  */
-export class ProtractorWebDriver implements WebDriver {
+export class ProtractorAdapter implements WebAdapter {
   private readonly _browser: protractor.ProtractorBrowser;
 
   /**
@@ -56,11 +56,11 @@ export class ProtractorWebDriver implements WebDriver {
     selector: string,
     parent?: WebElement
   ): Promise<WebElement[]> {
-    const parentElement = parent && (parent as ProtractorWebElement).adaptee;
+    const parentElement = parent && (parent as ProtractorElement).adaptee;
 
     return (await (parentElement || this._browser.driver).findElements(
       protractor.By.css(selector)
-    )).map(element => new ProtractorWebElement(element));
+    )).map(element => new ProtractorElement(element));
   }
 
   public async navigateTo(url: string): Promise<void> {

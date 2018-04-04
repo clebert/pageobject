@@ -1,13 +1,13 @@
 // tslint:disable no-redundant-jsdoc
 
-import {Argument, Key, WebDriver, WebElement} from '@pageobject/web';
+import {Argument, Key, WebAdapter, WebElement} from '@pageobject/web';
 import * as selenium from 'selenium-webdriver';
 
 interface WebDriver4 extends selenium.WebDriver {
   actions(options?: {bridge: boolean}): selenium.ActionSequence;
 }
 
-class SeleniumWebElement implements WebElement {
+class SeleniumElement implements WebElement {
   public readonly adaptee: selenium.WebElement;
 
   public constructor(adaptee: selenium.WebElement) {
@@ -36,48 +36,48 @@ class SeleniumWebElement implements WebElement {
 }
 
 /**
- * @implements https://pageobject.js.org/api/web/interfaces/webdriver.html
+ * @implements https://pageobject.js.org/api/web/interfaces/webadapter.html
  */
-export class SeleniumWebDriver implements WebDriver {
+export class SeleniumAdapter implements WebAdapter {
   /**
    * @param capabilities https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities
    */
-  public static async create(capabilities: object): Promise<SeleniumWebDriver> {
-    return new SeleniumWebDriver(
+  public static async create(capabilities: object): Promise<SeleniumAdapter> {
+    return new SeleniumAdapter(
       // tslint:disable-next-line await-promise
       await new selenium.Builder().withCapabilities(capabilities).build()
     );
   }
 
-  private readonly _adaptee: selenium.WebDriver;
+  private readonly _driver: selenium.WebDriver;
 
   /**
-   * @param adaptee http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html
+   * @param driver http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html
    */
-  public constructor(adaptee: selenium.WebDriver) {
-    this._adaptee = adaptee;
+  public constructor(driver: selenium.WebDriver) {
+    this._driver = driver;
   }
 
   public async execute<TResult>(
     script: (...args: Argument[]) => TResult,
     ...args: Argument[]
   ): Promise<TResult> {
-    return this._adaptee.executeScript<TResult>(script, ...args);
+    return this._driver.executeScript<TResult>(script, ...args);
   }
 
   public async findElements(
     selector: string,
     parent?: WebElement
   ): Promise<WebElement[]> {
-    const parentElement = parent && (parent as SeleniumWebElement).adaptee;
+    const parentElement = parent && (parent as SeleniumElement).adaptee;
 
-    return (await (parentElement || this._adaptee).findElements(
+    return (await (parentElement || this._driver).findElements(
       selenium.By.css(selector)
-    )).map(element => new SeleniumWebElement(element));
+    )).map(element => new SeleniumElement(element));
   }
 
   public async navigateTo(url: string): Promise<void> {
-    return this._adaptee.navigate().to(url);
+    return this._driver.navigate().to(url);
   }
 
   public async press(key: Key): Promise<void> {
@@ -101,13 +101,13 @@ export class SeleniumWebDriver implements WebDriver {
       }
     }
 
-    return (this._adaptee as WebDriver4)
+    return (this._driver as WebDriver4)
       .actions({bridge: true})
       .sendKeys(seleniumKey)
       .perform();
   }
 
   public async quit(): Promise<void> {
-    return this._adaptee.quit();
+    return this._driver.quit();
   }
 }

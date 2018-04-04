@@ -1,6 +1,6 @@
-import {Component, Driver, Effect, Locator, Operator} from '.';
+import {Adapter, Component, Effect, Locator, Operator} from '.';
 
-class TestDriver implements Driver<HTMLElement> {
+class TestAdapter implements Adapter<HTMLElement> {
   public async findElements(
     selector: string,
     parent?: HTMLElement
@@ -54,19 +54,19 @@ class Descriptor<TComponent extends TestComponent> {
 
 class A extends TestComponent {
   public static create(
-    driver: Driver<HTMLElement>,
+    adapter: Adapter<HTMLElement>,
     locator?: Locator<HTMLElement, A>
   ): A {
-    return new A(driver, locator, A, '.a');
+    return new A(adapter, locator, A, '.a');
   }
 }
 
 class B extends TestComponent {
   public static create(
-    driver: Driver<HTMLElement>,
+    adapter: Adapter<HTMLElement>,
     locator?: Locator<HTMLElement, B>
   ): B {
-    return new B(driver, locator, B, '.b');
+    return new B(adapter, locator, B, '.b');
   }
 }
 
@@ -287,7 +287,7 @@ describe('Component', () => {
     <div class="a" id="A2">3</div>
   `;
 
-  const a = A.create(new TestDriver());
+  const a = A.create(new TestAdapter());
 
   describeTests(a, undefined, 1);
   describeTests(a, undefined, 2);

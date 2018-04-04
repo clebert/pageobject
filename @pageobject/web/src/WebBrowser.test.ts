@@ -1,7 +1,7 @@
 import {Effect} from '@pageobject/base';
-import {WebBrowser, WebDriver} from '.';
+import {WebAdapter, WebBrowser} from '.';
 
-class TestDriver implements WebDriver {
+class TestAdapter implements WebAdapter {
   public readonly execute = jest.fn();
   public readonly findElements = jest.fn();
   public readonly navigateTo = jest.fn();
@@ -10,14 +10,14 @@ class TestDriver implements WebDriver {
 }
 
 describe('WebBrowser', () => {
-  let driver: TestDriver;
+  let adapter: TestAdapter;
   let browser: WebBrowser;
 
   beforeEach(() => {
-    driver = new TestDriver();
-    browser = new WebBrowser(driver);
+    adapter = new TestAdapter();
+    browser = new WebBrowser(adapter);
 
-    driver.execute.mockImplementation(async (script, ...args) =>
+    adapter.execute.mockImplementation(async (script, ...args) =>
       script(...args)
     );
   });
@@ -89,12 +89,12 @@ describe('WebBrowser', () => {
 
     describe('trigger()', () => {
       it('should navigate to the specified url', async () => {
-        driver.navigateTo.mockRejectedValue(new Error('navigateTo'));
+        adapter.navigateTo.mockRejectedValue(new Error('navigateTo'));
 
         await expect(effect.trigger()).rejects.toThrow('navigateTo');
 
-        expect(driver.navigateTo).toHaveBeenCalledTimes(1);
-        expect(driver.navigateTo).toHaveBeenCalledWith('about:blank');
+        expect(adapter.navigateTo).toHaveBeenCalledTimes(1);
+        expect(adapter.navigateTo).toHaveBeenCalledWith('about:blank');
       });
     });
   });
@@ -129,12 +129,12 @@ describe('WebBrowser', () => {
 
       describe('trigger()', () => {
         it('should press the specified key', async () => {
-          driver.press.mockRejectedValue(new Error('press'));
+          adapter.press.mockRejectedValue(new Error('press'));
 
           await expect(effect.trigger()).rejects.toThrow('press');
 
-          expect(driver.press).toHaveBeenCalledTimes(1);
-          expect(driver.press).toHaveBeenCalledWith('a');
+          expect(adapter.press).toHaveBeenCalledTimes(1);
+          expect(adapter.press).toHaveBeenCalledWith('a');
         });
       });
     });

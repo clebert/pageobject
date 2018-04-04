@@ -1,15 +1,15 @@
 import {serialize} from '@pageobject/base';
 import {FromFileOptions, JSDOM} from 'jsdom';
 import {Script} from 'vm';
-import {Argument, Key, WebDriver, WebElement} from '.';
+import {Argument, Key, WebAdapter, WebElement} from '.';
 
-class JSDOMWebElement implements WebElement {
+class JSDOMElement implements WebElement {
   public readonly adaptee: HTMLElement;
-  public readonly driver: JSDOM;
+  public readonly jsdom: JSDOM;
 
-  public constructor(adaptee: HTMLElement, driver: JSDOM) {
+  public constructor(adaptee: HTMLElement, jsdom: JSDOM) {
     this.adaptee = adaptee;
-    this.driver = driver;
+    this.jsdom = jsdom;
 
     // https://github.com/jsdom/jsdom/issues/1245
     // istanbul ignore next
@@ -19,7 +19,7 @@ class JSDOMWebElement implements WebElement {
 
   public async click(): Promise<void> {
     this.adaptee.dispatchEvent(
-      new this.driver.window.MouseEvent('click', {
+      new this.jsdom.window.MouseEvent('click', {
         bubbles: true,
         cancelable: true
       })
@@ -28,7 +28,7 @@ class JSDOMWebElement implements WebElement {
 
   public async doubleClick(): Promise<void> {
     this.adaptee.dispatchEvent(
-      new this.driver.window.MouseEvent('dblclick', {
+      new this.jsdom.window.MouseEvent('dblclick', {
         bubbles: true,
         cancelable: true
       })
@@ -40,7 +40,7 @@ class JSDOMWebElement implements WebElement {
     ...args: Argument[]
   ): Promise<TResult> {
     // tslint:disable-next-line
-    (this.driver.window as any).__element__ = this.adaptee;
+    (this.jsdom.window as any).__element__ = this.adaptee;
 
     const code = `(${script.toString()})(${[
       'window.__element__',
@@ -48,11 +48,11 @@ class JSDOMWebElement implements WebElement {
     ].join(', ')})`;
 
     // tslint:disable-next-line
-    return this.driver.runVMScript(new Script(code)) as any;
+    return this.jsdom.runVMScript(new Script(code)) as any;
   }
 }
 
-export class JSDOMWebDriver implements WebDriver {
+export class JSDOMAdapter implements WebAdapter {
   private _jsdom = new JSDOM();
 
   public async execute<TResult>(
@@ -71,10 +71,10 @@ export class JSDOMWebDriver implements WebDriver {
   ): Promise<WebElement[]> {
     return Array.from(
       (
-        (parent && (parent as JSDOMWebElement).adaptee) ||
+        (parent && (parent as JSDOMElement).adaptee) ||
         this._jsdom.window.document
       ).querySelectorAll(selector)
-    ).map(element => new JSDOMWebElement(element as HTMLElement, this._jsdom));
+    ).map(element => new JSDOMElement(element as HTMLElement, this._jsdom));
   }
 
   public async navigateTo(url: string): Promise<void> {

@@ -1,21 +1,17 @@
-import {Effect, Locator} from '@pageobject/base';
-import {WebComponent, WebDriver, WebElement} from '.';
+import {Adapter, Effect, Locator} from '@pageobject/base';
+import {WebComponent, WebElement} from '.';
 
 class TestComponent extends WebComponent {
   public static create(
-    driver: WebDriver,
+    adapter: Adapter<WebElement>,
     locator?: Locator<WebElement, TestComponent>
   ): TestComponent {
-    return new TestComponent(driver, locator, TestComponent, ':root');
+    return new TestComponent(adapter, locator, TestComponent, ':root');
   }
 }
 
-class TestDriver implements WebDriver {
-  public readonly execute = jest.fn();
+class TestAdapter implements Adapter<WebElement> {
   public readonly findElements = jest.fn();
-  public readonly navigateTo = jest.fn();
-  public readonly press = jest.fn();
-  public readonly quit = jest.fn();
 }
 
 class TestElement implements WebElement {
@@ -33,7 +29,7 @@ class TestHTMLElement {
 }
 
 describe('WebComponent', () => {
-  let driver: TestDriver;
+  let adapter: TestAdapter;
   let component: WebComponent;
   let element: TestElement;
   let htmlElement: TestHTMLElement;
@@ -42,12 +38,12 @@ describe('WebComponent', () => {
   let scrollBy: jest.SpyInstance;
 
   beforeEach(() => {
-    driver = new TestDriver();
-    component = TestComponent.create(driver);
+    adapter = new TestAdapter();
+    component = TestComponent.create(adapter);
     element = new TestElement();
     htmlElement = new TestHTMLElement();
 
-    driver.findElements.mockResolvedValue([element]);
+    adapter.findElements.mockResolvedValue([element]);
 
     element.execute.mockImplementation(async (script, ...args) =>
       script(htmlElement, ...args)
