@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/puppeteer",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A web API adapter for Puppeteer.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -21,7 +21,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pageobject/web": "^3.0.0",
+    "@pageobject/web": "^4.0.0",
     "@types/puppeteer": "^1.2.0",
     "puppeteer": "^1.2.0"
   }
