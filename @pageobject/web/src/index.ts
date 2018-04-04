@@ -1,4 +1,4 @@
-export * from './JSDOMWebDriver';
+export * from './JSDOMAdapter';
+export * from './WebAdapterTest';
 export * from './WebBrowser';
 export * from './WebComponent';
-export * from './WebDriverTest';

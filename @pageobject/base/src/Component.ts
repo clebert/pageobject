@@ -1,6 +1,6 @@
 import {Describable, Effect, Operator} from '.';
 
-export interface Driver<TElement> {
+export interface Adapter<TElement> {
   findElements(selector: string, parent?: TElement): Promise<TElement[]>;
 }
 
@@ -30,7 +30,7 @@ export interface ComponentFactory<
   TComponent extends Component<TElement>
 > {
   create(
-    driver: Driver<TElement>,
+    adapter: Adapter<TElement>,
     locator?: Locator<TElement, TComponent>
   ): TComponent;
 }
@@ -38,18 +38,18 @@ export interface ComponentFactory<
 export class Component<TElement> implements Describable {
   public readonly description: string;
 
-  private readonly _driver: Driver<TElement>;
+  private readonly _adapter: Adapter<TElement>;
   private readonly _locator: Locator<TElement, this>;
   private readonly _ownFactory: ComponentFactory<TElement, this>;
   private readonly _selector: string;
 
   protected constructor(
-    driver: Driver<TElement>,
+    adapter: Adapter<TElement>,
     locator: Locator<TElement, any> = {}, // tslint:disable-line no-any
     ownFactory: ComponentFactory<TElement, any>, // tslint:disable-line no-any
     selector: string
   ) {
-    this._driver = driver;
+    this._adapter = adapter;
     this._locator = locator;
     this._ownFactory = ownFactory;
     this._selector = selector;
@@ -60,7 +60,7 @@ export class Component<TElement> implements Describable {
   public select<TDescendant extends Component<TElement>>(
     descendantFactory: ComponentFactory<TElement, TDescendant>
   ): TDescendant {
-    return descendantFactory.create(this._driver, {parent: this});
+    return descendantFactory.create(this._adapter, {parent: this});
   }
 
   public nth(position: number): this {
@@ -68,7 +68,7 @@ export class Component<TElement> implements Describable {
       throw new Error('Position must be one-based');
     }
 
-    return this._ownFactory.create(this._driver, {...this._locator, position});
+    return this._ownFactory.create(this._adapter, {...this._locator, position});
   }
 
   public where<TValue>(
@@ -77,7 +77,7 @@ export class Component<TElement> implements Describable {
   ): this {
     const {filters} = this._locator;
 
-    return this._ownFactory.create(this._driver, {
+    return this._ownFactory.create(this._adapter, {
       ...this._locator,
       filters: [...(filters || []), {accessor, operator}]
     });
@@ -139,7 +139,7 @@ export class Component<TElement> implements Describable {
   private async _filterElements(): Promise<TElement[]> {
     const {filters, parent} = this._locator;
 
-    const elements = await this._driver.findElements(
+    const elements = await this._adapter.findElements(
       this._selector,
       parent ? await parent.findElement() : undefined
     );

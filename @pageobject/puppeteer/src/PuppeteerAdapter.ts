@@ -1,6 +1,6 @@
 // tslint:disable no-redundant-jsdoc
 
-import {Argument, Key, WebDriver, WebElement} from '@pageobject/web';
+import {Argument, Key, WebAdapter, WebElement} from '@pageobject/web';
 import {
   Browser,
   ElementHandle,
@@ -10,7 +10,7 @@ import {
   launch
 } from 'puppeteer';
 
-class PuppeteerWebElement implements WebElement {
+class PuppeteerElement implements WebElement {
   public readonly adaptee: ElementHandle;
   public readonly page: Page;
 
@@ -37,9 +37,9 @@ class PuppeteerWebElement implements WebElement {
 }
 
 /**
- * @implements https://pageobject.js.org/api/web/interfaces/webdriver.html
+ * @implements https://pageobject.js.org/api/web/interfaces/webadapter.html
  */
-export class PuppeteerWebDriver implements WebDriver {
+export class PuppeteerAdapter implements WebAdapter {
   /**
    * @param launchOptions https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions
    * @param navigationOptions https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagegotourl-options
@@ -47,10 +47,10 @@ export class PuppeteerWebDriver implements WebDriver {
   public static async create(
     launchOptions?: LaunchOptions,
     navigationOptions?: NavigationOptions
-  ): Promise<PuppeteerWebDriver> {
+  ): Promise<PuppeteerAdapter> {
     const browser = await launch(launchOptions);
 
-    return new PuppeteerWebDriver(
+    return new PuppeteerAdapter(
       browser,
       await browser.newPage(),
       navigationOptions
@@ -92,7 +92,7 @@ export class PuppeteerWebDriver implements WebDriver {
       (_selector: string, _parent: Element | undefined) =>
         (_parent || document).querySelectorAll(_selector),
       selector,
-      parent && (parent as PuppeteerWebElement).adaptee
+      parent && (parent as PuppeteerElement).adaptee
     );
 
     const lengthHandle = await elementsHandle.getProperty('length');
@@ -116,9 +116,7 @@ export class PuppeteerWebDriver implements WebDriver {
 
     await elementsHandle.dispose();
 
-    return elements.map(
-      element => new PuppeteerWebElement(element, this._page)
-    );
+    return elements.map(element => new PuppeteerElement(element, this._page));
   }
 
   public async navigateTo(url: string): Promise<void> {

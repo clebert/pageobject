@@ -1,1 +1,1 @@
-export * from './ProtractorWebDriver';
+export * from './ProtractorAdapter';

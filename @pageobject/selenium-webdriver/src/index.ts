@@ -1,1 +1,1 @@
-export * from './SeleniumWebDriver';
+export * from './SeleniumAdapter';
