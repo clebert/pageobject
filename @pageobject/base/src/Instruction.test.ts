@@ -1,12 +1,6 @@
 // tslint:disable no-any
 
-import {Effect, Instruction, Operator} from '.';
-
-class TestEffect implements Effect<any> {
-  public readonly context = {description: 'Object'};
-  public readonly description = 'effect()';
-  public readonly trigger = jest.fn();
-}
+import {FunctionCall, Instruction, Operator} from '.';
 
 class ObservablePromise<T> {
   public readonly promise: Promise<T>;
@@ -63,7 +57,7 @@ async function useFakeTimers<TResult>(
 
 function erroneous(id: number): () => Promise<never> {
   return async () => {
-    throw new Error(`EffectError${id}`);
+    throw new Error(`Error${id}`);
   };
 }
 
@@ -78,10 +72,29 @@ async function neverEnding(): Promise<never> {
 const {defaultTimeoutInSeconds} = Instruction;
 
 describe('Instruction', () => {
-  let effect: TestEffect;
+  let getterExecutable: jest.Mock;
+  let methodExecutable: jest.Mock;
+
+  let getter: FunctionCall<string>;
+  let method: FunctionCall<void>;
 
   beforeEach(() => {
-    effect = new TestEffect();
+    getterExecutable = jest.fn();
+    methodExecutable = jest.fn();
+
+    getter = new FunctionCall(
+      {description: 'Object'},
+      'getter',
+      [],
+      getterExecutable
+    );
+
+    method = new FunctionCall(
+      {description: 'Object'},
+      'method',
+      [],
+      methodExecutable
+    );
 
     Instruction.defaultTimeoutInSeconds = 0.01;
   });
@@ -96,90 +109,90 @@ describe('Instruction', () => {
 
   describe('assert() => Instruction.execute()', () => {
     it('should return without errors', async () => {
-      effect.trigger.mockImplementationOnce(erroneous(1));
-      effect.trigger.mockImplementationOnce(erroneous(2));
-      effect.trigger.mockImplementationOnce(fooValue);
+      getterExecutable.mockImplementationOnce(erroneous(1));
+      getterExecutable.mockImplementationOnce(erroneous(2));
+      getterExecutable.mockImplementationOnce(fooValue);
 
-      const instruction = Instruction.assert(effect, Operator.equals('foo'));
+      const instruction = Instruction.assert(getter, Operator.equals('foo'));
 
       await expect(
         useFakeTimers(async () => instruction.execute())
       ).resolves.toEqual([]);
 
-      expect(effect.trigger).toHaveBeenCalledTimes(3);
+      expect(getterExecutable).toHaveBeenCalledTimes(3);
     });
 
     it('should throw an assertion error', async () => {
-      effect.trigger.mockImplementationOnce(erroneous(1));
-      effect.trigger.mockImplementationOnce(erroneous(2));
-      effect.trigger.mockImplementation(fooValue);
+      getterExecutable.mockImplementationOnce(erroneous(1));
+      getterExecutable.mockImplementationOnce(erroneous(2));
+      getterExecutable.mockImplementation(fooValue);
 
-      const instruction = Instruction.assert(effect, Operator.equals('bar'));
+      const instruction = Instruction.assert(getter, Operator.equals('bar'));
 
       await expect(
         useFakeTimers(async () => instruction.execute())
       ).rejects.toThrow(
-        "Assert: (effect() == 'bar')\n  Context: Object\n  Cause: Assertion failed: ((effect() => 'foo') == 'bar')"
+        "Assert: (getter() == 'bar')\n  Context: Object\n  Cause: Assertion failed: ((getter() => 'foo') == 'bar')"
       );
 
-      expect(effect.trigger.mock.calls.length).toBeGreaterThan(3);
+      expect(getterExecutable.mock.calls.length).toBeGreaterThan(3);
     });
 
-    it('should throw an effect error', async () => {
-      effect.trigger.mockImplementationOnce(erroneous(1));
-      effect.trigger.mockImplementationOnce(erroneous(2));
-      effect.trigger.mockImplementationOnce(neverEnding);
+    it('should throw an executable error', async () => {
+      getterExecutable.mockImplementationOnce(erroneous(1));
+      getterExecutable.mockImplementationOnce(erroneous(2));
+      getterExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.assert(effect, Operator.equals('foo'));
+      const instruction = Instruction.assert(getter, Operator.equals('foo'));
 
       await expect(
         useFakeTimers(async () => instruction.execute(), 0.01)
       ).rejects.toThrow(
-        "Assert: (effect() == 'foo')\n  Context: Object\n  Cause: EffectError2"
+        "Assert: (getter() == 'foo')\n  Context: Object\n  Cause: Error2"
       );
 
-      expect(effect.trigger).toHaveBeenCalledTimes(3);
+      expect(getterExecutable).toHaveBeenCalledTimes(3);
     });
 
     it('should throw a default timeout error', async () => {
-      effect.trigger.mockImplementationOnce(neverEnding);
+      getterExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.assert(effect, Operator.equals('foo'));
+      const instruction = Instruction.assert(getter, Operator.equals('foo'));
 
       await expect(
         useFakeTimers(async () => instruction.execute(), 0.01)
       ).rejects.toThrow(
-        "Assert: (effect() == 'foo')\n  Context: Object\n  Cause: Timeout after 0.01 seconds"
+        "Assert: (getter() == 'foo')\n  Context: Object\n  Cause: Timeout after 0.01 seconds"
       );
 
-      expect(effect.trigger).toHaveBeenCalledTimes(1);
+      expect(getterExecutable).toHaveBeenCalledTimes(1);
     });
 
     it('should throw a custom timeout error', async () => {
-      effect.trigger.mockImplementationOnce(neverEnding);
+      getterExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.assert(effect, Operator.equals('foo'), 1);
+      const instruction = Instruction.assert(getter, Operator.equals('foo'), 1);
 
       await expect(
         useFakeTimers(async () => instruction.execute(), 1)
       ).rejects.toThrow(
-        "Assert: (effect() == 'foo')\n  Context: Object\n  Cause: Timeout after 1 second"
+        "Assert: (getter() == 'foo')\n  Context: Object\n  Cause: Timeout after 1 second"
       );
 
-      expect(effect.trigger).toHaveBeenCalledTimes(1);
+      expect(getterExecutable).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('if() => Instruction.execute()', () => {
     it('should return the specified then-instructions', async () => {
-      effect.trigger.mockImplementationOnce(erroneous(1));
-      effect.trigger.mockImplementationOnce(erroneous(2));
-      effect.trigger.mockImplementationOnce(fooValue);
+      getterExecutable.mockImplementationOnce(erroneous(1));
+      getterExecutable.mockImplementationOnce(erroneous(2));
+      getterExecutable.mockImplementationOnce(fooValue);
 
       const thenInstructions: Instruction[] = [];
 
       const instruction = Instruction.if(
-        effect,
+        getter,
         Operator.equals('foo'),
         thenInstructions
       );
@@ -188,18 +201,18 @@ describe('Instruction', () => {
         useFakeTimers(async () => instruction.execute())
       ).resolves.toBe(thenInstructions);
 
-      expect(effect.trigger).toHaveBeenCalledTimes(3);
+      expect(getterExecutable).toHaveBeenCalledTimes(3);
     });
 
     it('should return the default else-instructions', async () => {
-      effect.trigger.mockImplementationOnce(erroneous(1));
-      effect.trigger.mockImplementationOnce(erroneous(2));
-      effect.trigger.mockImplementationOnce(fooValue);
+      getterExecutable.mockImplementationOnce(erroneous(1));
+      getterExecutable.mockImplementationOnce(erroneous(2));
+      getterExecutable.mockImplementationOnce(fooValue);
 
       const thenInstructions: Instruction[] = [];
 
       const instruction = Instruction.if(
-        effect,
+        getter,
         Operator.equals('bar'),
         thenInstructions
       );
@@ -211,18 +224,18 @@ describe('Instruction', () => {
       expect(elseInstructions).toEqual([]);
       expect(elseInstructions).not.toBe(thenInstructions);
 
-      expect(effect.trigger).toHaveBeenCalledTimes(3);
+      expect(getterExecutable).toHaveBeenCalledTimes(3);
     });
 
     it('should return the specified else-instructions', async () => {
-      effect.trigger.mockImplementationOnce(erroneous(1));
-      effect.trigger.mockImplementationOnce(erroneous(2));
-      effect.trigger.mockImplementationOnce(fooValue);
+      getterExecutable.mockImplementationOnce(erroneous(1));
+      getterExecutable.mockImplementationOnce(erroneous(2));
+      getterExecutable.mockImplementationOnce(fooValue);
 
       const elseInstructions: Instruction[] = [];
 
       const instruction = Instruction.if(
-        effect,
+        getter,
         Operator.equals('bar'),
         [],
         elseInstructions
@@ -232,44 +245,44 @@ describe('Instruction', () => {
         useFakeTimers(async () => instruction.execute())
       ).resolves.toBe(elseInstructions);
 
-      expect(effect.trigger).toHaveBeenCalledTimes(3);
+      expect(getterExecutable).toHaveBeenCalledTimes(3);
     });
 
-    it('should throw an effect error', async () => {
-      effect.trigger.mockImplementationOnce(erroneous(1));
-      effect.trigger.mockImplementationOnce(erroneous(2));
-      effect.trigger.mockImplementationOnce(neverEnding);
+    it('should throw an executable error', async () => {
+      getterExecutable.mockImplementationOnce(erroneous(1));
+      getterExecutable.mockImplementationOnce(erroneous(2));
+      getterExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.if(effect, Operator.equals('foo'), []);
+      const instruction = Instruction.if(getter, Operator.equals('foo'), []);
 
       await expect(
         useFakeTimers(async () => instruction.execute(), 0.01)
       ).rejects.toThrow(
-        "If: (effect() == 'foo')\n  Context: Object\n  Cause: EffectError2"
+        "If: (getter() == 'foo')\n  Context: Object\n  Cause: Error2"
       );
 
-      expect(effect.trigger).toHaveBeenCalledTimes(3);
+      expect(getterExecutable).toHaveBeenCalledTimes(3);
     });
 
     it('should throw a default timeout error', async () => {
-      effect.trigger.mockImplementationOnce(neverEnding);
+      getterExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.if(effect, Operator.equals('foo'), []);
+      const instruction = Instruction.if(getter, Operator.equals('foo'), []);
 
       await expect(
         useFakeTimers(async () => instruction.execute(), 0.01)
       ).rejects.toThrow(
-        "If: (effect() == 'foo')\n  Context: Object\n  Cause: Timeout after 0.01 seconds"
+        "If: (getter() == 'foo')\n  Context: Object\n  Cause: Timeout after 0.01 seconds"
       );
 
-      expect(effect.trigger).toHaveBeenCalledTimes(1);
+      expect(getterExecutable).toHaveBeenCalledTimes(1);
     });
 
     it('should throw a custom timeout error', async () => {
-      effect.trigger.mockImplementationOnce(neverEnding);
+      getterExecutable.mockImplementationOnce(neverEnding);
 
       const instruction = Instruction.if(
-        effect,
+        getter,
         Operator.equals('foo'),
         [],
         [],
@@ -279,115 +292,111 @@ describe('Instruction', () => {
       await expect(
         useFakeTimers(async () => instruction.execute(), 1)
       ).rejects.toThrow(
-        "If: (effect() == 'foo')\n  Context: Object\n  Cause: Timeout after 1 second"
+        "If: (getter() == 'foo')\n  Context: Object\n  Cause: Timeout after 1 second"
       );
 
-      expect(effect.trigger).toHaveBeenCalledTimes(1);
+      expect(getterExecutable).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('perform() => Instruction.execute()', () => {
     it('should return without errors', async () => {
-      const instruction = Instruction.perform(effect);
+      const instruction = Instruction.perform(method);
 
       await expect(
         useFakeTimers(async () => instruction.execute())
       ).resolves.toEqual([]);
 
-      expect(effect.trigger).toHaveBeenCalledTimes(1);
+      expect(methodExecutable).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw an effect error', async () => {
-      effect.trigger.mockImplementationOnce(erroneous(1));
-      effect.trigger.mockImplementationOnce(erroneous(2));
+    it('should throw an executable error', async () => {
+      methodExecutable.mockImplementationOnce(erroneous(1));
+      methodExecutable.mockImplementationOnce(erroneous(2));
 
-      const instruction = Instruction.perform(effect);
+      const instruction = Instruction.perform(method);
 
       await expect(
         useFakeTimers(async () => instruction.execute())
       ).rejects.toThrow(
-        'Perform: effect()\n  Context: Object\n  Cause: EffectError1'
+        'Perform: method()\n  Context: Object\n  Cause: Error1'
       );
 
-      expect(effect.trigger).toHaveBeenCalledTimes(1);
+      expect(methodExecutable).toHaveBeenCalledTimes(1);
     });
 
     it('should throw a default timeout error', async () => {
-      effect.trigger.mockImplementationOnce(neverEnding);
+      methodExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.perform(effect);
+      const instruction = Instruction.perform(method);
 
       await expect(
         useFakeTimers(async () => instruction.execute(), 0.01)
       ).rejects.toThrow(
-        'Perform: effect()\n  Context: Object\n  Cause: Timeout after 0.01 seconds'
+        'Perform: method()\n  Context: Object\n  Cause: Timeout after 0.01 seconds'
       );
 
-      expect(effect.trigger).toHaveBeenCalledTimes(1);
+      expect(methodExecutable).toHaveBeenCalledTimes(1);
     });
 
     it('should throw a custom timeout error', async () => {
-      effect.trigger.mockImplementationOnce(neverEnding);
+      methodExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.perform(effect, 1);
+      const instruction = Instruction.perform(method, 1);
 
       await expect(
         useFakeTimers(async () => instruction.execute(), 1)
       ).rejects.toThrow(
-        'Perform: effect()\n  Context: Object\n  Cause: Timeout after 1 second'
+        'Perform: method()\n  Context: Object\n  Cause: Timeout after 1 second'
       );
 
-      expect(effect.trigger).toHaveBeenCalledTimes(1);
+      expect(methodExecutable).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('executeAll()', () => {
     it('should execute all specified instructions in sequence', async () => {
-      effect.trigger.mockImplementation(fooValue);
+      getterExecutable.mockImplementation(fooValue);
 
       const calls: number[] = [];
 
       await Instruction.executeAll([
         Instruction.assert(
           {
-            ...effect,
-            trigger: async () => {
+            ...getter,
+            executable: async () => {
               calls.push(1);
 
-              return effect.trigger();
+              return getter.executable();
             }
           },
           Operator.equals('foo')
         ),
-        Instruction.if(effect, Operator.equals('foo'), [
+        Instruction.if(getter, Operator.equals('foo'), [
           Instruction.assert(
             {
-              ...effect,
-              trigger: async () => {
+              ...getter,
+              executable: async () => {
                 calls.push(2);
 
-                return effect.trigger();
+                return getter.executable();
               }
             },
             Operator.equals('foo')
           ),
-          Instruction.if(effect, Operator.equals('foo'), [
+          Instruction.if(getter, Operator.equals('foo'), [
             Instruction.perform({
-              ...effect,
-              trigger: async () => {
+              ...method,
+              executable: async () => {
                 calls.push(3);
-
-                return effect.trigger();
               }
             })
           ])
         ]),
         Instruction.perform({
-          ...effect,
-          trigger: async () => {
+          ...method,
+          executable: async () => {
             calls.push(4);
-
-            return effect.trigger();
           }
         })
       ]);

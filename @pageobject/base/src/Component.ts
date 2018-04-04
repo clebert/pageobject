@@ -1,4 +1,4 @@
-import {Describable, Effect, Operator} from '.';
+import {Describable, FunctionCall, Operator} from '.';
 
 export interface Adapter<TElement> {
   findElements(selector: string, parent?: TElement): Promise<TElement[]>;
@@ -7,8 +7,8 @@ export interface Adapter<TElement> {
 export type Accessor<
   TElement,
   TComponent extends Component<TElement>,
-  TValue
-> = (pageObject: TComponent) => Effect<TValue>;
+  TResult
+> = (pageObject: TComponent) => FunctionCall<TResult>;
 
 export interface Filter<
   TElement,
@@ -85,10 +85,13 @@ export abstract class Component<TElement> implements Describable {
     });
   }
 
-  public getElementCount(): Effect<number> {
-    const trigger = async () => (await this._findElements()).length;
-
-    return {context: this, description: 'getElementCount()', trigger};
+  public getElementCount(): FunctionCall<number> {
+    return new FunctionCall(
+      this,
+      this.getElementCount.name,
+      arguments,
+      async () => (await this._findElements()).length
+    );
   }
 
   protected async findElement(): Promise<TElement> {
@@ -147,7 +150,7 @@ export abstract class Component<TElement> implements Describable {
 
         return (await Promise.all(
           filters.map(async filter =>
-            filter.operator.test(await filter.accessor(instance).trigger())
+            filter.operator.test(await filter.accessor(instance).executable())
           )
         )).every(result => result);
       })

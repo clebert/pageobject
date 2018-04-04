@@ -925,6 +925,9 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-not-exported">
 			<a href="classes/equalsoperator.html" class="tsd-kind-icon">Equals<wbr>Operator</a>
 		</li>
+		<li class=" tsd-kind-class tsd-has-type-parameter">
+			<a href="classes/functioncall.html" class="tsd-kind-icon">Function<wbr>Call</a>
+		</li>
 		<li class=" tsd-kind-class tsd-is-not-exported">
 			<a href="classes/greaterthanoperator.html" class="tsd-kind-icon">Greater<wbr>Than<wbr>Operator</a>
 		</li>
@@ -971,9 +974,6 @@ img { max-width: 100%; }
 			<a href="interfaces/describable.html" class="tsd-kind-icon">Describable</a>
 		</li>
 		<li class=" tsd-kind-interface tsd-has-type-parameter">
-			<a href="interfaces/effect.html" class="tsd-kind-icon">Effect</a>
-		</li>
-		<li class=" tsd-kind-interface tsd-has-type-parameter">
 			<a href="interfaces/filter.html" class="tsd-kind-icon">Filter</a>
 		</li>
 		<li class=" tsd-kind-interface tsd-has-type-parameter">
@@ -981,6 +981,9 @@ img { max-width: 100%; }
 		</li>
 		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="globals.html#accessor" class="tsd-kind-icon">Accessor</a>
+		</li>
+		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+			<a href="globals.html#executable" class="tsd-kind-icon">Executable</a>
 		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
 			<a href="globals.html#execute" class="tsd-kind-icon">execute</a>
@@ -1024,6 +1027,7 @@ img { max-width: 100%; }
 							<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/component.html" class="tsd-kind-icon">Component</a></li>
 							<li class="tsd-kind-class tsd-has-type-parameter tsd-is-not-exported"><a href="classes/conditional.html" class="tsd-kind-icon">Conditional</a></li>
 							<li class="tsd-kind-class tsd-has-type-parameter tsd-is-not-exported"><a href="classes/equalsoperator.html" class="tsd-kind-icon">Equals<wbr>Operator</a></li>
+							<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/functioncall.html" class="tsd-kind-icon">Function<wbr>Call</a></li>
 							<li class="tsd-kind-class tsd-is-not-exported"><a href="classes/greaterthanoperator.html" class="tsd-kind-icon">Greater<wbr>Than<wbr>Operator</a></li>
 							<li class="tsd-kind-class tsd-is-not-exported"><a href="classes/greaterthanorequalsoperator.html" class="tsd-kind-icon">Greater<wbr>Than<wbr>OrEquals<wbr>Operator</a></li>
 							<li class="tsd-kind-class"><a href="classes/instruction.html" class="tsd-kind-icon">Instruction</a></li>
@@ -1044,7 +1048,6 @@ img { max-width: 100%; }
 							<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/adapter.html" class="tsd-kind-icon">Adapter</a></li>
 							<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/componentfactory.html" class="tsd-kind-icon">Component<wbr>Factory</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/describable.html" class="tsd-kind-icon">Describable</a></li>
-							<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/effect.html" class="tsd-kind-icon">Effect</a></li>
 							<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/filter.html" class="tsd-kind-icon">Filter</a></li>
 							<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/locator.html" class="tsd-kind-icon">Locator</a></li>
 						</ul>
@@ -1053,6 +1056,7 @@ img { max-width: 100%; }
 						<h3>Type aliases</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#accessor" class="tsd-kind-icon">Accessor</a></li>
+							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#executable" class="tsd-kind-icon">Executable</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
@@ -1081,7 +1085,7 @@ img { max-width: 100%; }
 					<ul class="tsd-parameters">
 						<li class="tsd-parameter-siganture">
 							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
-								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>pageObject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TComponent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></li>
+								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>pageObject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TComponent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="classes/functioncall.html" class="tsd-signature-type">FunctionCall</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></li>
 							</ul>
 							<ul class="tsd-descriptions">
 								<li class="tsd-description">
@@ -1091,7 +1095,32 @@ img { max-width: 100%; }
 											<h5>pageObject: <span class="tsd-signature-type">TComponent</span></h5>
 										</li>
 									</ul>
-									<h4 class="tsd-returns-title">Returns <a href="interfaces/effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									<h4 class="tsd-returns-title">Returns <a href="classes/functioncall.html" class="tsd-signature-type">FunctionCall</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
+				<a name="executable" class="tsd-anchor"></a>
+				<h3>Executable</h3>
+				<div class="tsd-signature tsd-kind-icon">Executable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/FunctionCall.ts#L7">FunctionCall.ts:7</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-type-declaration">
+					<h4>Type declaration</h4>
+					<ul class="tsd-parameters">
+						<li class="tsd-parameter-siganture">
+							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></li>
+							</ul>
+							<ul class="tsd-descriptions">
+								<li class="tsd-description">
+									<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
 								</li>
 							</ul>
 						</li>
@@ -1111,7 +1140,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L66">Instruction.ts:66</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L56">Instruction.ts:56</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1158,7 +1187,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Operator.ts#L7">Operator.ts:7</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/FunctionCall.ts#L10">FunctionCall.ts:10</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>

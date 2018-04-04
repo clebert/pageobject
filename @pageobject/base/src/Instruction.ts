@@ -1,37 +1,27 @@
 // tslint:disable no-use-before-declare
 
-import {Operator, serialize} from '.';
-
-export interface Describable {
-  readonly description: string;
-}
-
-export interface Effect<TResult> extends Describable {
-  readonly context: Describable;
-
-  trigger(): Promise<TResult>;
-}
+import {FunctionCall, Operator, serialize} from '.';
 
 export abstract class Instruction {
   public static defaultTimeoutInSeconds = 5;
 
   public static assert<TValue>(
-    effect: Effect<TValue>,
+    getter: FunctionCall<TValue>,
     operator: Operator<TValue>,
     timeoutInSeconds?: number
   ): Instruction {
-    return new Assertion(effect, operator, timeoutInSeconds);
+    return new Assertion(getter, operator, timeoutInSeconds);
   }
 
   public static if<TValue>(
-    effect: Effect<TValue>,
+    getter: FunctionCall<TValue>,
     operator: Operator<TValue>,
     thenInstructions: Instruction[],
     elseInstructions: Instruction[] = [],
     timeoutInSeconds?: number
   ): Instruction {
     return new Conditional(
-      effect,
+      getter,
       operator,
       thenInstructions,
       elseInstructions,
@@ -40,10 +30,10 @@ export abstract class Instruction {
   }
 
   public static perform(
-    effect: Effect<void>,
+    method: FunctionCall<void>,
     timeoutInSeconds?: number
   ): Instruction {
-    return new Action(effect, timeoutInSeconds);
+    return new Action(method, timeoutInSeconds);
   }
 
   public static async executeAll(instructions: Instruction[]): Promise<void> {
@@ -112,29 +102,25 @@ async function execute<TResult>(
 }
 
 class Action extends Instruction {
-  public readonly effect: Effect<void>;
+  public readonly method: FunctionCall<void>;
 
   public constructor(
-    effect: Effect<void>,
+    method: FunctionCall<void>,
     timeoutInSeconds: number | undefined
   ) {
     super(timeoutInSeconds);
 
-    this.effect = effect;
+    this.method = method;
   }
 
   public async execute(): Promise<Instruction[]> {
     try {
-      await execute(
-        async () => this.effect.trigger(),
-        false,
-        this.timeoutInSeconds
-      );
+      await execute(this.method.executable, false, this.timeoutInSeconds);
 
       return [];
     } catch (error) {
-      const message = `Perform: ${this.effect.description}\n  Context: ${
-        this.effect.context.description
+      const message = `Perform: ${this.method.description}\n  Context: ${
+        this.method.context.description
       }\n  Cause: ${error.message}`;
 
       throw new Error(message);
@@ -143,17 +129,17 @@ class Action extends Instruction {
 }
 
 class Assertion<TValue> extends Instruction {
-  public readonly effect: Effect<TValue>;
+  public readonly getter: FunctionCall<TValue>;
   public readonly operator: Operator<TValue>;
 
   public constructor(
-    effect: Effect<TValue>,
+    getter: FunctionCall<TValue>,
     operator: Operator<TValue>,
     timeoutInSeconds: number | undefined
   ) {
     super(timeoutInSeconds);
 
-    this.effect = effect;
+    this.getter = getter;
     this.operator = operator;
   }
 
@@ -161,11 +147,11 @@ class Assertion<TValue> extends Instruction {
     try {
       await execute(
         async () => {
-          const value = await this.effect.trigger();
+          const value = await this.getter.executable();
 
           if (!this.operator.test(value)) {
             const message = `Assertion failed: ${this.operator.describe(
-              `(${this.effect.description} => ${serialize(value)})`
+              `(${this.getter.description} => ${serialize(value)})`
             )}`;
 
             throw new Error(message);
@@ -178,8 +164,8 @@ class Assertion<TValue> extends Instruction {
       return [];
     } catch (error) {
       const message = `Assert: ${this.operator.describe(
-        this.effect.description
-      )}\n  Context: ${this.effect.context.description}\n  Cause: ${
+        this.getter.description
+      )}\n  Context: ${this.getter.context.description}\n  Cause: ${
         error.message
       }`;
 
@@ -189,13 +175,13 @@ class Assertion<TValue> extends Instruction {
 }
 
 class Conditional<TValue> extends Instruction {
-  public readonly effect: Effect<TValue>;
+  public readonly getter: FunctionCall<TValue>;
   public readonly operator: Operator<TValue>;
   public readonly thenInstructions: Instruction[];
   public readonly elseInstructions: Instruction[];
 
   public constructor(
-    effect: Effect<TValue>,
+    getter: FunctionCall<TValue>,
     operator: Operator<TValue>,
     thenInstructions: Instruction[],
     elseInstructions: Instruction[],
@@ -203,7 +189,7 @@ class Conditional<TValue> extends Instruction {
   ) {
     super(timeoutInSeconds);
 
-    this.effect = effect;
+    this.getter = getter;
     this.operator = operator;
     this.thenInstructions = thenInstructions;
     this.elseInstructions = elseInstructions;
@@ -213,7 +199,7 @@ class Conditional<TValue> extends Instruction {
     try {
       return await execute(
         async () =>
-          this.operator.test(await this.effect.trigger())
+          this.operator.test(await this.getter.executable())
             ? this.thenInstructions
             : this.elseInstructions,
         true,
@@ -221,8 +207,8 @@ class Conditional<TValue> extends Instruction {
       );
     } catch (error) {
       const message = `If: ${this.operator.describe(
-        this.effect.description
-      )}\n  Context: ${this.effect.context.description}\n  Cause: ${
+        this.getter.description
+      )}\n  Context: ${this.getter.context.description}\n  Cause: ${
         error.message
       }`;
 

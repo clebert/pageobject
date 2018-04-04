@@ -1,4 +1,4 @@
-import {Effect} from '@pageobject/base';
+import {FunctionCall} from '@pageobject/base';
 import {WebAdapter, WebBrowser} from '.';
 
 class TestAdapter implements WebAdapter {
@@ -26,72 +26,72 @@ describe('WebBrowser', () => {
     expect(browser.description).toBe('WebBrowser');
   });
 
-  describe('getPageTitle() => Effect', () => {
-    let effect: Effect<string>;
+  describe('getPageTitle() => FunctionCall', () => {
+    let getter: FunctionCall<string>;
 
     beforeEach(() => {
-      effect = browser.getPageTitle();
+      getter = browser.getPageTitle();
     });
 
     it('should have a context', () => {
-      expect(effect.context).toBe(browser);
+      expect(getter.context).toBe(browser);
     });
 
     it('should have a description', () => {
-      expect(effect.description).toBe('getPageTitle()');
+      expect(getter.description).toBe('getPageTitle()');
     });
 
-    describe('trigger()', () => {
+    describe('executable()', () => {
       it('should return the page title', async () => {
         document.title = 'pageTitle';
 
-        await expect(effect.trigger()).resolves.toBe('pageTitle');
+        await expect(getter.executable()).resolves.toBe('pageTitle');
       });
     });
   });
 
-  describe('getPageURL() => Effect', () => {
-    let effect: Effect<string>;
+  describe('getPageURL() => FunctionCall', () => {
+    let getter: FunctionCall<string>;
 
     beforeEach(() => {
-      effect = browser.getPageURL();
+      getter = browser.getPageURL();
     });
 
     it('should have a context', () => {
-      expect(effect.context).toBe(browser);
+      expect(getter.context).toBe(browser);
     });
 
     it('should have a description', () => {
-      expect(effect.description).toBe('getPageURL()');
+      expect(getter.description).toBe('getPageURL()');
     });
 
-    describe('trigger()', () => {
+    describe('executable()', () => {
       it('should return the page URL', async () => {
-        await expect(effect.trigger()).resolves.toBe('about:blank');
+        await expect(getter.executable()).resolves.toBe('about:blank');
       });
     });
   });
 
-  describe('navigateTo() => Effect', () => {
-    let effect: Effect<void>;
+  describe('navigateTo() => FunctionCall', () => {
+    let method: FunctionCall<void>;
 
     beforeEach(() => {
-      effect = browser.navigateTo('about:blank');
+      method = browser.navigateTo('about:blank');
     });
 
     it('should have a context', () => {
-      expect(effect.context).toBe(browser);
+      expect(method.context).toBe(browser);
     });
 
     it('should have a description', () => {
-      expect(effect.description).toBe("navigateTo('about:blank')");
+      expect(method.description).toBe("navigateTo('about:blank')");
     });
 
-    describe('trigger()', () => {
+    describe('executable()', () => {
       it('should navigate to the specified url', async () => {
         adapter.navigateTo.mockRejectedValue(new Error('navigateTo'));
 
-        await expect(effect.trigger()).rejects.toThrow('navigateTo');
+        await expect(method.executable()).rejects.toThrow('navigateTo');
 
         expect(adapter.navigateTo).toHaveBeenCalledTimes(1);
         expect(adapter.navigateTo).toHaveBeenCalledWith('about:blank');
@@ -108,30 +108,30 @@ describe('WebBrowser', () => {
       expect(() => browser.press('aa')).toThrow(errorMessage);
     });
 
-    describe('=> Effect', () => {
-      let effect: Effect<void>;
+    describe('=> FunctionCall', () => {
+      let method: FunctionCall<void>;
 
       beforeEach(() => {
-        effect = browser.press('a');
+        method = browser.press('a');
       });
 
       it('should have a context', () => {
-        expect(effect.context).toBe(browser);
+        expect(method.context).toBe(browser);
       });
 
       it('should have a description', () => {
-        expect(effect.description).toBe("press('a')");
+        expect(method.description).toBe("press('a')");
 
         expect(browser.press('Enter').description).toBe("press('Enter')");
         expect(browser.press('Escape').description).toBe("press('Escape')");
         expect(browser.press('Tab').description).toBe("press('Tab')");
       });
 
-      describe('trigger()', () => {
+      describe('executable()', () => {
         it('should press the specified key', async () => {
           adapter.press.mockRejectedValue(new Error('press'));
 
-          await expect(effect.trigger()).rejects.toThrow('press');
+          await expect(method.executable()).rejects.toThrow('press');
 
           expect(adapter.press).toHaveBeenCalledTimes(1);
           expect(adapter.press).toHaveBeenCalledWith('a');

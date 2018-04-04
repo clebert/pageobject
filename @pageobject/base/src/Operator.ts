@@ -1,12 +1,7 @@
 // tslint:disable no-use-before-declare
 
 import {deepStrictEqual} from 'assert';
-import {inspect} from 'util';
-
-// tslint:disable-next-line no-any
-export function serialize(value: any): string {
-  return inspect(value, false, null);
-}
+import {serialize} from '.';
 
 export abstract class Operator<TValue> {
   public static not<TValue>(operand: Operator<TValue>): Operator<TValue> {

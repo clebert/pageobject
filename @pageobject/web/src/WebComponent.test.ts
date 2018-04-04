@@ -1,4 +1,4 @@
-import {Adapter, Effect} from '@pageobject/base';
+import {Adapter, FunctionCall} from '@pageobject/base';
 import {WebComponent, WebElement} from '.';
 
 class TestComponent extends WebComponent {
@@ -58,159 +58,159 @@ describe('WebComponent', () => {
     scrollBy.mockRestore();
   });
 
-  describe('click() => Effect', () => {
-    let effect: Effect<void>;
+  describe('click() => FunctionCall', () => {
+    let method: FunctionCall<void>;
 
     beforeEach(() => {
-      effect = component.click();
+      method = component.click();
     });
 
     it('should have a context', () => {
-      expect(effect.context).toBe(component);
+      expect(method.context).toBe(component);
     });
 
     it('should have a description', () => {
-      expect(effect.description).toBe('click()');
+      expect(method.description).toBe('click()');
     });
 
-    describe('trigger()', () => {
+    describe('executable()', () => {
       it('should click on the element', async () => {
         element.click.mockRejectedValue(new Error('click'));
 
-        await expect(effect.trigger()).rejects.toThrow('click');
+        await expect(method.executable()).rejects.toThrow('click');
 
         expect(element.click).toHaveBeenCalledTimes(1);
       });
     });
   });
 
-  describe('doubleClick() => Effect', () => {
-    let effect: Effect<void>;
+  describe('doubleClick() => FunctionCall', () => {
+    let method: FunctionCall<void>;
 
     beforeEach(() => {
-      effect = component.doubleClick();
+      method = component.doubleClick();
     });
 
     it('should have a context', () => {
-      expect(effect.context).toBe(component);
+      expect(method.context).toBe(component);
     });
 
     it('should have a description', () => {
-      expect(effect.description).toBe('doubleClick()');
+      expect(method.description).toBe('doubleClick()');
     });
 
-    describe('trigger()', () => {
+    describe('executable()', () => {
       it('should double-click on the element', async () => {
         element.doubleClick.mockRejectedValue(new Error('doubleClick'));
 
-        await expect(effect.trigger()).rejects.toThrow('doubleClick');
+        await expect(method.executable()).rejects.toThrow('doubleClick');
 
         expect(element.doubleClick).toHaveBeenCalledTimes(1);
       });
     });
   });
 
-  describe('getText() => Effect', () => {
-    let effect: Effect<string>;
+  describe('getText() => FunctionCall', () => {
+    let getter: FunctionCall<string>;
 
     beforeEach(() => {
-      effect = component.getText();
+      getter = component.getText();
     });
 
     it('should have a context', () => {
-      expect(effect.context).toBe(component);
+      expect(getter.context).toBe(component);
     });
 
     it('should have a description', () => {
-      expect(effect.description).toBe('getText()');
+      expect(getter.description).toBe('getText()');
     });
 
-    describe('trigger()', () => {
+    describe('executable()', () => {
       it('should return the text of the element', async () => {
-        await expect(effect.trigger()).resolves.toBe('text');
+        await expect(getter.executable()).resolves.toBe('text');
       });
     });
   });
 
-  describe('hasFocus() => Effect', () => {
-    let effect: Effect<boolean>;
+  describe('hasFocus() => FunctionCall', () => {
+    let getter: FunctionCall<boolean>;
 
     beforeEach(() => {
-      effect = component.hasFocus();
+      getter = component.hasFocus();
     });
 
     it('should have a context', () => {
-      expect(effect.context).toBe(component);
+      expect(getter.context).toBe(component);
     });
 
     it('should have a description', () => {
-      expect(effect.description).toBe('hasFocus()');
+      expect(getter.description).toBe('hasFocus()');
     });
 
-    describe('trigger()', () => {
+    describe('executable()', () => {
       it('should return the focus of the element', async () => {
-        await expect(effect.trigger()).resolves.toBe(false);
+        await expect(getter.executable()).resolves.toBe(false);
 
         getActiveElement.mockReturnValue(htmlElement);
 
-        await expect(effect.trigger()).resolves.toBe(true);
+        await expect(getter.executable()).resolves.toBe(true);
       });
     });
   });
 
-  describe('isVisible() => Effect', () => {
-    let effect: Effect<boolean>;
+  describe('isVisible() => FunctionCall', () => {
+    let getter: FunctionCall<boolean>;
 
     beforeEach(() => {
-      effect = component.isVisible();
+      getter = component.isVisible();
     });
 
     it('should have a context', () => {
-      expect(effect.context).toBe(component);
+      expect(getter.context).toBe(component);
     });
 
     it('should have a description', () => {
-      expect(effect.description).toBe('isVisible()');
+      expect(getter.description).toBe('isVisible()');
     });
 
-    describe('trigger()', () => {
+    describe('executable()', () => {
       it('should return the visibility of the element', async () => {
-        await expect(effect.trigger()).resolves.toBe(false);
+        await expect(getter.executable()).resolves.toBe(false);
 
         htmlElement.offsetHeight = 1;
         htmlElement.offsetWidth = 0;
 
-        await expect(effect.trigger()).resolves.toBe(true);
+        await expect(getter.executable()).resolves.toBe(true);
 
         htmlElement.offsetHeight = 0;
         htmlElement.offsetWidth = 1;
 
-        await expect(effect.trigger()).resolves.toBe(true);
+        await expect(getter.executable()).resolves.toBe(true);
 
         htmlElement.offsetHeight = 1;
         htmlElement.offsetWidth = 1;
 
-        await expect(effect.trigger()).resolves.toBe(true);
+        await expect(getter.executable()).resolves.toBe(true);
       });
     });
   });
 
-  describe('scrollIntoView() => Effect', () => {
-    let effect: Effect<void>;
+  describe('scrollIntoView() => FunctionCall', () => {
+    let method: FunctionCall<void>;
 
     beforeEach(() => {
-      effect = component.scrollIntoView();
+      method = component.scrollIntoView();
     });
 
     it('should have a context', () => {
-      expect(effect.context).toBe(component);
+      expect(method.context).toBe(component);
     });
 
     it('should have a description', () => {
-      expect(effect.description).toBe('scrollIntoView()');
+      expect(method.description).toBe('scrollIntoView()');
     });
 
-    describe('trigger()', () => {
+    describe('executable()', () => {
       it('should scroll the element into view', async () => {
         expect(window.innerHeight).toBe(768);
         expect(window.innerWidth).toBe(1024);
@@ -226,7 +226,7 @@ describe('WebComponent', () => {
           throw new Error('scrollIntoView');
         });
 
-        await expect(effect.trigger()).rejects.toEqual(
+        await expect(method.executable()).rejects.toEqual(
           new Error('scrollIntoView')
         );
 

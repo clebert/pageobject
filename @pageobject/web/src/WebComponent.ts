@@ -1,4 +1,4 @@
-import {Component, Effect} from '@pageobject/base';
+import {Component, FunctionCall} from '@pageobject/base';
 
 export type Argument = any; // tslint:disable-line no-any
 
@@ -13,63 +13,63 @@ export interface WebElement {
 }
 
 export abstract class WebComponent extends Component<WebElement> {
-  public click(): Effect<void> {
-    const trigger = async () => (await this.findElement()).click();
-
-    return {context: this, description: 'click()', trigger};
+  public click(): FunctionCall<void> {
+    return new FunctionCall(this, this.click.name, arguments, async () =>
+      (await this.findElement()).click()
+    );
   }
 
-  public doubleClick(): Effect<void> {
-    const trigger = async () => (await this.findElement()).doubleClick();
-
-    return {context: this, description: 'doubleClick()', trigger};
+  public doubleClick(): FunctionCall<void> {
+    return new FunctionCall(this, this.doubleClick.name, arguments, async () =>
+      (await this.findElement()).doubleClick()
+    );
   }
 
   /**
    * @returns The "rendered" text content of this web component and its descendants.
    */
-  public getText(): Effect<string> {
-    const trigger = async () =>
-      (await this.findElement()).execute(element => element.innerText);
-
-    return {context: this, description: 'getText()', trigger};
+  public getText(): FunctionCall<string> {
+    return new FunctionCall(this, this.getText.name, arguments, async () =>
+      (await this.findElement()).execute(element => element.innerText)
+    );
   }
 
-  public hasFocus(): Effect<boolean> {
-    const trigger = async () =>
+  public hasFocus(): FunctionCall<boolean> {
+    return new FunctionCall(this, this.hasFocus.name, arguments, async () =>
       (await this.findElement()).execute(
         element => document.activeElement === element
-      );
-
-    return {context: this, description: 'hasFocus()', trigger};
+      )
+    );
   }
 
   /**
    * This web component is considered visible if it consumes space in the document.
    */
-  public isVisible(): Effect<boolean> {
-    const trigger = async () =>
+  public isVisible(): FunctionCall<boolean> {
+    return new FunctionCall(this, this.isVisible.name, arguments, async () =>
       (await this.findElement()).execute(element => {
         const {offsetHeight, offsetWidth} = element;
 
         return Boolean(offsetHeight || offsetWidth);
-      });
-
-    return {context: this, description: 'isVisible()', trigger};
+      })
+    );
   }
 
-  public scrollIntoView(): Effect<void> {
-    const trigger = async () =>
-      (await this.findElement()).execute(element => {
-        const {height, left, top, width} = element.getBoundingClientRect();
-        const {innerHeight, innerWidth} = window;
+  public scrollIntoView(): FunctionCall<void> {
+    return new FunctionCall(
+      this,
+      this.scrollIntoView.name,
+      arguments,
+      async () =>
+        (await this.findElement()).execute(element => {
+          const {height, left, top, width} = element.getBoundingClientRect();
+          const {innerHeight, innerWidth} = window;
 
-        window.scrollBy(
-          left - innerWidth / 2 + width / 2,
-          top - innerHeight / 2 + height / 2
-        );
-      });
-
-    return {context: this, description: 'scrollIntoView()', trigger};
+          window.scrollBy(
+            left - innerWidth / 2 + width / 2,
+            top - innerHeight / 2 + height / 2
+          );
+        })
+    );
   }
 }

@@ -920,7 +920,7 @@ img { max-width: 100%; }
 					<a href="assertion.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-					<a href="assertion.html#effect" class="tsd-kind-icon">effect</a>
+					<a href="assertion.html#getter" class="tsd-kind-icon">getter</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
 					<a href="assertion.html#operator" class="tsd-kind-icon">operator</a>
@@ -956,6 +956,9 @@ img { max-width: 100%; }
 		</li>
 		<li class=" tsd-kind-class tsd-has-type-parameter tsd-is-not-exported">
 			<a href="equalsoperator.html" class="tsd-kind-icon">Equals<wbr>Operator</a>
+		</li>
+		<li class=" tsd-kind-class tsd-has-type-parameter">
+			<a href="functioncall.html" class="tsd-kind-icon">Function<wbr>Call</a>
 		</li>
 		<li class=" tsd-kind-class tsd-is-not-exported">
 			<a href="greaterthanoperator.html" class="tsd-kind-icon">Greater<wbr>Than<wbr>Operator</a>
@@ -1003,9 +1006,6 @@ img { max-width: 100%; }
 			<a href="../interfaces/describable.html" class="tsd-kind-icon">Describable</a>
 		</li>
 		<li class=" tsd-kind-interface tsd-has-type-parameter">
-			<a href="../interfaces/effect.html" class="tsd-kind-icon">Effect</a>
-		</li>
-		<li class=" tsd-kind-interface tsd-has-type-parameter">
 			<a href="../interfaces/filter.html" class="tsd-kind-icon">Filter</a>
 		</li>
 		<li class=" tsd-kind-interface tsd-has-type-parameter">
@@ -1013,6 +1013,9 @@ img { max-width: 100%; }
 		</li>
 		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="../globals.html#accessor" class="tsd-kind-icon">Accessor</a>
+		</li>
+		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+			<a href="../globals.html#executable" class="tsd-kind-icon">Executable</a>
 		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
 			<a href="../globals.html#execute" class="tsd-kind-icon">execute</a>
@@ -1058,7 +1061,7 @@ img { max-width: 100%; }
 					<section class="tsd-index-section tsd-is-not-exported">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="assertion.html#effect" class="tsd-kind-icon">effect</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="assertion.html#getter" class="tsd-kind-icon">getter</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="assertion.html#operator" class="tsd-kind-icon">operator</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-not-exported"><a href="assertion.html#timeoutinseconds" class="tsd-kind-icon">timeout<wbr>InSeconds</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-not-exported"><a href="assertion.html#defaulttimeoutinseconds" class="tsd-kind-icon">default<wbr>Timeout<wbr>InSeconds</a></li>
@@ -1083,20 +1086,20 @@ img { max-width: 100%; }
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-not-exported">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Assertion<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><a href="../interfaces/effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, operator<span class="tsd-signature-symbol">: </span><a href="operator.html" class="tsd-signature-type">Operator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, timeoutInSeconds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="assertion.html" class="tsd-signature-type">Assertion</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Assertion<span class="tsd-signature-symbol">(</span>getter<span class="tsd-signature-symbol">: </span><a href="functioncall.html" class="tsd-signature-type">FunctionCall</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, operator<span class="tsd-signature-symbol">: </span><a href="operator.html" class="tsd-signature-type">Operator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, timeoutInSeconds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="assertion.html" class="tsd-signature-type">Assertion</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Overrides <a href="instruction.html">Instruction</a>.<a href="instruction.html#constructor">constructor</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L147">Instruction.ts:147</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L133">Instruction.ts:133</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>effect: <a href="../interfaces/effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>getter: <a href="functioncall.html" class="tsd-signature-type">FunctionCall</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
 								<h5>operator: <a href="operator.html" class="tsd-signature-type">Operator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
@@ -1113,12 +1116,12 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
-				<a name="effect" class="tsd-anchor"></a>
-				<h3>effect</h3>
-				<div class="tsd-signature tsd-kind-icon">effect<span class="tsd-signature-symbol">:</span> <a href="../interfaces/effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<a name="getter" class="tsd-anchor"></a>
+				<h3>getter</h3>
+				<div class="tsd-signature tsd-kind-icon">getter<span class="tsd-signature-symbol">:</span> <a href="functioncall.html" class="tsd-signature-type">FunctionCall</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L146">Instruction.ts:146</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L132">Instruction.ts:132</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1128,7 +1131,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">operator<span class="tsd-signature-symbol">:</span> <a href="operator.html" class="tsd-signature-type">Operator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L147">Instruction.ts:147</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L133">Instruction.ts:133</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1139,7 +1142,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="instruction.html">Instruction</a>.<a href="instruction.html#timeoutinseconds">timeoutInSeconds</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L55">Instruction.ts:55</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L45">Instruction.ts:45</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1150,7 +1153,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="instruction.html">Instruction</a>.<a href="instruction.html#defaulttimeoutinseconds">defaultTimeoutInSeconds</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L16">Instruction.ts:16</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L6">Instruction.ts:6</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1168,7 +1171,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Overrides <a href="instruction.html">Instruction</a>.<a href="instruction.html#execute">execute</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L160">Instruction.ts:160</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L146">Instruction.ts:146</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="instruction.html" class="tsd-signature-type">Instruction</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1179,14 +1182,14 @@ img { max-width: 100%; }
 				<a name="assert" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagStatic">Static</span> assert</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-static tsd-is-not-exported">
-					<li class="tsd-signature tsd-kind-icon">assert&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><a href="../interfaces/effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, operator<span class="tsd-signature-symbol">: </span><a href="operator.html" class="tsd-signature-type">Operator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, timeoutInSeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="instruction.html" class="tsd-signature-type">Instruction</a></li>
+					<li class="tsd-signature tsd-kind-icon">assert&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>getter<span class="tsd-signature-symbol">: </span><a href="functioncall.html" class="tsd-signature-type">FunctionCall</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, operator<span class="tsd-signature-symbol">: </span><a href="operator.html" class="tsd-signature-type">Operator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, timeoutInSeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="instruction.html" class="tsd-signature-type">Instruction</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="instruction.html">Instruction</a>.<a href="instruction.html#assert">assert</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L18">Instruction.ts:18</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L8">Instruction.ts:8</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1198,7 +1201,7 @@ img { max-width: 100%; }
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>effect: <a href="../interfaces/effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>getter: <a href="functioncall.html" class="tsd-signature-type">FunctionCall</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
 								<h5>operator: <a href="operator.html" class="tsd-signature-type">Operator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
@@ -1222,7 +1225,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="instruction.html">Instruction</a>.<a href="instruction.html#executeall">executeAll</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L49">Instruction.ts:49</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L39">Instruction.ts:39</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1239,14 +1242,14 @@ img { max-width: 100%; }
 				<a name="if" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagStatic">Static</span> if</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-static tsd-is-not-exported">
-					<li class="tsd-signature tsd-kind-icon">if&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><a href="../interfaces/effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, operator<span class="tsd-signature-symbol">: </span><a href="operator.html" class="tsd-signature-type">Operator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, thenInstructions<span class="tsd-signature-symbol">: </span><a href="instruction.html" class="tsd-signature-type">Instruction</a><span class="tsd-signature-symbol">[]</span>, elseInstructions<span class="tsd-signature-symbol">?: </span><a href="instruction.html" class="tsd-signature-type">Instruction</a><span class="tsd-signature-symbol">[]</span>, timeoutInSeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="instruction.html" class="tsd-signature-type">Instruction</a></li>
+					<li class="tsd-signature tsd-kind-icon">if&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>getter<span class="tsd-signature-symbol">: </span><a href="functioncall.html" class="tsd-signature-type">FunctionCall</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, operator<span class="tsd-signature-symbol">: </span><a href="operator.html" class="tsd-signature-type">Operator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, thenInstructions<span class="tsd-signature-symbol">: </span><a href="instruction.html" class="tsd-signature-type">Instruction</a><span class="tsd-signature-symbol">[]</span>, elseInstructions<span class="tsd-signature-symbol">?: </span><a href="instruction.html" class="tsd-signature-type">Instruction</a><span class="tsd-signature-symbol">[]</span>, timeoutInSeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="instruction.html" class="tsd-signature-type">Instruction</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="instruction.html">Instruction</a>.<a href="instruction.html#if">if</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L26">Instruction.ts:26</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L16">Instruction.ts:16</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1258,7 +1261,7 @@ img { max-width: 100%; }
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>effect: <a href="../interfaces/effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>getter: <a href="functioncall.html" class="tsd-signature-type">FunctionCall</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
 								<h5>operator: <a href="operator.html" class="tsd-signature-type">Operator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
@@ -1281,20 +1284,20 @@ img { max-width: 100%; }
 				<a name="perform" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagStatic">Static</span> perform</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-not-exported">
-					<li class="tsd-signature tsd-kind-icon">perform<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><a href="../interfaces/effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span>, timeoutInSeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="instruction.html" class="tsd-signature-type">Instruction</a></li>
+					<li class="tsd-signature tsd-kind-icon">perform<span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><a href="functioncall.html" class="tsd-signature-type">FunctionCall</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span>, timeoutInSeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="instruction.html" class="tsd-signature-type">Instruction</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="instruction.html">Instruction</a>.<a href="instruction.html#perform">perform</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L42">Instruction.ts:42</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Instruction.ts#L32">Instruction.ts:32</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>effect: <a href="../interfaces/effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>method: <a href="functioncall.html" class="tsd-signature-type">FunctionCall</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> timeoutInSeconds: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
