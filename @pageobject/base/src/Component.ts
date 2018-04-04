@@ -68,6 +68,10 @@ export class Component<TElement> implements Describable {
       throw new Error('Position must be one-based');
     }
 
+    if (this._locator.position) {
+      throw new Error('Position is already set');
+    }
+
     return this._ownFactory.create(this._adapter, {...this._locator, position});
   }
 

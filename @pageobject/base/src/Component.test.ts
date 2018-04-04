@@ -79,7 +79,7 @@ function describeExistingVariants<TComponent extends TestComponent>(
 
   return [
     new Descriptor(
-      component.nth(position + 1).nth(position),
+      component.nth(position),
       `.nth(${position})`,
       parentDescriptor,
       position
@@ -211,6 +211,12 @@ function describeTests<TComponent extends TestComponent>(
         it('should throw an argument error', () => {
           expect(() => descriptor.component.nth(0)).toThrow(
             'Position must be one-based'
+          );
+        });
+
+        it('should throw a state error', () => {
+          expect(() => descriptor.component.nth(1).nth(2)).toThrow(
+            'Position is already set'
           );
         });
       });
