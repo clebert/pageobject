@@ -2,29 +2,29 @@
 
 import {FunctionCall, Operator, serialize} from '.';
 
-export abstract class Instruction {
+export abstract class Operation {
   public static defaultTimeoutInSeconds = 5;
 
   public static assert<TValue>(
     getter: FunctionCall<TValue>,
     operator: Operator<TValue>,
     timeoutInSeconds?: number
-  ): Instruction {
+  ): Operation {
     return new Assertion(getter, operator, timeoutInSeconds);
   }
 
   public static if<TValue>(
     getter: FunctionCall<TValue>,
     operator: Operator<TValue>,
-    thenInstructions: Instruction[],
-    elseInstructions: Instruction[] = [],
+    thenOperations: Operation[],
+    elseOperations: Operation[] = [],
     timeoutInSeconds?: number
-  ): Instruction {
+  ): Operation {
     return new Conditional(
       getter,
       operator,
-      thenInstructions,
-      elseInstructions,
+      thenOperations,
+      elseOperations,
       timeoutInSeconds
     );
   }
@@ -32,25 +32,25 @@ export abstract class Instruction {
   public static perform(
     method: FunctionCall<void>,
     timeoutInSeconds?: number
-  ): Instruction {
+  ): Operation {
     return new Action(method, timeoutInSeconds);
   }
 
-  public static async executeAll(instructions: Instruction[]): Promise<void> {
-    for (const instruction of instructions) {
-      await Instruction.executeAll(await instruction.execute());
+  public static async executeAll(operations: Operation[]): Promise<void> {
+    for (const operation of operations) {
+      await Operation.executeAll(await operation.execute());
     }
   }
 
   public readonly timeoutInSeconds: number;
 
   public constructor(
-    timeoutInSeconds: number = Instruction.defaultTimeoutInSeconds
+    timeoutInSeconds: number = Operation.defaultTimeoutInSeconds
   ) {
     this.timeoutInSeconds = timeoutInSeconds;
   }
 
-  public abstract execute(): Promise<Instruction[]>;
+  public abstract execute(): Promise<Operation[]>;
 }
 
 async function execute<TResult>(
@@ -101,7 +101,7 @@ async function execute<TResult>(
   ]);
 }
 
-class Action extends Instruction {
+class Action extends Operation {
   public readonly method: FunctionCall<void>;
 
   public constructor(
@@ -113,7 +113,7 @@ class Action extends Instruction {
     this.method = method;
   }
 
-  public async execute(): Promise<Instruction[]> {
+  public async execute(): Promise<Operation[]> {
     try {
       await execute(this.method.executable, false, this.timeoutInSeconds);
 
@@ -128,7 +128,7 @@ class Action extends Instruction {
   }
 }
 
-class Assertion<TValue> extends Instruction {
+class Assertion<TValue> extends Operation {
   public readonly getter: FunctionCall<TValue>;
   public readonly operator: Operator<TValue>;
 
@@ -143,7 +143,7 @@ class Assertion<TValue> extends Instruction {
     this.operator = operator;
   }
 
-  public async execute(): Promise<Instruction[]> {
+  public async execute(): Promise<Operation[]> {
     try {
       await execute(
         async () => {
@@ -174,34 +174,34 @@ class Assertion<TValue> extends Instruction {
   }
 }
 
-class Conditional<TValue> extends Instruction {
+class Conditional<TValue> extends Operation {
   public readonly getter: FunctionCall<TValue>;
   public readonly operator: Operator<TValue>;
-  public readonly thenInstructions: Instruction[];
-  public readonly elseInstructions: Instruction[];
+  public readonly thenOperations: Operation[];
+  public readonly elseOperations: Operation[];
 
   public constructor(
     getter: FunctionCall<TValue>,
     operator: Operator<TValue>,
-    thenInstructions: Instruction[],
-    elseInstructions: Instruction[],
+    thenOperations: Operation[],
+    elseOperations: Operation[],
     timeoutInSeconds: number | undefined
   ) {
     super(timeoutInSeconds);
 
     this.getter = getter;
     this.operator = operator;
-    this.thenInstructions = thenInstructions;
-    this.elseInstructions = elseInstructions;
+    this.thenOperations = thenOperations;
+    this.elseOperations = elseOperations;
   }
 
-  public async execute(): Promise<Instruction[]> {
+  public async execute(): Promise<Operation[]> {
     try {
       return await execute(
         async () =>
           this.operator.test(await this.getter.executable())
-            ? this.thenInstructions
-            : this.elseInstructions,
+            ? this.thenOperations
+            : this.elseOperations,
         true,
         this.timeoutInSeconds
       );

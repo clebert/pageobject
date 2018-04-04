@@ -1,6 +1,6 @@
 // tslint:disable no-any
 
-import {FunctionCall, Instruction, Operator} from '.';
+import {FunctionCall, Operation, Operator} from '.';
 
 class ObservablePromise<T> {
   public readonly promise: Promise<T>;
@@ -69,9 +69,9 @@ async function neverEnding(): Promise<never> {
   return new Promise<never>(() => undefined);
 }
 
-const {defaultTimeoutInSeconds} = Instruction;
+const {defaultTimeoutInSeconds} = Operation;
 
-describe('Instruction', () => {
+describe('Operation', () => {
   let getterExecutable: jest.Mock;
   let methodExecutable: jest.Mock;
 
@@ -96,27 +96,27 @@ describe('Instruction', () => {
       methodExecutable
     );
 
-    Instruction.defaultTimeoutInSeconds = 0.01;
+    Operation.defaultTimeoutInSeconds = 0.01;
   });
 
   afterEach(() => {
-    Instruction.defaultTimeoutInSeconds = defaultTimeoutInSeconds;
+    Operation.defaultTimeoutInSeconds = defaultTimeoutInSeconds;
   });
 
   it('should have a default timeout', () => {
     expect(defaultTimeoutInSeconds).toBe(5);
   });
 
-  describe('assert() => Instruction.execute()', () => {
+  describe('assert() => Operation.execute()', () => {
     it('should return without errors', async () => {
       getterExecutable.mockImplementationOnce(erroneous(1));
       getterExecutable.mockImplementationOnce(erroneous(2));
       getterExecutable.mockImplementationOnce(fooValue);
 
-      const instruction = Instruction.assert(getter, Operator.equals('foo'));
+      const operation = Operation.assert(getter, Operator.equals('foo'));
 
       await expect(
-        useFakeTimers(async () => instruction.execute())
+        useFakeTimers(async () => operation.execute())
       ).resolves.toEqual([]);
 
       expect(getterExecutable).toHaveBeenCalledTimes(3);
@@ -127,10 +127,10 @@ describe('Instruction', () => {
       getterExecutable.mockImplementationOnce(erroneous(2));
       getterExecutable.mockImplementation(fooValue);
 
-      const instruction = Instruction.assert(getter, Operator.equals('bar'));
+      const operation = Operation.assert(getter, Operator.equals('bar'));
 
       await expect(
-        useFakeTimers(async () => instruction.execute())
+        useFakeTimers(async () => operation.execute())
       ).rejects.toThrow(
         "Assert: (getter() == 'bar')\n  Context: Object\n  Cause: Assertion failed: ((getter() => 'foo') == 'bar')"
       );
@@ -143,10 +143,10 @@ describe('Instruction', () => {
       getterExecutable.mockImplementationOnce(erroneous(2));
       getterExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.assert(getter, Operator.equals('foo'));
+      const operation = Operation.assert(getter, Operator.equals('foo'));
 
       await expect(
-        useFakeTimers(async () => instruction.execute(), 0.01)
+        useFakeTimers(async () => operation.execute(), 0.01)
       ).rejects.toThrow(
         "Assert: (getter() == 'foo')\n  Context: Object\n  Cause: Error2"
       );
@@ -157,10 +157,10 @@ describe('Instruction', () => {
     it('should throw a default timeout error', async () => {
       getterExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.assert(getter, Operator.equals('foo'));
+      const operation = Operation.assert(getter, Operator.equals('foo'));
 
       await expect(
-        useFakeTimers(async () => instruction.execute(), 0.01)
+        useFakeTimers(async () => operation.execute(), 0.01)
       ).rejects.toThrow(
         "Assert: (getter() == 'foo')\n  Context: Object\n  Cause: Timeout after 0.01 seconds"
       );
@@ -171,10 +171,10 @@ describe('Instruction', () => {
     it('should throw a custom timeout error', async () => {
       getterExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.assert(getter, Operator.equals('foo'), 1);
+      const operation = Operation.assert(getter, Operator.equals('foo'), 1);
 
       await expect(
-        useFakeTimers(async () => instruction.execute(), 1)
+        useFakeTimers(async () => operation.execute(), 1)
       ).rejects.toThrow(
         "Assert: (getter() == 'foo')\n  Context: Object\n  Cause: Timeout after 1 second"
       );
@@ -183,67 +183,67 @@ describe('Instruction', () => {
     });
   });
 
-  describe('if() => Instruction.execute()', () => {
-    it('should return the specified then-instructions', async () => {
+  describe('if() => Operation.execute()', () => {
+    it('should return the specified then-operations', async () => {
       getterExecutable.mockImplementationOnce(erroneous(1));
       getterExecutable.mockImplementationOnce(erroneous(2));
       getterExecutable.mockImplementationOnce(fooValue);
 
-      const thenInstructions: Instruction[] = [];
+      const thenOperations: Operation[] = [];
 
-      const instruction = Instruction.if(
+      const operation = Operation.if(
         getter,
         Operator.equals('foo'),
-        thenInstructions
+        thenOperations
       );
 
       await expect(
-        useFakeTimers(async () => instruction.execute())
-      ).resolves.toBe(thenInstructions);
+        useFakeTimers(async () => operation.execute())
+      ).resolves.toBe(thenOperations);
 
       expect(getterExecutable).toHaveBeenCalledTimes(3);
     });
 
-    it('should return the default else-instructions', async () => {
+    it('should return the default else-operations', async () => {
       getterExecutable.mockImplementationOnce(erroneous(1));
       getterExecutable.mockImplementationOnce(erroneous(2));
       getterExecutable.mockImplementationOnce(fooValue);
 
-      const thenInstructions: Instruction[] = [];
+      const thenOperations: Operation[] = [];
 
-      const instruction = Instruction.if(
+      const operation = Operation.if(
         getter,
         Operator.equals('bar'),
-        thenInstructions
+        thenOperations
       );
 
-      const elseInstructions = await useFakeTimers(async () =>
-        instruction.execute()
+      const elseOperations = await useFakeTimers(async () =>
+        operation.execute()
       );
 
-      expect(elseInstructions).toEqual([]);
-      expect(elseInstructions).not.toBe(thenInstructions);
+      expect(elseOperations).toEqual([]);
+      expect(elseOperations).not.toBe(thenOperations);
 
       expect(getterExecutable).toHaveBeenCalledTimes(3);
     });
 
-    it('should return the specified else-instructions', async () => {
+    it('should return the specified else-operations', async () => {
       getterExecutable.mockImplementationOnce(erroneous(1));
       getterExecutable.mockImplementationOnce(erroneous(2));
       getterExecutable.mockImplementationOnce(fooValue);
 
-      const elseInstructions: Instruction[] = [];
+      const elseOperations: Operation[] = [];
 
-      const instruction = Instruction.if(
+      const operation = Operation.if(
         getter,
         Operator.equals('bar'),
         [],
-        elseInstructions
+        elseOperations
       );
 
       await expect(
-        useFakeTimers(async () => instruction.execute())
-      ).resolves.toBe(elseInstructions);
+        useFakeTimers(async () => operation.execute())
+      ).resolves.toBe(elseOperations);
 
       expect(getterExecutable).toHaveBeenCalledTimes(3);
     });
@@ -253,10 +253,10 @@ describe('Instruction', () => {
       getterExecutable.mockImplementationOnce(erroneous(2));
       getterExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.if(getter, Operator.equals('foo'), []);
+      const operation = Operation.if(getter, Operator.equals('foo'), []);
 
       await expect(
-        useFakeTimers(async () => instruction.execute(), 0.01)
+        useFakeTimers(async () => operation.execute(), 0.01)
       ).rejects.toThrow(
         "If: (getter() == 'foo')\n  Context: Object\n  Cause: Error2"
       );
@@ -267,10 +267,10 @@ describe('Instruction', () => {
     it('should throw a default timeout error', async () => {
       getterExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.if(getter, Operator.equals('foo'), []);
+      const operation = Operation.if(getter, Operator.equals('foo'), []);
 
       await expect(
-        useFakeTimers(async () => instruction.execute(), 0.01)
+        useFakeTimers(async () => operation.execute(), 0.01)
       ).rejects.toThrow(
         "If: (getter() == 'foo')\n  Context: Object\n  Cause: Timeout after 0.01 seconds"
       );
@@ -281,16 +281,10 @@ describe('Instruction', () => {
     it('should throw a custom timeout error', async () => {
       getterExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.if(
-        getter,
-        Operator.equals('foo'),
-        [],
-        [],
-        1
-      );
+      const operation = Operation.if(getter, Operator.equals('foo'), [], [], 1);
 
       await expect(
-        useFakeTimers(async () => instruction.execute(), 1)
+        useFakeTimers(async () => operation.execute(), 1)
       ).rejects.toThrow(
         "If: (getter() == 'foo')\n  Context: Object\n  Cause: Timeout after 1 second"
       );
@@ -299,12 +293,12 @@ describe('Instruction', () => {
     });
   });
 
-  describe('perform() => Instruction.execute()', () => {
+  describe('perform() => Operation.execute()', () => {
     it('should return without errors', async () => {
-      const instruction = Instruction.perform(method);
+      const operation = Operation.perform(method);
 
       await expect(
-        useFakeTimers(async () => instruction.execute())
+        useFakeTimers(async () => operation.execute())
       ).resolves.toEqual([]);
 
       expect(methodExecutable).toHaveBeenCalledTimes(1);
@@ -314,10 +308,10 @@ describe('Instruction', () => {
       methodExecutable.mockImplementationOnce(erroneous(1));
       methodExecutable.mockImplementationOnce(erroneous(2));
 
-      const instruction = Instruction.perform(method);
+      const operation = Operation.perform(method);
 
       await expect(
-        useFakeTimers(async () => instruction.execute())
+        useFakeTimers(async () => operation.execute())
       ).rejects.toThrow(
         'Perform: method()\n  Context: Object\n  Cause: Error1'
       );
@@ -328,10 +322,10 @@ describe('Instruction', () => {
     it('should throw a default timeout error', async () => {
       methodExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.perform(method);
+      const operation = Operation.perform(method);
 
       await expect(
-        useFakeTimers(async () => instruction.execute(), 0.01)
+        useFakeTimers(async () => operation.execute(), 0.01)
       ).rejects.toThrow(
         'Perform: method()\n  Context: Object\n  Cause: Timeout after 0.01 seconds'
       );
@@ -342,10 +336,10 @@ describe('Instruction', () => {
     it('should throw a custom timeout error', async () => {
       methodExecutable.mockImplementationOnce(neverEnding);
 
-      const instruction = Instruction.perform(method, 1);
+      const operation = Operation.perform(method, 1);
 
       await expect(
-        useFakeTimers(async () => instruction.execute(), 1)
+        useFakeTimers(async () => operation.execute(), 1)
       ).rejects.toThrow(
         'Perform: method()\n  Context: Object\n  Cause: Timeout after 1 second'
       );
@@ -355,13 +349,13 @@ describe('Instruction', () => {
   });
 
   describe('executeAll()', () => {
-    it('should execute all specified instructions in sequence', async () => {
+    it('should execute all specified operations in sequence', async () => {
       getterExecutable.mockImplementation(fooValue);
 
       const calls: number[] = [];
 
-      await Instruction.executeAll([
-        Instruction.assert(
+      await Operation.executeAll([
+        Operation.assert(
           {
             ...getter,
             executable: async () => {
@@ -372,8 +366,8 @@ describe('Instruction', () => {
           },
           Operator.equals('foo')
         ),
-        Instruction.if(getter, Operator.equals('foo'), [
-          Instruction.assert(
+        Operation.if(getter, Operator.equals('foo'), [
+          Operation.assert(
             {
               ...getter,
               executable: async () => {
@@ -384,8 +378,8 @@ describe('Instruction', () => {
             },
             Operator.equals('foo')
           ),
-          Instruction.if(getter, Operator.equals('foo'), [
-            Instruction.perform({
+          Operation.if(getter, Operator.equals('foo'), [
+            Operation.perform({
               ...method,
               executable: async () => {
                 calls.push(3);
@@ -393,7 +387,7 @@ describe('Instruction', () => {
             })
           ])
         ]),
-        Instruction.perform({
+        Operation.perform({
           ...method,
           executable: async () => {
             calls.push(4);

@@ -1,4 +1,4 @@
 export * from './Component';
 export * from './FunctionCall';
-export * from './Instruction';
+export * from './Operation';
 export * from './Operator';
