@@ -5,7 +5,7 @@
 [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 [![TypeScript][badge-typescript-image]][badge-typescript-link]
 
-> A web testing framework adapter for [Puppeteer][external-puppeteer].
+> A web API adapter for [Puppeteer][external-puppeteer].
 
 **This package is part of [PageObjectJS][internal-homepage].**
 

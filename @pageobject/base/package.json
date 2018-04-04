@@ -1,7 +1,7 @@
 {
   "name": "@pageobject/base",
   "version": "2.0.0",
-  "description": "A declarative API for platform- and framework-independent test automation.",
+  "description": "A declarative API as a basis for platform- and framework-independent UI test automation.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
   "homepage": "https://pageobject.js.org/",

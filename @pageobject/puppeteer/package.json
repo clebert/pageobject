@@ -1,7 +1,7 @@
 {
   "name": "@pageobject/puppeteer",
   "version": "2.0.0",
-  "description": "A web testing framework adapter for Puppeteer.",
+  "description": "A web API adapter for Puppeteer.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
   "homepage": "https://pageobject.js.org/",

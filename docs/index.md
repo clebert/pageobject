@@ -4,7 +4,7 @@
 [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 [![TypeScript][badge-typescript-image]][badge-typescript-link]
 
-> A platform- and framework-independent test automation library.
+> A platform- and framework-independent UI test automation library.
 
 ## Getting started
 
@@ -14,23 +14,23 @@ TODO
 
 ### [@pageobject/base][internal-api-base]
 
-A declarative API for platform- and framework-independent test automation.
+A declarative API as a **basis** for platform- and framework-independent UI test automation.
 
 ### [@pageobject/web][internal-api-web]
 
-A declarative API for framework-independent web test automation.
+A declarative API for framework-independent **web** UI test automation.
 
 ### [@pageobject/protractor][internal-api-protractor]
 
-A web testing framework adapter for Protractor.
+A web API adapter for Protractor.
 
 ### [@pageobject/puppeteer][internal-api-puppeteer]
 
-A web testing framework adapter for Puppeteer.
+A web API adapter for Puppeteer.
 
 ### [@pageobject/selenium-webdriver][internal-api-selenium-webdriver]
 
-A web testing framework adapter for Selenium.
+A web API adapter for Selenium.
 
 ---
 

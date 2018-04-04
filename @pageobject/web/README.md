@@ -5,7 +5,7 @@
 [![Coverage Status][badge-coveralls-image]][badge-coveralls-link]
 [![TypeScript][badge-typescript-image]][badge-typescript-link]
 
-> A declarative API for framework-independent web test automation.
+> A declarative API for framework-independent web UI test automation.
 
 **This package is part of [PageObjectJS][internal-homepage].**
 
