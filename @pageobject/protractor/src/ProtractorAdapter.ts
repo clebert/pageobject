@@ -36,20 +36,20 @@ class ProtractorElement implements WebElement {
  * @implements https://pageobject.js.org/api/web/interfaces/webadapter.html
  */
 export class ProtractorAdapter implements WebAdapter {
-  private readonly _browser: protractor.ProtractorBrowser;
+  public readonly browser: protractor.ProtractorBrowser;
 
   /**
    * @param browser https://www.protractortest.org/#/api?view=ProtractorBrowser
    */
   public constructor(browser: protractor.ProtractorBrowser) {
-    this._browser = browser;
+    this.browser = browser;
   }
 
   public async execute<TResult>(
     script: (...args: Argument[]) => TResult,
     ...args: Argument[]
   ): Promise<TResult> {
-    return this._browser.driver.executeScript<TResult>(script, ...args);
+    return this.browser.driver.executeScript<TResult>(script, ...args);
   }
 
   public async findElements(
@@ -58,13 +58,13 @@ export class ProtractorAdapter implements WebAdapter {
   ): Promise<WebElement[]> {
     const parentElement = parent && (parent as ProtractorElement).adaptee;
 
-    return (await (parentElement || this._browser.driver).findElements(
+    return (await (parentElement || this.browser.driver).findElements(
       protractor.By.css(selector)
     )).map(element => new ProtractorElement(element));
   }
 
   public async navigateTo(url: string): Promise<void> {
-    return this._browser.driver.navigate().to(url);
+    return this.browser.driver.navigate().to(url);
   }
 
   public async press(key: Key): Promise<void> {
@@ -88,7 +88,7 @@ export class ProtractorAdapter implements WebAdapter {
       }
     }
 
-    return this._browser.driver
+    return this.browser.driver
       .actions()
       .sendKeys(protractorKey)
       .perform();
