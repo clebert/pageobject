@@ -49,20 +49,20 @@ export class SeleniumAdapter implements WebAdapter {
     );
   }
 
-  private readonly _driver: selenium.WebDriver;
+  public readonly driver: selenium.WebDriver;
 
   /**
    * @param driver http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html
    */
   public constructor(driver: selenium.WebDriver) {
-    this._driver = driver;
+    this.driver = driver;
   }
 
   public async execute<TResult>(
     script: (...args: Argument[]) => TResult,
     ...args: Argument[]
   ): Promise<TResult> {
-    return this._driver.executeScript<TResult>(script, ...args);
+    return this.driver.executeScript<TResult>(script, ...args);
   }
 
   public async findElements(
@@ -71,13 +71,13 @@ export class SeleniumAdapter implements WebAdapter {
   ): Promise<WebElement[]> {
     const parentElement = parent && (parent as SeleniumElement).adaptee;
 
-    return (await (parentElement || this._driver).findElements(
+    return (await (parentElement || this.driver).findElements(
       selenium.By.css(selector)
     )).map(element => new SeleniumElement(element));
   }
 
   public async navigateTo(url: string): Promise<void> {
-    return this._driver.navigate().to(url);
+    return this.driver.navigate().to(url);
   }
 
   public async press(key: Key): Promise<void> {
@@ -101,13 +101,13 @@ export class SeleniumAdapter implements WebAdapter {
       }
     }
 
-    return (this._driver as WebDriver4)
+    return (this.driver as WebDriver4)
       .actions({bridge: true})
       .sendKeys(seleniumKey)
       .perform();
   }
 
   public async quit(): Promise<void> {
-    return this._driver.quit();
+    return this.driver.quit();
   }
 }
