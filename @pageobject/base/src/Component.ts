@@ -1,174 +1,125 @@
-import {Describable, FunctionCall, Operator} from '.';
+import {Predicate} from '.';
 
-export interface Adapter<TElement> {
-  findElements(selector: string, parent?: TElement): Promise<TElement[]>;
+export type Accessor<TNode, TComponent extends Component<TNode>, TValue> = (
+  component: TComponent
+) => () => Promise<TValue>;
+
+export interface Adapter<TNode> {
+  findNodes(selector: string, ancestor?: TNode): Promise<TNode[]>;
 }
 
-export type Accessor<
-  TElement,
-  TComponent extends Component<TElement>,
-  TResult
-> = (pageObject: TComponent) => FunctionCall<TResult>;
+export class Component<TNode> {
+  public static readonly selector: string | undefined;
 
-export interface Filter<
-  TElement,
-  TComponent extends Component<TElement>,
-  TValue
-> {
-  readonly accessor: Accessor<TElement, TComponent, TValue>;
-  readonly operator: Operator<TValue>;
-}
+  protected readonly adapter: Adapter<TNode>;
+  protected readonly ancestor?: Component<TNode>;
 
-export interface Locator<TElement, TComponent extends Component<TElement>> {
-  readonly filters?: Filter<TElement, TComponent, any>[]; // tslint:disable-line no-any
-  readonly parent?: Component<TElement>;
-  readonly position?: number;
-}
+  private _filter?: (component: Component<TNode>) => Promise<boolean>;
+  private _position?: number;
+  private _node?: TNode;
 
-export interface ComponentFactory<
-  TElement,
-  TComponent extends Component<TElement>
-> {
-  new (
-    adapter: Adapter<TElement>,
-    locator?: Locator<TElement, TComponent>
-  ): TComponent;
-}
-
-export abstract class Component<TElement> implements Describable {
-  public abstract readonly selector: string;
-
-  public readonly description: string;
-
-  private readonly _adapter: Adapter<TElement>;
-  private readonly _locator: Locator<TElement, this>;
-
-  public constructor(
-    adapter: Adapter<TElement>,
-    locator: Locator<TElement, any> = {} // tslint:disable-line no-any
-  ) {
-    this._adapter = adapter;
-    this._locator = locator;
-
-    this.description = this._describe();
+  public constructor(adapter: Adapter<TNode>, ancestor?: Component<TNode>) {
+    this.adapter = adapter;
+    this.ancestor = ancestor;
   }
 
-  public select<TDescendant extends Component<TElement>>(
-    Descendant: ComponentFactory<TElement, TDescendant>
-  ): TDescendant {
-    return new Descendant(this._adapter, {parent: this});
-  }
-
-  public nth(position: number): this {
+  public at(position: number): this {
     if (position < 1) {
       throw new Error('Position must be one-based');
     }
 
-    if (this._locator.position) {
+    if (this._position) {
       throw new Error('Position is already set');
     }
 
-    const Self = this.constructor as ComponentFactory<TElement, this>;
+    const reconstruction = this.reconstruct();
 
-    return new Self(this._adapter, {...this._locator, position});
+    reconstruction._filter = this._filter;
+    reconstruction._position = position;
+
+    return reconstruction;
   }
 
   public where<TValue>(
-    accessor: Accessor<TElement, this, TValue>,
-    operator: Operator<TValue>
+    accessor: Accessor<TNode, this, TValue>,
+    predicate: Predicate<TValue>
   ): this {
-    const Self = this.constructor as ComponentFactory<TElement, this>;
+    const reconstruction = this.reconstruct();
 
-    return new Self(this._adapter, {
-      ...this._locator,
-      filters: [...(this._locator.filters || []), {accessor, operator}]
-    });
+    reconstruction._filter = async component =>
+      (this._filter ? await this._filter(component) : true) &&
+      predicate(await accessor(component as this)());
+
+    reconstruction._position = this._position;
+
+    return reconstruction;
   }
 
-  public getElementCount(): FunctionCall<number> {
-    return new FunctionCall(
-      this,
-      this.getElementCount.name,
-      arguments,
-      async () => (await this._findElements()).length
-    );
-  }
-
-  protected async findElement(): Promise<TElement> {
-    const elements = await this._findElements();
-
-    if (elements.length === 0) {
-      throw new Error('Element not found');
+  public async findNodes(): Promise<TNode[]> {
+    if (this._node) {
+      return [this._node];
     }
 
-    if (elements.length > 1) {
-      throw new Error('Element not unique');
+    const {selector} = this.constructor as typeof Component;
+
+    if (!selector) {
+      throw new Error('Undefined selector');
     }
 
-    return elements[0];
-  }
-
-  private _describe(): string {
-    const {filters, parent, position} = this._locator;
-
-    const selectDescription = parent
-      ? `${parent.description}.select(${this.constructor.name})`
-      : `${this.constructor.name}`;
-
-    const nthDescription = position ? `.nth(${position})` : '';
-
-    const whereDescription = filters
-      ? `.where(${filters
-          .map(filter =>
-            filter.operator.describe(filter.accessor(this).description)
-          )
-          .join(', ')})`
-      : '';
-
-    return `${selectDescription}${nthDescription}${whereDescription}`;
-  }
-
-  private async _filterElements(): Promise<TElement[]> {
-    const {filters, parent} = this._locator;
-
-    const elements = await this._adapter.findElements(
-      this.selector,
-      parent ? await parent.findElement() : undefined
+    let nodes = await this.adapter.findNodes(
+      selector,
+      this.ancestor && (await this.ancestor.findUniqueNode())
     );
 
-    if (!filters) {
-      return elements;
+    const filter = this._filter;
+
+    if (filter) {
+      const results = await Promise.all(
+        nodes.map(async node => {
+          const reconstruction = this.reconstruct();
+
+          reconstruction._node = node;
+
+          return filter(reconstruction);
+        })
+      );
+
+      nodes = nodes.filter((node, index) => results[index]);
     }
 
-    const results = await Promise.all(
-      elements.map(async element => {
-        const Self = this.constructor as ComponentFactory<TElement, this>;
-
-        const instance = new Self({
-          findElements: async () => [element]
-        });
-
-        return (await Promise.all(
-          filters.map(async filter =>
-            filter.operator.test(await filter.accessor(instance).effect())
-          )
-        )).every(result => result);
-      })
-    );
-
-    return elements.filter((element, index) => results[index]);
-  }
-
-  private async _findElements(): Promise<TElement[]> {
-    const elements = await this._filterElements();
-    const {position} = this._locator;
+    const position = this._position;
 
     if (position) {
       const index = position - 1;
 
-      return index < elements.length ? [elements[index]] : [];
+      nodes = index < nodes.length ? [nodes[index]] : [];
     }
 
-    return elements;
+    return nodes;
+  }
+
+  public async findUniqueNode(): Promise<TNode> {
+    const nodes = await this.findNodes();
+
+    if (nodes.length === 0) {
+      throw new Error(`Node not found: ${this.constructor.name}`);
+    }
+
+    if (nodes.length > 1) {
+      throw new Error(`Node not unique: ${this.constructor.name}`);
+    }
+
+    return nodes[0];
+  }
+
+  public getNodeCount(): () => Promise<number> {
+    return async () => (await this.findNodes()).length;
+  }
+
+  protected reconstruct(): this {
+    return new (this.constructor as typeof Component)(
+      this.adapter,
+      this.ancestor
+    ) as this;
   }
 }

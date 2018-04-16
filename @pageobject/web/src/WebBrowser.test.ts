@@ -1,9 +1,8 @@
-import {FunctionCall} from '@pageobject/base';
 import {WebAdapter, WebBrowser} from '.';
 
 class TestAdapter implements WebAdapter {
   public readonly execute = jest.fn();
-  public readonly findElements = jest.fn();
+  public readonly findNodes = jest.fn();
   public readonly navigateTo = jest.fn();
   public readonly press = jest.fn();
   public readonly quit = jest.fn();
@@ -22,85 +21,35 @@ describe('WebBrowser', () => {
     );
   });
 
-  it('should have a description', () => {
-    expect(browser.description).toBe('WebBrowser');
-  });
+  describe('getPageTitle()', () => {
+    it('should return the page title', async () => {
+      document.title = 'pageTitle';
 
-  describe('getPageTitle() => FunctionCall', () => {
-    let getter: FunctionCall<string>;
-
-    beforeEach(() => {
-      getter = browser.getPageTitle();
-    });
-
-    it('should have a context', () => {
-      expect(getter.context).toBe(browser);
-    });
-
-    it('should have a description', () => {
-      expect(getter.description).toBe('getPageTitle()');
-    });
-
-    describe('effect()', () => {
-      it('should return the page title', async () => {
-        document.title = 'pageTitle';
-
-        await expect(getter.effect()).resolves.toBe('pageTitle');
-      });
+      await expect(browser.getPageTitle()()).resolves.toBe('pageTitle');
     });
   });
 
-  describe('getPageURL() => FunctionCall', () => {
-    let getter: FunctionCall<string>;
-
-    beforeEach(() => {
-      getter = browser.getPageURL();
-    });
-
-    it('should have a context', () => {
-      expect(getter.context).toBe(browser);
-    });
-
-    it('should have a description', () => {
-      expect(getter.description).toBe('getPageURL()');
-    });
-
-    describe('effect()', () => {
-      it('should return the page URL', async () => {
-        await expect(getter.effect()).resolves.toBe('about:blank');
-      });
+  describe('getPageURL()', () => {
+    it('should return the page URL', async () => {
+      await expect(browser.getPageURL()()).resolves.toBe('about:blank');
     });
   });
 
-  describe('navigateTo() => FunctionCall', () => {
-    let method: FunctionCall<void>;
+  describe('navigateTo()', () => {
+    it('should navigate to the specified url', async () => {
+      adapter.navigateTo.mockRejectedValue(new Error('navigateTo'));
 
-    beforeEach(() => {
-      method = browser.navigateTo('about:blank');
-    });
+      await expect(browser.navigateTo('about:blank')()).rejects.toThrow(
+        'navigateTo'
+      );
 
-    it('should have a context', () => {
-      expect(method.context).toBe(browser);
-    });
-
-    it('should have a description', () => {
-      expect(method.description).toBe("navigateTo('about:blank')");
-    });
-
-    describe('effect()', () => {
-      it('should navigate to the specified url', async () => {
-        adapter.navigateTo.mockRejectedValue(new Error('navigateTo'));
-
-        await expect(method.effect()).rejects.toThrow('navigateTo');
-
-        expect(adapter.navigateTo).toHaveBeenCalledTimes(1);
-        expect(adapter.navigateTo).toHaveBeenCalledWith('about:blank');
-      });
+      expect(adapter.navigateTo).toHaveBeenCalledTimes(1);
+      expect(adapter.navigateTo).toHaveBeenCalledWith('about:blank');
     });
   });
 
   describe('press()', () => {
-    it('should throw an argument error', () => {
+    it('should throw a single-character error', () => {
       const errorMessage =
         "Key must be a single character or one of: 'Enter', 'Escape', 'Tab'";
 
@@ -108,35 +57,20 @@ describe('WebBrowser', () => {
       expect(() => browser.press('aa')).toThrow(errorMessage);
     });
 
-    describe('=> FunctionCall', () => {
-      let method: FunctionCall<void>;
+    it('should press the specified key', async () => {
+      adapter.press.mockRejectedValue(new Error('press'));
 
-      beforeEach(() => {
-        method = browser.press('a');
-      });
+      await expect(browser.press('a')()).rejects.toThrow('press');
+      await expect(browser.press('Enter')()).rejects.toThrow('press');
+      await expect(browser.press('Escape')()).rejects.toThrow('press');
+      await expect(browser.press('Tab')()).rejects.toThrow('press');
 
-      it('should have a context', () => {
-        expect(method.context).toBe(browser);
-      });
+      expect(adapter.press).toHaveBeenCalledTimes(4);
 
-      it('should have a description', () => {
-        expect(method.description).toBe("press('a')");
-
-        expect(browser.press('Enter').description).toBe("press('Enter')");
-        expect(browser.press('Escape').description).toBe("press('Escape')");
-        expect(browser.press('Tab').description).toBe("press('Tab')");
-      });
-
-      describe('effect()', () => {
-        it('should press the specified key', async () => {
-          adapter.press.mockRejectedValue(new Error('press'));
-
-          await expect(method.effect()).rejects.toThrow('press');
-
-          expect(adapter.press).toHaveBeenCalledTimes(1);
-          expect(adapter.press).toHaveBeenCalledWith('a');
-        });
-      });
+      expect(adapter.press).toHaveBeenCalledWith('a');
+      expect(adapter.press).toHaveBeenCalledWith('Enter');
+      expect(adapter.press).toHaveBeenCalledWith('Escape');
+      expect(adapter.press).toHaveBeenLastCalledWith('Tab');
     });
   });
 });

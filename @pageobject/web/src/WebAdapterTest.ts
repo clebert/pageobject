@@ -61,14 +61,14 @@ export class WebAdapterTest {
   private async _testAdapterFindElements(): Promise<void> {
     await this._adapter.navigateTo(url);
 
-    const divs = await this._adapter.findElements('div');
+    const divs = await this._adapter.findNodes('div');
 
     strictEqual(divs.length, 2);
 
-    strictEqual((await this._adapter.findElements('div', divs[0])).length, 1);
-    strictEqual((await this._adapter.findElements('div', divs[1])).length, 0);
+    strictEqual((await this._adapter.findNodes('div', divs[0])).length, 1);
+    strictEqual((await this._adapter.findNodes('div', divs[1])).length, 0);
 
-    strictEqual((await this._adapter.findElements('unknown')).length, 0);
+    strictEqual((await this._adapter.findNodes('unknown')).length, 0);
   }
 
   private async _testAdapterNavigateTo(): Promise<void> {
@@ -115,7 +115,7 @@ export class WebAdapterTest {
   private async _testElementClick(): Promise<void> {
     await this._adapter.navigateTo(url);
 
-    const button = (await this._adapter.findElements('#click'))[0];
+    const button = (await this._adapter.findNodes('#click'))[0];
 
     strictEqual(await this._getPageTitle(), 'Test');
 
@@ -127,7 +127,7 @@ export class WebAdapterTest {
   private async _testElementDoubleClick(): Promise<void> {
     await this._adapter.navigateTo(url);
 
-    const button = (await this._adapter.findElements('#dblclick'))[0];
+    const button = (await this._adapter.findNodes('#dblclick'))[0];
 
     strictEqual(await this._getPageTitle(), 'Test');
 
@@ -139,7 +139,7 @@ export class WebAdapterTest {
   private async _testElementExecute(): Promise<void> {
     await this._adapter.navigateTo(url);
 
-    const root = (await this._adapter.findElements('#text'))[0];
+    const root = (await this._adapter.findNodes('#text'))[0];
 
     // istanbul ignore next
     strictEqual(

@@ -1,24 +1,29 @@
-import {serialize} from '@pageobject/base';
 import {FromFileOptions, JSDOM} from 'jsdom';
+import {inspect} from 'util';
 import {Script} from 'vm';
-import {Argument, Key, WebAdapter, WebElement} from '.';
+import {Argument, Key, WebAdapter, WebNode} from '.';
 
-class JSDOMElement implements WebElement {
-  public readonly adaptee: HTMLElement;
+// tslint:disable-next-line no-any
+export function serialize(value: any): string {
+  return inspect(value, false, null);
+}
+
+class JSDOMNode implements WebNode {
+  public readonly element: HTMLElement;
   public readonly jsdom: JSDOM;
 
-  public constructor(adaptee: HTMLElement, jsdom: JSDOM) {
-    this.adaptee = adaptee;
+  public constructor(element: HTMLElement, jsdom: JSDOM) {
+    this.element = element;
     this.jsdom = jsdom;
 
     // https://github.com/jsdom/jsdom/issues/1245
     // istanbul ignore next
-    this.adaptee.innerText =
-      this.adaptee.innerText || this.adaptee.textContent || '';
+    this.element.innerText =
+      this.element.innerText || this.element.textContent || '';
   }
 
   public async click(): Promise<void> {
-    this.adaptee.dispatchEvent(
+    this.element.dispatchEvent(
       new this.jsdom.window.MouseEvent('click', {
         bubbles: true,
         cancelable: true
@@ -27,7 +32,7 @@ class JSDOMElement implements WebElement {
   }
 
   public async doubleClick(): Promise<void> {
-    this.adaptee.dispatchEvent(
+    this.element.dispatchEvent(
       new this.jsdom.window.MouseEvent('dblclick', {
         bubbles: true,
         cancelable: true
@@ -40,7 +45,7 @@ class JSDOMElement implements WebElement {
     ...args: Argument[]
   ): Promise<TResult> {
     // tslint:disable-next-line
-    (this.jsdom.window as any).__element__ = this.adaptee;
+    (this.jsdom.window as any).__element__ = this.element;
 
     const code = `(${script.toString()})(${[
       'window.__element__',
@@ -65,16 +70,16 @@ export class JSDOMAdapter implements WebAdapter {
     return this._jsdom.runVMScript(new Script(code)) as any;
   }
 
-  public async findElements(
+  public async findNodes(
     selector: string,
-    parent?: WebElement
-  ): Promise<WebElement[]> {
+    parent?: WebNode
+  ): Promise<WebNode[]> {
     return Array.from(
       (
-        (parent && (parent as JSDOMElement).adaptee) ||
+        (parent && (parent as JSDOMNode).element) ||
         this._jsdom.window.document
       ).querySelectorAll(selector)
-    ).map(element => new JSDOMElement(element as HTMLElement, this._jsdom));
+    ).map(element => new JSDOMNode(element as HTMLElement, this._jsdom));
   }
 
   public async navigateTo(url: string): Promise<void> {

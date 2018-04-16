@@ -1,6 +1,6 @@
 // tslint:disable no-redundant-jsdoc
 
-import {Argument, Key, WebAdapter, WebElement} from '@pageobject/web';
+import {Argument, Key, WebAdapter, WebNode} from '@pageobject/web';
 import {
   Browser,
   ElementHandle,
@@ -10,29 +10,29 @@ import {
   launch
 } from 'puppeteer';
 
-class PuppeteerElement implements WebElement {
-  public readonly adaptee: ElementHandle;
+class PuppeteerNode implements WebNode {
+  public readonly element: ElementHandle;
   public readonly page: Page;
 
-  public constructor(adaptee: ElementHandle, page: Page) {
-    this.adaptee = adaptee;
+  public constructor(element: ElementHandle, page: Page) {
+    this.element = element;
     this.page = page;
   }
 
   public async click(): Promise<void> {
-    return this.adaptee.click();
+    return this.element.click();
   }
 
   public async doubleClick(): Promise<void> {
-    await this.adaptee.click();
-    await this.adaptee.click({clickCount: 2});
+    await this.element.click();
+    await this.element.click({clickCount: 2});
   }
 
   public async execute<THTMLElement extends HTMLElement, TResult>(
     script: (element: THTMLElement, ...args: Argument[]) => TResult,
     ...args: Argument[]
   ): Promise<TResult> {
-    return this.page.evaluate(script, this.adaptee, ...args);
+    return this.page.evaluate(script, this.element, ...args);
   }
 }
 
@@ -57,9 +57,10 @@ export class PuppeteerAdapter implements WebAdapter {
     );
   }
 
-  private readonly _browser: Browser;
+  public readonly browser: Browser;
+  public readonly page: Page;
+
   private readonly _navigationOptions?: NavigationOptions;
-  private readonly _page: Page;
 
   /**
    * @param browser https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-browser
@@ -71,28 +72,29 @@ export class PuppeteerAdapter implements WebAdapter {
     page: Page,
     navigationOptions?: NavigationOptions
   ) {
-    this._browser = browser;
+    this.browser = browser;
+    this.page = page;
+
     this._navigationOptions = navigationOptions;
-    this._page = page;
   }
 
   public async execute<TResult>(
     script: (...args: Argument[]) => TResult,
     ...args: Argument[]
   ): Promise<TResult> {
-    return this._page.evaluate(script, ...args);
+    return this.page.evaluate(script, ...args);
   }
 
-  public async findElements(
+  public async findNodes(
     selector: string,
-    parent?: WebElement
-  ): Promise<WebElement[]> {
-    const elementsHandle = await this._page.evaluateHandle(
+    parent?: WebNode
+  ): Promise<WebNode[]> {
+    const elementsHandle = await this.page.evaluateHandle(
       // istanbul ignore next
       (_selector: string, _parent: Element | undefined) =>
         (_parent || document).querySelectorAll(_selector),
       selector,
-      parent && (parent as PuppeteerElement).adaptee
+      parent && (parent as PuppeteerNode).element
     );
 
     const lengthHandle = await elementsHandle.getProperty('length');
@@ -116,18 +118,18 @@ export class PuppeteerAdapter implements WebAdapter {
 
     await elementsHandle.dispose();
 
-    return elements.map(element => new PuppeteerElement(element, this._page));
+    return elements.map(element => new PuppeteerNode(element, this.page));
   }
 
   public async navigateTo(url: string): Promise<void> {
-    await this._page.goto(url, this._navigationOptions);
+    await this.page.goto(url, this._navigationOptions);
   }
 
   public async press(key: Key): Promise<void> {
-    return this._page.keyboard.press(key);
+    return this.page.keyboard.press(key);
   }
 
   public async quit(): Promise<void> {
-    return this._browser.close();
+    return this.browser.close();
   }
 }

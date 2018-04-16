@@ -1,21 +1,11 @@
-import {Adapter, FunctionCall} from '@pageobject/base';
-import {WebComponent, WebElement} from '.';
+import {Adapter} from '@pageobject/base';
+import {WebComponent, WebNode} from '.';
 
-class TestComponent extends WebComponent {
-  public readonly selector: string = ':root';
+class TestAdapter implements Adapter<WebNode> {
+  public readonly findNodes = jest.fn();
 }
 
-class TestAdapter implements Adapter<WebElement> {
-  public readonly findElements = jest.fn();
-}
-
-class TestElement implements WebElement {
-  public readonly click = jest.fn();
-  public readonly doubleClick = jest.fn();
-  public readonly execute = jest.fn();
-}
-
-class TestHTMLElement {
+class TestElement {
   public readonly getBoundingClientRect = jest.fn();
   public readonly innerText = 'text';
 
@@ -23,25 +13,31 @@ class TestHTMLElement {
   public offsetWidth = 0;
 }
 
+class TestNode implements WebNode {
+  public readonly click = jest.fn();
+  public readonly doubleClick = jest.fn();
+  public readonly execute = jest.fn();
+}
+
 describe('WebComponent', () => {
   let adapter: TestAdapter;
   let component: WebComponent;
   let element: TestElement;
-  let htmlElement: TestHTMLElement;
+  let node: TestNode;
 
   let getActiveElement: jest.Mock;
   let scrollBy: jest.SpyInstance;
 
   beforeEach(() => {
     adapter = new TestAdapter();
-    component = new TestComponent(adapter);
+    component = new WebComponent(adapter);
     element = new TestElement();
-    htmlElement = new TestHTMLElement();
+    node = new TestNode();
 
-    adapter.findElements.mockResolvedValue([element]);
+    adapter.findNodes.mockImplementation(async () => [node]);
 
-    element.execute.mockImplementation(async (script, ...args) =>
-      script(htmlElement, ...args)
+    node.execute.mockImplementation(async (script, ...args) =>
+      script(element, ...args)
     );
 
     getActiveElement = jest.fn();
@@ -58,181 +54,89 @@ describe('WebComponent', () => {
     scrollBy.mockRestore();
   });
 
-  describe('click() => FunctionCall', () => {
-    let method: FunctionCall<void>;
-
-    beforeEach(() => {
-      method = component.click();
-    });
-
-    it('should have a context', () => {
-      expect(method.context).toBe(component);
-    });
-
-    it('should have a description', () => {
-      expect(method.description).toBe('click()');
-    });
-
-    describe('effect()', () => {
-      it('should click on the element', async () => {
-        element.click.mockRejectedValue(new Error('click'));
-
-        await expect(method.effect()).rejects.toThrow('click');
-
-        expect(element.click).toHaveBeenCalledTimes(1);
+  describe('click()', () => {
+    it('should click on this component', async () => {
+      node.click.mockImplementation(async () => {
+        throw new Error('click');
       });
+
+      await expect(component.click()()).rejects.toThrow('click');
+
+      expect(node.click).toHaveBeenCalledTimes(1);
     });
   });
 
-  describe('doubleClick() => FunctionCall', () => {
-    let method: FunctionCall<void>;
-
-    beforeEach(() => {
-      method = component.doubleClick();
-    });
-
-    it('should have a context', () => {
-      expect(method.context).toBe(component);
-    });
-
-    it('should have a description', () => {
-      expect(method.description).toBe('doubleClick()');
-    });
-
-    describe('effect()', () => {
-      it('should double-click on the element', async () => {
-        element.doubleClick.mockRejectedValue(new Error('doubleClick'));
-
-        await expect(method.effect()).rejects.toThrow('doubleClick');
-
-        expect(element.doubleClick).toHaveBeenCalledTimes(1);
+  describe('doubleClick()', () => {
+    it('should double-click on this component', async () => {
+      node.doubleClick.mockImplementation(async () => {
+        throw new Error('doubleClick');
       });
+
+      await expect(component.doubleClick()()).rejects.toThrow('doubleClick');
+
+      expect(node.doubleClick).toHaveBeenCalledTimes(1);
     });
   });
 
-  describe('getText() => FunctionCall', () => {
-    let getter: FunctionCall<string>;
-
-    beforeEach(() => {
-      getter = component.getText();
-    });
-
-    it('should have a context', () => {
-      expect(getter.context).toBe(component);
-    });
-
-    it('should have a description', () => {
-      expect(getter.description).toBe('getText()');
-    });
-
-    describe('effect()', () => {
-      it('should return the text of the element', async () => {
-        await expect(getter.effect()).resolves.toBe('text');
-      });
+  describe('getText()', () => {
+    it('should return the text of this component', async () => {
+      await expect(component.getText()()).resolves.toBe('text');
     });
   });
 
-  describe('hasFocus() => FunctionCall', () => {
-    let getter: FunctionCall<boolean>;
+  describe('hasFocus()', () => {
+    it('should return the focus of this component', async () => {
+      await expect(component.hasFocus()()).resolves.toBe(false);
 
-    beforeEach(() => {
-      getter = component.hasFocus();
-    });
+      getActiveElement.mockReturnValue(element);
 
-    it('should have a context', () => {
-      expect(getter.context).toBe(component);
-    });
-
-    it('should have a description', () => {
-      expect(getter.description).toBe('hasFocus()');
-    });
-
-    describe('effect()', () => {
-      it('should return the focus of the element', async () => {
-        await expect(getter.effect()).resolves.toBe(false);
-
-        getActiveElement.mockReturnValue(htmlElement);
-
-        await expect(getter.effect()).resolves.toBe(true);
-      });
+      await expect(component.hasFocus()()).resolves.toBe(true);
     });
   });
 
-  describe('isVisible() => FunctionCall', () => {
-    let getter: FunctionCall<boolean>;
+  describe('isVisible()', () => {
+    it('should return the visibility of this component', async () => {
+      await expect(component.isVisible()()).resolves.toBe(false);
 
-    beforeEach(() => {
-      getter = component.isVisible();
-    });
+      element.offsetHeight = 1;
+      element.offsetWidth = 0;
 
-    it('should have a context', () => {
-      expect(getter.context).toBe(component);
-    });
+      await expect(component.isVisible()()).resolves.toBe(true);
 
-    it('should have a description', () => {
-      expect(getter.description).toBe('isVisible()');
-    });
+      element.offsetHeight = 0;
+      element.offsetWidth = 1;
 
-    describe('effect()', () => {
-      it('should return the visibility of the element', async () => {
-        await expect(getter.effect()).resolves.toBe(false);
+      await expect(component.isVisible()()).resolves.toBe(true);
 
-        htmlElement.offsetHeight = 1;
-        htmlElement.offsetWidth = 0;
+      element.offsetHeight = 1;
+      element.offsetWidth = 1;
 
-        await expect(getter.effect()).resolves.toBe(true);
-
-        htmlElement.offsetHeight = 0;
-        htmlElement.offsetWidth = 1;
-
-        await expect(getter.effect()).resolves.toBe(true);
-
-        htmlElement.offsetHeight = 1;
-        htmlElement.offsetWidth = 1;
-
-        await expect(getter.effect()).resolves.toBe(true);
-      });
+      await expect(component.isVisible()()).resolves.toBe(true);
     });
   });
 
-  describe('scrollIntoView() => FunctionCall', () => {
-    let method: FunctionCall<void>;
+  describe('scrollIntoView()', () => {
+    it('should scroll this component into view', async () => {
+      expect(window.innerHeight).toBe(768);
+      expect(window.innerWidth).toBe(1024);
 
-    beforeEach(() => {
-      method = component.scrollIntoView();
-    });
-
-    it('should have a context', () => {
-      expect(method.context).toBe(component);
-    });
-
-    it('should have a description', () => {
-      expect(method.description).toBe('scrollIntoView()');
-    });
-
-    describe('effect()', () => {
-      it('should scroll the element into view', async () => {
-        expect(window.innerHeight).toBe(768);
-        expect(window.innerWidth).toBe(1024);
-
-        htmlElement.getBoundingClientRect.mockReturnValue({
-          height: 150,
-          left: 12,
-          top: 34,
-          width: 50
-        });
-
-        scrollBy.mockImplementation(() => {
-          throw new Error('scrollIntoView');
-        });
-
-        await expect(method.effect()).rejects.toEqual(
-          new Error('scrollIntoView')
-        );
-
-        expect(scrollBy).toHaveBeenCalledTimes(1);
-        expect(scrollBy).toHaveBeenLastCalledWith(-475, -275);
+      element.getBoundingClientRect.mockReturnValue({
+        height: 150,
+        left: 12,
+        top: 34,
+        width: 50
       });
+
+      scrollBy.mockImplementation(() => {
+        throw new Error('scrollIntoView');
+      });
+
+      await expect(component.scrollIntoView()()).rejects.toEqual(
+        new Error('scrollIntoView')
+      );
+
+      expect(scrollBy).toHaveBeenCalledTimes(1);
+      expect(scrollBy).toHaveBeenLastCalledWith(-475, -275);
     });
   });
 });

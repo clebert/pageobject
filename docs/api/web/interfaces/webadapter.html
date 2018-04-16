@@ -911,7 +911,7 @@ img { max-width: 100%; }
 			<a href="../classes/jsdomadapter.html" class="tsd-kind-icon">JSDOMAdapter</a>
 		</li>
 		<li class=" tsd-kind-class tsd-is-not-exported">
-			<a href="../classes/jsdomelement.html" class="tsd-kind-icon">JSDOMElement</a>
+			<a href="../classes/jsdomnode.html" class="tsd-kind-icon">JSDOMNode</a>
 		</li>
 		<li class=" tsd-kind-class">
 			<a href="../classes/webadaptertest.html" class="tsd-kind-icon">Web<wbr>Adapter<wbr>Test</a>
@@ -929,7 +929,7 @@ img { max-width: 100%; }
 					<a href="webadapter.html#execute" class="tsd-kind-icon">execute</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-					<a href="webadapter.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a>
+					<a href="webadapter.html#findnodes" class="tsd-kind-icon">find<wbr>Nodes</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="webadapter.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a>
@@ -943,7 +943,7 @@ img { max-width: 100%; }
 			</ul>
 		</li>
 		<li class=" tsd-kind-interface">
-			<a href="webelement.html" class="tsd-kind-icon">Web<wbr>Element</a>
+			<a href="webnode.html" class="tsd-kind-icon">Web<wbr>Node</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="../globals.html#argument" class="tsd-kind-icon">Argument</a>
@@ -954,6 +954,9 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-variable tsd-is-not-exported">
 			<a href="../globals.html#url" class="tsd-kind-icon">url</a>
 		</li>
+		<li class=" tsd-kind-function">
+			<a href="../globals.html#serialize" class="tsd-kind-icon">serialize</a>
+		</li>
 	</ul>
 </nav>
 <div class="container container-main">
@@ -962,7 +965,7 @@ img { max-width: 100%; }
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="tsd-signature-type">Adapter</span><span class="tsd-signature-symbol">&lt;</span><a href="webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">&gt;</span>
+					<span class="tsd-signature-type">Adapter</span><span class="tsd-signature-symbol">&lt;</span><a href="webnode.html" class="tsd-signature-type">WebNode</a><span class="tsd-signature-symbol">&gt;</span>
 					<ul class="tsd-hierarchy">
 						<li>
 							<span class="target">WebAdapter</span>
@@ -985,7 +988,7 @@ img { max-width: 100%; }
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="webadapter.html#execute" class="tsd-kind-icon">execute</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="webadapter.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="webadapter.html#findnodes" class="tsd-kind-icon">find<wbr>Nodes</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="webadapter.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="webadapter.html#press" class="tsd-kind-icon">press</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="webadapter.html#quit" class="tsd-kind-icon">quit</a></li>
@@ -1047,17 +1050,17 @@ img { max-width: 100%; }
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-				<a name="findelements" class="tsd-anchor"></a>
-				<h3>find<wbr>Elements</h3>
+				<a name="findnodes" class="tsd-anchor"></a>
+				<h3>find<wbr>Nodes</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-					<li class="tsd-signature tsd-kind-icon">find<wbr>Elements<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, parent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">TElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">find<wbr>Nodes<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, ancestor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">TNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="webnode.html" class="tsd-signature-type">WebNode</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Inherited from Adapter.findElements</p>
+							<p>Inherited from Adapter.findNodes</p>
 							<ul>
-								<li>Defined in @pageobject/base/dist/Component.d.ts:3</li>
+								<li>Defined in @pageobject/base/dist/Component.d.ts:4</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1066,10 +1069,10 @@ img { max-width: 100%; }
 								<h5>selector: <span class="tsd-signature-type">string</span></h5>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> parent: <span class="tsd-signature-type">TElement</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> ancestor: <span class="tsd-signature-type">TNode</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="webelement.html" class="tsd-signature-type">WebElement</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="webnode.html" class="tsd-signature-type">WebNode</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>

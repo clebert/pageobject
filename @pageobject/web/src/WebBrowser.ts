@@ -1,9 +1,9 @@
-import {Adapter, Describable, FunctionCall} from '@pageobject/base';
-import {Argument, WebElement} from '.';
+import {Adapter} from '@pageobject/base';
+import {Argument, WebNode} from '.';
 
 export type Key = 'Enter' | 'Escape' | 'Tab' | string;
 
-export interface WebAdapter extends Adapter<WebElement> {
+export interface WebAdapter extends Adapter<WebNode> {
   execute<TResult>(
     script: (...args: Argument[]) => TResult,
     ...args: Argument[]
@@ -14,34 +14,26 @@ export interface WebAdapter extends Adapter<WebElement> {
   quit(): Promise<void>;
 }
 
-export class WebBrowser implements Describable {
-  public readonly description = this.constructor.name;
-
-  private readonly _adapter: WebAdapter;
+export class WebBrowser {
+  protected readonly adapter: WebAdapter;
 
   public constructor(adapter: WebAdapter) {
-    this._adapter = adapter;
+    this.adapter = adapter;
   }
 
-  public getPageTitle(): FunctionCall<string> {
-    return new FunctionCall(this, this.getPageTitle.name, arguments, async () =>
-      this._adapter.execute(() => document.title)
-    );
+  public getPageTitle(): () => Promise<string> {
+    return async () => this.adapter.execute(() => document.title);
   }
 
-  public getPageURL(): FunctionCall<string> {
-    return new FunctionCall(this, this.getPageURL.name, arguments, async () =>
-      this._adapter.execute(() => window.location.href)
-    );
+  public getPageURL(): () => Promise<string> {
+    return async () => this.adapter.execute(() => window.location.href);
   }
 
-  public navigateTo(url: string): FunctionCall<void> {
-    return new FunctionCall(this, this.navigateTo.name, arguments, async () =>
-      this._adapter.navigateTo(url)
-    );
+  public navigateTo(url: string): () => Promise<void> {
+    return async () => this.adapter.navigateTo(url);
   }
 
-  public press(key: Key): FunctionCall<void> {
+  public press(key: Key): () => Promise<void> {
     if (key.length !== 1) {
       switch (key) {
         case 'Enter':
@@ -57,8 +49,6 @@ export class WebBrowser implements Describable {
       }
     }
 
-    return new FunctionCall(this, this.press.name, arguments, async () =>
-      this._adapter.press(key)
-    );
+    return async () => this.adapter.press(key);
   }
 }
