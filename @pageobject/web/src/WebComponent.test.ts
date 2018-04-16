@@ -54,7 +54,7 @@ describe('WebComponent', () => {
     scrollBy.mockRestore();
   });
 
-  describe('click()', () => {
+  describe('click() => Effect()', () => {
     it('should click on this component', async () => {
       node.click.mockImplementation(async () => {
         throw new Error('click');
@@ -66,7 +66,7 @@ describe('WebComponent', () => {
     });
   });
 
-  describe('doubleClick()', () => {
+  describe('doubleClick() => Effect()', () => {
     it('should double-click on this component', async () => {
       node.doubleClick.mockImplementation(async () => {
         throw new Error('doubleClick');
@@ -78,13 +78,13 @@ describe('WebComponent', () => {
     });
   });
 
-  describe('getText()', () => {
+  describe('getText() => Effect()', () => {
     it('should return the text of this component', async () => {
       await expect(component.getText()()).resolves.toBe('text');
     });
   });
 
-  describe('hasFocus()', () => {
+  describe('hasFocus() => Effect()', () => {
     it('should return the focus of this component', async () => {
       await expect(component.hasFocus()()).resolves.toBe(false);
 
@@ -94,7 +94,7 @@ describe('WebComponent', () => {
     });
   });
 
-  describe('isVisible()', () => {
+  describe('isVisible() => Effect()', () => {
     it('should return the visibility of this component', async () => {
       await expect(component.isVisible()()).resolves.toBe(false);
 
@@ -115,7 +115,7 @@ describe('WebComponent', () => {
     });
   });
 
-  describe('scrollIntoView()', () => {
+  describe('scrollIntoView() => Effect()', () => {
     it('should scroll this component into view', async () => {
       expect(window.innerHeight).toBe(768);
       expect(window.innerWidth).toBe(1024);

@@ -1,4 +1,4 @@
-import {Adapter, Component, equals, greaterThan, matches} from '.';
+import {Adapter, Component, Effect, equals, greaterThan, matches} from '.';
 
 class TestAdapter implements Adapter<HTMLElement> {
   public async findNodes(
@@ -16,7 +16,7 @@ class DIV extends Component<HTMLElement> {
     return new DIV(this.adapter, this);
   }
 
-  public getID(): () => Promise<string> {
+  public getID(): Effect<string> {
     return async () => (await this.findUniqueNode()).id;
   }
 }
@@ -151,7 +151,7 @@ describe('Component', () => {
     });
   });
 
-  describe('getNodeCount()', () => {
+  describe('getNodeCount() => Effect()', () => {
     it('should throw an undefined-selector error', async () => {
       await expect(component.getNodeCount()()).rejects.toThrow(
         'Undefined selector'

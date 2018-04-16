@@ -1,8 +1,10 @@
 import {Predicate} from '.';
 
-export type Accessor<TNode, TComponent extends Component<TNode>, TValue> = (
+export type Effect<TResult> = () => Promise<TResult>;
+
+export type Accessor<TNode, TComponent extends Component<TNode>, TResult> = (
   component: TComponent
-) => () => Promise<TValue>;
+) => Effect<TResult>;
 
 export interface Adapter<TNode> {
   findNodes(selector: string, ancestor?: TNode): Promise<TNode[]>;
@@ -112,7 +114,7 @@ export class Component<TNode> {
     return nodes[0];
   }
 
-  public getNodeCount(): () => Promise<number> {
+  public getNodeCount(): Effect<number> {
     return async () => (await this.findNodes()).length;
   }
 

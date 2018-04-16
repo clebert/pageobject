@@ -1,4 +1,4 @@
-import {Component} from '@pageobject/base';
+import {Component, Effect} from '@pageobject/base';
 
 export type Argument = any; // tslint:disable-line no-any
 
@@ -15,23 +15,23 @@ export interface WebNode {
 export class WebComponent extends Component<WebNode> {
   public static readonly selector: string = ':root';
 
-  public click(): () => Promise<void> {
+  public click(): Effect<void> {
     return async () => (await this.findUniqueNode()).click();
   }
 
-  public doubleClick(): () => Promise<void> {
+  public doubleClick(): Effect<void> {
     return async () => (await this.findUniqueNode()).doubleClick();
   }
 
   /**
    * @returns The "rendered" text content of this component and its descendants.
    */
-  public getText(): () => Promise<string> {
+  public getText(): Effect<string> {
     return async () =>
       (await this.findUniqueNode()).execute(element => element.innerText);
   }
 
-  public hasFocus(): () => Promise<boolean> {
+  public hasFocus(): Effect<boolean> {
     return async () =>
       (await this.findUniqueNode()).execute(
         element => document.activeElement === element
@@ -41,7 +41,7 @@ export class WebComponent extends Component<WebNode> {
   /**
    * A component is considered visible if it consumes space in the document.
    */
-  public isVisible(): () => Promise<boolean> {
+  public isVisible(): Effect<boolean> {
     return async () =>
       (await this.findUniqueNode()).execute(element => {
         const {offsetHeight, offsetWidth} = element;
@@ -50,7 +50,7 @@ export class WebComponent extends Component<WebNode> {
       });
   }
 
-  public scrollIntoView(): () => Promise<void> {
+  public scrollIntoView(): Effect<void> {
     return async () =>
       (await this.findUniqueNode()).execute(element => {
         const {height, left, top, width} = element.getBoundingClientRect();

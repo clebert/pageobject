@@ -1,4 +1,4 @@
-import {Adapter} from '@pageobject/base';
+import {Adapter, Effect} from '@pageobject/base';
 import {Argument, WebNode} from '.';
 
 export type Key = 'Enter' | 'Escape' | 'Tab' | string;
@@ -21,19 +21,19 @@ export class WebBrowser {
     this.adapter = adapter;
   }
 
-  public getPageTitle(): () => Promise<string> {
+  public getPageTitle(): Effect<string> {
     return async () => this.adapter.execute(() => document.title);
   }
 
-  public getPageURL(): () => Promise<string> {
+  public getPageURL(): Effect<string> {
     return async () => this.adapter.execute(() => window.location.href);
   }
 
-  public navigateTo(url: string): () => Promise<void> {
+  public navigateTo(url: string): Effect<void> {
     return async () => this.adapter.navigateTo(url);
   }
 
-  public press(key: Key): () => Promise<void> {
+  public press(key: Key): Effect<void> {
     if (key.length !== 1) {
       switch (key) {
         case 'Enter':

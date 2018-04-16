@@ -21,7 +21,7 @@ describe('WebBrowser', () => {
     );
   });
 
-  describe('getPageTitle()', () => {
+  describe('getPageTitle() => Effect()', () => {
     it('should return the page title', async () => {
       document.title = 'pageTitle';
 
@@ -29,13 +29,13 @@ describe('WebBrowser', () => {
     });
   });
 
-  describe('getPageURL()', () => {
+  describe('getPageURL() => Effect()', () => {
     it('should return the page URL', async () => {
       await expect(browser.getPageURL()()).resolves.toBe('about:blank');
     });
   });
 
-  describe('navigateTo()', () => {
+  describe('navigateTo() => Effect()', () => {
     it('should navigate to the specified url', async () => {
       adapter.navigateTo.mockRejectedValue(new Error('navigateTo'));
 
@@ -57,20 +57,22 @@ describe('WebBrowser', () => {
       expect(() => browser.press('aa')).toThrow(errorMessage);
     });
 
-    it('should press the specified key', async () => {
-      adapter.press.mockRejectedValue(new Error('press'));
+    describe('=> Effect()', () => {
+      it('should press the specified key', async () => {
+        adapter.press.mockRejectedValue(new Error('press'));
 
-      await expect(browser.press('a')()).rejects.toThrow('press');
-      await expect(browser.press('Enter')()).rejects.toThrow('press');
-      await expect(browser.press('Escape')()).rejects.toThrow('press');
-      await expect(browser.press('Tab')()).rejects.toThrow('press');
+        await expect(browser.press('a')()).rejects.toThrow('press');
+        await expect(browser.press('Enter')()).rejects.toThrow('press');
+        await expect(browser.press('Escape')()).rejects.toThrow('press');
+        await expect(browser.press('Tab')()).rejects.toThrow('press');
 
-      expect(adapter.press).toHaveBeenCalledTimes(4);
+        expect(adapter.press).toHaveBeenCalledTimes(4);
 
-      expect(adapter.press).toHaveBeenCalledWith('a');
-      expect(adapter.press).toHaveBeenCalledWith('Enter');
-      expect(adapter.press).toHaveBeenCalledWith('Escape');
-      expect(adapter.press).toHaveBeenLastCalledWith('Tab');
+        expect(adapter.press).toHaveBeenCalledWith('a');
+        expect(adapter.press).toHaveBeenCalledWith('Enter');
+        expect(adapter.press).toHaveBeenCalledWith('Escape');
+        expect(adapter.press).toHaveBeenLastCalledWith('Tab');
+      });
     });
   });
 });
