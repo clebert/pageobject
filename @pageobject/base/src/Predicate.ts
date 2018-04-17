@@ -42,6 +42,10 @@ export abstract class Predicate<TValue> {
     return new Matches(expected);
   }
 
+  public static notMatches(expected: RegExp): Predicate<string> {
+    return new NotMatches(expected);
+  }
+
   public abstract assert(actual: TValue): void;
   public abstract test(actual: TValue): boolean;
 }
@@ -155,5 +159,21 @@ class Matches extends BinaryPredicate<string, RegExp> {
 
   public test(actual: string): boolean {
     return this.expected.test(actual);
+  }
+}
+
+class NotMatches extends BinaryPredicate<string, RegExp> {
+  public assert(actual: string): void {
+    const message = `${serialize(actual)} !~ ${serialize(this.expected)}`;
+
+    if (useJest()) {
+      expect(actual).not.toMatch(this.expected);
+    } else {
+      ok(this.test(actual), message);
+    }
+  }
+
+  public test(actual: string): boolean {
+    return !this.expected.test(actual);
   }
 }
