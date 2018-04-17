@@ -50,7 +50,7 @@ export class Component<TNode> {
 
     reconstruction._filter = async component =>
       (this._filter ? await this._filter(component) : true) &&
-      predicate(await accessor(component as this)());
+      predicate.test(await accessor(component as this)());
 
     reconstruction._position = this._position;
 

@@ -1,161 +1,395 @@
-import {
-  and,
-  endsWith,
-  equals,
-  greaterThan,
-  greaterThanOrEquals,
-  includes,
-  lessThan,
-  lessThanOrEquals,
-  matches,
-  not,
-  or,
-  startsWith
-} from '.';
+import {Predicate} from '.';
 
-const identity = (value: boolean) => value;
+interface JestGlobal {
+  expect?: typeof expect;
+}
+
+function noJest(effect: () => void): () => void {
+  const jestGlobal = global as JestGlobal;
+
+  return () => {
+    const expect = jestGlobal.expect;
+
+    try {
+      jestGlobal.expect = undefined;
+
+      effect();
+    } finally {
+      jestGlobal.expect = expect;
+    }
+  };
+}
+
+const {
+  is,
+  isNot,
+  isGreaterThan,
+  isGreaterThanOrEquals,
+  isLessThan,
+  isLessThanOrEquals,
+  matches
+} = Predicate;
+
+const effectsIs = (
+  predicateMethodName: keyof Predicate<number | string>,
+  negated: boolean = false
+) => {
+  const predicateFactory = negated ? isNot : is;
+
+  return {
+    ok: [
+      () => predicateFactory(0)[predicateMethodName](0),
+      () => predicateFactory('foo')[predicateMethodName]('foo')
+    ],
+    nok: [
+      () => predicateFactory(0)[predicateMethodName](-1),
+      () => predicateFactory(0)[predicateMethodName](1),
+      () => predicateFactory('foo')[predicateMethodName]('foobar'),
+      () => predicateFactory('foo')[predicateMethodName]('bar'),
+      () => predicateFactory('foo')[predicateMethodName]('barfoo')
+    ]
+  };
+};
+
+const effectsIsGreaterThan = (
+  predicateMethodName: keyof Predicate<number>
+) => ({
+  ok: [() => isGreaterThan(0)[predicateMethodName](1)],
+  nok: [
+    () => isGreaterThan(0)[predicateMethodName](-1),
+    () => isGreaterThan(0)[predicateMethodName](0)
+  ]
+});
+
+const effectsIsGreaterThanOrEquals = (
+  predicateMethodName: keyof Predicate<number>
+) => ({
+  ok: [
+    () => isGreaterThanOrEquals(0)[predicateMethodName](0),
+    () => isGreaterThanOrEquals(0)[predicateMethodName](1)
+  ],
+  nok: [() => isGreaterThanOrEquals(0)[predicateMethodName](-1)]
+});
+
+const effectsIsLessThan = (predicateMethodName: keyof Predicate<number>) => ({
+  ok: [() => isLessThan(0)[predicateMethodName](-1)],
+  nok: [
+    () => isLessThan(0)[predicateMethodName](0),
+    () => isLessThan(0)[predicateMethodName](1)
+  ]
+});
+
+const effectsIsLessThanOrEquals = (
+  predicateMethodName: keyof Predicate<number>
+) => ({
+  ok: [
+    () => isLessThanOrEquals(0)[predicateMethodName](-1),
+    () => isLessThanOrEquals(0)[predicateMethodName](0)
+  ],
+  nok: [() => isLessThanOrEquals(0)[predicateMethodName](1)]
+});
+
+const effectsMatches = (predicateMethodName: keyof Predicate<string>) => ({
+  ok: [
+    () => matches(/foo/)[predicateMethodName]('foo'),
+    () => matches(/foo/)[predicateMethodName]('foobar'),
+    () => matches(/foo/)[predicateMethodName]('barfoo')
+  ],
+  nok: [() => matches(/foo/)[predicateMethodName]('bar')]
+});
 
 describe('Predicate', () => {
-  describe('equals()', () => {
-    it('should return true', () => {
-      expect(equals(0)(0)).toBe(true);
+  describe('is() => Predicate', () => {
+    describe('assert()', () => {
+      it('should not throw a jest error', () => {
+        for (const effect of effectsIs('assert').ok) {
+          expect(effect).not.toThrow();
+        }
+      });
 
-      expect(equals('foo')('foo')).toBe(true);
+      it('should throw a jest error', () => {
+        for (const effect of effectsIs('assert').nok) {
+          expect(effect).toThrow('Expected value to be:');
+        }
+      });
+
+      it('should not throw a node error', () => {
+        for (const effect of effectsIs('assert').ok) {
+          expect(noJest(effect)).not.toThrow();
+        }
+      });
+
+      it('should throw a node error', () => {
+        for (const effect of effectsIs('assert').nok) {
+          expect(noJest(effect)).toThrow(' === ');
+        }
+      });
     });
 
-    it('should return false', () => {
-      expect(equals(0)(-1)).toBe(false);
-      expect(equals(0)(1)).toBe(false);
+    describe('test()', () => {
+      it('should return true', () => {
+        for (const effect of effectsIs('test').ok) {
+          expect(effect()).toBe(true);
+        }
+      });
 
-      expect(equals('foo')('foobar')).toBe(false);
-      expect(equals('foo')('bar')).toBe(false);
-      expect(equals('foo')('barfoo')).toBe(false);
-    });
-  });
-
-  describe('greaterThan()', () => {
-    it('should return true', () => {
-      expect(greaterThan(0)(1)).toBe(true);
-    });
-
-    it('should return false', () => {
-      expect(greaterThan(0)(-1)).toBe(false);
-      expect(greaterThan(0)(0)).toBe(false);
-    });
-  });
-
-  describe('greaterThanOrEquals()', () => {
-    it('should return true', () => {
-      expect(greaterThanOrEquals(0)(0)).toBe(true);
-      expect(greaterThanOrEquals(0)(1)).toBe(true);
-    });
-
-    it('should return false', () => {
-      expect(greaterThanOrEquals(0)(-1)).toBe(false);
-    });
-  });
-
-  describe('lessThan()', () => {
-    it('should return true', () => {
-      expect(lessThan(0)(-1)).toBe(true);
-    });
-
-    it('should return false', () => {
-      expect(lessThan(0)(0)).toBe(false);
-      expect(lessThan(0)(1)).toBe(false);
+      it('should return false', () => {
+        for (const effect of effectsIs('test').nok) {
+          expect(effect()).toBe(false);
+        }
+      });
     });
   });
 
-  describe('lessThanOrEquals()', () => {
-    it('should return true', () => {
-      expect(lessThanOrEquals(0)(-1)).toBe(true);
-      expect(lessThanOrEquals(0)(0)).toBe(true);
+  describe('isNot() => Predicate', () => {
+    describe('assert()', () => {
+      it('should not throw a jest error', () => {
+        for (const effect of effectsIs('assert', true).nok) {
+          expect(effect).not.toThrow();
+        }
+      });
+
+      it('should throw a jest error', () => {
+        for (const effect of effectsIs('assert', true).ok) {
+          expect(effect).toThrow('Expected value to not be:');
+        }
+      });
+
+      it('should not throw a node error', () => {
+        for (const effect of effectsIs('assert', true).nok) {
+          expect(noJest(effect)).not.toThrow();
+        }
+      });
+
+      it('should throw a node error', () => {
+        for (const effect of effectsIs('assert', true).ok) {
+          expect(noJest(effect)).toThrow(' !== ');
+        }
+      });
     });
 
-    it('should return false', () => {
-      expect(lessThanOrEquals(0)(1)).toBe(false);
-    });
-  });
+    describe('test()', () => {
+      it('should return true', () => {
+        for (const effect of effectsIs('test', true).nok) {
+          expect(effect()).toBe(true);
+        }
+      });
 
-  describe('matches()', () => {
-    it('should return true', () => {
-      expect(matches(/foo/)('foo')).toBe(true);
-      expect(matches(/foo/)('foobar')).toBe(true);
-      expect(matches(/foo/)('barfoo')).toBe(true);
-    });
-
-    it('should return false', () => {
-      expect(matches(/foo/)('bar')).toBe(false);
-    });
-  });
-
-  describe('includes()', () => {
-    it('should return true', () => {
-      expect(includes('foo')('foo')).toBe(true);
-      expect(includes('foo')('foobar')).toBe(true);
-      expect(includes('foo')('barfoo')).toBe(true);
-    });
-
-    it('should return false', () => {
-      expect(includes('foo')('bar')).toBe(false);
-    });
-  });
-
-  describe('startsWith()', () => {
-    it('should return true', () => {
-      expect(startsWith('foo')('foo')).toBe(true);
-      expect(startsWith('foo')('foobar')).toBe(true);
-    });
-
-    it('should return false', () => {
-      expect(startsWith('foo')('bar')).toBe(false);
-      expect(startsWith('foo')('barfoo')).toBe(false);
+      it('should return false', () => {
+        for (const effect of effectsIs('test', true).ok) {
+          expect(effect()).toBe(false);
+        }
+      });
     });
   });
 
-  describe('endsWith()', () => {
-    it('should return true', () => {
-      expect(endsWith('foo')('foo')).toBe(true);
-      expect(endsWith('foo')('barfoo')).toBe(true);
+  describe('isGreaterThan() => Predicate', () => {
+    describe('assert()', () => {
+      it('should not throw a jest error', () => {
+        for (const effect of effectsIsGreaterThan('assert').ok) {
+          expect(effect).not.toThrow();
+        }
+      });
+
+      it('should throw a jest error', () => {
+        for (const effect of effectsIsGreaterThan('assert').nok) {
+          expect(effect).toThrow('Expected value to be greater than:');
+        }
+      });
+
+      it('should not throw a node error', () => {
+        for (const effect of effectsIsGreaterThan('assert').ok) {
+          expect(noJest(effect)).not.toThrow();
+        }
+      });
+
+      it('should throw a node error', () => {
+        for (const effect of effectsIsGreaterThan('assert').nok) {
+          expect(noJest(effect)).toThrow(/^-?[0-9] > 0$/);
+        }
+      });
     });
 
-    it('should return false', () => {
-      expect(endsWith('foo')('foobar')).toBe(false);
-      expect(endsWith('foo')('bar')).toBe(false);
+    describe('test()', () => {
+      it('should return true', () => {
+        for (const effect of effectsIsGreaterThan('test').ok) {
+          expect(effect()).toBe(true);
+        }
+      });
+
+      it('should return false', () => {
+        for (const effect of effectsIsGreaterThan('test').nok) {
+          expect(effect()).toBe(false);
+        }
+      });
     });
   });
 
-  describe('not()', () => {
-    it('should return true', () => {
-      expect(not(identity)(false)).toBe(true);
+  describe('isGreaterThanOrEquals() => Predicate', () => {
+    describe('assert()', () => {
+      it('should not throw a jest error', () => {
+        for (const effect of effectsIsGreaterThanOrEquals('assert').ok) {
+          expect(effect).not.toThrow();
+        }
+      });
+
+      it('should throw a jest error', () => {
+        for (const effect of effectsIsGreaterThanOrEquals('assert').nok) {
+          expect(effect).toThrow('Expected value to be greater than or equal:');
+        }
+      });
+
+      it('should not throw a node error', () => {
+        for (const effect of effectsIsGreaterThanOrEquals('assert').ok) {
+          expect(noJest(effect)).not.toThrow();
+        }
+      });
+
+      it('should throw a node error', () => {
+        for (const effect of effectsIsGreaterThanOrEquals('assert').nok) {
+          expect(noJest(effect)).toThrow(/^-?[0-9] >= 0$/);
+        }
+      });
     });
 
-    it('should return false', () => {
-      expect(not(identity)(true)).toBe(false);
+    describe('test()', () => {
+      it('should return true', () => {
+        for (const effect of effectsIsGreaterThanOrEquals('test').ok) {
+          expect(effect()).toBe(true);
+        }
+      });
+
+      it('should return false', () => {
+        for (const effect of effectsIsGreaterThanOrEquals('test').nok) {
+          expect(effect()).toBe(false);
+        }
+      });
     });
   });
 
-  describe('and()', () => {
-    it('should return true', () => {
-      expect(and(identity, identity)(true)).toBe(true);
+  describe('isLessThan() => Predicate', () => {
+    describe('assert()', () => {
+      it('should not throw a jest error', () => {
+        for (const effect of effectsIsLessThan('assert').ok) {
+          expect(effect).not.toThrow();
+        }
+      });
+
+      it('should throw a jest error', () => {
+        for (const effect of effectsIsLessThan('assert').nok) {
+          expect(effect).toThrow('Expected value to be less than:');
+        }
+      });
+
+      it('should not throw a node error', () => {
+        for (const effect of effectsIsLessThan('assert').ok) {
+          expect(noJest(effect)).not.toThrow();
+        }
+      });
+
+      it('should throw a node error', () => {
+        for (const effect of effectsIsLessThan('assert').nok) {
+          expect(noJest(effect)).toThrow(/^-?[0-9] < 0$/);
+        }
+      });
     });
 
-    it('should return false', () => {
-      expect(and(identity, identity)(false)).toBe(false);
-      expect(and(not(identity), identity)(true)).toBe(false);
-      expect(and(not(identity), identity)(false)).toBe(false);
+    describe('test()', () => {
+      it('should return true', () => {
+        for (const effect of effectsIsLessThan('test').ok) {
+          expect(effect()).toBe(true);
+        }
+      });
+
+      it('should return false', () => {
+        for (const effect of effectsIsLessThan('test').nok) {
+          expect(effect()).toBe(false);
+        }
+      });
     });
   });
 
-  describe('or()', () => {
-    it('should return true', () => {
-      expect(or(identity, identity)(true)).toBe(true);
-      expect(or(not(identity), identity)(true)).toBe(true);
-      expect(or(not(identity), identity)(false)).toBe(true);
+  describe('isLessThanOrEquals() => Predicate', () => {
+    describe('assert()', () => {
+      it('should not throw a jest error', () => {
+        for (const effect of effectsIsLessThanOrEquals('assert').ok) {
+          expect(effect).not.toThrow();
+        }
+      });
+
+      it('should throw a jest error', () => {
+        for (const effect of effectsIsLessThanOrEquals('assert').nok) {
+          expect(effect).toThrow('Expected value to be less than or equal:');
+        }
+      });
+
+      it('should not throw a node error', () => {
+        for (const effect of effectsIsLessThanOrEquals('assert').ok) {
+          expect(noJest(effect)).not.toThrow();
+        }
+      });
+
+      it('should throw a node error', () => {
+        for (const effect of effectsIsLessThanOrEquals('assert').nok) {
+          expect(noJest(effect)).toThrow(/^-?[0-9] <= 0$/);
+        }
+      });
     });
 
-    it('should return false', () => {
-      expect(or(identity, identity)(false)).toBe(false);
+    describe('test()', () => {
+      it('should return true', () => {
+        for (const effect of effectsIsLessThanOrEquals('test').ok) {
+          expect(effect()).toBe(true);
+        }
+      });
+
+      it('should return false', () => {
+        for (const effect of effectsIsLessThanOrEquals('test').nok) {
+          expect(effect()).toBe(false);
+        }
+      });
+    });
+  });
+
+  describe('matches() => Predicate', () => {
+    describe('assert()', () => {
+      it('should not throw a jest error', () => {
+        for (const effect of effectsMatches('assert').ok) {
+          expect(effect).not.toThrow();
+        }
+      });
+
+      it('should throw a jest error', () => {
+        for (const effect of effectsMatches('assert').nok) {
+          expect(effect).toThrow('Expected value to match:');
+        }
+      });
+
+      it('should not throw a node error', () => {
+        for (const effect of effectsMatches('assert').ok) {
+          expect(noJest(effect)).not.toThrow();
+        }
+      });
+
+      it('should throw a node error', () => {
+        for (const effect of effectsMatches('assert').nok) {
+          expect(noJest(effect)).toThrow(/'[a-z]+' =~ \/foo\//);
+        }
+      });
+    });
+
+    describe('test()', () => {
+      it('should return true', () => {
+        for (const effect of effectsMatches('test').ok) {
+          expect(effect()).toBe(true);
+        }
+      });
+
+      it('should return false', () => {
+        for (const effect of effectsMatches('test').nok) {
+          expect(effect()).toBe(false);
+        }
+      });
     });
   });
 });

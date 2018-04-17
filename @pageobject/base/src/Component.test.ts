@@ -1,4 +1,6 @@
-import {Adapter, Component, Effect, equals, greaterThan, matches} from '.';
+import {Adapter, Component, Effect, Predicate} from '.';
+
+const {is, isGreaterThan, matches} = Predicate;
 
 class TestAdapter implements Adapter<HTMLElement> {
   public async findNodes(
@@ -38,41 +40,41 @@ const divs = new DIV(adapter);
 
 const a1List = [
   divs.at(1),
-  divs.where(div => div.getID(), equals('a1')),
+  divs.where(div => div.getID(), is('a1')),
   divs.where(div => div.getID(), matches(/a/)).at(1),
   divs
-    .where(div => div.divs.getNodeCount(), greaterThan(1))
-    .where(div => div.divs.at(1).getID(), equals('b1'))
+    .where(div => div.divs.getNodeCount(), isGreaterThan(1))
+    .where(div => div.divs.at(1).getID(), is('b1'))
 ];
 
 const a2List = [
   divs.at(6),
-  divs.where(div => div.getID(), equals('a2')),
+  divs.where(div => div.getID(), is('a2')),
   divs.where(div => div.getID(), matches(/a/)).at(2),
-  divs.where(div => div.divs.getNodeCount(), equals(0)).at(4)
+  divs.where(div => div.divs.getNodeCount(), is(0)).at(4)
 ];
 
 const b1List = [
   divs.at(2),
-  divs.where(div => div.getID(), equals('b1')),
+  divs.where(div => div.getID(), is('b1')),
   divs.where(div => div.getID(), matches(/b/)).at(1),
   divs
-    .where(div => div.divs.getNodeCount(), greaterThan(1))
-    .where(div => div.divs.at(1).getID(), equals('c1')),
+    .where(div => div.divs.getNodeCount(), isGreaterThan(1))
+    .where(div => div.divs.at(1).getID(), is('c1')),
   a1List[0].divs.at(1)
 ];
 
 const b2List = [
   divs.at(5),
-  divs.where(div => div.getID(), equals('b2')),
+  divs.where(div => div.getID(), is('b2')),
   divs.where(div => div.getID(), matches(/b/)).at(2),
-  divs.where(div => div.divs.getNodeCount(), equals(0)).at(3),
+  divs.where(div => div.divs.getNodeCount(), is(0)).at(3),
   a1List[0].divs.at(4)
 ];
 
 const notFoundList = [
   divs.at(7),
-  divs.where(div => div.getID(), equals('a3')),
+  divs.where(div => div.getID(), is('a3')),
   a1List[0].divs.at(5),
   a1List[0].divs.where(div => div.getID(), matches(/a/))
 ];
@@ -83,8 +85,8 @@ const filterNotFound = divs.where(div => div.divs.at(1).getID(), matches(/./));
 const notUniqueList = [
   divs,
   divs.where(div => div.getID(), matches(/a/)),
-  divs.where(div => div.divs.getNodeCount(), greaterThan(1)),
-  divs.where(div => div.divs.getNodeCount(), equals(0)),
+  divs.where(div => div.divs.getNodeCount(), isGreaterThan(1)),
+  divs.where(div => div.divs.getNodeCount(), is(0)),
   a1List[0].divs,
   a1List[0].divs.where(div => div.getID(), matches(/b/))
 ];
