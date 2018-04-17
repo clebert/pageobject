@@ -913,11 +913,14 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-constructor tsd-parent-kind-class">
 					<a href="seleniumadapter.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="seleniumadapter.html#driver" class="tsd-kind-icon">driver</a>
+				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 					<a href="seleniumadapter.html#execute" class="tsd-kind-icon">execute</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="seleniumadapter.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a>
+					<a href="seleniumadapter.html#findnodes" class="tsd-kind-icon">find<wbr>Nodes</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="seleniumadapter.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a>
@@ -934,7 +937,7 @@ img { max-width: 100%; }
 			</ul>
 		</li>
 		<li class=" tsd-kind-class tsd-is-not-exported">
-			<a href="seleniumelement.html" class="tsd-kind-icon">Selenium<wbr>Element</a>
+			<a href="seleniumnode.html" class="tsd-kind-icon">Selenium<wbr>Node</a>
 		</li>
 		<li class=" tsd-kind-interface tsd-is-not-exported">
 			<a href="../interfaces/webdriver4.html" class="tsd-kind-icon">Web<wbr>Driver4</a>
@@ -977,10 +980,16 @@ img { max-width: 100%; }
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
+						<h3>Properties</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="seleniumadapter.html#driver" class="tsd-kind-icon">driver</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="seleniumadapter.html#execute" class="tsd-kind-icon">execute</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="seleniumadapter.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="seleniumadapter.html#findnodes" class="tsd-kind-icon">find<wbr>Nodes</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="seleniumadapter.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="seleniumadapter.html#press" class="tsd-kind-icon">press</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="seleniumadapter.html#quit" class="tsd-kind-icon">quit</a></li>
@@ -1002,7 +1011,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L52">SeleniumAdapter.ts:52</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L59">SeleniumAdapter.ts:59</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1024,6 +1033,19 @@ img { max-width: 100%; }
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Properties</h2>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="driver" class="tsd-anchor"></a>
+				<h3>driver</h3>
+				<div class="tsd-signature tsd-kind-icon">driver<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WebDriver</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L59">SeleniumAdapter.ts:59</a></li>
+					</ul>
+				</aside>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 				<a name="execute" class="tsd-anchor"></a>
@@ -1035,7 +1057,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L61">SeleniumAdapter.ts:61</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L68">SeleniumAdapter.ts:68</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1076,16 +1098,16 @@ img { max-width: 100%; }
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="findelements" class="tsd-anchor"></a>
-				<h3>find<wbr>Elements</h3>
+				<a name="findnodes" class="tsd-anchor"></a>
+				<h3>find<wbr>Nodes</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">find<wbr>Elements<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, parent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">WebElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WebElement</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">find<wbr>Nodes<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, ancestor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">WebNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WebNode</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L68">SeleniumAdapter.ts:68</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L75">SeleniumAdapter.ts:75</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1094,10 +1116,10 @@ img { max-width: 100%; }
 								<h5>selector: <span class="tsd-signature-type">string</span></h5>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> parent: <span class="tsd-signature-type">WebElement</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> ancestor: <span class="tsd-signature-type">WebNode</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WebElement</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WebNode</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1111,7 +1133,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L79">SeleniumAdapter.ts:79</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L86">SeleniumAdapter.ts:86</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1134,7 +1156,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L83">SeleniumAdapter.ts:83</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L90">SeleniumAdapter.ts:90</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1157,7 +1179,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L110">SeleniumAdapter.ts:110</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L117">SeleniumAdapter.ts:117</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1174,7 +1196,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L45">SeleniumAdapter.ts:45</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/selenium-webdriver/src/SeleniumAdapter.ts#L52">SeleniumAdapter.ts:52</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

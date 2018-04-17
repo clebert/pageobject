@@ -911,7 +911,7 @@ img { max-width: 100%; }
 			<a href="jsdomadapter.html" class="tsd-kind-icon">JSDOMAdapter</a>
 		</li>
 		<li class=" tsd-kind-class tsd-is-not-exported">
-			<a href="jsdomelement.html" class="tsd-kind-icon">JSDOMElement</a>
+			<a href="jsdomnode.html" class="tsd-kind-icon">JSDOMNode</a>
 		</li>
 		<li class=" tsd-kind-class">
 			<a href="webadaptertest.html" class="tsd-kind-icon">Web<wbr>Adapter<wbr>Test</a>
@@ -922,8 +922,8 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-constructor tsd-parent-kind-class">
 					<a href="webbrowser.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="webbrowser.html#description" class="tsd-kind-icon">description</a>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a href="webbrowser.html#adapter" class="tsd-kind-icon">adapter</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="webbrowser.html#getpagetitle" class="tsd-kind-icon">get<wbr>Page<wbr>Title</a>
@@ -946,7 +946,7 @@ img { max-width: 100%; }
 			<a href="../interfaces/webadapter.html" class="tsd-kind-icon">Web<wbr>Adapter</a>
 		</li>
 		<li class=" tsd-kind-interface">
-			<a href="../interfaces/webelement.html" class="tsd-kind-icon">Web<wbr>Element</a>
+			<a href="../interfaces/webnode.html" class="tsd-kind-icon">Web<wbr>Node</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="../globals.html#argument" class="tsd-kind-icon">Argument</a>
@@ -955,7 +955,10 @@ img { max-width: 100%; }
 			<a href="../globals.html#key" class="tsd-kind-icon">Key</a>
 		</li>
 		<li class=" tsd-kind-variable tsd-is-not-exported">
-			<a href="../globals.html#url" class="tsd-kind-icon">url</a>
+			<a href="../globals.html#fileurl" class="tsd-kind-icon">fileURL</a>
+		</li>
+		<li class=" tsd-kind-function tsd-is-not-exported">
+			<a href="../globals.html#serialize" class="tsd-kind-icon">serialize</a>
 		</li>
 	</ul>
 </nav>
@@ -969,12 +972,6 @@ img { max-width: 100%; }
 				</li>
 			</ul>
 		</section>
-		<section class="tsd-panel">
-			<h3>Implements</h3>
-			<ul class="tsd-hierarchy">
-				<li><span class="tsd-signature-type">Describable</span></li>
-			</ul>
-		</section>
 		<section class="tsd-panel-group tsd-index-group">
 			<h2>Index</h2>
 			<section class="tsd-panel tsd-index-panel">
@@ -985,10 +982,10 @@ img { max-width: 100%; }
 							<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="webbrowser.html#constructor" class="tsd-kind-icon">constructor</a></li>
 						</ul>
 					</section>
-					<section class="tsd-index-section ">
+					<section class="tsd-index-section tsd-is-private-protected">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="webbrowser.html#description" class="tsd-kind-icon">description</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="webbrowser.html#adapter" class="tsd-kind-icon">adapter</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
@@ -1015,7 +1012,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L20">WebBrowser.ts:20</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L18">WebBrowser.ts:18</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1029,12 +1026,12 @@ img { max-width: 100%; }
 				</ul>
 			</section>
 		</section>
-		<section class="tsd-panel-group tsd-member-group ">
+		<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
 			<h2>Properties</h2>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="description" class="tsd-anchor"></a>
-				<h3>description</h3>
-				<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;this.constructor.name</span></div>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+				<a name="adapter" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagProtected">Protected</span> adapter</h3>
+				<div class="tsd-signature tsd-kind-icon">adapter<span class="tsd-signature-symbol">:</span> <a href="../interfaces/webadapter.html" class="tsd-signature-type">WebAdapter</a></div>
 				<aside class="tsd-sources">
 					<ul>
 						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L18">WebBrowser.ts:18</a></li>
@@ -1048,16 +1045,16 @@ img { max-width: 100%; }
 				<a name="getpagetitle" class="tsd-anchor"></a>
 				<h3>get<wbr>Page<wbr>Title</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Page<wbr>Title<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FunctionCall</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Page<wbr>Title<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Effect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L26">WebBrowser.ts:26</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L24">WebBrowser.ts:24</a></li>
 							</ul>
 						</aside>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FunctionCall</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Effect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1065,7 +1062,24 @@ img { max-width: 100%; }
 				<a name="getpageurl" class="tsd-anchor"></a>
 				<h3>get<wbr>PageURL</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>PageURL<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FunctionCall</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">get<wbr>PageURL<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Effect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L28">WebBrowser.ts:28</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Effect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="navigateto" class="tsd-anchor"></a>
+				<h3>navigate<wbr>To</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">navigate<wbr>To<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Effect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
@@ -1074,30 +1088,13 @@ img { max-width: 100%; }
 								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L32">WebBrowser.ts:32</a></li>
 							</ul>
 						</aside>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FunctionCall</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="navigateto" class="tsd-anchor"></a>
-				<h3>navigate<wbr>To</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">navigate<wbr>To<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FunctionCall</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L38">WebBrowser.ts:38</a></li>
-							</ul>
-						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>url: <span class="tsd-signature-type">string</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FunctionCall</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Effect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1105,13 +1102,13 @@ img { max-width: 100%; }
 				<a name="press" class="tsd-anchor"></a>
 				<h3>press</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">press<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><a href="../globals.html#key" class="tsd-signature-type">Key</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FunctionCall</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">press<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><a href="../globals.html#key" class="tsd-signature-type">Key</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Effect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L44">WebBrowser.ts:44</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L36">WebBrowser.ts:36</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1120,7 +1117,7 @@ img { max-width: 100%; }
 								<h5>key: <a href="../globals.html#key" class="tsd-signature-type">Key</a></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FunctionCall</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Effect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>

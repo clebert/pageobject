@@ -1,297 +1,207 @@
-import {Adapter, Component, FunctionCall, Operator} from '.';
+import {Adapter, Component, Effect, Predicate} from '.';
+
+const {is, isGreaterThan, matches} = Predicate;
 
 class TestAdapter implements Adapter<HTMLElement> {
-  public async findElements(
+  public async findNodes(
     selector: string,
-    parent?: HTMLElement
+    ancestor?: HTMLElement
   ): Promise<HTMLElement[]> {
-    return Array.from((parent || document).querySelectorAll(selector));
+    return Array.from((ancestor || document).querySelectorAll(selector));
   }
 }
 
-abstract class TestComponent extends Component<HTMLElement> {
-  public readonly type = this.constructor.name;
+class DIV extends Component<HTMLElement> {
+  public static readonly selector: string = 'div';
 
-  public getID(): FunctionCall<string> {
-    return new FunctionCall(
-      this,
-      this.getID.name,
-      arguments,
-      async () => (await this.findElement()).id
-    );
+  public get divs(): DIV {
+    return new DIV(this.adapter, this);
   }
 
-  public getText(): FunctionCall<string | null> {
-    return new FunctionCall(
-      this,
-      this.getText.name,
-      arguments,
-      async () => (await this.findElement()).textContent
-    );
-  }
-
-  public getType(): FunctionCall<string> {
-    return new FunctionCall(
-      this,
-      this.getType.name,
-      arguments,
-      async () => this.type
-    );
+  public getID(): Effect<string> {
+    return async () => (await this.findUniqueNode()).id;
   }
 }
 
-class Descriptor<TComponent extends TestComponent> {
-  public readonly component: TComponent;
-  public readonly description: string;
-  public readonly id: string;
+document.body.innerHTML = `
+  <div id="a1">
+    <div id="b1">
+      <div id="c1"></div>
+      <div id="c2"></div>
+    </div>
+    <div id="b2"></div>
+  </div>
+  <div id="a2"></div>
+`;
 
-  public constructor(
-    component: TComponent,
-    description: string,
-    parentDescriptor: Descriptor<TComponent> | undefined,
-    position?: number
-  ) {
-    const {type} = (this.component = component);
+const adapter = new TestAdapter();
+const component = new Component(adapter);
+const divs = new DIV(adapter);
 
-    this.description = parentDescriptor
-      ? `${parentDescriptor.description}.select(${type})${description}`
-      : `${type}${description}`;
+const a1List = [
+  divs.at(1),
+  divs.where(div => div.getID(), is('a1')),
+  divs.where(div => div.getID(), matches(/a/)).at(1),
+  divs
+    .where(div => div.divs.getNodeCount(), isGreaterThan(1))
+    .where(div => div.divs.at(1).getID(), is('b1'))
+];
 
-    this.id = `${type}${position || 0}`;
-  }
-}
+const a2List = [
+  divs.at(6),
+  divs.where(div => div.getID(), is('a2')),
+  divs.where(div => div.getID(), matches(/a/)).at(2),
+  divs.where(div => div.divs.getNodeCount(), is(0)).at(4)
+];
 
-class A extends TestComponent {
-  public readonly selector: string = '.a';
-}
+const b1List = [
+  divs.at(2),
+  divs.where(div => div.getID(), is('b1')),
+  divs.where(div => div.getID(), matches(/b/)).at(1),
+  divs
+    .where(div => div.divs.getNodeCount(), isGreaterThan(1))
+    .where(div => div.divs.at(1).getID(), is('c1')),
+  a1List[0].divs.at(1)
+];
 
-class B extends TestComponent {
-  public readonly selector: string = '.b';
-}
+const b2List = [
+  divs.at(5),
+  divs.where(div => div.getID(), is('b2')),
+  divs.where(div => div.getID(), matches(/b/)).at(2),
+  divs.where(div => div.divs.getNodeCount(), is(0)).at(3),
+  a1List[0].divs.at(4)
+];
 
-function describeExistingVariants<TComponent extends TestComponent>(
-  component: TComponent,
-  parentDescriptor: Descriptor<TComponent> | undefined,
-  position: number
-): Descriptor<TComponent>[] {
-  const id = `${component.type}${position}`;
+const notFoundList = [
+  divs.at(7),
+  divs.where(div => div.getID(), is('a3')),
+  a1List[0].divs.at(5),
+  a1List[0].divs.where(div => div.getID(), matches(/a/))
+];
 
-  return [
-    new Descriptor(
-      component.nth(position),
-      `.nth(${position})`,
-      parentDescriptor,
-      position
-    ),
-    new Descriptor(
-      component.where(self => self.getID(), Operator.equals(id)),
-      `.where((getID() == '${id}'))`,
-      parentDescriptor,
-      position
-    ),
-    new Descriptor(
-      component.nth(1).where(self => self.getID(), Operator.equals(id)),
-      `.nth(1).where((getID() == '${id}'))`,
-      parentDescriptor,
-      position
-    ),
-    new Descriptor(
-      component.where(self => self.getID(), Operator.equals(id)).nth(1),
-      `.nth(1).where((getID() == '${id}'))`,
-      parentDescriptor,
-      position
-    )
-  ];
-}
+const ancestorNotFound = notFoundList[0].divs;
+const filterNotFound = divs.where(div => div.divs.at(1).getID(), matches(/./));
 
-function describeAmbiguousVariants<TComponent extends TestComponent>(
-  component: TComponent,
-  parentDescriptor: Descriptor<TComponent> | undefined
-): Descriptor<TComponent>[] {
-  return [
-    new Descriptor(component, '', parentDescriptor),
-    new Descriptor(
-      component
-        .where(self => self.getElementCount(), Operator.equals(1))
-        .where(self => self.getType(), Operator.equals(component.type)),
-      `.where((getElementCount() == 1), (getType() == '${component.type}'))`,
-      parentDescriptor
-    )
-  ];
-}
+const notUniqueList = [
+  divs,
+  divs.where(div => div.getID(), matches(/a/)),
+  divs.where(div => div.divs.getNodeCount(), isGreaterThan(1)),
+  divs.where(div => div.divs.getNodeCount(), is(0)),
+  a1List[0].divs,
+  a1List[0].divs.where(div => div.getID(), matches(/b/))
+];
 
-function describeNonExistingVariants<TComponent extends TestComponent>(
-  component: TComponent,
-  parentDescriptor: Descriptor<TComponent> | undefined
-): Descriptor<TComponent>[] {
-  return [
-    new Descriptor(component.nth(3), '.nth(3)', parentDescriptor),
-    new Descriptor(
-      component
-        .where(self => self.getElementCount(), Operator.equals(0))
-        .where(self => self.getType(), Operator.equals(component.type)),
-      `.where((getElementCount() == 0), (getType() == '${component.type}'))`,
-      parentDescriptor
-    ),
-    new Descriptor(
-      component
-        .where(self => self.getElementCount(), Operator.equals(1))
-        .where(self => self.getType(), Operator.equals('C')),
-      ".where((getElementCount() == 1), (getType() == 'C'))",
-      parentDescriptor
-    )
-  ];
-}
-
-function describeErroneousTests<TComponent extends TestComponent>(
-  component: TComponent,
-  parentDescriptor: Descriptor<TComponent> | undefined,
-  ambiguous: boolean
-): void {
-  const descriptors = ambiguous
-    ? describeAmbiguousVariants(component, parentDescriptor)
-    : describeNonExistingVariants(component, parentDescriptor);
-
-  for (const descriptor of descriptors) {
-    const error = ambiguous ? 'Element not unique' : 'Element not found';
-
-    describe(descriptor.description, () => {
-      it('should have a description', () => {
-        expect(descriptor.component.description).toBe(descriptor.description);
-      });
-
-      describe('getElementCount() => FunctionCall.effect()', () => {
-        it('should return the element count', async () => {
-          await expect(
-            descriptor.component.getElementCount().effect()
-          ).resolves.toBe(ambiguous ? 2 : 0);
-        });
-      });
-    });
-
-    if (!parentDescriptor) {
-      const b = descriptor.component.select(B);
-
-      describe(`${descriptor.description}.select(B)`, () => {
-        it('should have a description', () => {
-          expect(b.description).toBe(`${descriptor.description}.select(B)`);
-        });
-
-        describe('getElementCount() => FunctionCall.effect()', () => {
-          it('should throw an error', async () => {
-            await expect(b.getElementCount().effect()).rejects.toThrow(error);
-          });
-        });
-      });
-    }
-  }
-}
-
-function describeTests<TComponent extends TestComponent>(
-  component: TComponent,
-  parentDescriptor: Descriptor<TComponent> | undefined,
-  position: number
-): void {
-  const descriptors = describeExistingVariants(
-    component,
-    parentDescriptor,
-    position
-  );
-
-  for (const descriptor of descriptors) {
-    describe(descriptor.description, () => {
-      it('should have a description', () => {
-        expect(descriptor.component.description).toBe(descriptor.description);
-      });
-
-      describe('nth()', () => {
-        it('should throw an argument error', () => {
-          expect(() => descriptor.component.nth(0)).toThrow(
-            'Position must be one-based'
-          );
-        });
-
-        it('should throw a state error', () => {
-          expect(() => descriptor.component.nth(1).nth(2)).toThrow(
-            'Position is already set'
-          );
-        });
-      });
-
-      describe('getElementCount() => FunctionCall', () => {
-        const getter = descriptor.component.getElementCount();
-
-        it('should have a context', () => {
-          expect(getter.context).toBe(descriptor.component);
-        });
-
-        it('should have a description', () => {
-          expect(getter.description).toBe('getElementCount()');
-        });
-
-        describe('effect()', () => {
-          it('should return the element count', async () => {
-            await expect(getter.effect()).resolves.toBe(1);
-          });
-        });
-      });
-
-      describe('getText() => FunctionCall.effect()', () => {
-        it('should return the text of the element', async () => {
-          const result = descriptor.component.getText().effect();
-
-          if (!parentDescriptor) {
-            if (position === 1) {
-              await expect(result).resolves.toContain('1');
-              await expect(result).resolves.toContain('2');
-              await expect(result).resolves.not.toContain('3');
-            } else {
-              await expect(result).resolves.not.toContain('1');
-              await expect(result).resolves.not.toContain('2');
-              await expect(result).resolves.toContain('3');
-            }
-          } else {
-            if (position === 1) {
-              await expect(result).resolves.toContain('1');
-              await expect(result).resolves.not.toContain('2');
-              await expect(result).resolves.not.toContain('3');
-            } else {
-              await expect(result).resolves.not.toContain('1');
-              await expect(result).resolves.toContain('2');
-              await expect(result).resolves.not.toContain('3');
-            }
-          }
-        });
-      });
-    });
-  }
-
-  describeErroneousTests(component, parentDescriptor, true);
-  describeErroneousTests(component, parentDescriptor, false);
-
-  if (!parentDescriptor) {
-    if (position === 1) {
-      for (const descriptor of descriptors) {
-        const b = descriptor.component.select(B);
-
-        describeTests(b, descriptor, 1);
-        describeTests(b, descriptor, 2);
-      }
-    }
-  }
-}
+const ancestorNotUnique = divs.divs.at(1);
+const filterNotUnique = divs.where(div => div.divs.getID(), matches(/./));
 
 describe('Component', () => {
-  document.body.innerHTML = `
-    <div class="a" id="A1">
-      <div class="b" id="B1">1</div>
-      <div class="b" id="B2">2</div>
-    </div>
-    <div class="a" id="A2">3</div>
-  `;
+  describe('at()', () => {
+    it('should throw a position-one-based error', () => {
+      expect(() => divs.at(0)).toThrow('Position must be one-based');
+    });
 
-  const a = new A(new TestAdapter());
+    it('should throw a position-already-set error', () => {
+      expect(() => divs.at(1).at(2)).toThrow('Position is already set');
+    });
+  });
 
-  describeTests(a, undefined, 1);
-  describeTests(a, undefined, 2);
+  describe('findUniqueNode()', () => {
+    it('should throw an undefined-selector error', async () => {
+      await expect(component.findUniqueNode()).rejects.toThrow(
+        'Undefined selector'
+      );
+    });
+
+    it('should return an unique node', async () => {
+      for (const a1 of a1List) {
+        expect((await a1.findUniqueNode()).id).toBe('a1');
+      }
+
+      for (const a2 of a2List) {
+        expect((await a2.findUniqueNode()).id).toBe('a2');
+      }
+
+      for (const b1 of b1List) {
+        expect((await b1.findUniqueNode()).id).toBe('b1');
+      }
+
+      for (const b2 of b2List) {
+        expect((await b2.findUniqueNode()).id).toBe('b2');
+      }
+    });
+
+    it('should throw a node-not-found error', async () => {
+      const message = 'Node not found: DIV';
+
+      for (const notFound of notFoundList) {
+        await expect(notFound.findUniqueNode()).rejects.toThrow(message);
+      }
+
+      await expect(ancestorNotFound.findUniqueNode()).rejects.toThrow(message);
+      await expect(filterNotFound.findUniqueNode()).rejects.toThrow(message);
+    });
+
+    it('should throw a node-not-unique error', async () => {
+      const message = 'Node not unique: DIV';
+
+      for (const notUnique of notUniqueList) {
+        await expect(notUnique.findUniqueNode()).rejects.toThrow(message);
+      }
+
+      await expect(ancestorNotUnique.findUniqueNode()).rejects.toThrow(message);
+      await expect(filterNotUnique.findUniqueNode()).rejects.toThrow(message);
+    });
+  });
+
+  describe('getNodeCount() => Effect()', () => {
+    it('should throw an undefined-selector error', async () => {
+      await expect(component.getNodeCount()()).rejects.toThrow(
+        'Undefined selector'
+      );
+    });
+
+    it('should return 1', async () => {
+      for (const a1 of a1List) {
+        await expect(a1.getNodeCount()()).resolves.toBe(1);
+      }
+
+      for (const a2 of a2List) {
+        await expect(a2.getNodeCount()()).resolves.toBe(1);
+      }
+
+      for (const b1 of b1List) {
+        await expect(b1.getNodeCount()()).resolves.toBe(1);
+      }
+
+      for (const b2 of b2List) {
+        await expect(b2.getNodeCount()()).resolves.toBe(1);
+      }
+    });
+
+    it('should return 0', async () => {
+      for (const notFound of notFoundList) {
+        await expect(notFound.getNodeCount()()).resolves.toBe(0);
+      }
+    });
+
+    it('should return a number greater than 1', async () => {
+      for (const notUnique of notUniqueList) {
+        await expect(notUnique.getNodeCount()()).resolves.toBeGreaterThan(1);
+      }
+    });
+
+    it('should throw a node-not-found error', async () => {
+      const message = 'Node not found: DIV';
+
+      await expect(ancestorNotFound.getNodeCount()()).rejects.toThrow(message);
+      await expect(filterNotFound.getNodeCount()()).rejects.toThrow(message);
+    });
+
+    it('should throw a node-not-unique error', async () => {
+      const message = 'Node not unique: DIV';
+
+      await expect(ancestorNotUnique.getNodeCount()()).rejects.toThrow(message);
+      await expect(filterNotUnique.getNodeCount()()).rejects.toThrow(message);
+    });
+  });
 });

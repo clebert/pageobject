@@ -1,6 +1,6 @@
 // tslint:disable no-redundant-jsdoc
 
-import {Argument, Key, WebAdapter, WebElement} from '@pageobject/web';
+import {Argument, Key, WebAdapter, WebNode} from '@pageobject/web';
 import {
   Browser,
   ElementHandle,
@@ -10,29 +10,29 @@ import {
   launch
 } from 'puppeteer';
 
-class PuppeteerElement implements WebElement {
-  public readonly adaptee: ElementHandle;
+class PuppeteerNode implements WebNode {
+  public readonly elementHandle: ElementHandle;
   public readonly page: Page;
 
-  public constructor(adaptee: ElementHandle, page: Page) {
-    this.adaptee = adaptee;
+  public constructor(elementHandle: ElementHandle, page: Page) {
+    this.elementHandle = elementHandle;
     this.page = page;
   }
 
   public async click(): Promise<void> {
-    return this.adaptee.click();
+    return this.elementHandle.click();
   }
 
   public async doubleClick(): Promise<void> {
-    await this.adaptee.click();
-    await this.adaptee.click({clickCount: 2});
+    await this.elementHandle.click();
+    await this.elementHandle.click({clickCount: 2});
   }
 
   public async execute<THTMLElement extends HTMLElement, TResult>(
     script: (element: THTMLElement, ...args: Argument[]) => TResult,
     ...args: Argument[]
   ): Promise<TResult> {
-    return this.page.evaluate(script, this.adaptee, ...args);
+    return this.page.evaluate(script, this.elementHandle, ...args);
   }
 }
 
@@ -57,9 +57,9 @@ export class PuppeteerAdapter implements WebAdapter {
     );
   }
 
-  private readonly _browser: Browser;
-  private readonly _navigationOptions?: NavigationOptions;
-  private readonly _page: Page;
+  public readonly browser: Browser;
+  public readonly page: Page;
+  public readonly navigationOptions?: NavigationOptions;
 
   /**
    * @param browser https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-browser
@@ -71,28 +71,28 @@ export class PuppeteerAdapter implements WebAdapter {
     page: Page,
     navigationOptions?: NavigationOptions
   ) {
-    this._browser = browser;
-    this._navigationOptions = navigationOptions;
-    this._page = page;
+    this.browser = browser;
+    this.page = page;
+    this.navigationOptions = navigationOptions;
   }
 
   public async execute<TResult>(
     script: (...args: Argument[]) => TResult,
     ...args: Argument[]
   ): Promise<TResult> {
-    return this._page.evaluate(script, ...args);
+    return this.page.evaluate(script, ...args);
   }
 
-  public async findElements(
+  public async findNodes(
     selector: string,
-    parent?: WebElement
-  ): Promise<WebElement[]> {
-    const elementsHandle = await this._page.evaluateHandle(
+    ancestor?: WebNode
+  ): Promise<WebNode[]> {
+    const elementsHandle = await this.page.evaluateHandle(
       // istanbul ignore next
-      (_selector: string, _parent: Element | undefined) =>
-        (_parent || document).querySelectorAll(_selector),
+      (_selector: string, _ancestor: Element | undefined) =>
+        (_ancestor || document).querySelectorAll(_selector),
       selector,
-      parent && (parent as PuppeteerElement).adaptee
+      ancestor && (ancestor as PuppeteerNode).elementHandle
     );
 
     const lengthHandle = await elementsHandle.getProperty('length');
@@ -100,34 +100,37 @@ export class PuppeteerAdapter implements WebAdapter {
 
     await lengthHandle.dispose();
 
-    const elements: ElementHandle[] = [];
+    const elementHandles: ElementHandle[] = [];
 
     for (let i = 0; i < length; i += 1) {
-      const elementHandle = await elementsHandle.getProperty(String(i));
-      const element = elementHandle.asElement();
+      const elementHandle = (await elementsHandle.getProperty(
+        String(i)
+      )).asElement();
 
       // istanbul ignore next
-      if (!element) {
+      if (!elementHandle) {
         throw new Error('Unable to get element handle');
       }
 
-      elements.push(element);
+      elementHandles.push(elementHandle);
     }
 
     await elementsHandle.dispose();
 
-    return elements.map(element => new PuppeteerElement(element, this._page));
+    return elementHandles.map(
+      elementHandle => new PuppeteerNode(elementHandle, this.page)
+    );
   }
 
   public async navigateTo(url: string): Promise<void> {
-    await this._page.goto(url, this._navigationOptions);
+    await this.page.goto(url, this.navigationOptions);
   }
 
   public async press(key: Key): Promise<void> {
-    return this._page.keyboard.press(key);
+    return this.page.keyboard.press(key);
   }
 
   public async quit(): Promise<void> {
-    return this._browser.close();
+    return this.browser.close();
   }
 }

@@ -913,11 +913,14 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-constructor tsd-parent-kind-class">
 					<a href="protractoradapter.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="protractoradapter.html#browser" class="tsd-kind-icon">browser</a>
+				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 					<a href="protractoradapter.html#execute" class="tsd-kind-icon">execute</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="protractoradapter.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a>
+					<a href="protractoradapter.html#findnodes" class="tsd-kind-icon">find<wbr>Nodes</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="protractoradapter.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a>
@@ -931,7 +934,7 @@ img { max-width: 100%; }
 			</ul>
 		</li>
 		<li class=" tsd-kind-class tsd-is-not-exported">
-			<a href="protractorelement.html" class="tsd-kind-icon">Protractor<wbr>Element</a>
+			<a href="protractornode.html" class="tsd-kind-icon">Protractor<wbr>Node</a>
 		</li>
 	</ul>
 </nav>
@@ -971,10 +974,16 @@ img { max-width: 100%; }
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
+						<h3>Properties</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="protractoradapter.html#browser" class="tsd-kind-icon">browser</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="protractoradapter.html#execute" class="tsd-kind-icon">execute</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="protractoradapter.html#findelements" class="tsd-kind-icon">find<wbr>Elements</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="protractoradapter.html#findnodes" class="tsd-kind-icon">find<wbr>Nodes</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="protractoradapter.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="protractoradapter.html#press" class="tsd-kind-icon">press</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="protractoradapter.html#quit" class="tsd-kind-icon">quit</a></li>
@@ -995,7 +1004,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/protractor/src/ProtractorAdapter.ts#L39">ProtractorAdapter.ts:39</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/protractor/src/ProtractorAdapter.ts#L44">ProtractorAdapter.ts:44</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1017,6 +1026,19 @@ img { max-width: 100%; }
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Properties</h2>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="browser" class="tsd-anchor"></a>
+				<h3>browser</h3>
+				<div class="tsd-signature tsd-kind-icon">browser<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ProtractorBrowser</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/protractor/src/ProtractorAdapter.ts#L44">ProtractorAdapter.ts:44</a></li>
+					</ul>
+				</aside>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 				<a name="execute" class="tsd-anchor"></a>
@@ -1028,7 +1050,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/protractor/src/ProtractorAdapter.ts#L48">ProtractorAdapter.ts:48</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/protractor/src/ProtractorAdapter.ts#L53">ProtractorAdapter.ts:53</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1069,16 +1091,16 @@ img { max-width: 100%; }
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="findelements" class="tsd-anchor"></a>
-				<h3>find<wbr>Elements</h3>
+				<a name="findnodes" class="tsd-anchor"></a>
+				<h3>find<wbr>Nodes</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">find<wbr>Elements<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, parent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">WebElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WebElement</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">find<wbr>Nodes<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, ancestor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">WebNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WebNode</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/protractor/src/ProtractorAdapter.ts#L55">ProtractorAdapter.ts:55</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/protractor/src/ProtractorAdapter.ts#L60">ProtractorAdapter.ts:60</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1087,10 +1109,10 @@ img { max-width: 100%; }
 								<h5>selector: <span class="tsd-signature-type">string</span></h5>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> parent: <span class="tsd-signature-type">WebElement</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> ancestor: <span class="tsd-signature-type">WebNode</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WebElement</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WebNode</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -1104,7 +1126,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/protractor/src/ProtractorAdapter.ts#L66">ProtractorAdapter.ts:66</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/protractor/src/ProtractorAdapter.ts#L71">ProtractorAdapter.ts:71</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1127,7 +1149,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/protractor/src/ProtractorAdapter.ts#L70">ProtractorAdapter.ts:70</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/protractor/src/ProtractorAdapter.ts#L75">ProtractorAdapter.ts:75</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1150,7 +1172,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/protractor/src/ProtractorAdapter.ts#L97">ProtractorAdapter.ts:97</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/protractor/src/ProtractorAdapter.ts#L102">ProtractorAdapter.ts:102</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>

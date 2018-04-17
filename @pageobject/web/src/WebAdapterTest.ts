@@ -2,19 +2,19 @@ import {ok, strictEqual} from 'assert';
 import {join} from 'path';
 import {WebAdapter} from '.';
 
-const url = `file://${join(__dirname, '../fixtures/index.html')}`;
+const fileURL = `file://${join(__dirname, '../fixtures/index.html')}`;
 
 export class WebAdapterTest {
-  private readonly _adapter: WebAdapter;
+  public readonly adapter: WebAdapter;
 
   public constructor(adapter: WebAdapter) {
-    this._adapter = adapter;
+    this.adapter = adapter;
   }
 
   public async run(): Promise<void> {
     try {
       await this._testAdapterExecute();
-      await this._testAdapterFindElements();
+      await this._testAdapterFindNodes();
       await this._testAdapterNavigateTo();
       await this._testAdapterPress();
 
@@ -22,21 +22,21 @@ export class WebAdapterTest {
       await this._testElementDoubleClick();
       await this._testElementExecute();
     } finally {
-      await this._adapter.quit();
+      await this.adapter.quit();
     }
   }
 
   private async _getPageTitle(): Promise<string> {
     // istanbul ignore next
-    return this._adapter.execute(() => document.title);
+    return this.adapter.execute(() => document.title);
   }
 
   private async _testAdapterExecute(): Promise<void> {
-    await this._adapter.navigateTo(url);
+    await this.adapter.navigateTo(fileURL);
 
     // istanbul ignore next
     strictEqual(
-      await this._adapter.execute(
+      await this.adapter.execute(
         (...args) => [document.title, ...args].join(','),
         'arg1',
         'arg2'
@@ -44,78 +44,78 @@ export class WebAdapterTest {
       'Test,arg1,arg2'
     );
 
-    let scriptError = new Error();
+    let message = '';
 
     try {
       // istanbul ignore next
-      await this._adapter.execute(() => {
-        throw new Error('execute');
+      await this.adapter.execute(() => {
+        throw new Error('script');
       });
     } catch (error) {
-      scriptError = error;
+      message = error.message;
     }
 
-    ok(/execute/.test(scriptError.message));
+    ok(/script/.test(message));
   }
 
-  private async _testAdapterFindElements(): Promise<void> {
-    await this._adapter.navigateTo(url);
+  private async _testAdapterFindNodes(): Promise<void> {
+    await this.adapter.navigateTo(fileURL);
 
-    const divs = await this._adapter.findElements('div');
+    const divs = await this.adapter.findNodes('div');
 
     strictEqual(divs.length, 2);
 
-    strictEqual((await this._adapter.findElements('div', divs[0])).length, 1);
-    strictEqual((await this._adapter.findElements('div', divs[1])).length, 0);
+    strictEqual((await this.adapter.findNodes('div', divs[0])).length, 1);
+    strictEqual((await this.adapter.findNodes('div', divs[1])).length, 0);
 
-    strictEqual((await this._adapter.findElements('unknown')).length, 0);
+    strictEqual((await this.adapter.findNodes('unknown')).length, 0);
   }
 
   private async _testAdapterNavigateTo(): Promise<void> {
-    await this._adapter.navigateTo(url);
+    await this.adapter.navigateTo(fileURL);
 
     strictEqual(await this._getPageTitle(), 'Test');
 
-    await this._adapter.navigateTo('http://example.com');
+    await this.adapter.navigateTo('http://example.com');
 
     strictEqual(await this._getPageTitle(), 'Example Domain');
   }
 
   private async _testAdapterPress(): Promise<void> {
-    await this._adapter.navigateTo(url);
+    await this.adapter.navigateTo(fileURL);
 
     strictEqual(await this._getPageTitle(), 'Test');
 
-    await this._adapter.press('a');
+    await this.adapter.press('a');
 
     strictEqual(
       await this._getPageTitle(),
       'Event: keydown a, keypress a, keyup a'
     );
 
-    await this._adapter.press('Enter');
+    await this.adapter.press('Enter');
 
     strictEqual(
       await this._getPageTitle(),
       'Event: keydown Enter, keypress Enter, keyup Enter'
     );
 
-    await this._adapter.press('Escape');
+    await this.adapter.press('Escape');
 
     strictEqual(
       await this._getPageTitle(),
       'Event: keydown Escape, keyup Escape'
     );
 
-    await this._adapter.press('Tab');
+    await this.adapter.press('Tab');
 
     strictEqual(await this._getPageTitle(), 'Event: keydown Tab, keyup Tab');
   }
 
   private async _testElementClick(): Promise<void> {
-    await this._adapter.navigateTo(url);
+    await this.adapter.navigateTo(fileURL);
 
-    const button = (await this._adapter.findElements('#click'))[0];
+    const button = (await this.adapter.findNodes('#click'))[0];
 
     strictEqual(await this._getPageTitle(), 'Test');
 
@@ -125,9 +125,9 @@ export class WebAdapterTest {
   }
 
   private async _testElementDoubleClick(): Promise<void> {
-    await this._adapter.navigateTo(url);
+    await this.adapter.navigateTo(fileURL);
 
-    const button = (await this._adapter.findElements('#dblclick'))[0];
+    const button = (await this.adapter.findNodes('#dblclick'))[0];
 
     strictEqual(await this._getPageTitle(), 'Test');
 
@@ -137,13 +137,13 @@ export class WebAdapterTest {
   }
 
   private async _testElementExecute(): Promise<void> {
-    await this._adapter.navigateTo(url);
+    await this.adapter.navigateTo(fileURL);
 
-    const root = (await this._adapter.findElements('#text'))[0];
+    const text = (await this.adapter.findNodes('#text'))[0];
 
     // istanbul ignore next
     strictEqual(
-      await root.execute(
+      await text.execute(
         (element, ...args) =>
           [document.title, element.innerText, ...args].join(','),
         'arg1',
@@ -152,17 +152,17 @@ export class WebAdapterTest {
       'Test,text,arg1,arg2'
     );
 
-    let scriptError = new Error();
+    let message = '';
 
     try {
       // istanbul ignore next
-      await this._adapter.execute(() => {
-        throw new Error('execute');
+      await this.adapter.execute(() => {
+        throw new Error('script');
       });
     } catch (error) {
-      scriptError = error;
+      message = error.message;
     }
 
-    ok(/execute/.test(scriptError.message));
+    ok(/script/.test(message));
   }
 }

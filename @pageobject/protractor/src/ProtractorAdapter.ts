@@ -1,24 +1,29 @@
 // tslint:disable no-redundant-jsdoc
 
-import {Argument, Key, WebAdapter, WebElement} from '@pageobject/web';
-import * as protractor from 'protractor';
+import {Argument, Key, WebAdapter, WebNode} from '@pageobject/web';
+import {
+  By,
+  Key as ProtractorKey,
+  ProtractorBrowser,
+  WebElement
+} from 'protractor';
 
-class ProtractorElement implements WebElement {
-  public readonly adaptee: protractor.WebElement;
+class ProtractorNode implements WebNode {
+  public readonly element: WebElement;
 
-  public constructor(adaptee: protractor.WebElement) {
-    this.adaptee = adaptee;
+  public constructor(element: WebElement) {
+    this.element = element;
   }
 
   public async click(): Promise<void> {
-    return this.adaptee.click();
+    return this.element.click();
   }
 
   public async doubleClick(): Promise<void> {
-    return this.adaptee
+    return this.element
       .getDriver()
       .actions()
-      .doubleClick(this.adaptee)
+      .doubleClick(this.element)
       .perform();
   }
 
@@ -26,9 +31,9 @@ class ProtractorElement implements WebElement {
     script: (element: THTMLElement, ...args: Argument[]) => TResult,
     ...args: Argument[]
   ): Promise<TResult> {
-    return this.adaptee
+    return this.element
       .getDriver()
-      .executeScript<TResult>(script, this.adaptee, ...args);
+      .executeScript<TResult>(script, this.element, ...args);
   }
 }
 
@@ -36,35 +41,35 @@ class ProtractorElement implements WebElement {
  * @implements https://pageobject.js.org/api/web/interfaces/webadapter.html
  */
 export class ProtractorAdapter implements WebAdapter {
-  private readonly _browser: protractor.ProtractorBrowser;
+  public readonly browser: ProtractorBrowser;
 
   /**
    * @param browser https://www.protractortest.org/#/api?view=ProtractorBrowser
    */
-  public constructor(browser: protractor.ProtractorBrowser) {
-    this._browser = browser;
+  public constructor(browser: ProtractorBrowser) {
+    this.browser = browser;
   }
 
   public async execute<TResult>(
     script: (...args: Argument[]) => TResult,
     ...args: Argument[]
   ): Promise<TResult> {
-    return this._browser.driver.executeScript<TResult>(script, ...args);
+    return this.browser.driver.executeScript<TResult>(script, ...args);
   }
 
-  public async findElements(
+  public async findNodes(
     selector: string,
-    parent?: WebElement
-  ): Promise<WebElement[]> {
-    const parentElement = parent && (parent as ProtractorElement).adaptee;
+    ancestor?: WebNode
+  ): Promise<WebNode[]> {
+    const ancestorElement = ancestor && (ancestor as ProtractorNode).element;
 
-    return (await (parentElement || this._browser.driver).findElements(
-      protractor.By.css(selector)
-    )).map(element => new ProtractorElement(element));
+    return (await (ancestorElement || this.browser.driver).findElements(
+      By.css(selector)
+    )).map(element => new ProtractorNode(element));
   }
 
   public async navigateTo(url: string): Promise<void> {
-    return this._browser.driver.navigate().to(url);
+    return this.browser.driver.navigate().to(url);
   }
 
   public async press(key: Key): Promise<void> {
@@ -72,15 +77,15 @@ export class ProtractorAdapter implements WebAdapter {
 
     switch (key) {
       case 'Enter': {
-        protractorKey = protractor.Key.ENTER;
+        protractorKey = ProtractorKey.ENTER;
         break;
       }
       case 'Escape': {
-        protractorKey = protractor.Key.ESCAPE;
+        protractorKey = ProtractorKey.ESCAPE;
         break;
       }
       case 'Tab': {
-        protractorKey = protractor.Key.TAB;
+        protractorKey = ProtractorKey.TAB;
         break;
       }
       default: {
@@ -88,7 +93,7 @@ export class ProtractorAdapter implements WebAdapter {
       }
     }
 
-    return this._browser.driver
+    return this.browser.driver
       .actions()
       .sendKeys(protractorKey)
       .perform();
