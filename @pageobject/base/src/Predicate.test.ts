@@ -32,77 +32,72 @@ const {
 } = Predicate;
 
 const effectsIs = (
-  predicateMethodName: keyof Predicate<number | string>,
+  key: keyof Predicate<number | string>,
   negated: boolean = false
 ) => {
-  const predicateFactory = negated ? isNot : is;
+  const factory = negated ? isNot : is;
 
   return {
-    ok: [
-      () => predicateFactory(0)[predicateMethodName](0),
-      () => predicateFactory('foo')[predicateMethodName]('foo')
-    ],
+    ok: [() => factory(0)[key](0), () => factory('foo')[key]('foo')],
     nok: [
-      () => predicateFactory(0)[predicateMethodName](-1),
-      () => predicateFactory(0)[predicateMethodName](1),
-      () => predicateFactory('foo')[predicateMethodName]('foobar'),
-      () => predicateFactory('foo')[predicateMethodName]('bar'),
-      () => predicateFactory('foo')[predicateMethodName]('barfoo')
+      () => factory(0)[key](-1),
+      () => factory(0)[key](1),
+      () => factory('foo')[key]('foobar'),
+      () => factory('foo')[key]('bar'),
+      () => factory('foo')[key]('barfoo')
     ]
   };
 };
 
-const effectsIsGreaterThan = (
-  predicateMethodName: keyof Predicate<number>
-) => ({
-  ok: [() => isGreaterThan(0)[predicateMethodName](1)],
-  nok: [
-    () => isGreaterThan(0)[predicateMethodName](-1),
-    () => isGreaterThan(0)[predicateMethodName](0)
-  ]
-});
+const effectsIsGreaterThan = (key: keyof Predicate<number>) => {
+  const factory = isGreaterThan;
 
-const effectsIsGreaterThanOrEquals = (
-  predicateMethodName: keyof Predicate<number>
-) => ({
-  ok: [
-    () => isGreaterThanOrEquals(0)[predicateMethodName](0),
-    () => isGreaterThanOrEquals(0)[predicateMethodName](1)
-  ],
-  nok: [() => isGreaterThanOrEquals(0)[predicateMethodName](-1)]
-});
+  return {
+    ok: [() => factory(0)[key](1)],
+    nok: [() => factory(0)[key](-1), () => factory(0)[key](0)]
+  };
+};
 
-const effectsIsLessThan = (predicateMethodName: keyof Predicate<number>) => ({
-  ok: [() => isLessThan(0)[predicateMethodName](-1)],
-  nok: [
-    () => isLessThan(0)[predicateMethodName](0),
-    () => isLessThan(0)[predicateMethodName](1)
-  ]
-});
+const effectsIsGreaterThanOrEquals = (key: keyof Predicate<number>) => {
+  const factory = isGreaterThanOrEquals;
 
-const effectsIsLessThanOrEquals = (
-  predicateMethodName: keyof Predicate<number>
-) => ({
-  ok: [
-    () => isLessThanOrEquals(0)[predicateMethodName](-1),
-    () => isLessThanOrEquals(0)[predicateMethodName](0)
-  ],
-  nok: [() => isLessThanOrEquals(0)[predicateMethodName](1)]
-});
+  return {
+    ok: [() => factory(0)[key](0), () => factory(0)[key](1)],
+    nok: [() => factory(0)[key](-1)]
+  };
+};
+
+const effectsIsLessThan = (key: keyof Predicate<number>) => {
+  const factory = isLessThan;
+
+  return {
+    ok: [() => factory(0)[key](-1)],
+    nok: [() => factory(0)[key](0), () => factory(0)[key](1)]
+  };
+};
+
+const effectsIsLessThanOrEquals = (key: keyof Predicate<number>) => {
+  const factory = isLessThanOrEquals;
+
+  return {
+    ok: [() => factory(0)[key](-1), () => factory(0)[key](0)],
+    nok: [() => factory(0)[key](1)]
+  };
+};
 
 const effectsMatches = (
-  predicateMethodName: keyof Predicate<string>,
+  key: keyof Predicate<string>,
   negated: boolean = false
 ) => {
-  const predicateFactory = negated ? notMatches : matches;
+  const factory = negated ? notMatches : matches;
 
   return {
     ok: [
-      () => predicateFactory(/foo/)[predicateMethodName]('foo'),
-      () => predicateFactory(/foo/)[predicateMethodName]('foobar'),
-      () => predicateFactory(/foo/)[predicateMethodName]('barfoo')
+      () => factory(/foo/)[key]('foo'),
+      () => factory(/foo/)[key]('foobar'),
+      () => factory(/foo/)[key]('barfoo')
     ],
-    nok: [() => predicateFactory(/foo/)[predicateMethodName]('bar')]
+    nok: [() => factory(/foo/)[key]('bar')]
   };
 };
 

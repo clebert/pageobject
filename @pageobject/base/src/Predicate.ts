@@ -10,7 +10,7 @@ function serialize(value: any): string {
 
 function useJest(): boolean {
   // tslint:disable-next-line strict-type-predicates
-  return typeof expect === 'function';
+  return typeof jest !== 'undefined' && typeof expect === 'function';
 }
 
 export abstract class Predicate<TValue> {

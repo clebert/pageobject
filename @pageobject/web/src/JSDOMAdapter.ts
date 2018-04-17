@@ -44,7 +44,7 @@ class JSDOMNode implements WebNode {
     script: (element: THTMLElement, ...args: Argument[]) => TResult,
     ...args: Argument[]
   ): Promise<TResult> {
-    // tslint:disable-next-line
+    // tslint:disable-next-line no-any
     (this.jsdom.window as any).__element__ = this.element;
 
     const code = `(${script.toString()})(${[
@@ -52,7 +52,7 @@ class JSDOMNode implements WebNode {
       ...args.map(serialize)
     ].join(', ')})`;
 
-    // tslint:disable-next-line
+    // tslint:disable-next-line no-any no-void-expression
     return this.jsdom.runVMScript(new Script(code)) as any;
   }
 }
@@ -66,7 +66,7 @@ export class JSDOMAdapter implements WebAdapter {
   ): Promise<TResult> {
     const code = `(${script.toString()})(${args.map(serialize).join(', ')})`;
 
-    // tslint:disable-next-line
+    // tslint:disable-next-line no-any no-void-expression
     return this._jsdom.runVMScript(new Script(code)) as any;
   }
 
