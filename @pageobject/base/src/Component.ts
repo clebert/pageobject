@@ -1,14 +1,14 @@
 import {Predicate} from '.';
 
-export type Effect<TResult> = () => Promise<TResult>;
-
-export type Accessor<TNode, TComponent extends Component<TNode>, TResult> = (
-  component: TComponent
-) => Effect<TResult>;
-
 export interface Adapter<TNode> {
   findNodes(selector: string, ancestor?: TNode): Promise<TNode[]>;
 }
+
+export type Effect<TResult> = () => Promise<TResult>;
+
+export type Getter<TNode, TComponent extends Component<TNode>, TResult> = (
+  component: TComponent
+) => Effect<TResult>;
 
 export class Component<TNode> {
   public static readonly selector: string | undefined;
@@ -43,14 +43,14 @@ export class Component<TNode> {
   }
 
   public where<TValue>(
-    accessor: Accessor<TNode, this, TValue>,
+    getter: Getter<TNode, this, TValue>,
     predicate: Predicate<TValue>
   ): this {
     const reconstruction = this.reconstruct();
 
     reconstruction._filter = async component =>
       (this._filter ? await this._filter(component) : true) &&
-      predicate.test(await accessor(component as this)());
+      predicate.test(await getter(component as this)());
 
     reconstruction._position = this._position;
 
