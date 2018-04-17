@@ -1,4 +1,4 @@
-const chromeArgs =
+const args =
   process.env.CI === 'true'
     ? [
         '--headless',
@@ -10,7 +10,7 @@ const chromeArgs =
     : ['--headless', '--disable-gpu'];
 
 exports.config = {
-  capabilities: {browserName: 'chrome', chromeOptions: {args: chromeArgs}},
+  capabilities: {browserName: 'chrome', chromeOptions: {args}},
   directConnect: true,
   specs: ['@pageobject/protractor/dist/ProtractorAdapter.spec.js']
 };

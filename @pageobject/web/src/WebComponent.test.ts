@@ -54,13 +54,19 @@ describe('WebComponent', () => {
     scrollBy.mockRestore();
   });
 
+  describe('selector', () => {
+    it('should match the root element', () => {
+      expect(WebComponent.selector).toBe(':root');
+    });
+  });
+
   describe('click() => Effect()', () => {
     it('should click on this component', async () => {
       node.click.mockImplementation(async () => {
-        throw new Error('click');
+        throw new Error('awaited');
       });
 
-      await expect(component.click()()).rejects.toThrow('click');
+      await expect(component.click()()).rejects.toThrow('awaited');
 
       expect(node.click).toHaveBeenCalledTimes(1);
     });
@@ -69,10 +75,10 @@ describe('WebComponent', () => {
   describe('doubleClick() => Effect()', () => {
     it('should double-click on this component', async () => {
       node.doubleClick.mockImplementation(async () => {
-        throw new Error('doubleClick');
+        throw new Error('awaited');
       });
 
-      await expect(component.doubleClick()()).rejects.toThrow('doubleClick');
+      await expect(component.doubleClick()()).rejects.toThrow('awaited');
 
       expect(node.doubleClick).toHaveBeenCalledTimes(1);
     });
@@ -128,12 +134,10 @@ describe('WebComponent', () => {
       });
 
       scrollBy.mockImplementation(() => {
-        throw new Error('scrollIntoView');
+        throw new Error('script');
       });
 
-      await expect(component.scrollIntoView()()).rejects.toEqual(
-        new Error('scrollIntoView')
-      );
+      await expect(component.scrollIntoView()()).rejects.toThrow('script');
 
       expect(scrollBy).toHaveBeenCalledTimes(1);
       expect(scrollBy).toHaveBeenLastCalledWith(-475, -275);

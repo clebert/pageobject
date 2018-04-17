@@ -37,10 +37,12 @@ describe('WebBrowser', () => {
 
   describe('navigateTo() => Effect()', () => {
     it('should navigate to the specified url', async () => {
-      adapter.navigateTo.mockRejectedValue(new Error('navigateTo'));
+      adapter.navigateTo.mockImplementation(async () => {
+        throw new Error('awaited');
+      });
 
       await expect(browser.navigateTo('about:blank')()).rejects.toThrow(
-        'navigateTo'
+        'awaited'
       );
 
       expect(adapter.navigateTo).toHaveBeenCalledTimes(1);
@@ -59,12 +61,14 @@ describe('WebBrowser', () => {
 
     describe('=> Effect()', () => {
       it('should press the specified key', async () => {
-        adapter.press.mockRejectedValue(new Error('press'));
+        adapter.press.mockImplementation(async () => {
+          throw new Error('awaited');
+        });
 
-        await expect(browser.press('a')()).rejects.toThrow('press');
-        await expect(browser.press('Enter')()).rejects.toThrow('press');
-        await expect(browser.press('Escape')()).rejects.toThrow('press');
-        await expect(browser.press('Tab')()).rejects.toThrow('press');
+        await expect(browser.press('a')()).rejects.toThrow('awaited');
+        await expect(browser.press('Enter')()).rejects.toThrow('awaited');
+        await expect(browser.press('Escape')()).rejects.toThrow('awaited');
+        await expect(browser.press('Tab')()).rejects.toThrow('awaited');
 
         expect(adapter.press).toHaveBeenCalledTimes(4);
 

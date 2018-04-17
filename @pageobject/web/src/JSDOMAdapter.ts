@@ -4,7 +4,7 @@ import {Script} from 'vm';
 import {Argument, Key, WebAdapter, WebNode} from '.';
 
 // tslint:disable-next-line no-any
-export function serialize(value: any): string {
+function serialize(value: any): string {
   return inspect(value, false, null);
 }
 
@@ -72,13 +72,14 @@ export class JSDOMAdapter implements WebAdapter {
 
   public async findNodes(
     selector: string,
-    parent?: WebNode
+    ancestor?: WebNode
   ): Promise<WebNode[]> {
+    const ancestorElement = ancestor && (ancestor as JSDOMNode).element;
+
     return Array.from(
-      (
-        (parent && (parent as JSDOMNode).element) ||
-        this._jsdom.window.document
-      ).querySelectorAll(selector)
+      (ancestorElement || this._jsdom.window.document).querySelectorAll(
+        selector
+      )
     ).map(element => new JSDOMNode(element as HTMLElement, this._jsdom));
   }
 

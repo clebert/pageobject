@@ -917,6 +917,9 @@ img { max-width: 100%; }
 					<a href="puppeteeradapter.html#browser" class="tsd-kind-icon">browser</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="puppeteeradapter.html#navigationoptions" class="tsd-kind-icon">navigation<wbr>Options</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
 					<a href="puppeteeradapter.html#page" class="tsd-kind-icon">page</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
@@ -983,6 +986,7 @@ img { max-width: 100%; }
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="puppeteeradapter.html#browser" class="tsd-kind-icon">browser</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="puppeteeradapter.html#navigationoptions" class="tsd-kind-icon">navigation<wbr>Options</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="puppeteeradapter.html#page" class="tsd-kind-icon">page</a></li>
 						</ul>
 					</section>
@@ -1012,7 +1016,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/puppeteer/src/PuppeteerAdapter.ts#L63">PuppeteerAdapter.ts:63</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/puppeteer/src/PuppeteerAdapter.ts#L62">PuppeteerAdapter.ts:62</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1062,6 +1066,16 @@ img { max-width: 100%; }
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="navigationoptions" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> navigation<wbr>Options</h3>
+				<div class="tsd-signature tsd-kind-icon">navigation<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NavigationOptions</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/puppeteer/src/PuppeteerAdapter.ts#L62">PuppeteerAdapter.ts:62</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="page" class="tsd-anchor"></a>
 				<h3>page</h3>
 				<div class="tsd-signature tsd-kind-icon">page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Page</span></div>
@@ -1084,7 +1098,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/puppeteer/src/PuppeteerAdapter.ts#L81">PuppeteerAdapter.ts:81</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/puppeteer/src/PuppeteerAdapter.ts#L79">PuppeteerAdapter.ts:79</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1128,13 +1142,13 @@ img { max-width: 100%; }
 				<a name="findnodes" class="tsd-anchor"></a>
 				<h3>find<wbr>Nodes</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">find<wbr>Nodes<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, parent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">WebNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WebNode</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">find<wbr>Nodes<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, ancestor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">WebNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WebNode</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/puppeteer/src/PuppeteerAdapter.ts#L88">PuppeteerAdapter.ts:88</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/puppeteer/src/PuppeteerAdapter.ts#L86">PuppeteerAdapter.ts:86</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1143,7 +1157,7 @@ img { max-width: 100%; }
 								<h5>selector: <span class="tsd-signature-type">string</span></h5>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> parent: <span class="tsd-signature-type">WebNode</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> ancestor: <span class="tsd-signature-type">WebNode</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WebNode</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1160,7 +1174,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/puppeteer/src/PuppeteerAdapter.ts#L124">PuppeteerAdapter.ts:124</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/puppeteer/src/PuppeteerAdapter.ts#L125">PuppeteerAdapter.ts:125</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1183,7 +1197,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/puppeteer/src/PuppeteerAdapter.ts#L128">PuppeteerAdapter.ts:128</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/puppeteer/src/PuppeteerAdapter.ts#L129">PuppeteerAdapter.ts:129</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1206,7 +1220,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/puppeteer/src/PuppeteerAdapter.ts#L132">PuppeteerAdapter.ts:132</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/puppeteer/src/PuppeteerAdapter.ts#L133">PuppeteerAdapter.ts:133</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>

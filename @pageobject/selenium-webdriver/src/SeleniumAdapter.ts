@@ -74,11 +74,11 @@ export class SeleniumAdapter implements WebAdapter {
 
   public async findNodes(
     selector: string,
-    parent?: WebNode
+    ancestor?: WebNode
   ): Promise<WebNode[]> {
-    const parentElement = parent && (parent as SeleniumNode).element;
+    const ancestorElement = ancestor && (ancestor as SeleniumNode).element;
 
-    return (await (parentElement || this.driver).findElements(
+    return (await (ancestorElement || this.driver).findElements(
       By.css(selector)
     )).map(element => new SeleniumNode(element));
   }

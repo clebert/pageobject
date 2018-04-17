@@ -36,6 +36,17 @@ class ChromeDriver {
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
+const args =
+  process.env.CI === 'true'
+    ? [
+        '--headless',
+        '--disable-gpu',
+        '--disable-dev-shm-usage',
+        '--disable-setuid-sandbox',
+        '--no-sandbox'
+      ]
+    : ['--headless', '--disable-gpu'];
+
 describe('SeleniumAdapter', () => {
   const chromeDriver = new ChromeDriver();
 
@@ -48,21 +59,10 @@ describe('SeleniumAdapter', () => {
   });
 
   it('should pass the WebAdapterTest successfully', async () => {
-    const chromeArgs =
-      process.env.CI === 'true'
-        ? [
-            '--headless',
-            '--disable-gpu',
-            '--disable-dev-shm-usage',
-            '--disable-setuid-sandbox',
-            '--no-sandbox'
-          ]
-        : ['--headless', '--disable-gpu'];
-
     await new WebAdapterTest(
       await SeleniumAdapter.create({
         browserName: 'chrome',
-        chromeOptions: {args: chromeArgs}
+        chromeOptions: {args}
       })
     ).run();
   });

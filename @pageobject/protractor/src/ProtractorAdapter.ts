@@ -59,11 +59,11 @@ export class ProtractorAdapter implements WebAdapter {
 
   public async findNodes(
     selector: string,
-    parent?: WebNode
+    ancestor?: WebNode
   ): Promise<WebNode[]> {
-    const parentElement = parent && (parent as ProtractorNode).element;
+    const ancestorElement = ancestor && (ancestor as ProtractorNode).element;
 
-    return (await (parentElement || this.browser.driver).findElements(
+    return (await (ancestorElement || this.browser.driver).findElements(
       By.css(selector)
     )).map(element => new ProtractorNode(element));
   }
