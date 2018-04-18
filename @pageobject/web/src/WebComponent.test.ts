@@ -11,7 +11,7 @@ class TestComponent extends WebComponent {
 
 class TestElement {
   public readonly getBoundingClientRect = jest.fn();
-  public readonly innerText = 'text';
+  public readonly innerText = '\n text \n';
 
   public offsetHeight = 0;
   public offsetWidth = 0;

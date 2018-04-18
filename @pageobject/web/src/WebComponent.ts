@@ -26,7 +26,9 @@ export class WebComponent extends Component<WebNode> {
    */
   public getText(): Effect<string> {
     return async () =>
-      (await this.findUniqueNode()).execute(element => element.innerText);
+      (await this.findUniqueNode()).execute(element =>
+        element.innerText.trim()
+      );
   }
 
   public hasFocus(): Effect<boolean> {
