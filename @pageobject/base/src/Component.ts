@@ -13,8 +13,8 @@ export type Getter<TNode, TComponent extends Component<TNode>, TResult> = (
 export class Component<TNode> {
   public static readonly selector: string | undefined;
 
-  protected readonly adapter: Adapter<TNode>;
-  protected readonly ancestor?: Component<TNode>;
+  public readonly adapter: Adapter<TNode>;
+  public readonly ancestor?: Component<TNode>;
 
   private _filter?: (component: Component<TNode>) => Promise<boolean>;
   private _position?: number;
@@ -34,7 +34,7 @@ export class Component<TNode> {
       throw new Error('Position is already set');
     }
 
-    const reconstruction = this.reconstruct();
+    const reconstruction = this._reconstruct();
 
     reconstruction._filter = this._filter;
     reconstruction._position = position;
@@ -46,7 +46,7 @@ export class Component<TNode> {
     getter: Getter<TNode, this, TValue>,
     predicate: Predicate<TValue>
   ): this {
-    const reconstruction = this.reconstruct();
+    const reconstruction = this._reconstruct();
 
     reconstruction._filter = async component =>
       (this._filter ? await this._filter(component) : true) &&
@@ -78,7 +78,7 @@ export class Component<TNode> {
     if (filter) {
       const results = await Promise.all(
         nodes.map(async node => {
-          const reconstruction = this.reconstruct();
+          const reconstruction = this._reconstruct();
 
           reconstruction._node = node;
 
@@ -118,7 +118,7 @@ export class Component<TNode> {
     return async () => (await this.findNodes()).length;
   }
 
-  protected reconstruct(): this {
+  private _reconstruct(): this {
     return new (this.constructor as typeof Component)(
       this.adapter,
       this.ancestor
