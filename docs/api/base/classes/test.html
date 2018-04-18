@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TestStep | @pageobject/base</title>
+	<title>Test | @pageobject/base</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -940,26 +940,26 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-class tsd-has-type-parameter">
 			<a href="predicate.html" class="tsd-kind-icon">Predicate</a>
 		</li>
-		<li class="current tsd-kind-class">
-			<a href="teststep.html" class="tsd-kind-icon">Test<wbr>Step</a>
+		<li class="current tsd-kind-class tsd-has-type-parameter">
+			<a href="test.html" class="tsd-kind-icon">Test</a>
 			<ul>
-				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
-					<a href="teststep.html#defaulttimeoutinseconds" class="tsd-kind-icon">default<wbr>Timeout<wbr>InSeconds</a>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="test.html#ctx" class="tsd-kind-icon">ctx</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="test.html#defaulttimeoutinseconds" class="tsd-kind-icon">default<wbr>Timeout<wbr>InSeconds</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a href="test.html#assert" class="tsd-kind-icon">assert</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a href="test.html#if" class="tsd-kind-icon">if</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="teststep.html#run" class="tsd-kind-icon">run</a>
+					<a href="test.html#perform" class="tsd-kind-icon">perform</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
-					<a href="teststep.html#assert" class="tsd-kind-icon">assert</a>
-				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
-					<a href="teststep.html#if" class="tsd-kind-icon">if</a>
-				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a href="teststep.html#perform" class="tsd-kind-icon">perform</a>
-				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a href="teststep.html#runall" class="tsd-kind-icon">run<wbr>All</a>
+					<a href="test.html#run" class="tsd-kind-icon">run</a>
 				</li>
 			</ul>
 		</li>
@@ -970,10 +970,25 @@ img { max-width: 100%; }
 			<a href="../interfaces/componentclass.html" class="tsd-kind-icon">Component<wbr>Class</a>
 		</li>
 		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+			<a href="../globals.html#conditionaltestcallback" class="tsd-kind-icon">Conditional<wbr>Test<wbr>Callback</a>
+		</li>
+		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="../globals.html#effect" class="tsd-kind-icon">Effect</a>
 		</li>
 		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="../globals.html#getter" class="tsd-kind-icon">Getter</a>
+		</li>
+		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+			<a href="../globals.html#testcallback" class="tsd-kind-icon">Test<wbr>Callback</a>
+		</li>
+		<li class=" tsd-kind-type-alias tsd-is-not-exported">
+			<a href="../globals.html#teststep" class="tsd-kind-icon">Test<wbr>Step</a>
+		</li>
+		<li class=" tsd-kind-function tsd-is-not-exported">
+			<a href="../globals.html#reliable" class="tsd-kind-icon">reliable</a>
+		</li>
+		<li class=" tsd-kind-function tsd-is-not-exported">
+			<a href="../globals.html#runall" class="tsd-kind-icon">run<wbr>All</a>
 		</li>
 		<li class=" tsd-kind-function tsd-is-not-exported">
 			<a href="../globals.html#serialize" class="tsd-kind-icon">serialize</a>
@@ -985,11 +1000,19 @@ img { max-width: 100%; }
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
+		<section class="tsd-panel tsd-type-parameters">
+			<h3>Type parameters</h3>
+			<ul class="tsd-type-parameters">
+				<li>
+					<h4>TContext</h4>
+				</li>
+			</ul>
+		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">TestStep</span>
+					<span class="target">Test</span>
 				</li>
 			</ul>
 		</section>
@@ -1000,17 +1023,17 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="teststep.html#defaulttimeoutinseconds" class="tsd-kind-icon">default<wbr>Timeout<wbr>InSeconds</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="test.html#ctx" class="tsd-kind-icon">ctx</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="test.html#defaulttimeoutinseconds" class="tsd-kind-icon">default<wbr>Timeout<wbr>InSeconds</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="teststep.html#run" class="tsd-kind-icon">run</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static"><a href="teststep.html#assert" class="tsd-kind-icon">assert</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static"><a href="teststep.html#if" class="tsd-kind-icon">if</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="teststep.html#perform" class="tsd-kind-icon">perform</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="teststep.html#runall" class="tsd-kind-icon">run<wbr>All</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="test.html#assert" class="tsd-kind-icon">assert</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="test.html#if" class="tsd-kind-icon">if</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="test.html#perform" class="tsd-kind-icon">perform</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static"><a href="test.html#run" class="tsd-kind-icon">run</a></li>
 						</ul>
 					</section>
 				</div>
@@ -1018,47 +1041,40 @@ img { max-width: 100%; }
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
-				<a name="defaulttimeoutinseconds" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagStatic">Static</span> default<wbr>Timeout<wbr>InSeconds</h3>
-				<div class="tsd-signature tsd-kind-icon">default<wbr>Timeout<wbr>InSeconds<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;5</span></div>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="ctx" class="tsd-anchor"></a>
+				<h3>ctx</h3>
+				<div class="tsd-signature tsd-kind-icon">ctx<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TContext</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/TestStep.ts#L4">TestStep.ts:4</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L81">Test.ts:81</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="defaulttimeoutinseconds" class="tsd-anchor"></a>
+				<h3>default<wbr>Timeout<wbr>InSeconds</h3>
+				<div class="tsd-signature tsd-kind-icon">default<wbr>Timeout<wbr>InSeconds<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L82">Test.ts:82</a></li>
 					</ul>
 				</aside>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="run" class="tsd-anchor"></a>
-				<h3>run</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">run<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="teststep.html" class="tsd-signature-type">TestStep</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/TestStep.ts#L72">TestStep.ts:72</a></li>
-							</ul>
-						</aside>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="teststep.html" class="tsd-signature-type">TestStep</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 				<a name="assert" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagStatic">Static</span> assert</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
-					<li class="tsd-signature tsd-kind-icon">assert&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><a href="../globals.html#effect" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, predicate<span class="tsd-signature-symbol">: </span><a href="predicate.html" class="tsd-signature-type">Predicate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, timeoutInSeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="teststep.html" class="tsd-signature-type">TestStep</a></li>
+				<h3>assert</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">assert&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><a href="../globals.html#effect" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, predicate<span class="tsd-signature-symbol">: </span><a href="predicate.html" class="tsd-signature-type">Predicate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, timeoutInSeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/TestStep.ts#L6">TestStep.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L91">Test.ts:91</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1076,24 +1092,24 @@ img { max-width: 100%; }
 								<h5>predicate: <a href="predicate.html" class="tsd-signature-type">Predicate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> timeoutInSeconds: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;TestStep.defaultTimeoutInSeconds</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> timeoutInSeconds: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.defaultTimeoutInSeconds</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <a href="teststep.html" class="tsd-signature-type">TestStep</a></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 				<a name="if" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagStatic">Static</span> if</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
-					<li class="tsd-signature tsd-kind-icon">if&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><a href="../globals.html#effect" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, predicate<span class="tsd-signature-symbol">: </span><a href="predicate.html" class="tsd-signature-type">Predicate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, thenTestSteps<span class="tsd-signature-symbol">: </span><a href="teststep.html" class="tsd-signature-type">TestStep</a><span class="tsd-signature-symbol">[]</span>, elseTestSteps<span class="tsd-signature-symbol">?: </span><a href="teststep.html" class="tsd-signature-type">TestStep</a><span class="tsd-signature-symbol">[]</span>, timeoutInSeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="teststep.html" class="tsd-signature-type">TestStep</a></li>
+				<h3>if</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">if&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><a href="../globals.html#effect" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, predicate<span class="tsd-signature-symbol">: </span><a href="predicate.html" class="tsd-signature-type">Predicate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, callback<span class="tsd-signature-symbol">: </span><a href="../globals.html#conditionaltestcallback" class="tsd-signature-type">ConditionalTestCallback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span>, timeoutInSeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/TestStep.ts#L22">TestStep.ts:22</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L107">Test.ts:107</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1111,30 +1127,27 @@ img { max-width: 100%; }
 								<h5>predicate: <a href="predicate.html" class="tsd-signature-type">Predicate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
-								<h5>thenTestSteps: <a href="teststep.html" class="tsd-signature-type">TestStep</a><span class="tsd-signature-symbol">[]</span></h5>
+								<h5>callback: <a href="../globals.html#conditionaltestcallback" class="tsd-signature-type">ConditionalTestCallback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> elseTestSteps: <a href="teststep.html" class="tsd-signature-type">TestStep</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></h5>
-							</li>
-							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> timeoutInSeconds: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;TestStep.defaultTimeoutInSeconds</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> timeoutInSeconds: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.defaultTimeoutInSeconds</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <a href="teststep.html" class="tsd-signature-type">TestStep</a></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="perform" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagStatic">Static</span> perform</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<li class="tsd-signature tsd-kind-icon">perform<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><a href="../globals.html#effect" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span>, timeoutInSeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="teststep.html" class="tsd-signature-type">TestStep</a></li>
+				<h3>perform</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">perform<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><a href="../globals.html#effect" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span>, timeoutInSeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/TestStep.ts#L37">TestStep.ts:37</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L128">Test.ts:128</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1143,30 +1156,42 @@ img { max-width: 100%; }
 								<h5>effect: <a href="../globals.html#effect" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> timeoutInSeconds: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;TestStep.defaultTimeoutInSeconds</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> timeoutInSeconds: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.defaultTimeoutInSeconds</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <a href="teststep.html" class="tsd-signature-type">TestStep</a></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-				<a name="runall" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagStatic">Static</span> run<wbr>All</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<li class="tsd-signature tsd-kind-icon">run<wbr>All<span class="tsd-signature-symbol">(</span>testSteps<span class="tsd-signature-symbol">: </span><a href="teststep.html" class="tsd-signature-type">TestStep</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+				<a name="run" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagStatic">Static</span> run</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+					<li class="tsd-signature tsd-kind-icon">run&lt;TContext&gt;<span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TContext</span>, defaultTimeoutInSeconds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, callback<span class="tsd-signature-symbol">: </span><a href="../globals.html#testcallback" class="tsd-signature-type">TestCallback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/TestStep.ts#L52">TestStep.ts:52</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L69">Test.ts:69</a></li>
 							</ul>
 						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>TContext</h4>
+							</li>
+						</ul>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>testSteps: <a href="teststep.html" class="tsd-signature-type">TestStep</a><span class="tsd-signature-symbol">[]</span></h5>
+								<h5>ctx: <span class="tsd-signature-type">TContext</span></h5>
+							</li>
+							<li>
+								<h5>defaultTimeoutInSeconds: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>callback: <a href="../globals.html#testcallback" class="tsd-signature-type">TestCallback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
