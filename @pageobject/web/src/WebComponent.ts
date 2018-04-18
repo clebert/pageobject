@@ -13,8 +13,6 @@ export interface WebNode {
 }
 
 export class WebComponent extends Component<WebNode> {
-  public static readonly selector: string = ':root';
-
   public click(): Effect<void> {
     return async () => (await this.findUniqueNode()).click();
   }

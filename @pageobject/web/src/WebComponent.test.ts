@@ -5,6 +5,10 @@ class TestAdapter implements Adapter<WebNode> {
   public readonly findNodes = jest.fn();
 }
 
+class TestComponent extends WebComponent {
+  public static readonly selector: string = ':root';
+}
+
 class TestElement {
   public readonly getBoundingClientRect = jest.fn();
   public readonly innerText = 'text';
@@ -21,7 +25,7 @@ class TestNode implements WebNode {
 
 describe('WebComponent', () => {
   let adapter: TestAdapter;
-  let component: WebComponent;
+  let component: TestComponent;
   let element: TestElement;
   let node: TestNode;
 
@@ -30,7 +34,7 @@ describe('WebComponent', () => {
 
   beforeEach(() => {
     adapter = new TestAdapter();
-    component = new WebComponent(adapter);
+    component = new TestComponent(adapter);
     element = new TestElement();
     node = new TestNode();
 
@@ -52,12 +56,6 @@ describe('WebComponent', () => {
 
   afterEach(() => {
     scrollBy.mockRestore();
-  });
-
-  describe('selector', () => {
-    it('should match the root element', () => {
-      expect(WebComponent.selector).toBe(':root');
-    });
   });
 
   describe('click() => Effect()', () => {
