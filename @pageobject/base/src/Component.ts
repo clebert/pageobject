@@ -4,13 +4,19 @@ export interface Adapter<TNode> {
   findNodes(selector: string, ancestor?: TNode): Promise<TNode[]>;
 }
 
+export interface ComponentClass<TNode, TComponent extends Component<TNode>> {
+  readonly selector: string;
+
+  new (adapter: Adapter<TNode>, ancestor?: Component<TNode>): TComponent;
+}
+
 export type Effect<TResult> = () => Promise<TResult>;
 
 export type Getter<TNode, TComponent extends Component<TNode>, TResult> = (
   component: TComponent
 ) => Effect<TResult>;
 
-export class Component<TNode> {
+export abstract class Component<TNode> {
   public static readonly selector: string | undefined;
 
   public readonly adapter: Adapter<TNode>;
@@ -25,13 +31,23 @@ export class Component<TNode> {
     this.ancestor = ancestor;
   }
 
+  public select<TComponent extends Component<TNode>>(
+    Descendant: ComponentClass<TNode, TComponent>
+  ): TComponent {
+    return new Descendant(this.adapter, this);
+  }
+
   public at(position: number): this {
     if (position < 1) {
-      throw new Error('Position must be one-based');
+      throw new Error(`The specified position (${position}) must be one-based`);
     }
 
     if (this._position) {
-      throw new Error('Position is already set');
+      throw new Error(
+        `The existing position (${
+          this._position
+        }) of this ${this.toString()} component cannot be overwritten with ${position}`
+      );
     }
 
     const reconstruction = this._reconstruct();
@@ -65,7 +81,9 @@ export class Component<TNode> {
     const {selector} = this.constructor as typeof Component;
 
     if (!selector) {
-      throw new Error('Undefined selector');
+      throw new Error(
+        `The specified ${this.toString()} component has no selector`
+      );
     }
 
     let nodes = await this.adapter.findNodes(
@@ -104,11 +122,15 @@ export class Component<TNode> {
     const nodes = await this.findNodes();
 
     if (nodes.length === 0) {
-      throw new Error(`Node not found: ${this.constructor.name}`);
+      throw new Error(
+        `The searched ${this.toString()} component cannot be found`
+      );
     }
 
     if (nodes.length > 1) {
-      throw new Error(`Node not unique: ${this.constructor.name}`);
+      throw new Error(
+        `The searched ${this.toString()} component cannot be uniquely determined`
+      );
     }
 
     return nodes[0];
@@ -118,10 +140,14 @@ export class Component<TNode> {
     return async () => (await this.findNodes()).length;
   }
 
+  public toString(): string {
+    return `<${this.constructor.name}>`;
+  }
+
   private _reconstruct(): this {
-    return new (this.constructor as typeof Component)(
+    return new (this.constructor as ComponentClass<TNode, this>)(
       this.adapter,
       this.ancestor
-    ) as this;
+    );
   }
 }

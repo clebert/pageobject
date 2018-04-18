@@ -1,4 +1,5 @@
 import {Adapter, Effect} from '@pageobject/base';
+import {inspect} from 'util';
 import {Argument, WebNode} from '.';
 
 export type Key = 'Enter' | 'Escape' | 'Tab' | string;
@@ -12,6 +13,11 @@ export interface WebAdapter extends Adapter<WebNode> {
   navigateTo(url: string): Promise<void>;
   press(key: Key): Promise<void>;
   quit(): Promise<void>;
+}
+
+// tslint:disable-next-line no-any
+function serialize(value: any): string {
+  return inspect(value, false, null);
 }
 
 export class WebBrowser {
@@ -43,7 +49,9 @@ export class WebBrowser {
         }
         default: {
           throw new Error(
-            "Key must be a single character or one of: 'Enter', 'Escape', 'Tab'"
+            `The specified key (${serialize(
+              key
+            )}) must be a single character or one of: 'Enter', 'Escape', 'Tab'`
           );
         }
       }
