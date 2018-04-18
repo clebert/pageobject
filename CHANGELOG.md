@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="6.0.0"></a>
+# [6.0.0](https://github.com/clebert/pageobject/compare/v5.0.0...v6.0.0) (2018-04-18)
+
+
+### Features
+
+* **all:** change visibility of some methods ([#198](https://github.com/clebert/pageobject/issues/198)) ([d9cfbc8](https://github.com/clebert/pageobject/commit/d9cfbc8))
+* **all:** general api improvements ([#201](https://github.com/clebert/pageobject/issues/201)) ([d1ca24a](https://github.com/clebert/pageobject/commit/d1ca24a))
+* **web:** remove default selector from web component class ([#199](https://github.com/clebert/pageobject/issues/199)) ([26232cb](https://github.com/clebert/pageobject/commit/26232cb))
+* **web:** trim the text of a web component ([#200](https://github.com/clebert/pageobject/issues/200)) ([d8d188f](https://github.com/clebert/pageobject/commit/d8d188f))
+
+
+### BREAKING CHANGES
+
+* **all:** Breaking API changes to the `TestStep` and `WebComponent` classes
+* **web:** Each web component requires its own selector.
+
+
+
+
 <a name="5.0.0"></a>
 # [5.0.0](https://github.com/clebert/pageobject/compare/v4.0.0...v5.0.0) (2018-04-17)
 
