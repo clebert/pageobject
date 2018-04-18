@@ -15,7 +15,7 @@ export interface WebAdapter extends Adapter<WebNode> {
 }
 
 export class WebBrowser {
-  protected readonly adapter: WebAdapter;
+  public readonly adapter: WebAdapter;
 
   public constructor(adapter: WebAdapter) {
     this.adapter = adapter;
