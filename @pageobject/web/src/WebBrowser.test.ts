@@ -51,12 +51,14 @@ describe('WebBrowser', () => {
   });
 
   describe('press()', () => {
-    it('should throw a single-character error', () => {
-      const errorMessage =
-        "Key must be a single character or one of: 'Enter', 'Escape', 'Tab'";
+    it('should throw an illegal-argument error', () => {
+      expect(() => browser.press('')).toThrow(
+        "The specified key ('') must be a single character or one of: 'Enter', 'Escape', 'Tab'"
+      );
 
-      expect(() => browser.press('')).toThrow(errorMessage);
-      expect(() => browser.press('aa')).toThrow(errorMessage);
+      expect(() => browser.press('aa')).toThrow(
+        "The specified key ('aa') must be a single character or one of: 'Enter', 'Escape', 'Tab'"
+      );
     });
 
     describe('=> Effect()', () => {

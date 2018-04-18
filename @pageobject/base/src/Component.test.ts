@@ -15,13 +15,15 @@ class DIV extends Component<HTMLElement> {
   public static readonly selector: string = 'div';
 
   public get divs(): DIV {
-    return new DIV(this.adapter, this);
+    return this.select(DIV);
   }
 
   public getID(): Effect<string> {
     return async () => (await this.findUniqueNode()).id;
   }
 }
+
+class Unselectable extends Component<HTMLElement> {}
 
 document.body.innerHTML = `
   <div id="a1">
@@ -35,7 +37,7 @@ document.body.innerHTML = `
 `;
 
 const adapter = new TestAdapter();
-const component = new Component(adapter);
+const unselectable = new Unselectable(adapter);
 const divs = new DIV(adapter);
 
 const a1List = [
@@ -96,19 +98,23 @@ const filterNotUnique = divs.where(div => div.divs.getID(), matches(/./));
 
 describe('Component', () => {
   describe('at()', () => {
-    it('should throw a position-one-based error', () => {
-      expect(() => divs.at(0)).toThrow('Position must be one-based');
+    it('should throw an illegal-argument error', () => {
+      expect(() => divs.at(0)).toThrow(
+        'The specified position (0) must be one-based'
+      );
     });
 
-    it('should throw a position-already-set error', () => {
-      expect(() => divs.at(1).at(2)).toThrow('Position is already set');
+    it('should throw an illegal-state error', () => {
+      expect(() => divs.at(1).at(2)).toThrow(
+        'The existing position (1) of this <DIV> component cannot be overwritten with 2'
+      );
     });
   });
 
   describe('findUniqueNode()', () => {
-    it('should throw an undefined-selector error', async () => {
-      await expect(component.findUniqueNode()).rejects.toThrow(
-        'Undefined selector'
+    it('should throw an illegal-argument error', async () => {
+      await expect(unselectable.findUniqueNode()).rejects.toThrow(
+        'The specified <Unselectable> component has no selector'
       );
     });
 
@@ -130,8 +136,8 @@ describe('Component', () => {
       }
     });
 
-    it('should throw a node-not-found error', async () => {
-      const message = 'Node not found: DIV';
+    it('should throw a component-not-found error', async () => {
+      const message = 'The searched <DIV> component cannot be found';
 
       for (const notFound of notFoundList) {
         await expect(notFound.findUniqueNode()).rejects.toThrow(message);
@@ -141,8 +147,9 @@ describe('Component', () => {
       await expect(filterNotFound.findUniqueNode()).rejects.toThrow(message);
     });
 
-    it('should throw a node-not-unique error', async () => {
-      const message = 'Node not unique: DIV';
+    it('should throw a component-not-unique error', async () => {
+      const message =
+        'The searched <DIV> component cannot be uniquely determined';
 
       for (const notUnique of notUniqueList) {
         await expect(notUnique.findUniqueNode()).rejects.toThrow(message);
@@ -154,9 +161,9 @@ describe('Component', () => {
   });
 
   describe('getNodeCount() => Effect()', () => {
-    it('should throw an undefined-selector error', async () => {
-      await expect(component.getNodeCount()()).rejects.toThrow(
-        'Undefined selector'
+    it('should throw an illegal-argument error', async () => {
+      await expect(unselectable.getNodeCount()()).rejects.toThrow(
+        'The specified <Unselectable> component has no selector'
       );
     });
 
@@ -190,15 +197,16 @@ describe('Component', () => {
       }
     });
 
-    it('should throw a node-not-found error', async () => {
-      const message = 'Node not found: DIV';
+    it('should throw a component-not-found error', async () => {
+      const message = 'The searched <DIV> component cannot be found';
 
       await expect(ancestorNotFound.getNodeCount()()).rejects.toThrow(message);
       await expect(filterNotFound.getNodeCount()()).rejects.toThrow(message);
     });
 
-    it('should throw a node-not-unique error', async () => {
-      const message = 'Node not unique: DIV';
+    it('should throw a component-not-unique error', async () => {
+      const message =
+        'The searched <DIV> component cannot be uniquely determined';
 
       await expect(ancestorNotUnique.getNodeCount()()).rejects.toThrow(message);
       await expect(filterNotUnique.getNodeCount()()).rejects.toThrow(message);

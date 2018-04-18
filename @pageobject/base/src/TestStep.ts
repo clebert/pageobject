@@ -6,7 +6,7 @@ export class TestStep {
   public static assert<TValue>(
     effect: Effect<TValue>,
     predicate: Predicate<TValue>,
-    timeoutInSeconds?: number
+    timeoutInSeconds: number = TestStep.defaultTimeoutInSeconds
   ): TestStep {
     return new TestStep(
       async () => {
@@ -24,7 +24,7 @@ export class TestStep {
     predicate: Predicate<TValue>,
     thenTestSteps: TestStep[],
     elseTestSteps: TestStep[] = [],
-    timeoutInSeconds?: number
+    timeoutInSeconds: number = TestStep.defaultTimeoutInSeconds
   ): TestStep {
     return new TestStep(
       async () =>
@@ -36,7 +36,7 @@ export class TestStep {
 
   public static perform(
     effect: Effect<void>,
-    timeoutInSeconds?: number
+    timeoutInSeconds: number = TestStep.defaultTimeoutInSeconds
   ): TestStep {
     return new TestStep(
       async () => {
@@ -55,22 +55,26 @@ export class TestStep {
     }
   }
 
-  public readonly effect: Effect<TestStep[]>;
-  public readonly retryOnError: boolean;
-  public readonly timeoutInSeconds: number;
+  private readonly _effect: Effect<TestStep[]>;
+  private readonly _retryOnError: boolean;
+  private readonly _timeoutInSeconds: number;
 
-  public constructor(
+  private constructor(
     effect: Effect<TestStep[]>,
     retryOnError: boolean,
-    timeoutInSeconds: number = TestStep.defaultTimeoutInSeconds
+    timeoutInSeconds: number
   ) {
-    this.effect = effect;
-    this.retryOnError = retryOnError;
-    this.timeoutInSeconds = timeoutInSeconds;
+    this._effect = effect;
+    this._retryOnError = retryOnError;
+    this._timeoutInSeconds = timeoutInSeconds;
   }
 
   public async run(): Promise<TestStep[]> {
-    const {effect, retryOnError, timeoutInSeconds} = this;
+    const {
+      _effect: effect,
+      _retryOnError: retryOnError,
+      _timeoutInSeconds: timeoutInSeconds
+    } = this;
 
     let message = `Timeout after ${timeoutInSeconds} second${
       timeoutInSeconds === 1 ? '' : 's'

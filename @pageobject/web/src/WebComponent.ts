@@ -12,7 +12,7 @@ export interface WebNode {
   ): Promise<TResult>;
 }
 
-export class WebComponent extends Component<WebNode> {
+export abstract class WebComponent extends Component<WebNode> {
   public click(): Effect<void> {
     return async () => (await this.findUniqueNode()).click();
   }
