@@ -89,12 +89,12 @@ export class Test<TContext> {
   }
 
   public assert<TValue>(
-    effect: Effect<TValue>,
+    value: Effect<TValue>,
     predicate: Predicate<TValue>,
     timeoutInSeconds: number = this.defaultTimeoutInSeconds
   ): this {
     const testStep = async () => {
-      predicate.assert(await effect());
+      predicate.assert(await value());
 
       return [];
     };
@@ -105,7 +105,7 @@ export class Test<TContext> {
   }
 
   public if<TValue>(
-    effect: Effect<TValue>,
+    value: Effect<TValue>,
     predicate: Predicate<TValue>,
     callback: ConditionalTestCallback<TContext>,
     timeoutInSeconds: number = this.defaultTimeoutInSeconds
@@ -116,7 +116,7 @@ export class Test<TContext> {
     callback(thenTest, elseTest);
 
     const testStep = async () =>
-      predicate.test(await effect())
+      predicate.test(await value())
         ? thenTest._testSteps
         : elseTest._testSteps;
 
@@ -126,11 +126,11 @@ export class Test<TContext> {
   }
 
   public perform(
-    effect: Effect<void>,
+    action: Effect<void>,
     timeoutInSeconds: number = this.defaultTimeoutInSeconds
   ): this {
     const testStep = async () => {
-      await effect();
+      await action();
 
       return [];
     };
