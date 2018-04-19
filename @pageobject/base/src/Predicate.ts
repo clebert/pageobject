@@ -38,6 +38,14 @@ export abstract class Predicate<TValue> {
     return new IsLessThanOrEquals(expected);
   }
 
+  public static includes(expected: string): Predicate<string> {
+    return new Includes(expected);
+  }
+
+  public static notIncludes(expected: string): Predicate<string> {
+    return new NotIncludes(expected);
+  }
+
   public static matches(expected: RegExp): Predicate<string> {
     return new Matches(expected);
   }
@@ -76,7 +84,7 @@ class Is<TValue> extends BinaryPredicate<TValue> {
   }
 }
 
-class IsNot<TValue> extends BinaryPredicate<TValue> {
+class IsNot<TValue> extends Is<TValue> {
   public assert(actual: TValue): void {
     if (useJest()) {
       expect(actual).not.toBe(this.expected);
@@ -86,7 +94,7 @@ class IsNot<TValue> extends BinaryPredicate<TValue> {
   }
 
   public test(actual: TValue): boolean {
-    return actual !== this.expected;
+    return !super.test(actual);
   }
 }
 
@@ -146,14 +154,49 @@ class IsLessThanOrEquals extends BinaryPredicate<number> {
   }
 }
 
+class Includes extends BinaryPredicate<string> {
+  public assert(actual: string): void {
+    if (useJest()) {
+      expect(actual).toContain(this.expected);
+    } else {
+      ok(
+        this.test(actual),
+        `${serialize(actual)} =~ ${serialize(this.expected)}`
+      );
+    }
+  }
+
+  public test(actual: string): boolean {
+    return actual.includes(this.expected);
+  }
+}
+
+class NotIncludes extends Includes {
+  public assert(actual: string): void {
+    if (useJest()) {
+      expect(actual).not.toContain(this.expected);
+    } else {
+      ok(
+        this.test(actual),
+        `${serialize(actual)} !~ ${serialize(this.expected)}`
+      );
+    }
+  }
+
+  public test(actual: string): boolean {
+    return !super.test(actual);
+  }
+}
+
 class Matches extends BinaryPredicate<string, RegExp> {
   public assert(actual: string): void {
-    const message = `${serialize(actual)} =~ ${serialize(this.expected)}`;
-
     if (useJest()) {
       expect(actual).toMatch(this.expected);
     } else {
-      ok(this.test(actual), message);
+      ok(
+        this.test(actual),
+        `${serialize(actual)} =~ ${serialize(this.expected)}`
+      );
     }
   }
 
@@ -162,18 +205,19 @@ class Matches extends BinaryPredicate<string, RegExp> {
   }
 }
 
-class NotMatches extends BinaryPredicate<string, RegExp> {
+class NotMatches extends Matches {
   public assert(actual: string): void {
-    const message = `${serialize(actual)} !~ ${serialize(this.expected)}`;
-
     if (useJest()) {
       expect(actual).not.toMatch(this.expected);
     } else {
-      ok(this.test(actual), message);
+      ok(
+        this.test(actual),
+        `${serialize(actual)} !~ ${serialize(this.expected)}`
+      );
     }
   }
 
   public test(actual: string): boolean {
-    return !this.expected.test(actual);
+    return !super.test(actual);
   }
 }
