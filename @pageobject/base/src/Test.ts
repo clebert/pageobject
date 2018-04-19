@@ -116,9 +116,7 @@ export class Test<TContext> {
     callback(thenTest, elseTest);
 
     const testStep = async () =>
-      predicate.test(await value())
-        ? thenTest._testSteps
-        : elseTest._testSteps;
+      predicate.test(await value()) ? thenTest._testSteps : elseTest._testSteps;
 
     this._testSteps.push(reliable(testStep, true, timeoutInSeconds));
 
