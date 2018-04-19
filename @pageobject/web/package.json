@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/web",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "A declarative API for framework-independent web UI test automation.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -22,7 +22,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pageobject/base": "^7.0.0",
+    "@pageobject/base": "^8.0.0",
     "jsdom": "^11.8.0"
   },
   "devDependencies": {

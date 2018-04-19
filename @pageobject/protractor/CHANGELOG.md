@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="8.0.0"></a>
+# [8.0.0](https://github.com/clebert/pageobject/compare/v7.0.0...v8.0.0) (2018-04-19)
+
+
+
+
+**Note:** Version bump only for package @pageobject/protractor
+
 <a name="7.0.0"></a>
 # [7.0.0](https://github.com/clebert/pageobject/compare/v6.0.0...v7.0.0) (2018-04-19)
 

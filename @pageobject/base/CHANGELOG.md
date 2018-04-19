@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="8.0.0"></a>
+# [8.0.0](https://github.com/clebert/pageobject/compare/v7.0.0...v8.0.0) (2018-04-19)
+
+
+### Features
+
+* **base:** change test class properties ([#205](https://github.com/clebert/pageobject/issues/205)) ([f7f8925](https://github.com/clebert/pageobject/commit/f7f8925))
+
+
+### BREAKING CHANGES
+
+* **base:** Replace the `ctx` property of the `Test` class with `adapter`.
+
+
+
+
 <a name="7.0.0"></a>
 # [7.0.0](https://github.com/clebert/pageobject/compare/v6.0.0...v7.0.0) (2018-04-19)
 
