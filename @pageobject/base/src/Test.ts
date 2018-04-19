@@ -1,11 +1,13 @@
-import {Effect, Predicate} from '.';
+import {Adapter, Effect, Predicate} from '.';
 
-export type ConditionalTestCallback<TContext> = (
-  thenTest: Test<TContext>,
-  elseTest: Test<TContext>
+export type ConditionalTestCallback<TNode, TAdapter extends Adapter<TNode>> = (
+  thenTest: Test<TNode, TAdapter>,
+  elseTest: Test<TNode, TAdapter>
 ) => void;
 
-export type TestCallback<TContext> = (test: Test<TContext>) => void;
+export type TestCallback<TNode, TAdapter extends Adapter<TNode>> = (
+  test: Test<TNode, TAdapter>
+) => void;
 
 type TestStep = () => Promise<TestStep[]>;
 
@@ -65,26 +67,26 @@ async function runAll(testSteps: TestStep[]): Promise<void> {
   }
 }
 
-export class Test<TContext> {
-  public static async run<TContext>(
-    ctx: TContext,
+export class Test<TNode, TAdapter extends Adapter<TNode>> {
+  public static async run<TNode, TAdapter extends Adapter<TNode>>(
+    adapter: TAdapter,
     defaultTimeoutInSeconds: number,
-    callback: TestCallback<TContext>
+    callback: TestCallback<TNode, TAdapter>
   ): Promise<void> {
-    const test = new Test(ctx, defaultTimeoutInSeconds);
+    const test = new Test(adapter, defaultTimeoutInSeconds);
 
     callback(test);
 
     await runAll(test._testSteps);
   }
 
-  public readonly ctx: TContext;
+  public readonly adapter: TAdapter;
   public readonly defaultTimeoutInSeconds: number;
 
   private readonly _testSteps: TestStep[] = [];
 
-  private constructor(ctx: TContext, defaultTimeoutInSeconds: number) {
-    this.ctx = ctx;
+  private constructor(adapter: TAdapter, defaultTimeoutInSeconds: number) {
+    this.adapter = adapter;
     this.defaultTimeoutInSeconds = defaultTimeoutInSeconds;
   }
 
@@ -107,11 +109,11 @@ export class Test<TContext> {
   public if<TValue>(
     value: Effect<TValue>,
     predicate: Predicate<TValue>,
-    callback: ConditionalTestCallback<TContext>,
+    callback: ConditionalTestCallback<TNode, TAdapter>,
     timeoutInSeconds: number = this.defaultTimeoutInSeconds
   ): this {
-    const thenTest = new Test(this.ctx, this.defaultTimeoutInSeconds);
-    const elseTest = new Test(this.ctx, this.defaultTimeoutInSeconds);
+    const thenTest = new Test(this.adapter, this.defaultTimeoutInSeconds);
+    const elseTest = new Test(this.adapter, this.defaultTimeoutInSeconds);
 
     callback(thenTest, elseTest);
 

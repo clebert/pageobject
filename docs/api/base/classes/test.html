@@ -950,7 +950,7 @@ img { max-width: 100%; }
 			<a href="test.html" class="tsd-kind-icon">Test</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="test.html#ctx" class="tsd-kind-icon">ctx</a>
+					<a href="test.html#adapter" class="tsd-kind-icon">adapter</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
 					<a href="test.html#defaulttimeoutinseconds" class="tsd-kind-icon">default<wbr>Timeout<wbr>InSeconds</a>
@@ -1010,7 +1010,10 @@ img { max-width: 100%; }
 			<h3>Type parameters</h3>
 			<ul class="tsd-type-parameters">
 				<li>
-					<h4>TContext</h4>
+					<h4>TNode</h4>
+				</li>
+				<li>
+					<h4>TAdapter<span class="tsd-signature-symbol">: </span><a href="../interfaces/adapter.html" class="tsd-signature-type">Adapter</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TNode</span><span class="tsd-signature-symbol">&gt;</span></h4>
 				</li>
 			</ul>
 		</section>
@@ -1029,7 +1032,7 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="test.html#ctx" class="tsd-kind-icon">ctx</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="test.html#adapter" class="tsd-kind-icon">adapter</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="test.html#defaulttimeoutinseconds" class="tsd-kind-icon">default<wbr>Timeout<wbr>InSeconds</a></li>
 						</ul>
 					</section>
@@ -1048,12 +1051,12 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="ctx" class="tsd-anchor"></a>
-				<h3>ctx</h3>
-				<div class="tsd-signature tsd-kind-icon">ctx<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TContext</span></div>
+				<a name="adapter" class="tsd-anchor"></a>
+				<h3>adapter</h3>
+				<div class="tsd-signature tsd-kind-icon">adapter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TAdapter</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L81">Test.ts:81</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L83">Test.ts:83</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1063,7 +1066,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">default<wbr>Timeout<wbr>InSeconds<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L82">Test.ts:82</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L84">Test.ts:84</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1080,7 +1083,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L91">Test.ts:91</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L93">Test.ts:93</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1109,13 +1112,13 @@ img { max-width: 100%; }
 				<a name="if" class="tsd-anchor"></a>
 				<h3>if</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-					<li class="tsd-signature tsd-kind-icon">if&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../globals.html#effect" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, predicate<span class="tsd-signature-symbol">: </span><a href="predicate.html" class="tsd-signature-type">Predicate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, callback<span class="tsd-signature-symbol">: </span><a href="../globals.html#conditionaltestcallback" class="tsd-signature-type">ConditionalTestCallback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span>, timeoutInSeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					<li class="tsd-signature tsd-kind-icon">if&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../globals.html#effect" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, predicate<span class="tsd-signature-symbol">: </span><a href="predicate.html" class="tsd-signature-type">Predicate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span>, callback<span class="tsd-signature-symbol">: </span><a href="../globals.html#conditionaltestcallback" class="tsd-signature-type">ConditionalTestCallback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TNode</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TAdapter</span><span class="tsd-signature-symbol">&gt;</span>, timeoutInSeconds<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L107">Test.ts:107</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L109">Test.ts:109</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1133,7 +1136,7 @@ img { max-width: 100%; }
 								<h5>predicate: <a href="predicate.html" class="tsd-signature-type">Predicate</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
-								<h5>callback: <a href="../globals.html#conditionaltestcallback" class="tsd-signature-type">ConditionalTestCallback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>callback: <a href="../globals.html#conditionaltestcallback" class="tsd-signature-type">ConditionalTestCallback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TNode</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TAdapter</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li>
 								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> timeoutInSeconds: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;this.defaultTimeoutInSeconds</span></h5>
@@ -1153,7 +1156,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L126">Test.ts:126</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L128">Test.ts:128</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1173,31 +1176,34 @@ img { max-width: 100%; }
 				<a name="run" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagStatic">Static</span> run</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
-					<li class="tsd-signature tsd-kind-icon">run&lt;TContext&gt;<span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TContext</span>, defaultTimeoutInSeconds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, callback<span class="tsd-signature-symbol">: </span><a href="../globals.html#testcallback" class="tsd-signature-type">TestCallback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">run&lt;TNode, TAdapter&gt;<span class="tsd-signature-symbol">(</span>adapter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TAdapter</span>, defaultTimeoutInSeconds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, callback<span class="tsd-signature-symbol">: </span><a href="../globals.html#testcallback" class="tsd-signature-type">TestCallback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TNode</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TAdapter</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L69">Test.ts:69</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L71">Test.ts:71</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
 						<ul class="tsd-type-parameters">
 							<li>
-								<h4>TContext</h4>
+								<h4>TNode</h4>
+							</li>
+							<li>
+								<h4>TAdapter<span class="tsd-signature-symbol">: </span><a href="../interfaces/adapter.html" class="tsd-signature-type">Adapter</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TNode</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							</li>
 						</ul>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>ctx: <span class="tsd-signature-type">TContext</span></h5>
+								<h5>adapter: <span class="tsd-signature-type">TAdapter</span></h5>
 							</li>
 							<li>
 								<h5>defaultTimeoutInSeconds: <span class="tsd-signature-type">number</span></h5>
 							</li>
 							<li>
-								<h5>callback: <a href="../globals.html#testcallback" class="tsd-signature-type">TestCallback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>callback: <a href="../globals.html#testcallback" class="tsd-signature-type">TestCallback</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TNode</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TAdapter</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>

@@ -1,6 +1,10 @@
-import {Effect, Predicate, Test} from '.';
+import {Adapter, Effect, Predicate, Test} from '.';
 
 const {is} = Predicate;
+
+class TestAdapter implements Adapter<object> {
+  public readonly findNodes = jest.fn();
+}
 
 class ObservablePromise<T> {
   public readonly promise: Promise<T>;
@@ -69,13 +73,14 @@ async function neverEnding(): Promise<never> {
   return new Promise<never>(() => undefined);
 }
 
+const adapter = new TestAdapter();
 const defaultTimeoutInSeconds = 0.01;
 
 describe('Test.run()', () => {
-  let ctx: {effect: jest.Mock};
+  let effect: jest.Mock;
 
   beforeEach(() => {
-    ctx = {effect: jest.fn()};
+    effect = jest.fn();
   });
 
   it('should run all test steps in sequence', async () => {
@@ -92,7 +97,7 @@ describe('Test.run()', () => {
     };
 
     await useFakeTimers(async () =>
-      Test.run(ctx, defaultTimeoutInSeconds, test =>
+      Test.run(adapter, defaultTimeoutInSeconds, test =>
         test
           .assert(fooEffect(1), is('foo'))
           .if(fooEffect(2), is('foo'), thenTest1 =>
@@ -109,87 +114,97 @@ describe('Test.run()', () => {
     expect(calls).toEqual([1, 2, 3, 4, 5, 6]);
   });
 
+  describe('Test.adapter', () => {
+    it('should be the specified adapter', () => {
+      expect.assertions(1);
+
+      Test.run(adapter, defaultTimeoutInSeconds, test => {
+        expect(test.adapter).toBe(adapter);
+      });
+    });
+  });
+
   describe('Test.assert()', () => {
     it('should not throw an error', async () => {
-      ctx.effect.mockImplementationOnce(erroneous(1));
-      ctx.effect.mockImplementationOnce(erroneous(2));
-      ctx.effect.mockImplementationOnce(fooValue);
+      effect.mockImplementationOnce(erroneous(1));
+      effect.mockImplementationOnce(erroneous(2));
+      effect.mockImplementationOnce(fooValue);
 
       await useFakeTimers(async () =>
-        Test.run(ctx, defaultTimeoutInSeconds, test => {
-          test.assert(test.ctx.effect, is('foo'));
+        Test.run(adapter, defaultTimeoutInSeconds, test => {
+          test.assert(effect, is('foo'));
         })
       );
 
-      expect(ctx.effect).toHaveBeenCalledTimes(3);
+      expect(effect).toHaveBeenCalledTimes(3);
     });
 
     it('should throw an assertion error', async () => {
-      ctx.effect.mockImplementationOnce(erroneous(1));
-      ctx.effect.mockImplementationOnce(erroneous(2));
-      ctx.effect.mockImplementation(fooValue);
+      effect.mockImplementationOnce(erroneous(1));
+      effect.mockImplementationOnce(erroneous(2));
+      effect.mockImplementation(fooValue);
 
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(ctx, defaultTimeoutInSeconds, test => {
-              test.assert(test.ctx.effect, is('bar'));
+            Test.run(adapter, defaultTimeoutInSeconds, test => {
+              test.assert(effect, is('bar'));
             }),
           defaultTimeoutInSeconds
         )
       ).rejects.toThrow('Expected value to be:');
 
-      expect(ctx.effect.mock.calls.length).toBeGreaterThan(3);
+      expect(effect.mock.calls.length).toBeGreaterThan(3);
     });
 
     it('should throw an effect error', async () => {
-      ctx.effect.mockImplementationOnce(erroneous(1));
-      ctx.effect.mockImplementationOnce(erroneous(2));
-      ctx.effect.mockImplementationOnce(neverEnding);
+      effect.mockImplementationOnce(erroneous(1));
+      effect.mockImplementationOnce(erroneous(2));
+      effect.mockImplementationOnce(neverEnding);
 
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(ctx, defaultTimeoutInSeconds, test => {
-              test.assert(test.ctx.effect, is('foo'));
+            Test.run(adapter, defaultTimeoutInSeconds, test => {
+              test.assert(effect, is('foo'));
             }),
           defaultTimeoutInSeconds
         )
       ).rejects.toThrow('effect 2');
 
-      expect(ctx.effect).toHaveBeenCalledTimes(3);
+      expect(effect).toHaveBeenCalledTimes(3);
     });
 
     it('should throw a default timeout error', async () => {
-      ctx.effect.mockImplementationOnce(neverEnding);
+      effect.mockImplementationOnce(neverEnding);
 
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(ctx, defaultTimeoutInSeconds, test => {
-              test.assert(test.ctx.effect, is('foo'));
+            Test.run(adapter, defaultTimeoutInSeconds, test => {
+              test.assert(effect, is('foo'));
             }),
           defaultTimeoutInSeconds
         )
       ).rejects.toThrow('Timeout after 0.01 seconds');
 
-      expect(ctx.effect).toHaveBeenCalledTimes(1);
+      expect(effect).toHaveBeenCalledTimes(1);
     });
 
     it('should throw a custom timeout error', async () => {
-      ctx.effect.mockImplementationOnce(neverEnding);
+      effect.mockImplementationOnce(neverEnding);
 
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(ctx, defaultTimeoutInSeconds, test => {
-              test.assert(test.ctx.effect, is('foo'), 1);
+            Test.run(adapter, defaultTimeoutInSeconds, test => {
+              test.assert(effect, is('foo'), 1);
             }),
           1
         )
       ).rejects.toThrow('Timeout after 1 second');
 
-      expect(ctx.effect).toHaveBeenCalledTimes(1);
+      expect(effect).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -198,16 +213,16 @@ describe('Test.run()', () => {
       expect.assertions(8);
 
       await useFakeTimers(async () =>
-        Test.run(ctx, defaultTimeoutInSeconds, test => {
-          test.if(test.ctx.effect, is('foo'), (thenTest, elseTest) => {
+        Test.run(adapter, defaultTimeoutInSeconds, test => {
+          test.if(effect, is('foo'), (thenTest, elseTest) => {
             expect(thenTest).not.toBe(test);
             expect(elseTest).not.toBe(test);
 
             expect(thenTest).toBeInstanceOf(Test);
             expect(elseTest).toBeInstanceOf(Test);
 
-            expect(thenTest.ctx).toBe(test.ctx);
-            expect(elseTest.ctx).toBe(test.ctx);
+            expect(thenTest.adapter).toBe(test.adapter);
+            expect(elseTest.adapter).toBe(test.adapter);
 
             expect(thenTest.defaultTimeoutInSeconds).toBe(
               test.defaultTimeoutInSeconds
@@ -222,152 +237,152 @@ describe('Test.run()', () => {
     });
 
     it('should run the then-test without error', async () => {
-      ctx.effect.mockImplementationOnce(erroneous(1));
-      ctx.effect.mockImplementationOnce(erroneous(2));
-      ctx.effect.mockImplementationOnce(fooValue);
+      effect.mockImplementationOnce(erroneous(1));
+      effect.mockImplementationOnce(erroneous(2));
+      effect.mockImplementationOnce(fooValue);
 
       const noEffect = jest.fn();
 
       await useFakeTimers(async () =>
-        Test.run(ctx, defaultTimeoutInSeconds, test => {
-          test.if(test.ctx.effect, is('foo'), (thenTest, elseTest) => {
-            thenTest.perform(thenTest.ctx.effect);
+        Test.run(adapter, defaultTimeoutInSeconds, test => {
+          test.if(effect, is('foo'), (thenTest, elseTest) => {
+            thenTest.perform(effect);
 
             elseTest.perform(noEffect);
           });
         })
       );
 
-      expect(ctx.effect).toHaveBeenCalledTimes(4);
+      expect(effect).toHaveBeenCalledTimes(4);
     });
 
     it('should run the else-test without error', async () => {
-      ctx.effect.mockImplementationOnce(erroneous(1));
-      ctx.effect.mockImplementationOnce(erroneous(2));
-      ctx.effect.mockImplementationOnce(fooValue);
+      effect.mockImplementationOnce(erroneous(1));
+      effect.mockImplementationOnce(erroneous(2));
+      effect.mockImplementationOnce(fooValue);
 
       const noEffect = jest.fn();
 
       await useFakeTimers(async () =>
-        Test.run(ctx, defaultTimeoutInSeconds, test => {
-          test.if(test.ctx.effect, is('bar'), (thenTest, elseTest) => {
+        Test.run(adapter, defaultTimeoutInSeconds, test => {
+          test.if(effect, is('bar'), (thenTest, elseTest) => {
             thenTest.perform(noEffect);
 
-            elseTest.perform(thenTest.ctx.effect);
+            elseTest.perform(effect);
           });
         })
       );
 
-      expect(ctx.effect).toHaveBeenCalledTimes(4);
+      expect(effect).toHaveBeenCalledTimes(4);
     });
 
     it('should throw an effect error', async () => {
-      ctx.effect.mockImplementationOnce(erroneous(1));
-      ctx.effect.mockImplementationOnce(erroneous(2));
-      ctx.effect.mockImplementationOnce(neverEnding);
+      effect.mockImplementationOnce(erroneous(1));
+      effect.mockImplementationOnce(erroneous(2));
+      effect.mockImplementationOnce(neverEnding);
 
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(ctx, defaultTimeoutInSeconds, test => {
-              test.if(test.ctx.effect, is('foo'), () => undefined);
+            Test.run(adapter, defaultTimeoutInSeconds, test => {
+              test.if(effect, is('foo'), () => undefined);
             }),
           defaultTimeoutInSeconds
         )
       ).rejects.toThrow('effect 2');
 
-      expect(ctx.effect).toHaveBeenCalledTimes(3);
+      expect(effect).toHaveBeenCalledTimes(3);
     });
 
     it('should throw a default timeout error', async () => {
-      ctx.effect.mockImplementationOnce(neverEnding);
+      effect.mockImplementationOnce(neverEnding);
 
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(ctx, defaultTimeoutInSeconds, test => {
-              test.if(test.ctx.effect, is('foo'), () => undefined);
+            Test.run(adapter, defaultTimeoutInSeconds, test => {
+              test.if(effect, is('foo'), () => undefined);
             }),
           defaultTimeoutInSeconds
         )
       ).rejects.toThrow('Timeout after 0.01 seconds');
 
-      expect(ctx.effect).toHaveBeenCalledTimes(1);
+      expect(effect).toHaveBeenCalledTimes(1);
     });
 
     it('should throw a custom timeout error', async () => {
-      ctx.effect.mockImplementationOnce(neverEnding);
+      effect.mockImplementationOnce(neverEnding);
 
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(ctx, defaultTimeoutInSeconds, test => {
-              test.if(test.ctx.effect, is('foo'), () => undefined, 1);
+            Test.run(adapter, defaultTimeoutInSeconds, test => {
+              test.if(effect, is('foo'), () => undefined, 1);
             }),
           1
         )
       ).rejects.toThrow('Timeout after 1 second');
 
-      expect(ctx.effect).toHaveBeenCalledTimes(1);
+      expect(effect).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('Test.perform()', () => {
     it('should not throw an error', async () => {
       await useFakeTimers(async () =>
-        Test.run(ctx, defaultTimeoutInSeconds, test => {
-          test.perform(test.ctx.effect);
+        Test.run(adapter, defaultTimeoutInSeconds, test => {
+          test.perform(effect);
         })
       );
 
-      expect(ctx.effect).toHaveBeenCalledTimes(1);
+      expect(effect).toHaveBeenCalledTimes(1);
     });
 
     it('should throw an effect error', async () => {
-      ctx.effect.mockImplementationOnce(erroneous(1));
-      ctx.effect.mockImplementationOnce(erroneous(2));
+      effect.mockImplementationOnce(erroneous(1));
+      effect.mockImplementationOnce(erroneous(2));
 
       await expect(
         useFakeTimers(async () =>
-          Test.run(ctx, defaultTimeoutInSeconds, test => {
-            test.perform(test.ctx.effect);
+          Test.run(adapter, defaultTimeoutInSeconds, test => {
+            test.perform(effect);
           })
         )
       ).rejects.toThrow('effect 1');
 
-      expect(ctx.effect).toHaveBeenCalledTimes(1);
+      expect(effect).toHaveBeenCalledTimes(1);
     });
 
     it('should throw a default timeout error', async () => {
-      ctx.effect.mockImplementationOnce(neverEnding);
+      effect.mockImplementationOnce(neverEnding);
 
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(ctx, defaultTimeoutInSeconds, test => {
-              test.perform(test.ctx.effect);
+            Test.run(adapter, defaultTimeoutInSeconds, test => {
+              test.perform(effect);
             }),
           defaultTimeoutInSeconds
         )
       ).rejects.toThrow('Timeout after 0.01 seconds');
 
-      expect(ctx.effect).toHaveBeenCalledTimes(1);
+      expect(effect).toHaveBeenCalledTimes(1);
     });
 
     it('should throw a custom timeout error', async () => {
-      ctx.effect.mockImplementationOnce(neverEnding);
+      effect.mockImplementationOnce(neverEnding);
 
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(ctx, defaultTimeoutInSeconds, test => {
-              test.perform(test.ctx.effect, 1);
+            Test.run(adapter, defaultTimeoutInSeconds, test => {
+              test.perform(effect, 1);
             }),
           1
         )
       ).rejects.toThrow('Timeout after 1 second');
 
-      expect(ctx.effect).toHaveBeenCalledTimes(1);
+      expect(effect).toHaveBeenCalledTimes(1);
     });
   });
 });
