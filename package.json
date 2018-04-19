@@ -8,6 +8,7 @@
     "release": "lerna publish --conventional-commits",
     "pretest": "make",
     "test": "run-s test:*",
+    "test:examples": "for example in docs/examples/*.js; do node \"$example\"; done",
     "test:jest": "jest --no-cache --verbose",
     "test:markdownlint": "markdownlint --config .markdownlint.json --ignore '**/CHANGELOG.md' --ignore '**/node_modules/**/*' --ignore '**/temp/**/*' '**/*.md'",
     "test:prettier": "prettier --list-different '**/*.{js,json,md,ts}'",
