@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="7.0.0"></a>
+# [7.0.0](https://github.com/clebert/pageobject/compare/v6.0.0...v7.0.0) (2018-04-19)
+
+
+### Features
+
+* **base:** add includes and not-includes predicates ([#204](https://github.com/clebert/pageobject/issues/204)) ([42ffcc6](https://github.com/clebert/pageobject/commit/42ffcc6))
+* **base:** replace test-step class with test class ([#202](https://github.com/clebert/pageobject/issues/202)) ([cb7b996](https://github.com/clebert/pageobject/commit/cb7b996))
+
+
+### BREAKING CHANGES
+
+* **base:** Replaced the `TestStep` class with the all new `Test` class.
+
+
+
+
 <a name="6.0.0"></a>
 # [6.0.0](https://github.com/clebert/pageobject/compare/v5.0.0...v6.0.0) (2018-04-18)
 
