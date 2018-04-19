@@ -940,8 +940,8 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-class tsd-has-type-parameter">
 			<a href="classes/predicate.html" class="tsd-kind-icon">Predicate</a>
 		</li>
-		<li class=" tsd-kind-class">
-			<a href="classes/teststep.html" class="tsd-kind-icon">Test<wbr>Step</a>
+		<li class=" tsd-kind-class tsd-has-type-parameter">
+			<a href="classes/test.html" class="tsd-kind-icon">Test</a>
 		</li>
 		<li class=" tsd-kind-interface tsd-has-type-parameter">
 			<a href="interfaces/adapter.html" class="tsd-kind-icon">Adapter</a>
@@ -950,10 +950,25 @@ img { max-width: 100%; }
 			<a href="interfaces/componentclass.html" class="tsd-kind-icon">Component<wbr>Class</a>
 		</li>
 		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+			<a href="globals.html#conditionaltestcallback" class="tsd-kind-icon">Conditional<wbr>Test<wbr>Callback</a>
+		</li>
+		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="globals.html#effect" class="tsd-kind-icon">Effect</a>
 		</li>
 		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="globals.html#getter" class="tsd-kind-icon">Getter</a>
+		</li>
+		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+			<a href="globals.html#testcallback" class="tsd-kind-icon">Test<wbr>Callback</a>
+		</li>
+		<li class=" tsd-kind-type-alias tsd-is-not-exported">
+			<a href="globals.html#teststep" class="tsd-kind-icon">Test<wbr>Step</a>
+		</li>
+		<li class=" tsd-kind-function tsd-is-not-exported">
+			<a href="globals.html#reliable" class="tsd-kind-icon">reliable</a>
+		</li>
+		<li class=" tsd-kind-function tsd-is-not-exported">
+			<a href="globals.html#runall" class="tsd-kind-icon">run<wbr>All</a>
 		</li>
 		<li class=" tsd-kind-function tsd-is-not-exported">
 			<a href="globals.html#serialize" class="tsd-kind-icon">serialize</a>
@@ -1001,7 +1016,7 @@ img { max-width: 100%; }
 							<li class="tsd-kind-class tsd-is-not-exported"><a href="classes/matches.html" class="tsd-kind-icon">Matches</a></li>
 							<li class="tsd-kind-class tsd-is-not-exported"><a href="classes/notmatches.html" class="tsd-kind-icon">Not<wbr>Matches</a></li>
 							<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/predicate.html" class="tsd-kind-icon">Predicate</a></li>
-							<li class="tsd-kind-class"><a href="classes/teststep.html" class="tsd-kind-icon">Test<wbr>Step</a></li>
+							<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/test.html" class="tsd-kind-icon">Test</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
@@ -1014,13 +1029,18 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Type aliases</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#conditionaltestcallback" class="tsd-kind-icon">Conditional<wbr>Test<wbr>Callback</a></li>
 							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#effect" class="tsd-kind-icon">Effect</a></li>
 							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#getter" class="tsd-kind-icon">Getter</a></li>
+							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#testcallback" class="tsd-kind-icon">Test<wbr>Callback</a></li>
+							<li class="tsd-kind-type-alias tsd-is-not-exported"><a href="globals.html#teststep" class="tsd-kind-icon">Test<wbr>Step</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section tsd-is-not-exported">
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-function tsd-is-not-exported"><a href="globals.html#reliable" class="tsd-kind-icon">reliable</a></li>
+							<li class="tsd-kind-function tsd-is-not-exported"><a href="globals.html#runall" class="tsd-kind-icon">run<wbr>All</a></li>
 							<li class="tsd-kind-function tsd-is-not-exported"><a href="globals.html#serialize" class="tsd-kind-icon">serialize</a></li>
 							<li class="tsd-kind-function tsd-is-not-exported"><a href="globals.html#usejest" class="tsd-kind-icon">use<wbr>Jest</a></li>
 						</ul>
@@ -1030,6 +1050,40 @@ img { max-width: 100%; }
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Type aliases</h2>
+			<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
+				<a name="conditionaltestcallback" class="tsd-anchor"></a>
+				<h3>Conditional<wbr>Test<wbr>Callback</h3>
+				<div class="tsd-signature tsd-kind-icon">Conditional<wbr>Test<wbr>Callback<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L3">Test.ts:3</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-type-declaration">
+					<h4>Type declaration</h4>
+					<ul class="tsd-parameters">
+						<li class="tsd-parameter-siganture">
+							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>thenTest<span class="tsd-signature-symbol">: </span><a href="classes/test.html" class="tsd-signature-type">Test</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span>, elseTest<span class="tsd-signature-symbol">: </span><a href="classes/test.html" class="tsd-signature-type">Test</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+							</ul>
+							<ul class="tsd-descriptions">
+								<li class="tsd-description">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameters">
+										<li>
+											<h5>thenTest: <a href="classes/test.html" class="tsd-signature-type">Test</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span></h5>
+										</li>
+										<li>
+											<h5>elseTest: <a href="classes/test.html" class="tsd-signature-type">Test</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span></h5>
+										</li>
+									</ul>
+									<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
 				<a name="effect" class="tsd-anchor"></a>
 				<h3>Effect</h3>
@@ -1086,9 +1140,117 @@ img { max-width: 100%; }
 					</ul>
 				</div>
 			</section>
+			<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
+				<a name="testcallback" class="tsd-anchor"></a>
+				<h3>Test<wbr>Callback</h3>
+				<div class="tsd-signature tsd-kind-icon">Test<wbr>Callback<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L8">Test.ts:8</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-type-declaration">
+					<h4>Type declaration</h4>
+					<ul class="tsd-parameters">
+						<li class="tsd-parameter-siganture">
+							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>test<span class="tsd-signature-symbol">: </span><a href="classes/test.html" class="tsd-signature-type">Test</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+							</ul>
+							<ul class="tsd-descriptions">
+								<li class="tsd-description">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameters">
+										<li>
+											<h5>test: <a href="classes/test.html" class="tsd-signature-type">Test</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span></h5>
+										</li>
+									</ul>
+									<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-is-not-exported">
+				<a name="teststep" class="tsd-anchor"></a>
+				<h3>Test<wbr>Step</h3>
+				<div class="tsd-signature tsd-kind-icon">Test<wbr>Step<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L10">Test.ts:10</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-type-declaration">
+					<h4>Type declaration</h4>
+					<ul class="tsd-parameters">
+						<li class="tsd-parameter-siganture">
+							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="globals.html#teststep" class="tsd-signature-type">TestStep</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+							</ul>
+							<ul class="tsd-descriptions">
+								<li class="tsd-description">
+									<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="globals.html#teststep" class="tsd-signature-type">TestStep</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 			<h2>Functions</h2>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-is-not-exported">
+				<a name="reliable" class="tsd-anchor"></a>
+				<h3>reliable</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-is-not-exported">
+					<li class="tsd-signature tsd-kind-icon">reliable<span class="tsd-signature-symbol">(</span>testStep<span class="tsd-signature-symbol">: </span><a href="globals.html#teststep" class="tsd-signature-type">TestStep</a>, retryOnError<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, timeoutInSeconds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="globals.html#teststep" class="tsd-signature-type">TestStep</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L12">Test.ts:12</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>testStep: <a href="globals.html#teststep" class="tsd-signature-type">TestStep</a></h5>
+							</li>
+							<li>
+								<h5>retryOnError: <span class="tsd-signature-type">boolean</span></h5>
+							</li>
+							<li>
+								<h5>timeoutInSeconds: <span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="globals.html#teststep" class="tsd-signature-type">TestStep</a></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-is-not-exported">
+				<a name="runall" class="tsd-anchor"></a>
+				<h3>run<wbr>All</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-is-not-exported">
+					<li class="tsd-signature tsd-kind-icon">run<wbr>All<span class="tsd-signature-symbol">(</span>testSteps<span class="tsd-signature-symbol">: </span><a href="globals.html#teststep" class="tsd-signature-type">TestStep</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/base/src/Test.ts#L62">Test.ts:62</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>testSteps: <a href="globals.html#teststep" class="tsd-signature-type">TestStep</a><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-function tsd-is-not-exported">
 				<a name="serialize" class="tsd-anchor"></a>
 				<h3>serialize</h3>
