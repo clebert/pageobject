@@ -27,6 +27,8 @@ const {
   isGreaterThanOrEquals,
   isLessThan,
   isLessThanOrEquals,
+  includes,
+  notIncludes,
   matches,
   notMatches
 } = Predicate;
@@ -82,6 +84,22 @@ const effectsIsLessThanOrEquals = (key: keyof Predicate<number>) => {
   return {
     ok: [() => factory(0)[key](-1), () => factory(0)[key](0)],
     nok: [() => factory(0)[key](1)]
+  };
+};
+
+const effectsIncludes = (
+  key: keyof Predicate<string>,
+  negated: boolean = false
+) => {
+  const factory = negated ? notIncludes : includes;
+
+  return {
+    ok: [
+      () => factory('foo')[key]('foo'),
+      () => factory('foo')[key]('foobar'),
+      () => factory('foo')[key]('barfoo')
+    ],
+    nok: [() => factory('foo')[key]('bar')]
   };
 };
 
@@ -348,6 +366,90 @@ describe('Predicate', () => {
 
       it('should return false', () => {
         for (const effect of effectsIsLessThanOrEquals('test').nok) {
+          expect(effect()).toBe(false);
+        }
+      });
+    });
+  });
+
+  describe('includes() => Predicate', () => {
+    describe('assert()', () => {
+      it('should not throw a jest error', () => {
+        for (const effect of effectsIncludes('assert').ok) {
+          expect(effect).not.toThrow();
+        }
+      });
+
+      it('should throw a jest error', () => {
+        for (const effect of effectsIncludes('assert').nok) {
+          expect(effect).toThrow('To contain value:');
+        }
+      });
+
+      it('should not throw a node error', () => {
+        for (const effect of effectsIncludes('assert').ok) {
+          expect(noJest(effect)).not.toThrow();
+        }
+      });
+
+      it('should throw a node error', () => {
+        for (const effect of effectsIncludes('assert').nok) {
+          expect(noJest(effect)).toThrow(/'[a-z]+' =~ 'foo'/);
+        }
+      });
+    });
+
+    describe('test()', () => {
+      it('should return true', () => {
+        for (const effect of effectsIncludes('test').ok) {
+          expect(effect()).toBe(true);
+        }
+      });
+
+      it('should return false', () => {
+        for (const effect of effectsIncludes('test').nok) {
+          expect(effect()).toBe(false);
+        }
+      });
+    });
+  });
+
+  describe('notIncludes() => Predicate', () => {
+    describe('assert()', () => {
+      it('should not throw a jest error', () => {
+        for (const effect of effectsIncludes('assert', true).nok) {
+          expect(effect).not.toThrow();
+        }
+      });
+
+      it('should throw a jest error', () => {
+        for (const effect of effectsIncludes('assert', true).ok) {
+          expect(effect).toThrow('Not to contain value:');
+        }
+      });
+
+      it('should not throw a node error', () => {
+        for (const effect of effectsIncludes('assert', true).nok) {
+          expect(noJest(effect)).not.toThrow();
+        }
+      });
+
+      it('should throw a node error', () => {
+        for (const effect of effectsIncludes('assert', true).ok) {
+          expect(noJest(effect)).toThrow(/'[a-z]+' !~ 'foo'/);
+        }
+      });
+    });
+
+    describe('test()', () => {
+      it('should return true', () => {
+        for (const effect of effectsIncludes('test', true).nok) {
+          expect(effect()).toBe(true);
+        }
+      });
+
+      it('should return false', () => {
+        for (const effect of effectsIncludes('test', true).ok) {
           expect(effect()).toBe(false);
         }
       });
