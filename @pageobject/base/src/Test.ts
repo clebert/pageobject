@@ -73,7 +73,7 @@ export class Test<TNode, TAdapter extends Adapter<TNode>> {
     defaultTimeoutInSeconds: number,
     callback: TestCallback<TNode, TAdapter>
   ): Promise<void> {
-    const test = new Test(adapter, defaultTimeoutInSeconds);
+    const test = new Test<TNode, TAdapter>(adapter, defaultTimeoutInSeconds);
 
     callback(test);
 
@@ -112,8 +112,15 @@ export class Test<TNode, TAdapter extends Adapter<TNode>> {
     callback: ConditionalTestCallback<TNode, TAdapter>,
     timeoutInSeconds: number = this.defaultTimeoutInSeconds
   ): this {
-    const thenTest = new Test(this.adapter, this.defaultTimeoutInSeconds);
-    const elseTest = new Test(this.adapter, this.defaultTimeoutInSeconds);
+    const thenTest = new Test<TNode, TAdapter>(
+      this.adapter,
+      this.defaultTimeoutInSeconds
+    );
+
+    const elseTest = new Test<TNode, TAdapter>(
+      this.adapter,
+      this.defaultTimeoutInSeconds
+    );
 
     callback(thenTest, elseTest);
 

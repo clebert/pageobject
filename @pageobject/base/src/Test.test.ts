@@ -115,10 +115,10 @@ describe('Test.run()', () => {
   });
 
   describe('Test.adapter', () => {
-    it('should be the specified adapter', () => {
+    it('should be the specified adapter', async () => {
       expect.assertions(1);
 
-      Test.run(adapter, defaultTimeoutInSeconds, test => {
+      await Test.run(adapter, defaultTimeoutInSeconds, test => {
         expect(test.adapter).toBe(adapter);
       });
     });
