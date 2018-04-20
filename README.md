@@ -52,34 +52,38 @@ await Test.run(await PuppeteerAdapter.create(), 10, example);
 #### ES2015 notation
 
 ```js
-class Link extends WebComponent {}
-
-Link.selector = 'a';
+class Link extends WebComponent {
+  get selector() {
+    return 'a';
+  }
+}
 ```
 
 ```js
 class ExamplePage extends WebComponent {
+  get selector() {
+    return ':root';
+  }
+
   get moreInformationLink() {
-    return this.select(Link);
+    return new Link(this.adapter, this);
   }
 }
-
-ExamplePage.selector = ':root';
 ```
 
 #### TypeScript/Babel notation
 
 ```js
 class Link extends WebComponent {
-  static selector = 'a';
+  selector = 'a';
 }
 ```
 
 ```js
 class ExamplePage extends WebComponent {
-  static selector = ':root';
+  selector = ':root';
 
-  moreInformationLink = this.select(Link);
+  moreInformationLink = new Link(this.adapter, this);
 }
 ```
 

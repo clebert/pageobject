@@ -2,17 +2,21 @@ const {Predicate, Test} = require('@pageobject/base');
 const {WebBrowser, WebComponent} = require('@pageobject/web');
 const {PuppeteerAdapter} = require('@pageobject/puppeteer');
 
-class Link extends WebComponent {}
-
-Link.selector = 'a';
-
-class ExamplePage extends WebComponent {
-  get moreInformationLink() {
-    return this.select(Link);
+class Link extends WebComponent {
+  get selector() {
+    return 'a';
   }
 }
 
-ExamplePage.selector = ':root';
+class ExamplePage extends WebComponent {
+  get selector() {
+    return ':root';
+  }
+
+  get moreInformationLink() {
+    return new Link(this.adapter, this);
+  }
+}
 
 function example(test) {
   const browser = new WebBrowser(test.adapter);
@@ -41,4 +45,8 @@ function example(test) {
   } finally {
     await adapter.quit();
   }
-})().catch(error => console.error(error.toString()));
+})().catch(error => {
+  console.error(error.toString());
+
+  process.exit(1);
+});

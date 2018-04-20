@@ -20,4 +20,8 @@ function example(test) {
   } finally {
     await adapter.quit();
   }
-})().catch(error => console.error(error.toString()));
+})().catch(error => {
+  console.error(error.toString());
+
+  process.exit(1);
+});

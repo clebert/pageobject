@@ -6,7 +6,7 @@ class TestAdapter implements Adapter<WebNode> {
 }
 
 class TestComponent extends WebComponent {
-  public static readonly selector: string = ':root';
+  public readonly selector: string = ':root';
 }
 
 class TestElement {

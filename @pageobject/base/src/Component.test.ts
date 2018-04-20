@@ -12,10 +12,10 @@ class TestAdapter implements Adapter<HTMLElement> {
 }
 
 class DIV extends Component<HTMLElement> {
-  public static readonly selector: string = 'div';
+  public readonly selector: string = 'div';
 
   public get divs(): DIV {
-    return this.select(DIV);
+    return new DIV(this.adapter, this);
   }
 
   public getID(): Effect<string> {
@@ -23,7 +23,9 @@ class DIV extends Component<HTMLElement> {
   }
 }
 
-class Unselectable extends Component<HTMLElement> {}
+class Unselectable extends Component<HTMLElement> {
+  public readonly selector: string = '';
+}
 
 document.body.innerHTML = `
   <div id="a1">

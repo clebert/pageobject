@@ -4,12 +4,6 @@ export interface Adapter<TNode> {
   findNodes(selector: string, ancestor?: TNode): Promise<TNode[]>;
 }
 
-export interface ComponentClass<TNode, TComponent extends Component<TNode>> {
-  readonly selector: string;
-
-  new (adapter: Adapter<TNode>, ancestor?: Component<TNode>): TComponent;
-}
-
 export type Effect<TResult> = () => Promise<TResult>;
 
 export type Getter<TNode, TComponent extends Component<TNode>, TResult> = (
@@ -17,7 +11,7 @@ export type Getter<TNode, TComponent extends Component<TNode>, TResult> = (
 ) => Effect<TResult>;
 
 export abstract class Component<TNode> {
-  public static readonly selector: string | undefined;
+  public abstract readonly selector: string;
 
   public readonly adapter: Adapter<TNode>;
   public readonly ancestor?: Component<TNode>;
@@ -29,12 +23,6 @@ export abstract class Component<TNode> {
   public constructor(adapter: Adapter<TNode>, ancestor?: Component<TNode>) {
     this.adapter = adapter;
     this.ancestor = ancestor;
-  }
-
-  public select<TComponent extends Component<TNode>>(
-    Descendant: ComponentClass<TNode, TComponent>
-  ): TComponent {
-    return new Descendant(this.adapter, this);
   }
 
   public at(position: number): this {
@@ -50,7 +38,7 @@ export abstract class Component<TNode> {
       );
     }
 
-    const reconstruction = this._reconstruct();
+    const reconstruction = this.reconstruct();
 
     reconstruction._filter = this._filter;
     reconstruction._position = position;
@@ -62,7 +50,7 @@ export abstract class Component<TNode> {
     getter: Getter<TNode, this, TValue>,
     predicate: Predicate<TValue>
   ): this {
-    const reconstruction = this._reconstruct();
+    const reconstruction = this.reconstruct();
 
     reconstruction._filter = async component =>
       (this._filter ? await this._filter(component) : true) &&
@@ -78,16 +66,14 @@ export abstract class Component<TNode> {
       return [this._node];
     }
 
-    const {selector} = this.constructor as typeof Component;
-
-    if (!selector) {
+    if (!this.selector) {
       throw new Error(
         `The specified ${this.toString()} component has no selector`
       );
     }
 
     let nodes = await this.adapter.findNodes(
-      selector,
+      this.selector,
       this.ancestor && (await this.ancestor.findUniqueNode())
     );
 
@@ -96,7 +82,7 @@ export abstract class Component<TNode> {
     if (filter) {
       const results = await Promise.all(
         nodes.map(async node => {
-          const reconstruction = this._reconstruct();
+          const reconstruction = this.reconstruct();
 
           reconstruction._node = node;
 
@@ -107,10 +93,8 @@ export abstract class Component<TNode> {
       nodes = nodes.filter((node, index) => results[index]);
     }
 
-    const position = this._position;
-
-    if (position) {
-      const index = position - 1;
+    if (this._position) {
+      const index = this._position - 1;
 
       nodes = index < nodes.length ? [nodes[index]] : [];
     }
@@ -144,10 +128,8 @@ export abstract class Component<TNode> {
     return `<${this.constructor.name}>`;
   }
 
-  private _reconstruct(): this {
-    return new (this.constructor as ComponentClass<TNode, this>)(
-      this.adapter,
-      this.ancestor
-    );
+  protected reconstruct(): this {
+    // tslint:disable-next-line no-any
+    return new (this.constructor as any)(this.adapter, this.ancestor);
   }
 }
