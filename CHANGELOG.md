@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="9.0.0"></a>
+# [9.0.0](https://github.com/clebert/pageobject/compare/v8.0.0...v9.0.0) (2018-04-20)
+
+
+### Features
+
+* **base:** make component selector non-static ([#209](https://github.com/clebert/pageobject/issues/209)) ([100dad6](https://github.com/clebert/pageobject/commit/100dad6))
+* **base:** the test class quits the adapter ([#210](https://github.com/clebert/pageobject/issues/210)) ([66cd8ee](https://github.com/clebert/pageobject/commit/66cd8ee))
+
+
+### BREAKING CHANGES
+
+* **base:** The `select` method of the `Component` class is removed and the `selector` property of the `Component` class is now abstract instead of static.
+
+
+
+
 <a name="8.0.0"></a>
 # [8.0.0](https://github.com/clebert/pageobject/compare/v7.0.0...v8.0.0) (2018-04-19)
 

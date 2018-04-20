@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="9.0.0"></a>
+# [9.0.0](https://github.com/clebert/pageobject/compare/v8.0.0...v9.0.0) (2018-04-20)
+
+
+
+
+**Note:** Version bump only for package @pageobject/puppeteer
+
 <a name="8.0.0"></a>
 # [8.0.0](https://github.com/clebert/pageobject/compare/v7.0.0...v8.0.0) (2018-04-19)
 
