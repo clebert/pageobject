@@ -36,7 +36,12 @@ function example(test) {
 }
 
 (async () => {
-  const adapter = await PuppeteerAdapter.create();
+  const args =
+    process.env.CI === 'true'
+      ? ['--disable-dev-shm-usage', '--disable-setuid-sandbox', '--no-sandbox']
+      : [];
+
+  const adapter = await PuppeteerAdapter.create({args});
 
   try {
     await Test.run(adapter, 10, example);
