@@ -1,8 +1,8 @@
-import {Adapter, Component, Effect, Predicate} from '.';
+import {Component, DOMAdapter, Effect, Predicate} from '.';
 
 const {is, isGreaterThan, matches} = Predicate;
 
-class TestAdapter implements Adapter<HTMLElement> {
+class TestAdapter implements DOMAdapter<HTMLElement> {
   public async findNodes(
     selector: string,
     ancestor?: HTMLElement

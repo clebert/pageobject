@@ -1,12 +1,16 @@
-import {Adapter, Effect, Predicate} from '.';
+import {Effect, Predicate} from '.';
 
-export type ConditionalTestCallback<TNode, TAdapter extends Adapter<TNode>> = (
-  thenTest: Test<TNode, TAdapter>,
-  elseTest: Test<TNode, TAdapter>
+export interface QuitableAdapter {
+  quit(): Promise<void>;
+}
+
+export type ConditionalTestCallback<TAdapter extends QuitableAdapter> = (
+  thenTest: Test<TAdapter>,
+  elseTest: Test<TAdapter>
 ) => void;
 
-export type TestCallback<TNode, TAdapter extends Adapter<TNode>> = (
-  test: Test<TNode, TAdapter>
+export type TestCallback<TAdapter extends QuitableAdapter> = (
+  test: Test<TAdapter>
 ) => void;
 
 type TestStep = () => Promise<TestStep[]>;
@@ -67,17 +71,21 @@ async function runAll(testSteps: TestStep[]): Promise<void> {
   }
 }
 
-export class Test<TNode, TAdapter extends Adapter<TNode>> {
-  public static async run<TNode, TAdapter extends Adapter<TNode>>(
+export class Test<TAdapter extends QuitableAdapter> {
+  public static async run<TAdapter extends QuitableAdapter>(
     adapter: TAdapter,
     defaultTimeoutInSeconds: number,
-    callback: TestCallback<TNode, TAdapter>
+    callback: TestCallback<TAdapter>
   ): Promise<void> {
-    const test = new Test<TNode, TAdapter>(adapter, defaultTimeoutInSeconds);
+    const test = new Test(adapter, defaultTimeoutInSeconds);
 
     callback(test);
 
-    await runAll(test._testSteps);
+    try {
+      await runAll(test._testSteps);
+    } finally {
+      await adapter.quit();
+    }
   }
 
   public readonly adapter: TAdapter;
@@ -109,18 +117,11 @@ export class Test<TNode, TAdapter extends Adapter<TNode>> {
   public if<TValue>(
     value: Effect<TValue>,
     predicate: Predicate<TValue>,
-    callback: ConditionalTestCallback<TNode, TAdapter>,
+    callback: ConditionalTestCallback<TAdapter>,
     timeoutInSeconds: number = this.defaultTimeoutInSeconds
   ): this {
-    const thenTest = new Test<TNode, TAdapter>(
-      this.adapter,
-      this.defaultTimeoutInSeconds
-    );
-
-    const elseTest = new Test<TNode, TAdapter>(
-      this.adapter,
-      this.defaultTimeoutInSeconds
-    );
+    const thenTest = new Test(this.adapter, this.defaultTimeoutInSeconds);
+    const elseTest = new Test(this.adapter, this.defaultTimeoutInSeconds);
 
     callback(thenTest, elseTest);
 

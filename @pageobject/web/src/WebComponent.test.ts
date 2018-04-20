@@ -1,7 +1,7 @@
-import {Adapter} from '@pageobject/base';
+import {DOMAdapter} from '@pageobject/base';
 import {WebComponent, WebNode} from '.';
 
-class TestAdapter implements Adapter<WebNode> {
+class TestAdapter implements DOMAdapter<WebNode> {
   public readonly findNodes = jest.fn();
 }
 

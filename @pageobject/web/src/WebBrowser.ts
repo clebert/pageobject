@@ -1,10 +1,10 @@
-import {Adapter, Effect} from '@pageobject/base';
+import {DOMAdapter, Effect, QuitableAdapter} from '@pageobject/base';
 import {inspect} from 'util';
 import {Argument, WebNode} from '.';
 
 export type Key = 'Enter' | 'Escape' | 'Tab' | string;
 
-export interface WebAdapter extends Adapter<WebNode> {
+export interface WebAdapter extends DOMAdapter<WebNode>, QuitableAdapter {
   execute<TResult>(
     script: (...args: Argument[]) => TResult,
     ...args: Argument[]
@@ -12,7 +12,6 @@ export interface WebAdapter extends Adapter<WebNode> {
 
   navigateTo(url: string): Promise<void>;
   press(key: Key): Promise<void>;
-  quit(): Promise<void>;
 }
 
 // tslint:disable-next-line no-any

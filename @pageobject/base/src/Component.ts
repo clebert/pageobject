@@ -1,6 +1,6 @@
 import {Predicate} from '.';
 
-export interface Adapter<TNode> {
+export interface DOMAdapter<TNode> {
   findNodes(selector: string, ancestor?: TNode): Promise<TNode[]>;
 }
 
@@ -13,14 +13,14 @@ export type Getter<TNode, TComponent extends Component<TNode>, TResult> = (
 export abstract class Component<TNode> {
   public abstract readonly selector: string;
 
-  public readonly adapter: Adapter<TNode>;
+  public readonly adapter: DOMAdapter<TNode>;
   public readonly ancestor?: Component<TNode>;
 
   private _filter?: (component: Component<TNode>) => Promise<boolean>;
   private _position?: number;
   private _node?: TNode;
 
-  public constructor(adapter: Adapter<TNode>, ancestor?: Component<TNode>) {
+  public constructor(adapter: DOMAdapter<TNode>, ancestor?: Component<TNode>) {
     this.adapter = adapter;
     this.ancestor = ancestor;
   }
