@@ -13,4 +13,8 @@ function example(test) {
   await Test.run(new JSDOMAdapter(), 10, example);
 
   console.log(`OK: ${__filename}`);
-})().catch(error => console.error(error.toString()));
+})().catch(error => {
+  console.error(error.toString());
+
+  process.exit(1);
+});
