@@ -77,7 +77,7 @@ export class Test<TAdapter extends QuitableAdapter> {
     defaultTimeoutInSeconds: number,
     callback: TestCallback<TAdapter>
   ): Promise<void> {
-    const test = new Test<TAdapter>(adapter, defaultTimeoutInSeconds);
+    const test = new Test(adapter, defaultTimeoutInSeconds);
 
     callback(test);
 
@@ -120,15 +120,8 @@ export class Test<TAdapter extends QuitableAdapter> {
     callback: ConditionalTestCallback<TAdapter>,
     timeoutInSeconds: number = this.defaultTimeoutInSeconds
   ): this {
-    const thenTest = new Test<TAdapter>(
-      this.adapter,
-      this.defaultTimeoutInSeconds
-    );
-
-    const elseTest = new Test<TAdapter>(
-      this.adapter,
-      this.defaultTimeoutInSeconds
-    );
+    const thenTest = new Test(this.adapter, this.defaultTimeoutInSeconds);
+    const elseTest = new Test(this.adapter, this.defaultTimeoutInSeconds);
 
     callback(thenTest, elseTest);
 
