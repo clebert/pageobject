@@ -35,21 +35,15 @@ function example(test) {
   test.perform(page.moreInformationLink.click());
 }
 
+const args =
+  process.env.CI === 'true'
+    ? ['--disable-dev-shm-usage', '--disable-setuid-sandbox', '--no-sandbox']
+    : [];
+
 (async () => {
-  const args =
-    process.env.CI === 'true'
-      ? ['--disable-dev-shm-usage', '--disable-setuid-sandbox', '--no-sandbox']
-      : [];
+  await Test.run(await PuppeteerAdapter.create({args}), 10, example);
 
-  const adapter = await PuppeteerAdapter.create({args});
-
-  try {
-    await Test.run(adapter, 10, example);
-
-    console.log(`OK: ${__filename}`);
-  } finally {
-    await adapter.quit();
-  }
+  console.log(`OK: ${__filename}`);
 })().catch(error => {
   console.error(error.toString());
 

@@ -1,9 +1,9 @@
-import {Adapter, Effect, Predicate, Test} from '.';
+import {Effect, Predicate, QuitableAdapter, Test} from '.';
 
 const {is} = Predicate;
 
-class TestAdapter implements Adapter<object> {
-  public readonly findNodes = jest.fn();
+class TestAdapter implements QuitableAdapter {
+  public readonly quit = jest.fn();
 }
 
 class ObservablePromise<T> {
@@ -73,13 +73,14 @@ async function neverEnding(): Promise<never> {
   return new Promise<never>(() => undefined);
 }
 
-const adapter = new TestAdapter();
 const defaultTimeoutInSeconds = 0.01;
 
 describe('Test.run()', () => {
+  let adapter: TestAdapter;
   let effect: jest.Mock;
 
   beforeEach(() => {
+    adapter = new TestAdapter();
     effect = jest.fn();
   });
 
@@ -96,6 +97,10 @@ describe('Test.run()', () => {
       calls.push(call);
     };
 
+    adapter.quit.mockImplementation(async () => {
+      calls.push(7);
+    });
+
     await useFakeTimers(async () =>
       Test.run(adapter, defaultTimeoutInSeconds, test =>
         test
@@ -111,7 +116,7 @@ describe('Test.run()', () => {
       )
     );
 
-    expect(calls).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(calls).toEqual([1, 2, 3, 4, 5, 6, 7]);
   });
 
   describe('Test.adapter', () => {
@@ -136,6 +141,7 @@ describe('Test.run()', () => {
         })
       );
 
+      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(3);
     });
 
@@ -154,6 +160,7 @@ describe('Test.run()', () => {
         )
       ).rejects.toThrow('Expected value to be:');
 
+      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect.mock.calls.length).toBeGreaterThan(3);
     });
 
@@ -172,6 +179,7 @@ describe('Test.run()', () => {
         )
       ).rejects.toThrow('effect 2');
 
+      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(3);
     });
 
@@ -188,6 +196,7 @@ describe('Test.run()', () => {
         )
       ).rejects.toThrow('Timeout after 0.01 seconds');
 
+      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(1);
     });
 
@@ -204,6 +213,7 @@ describe('Test.run()', () => {
         )
       ).rejects.toThrow('Timeout after 1 second');
 
+      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(1);
     });
   });
@@ -291,6 +301,7 @@ describe('Test.run()', () => {
         )
       ).rejects.toThrow('effect 2');
 
+      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(3);
     });
 
@@ -307,6 +318,7 @@ describe('Test.run()', () => {
         )
       ).rejects.toThrow('Timeout after 0.01 seconds');
 
+      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(1);
     });
 
@@ -323,6 +335,7 @@ describe('Test.run()', () => {
         )
       ).rejects.toThrow('Timeout after 1 second');
 
+      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(1);
     });
   });
@@ -350,6 +363,7 @@ describe('Test.run()', () => {
         )
       ).rejects.toThrow('effect 1');
 
+      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(1);
     });
 
@@ -366,6 +380,7 @@ describe('Test.run()', () => {
         )
       ).rejects.toThrow('Timeout after 0.01 seconds');
 
+      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(1);
     });
 
@@ -382,6 +397,7 @@ describe('Test.run()', () => {
         )
       ).rejects.toThrow('Timeout after 1 second');
 
+      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(1);
     });
   });

@@ -10,16 +10,15 @@ function example(test) {
   test.assert(browser.getPageTitle(), Predicate.is('Example Domain'));
 }
 
+const args =
+  process.env.CI === 'true'
+    ? ['--disable-dev-shm-usage', '--disable-setuid-sandbox', '--no-sandbox']
+    : [];
+
 (async () => {
-  const adapter = await PuppeteerAdapter.create();
+  await Test.run(await PuppeteerAdapter.create({args}), 10, example);
 
-  try {
-    await Test.run(adapter, 10, example);
-
-    console.log(`OK: ${__filename}`);
-  } finally {
-    await adapter.quit();
-  }
+  console.log(`OK: ${__filename}`);
 })().catch(error => {
   console.error(error.toString());
 
