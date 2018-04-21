@@ -1,5 +1,5 @@
 BIN := "$(shell yarn bin)"
-PKGS := base web protractor puppeteer selenium-webdriver
+PKGS := base web protractor puppeteer selenium-webdriver todomvc
 
 .PHONY: docs
 docs: $(addprefix docs/api/,$(PKGS)) docs/index.md

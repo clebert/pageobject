@@ -1,0 +1,9 @@
+{
+  "name": "@pageobject/todomvc",
+  "private": true,
+  "dependencies": {
+    "@pageobject/base": "^9.1.0",
+    "@pageobject/puppeteer": "^9.1.0",
+    "@pageobject/web": "^9.1.0"
+  }
+}

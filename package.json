@@ -47,7 +47,8 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/@pageobject/*/src/*.ts",
-      "!**/@pageobject/protractor/src/*.ts"
+      "!**/@pageobject/protractor/src/*.ts",
+      "!**/@pageobject/todomvc/src/*.ts"
     ],
     "coverageThreshold": {
       "global": {
