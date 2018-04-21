@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="9.1.0"></a>
+# [9.1.0](https://github.com/clebert/pageobject/compare/v9.0.0...v9.1.0) (2018-04-21)
+
+
+### Features
+
+* **web:** add new effect getters to the web component ([#211](https://github.com/clebert/pageobject/issues/211)) ([e919b8d](https://github.com/clebert/pageobject/commit/e919b8d))
+
+
+
+
 <a name="9.0.0"></a>
 # [9.0.0](https://github.com/clebert/pageobject/compare/v8.0.0...v9.0.0) (2018-04-20)
 
