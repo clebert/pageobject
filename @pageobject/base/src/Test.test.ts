@@ -119,6 +119,16 @@ describe('Test.run()', () => {
     expect(calls).toEqual([1, 2, 3, 4, 5, 6, 7]);
   });
 
+  it('should throw an adapter-quit error', async () => {
+    adapter.quit.mockImplementation(async () => {
+      throw new Error('awaited');
+    });
+
+    await expect(
+      Test.run(adapter, defaultTimeoutInSeconds, test => undefined)
+    ).rejects.toThrow('awaited');
+  });
+
   describe('Test.adapter', () => {
     it('should be the specified adapter', async () => {
       expect.assertions(1);
