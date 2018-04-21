@@ -1,8 +1,11 @@
-import {DOMAdapter} from '@pageobject/base';
-import {WebComponent, WebNode} from '.';
+import {Keyboard, Page, WebAdapter, WebComponent, WebNode} from '.';
 
-class TestAdapter implements DOMAdapter<WebNode> {
+class TestAdapter implements WebAdapter {
+  public readonly execute = jest.fn();
   public readonly findNodes = jest.fn();
+  public readonly goto = jest.fn();
+  public readonly press = jest.fn();
+  public readonly quit = jest.fn();
 }
 
 class TestComponent extends WebComponent {
@@ -38,6 +41,10 @@ describe('WebComponent', () => {
     element = new TestElement();
     node = new TestNode();
 
+    adapter.execute.mockImplementation(async (script, ...args) =>
+      script(...args)
+    );
+
     adapter.findNodes.mockImplementation(async () => [node]);
 
     node.execute.mockImplementation(async (script, ...args) =>
@@ -56,6 +63,103 @@ describe('WebComponent', () => {
 
   afterEach(() => {
     scrollBy.mockRestore();
+  });
+
+  describe('keyboard', () => {
+    it('should be an instance of the Keyboard class', () => {
+      expect(component.keyboard).toBeInstanceOf(Keyboard);
+    });
+
+    describe('press() => Effect()', () => {
+      it('should press the specified key', async () => {
+        adapter.press.mockImplementation(async () => {
+          throw new Error('awaited');
+        });
+
+        await expect(component.keyboard.press('Enter')()).rejects.toThrow(
+          'awaited'
+        );
+
+        expect(adapter.press).toHaveBeenLastCalledWith('Enter');
+
+        await expect(component.keyboard.press('Escape')()).rejects.toThrow(
+          'awaited'
+        );
+
+        expect(adapter.press).toHaveBeenLastCalledWith('Escape');
+
+        await expect(component.keyboard.press('Tab')()).rejects.toThrow(
+          'awaited'
+        );
+
+        expect(adapter.press).toHaveBeenLastCalledWith('Tab');
+
+        expect(adapter.press).toHaveBeenCalledTimes(3);
+      });
+    });
+
+    describe('type() => Effect()', () => {
+      it('should type the specified text', async () => {
+        await component.keyboard.type('')();
+
+        expect(adapter.press).toHaveBeenCalledTimes(0);
+
+        await component.keyboard.type('abc')();
+
+        expect(adapter.press).toHaveBeenCalledWith('a');
+        expect(adapter.press).toHaveBeenCalledWith('b');
+        expect(adapter.press).toHaveBeenLastCalledWith('c');
+
+        expect(adapter.press).toHaveBeenCalledTimes(3);
+
+        adapter.press.mockImplementation(async () => {
+          throw new Error('awaited');
+        });
+
+        await expect(component.keyboard.type('abc')()).rejects.toThrow(
+          'awaited'
+        );
+
+        expect(adapter.press).toHaveBeenCalledTimes(4);
+      });
+    });
+  });
+
+  describe('page', () => {
+    it('should be an instance of the Page class', () => {
+      expect(component.page).toBeInstanceOf(Page);
+    });
+
+    describe('getTitle() => Effect()', () => {
+      it('should return the page title', async () => {
+        document.title = 'pageTitle';
+
+        console.log(document.title);
+
+        await expect(component.page.getTitle()()).resolves.toBe('pageTitle');
+      });
+    });
+
+    describe('getURL() => Effect()', () => {
+      it('should return the page URL', async () => {
+        await expect(component.page.getURL()()).resolves.toBe('about:blank');
+      });
+    });
+
+    describe('goto() => Effect()', () => {
+      it('should goto the specified url', async () => {
+        adapter.goto.mockImplementation(async () => {
+          throw new Error('awaited');
+        });
+
+        await expect(component.page.goto('about:blank')()).rejects.toThrow(
+          'awaited'
+        );
+
+        expect(adapter.goto).toHaveBeenCalledTimes(1);
+        expect(adapter.goto).toHaveBeenCalledWith('about:blank');
+      });
+    });
   });
 
   describe('click() => Effect()', () => {

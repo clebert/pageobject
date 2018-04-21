@@ -914,10 +914,13 @@ img { max-width: 100%; }
 			<a href="classes/jsdomnode.html" class="tsd-kind-icon">JSDOMNode</a>
 		</li>
 		<li class=" tsd-kind-class">
-			<a href="classes/webadaptertest.html" class="tsd-kind-icon">Web<wbr>Adapter<wbr>Test</a>
+			<a href="classes/keyboard.html" class="tsd-kind-icon">Keyboard</a>
 		</li>
 		<li class=" tsd-kind-class">
-			<a href="classes/webbrowser.html" class="tsd-kind-icon">Web<wbr>Browser</a>
+			<a href="classes/page.html" class="tsd-kind-icon">Page</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="classes/webadaptertest.html" class="tsd-kind-icon">Web<wbr>Adapter<wbr>Test</a>
 		</li>
 		<li class=" tsd-kind-class">
 			<a href="classes/webcomponent.html" class="tsd-kind-icon">Web<wbr>Component</a>
@@ -930,6 +933,9 @@ img { max-width: 100%; }
 		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="globals.html#argument" class="tsd-kind-icon">Argument</a>
+		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="globals.html#character" class="tsd-kind-icon">Character</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="globals.html#key" class="tsd-kind-icon">Key</a>
@@ -972,8 +978,9 @@ img { max-width: 100%; }
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-class"><a href="classes/jsdomadapter.html" class="tsd-kind-icon">JSDOMAdapter</a></li>
 							<li class="tsd-kind-class tsd-is-not-exported"><a href="classes/jsdomnode.html" class="tsd-kind-icon">JSDOMNode</a></li>
+							<li class="tsd-kind-class"><a href="classes/keyboard.html" class="tsd-kind-icon">Keyboard</a></li>
+							<li class="tsd-kind-class"><a href="classes/page.html" class="tsd-kind-icon">Page</a></li>
 							<li class="tsd-kind-class"><a href="classes/webadaptertest.html" class="tsd-kind-icon">Web<wbr>Adapter<wbr>Test</a></li>
-							<li class="tsd-kind-class"><a href="classes/webbrowser.html" class="tsd-kind-icon">Web<wbr>Browser</a></li>
 							<li class="tsd-kind-class"><a href="classes/webcomponent.html" class="tsd-kind-icon">Web<wbr>Component</a></li>
 						</ul>
 					</section>
@@ -988,6 +995,7 @@ img { max-width: 100%; }
 						<h3>Type aliases</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-type-alias"><a href="globals.html#argument" class="tsd-kind-icon">Argument</a></li>
+							<li class="tsd-kind-type-alias"><a href="globals.html#character" class="tsd-kind-icon">Character</a></li>
 							<li class="tsd-kind-type-alias"><a href="globals.html#key" class="tsd-kind-icon">Key</a></li>
 						</ul>
 					</section>
@@ -1014,17 +1022,27 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">Argument<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebComponent.ts#L3">WebComponent.ts:3</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebAdapter.ts#L6">WebAdapter.ts:6</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-type-alias">
+				<a name="character" class="tsd-anchor"></a>
+				<h3>Character</h3>
+				<div class="tsd-signature tsd-kind-icon">Character<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebAdapter.ts#L18">WebAdapter.ts:18</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-type-alias">
 				<a name="key" class="tsd-anchor"></a>
 				<h3>Key</h3>
-				<div class="tsd-signature tsd-kind-icon">Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"Enter"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Escape"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Tab"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+				<div class="tsd-signature tsd-kind-icon">Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"Enter"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Escape"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Tab"</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L5">WebBrowser.ts:5</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebAdapter.ts#L19">WebAdapter.ts:19</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1037,7 +1055,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">fileURL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;file://${join(__dirname, &#x27;../fixtures/index.html&#x27;)}&#x60;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebAdapterTest.ts#L5">WebAdapterTest.ts:5</a></li>
+						<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebAdapter.ts#L32">WebAdapter.ts:32</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1054,7 +1072,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L18">WebBrowser.ts:18</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/JSDOMAdapter.ts#L7">JSDOMAdapter.ts:7</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>

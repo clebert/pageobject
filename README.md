@@ -13,22 +13,40 @@ To run them, you need Node.js version 8 or higher.
 
 ### Example 1: Writing your first automated web UI test
 
-In this example we declare a test which opens the website `example.com` and asserts its page title:
+In this example we write a test which opens the website [example.com](http://example.com/) and asserts its page title:
 
 ```js
-function example(test) {
-  const browser = new WebBrowser(test.adapter);
+function example(test, app) {
+  test
+    .perform(app.page.goto('http://example.com/'))
+    .assert(app.page.getTitle(), is('Example Domain'));
+}
+```
 
-  test.perform(browser.navigateTo('http://example.com/'));
+We also need to write our first component, which currently serves only to give us access to its page object:
 
-  test.assert(browser.getPageTitle(), Predicate.is('Example Domain'));
+```js
+// ES2015 notation
+class App extends WebComponent {
+  get selector() {
+    return ':root';
+  }
+}
+```
+
+```js
+// TypeScript/Babel notation
+class App extends WebComponent {
+  selector = ':root';
 }
 ```
 
 The test is performed in Node.js without a real browser using [jsdom][external-jsdom]:
 
 ```js
-await Test.run(new JSDOMAdapter(), 10, example);
+const adapter = new JSDOMAdapter();
+
+await Test.run(new App(adapter), 10, example);
 ```
 
 ### Example 2: Using a real browser
@@ -44,12 +62,12 @@ Adapters for the following test automation solutions are currently available:
 We only need to change one line to run the above test in a headless Chrome:
 
 ```js
-await Test.run(await PuppeteerAdapter.create(), 10, example);
+const adapter = await PuppeteerAdapter.create();
 ```
 
-### Example 3: Writing your first components (aka page objects)
+### Example 3: Writing and using another component
 
-#### ES2015 notation
+Next we write a component for the "More information..." link:
 
 ```js
 class Link extends WebComponent {
@@ -59,8 +77,10 @@ class Link extends WebComponent {
 }
 ```
 
+We declare the link as a descendant of the app component:
+
 ```js
-class ExamplePage extends WebComponent {
+class App extends WebComponent {
   get selector() {
     return ':root';
   }
@@ -71,36 +91,15 @@ class ExamplePage extends WebComponent {
 }
 ```
 
-#### TypeScript/Babel notation
+Now we extend our test by asserting the link text and then following the link:
 
 ```js
-class Link extends WebComponent {
-  selector = 'a';
-}
-```
-
-```js
-class ExamplePage extends WebComponent {
-  selector = ':root';
-
-  moreInformationLink = new Link(this.adapter, this);
-}
-```
-
-#### Using the components
-
-```js
-function example(test) {
-  // ...
-
-  const page = new ExamplePage(test.adapter);
-
-  test.assert(
-    page.moreInformationLink.getText(),
-    Predicate.is('More information...')
-  );
-
-  test.perform(page.moreInformationLink.click());
+function example(test, app) {
+  test
+    .perform(app.page.goto('http://example.com/'))
+    .assert(app.page.getTitle(), is('Example Domain'))
+    .assert(app.moreInformationLink.getText(), is('More information...'))
+    .perform(app.moreInformationLink.click());
 }
 ```
 

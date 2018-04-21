@@ -914,10 +914,13 @@ img { max-width: 100%; }
 			<a href="../classes/jsdomnode.html" class="tsd-kind-icon">JSDOMNode</a>
 		</li>
 		<li class=" tsd-kind-class">
-			<a href="../classes/webadaptertest.html" class="tsd-kind-icon">Web<wbr>Adapter<wbr>Test</a>
+			<a href="../classes/keyboard.html" class="tsd-kind-icon">Keyboard</a>
 		</li>
 		<li class=" tsd-kind-class">
-			<a href="../classes/webbrowser.html" class="tsd-kind-icon">Web<wbr>Browser</a>
+			<a href="../classes/page.html" class="tsd-kind-icon">Page</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="../classes/webadaptertest.html" class="tsd-kind-icon">Web<wbr>Adapter<wbr>Test</a>
 		</li>
 		<li class=" tsd-kind-class">
 			<a href="../classes/webcomponent.html" class="tsd-kind-icon">Web<wbr>Component</a>
@@ -932,12 +935,12 @@ img { max-width: 100%; }
 					<a href="webadapter.html#findnodes" class="tsd-kind-icon">find<wbr>Nodes</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
-					<a href="webadapter.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a>
+					<a href="webadapter.html#goto" class="tsd-kind-icon">goto</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="webadapter.html#press" class="tsd-kind-icon">press</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="webadapter.html#quit" class="tsd-kind-icon">quit</a>
 				</li>
 			</ul>
@@ -947,6 +950,9 @@ img { max-width: 100%; }
 		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="../globals.html#argument" class="tsd-kind-icon">Argument</a>
+		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="../globals.html#character" class="tsd-kind-icon">Character</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="../globals.html#key" class="tsd-kind-icon">Key</a>
@@ -965,10 +971,7 @@ img { max-width: 100%; }
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="tsd-signature-type">DOMAdapter</span><span class="tsd-signature-symbol">&lt;</span><a href="webnode.html" class="tsd-signature-type">WebNode</a><span class="tsd-signature-symbol">&gt;</span>
-				</li>
-				<li>
-					<span class="tsd-signature-type">QuitableAdapter</span>
+					<span class="tsd-signature-type">Adapter</span><span class="tsd-signature-symbol">&lt;</span><a href="webnode.html" class="tsd-signature-type">WebNode</a><span class="tsd-signature-symbol">&gt;</span>
 					<ul class="tsd-hierarchy">
 						<li>
 							<span class="target">WebAdapter</span>
@@ -992,9 +995,9 @@ img { max-width: 100%; }
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="webadapter.html#execute" class="tsd-kind-icon">execute</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="webadapter.html#findnodes" class="tsd-kind-icon">find<wbr>Nodes</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="webadapter.html#navigateto" class="tsd-kind-icon">navigate<wbr>To</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="webadapter.html#goto" class="tsd-kind-icon">goto</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="webadapter.html#press" class="tsd-kind-icon">press</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="webadapter.html#quit" class="tsd-kind-icon">quit</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="webadapter.html#quit" class="tsd-kind-icon">quit</a></li>
 						</ul>
 					</section>
 				</div>
@@ -1012,7 +1015,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L8">WebBrowser.ts:8</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebAdapter.ts#L22">WebAdapter.ts:22</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1061,7 +1064,7 @@ img { max-width: 100%; }
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Inherited from DOMAdapter.findNodes</p>
+							<p>Inherited from Adapter.findNodes</p>
 							<ul>
 								<li>Defined in @pageobject/base/dist/Component.d.ts:3</li>
 							</ul>
@@ -1080,16 +1083,16 @@ img { max-width: 100%; }
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-				<a name="navigateto" class="tsd-anchor"></a>
-				<h3>navigate<wbr>To</h3>
+				<a name="goto" class="tsd-anchor"></a>
+				<h3>goto</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-					<li class="tsd-signature tsd-kind-icon">navigate<wbr>To<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">goto<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L13">WebBrowser.ts:13</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebAdapter.ts#L27">WebAdapter.ts:27</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1106,37 +1109,36 @@ img { max-width: 100%; }
 				<a name="press" class="tsd-anchor"></a>
 				<h3>press</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-					<li class="tsd-signature tsd-kind-icon">press<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><a href="../globals.html#key" class="tsd-signature-type">Key</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">press<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><a href="../globals.html#key" class="tsd-signature-type">Key</a><span class="tsd-signature-symbol"> | </span><a href="../globals.html#character" class="tsd-signature-type">Character</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebBrowser.ts#L14">WebBrowser.ts:14</a></li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebAdapter.ts#L28">WebAdapter.ts:28</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>key: <a href="../globals.html#key" class="tsd-signature-type">Key</a></h5>
+								<h5>key: <a href="../globals.html#key" class="tsd-signature-type">Key</a><span class="tsd-signature-symbol"> | </span><a href="../globals.html#character" class="tsd-signature-type">Character</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 				<a name="quit" class="tsd-anchor"></a>
 				<h3>quit</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 					<li class="tsd-signature tsd-kind-icon">quit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Inherited from QuitableAdapter.quit</p>
 							<ul>
-								<li>Defined in @pageobject/base/dist/Test.d.ts:3</li>
+								<li>Defined in <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/web/src/WebAdapter.ts#L29">WebAdapter.ts:29</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>

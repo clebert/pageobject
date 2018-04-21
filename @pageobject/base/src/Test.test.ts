@@ -1,10 +1,6 @@
-import {Effect, Predicate, QuitableAdapter, Test} from '.';
+import {Effect, Predicate, Test} from '.';
 
 const {is} = Predicate;
-
-class TestAdapter implements QuitableAdapter {
-  public readonly quit = jest.fn();
-}
 
 class ObservablePromise<T> {
   public readonly promise: Promise<T>;
@@ -73,15 +69,24 @@ async function neverEnding(): Promise<never> {
   return new Promise<never>(() => undefined);
 }
 
+const context = {};
 const defaultTimeoutInSeconds = 0.01;
 
 describe('Test.run()', () => {
-  let adapter: TestAdapter;
   let effect: jest.Mock;
 
   beforeEach(() => {
-    adapter = new TestAdapter();
     effect = jest.fn();
+  });
+
+  it('should call the callback with the specified context', async () => {
+    expect.assertions(1);
+
+    await useFakeTimers(async () =>
+      Test.run(context, defaultTimeoutInSeconds, (test, ctx) => {
+        expect(ctx).toBe(context);
+      })
+    );
   });
 
   it('should run all test steps in sequence', async () => {
@@ -97,12 +102,8 @@ describe('Test.run()', () => {
       calls.push(call);
     };
 
-    adapter.quit.mockImplementation(async () => {
-      calls.push(7);
-    });
-
     await useFakeTimers(async () =>
-      Test.run(adapter, defaultTimeoutInSeconds, test =>
+      Test.run(context, defaultTimeoutInSeconds, test =>
         test
           .assert(fooEffect(1), is('foo'))
           .if(fooEffect(2), is('foo'), thenTest1 =>
@@ -116,27 +117,7 @@ describe('Test.run()', () => {
       )
     );
 
-    expect(calls).toEqual([1, 2, 3, 4, 5, 6, 7]);
-  });
-
-  it('should throw an adapter-quit error', async () => {
-    adapter.quit.mockImplementation(async () => {
-      throw new Error('awaited');
-    });
-
-    await expect(
-      Test.run(adapter, defaultTimeoutInSeconds, test => undefined)
-    ).rejects.toThrow('awaited');
-  });
-
-  describe('Test.adapter', () => {
-    it('should be the specified adapter', async () => {
-      expect.assertions(1);
-
-      await Test.run(adapter, defaultTimeoutInSeconds, test => {
-        expect(test.adapter).toBe(adapter);
-      });
-    });
+    expect(calls).toEqual([1, 2, 3, 4, 5, 6]);
   });
 
   describe('Test.assert()', () => {
@@ -146,12 +127,11 @@ describe('Test.run()', () => {
       effect.mockImplementationOnce(fooValue);
 
       await useFakeTimers(async () =>
-        Test.run(adapter, defaultTimeoutInSeconds, test => {
+        Test.run(context, defaultTimeoutInSeconds, test => {
           test.assert(effect, is('foo'));
         })
       );
 
-      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(3);
     });
 
@@ -163,14 +143,13 @@ describe('Test.run()', () => {
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(adapter, defaultTimeoutInSeconds, test => {
+            Test.run(context, defaultTimeoutInSeconds, test => {
               test.assert(effect, is('bar'));
             }),
           defaultTimeoutInSeconds
         )
       ).rejects.toThrow('Expected value to be:');
 
-      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect.mock.calls.length).toBeGreaterThan(3);
     });
 
@@ -182,14 +161,13 @@ describe('Test.run()', () => {
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(adapter, defaultTimeoutInSeconds, test => {
+            Test.run(context, defaultTimeoutInSeconds, test => {
               test.assert(effect, is('foo'));
             }),
           defaultTimeoutInSeconds
         )
       ).rejects.toThrow('effect 2');
 
-      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(3);
     });
 
@@ -199,14 +177,13 @@ describe('Test.run()', () => {
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(adapter, defaultTimeoutInSeconds, test => {
+            Test.run(context, defaultTimeoutInSeconds, test => {
               test.assert(effect, is('foo'));
             }),
           defaultTimeoutInSeconds
         )
       ).rejects.toThrow('Timeout after 0.01 seconds');
 
-      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(1);
     });
 
@@ -216,33 +193,29 @@ describe('Test.run()', () => {
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(adapter, defaultTimeoutInSeconds, test => {
+            Test.run(context, defaultTimeoutInSeconds, test => {
               test.assert(effect, is('foo'), 1);
             }),
           1
         )
       ).rejects.toThrow('Timeout after 1 second');
 
-      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('Test.if()', () => {
     it('should call the callback with proper arguments', async () => {
-      expect.assertions(8);
+      expect.assertions(6);
 
       await useFakeTimers(async () =>
-        Test.run(adapter, defaultTimeoutInSeconds, test => {
+        Test.run(context, defaultTimeoutInSeconds, test => {
           test.if(effect, is('foo'), (thenTest, elseTest) => {
             expect(thenTest).not.toBe(test);
             expect(elseTest).not.toBe(test);
 
             expect(thenTest).toBeInstanceOf(Test);
             expect(elseTest).toBeInstanceOf(Test);
-
-            expect(thenTest.adapter).toBe(test.adapter);
-            expect(elseTest.adapter).toBe(test.adapter);
 
             expect(thenTest.defaultTimeoutInSeconds).toBe(
               test.defaultTimeoutInSeconds
@@ -264,7 +237,7 @@ describe('Test.run()', () => {
       const noEffect = jest.fn();
 
       await useFakeTimers(async () =>
-        Test.run(adapter, defaultTimeoutInSeconds, test => {
+        Test.run(context, defaultTimeoutInSeconds, test => {
           test.if(effect, is('foo'), (thenTest, elseTest) => {
             thenTest.perform(effect);
 
@@ -284,7 +257,7 @@ describe('Test.run()', () => {
       const noEffect = jest.fn();
 
       await useFakeTimers(async () =>
-        Test.run(adapter, defaultTimeoutInSeconds, test => {
+        Test.run(context, defaultTimeoutInSeconds, test => {
           test.if(effect, is('bar'), (thenTest, elseTest) => {
             thenTest.perform(noEffect);
 
@@ -304,14 +277,13 @@ describe('Test.run()', () => {
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(adapter, defaultTimeoutInSeconds, test => {
+            Test.run(context, defaultTimeoutInSeconds, test => {
               test.if(effect, is('foo'), () => undefined);
             }),
           defaultTimeoutInSeconds
         )
       ).rejects.toThrow('effect 2');
 
-      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(3);
     });
 
@@ -321,14 +293,13 @@ describe('Test.run()', () => {
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(adapter, defaultTimeoutInSeconds, test => {
+            Test.run(context, defaultTimeoutInSeconds, test => {
               test.if(effect, is('foo'), () => undefined);
             }),
           defaultTimeoutInSeconds
         )
       ).rejects.toThrow('Timeout after 0.01 seconds');
 
-      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(1);
     });
 
@@ -338,14 +309,13 @@ describe('Test.run()', () => {
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(adapter, defaultTimeoutInSeconds, test => {
+            Test.run(context, defaultTimeoutInSeconds, test => {
               test.if(effect, is('foo'), () => undefined, 1);
             }),
           1
         )
       ).rejects.toThrow('Timeout after 1 second');
 
-      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(1);
     });
   });
@@ -353,7 +323,7 @@ describe('Test.run()', () => {
   describe('Test.perform()', () => {
     it('should not throw an error', async () => {
       await useFakeTimers(async () =>
-        Test.run(adapter, defaultTimeoutInSeconds, test => {
+        Test.run(context, defaultTimeoutInSeconds, test => {
           test.perform(effect);
         })
       );
@@ -367,13 +337,12 @@ describe('Test.run()', () => {
 
       await expect(
         useFakeTimers(async () =>
-          Test.run(adapter, defaultTimeoutInSeconds, test => {
+          Test.run(context, defaultTimeoutInSeconds, test => {
             test.perform(effect);
           })
         )
       ).rejects.toThrow('effect 1');
 
-      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(1);
     });
 
@@ -383,14 +352,13 @@ describe('Test.run()', () => {
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(adapter, defaultTimeoutInSeconds, test => {
+            Test.run(context, defaultTimeoutInSeconds, test => {
               test.perform(effect);
             }),
           defaultTimeoutInSeconds
         )
       ).rejects.toThrow('Timeout after 0.01 seconds');
 
-      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(1);
     });
 
@@ -400,14 +368,13 @@ describe('Test.run()', () => {
       await expect(
         useFakeTimers(
           async () =>
-            Test.run(adapter, defaultTimeoutInSeconds, test => {
+            Test.run(context, defaultTimeoutInSeconds, test => {
               test.perform(effect, 1);
             }),
           1
         )
       ).rejects.toThrow('Timeout after 1 second');
 
-      expect(adapter.quit).toHaveBeenCalledTimes(1);
       expect(effect).toHaveBeenCalledTimes(1);
     });
   });

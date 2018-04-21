@@ -83,7 +83,7 @@ export class SeleniumAdapter implements WebAdapter {
     )).map(element => new SeleniumNode(element));
   }
 
-  public async navigateTo(url: string): Promise<void> {
+  public async goto(url: string): Promise<void> {
     return this.driver.navigate().to(url);
   }
 

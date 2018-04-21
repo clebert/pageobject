@@ -68,7 +68,7 @@ export class ProtractorAdapter implements WebAdapter {
     )).map(element => new ProtractorNode(element));
   }
 
-  public async navigateTo(url: string): Promise<void> {
+  public async goto(url: string): Promise<void> {
     return this.browser.driver.navigate().to(url);
   }
 

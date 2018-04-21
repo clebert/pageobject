@@ -122,7 +122,7 @@ export class PuppeteerAdapter implements WebAdapter {
     );
   }
 
-  public async navigateTo(url: string): Promise<void> {
+  public async goto(url: string): Promise<void> {
     await this.page.goto(url, this.navigationOptions);
   }
 

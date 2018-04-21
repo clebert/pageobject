@@ -83,7 +83,7 @@ export class JSDOMAdapter implements WebAdapter {
     ).map(element => new JSDOMNode(element as HTMLElement, this._jsdom));
   }
 
-  public async navigateTo(url: string): Promise<void> {
+  public async goto(url: string): Promise<void> {
     await this.quit();
 
     const options: FromFileOptions = {runScripts: 'dangerously'};

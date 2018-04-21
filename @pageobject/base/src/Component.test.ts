@@ -1,8 +1,8 @@
-import {Component, DOMAdapter, Effect, Predicate} from '.';
+import {Adapter, Component, Effect, Predicate} from '.';
 
 const {is, isGreaterThan, matches} = Predicate;
 
-class TestAdapter implements DOMAdapter<HTMLElement> {
+class TestAdapter implements Adapter<HTMLElement> {
   public async findNodes(
     selector: string,
     ancestor?: HTMLElement
@@ -11,7 +11,7 @@ class TestAdapter implements DOMAdapter<HTMLElement> {
   }
 }
 
-class DIV extends Component<HTMLElement> {
+class DIV extends Component<HTMLElement, TestAdapter> {
   public readonly selector: string = 'div';
 
   public get divs(): DIV {
@@ -23,7 +23,7 @@ class DIV extends Component<HTMLElement> {
   }
 }
 
-class Unselectable extends Component<HTMLElement> {
+class Unselectable extends Component<HTMLElement, TestAdapter> {
   public readonly selector: string = '';
 }
 

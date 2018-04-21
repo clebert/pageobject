@@ -1,26 +1,22 @@
 import {Predicate} from '.';
 
-export interface DOMAdapter<TNode> {
+export interface Adapter<TNode> {
   findNodes(selector: string, ancestor?: TNode): Promise<TNode[]>;
 }
 
 export type Effect<TResult> = () => Promise<TResult>;
 
-export type Getter<TNode, TComponent extends Component<TNode>, TResult> = (
-  component: TComponent
-) => Effect<TResult>;
-
-export abstract class Component<TNode> {
+export abstract class Component<TNode, TAdapter extends Adapter<TNode>> {
   public abstract readonly selector: string;
 
-  public readonly adapter: DOMAdapter<TNode>;
-  public readonly ancestor?: Component<TNode>;
+  public readonly adapter: TAdapter;
+  public readonly ancestor?: Component<TNode, TAdapter>;
 
-  private _filter?: (component: Component<TNode>) => Promise<boolean>;
+  private _filter?: (component: Component<TNode, TAdapter>) => Promise<boolean>;
   private _position?: number;
   private _node?: TNode;
 
-  public constructor(adapter: DOMAdapter<TNode>, ancestor?: Component<TNode>) {
+  public constructor(adapter: TAdapter, ancestor?: Component<TNode, TAdapter>) {
     this.adapter = adapter;
     this.ancestor = ancestor;
   }
@@ -47,7 +43,7 @@ export abstract class Component<TNode> {
   }
 
   public where<TValue>(
-    getter: Getter<TNode, this, TValue>,
+    getter: (component: this) => Effect<TValue>,
     predicate: Predicate<TValue>
   ): this {
     const reconstruction = this.reconstruct();
