@@ -98,10 +98,40 @@ describe('WebComponent', () => {
     });
   });
 
-  describe('isVisible() => Effect()', () => {
-    it('should return the visibility of this component', async () => {
-      await expect(component.isVisible()()).resolves.toBe(false);
+  describe('isExisting() => Effect()', () => {
+    it('should return true', async () => {
+      await expect(component.isExisting()()).resolves.toBe(true);
 
+      adapter.findNodes.mockImplementation(async () => [node, node]);
+
+      await expect(component.isExisting()()).resolves.toBe(true);
+    });
+
+    it('should return false', async () => {
+      adapter.findNodes.mockImplementation(async () => []);
+
+      await expect(component.isExisting()()).resolves.toBe(false);
+    });
+  });
+
+  describe('isUnique() => Effect()', () => {
+    it('should return true', async () => {
+      await expect(component.isUnique()()).resolves.toBe(true);
+    });
+
+    it('should return false', async () => {
+      adapter.findNodes.mockImplementation(async () => []);
+
+      await expect(component.isUnique()()).resolves.toBe(false);
+
+      adapter.findNodes.mockImplementation(async () => [node, node]);
+
+      await expect(component.isUnique()()).resolves.toBe(false);
+    });
+  });
+
+  describe('isVisible() => Effect()', () => {
+    it('should return true', async () => {
       element.offsetHeight = 1;
       element.offsetWidth = 0;
 
@@ -116,6 +146,10 @@ describe('WebComponent', () => {
       element.offsetWidth = 1;
 
       await expect(component.isVisible()()).resolves.toBe(true);
+    });
+
+    it('should return false', async () => {
+      await expect(component.isVisible()()).resolves.toBe(false);
     });
   });
 
