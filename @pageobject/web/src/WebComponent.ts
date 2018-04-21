@@ -38,6 +38,14 @@ export abstract class WebComponent extends Component<WebNode> {
       );
   }
 
+  public isExisting(): Effect<boolean> {
+    return async () => (await this.findNodes()).length > 0;
+  }
+
+  public isUnique(): Effect<boolean> {
+    return async () => (await this.findNodes()).length === 1;
+  }
+
   /**
    * A component is considered visible if it consumes space in the document.
    */
