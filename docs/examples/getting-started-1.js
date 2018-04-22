@@ -1,16 +1,24 @@
 const {Predicate, Test} = require('@pageobject/base');
-const {JSDOMAdapter, WebBrowser} = require('@pageobject/web');
+const {JSDOMAdapter, WebComponent} = require('@pageobject/web');
 
-function example(test) {
-  const browser = new WebBrowser(test.adapter);
+const {is} = Predicate;
 
-  test.perform(browser.navigateTo('http://example.com/'));
+class App extends WebComponent {
+  get selector() {
+    return ':root';
+  }
+}
 
-  test.assert(browser.getPageTitle(), Predicate.is('Example Domain'));
+function example(test, app) {
+  test
+    .perform(app.page.goto('http://example.com/'))
+    .assert(app.page.getTitle(), is('Example Domain'));
 }
 
 (async () => {
-  await Test.run(new JSDOMAdapter(), 10, example);
+  const adapter = new JSDOMAdapter();
+
+  await Test.run(new App(adapter), 10, example);
 
   console.log(`OK: ${__filename}`);
 })().catch(error => {

@@ -1,6 +1,8 @@
 const {Predicate, Test} = require('@pageobject/base');
-const {WebBrowser, WebComponent} = require('@pageobject/web');
+const {WebComponent} = require('@pageobject/web');
 const {PuppeteerAdapter} = require('@pageobject/puppeteer');
+
+const {is} = Predicate;
 
 class Link extends WebComponent {
   get selector() {
@@ -8,7 +10,7 @@ class Link extends WebComponent {
   }
 }
 
-class ExamplePage extends WebComponent {
+class App extends WebComponent {
   get selector() {
     return ':root';
   }
@@ -18,21 +20,12 @@ class ExamplePage extends WebComponent {
   }
 }
 
-function example(test) {
-  const browser = new WebBrowser(test.adapter);
-
-  test.perform(browser.navigateTo('http://example.com/'));
-
-  test.assert(browser.getPageTitle(), Predicate.is('Example Domain'));
-
-  const page = new ExamplePage(test.adapter);
-
-  test.assert(
-    page.moreInformationLink.getText(),
-    Predicate.is('More information...')
-  );
-
-  test.perform(page.moreInformationLink.click());
+function example(test, app) {
+  test
+    .perform(app.page.goto('http://example.com/'))
+    .assert(app.page.getTitle(), is('Example Domain'))
+    .assert(app.moreInformationLink.getText(), is('More information...'))
+    .perform(app.moreInformationLink.click());
 }
 
 const args =
@@ -41,7 +34,13 @@ const args =
     : [];
 
 (async () => {
-  await Test.run(await PuppeteerAdapter.create({args}), 10, example);
+  const adapter = await PuppeteerAdapter.create({args});
+
+  try {
+    await Test.run(new App(adapter), 10, example);
+  } finally {
+    await adapter.quit();
+  }
 
   console.log(`OK: ${__filename}`);
 })().catch(error => {

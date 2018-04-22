@@ -1,18 +1,57 @@
 import {Component, Effect} from '@pageobject/base';
+import {Key, WebAdapter, WebNode} from '.';
 
-export type Argument = any; // tslint:disable-line no-any
+export class Keyboard {
+  public readonly adapter: WebAdapter;
 
-export interface WebNode {
-  click(): Promise<void>;
-  doubleClick(): Promise<void>;
+  public constructor(adapter: WebAdapter) {
+    this.adapter = adapter;
+  }
 
-  execute<THTMLElement extends HTMLElement, TResult>(
-    script: (element: THTMLElement, ...args: Argument[]) => TResult,
-    ...args: Argument[]
-  ): Promise<TResult>;
+  public press(key: Key): Effect<void> {
+    return async () => this.adapter.press(key);
+  }
+
+  public type(text: string): Effect<void> {
+    return async () => {
+      for (const character of text.split('')) {
+        await this.adapter.press(character);
+      }
+    };
+  }
 }
 
-export abstract class WebComponent extends Component<WebNode> {
+export class Page {
+  public readonly adapter: WebAdapter;
+
+  public constructor(adapter: WebAdapter) {
+    this.adapter = adapter;
+  }
+
+  public getTitle(): Effect<string> {
+    return async () => this.adapter.execute(() => document.title);
+  }
+
+  public getURL(): Effect<string> {
+    return async () => this.adapter.execute(() => window.location.href);
+  }
+
+  public goto(url: string): Effect<void> {
+    return async () => this.adapter.goto(url);
+  }
+}
+
+export abstract class WebComponent extends Component<WebNode, WebAdapter> {
+  public readonly keyboard: Keyboard;
+  public readonly page: Page;
+
+  public constructor(adapter: WebAdapter, ancestor?: WebComponent) {
+    super(adapter, ancestor);
+
+    this.keyboard = new Keyboard(adapter);
+    this.page = new Page(adapter);
+  }
+
   public click(): Effect<void> {
     return async () => (await this.findUniqueNode()).click();
   }

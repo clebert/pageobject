@@ -1,6 +1,33 @@
+import {Adapter} from '@pageobject/base';
 import {ok, strictEqual} from 'assert';
 import {join} from 'path';
 import {WebAdapter} from '.';
+
+export type Argument = any; // tslint:disable-line no-any
+
+export interface WebNode {
+  click(): Promise<void>;
+  doubleClick(): Promise<void>;
+
+  execute<THTMLElement extends HTMLElement, TResult>(
+    script: (element: THTMLElement, ...args: Argument[]) => TResult,
+    ...args: Argument[]
+  ): Promise<TResult>;
+}
+
+export type Character = string;
+export type Key = 'Enter' | 'Escape' | 'Tab';
+
+export interface WebAdapter extends Adapter<WebNode> {
+  execute<TResult>(
+    script: (...args: Argument[]) => TResult,
+    ...args: Argument[]
+  ): Promise<TResult>;
+
+  goto(url: string): Promise<void>;
+  press(key: Key | Character): Promise<void>;
+  quit(): Promise<void>;
+}
 
 const fileURL = `file://${join(__dirname, '../fixtures/index.html')}`;
 
@@ -15,12 +42,12 @@ export class WebAdapterTest {
     try {
       await this._testAdapterExecute();
       await this._testAdapterFindNodes();
-      await this._testAdapterNavigateTo();
+      await this._testAdapterGoto();
       await this._testAdapterPress();
 
-      await this._testElementClick();
-      await this._testElementDoubleClick();
-      await this._testElementExecute();
+      await this._testNodeClick();
+      await this._testNodeDoubleClick();
+      await this._testNodeExecute();
     } finally {
       await this.adapter.quit();
     }
@@ -32,7 +59,7 @@ export class WebAdapterTest {
   }
 
   private async _testAdapterExecute(): Promise<void> {
-    await this.adapter.navigateTo(fileURL);
+    await this.adapter.goto(fileURL);
 
     // istanbul ignore next
     strictEqual(
@@ -59,7 +86,7 @@ export class WebAdapterTest {
   }
 
   private async _testAdapterFindNodes(): Promise<void> {
-    await this.adapter.navigateTo(fileURL);
+    await this.adapter.goto(fileURL);
 
     const divs = await this.adapter.findNodes('div');
 
@@ -71,18 +98,18 @@ export class WebAdapterTest {
     strictEqual((await this.adapter.findNodes('unknown')).length, 0);
   }
 
-  private async _testAdapterNavigateTo(): Promise<void> {
-    await this.adapter.navigateTo(fileURL);
+  private async _testAdapterGoto(): Promise<void> {
+    await this.adapter.goto(fileURL);
 
     strictEqual(await this._getPageTitle(), 'Test');
 
-    await this.adapter.navigateTo('http://example.com');
+    await this.adapter.goto('http://example.com');
 
     strictEqual(await this._getPageTitle(), 'Example Domain');
   }
 
   private async _testAdapterPress(): Promise<void> {
-    await this.adapter.navigateTo(fileURL);
+    await this.adapter.goto(fileURL);
 
     strictEqual(await this._getPageTitle(), 'Test');
 
@@ -112,8 +139,8 @@ export class WebAdapterTest {
     strictEqual(await this._getPageTitle(), 'Event: keydown Tab, keyup Tab');
   }
 
-  private async _testElementClick(): Promise<void> {
-    await this.adapter.navigateTo(fileURL);
+  private async _testNodeClick(): Promise<void> {
+    await this.adapter.goto(fileURL);
 
     const button = (await this.adapter.findNodes('#click'))[0];
 
@@ -124,8 +151,8 @@ export class WebAdapterTest {
     strictEqual(await this._getPageTitle(), 'Event: click');
   }
 
-  private async _testElementDoubleClick(): Promise<void> {
-    await this.adapter.navigateTo(fileURL);
+  private async _testNodeDoubleClick(): Promise<void> {
+    await this.adapter.goto(fileURL);
 
     const button = (await this.adapter.findNodes('#dblclick'))[0];
 
@@ -136,8 +163,8 @@ export class WebAdapterTest {
     strictEqual(await this._getPageTitle(), 'Event: dblclick');
   }
 
-  private async _testElementExecute(): Promise<void> {
-    await this.adapter.navigateTo(fileURL);
+  private async _testNodeExecute(): Promise<void> {
+    await this.adapter.goto(fileURL);
 
     const text = (await this.adapter.findNodes('#text'))[0];
 
