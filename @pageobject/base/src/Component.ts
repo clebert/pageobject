@@ -22,15 +22,19 @@ export abstract class Component<TNode, TAdapter extends Adapter<TNode>> {
   }
 
   public at(position: number): this {
+    const name = this.toString();
+
     if (position < 1) {
-      throw new Error(`The specified position (${position}) must be one-based`);
+      throw new Error(
+        `Position (${position}) of ${name} component must be one-based`
+      );
     }
 
     if (this._position) {
       throw new Error(
-        `The existing position (${
+        `Position (${
           this._position
-        }) of this ${this.toString()} component cannot be overwritten with ${position}`
+        }) of ${name} component cannot be overwritten with ${position}`
       );
     }
 
@@ -63,9 +67,7 @@ export abstract class Component<TNode, TAdapter extends Adapter<TNode>> {
     }
 
     if (!this.selector) {
-      throw new Error(
-        `The specified ${this.toString()} component has no selector`
-      );
+      throw new Error(`${this.toString()} component has no selector`);
     }
 
     let nodes = await this.adapter.findNodes(
@@ -100,24 +102,17 @@ export abstract class Component<TNode, TAdapter extends Adapter<TNode>> {
 
   public async findUniqueNode(): Promise<TNode> {
     const nodes = await this.findNodes();
+    const name = this.toString();
 
     if (nodes.length === 0) {
-      throw new Error(
-        `The searched ${this.toString()} component cannot be found`
-      );
+      throw new Error(`${name} component cannot be found`);
     }
 
     if (nodes.length > 1) {
-      throw new Error(
-        `The searched ${this.toString()} component cannot be uniquely determined`
-      );
+      throw new Error(`${name} component cannot be uniquely determined`);
     }
 
     return nodes[0];
-  }
-
-  public getNodeCount(): Effect<number> {
-    return async () => (await this.findNodes()).length;
   }
 
   public toString(): string {

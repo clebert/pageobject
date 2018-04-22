@@ -21,6 +21,10 @@ class DIV extends Component<HTMLElement, TestAdapter> {
   public getID(): Effect<string> {
     return async () => (await this.findUniqueNode()).id;
   }
+
+  public getNodeCount(): Effect<number> {
+    return async () => (await this.findNodes()).length;
+  }
 }
 
 class Unselectable extends Component<HTMLElement, TestAdapter> {
@@ -100,27 +104,27 @@ const filterNotUnique = divs.where(div => div.divs.getID(), matches(/./));
 
 describe('Component', () => {
   describe('at()', () => {
-    it('should throw an illegal-argument error', () => {
+    it('should throw a position-base error', () => {
       expect(() => divs.at(0)).toThrow(
-        'The specified position (0) must be one-based'
+        'Position (0) of <DIV> component must be one-based'
       );
     });
 
-    it('should throw an illegal-state error', () => {
+    it('should throw a position-already-set error', () => {
       expect(() => divs.at(1).at(2)).toThrow(
-        'The existing position (1) of this <DIV> component cannot be overwritten with 2'
+        'Position (1) of <DIV> component cannot be overwritten with 2'
       );
     });
   });
 
   describe('findUniqueNode()', () => {
-    it('should throw an illegal-argument error', async () => {
+    it('should throw a no-selector error', async () => {
       await expect(unselectable.findUniqueNode()).rejects.toThrow(
-        'The specified <Unselectable> component has no selector'
+        '<Unselectable> component has no selector'
       );
     });
 
-    it('should return an unique node', async () => {
+    it('should return a unique node', async () => {
       for (const a1 of a1List) {
         expect((await a1.findUniqueNode()).id).toBe('a1');
       }
@@ -139,7 +143,7 @@ describe('Component', () => {
     });
 
     it('should throw a component-not-found error', async () => {
-      const message = 'The searched <DIV> component cannot be found';
+      const message = '<DIV> component cannot be found';
 
       for (const notFound of notFoundList) {
         await expect(notFound.findUniqueNode()).rejects.toThrow(message);
@@ -150,8 +154,7 @@ describe('Component', () => {
     });
 
     it('should throw a component-not-unique error', async () => {
-      const message =
-        'The searched <DIV> component cannot be uniquely determined';
+      const message = '<DIV> component cannot be uniquely determined';
 
       for (const notUnique of notUniqueList) {
         await expect(notUnique.findUniqueNode()).rejects.toThrow(message);
@@ -162,56 +165,55 @@ describe('Component', () => {
     });
   });
 
-  describe('getNodeCount() => Effect()', () => {
-    it('should throw an illegal-argument error', async () => {
-      await expect(unselectable.getNodeCount()()).rejects.toThrow(
-        'The specified <Unselectable> component has no selector'
+  describe('findNodes()', () => {
+    it('should throw a no-selector error', async () => {
+      await expect(unselectable.findNodes()).rejects.toThrow(
+        '<Unselectable> component has no selector'
       );
     });
 
-    it('should return 1', async () => {
+    it('should return an array with one node', async () => {
       for (const a1 of a1List) {
-        await expect(a1.getNodeCount()()).resolves.toBe(1);
+        expect((await a1.findNodes()).length).toBe(1);
       }
 
       for (const a2 of a2List) {
-        await expect(a2.getNodeCount()()).resolves.toBe(1);
+        expect((await a2.findNodes()).length).toBe(1);
       }
 
       for (const b1 of b1List) {
-        await expect(b1.getNodeCount()()).resolves.toBe(1);
+        expect((await b1.findNodes()).length).toBe(1);
       }
 
       for (const b2 of b2List) {
-        await expect(b2.getNodeCount()()).resolves.toBe(1);
+        expect((await b2.findNodes()).length).toBe(1);
       }
     });
 
-    it('should return 0', async () => {
+    it('should return an empty array', async () => {
       for (const notFound of notFoundList) {
-        await expect(notFound.getNodeCount()()).resolves.toBe(0);
+        expect((await notFound.findNodes()).length).toBe(0);
       }
     });
 
-    it('should return a number greater than 1', async () => {
+    it('should return an array with more than one node', async () => {
       for (const notUnique of notUniqueList) {
-        await expect(notUnique.getNodeCount()()).resolves.toBeGreaterThan(1);
+        expect((await notUnique.findNodes()).length).toBeGreaterThan(1);
       }
     });
 
     it('should throw a component-not-found error', async () => {
-      const message = 'The searched <DIV> component cannot be found';
+      const message = '<DIV> component cannot be found';
 
-      await expect(ancestorNotFound.getNodeCount()()).rejects.toThrow(message);
-      await expect(filterNotFound.getNodeCount()()).rejects.toThrow(message);
+      await expect(ancestorNotFound.findNodes()).rejects.toThrow(message);
+      await expect(filterNotFound.findNodes()).rejects.toThrow(message);
     });
 
     it('should throw a component-not-unique error', async () => {
-      const message =
-        'The searched <DIV> component cannot be uniquely determined';
+      const message = '<DIV> component cannot be uniquely determined';
 
-      await expect(ancestorNotUnique.getNodeCount()()).rejects.toThrow(message);
-      await expect(filterNotUnique.getNodeCount()()).rejects.toThrow(message);
+      await expect(ancestorNotUnique.findNodes()).rejects.toThrow(message);
+      await expect(filterNotUnique.findNodes()).rejects.toThrow(message);
     });
   });
 });

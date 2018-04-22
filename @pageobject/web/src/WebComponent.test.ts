@@ -186,6 +186,24 @@ describe('WebComponent', () => {
     });
   });
 
+  describe('getNodeCount() => Effect()', () => {
+    it('should return 0', async () => {
+      adapter.findNodes.mockImplementation(async () => []);
+
+      await expect(component.getNodeCount()()).resolves.toBe(0);
+    });
+
+    it('should return 1', async () => {
+      await expect(component.getNodeCount()()).resolves.toBe(1);
+    });
+
+    it('should return 2', async () => {
+      adapter.findNodes.mockImplementation(async () => [node, node]);
+
+      await expect(component.getNodeCount()()).resolves.toBe(2);
+    });
+  });
+
   describe('getText() => Effect()', () => {
     it('should return the text of this component', async () => {
       await expect(component.getText()()).resolves.toBe('text');
