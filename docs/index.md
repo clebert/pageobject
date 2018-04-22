@@ -67,7 +67,7 @@ const adapter = await PuppeteerAdapter.create();
 
 ### Example 3: Writing and using another component
 
-Next we write a component for the "More information..." link:
+Next we write a component for the "more information" link:
 
 ```js
 class Link extends WebComponent {
@@ -91,7 +91,7 @@ class App extends WebComponent {
 }
 ```
 
-Now we extend our test by asserting the link text and then following the link:
+Now we extend our existing test so that it asserts the link text and then clicks on the link:
 
 ```js
 function example(test, app) {
