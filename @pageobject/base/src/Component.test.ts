@@ -47,48 +47,60 @@ const unselectable = new Unselectable(adapter);
 const divs = new DIV(adapter);
 
 const a1List = [
-  divs.at(1),
+  divs.nth(1),
+  divs.nth(-6),
+  divs.first(),
   divs.where(div => div.getID(), is('a1')),
-  divs.where(div => div.getID(), matches(/a/)).at(1),
+  divs.where(div => div.getID(), matches(/a/)).nth(1),
   divs
     .where(div => div.divs.getNodeCount(), isGreaterThan(1))
-    .where(div => div.divs.at(1).getID(), is('b1'))
+    .where(div => div.divs.nth(1).getID(), is('b1'))
 ];
 
 const a2List = [
-  divs.at(6),
+  divs.nth(6),
+  divs.nth(-1),
+  divs.last(),
   divs.where(div => div.getID(), is('a2')),
-  divs.where(div => div.getID(), matches(/a/)).at(2),
-  divs.where(div => div.divs.getNodeCount(), is(0)).at(4)
+  divs.where(div => div.getID(), matches(/a/)).nth(2),
+  divs.where(div => div.divs.getNodeCount(), is(0)).nth(4)
 ];
 
 const b1List = [
-  divs.at(2),
+  divs.nth(2),
+  divs.nth(-5),
   divs.where(div => div.getID(), is('b1')),
-  divs.where(div => div.getID(), matches(/b/)).at(1),
+  divs.where(div => div.getID(), matches(/b/)).nth(1),
   divs
     .where(div => div.divs.getNodeCount(), isGreaterThan(1))
-    .where(div => div.divs.at(1).getID(), is('c1')),
-  a1List[0].divs.at(1)
+    .where(div => div.divs.nth(1).getID(), is('c1')),
+  a1List[0].divs.nth(1),
+  a1List[0].divs.nth(-4),
+  a1List[0].divs.first()
 ];
 
 const b2List = [
-  divs.at(5),
+  divs.nth(5),
+  divs.nth(-2),
   divs.where(div => div.getID(), is('b2')),
-  divs.where(div => div.getID(), matches(/b/)).at(2),
-  divs.where(div => div.divs.getNodeCount(), is(0)).at(3),
-  a1List[0].divs.at(4)
+  divs.where(div => div.getID(), matches(/b/)).nth(2),
+  divs.where(div => div.divs.getNodeCount(), is(0)).nth(3),
+  a1List[0].divs.nth(4),
+  a1List[0].divs.nth(-1),
+  a1List[0].divs.last()
 ];
 
 const notFoundList = [
-  divs.at(7),
+  divs.nth(7),
+  divs.nth(-7),
   divs.where(div => div.getID(), is('a3')),
-  a1List[0].divs.at(5),
+  a1List[0].divs.nth(5),
+  a1List[0].divs.nth(-5),
   a1List[0].divs.where(div => div.getID(), matches(/a/))
 ];
 
 const ancestorNotFound = notFoundList[0].divs;
-const filterNotFound = divs.where(div => div.divs.at(1).getID(), matches(/./));
+const filterNotFound = divs.where(div => div.divs.nth(1).getID(), matches(/./));
 
 const notUniqueList = [
   divs,
@@ -99,20 +111,32 @@ const notUniqueList = [
   a1List[0].divs.where(div => div.getID(), matches(/b/))
 ];
 
-const ancestorNotUnique = divs.divs.at(1);
+const ancestorNotUnique = divs.divs.nth(1);
 const filterNotUnique = divs.where(div => div.divs.getID(), matches(/./));
 
 describe('Component', () => {
-  describe('at()', () => {
+  describe('nth()', () => {
     it('should throw a position-base error', () => {
-      expect(() => divs.at(0)).toThrow(
+      expect(() => divs.nth(0)).toThrow(
         'Position (0) of <DIV> component must be one-based'
       );
     });
 
     it('should throw a position-already-set error', () => {
-      expect(() => divs.at(1).at(2)).toThrow(
+      expect(() => divs.nth(1).nth(2)).toThrow(
         'Position (1) of <DIV> component cannot be overwritten with 2'
+      );
+
+      expect(() => divs.nth(-1).nth(2)).toThrow(
+        'Position (-1) of <DIV> component cannot be overwritten with 2'
+      );
+
+      expect(() => divs.first().nth(2)).toThrow(
+        'Position (1) of <DIV> component cannot be overwritten with 2'
+      );
+
+      expect(() => divs.last().nth(2)).toThrow(
+        'Position (-1) of <DIV> component cannot be overwritten with 2'
       );
     });
   });

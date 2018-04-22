@@ -21,10 +21,18 @@ export abstract class Component<TNode, TAdapter extends Adapter<TNode>> {
     this.ancestor = ancestor;
   }
 
-  public at(position: number): this {
+  public first(): this {
+    return this.nth(1);
+  }
+
+  public last(): this {
+    return this.nth(-1);
+  }
+
+  public nth(position: number): this {
     const name = this.toString();
 
-    if (position < 1) {
+    if (position === 0) {
       throw new Error(
         `Position (${position}) of ${name} component must be one-based`
       );
@@ -92,9 +100,10 @@ export abstract class Component<TNode, TAdapter extends Adapter<TNode>> {
     }
 
     if (this._position) {
-      const index = this._position - 1;
+      const index =
+        this._position < 0 ? nodes.length + this._position : this._position - 1;
 
-      nodes = index < nodes.length ? [nodes[index]] : [];
+      nodes = index >= 0 && index < nodes.length ? [nodes[index]] : [];
     }
 
     return nodes;
