@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="10.0.0"></a>
+# [10.0.0](https://github.com/clebert/pageobject/compare/v9.1.0...v10.0.0) (2018-04-22)
+
+
+### Features
+
+* **all:** improving the usability and readability of the api ([#213](https://github.com/clebert/pageobject/issues/213)) ([6a22eeb](https://github.com/clebert/pageobject/commit/6a22eeb))
+* **all:** move effector from component to web component ([#215](https://github.com/clebert/pageobject/issues/215)) ([cd77b49](https://github.com/clebert/pageobject/commit/cd77b49))
+
+
+### BREAKING CHANGES
+
+* **all:** Moved the `getNodeCount` method from the `Component` class to the `WebComponent` class.
+* **all:** Simplified the adapter concept and replaced the `WebBrowser` class with the `Keyboard` and `Page` classes.
+
+
+
+
 <a name="9.1.0"></a>
 # [9.1.0](https://github.com/clebert/pageobject/compare/v9.0.0...v9.1.0) (2018-04-21)
 
