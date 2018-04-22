@@ -1,7 +1,7 @@
 import {FromFileOptions, JSDOM} from 'jsdom';
 import {inspect} from 'util';
 import {Script} from 'vm';
-import {Argument, Key, WebAdapter, WebNode} from '.';
+import {Argument, Key, WebAdapter, WebNode} from './WebComponent';
 
 // tslint:disable-next-line no-any
 function serialize(value: any): string {

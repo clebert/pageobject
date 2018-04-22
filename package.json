@@ -46,8 +46,8 @@
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/@pageobject/*/src/**/*.ts",
-      "!**/@pageobject/protractor/src/**/*.ts"
+      "**/@pageobject/*/src/*.ts",
+      "!**/@pageobject/protractor/src/*.ts"
     ],
     "coverageThreshold": {
       "global": {
@@ -63,7 +63,7 @@
       "ts"
     ],
     "testMatch": [
-      "<rootDir>/@pageobject/*/src/**/*.test.ts"
+      "<rootDir>/@pageobject/*/src/tests/*.test.ts"
     ],
     "transform": {
       ".ts": "<rootDir>/node_modules/ts-jest/preprocessor.js"

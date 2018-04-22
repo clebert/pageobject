@@ -1,4 +1,4 @@
-import {Predicate} from '.';
+import {Predicate} from './Predicate';
 
 export interface Adapter<TNode> {
   findNodes(selector: string, ancestor?: TNode): Promise<TNode[]>;

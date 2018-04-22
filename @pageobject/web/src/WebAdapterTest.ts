@@ -1,6 +1,6 @@
 import {ok, strictEqual} from 'assert';
 import {join} from 'path';
-import {WebAdapter} from '.';
+import {WebAdapter} from './WebComponent';
 
 const fileURL = `file://${join(__dirname, '../fixtures/index.html')}`;
 

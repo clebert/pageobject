@@ -1,4 +1,4 @@
-import {Predicate} from '.';
+import {Predicate} from '..';
 
 interface JestGlobal {
   expect?: typeof expect;
