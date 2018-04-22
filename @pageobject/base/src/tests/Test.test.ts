@@ -1,4 +1,4 @@
-import {Effect, Predicate, Test} from '.';
+import {Effect, Predicate, Test} from '..';
 
 const {is} = Predicate;
 

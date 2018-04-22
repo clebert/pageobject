@@ -1,4 +1,4 @@
-import {Keyboard, Page, WebAdapter, WebComponent, WebNode} from '.';
+import {Keyboard, Page, WebAdapter, WebComponent, WebNode} from '..';
 
 class TestAdapter implements WebAdapter {
   public readonly execute = jest.fn();

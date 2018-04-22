@@ -1,4 +1,5 @@
-import {Effect, Predicate} from '.';
+import {Effect} from './Component';
+import {Predicate} from './Predicate';
 
 export type ConditionalTestCallback = (thenTest: Test, elseTest: Test) => void;
 export type TestCallback<TContext> = (test: Test, context: TContext) => void;

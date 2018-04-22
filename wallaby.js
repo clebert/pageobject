@@ -34,11 +34,7 @@ module.exports = ({localProjectDir, projectCacheDir}) => {
   return {
     debug: true,
     env: {type: 'node', runner: 'node'},
-    files: [
-      '@pageobject/*/fixtures/**/*',
-      '@pageobject/*/src/**/*.ts',
-      '!@pageobject/*/src/**/*.test.ts'
-    ],
+    files: ['@pageobject/*/fixtures/*', '@pageobject/*/src/*.ts'],
     hints: {
       ignoreCoverage: /istanbul ignore/
     },
@@ -49,10 +45,8 @@ module.exports = ({localProjectDir, projectCacheDir}) => {
     setup,
     testFramework: 'jest',
     tests: [
-      '@pageobject/*/src/**/*.test.ts',
-      '!@pageobject/protractor/src/**/*.test.ts',
-      '!@pageobject/puppeteer/src/**/*.test.ts',
-      '!@pageobject/selenium-webdriver/src/**/*.test.ts'
+      '@pageobject/base/src/tests/*.test.ts',
+      '@pageobject/web/src/tests/*.test.ts'
     ]
   };
 };

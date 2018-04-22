@@ -1,4 +1,4 @@
-import {JSDOMAdapter, WebAdapterTest} from '.';
+import {JSDOMAdapter, WebAdapterTest} from '..';
 
 describe('JSDOMAdapter', () => {
   it('should pass the WebAdapterTest successfully', async () => {

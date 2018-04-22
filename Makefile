@@ -12,7 +12,7 @@ clean:
 	rm -rf @pageobject/*/dist
 	rm -rf docs/api/*
 
-@pageobject/%/dist: @pageobject/%/src/*.ts | node_modules node_modules/webdriver-manager/selenium
+@pageobject/%/dist: @pageobject/%/src/*.ts @pageobject/%/src/tests/*.ts | node_modules node_modules/webdriver-manager/selenium
 	$(BIN)/tsc --project @pageobject/$*
 	touch $@
 

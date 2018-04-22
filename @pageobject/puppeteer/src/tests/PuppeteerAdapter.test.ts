@@ -1,5 +1,5 @@
 import {WebAdapterTest} from '@pageobject/web';
-import {PuppeteerAdapter} from '.';
+import {PuppeteerAdapter} from '..';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 

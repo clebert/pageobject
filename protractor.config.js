@@ -12,5 +12,5 @@ const args =
 exports.config = {
   capabilities: {browserName: 'chrome', chromeOptions: {args}},
   directConnect: true,
-  specs: ['@pageobject/protractor/dist/ProtractorAdapter.spec.js']
+  specs: ['@pageobject/protractor/dist/tests/ProtractorAdapter.spec.js']
 };

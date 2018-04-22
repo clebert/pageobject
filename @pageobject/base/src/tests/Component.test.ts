@@ -1,4 +1,4 @@
-import {Adapter, Component, Effect, Predicate} from '.';
+import {Adapter, Component, Effect, Predicate} from '..';
 
 const {is, isGreaterThan, matches} = Predicate;
 
