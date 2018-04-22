@@ -1,5 +1,30 @@
-import {Component, Effect} from '@pageobject/base';
-import {Key, WebAdapter, WebNode} from '.';
+import {Adapter, Component, Effect} from '@pageobject/base';
+
+export type Argument = any; // tslint:disable-line no-any
+
+export interface WebNode {
+  click(): Promise<void>;
+  doubleClick(): Promise<void>;
+
+  execute<THTMLElement extends HTMLElement, TResult>(
+    script: (element: THTMLElement, ...args: Argument[]) => TResult,
+    ...args: Argument[]
+  ): Promise<TResult>;
+}
+
+export type Character = string;
+export type Key = 'Enter' | 'Escape' | 'Tab';
+
+export interface WebAdapter extends Adapter<WebNode> {
+  execute<TResult>(
+    script: (...args: Argument[]) => TResult,
+    ...args: Argument[]
+  ): Promise<TResult>;
+
+  goto(url: string): Promise<void>;
+  press(key: Key | Character): Promise<void>;
+  quit(): Promise<void>;
+}
 
 export class Keyboard {
   public readonly adapter: WebAdapter;
@@ -58,6 +83,10 @@ export abstract class WebComponent extends Component<WebNode, WebAdapter> {
 
   public doubleClick(): Effect<void> {
     return async () => (await this.findUniqueNode()).doubleClick();
+  }
+
+  public getNodeCount(): Effect<number> {
+    return async () => (await this.findNodes()).length;
   }
 
   /**

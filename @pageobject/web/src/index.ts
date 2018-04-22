@@ -1,3 +1,3 @@
 export * from './JSDOMAdapter';
-export * from './WebAdapter';
+export * from './WebAdapterTest';
 export * from './WebComponent';

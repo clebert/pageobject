@@ -1,33 +1,6 @@
-import {Adapter} from '@pageobject/base';
 import {ok, strictEqual} from 'assert';
 import {join} from 'path';
 import {WebAdapter} from '.';
-
-export type Argument = any; // tslint:disable-line no-any
-
-export interface WebNode {
-  click(): Promise<void>;
-  doubleClick(): Promise<void>;
-
-  execute<THTMLElement extends HTMLElement, TResult>(
-    script: (element: THTMLElement, ...args: Argument[]) => TResult,
-    ...args: Argument[]
-  ): Promise<TResult>;
-}
-
-export type Character = string;
-export type Key = 'Enter' | 'Escape' | 'Tab';
-
-export interface WebAdapter extends Adapter<WebNode> {
-  execute<TResult>(
-    script: (...args: Argument[]) => TResult,
-    ...args: Argument[]
-  ): Promise<TResult>;
-
-  goto(url: string): Promise<void>;
-  press(key: Key | Character): Promise<void>;
-  quit(): Promise<void>;
-}
 
 const fileURL = `file://${join(__dirname, '../fixtures/index.html')}`;
 
