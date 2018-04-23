@@ -934,9 +934,53 @@ img { max-width: 100%; }
 	<div class="content-wrap">
 		<div class="tsd-panel tsd-typography">
 			<h1 id="-pageobject-todomvc">@pageobject/todomvc</h1>
+			<p><a href="https://yarnpkg.com/en/package/@pageobject/todomvc"><img src="https://img.shields.io/npm/v/@pageobject/todomvc.svg" alt="Package Version"></a>
+				<a href="https://travis-ci.org/clebert/pageobject"><img src="https://travis-ci.org/clebert/pageobject.svg?branch=master" alt="Build Status"></a>
+				<a href="https://coveralls.io/github/clebert/pageobject?branch=master"><img src="https://coveralls.io/repos/github/clebert/pageobject/badge.svg?branch=master" alt="Coverage Status"></a>
+			<a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-ready-blue.svg" alt="TypeScript"></a></p>
 			<blockquote>
-				<p>TODO.</p>
+				<p>An exemplary test suite for the popular <a href="http://todomvc.com/">TodoMVC</a> application.</p>
 			</blockquote>
+			<p><strong>This package is part of <a href="https://pageobject.js.org/">PageObjectJS</a>.</strong></p>
+			<h2 id="installation">Installation</h2>
+			<pre><code class="lang-sh">yarn add @pageobject/todomvc
+</code></pre>
+			<h2 id="introduction">Introduction</h2>
+			<p>This project serves as an example implementation. We use <a href="https://www.typescriptlang.org/">TypeScript</a> as programming language, <a href="https://facebook.github.io/jest/">Jest</a> as test runner and perform the tests with <a href="https://github.com/GoogleChrome/puppeteer">Puppeteer</a> in a headless Chrome. The artifact published on NPM contains all components written for this project.</p>
+			<h2 id="test-cases">Test cases</h2>
+			<p>You can find the <strong>complete code</strong> of all test cases <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/todomvc/src/tests/">here</a>.</p>
+			<h3 id="creating-todos">Creating todos</h3>
+			<pre><code class="lang-js">test.perform(app.page.goto(<span class="hljs-string">'http://todomvc.com/examples/react/#/'</span>), <span class="hljs-number">30</span>);
+
+test
+  .assert(app.newTodoInput.hasFocus(), is(<span class="hljs-literal">true</span>))
+  .perform(app.keyboard.type(<span class="hljs-string">'My first todo'</span>))
+  .perform(app.keyboard.press(<span class="hljs-string">'Enter'</span>))
+
+  .assert(app.newTodoInput.hasFocus(), is(<span class="hljs-literal">true</span>))
+  .perform(app.keyboard.type(<span class="hljs-string">'My second todo'</span>))
+  .perform(app.keyboard.press(<span class="hljs-string">'Enter'</span>))
+
+  .assert(app.todoList.todos.first().label.getText(), is(<span class="hljs-string">'My first todo'</span>))
+  .assert(app.todoList.todos.last().label.getText(), is(<span class="hljs-string">'My second todo'</span>));
+</code></pre>
+			<h3 id="completing-a-todo">Completing a todo</h3>
+			<pre><code class="lang-js">test.perform(app.page.goto(<span class="hljs-string">'http://todomvc.com/examples/react/#/'</span>), <span class="hljs-number">30</span>);
+
+test
+  .assert(app.newTodoInput.hasFocus(), is(<span class="hljs-literal">true</span>))
+  .perform(app.keyboard.type(<span class="hljs-string">'My todo'</span>))
+  .perform(app.keyboard.press(<span class="hljs-string">'Enter'</span>));
+
+<span class="hljs-keyword">const</span> todo = app.todoList.todos.first();
+
+test
+  .assert(todo.toggle.isChecked(), is(<span class="hljs-literal">false</span>))
+  .perform(todo.toggle.click())
+  .assert(todo.toggle.isChecked(), is(<span class="hljs-literal">true</span>));
+</code></pre>
+			<h2 id="api-documentation">API documentation</h2>
+			<p>Please find the API documentation <a href="https://pageobject.js.org/api/todomvc/">here</a>.</p>
 			<hr>
 			<p>Copyright (c) 2017-present, Clemens Akens. Released under the terms of the <a href="https://github.com/clebert/pageobject/blob/master/LICENSE">MIT License</a>.</p>
 		</div>

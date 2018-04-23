@@ -1,5 +1,5 @@
 import {Predicate} from '@pageobject/base';
-import {TodoMVC} from '../TodoMVC';
+import {TodoMVC} from '..';
 
 const {is} = Predicate;
 
