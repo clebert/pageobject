@@ -122,7 +122,7 @@ export abstract class WebComponent extends Component<WebNode, WebAdapter> {
       (await this.findUniqueNode()).execute(element => {
         const {offsetHeight, offsetWidth} = element;
 
-        return Boolean(offsetHeight || offsetWidth);
+        return Boolean(offsetHeight && offsetWidth);
       });
   }
 
