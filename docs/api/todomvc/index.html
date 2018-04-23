@@ -950,7 +950,6 @@ img { max-width: 100%; }
 			<h2 id="test-cases">Test cases</h2>
 			<p>You can find the <strong>complete code</strong> of all test cases <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/todomvc/src/tests/">here</a>.</p>
 			<h3 id="creating-todos">Creating todos</h3>
-			<p><img src="../../images/creating-todos.png" alt="Creating todos"></p>
 			<pre><code class="lang-js">test.perform(app.page.goto(<span class="hljs-string">'http://todomvc.com/examples/react/#/'</span>), <span class="hljs-number">30</span>);
 
 test
@@ -965,8 +964,8 @@ test
   .assert(app.todoList.todos.first().label.getText(), is(<span class="hljs-string">'My first todo'</span>))
   .assert(app.todoList.todos.last().label.getText(), is(<span class="hljs-string">'My second todo'</span>));
 </code></pre>
+			<p><img src="../../images/creating-todos.png" alt="Creating todos"></p>
 			<h3 id="completing-a-todo">Completing a todo</h3>
-			<p><img src="../../images/completing-a-todo.png" alt="Completing a todo"></p>
 			<pre><code class="lang-js">test.perform(app.page.goto(<span class="hljs-string">'http://todomvc.com/examples/react/#/'</span>), <span class="hljs-number">30</span>);
 
 test
@@ -981,6 +980,7 @@ test
   .perform(todo.toggle.click())
   .assert(todo.toggle.isChecked(), is(<span class="hljs-literal">true</span>));
 </code></pre>
+			<p><img src="../../images/completing-a-todo.png" alt="Completing a todo"></p>
 			<h2 id="api-documentation">API documentation</h2>
 			<p>Please find the API documentation <a href="https://pageobject.js.org/api/todomvc/">here</a>.</p>
 			<hr>

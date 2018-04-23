@@ -25,8 +25,6 @@ You can find the **complete code** of all test cases [here](https://github.com/c
 
 ### Creating todos
 
-![Creating todos](../../docs/images/creating-todos.png)
-
 ```js
 test.perform(app.page.goto('http://todomvc.com/examples/react/#/'), 30);
 
@@ -43,9 +41,9 @@ test
   .assert(app.todoList.todos.last().label.getText(), is('My second todo'));
 ```
 
-### Completing a todo
+![Creating todos](../../docs/images/creating-todos.png)
 
-![Completing a todo](../../docs/images/completing-a-todo.png)
+### Completing a todo
 
 ```js
 test.perform(app.page.goto('http://todomvc.com/examples/react/#/'), 30);
@@ -62,6 +60,8 @@ test
   .perform(todo.toggle.click())
   .assert(todo.toggle.isChecked(), is(true));
 ```
+
+![Completing a todo](../../docs/images/completing-a-todo.png)
 
 ## API documentation
 
