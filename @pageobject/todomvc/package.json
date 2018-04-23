@@ -1,0 +1,28 @@
+{
+  "name": "@pageobject/todomvc",
+  "version": "11.0.0",
+  "description": "An exemplary test suite for the popular TodoMVC application.",
+  "license": "MIT",
+  "author": "Clemens Akens <clebert@me.com>",
+  "homepage": "https://pageobject.js.org/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clebert/pageobject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clebert/pageobject/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@pageobject/base": "^11.0.0",
+    "@pageobject/puppeteer": "^11.0.0",
+    "@pageobject/web": "^11.0.0"
+  }
+}

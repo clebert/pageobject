@@ -1,6 +1,7 @@
 .DS_Store
 coverage/
 dist/
+error-screenshot.png
 lerna-debug.log
 node_modules/
 npm-debug.log
