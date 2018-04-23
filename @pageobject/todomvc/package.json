@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/todomvc",
-  "version": "11.1.0",
+  "version": "11.1.1",
   "description": "An exemplary test suite for the popular TodoMVC application.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -21,8 +21,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@pageobject/base": "^11.1.0",
-    "@pageobject/puppeteer": "^11.1.0",
-    "@pageobject/web": "^11.1.0"
+    "@pageobject/base": "^11.1.1",
+    "@pageobject/puppeteer": "^11.1.1",
+    "@pageobject/web": "^11.1.1"
   }
 }
