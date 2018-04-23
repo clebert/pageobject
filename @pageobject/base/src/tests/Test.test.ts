@@ -135,7 +135,7 @@ describe('Test.run()', () => {
       expect(effect).toHaveBeenCalledTimes(3);
     });
 
-    it('should throw an assertion error', async () => {
+    it('should throw an error with an assertion message', async () => {
       effect.mockImplementationOnce(erroneous(1));
       effect.mockImplementationOnce(erroneous(2));
       effect.mockImplementation(fooValue);
@@ -153,7 +153,7 @@ describe('Test.run()', () => {
       expect(effect.mock.calls.length).toBeGreaterThan(3);
     });
 
-    it('should throw an effect error', async () => {
+    it('should throw an error with an effect message', async () => {
       effect.mockImplementationOnce(erroneous(1));
       effect.mockImplementationOnce(erroneous(2));
       effect.mockImplementationOnce(neverEnding);
@@ -171,7 +171,25 @@ describe('Test.run()', () => {
       expect(effect).toHaveBeenCalledTimes(3);
     });
 
-    it('should throw a default timeout error', async () => {
+    it('should throw an error with a custom message', async () => {
+      effect.mockImplementationOnce(erroneous(1));
+      effect.mockImplementationOnce(erroneous(2));
+      effect.mockImplementationOnce(neverEnding);
+
+      await expect(
+        useFakeTimers(
+          async () =>
+            Test.run(context, defaultTimeoutInSeconds, test => {
+              test.assert(effect, is('foo'), 'is foo');
+            }),
+          defaultTimeoutInSeconds
+        )
+      ).rejects.toThrow('is foo');
+
+      expect(effect).toHaveBeenCalledTimes(3);
+    });
+
+    it('should throw an error with a default timeout message', async () => {
       effect.mockImplementationOnce(neverEnding);
 
       await expect(
@@ -187,14 +205,14 @@ describe('Test.run()', () => {
       expect(effect).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw a custom timeout error', async () => {
+    it('should throw an error with a custom timeout message', async () => {
       effect.mockImplementationOnce(neverEnding);
 
       await expect(
         useFakeTimers(
           async () =>
             Test.run(context, defaultTimeoutInSeconds, test => {
-              test.assert(effect, is('foo'), 1);
+              test.assert(effect, is('foo'), undefined, 1);
             }),
           1
         )
@@ -269,7 +287,7 @@ describe('Test.run()', () => {
       expect(effect).toHaveBeenCalledTimes(4);
     });
 
-    it('should throw an effect error', async () => {
+    it('should throw an error with an effect message', async () => {
       effect.mockImplementationOnce(erroneous(1));
       effect.mockImplementationOnce(erroneous(2));
       effect.mockImplementationOnce(neverEnding);
@@ -287,7 +305,7 @@ describe('Test.run()', () => {
       expect(effect).toHaveBeenCalledTimes(3);
     });
 
-    it('should throw a default timeout error', async () => {
+    it('should throw an error with a default timeout message', async () => {
       effect.mockImplementationOnce(neverEnding);
 
       await expect(
@@ -303,7 +321,7 @@ describe('Test.run()', () => {
       expect(effect).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw a custom timeout error', async () => {
+    it('should throw an error with a custom timeout message', async () => {
       effect.mockImplementationOnce(neverEnding);
 
       await expect(
@@ -331,7 +349,7 @@ describe('Test.run()', () => {
       expect(effect).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw an effect error', async () => {
+    it('should throw an error with an effect message', async () => {
       effect.mockImplementationOnce(erroneous(1));
       effect.mockImplementationOnce(erroneous(2));
 
@@ -346,7 +364,7 @@ describe('Test.run()', () => {
       expect(effect).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw a default timeout error', async () => {
+    it('should throw an error with a default timeout message', async () => {
       effect.mockImplementationOnce(neverEnding);
 
       await expect(
@@ -362,7 +380,7 @@ describe('Test.run()', () => {
       expect(effect).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw a custom timeout error', async () => {
+    it('should throw an error with a custom timeout message', async () => {
       effect.mockImplementationOnce(neverEnding);
 
       await expect(
