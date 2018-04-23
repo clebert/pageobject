@@ -16,11 +16,12 @@ clean:
 	$(BIN)/tsc --project @pageobject/$*
 	touch $@
 
-docs/api/%: @pageobject/%/README.md @pageobject/%/src/*.ts typedoc.js | dist
+docs/api/%: @pageobject/%/README.md @pageobject/%/src/*.ts docs/images/* typedoc.js | dist
 	rm -rf $@
 	rm -rf node_modules/@types/lodash
 	$(BIN)/typedoc --out $@ --readme @pageobject/$*/README.md ./@pageobject/$*
 	$(BIN)/replace-in-file '/Defined in .+node_modules./g' 'Defined in ' 'docs/api/$*/**/*.html' --isRegex --verbose
+	$(BIN)/replace-in-file '/\/docs\/images\//g' '/images/' 'docs/api/$*/**/*.html' --isRegex --verbose
 
 docs/index.md: README.md
 	cp $< $@
