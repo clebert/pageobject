@@ -21,14 +21,23 @@ export abstract class Component<TNode, TAdapter extends Adapter<TNode>> {
     this.ancestor = ancestor;
   }
 
+  /**
+   * A call to this method is the same as: `this.nth(1)`
+   */
   public first(): this {
     return this.nth(1);
   }
 
+  /**
+   * A call to this method is the same as: `this.nth(-1)`
+   */
   public last(): this {
     return this.nth(-1);
   }
 
+  /**
+   * @returns An extended copy of `this` component.
+   */
   public nth(position: number): this {
     const name = this.toString();
 
@@ -54,6 +63,9 @@ export abstract class Component<TNode, TAdapter extends Adapter<TNode>> {
     return reconstruction;
   }
 
+  /**
+   * @returns An extended copy of `this` component.
+   */
   public where<TValue>(
     getter: (component: this) => Effect<TValue>,
     predicate: Predicate<TValue>
