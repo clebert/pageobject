@@ -17,7 +17,7 @@ yarn add @pageobject/todomvc
 
 ## Introduction
 
-This project serves as an example implementation. We use [TypeScript][external-typescript] as programming language, [Jest][external-jest] as test runner and perform the tests with [Puppeteer][external-puppeteer] in a headless Chrome. The artifact published on NPM contains all components written for this project.
+This project serves as an example implementation. We use [TypeScript][external-typescript] as programming language, [Jest][external-jest] as test runner and perform the tests with [Puppeteer][external-puppeteer] in a headless Chrome. The artifact published on [npm][external-npm] contains all components written for this project.
 
 ## Test cases
 
@@ -76,6 +76,7 @@ Copyright (c) 2017-present, Clemens Akens. Released under the terms of the [MIT 
 [badge-typescript-image]: https://img.shields.io/badge/TypeScript-ready-blue.svg
 [badge-typescript-link]: https://www.typescriptlang.org/
 [external-jest]: https://facebook.github.io/jest/
+[external-npm]: https://www.npmjs.com/
 [external-puppeteer]: https://github.com/GoogleChrome/puppeteer
 [external-todomvc]: http://todomvc.com/
 [external-typescript]: https://www.typescriptlang.org/
