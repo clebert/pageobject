@@ -255,22 +255,22 @@ describe('WebComponent', () => {
   describe('isVisible() => Effect()', () => {
     it('should return true', async () => {
       element.offsetHeight = 1;
-      element.offsetWidth = 0;
-
-      await expect(component.isVisible()()).resolves.toBe(true);
-
-      element.offsetHeight = 0;
-      element.offsetWidth = 1;
-
-      await expect(component.isVisible()()).resolves.toBe(true);
-
-      element.offsetHeight = 1;
       element.offsetWidth = 1;
 
       await expect(component.isVisible()()).resolves.toBe(true);
     });
 
     it('should return false', async () => {
+      await expect(component.isVisible()()).resolves.toBe(false);
+
+      element.offsetHeight = 1;
+      element.offsetWidth = 0;
+
+      await expect(component.isVisible()()).resolves.toBe(false);
+
+      element.offsetHeight = 0;
+      element.offsetWidth = 1;
+
       await expect(component.isVisible()()).resolves.toBe(false);
     });
   });
