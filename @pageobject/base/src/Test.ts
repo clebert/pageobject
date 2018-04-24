@@ -9,7 +9,8 @@ type TestStep = () => Promise<TestStep[]>;
 function reliable(
   testStep: TestStep,
   retryOnError: boolean,
-  timeoutInSeconds: number
+  timeoutInSeconds: number,
+  customMessage?: string
 ): TestStep {
   return async () => {
     let message = `Timeout after ${timeoutInSeconds} second${
@@ -41,7 +42,7 @@ function reliable(
           await new Promise<void>(setImmediate);
         }
 
-        throw new Error(message);
+        throw new Error(customMessage || message);
       })(),
       (async () => {
         await new Promise<void>(resolve => {
@@ -50,7 +51,7 @@ function reliable(
 
         resolved = true;
 
-        throw new Error(message);
+        throw new Error(customMessage || message);
       })()
     ]);
   };
@@ -86,6 +87,7 @@ export class Test {
   public assert<TValue>(
     value: Effect<TValue>,
     predicate: Predicate<TValue>,
+    customMessage?: string,
     timeoutInSeconds: number = this.defaultTimeoutInSeconds
   ): this {
     const testStep = async () => {
@@ -94,7 +96,9 @@ export class Test {
       return [];
     };
 
-    this._testSteps.push(reliable(testStep, true, timeoutInSeconds));
+    this._testSteps.push(
+      reliable(testStep, true, timeoutInSeconds, customMessage)
+    );
 
     return this;
   }

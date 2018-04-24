@@ -1,6 +1,6 @@
 // tslint:disable no-use-before-declare
 
-import {notStrictEqual, ok, strictEqual} from 'assert';
+import {ok} from 'assert';
 import {inspect} from 'util';
 
 // tslint:disable-next-line no-any
@@ -15,47 +15,60 @@ function useJest(): boolean {
 
 export abstract class Predicate<TValue> {
   public static is<TValue>(expected: TValue): Predicate<TValue> {
-    return new Is(expected);
+    return useJest() ? new JestIs(expected) : new Is(expected);
   }
 
   public static isNot<TValue>(expected: TValue): Predicate<TValue> {
-    return new IsNot(expected);
+    return useJest() ? new JestIsNot(expected) : new IsNot(expected);
   }
 
   public static isGreaterThan(expected: number): Predicate<number> {
-    return new IsGreaterThan(expected);
+    return useJest()
+      ? new JestIsGreaterThan(expected)
+      : new IsGreaterThan(expected);
   }
 
   public static isGreaterThanOrEquals(expected: number): Predicate<number> {
-    return new IsGreaterThanOrEquals(expected);
+    return useJest()
+      ? new JestIsGreaterThanOrEquals(expected)
+      : new IsGreaterThanOrEquals(expected);
   }
 
   public static isLessThan(expected: number): Predicate<number> {
-    return new IsLessThan(expected);
+    return useJest() ? new JestIsLessThan(expected) : new IsLessThan(expected);
   }
 
   public static isLessThanOrEquals(expected: number): Predicate<number> {
-    return new IsLessThanOrEquals(expected);
+    return useJest()
+      ? new JestIsLessThanOrEquals(expected)
+      : new IsLessThanOrEquals(expected);
   }
 
   public static includes(expected: string): Predicate<string> {
-    return new Includes(expected);
+    return useJest() ? new JestIncludes(expected) : new Includes(expected);
   }
 
   public static notIncludes(expected: string): Predicate<string> {
-    return new NotIncludes(expected);
+    return useJest()
+      ? new JestNotIncludes(expected)
+      : new NotIncludes(expected);
   }
 
   public static matches(expected: RegExp): Predicate<string> {
-    return new Matches(expected);
+    return useJest() ? new JestMatches(expected) : new Matches(expected);
   }
 
   public static notMatches(expected: RegExp): Predicate<string> {
-    return new NotMatches(expected);
+    return useJest() ? new JestNotMatches(expected) : new NotMatches(expected);
   }
 
-  public abstract assert(actual: TValue): void;
+  public assert(actual: TValue): void {
+    ok(this.test(actual), this.describe(actual));
+  }
+
   public abstract test(actual: TValue): boolean;
+
+  protected abstract describe(actual: TValue): string;
 }
 
 abstract class BinaryPredicate<TActual, TExpected = TActual> extends Predicate<
@@ -71,153 +84,161 @@ abstract class BinaryPredicate<TActual, TExpected = TActual> extends Predicate<
 }
 
 class Is<TValue> extends BinaryPredicate<TValue> {
-  public assert(actual: TValue): void {
-    if (useJest()) {
-      expect(actual).toBe(this.expected);
-    } else {
-      strictEqual(actual, this.expected);
-    }
-  }
-
   public test(actual: TValue): boolean {
     return actual === this.expected;
+  }
+
+  protected describe(actual: TValue): string {
+    return `${serialize(actual)} === ${serialize(this.expected)}`;
+  }
+}
+
+class JestIs<TValue> extends Is<TValue> {
+  public assert(actual: TValue): void {
+    expect(actual).toBe(this.expected);
   }
 }
 
 class IsNot<TValue> extends Is<TValue> {
-  public assert(actual: TValue): void {
-    if (useJest()) {
-      expect(actual).not.toBe(this.expected);
-    } else {
-      notStrictEqual(actual, this.expected);
-    }
-  }
-
   public test(actual: TValue): boolean {
     return !super.test(actual);
+  }
+
+  protected describe(actual: TValue): string {
+    return `${serialize(actual)} !== ${serialize(this.expected)}`;
+  }
+}
+
+class JestIsNot<TValue> extends IsNot<TValue> {
+  public assert(actual: TValue): void {
+    expect(actual).not.toBe(this.expected);
   }
 }
 
 class IsGreaterThan extends BinaryPredicate<number> {
-  public assert(actual: number): void {
-    if (useJest()) {
-      expect(actual).toBeGreaterThan(this.expected);
-    } else {
-      ok(this.test(actual), `${actual} > ${this.expected}`);
-    }
-  }
-
   public test(actual: number): boolean {
     return actual > this.expected;
+  }
+
+  protected describe(actual: number): string {
+    return `${actual} > ${this.expected}`;
+  }
+}
+
+class JestIsGreaterThan extends IsGreaterThan {
+  public assert(actual: number): void {
+    expect(actual).toBeGreaterThan(this.expected);
   }
 }
 
 class IsGreaterThanOrEquals extends BinaryPredicate<number> {
-  public assert(actual: number): void {
-    if (useJest()) {
-      expect(actual).toBeGreaterThanOrEqual(this.expected);
-    } else {
-      ok(this.test(actual), `${actual} >= ${this.expected}`);
-    }
-  }
-
   public test(actual: number): boolean {
     return actual >= this.expected;
+  }
+
+  protected describe(actual: number): string {
+    return `${actual} >= ${this.expected}`;
+  }
+}
+
+class JestIsGreaterThanOrEquals extends IsGreaterThanOrEquals {
+  public assert(actual: number): void {
+    expect(actual).toBeGreaterThanOrEqual(this.expected);
   }
 }
 
 class IsLessThan extends BinaryPredicate<number> {
-  public assert(actual: number): void {
-    if (useJest()) {
-      expect(actual).toBeLessThan(this.expected);
-    } else {
-      ok(this.test(actual), `${actual} < ${this.expected}`);
-    }
-  }
-
   public test(actual: number): boolean {
     return actual < this.expected;
+  }
+
+  protected describe(actual: number): string {
+    return `${actual} < ${this.expected}`;
+  }
+}
+
+class JestIsLessThan extends IsLessThan {
+  public assert(actual: number): void {
+    expect(actual).toBeLessThan(this.expected);
   }
 }
 
 class IsLessThanOrEquals extends BinaryPredicate<number> {
-  public assert(actual: number): void {
-    if (useJest()) {
-      expect(actual).toBeLessThanOrEqual(this.expected);
-    } else {
-      ok(this.test(actual), `${actual} <= ${this.expected}`);
-    }
-  }
-
   public test(actual: number): boolean {
     return actual <= this.expected;
+  }
+
+  protected describe(actual: number): string {
+    return `${actual} <= ${this.expected}`;
+  }
+}
+
+class JestIsLessThanOrEquals extends IsLessThanOrEquals {
+  public assert(actual: number): void {
+    expect(actual).toBeLessThanOrEqual(this.expected);
   }
 }
 
 class Includes extends BinaryPredicate<string> {
-  public assert(actual: string): void {
-    if (useJest()) {
-      expect(actual).toContain(this.expected);
-    } else {
-      ok(
-        this.test(actual),
-        `${serialize(actual)} =~ ${serialize(this.expected)}`
-      );
-    }
-  }
-
   public test(actual: string): boolean {
     return actual.includes(this.expected);
+  }
+
+  protected describe(actual: string): string {
+    return `${serialize(actual)} =~ ${serialize(this.expected)}`;
+  }
+}
+
+class JestIncludes extends Includes {
+  public assert(actual: string): void {
+    expect(actual).toContain(this.expected);
   }
 }
 
 class NotIncludes extends Includes {
-  public assert(actual: string): void {
-    if (useJest()) {
-      expect(actual).not.toContain(this.expected);
-    } else {
-      ok(
-        this.test(actual),
-        `${serialize(actual)} !~ ${serialize(this.expected)}`
-      );
-    }
-  }
-
   public test(actual: string): boolean {
     return !super.test(actual);
+  }
+
+  protected describe(actual: string): string {
+    return `${serialize(actual)} !~ ${serialize(this.expected)}`;
+  }
+}
+
+class JestNotIncludes extends NotIncludes {
+  public assert(actual: string): void {
+    expect(actual).not.toContain(this.expected);
   }
 }
 
 class Matches extends BinaryPredicate<string, RegExp> {
-  public assert(actual: string): void {
-    if (useJest()) {
-      expect(actual).toMatch(this.expected);
-    } else {
-      ok(
-        this.test(actual),
-        `${serialize(actual)} =~ ${serialize(this.expected)}`
-      );
-    }
-  }
-
   public test(actual: string): boolean {
     return this.expected.test(actual);
+  }
+
+  protected describe(actual: string): string {
+    return `${serialize(actual)} =~ ${serialize(this.expected)}`;
+  }
+}
+
+class JestMatches extends Matches {
+  public assert(actual: string): void {
+    expect(actual).toMatch(this.expected);
   }
 }
 
 class NotMatches extends Matches {
-  public assert(actual: string): void {
-    if (useJest()) {
-      expect(actual).not.toMatch(this.expected);
-    } else {
-      ok(
-        this.test(actual),
-        `${serialize(actual)} !~ ${serialize(this.expected)}`
-      );
-    }
-  }
-
   public test(actual: string): boolean {
     return !super.test(actual);
+  }
+
+  protected describe(actual: string): string {
+    return `${serialize(actual)} !~ ${serialize(this.expected)}`;
+  }
+}
+
+class JestNotMatches extends NotMatches {
+  public assert(actual: string): void {
+    expect(actual).not.toMatch(this.expected);
   }
 }
