@@ -1,9 +1,9 @@
 import {Predicate} from '@pageobject/base';
-import {TodoMVC} from '..';
+import {jestTest} from './jestTest';
 
 const {is} = Predicate;
 
-TodoMVC.jest('Completing a todo', (test, app) => {
+jestTest('Completing a todo', (test, app) => {
   test.perform(app.page.goto('http://todomvc.com/examples/react/#/'), 30);
 
   test
