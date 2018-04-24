@@ -26,7 +26,7 @@ You can find the **complete code** of all test cases [here](https://github.com/c
 ### Creating todos
 
 ```js
-test.perform(app.page.goto('http://todomvc.com/examples/react/#/'), 30);
+test.perform(app.page.goto('http://todomvc.com/examples/react/#/'));
 
 test
   .assert(app.newTodoInput.hasFocus(), is(true), 'newTodoInput has focus (1)')
@@ -46,7 +46,7 @@ test
 ### Completing a todo
 
 ```js
-test.perform(app.page.goto('http://todomvc.com/examples/react/#/'), 30);
+test.perform(app.page.goto('http://todomvc.com/examples/react/#/'));
 
 test
   .assert(app.newTodoInput.hasFocus(), is(true), 'newTodoInput has focus')

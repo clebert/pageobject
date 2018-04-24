@@ -4,7 +4,7 @@ import {jestTest} from './jestTest';
 const {is} = Predicate;
 
 jestTest('Creating todos', (test, app) => {
-  test.perform(app.page.goto('http://todomvc.com/examples/react/#/'), 30);
+  test.perform(app.page.goto('http://todomvc.com/examples/react/#/'));
 
   test
     .assert(app.newTodoInput.hasFocus(), is(true), 'newTodoInput has focus (1)')
