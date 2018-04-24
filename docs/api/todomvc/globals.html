@@ -947,7 +947,7 @@ img { max-width: 100%; }
 			<h2 id="test-cases">Test cases</h2>
 			<p>You can find the <strong>complete code</strong> of all test cases <a href="https://github.com/clebert/pageobject/blob/master/@pageobject/todomvc/src/tests/">here</a>.</p>
 			<h3 id="creating-todos">Creating todos</h3>
-			<pre><code class="lang-js">test.perform(app.page.goto(<span class="hljs-string">'http://todomvc.com/examples/react/#/'</span>), <span class="hljs-number">30</span>);
+			<pre><code class="lang-js">test.perform(app.page.goto(<span class="hljs-string">'http://todomvc.com/examples/react/#/'</span>));
 
 test
   .assert(app.newTodoInput.hasFocus(), is(<span class="hljs-literal">true</span>), <span class="hljs-string">'newTodoInput has focus (1)'</span>)
@@ -963,7 +963,7 @@ test
 </code></pre>
 			<p><img src="../../images/creating-todos.png" alt="Creating todos"></p>
 			<h3 id="completing-a-todo">Completing a todo</h3>
-			<pre><code class="lang-js">test.perform(app.page.goto(<span class="hljs-string">'http://todomvc.com/examples/react/#/'</span>), <span class="hljs-number">30</span>);
+			<pre><code class="lang-js">test.perform(app.page.goto(<span class="hljs-string">'http://todomvc.com/examples/react/#/'</span>));
 
 test
   .assert(app.newTodoInput.hasFocus(), is(<span class="hljs-literal">true</span>), <span class="hljs-string">'newTodoInput has focus'</span>)
