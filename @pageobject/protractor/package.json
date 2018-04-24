@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/protractor",
-  "version": "11.1.1",
+  "version": "11.2.0",
   "description": "A web API adapter for Protractor.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
@@ -21,7 +21,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@pageobject/web": "^11.1.1",
+    "@pageobject/web": "^11.2.0",
     "protractor": "^5.3.1"
   }
 }
