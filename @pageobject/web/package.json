@@ -1,6 +1,6 @@
 {
   "name": "@pageobject/web",
-  "version": "11.2.0",
+  "version": "11.2.1",
   "description": "A declarative API for framework-independent web UI test automation.",
   "license": "MIT",
   "author": "Clemens Akens <clebert@me.com>",
