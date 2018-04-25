@@ -127,8 +127,29 @@ export abstract class WebComponent extends Component<WebNode, WebAdapter> {
   }
 
   public scrollIntoView(): Effect<void> {
-    return async () =>
-      (await this.findUniqueNode()).execute(element => {
+    const getRect = async () =>
+      (await this.findUniqueNode()).execute(element =>
+        element.getBoundingClientRect()
+      );
+
+    const isPageMoving = async (lastRect: ClientRect) => {
+      const currentRect = await getRect();
+
+      return (
+        currentRect.left !== lastRect.left || currentRect.top !== lastRect.top
+      );
+    };
+
+    return async () => {
+      let lastRect: ClientRect;
+
+      do {
+        lastRect = await getRect();
+
+        await new Promise<void>(resolve => setTimeout(resolve, 10));
+      } while (await isPageMoving(lastRect));
+
+      await (await this.findUniqueNode()).execute(element => {
         const {height, left, top, width} = element.getBoundingClientRect();
         const {innerHeight, innerWidth} = window;
 
@@ -137,5 +158,6 @@ export abstract class WebComponent extends Component<WebNode, WebAdapter> {
           top - innerHeight / 2 + height / 2
         );
       });
+    };
   }
 }
