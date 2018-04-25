@@ -296,5 +296,67 @@ describe('WebComponent', () => {
       expect(scrollBy).toHaveBeenCalledTimes(1);
       expect(scrollBy).toHaveBeenLastCalledWith(-475, -275);
     });
+
+    it('should not start to scroll until the page stops moving vertically', async () => {
+      let top = 100;
+
+      element.getBoundingClientRect.mockImplementation(() => ({
+        height: 0,
+        left: 0,
+        top,
+        width: 0
+      }));
+
+      scrollBy.mockImplementation(() => {
+        if (top !== 0) {
+          throw new Error('page is moving');
+        }
+      });
+
+      const intervalId = setInterval(() => {
+        top -= 1;
+
+        if (top === 0) {
+          clearInterval(intervalId);
+        }
+      }, 1);
+
+      await component.scrollIntoView()();
+
+      expect(scrollBy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not start to scroll until the page stops moving horizontally', async () => {
+      let left = 100;
+
+      element.getBoundingClientRect.mockImplementation(() => ({
+        height: 0,
+        left,
+        top: 0,
+        width: 0
+      }));
+
+      scrollBy.mockImplementation(() => {
+        if (left !== 0) {
+          throw new Error('page is moving');
+        }
+      });
+
+      const intervalId = setInterval(() => {
+        left -= 1;
+
+        if (left === 0) {
+          clearInterval(intervalId);
+        }
+      }, 1);
+
+      await component.scrollIntoView()();
+
+      expect(scrollBy).toHaveBeenCalledTimes(1);
+
+      expect(element.getBoundingClientRect.mock.calls.length).toBeGreaterThan(
+        1
+      );
+    });
   });
 });
