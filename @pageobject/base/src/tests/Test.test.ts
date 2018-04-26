@@ -135,7 +135,7 @@ describe('Test.run()', () => {
       expect(effect).toHaveBeenCalledTimes(3);
     });
 
-    it('should throw an error with an assertion message', async () => {
+    it('should throw an error with a default assertion message', async () => {
       effect.mockImplementationOnce(erroneous(1));
       effect.mockImplementationOnce(erroneous(2));
       effect.mockImplementation(fooValue);
@@ -148,7 +148,25 @@ describe('Test.run()', () => {
             }),
           defaultTimeoutInSeconds
         )
-      ).rejects.toThrow('Expected value to be:');
+      ).rejects.toThrow("'foo' === 'bar'");
+
+      expect(effect.mock.calls.length).toBeGreaterThan(3);
+    });
+
+    it('should throw an error with a custom assertion message', async () => {
+      effect.mockImplementationOnce(erroneous(1));
+      effect.mockImplementationOnce(erroneous(2));
+      effect.mockImplementation(fooValue);
+
+      await expect(
+        useFakeTimers(
+          async () =>
+            Test.run(context, defaultTimeoutInSeconds, test => {
+              test.assert(effect, is('bar'), '<value>');
+            }),
+          defaultTimeoutInSeconds
+        )
+      ).rejects.toThrow("(<value> = 'foo') === 'bar'");
 
       expect(effect.mock.calls.length).toBeGreaterThan(3);
     });
@@ -167,24 +185,6 @@ describe('Test.run()', () => {
           defaultTimeoutInSeconds
         )
       ).rejects.toThrow('effect 2');
-
-      expect(effect).toHaveBeenCalledTimes(3);
-    });
-
-    it('should throw an error with a custom message', async () => {
-      effect.mockImplementationOnce(erroneous(1));
-      effect.mockImplementationOnce(erroneous(2));
-      effect.mockImplementationOnce(neverEnding);
-
-      await expect(
-        useFakeTimers(
-          async () =>
-            Test.run(context, defaultTimeoutInSeconds, test => {
-              test.assert(effect, is('foo'), 'is foo');
-            }),
-          defaultTimeoutInSeconds
-        )
-      ).rejects.toThrow('is foo');
 
       expect(effect).toHaveBeenCalledTimes(3);
     });

@@ -1,64 +1,18 @@
 import {Predicate} from '..';
 
-interface JestGlobal {
-  expect?: typeof expect;
-}
-
-function noJest(effect: () => void): () => void {
-  const jestGlobal = global as JestGlobal;
-
-  return () => {
-    const expect = jestGlobal.expect;
-
-    try {
-      jestGlobal.expect = undefined;
-
-      effect();
-    } finally {
-      jestGlobal.expect = expect;
-    }
-  };
-}
-
 describe('Predicate', () => {
   describe('is() => Predicate', () => {
     const factory = Predicate.is;
 
     describe('describe()', () => {
-      it('should return a description', () => {
+      it('should return the default description', () => {
         expect(factory('foo').describe('bar')).toBe("'bar' === 'foo'");
       });
-    });
 
-    describe('assert()', () => {
-      it('should not throw a node-assertion error', () => {
-        expect(noJest(() => factory('foo').assert('foo'))).not.toThrow();
-      });
-
-      it('should throw a node-assertion error', () => {
-        expect(noJest(() => factory('foo').assert('foobar'))).toThrow(
-          "'foobar' === 'foo'"
+      it('should return a custom description', () => {
+        expect(factory('foo').describe('bar', '<value>')).toBe(
+          "(<value> = 'bar') === 'foo'"
         );
-
-        expect(noJest(() => factory('foo').assert('bar'))).toThrow(
-          "'bar' === 'foo'"
-        );
-
-        expect(noJest(() => factory('foo').assert('barfoo'))).toThrow(
-          "'barfoo' === 'foo'"
-        );
-      });
-
-      it('should not throw a jest-assertion error', () => {
-        expect(() => factory('foo').assert('foo')).not.toThrow();
-      });
-
-      it('should throw a jest-assertion error', () => {
-        const message = 'Expected value to be:';
-
-        expect(() => factory('foo').assert('foobar')).toThrow(message);
-        expect(() => factory('foo').assert('bar')).toThrow(message);
-        expect(() => factory('foo').assert('barfoo')).toThrow(message);
       });
     });
 
@@ -79,34 +33,14 @@ describe('Predicate', () => {
     const factory = Predicate.isNot;
 
     describe('describe()', () => {
-      it('should return a description', () => {
+      it('should return the default description', () => {
         expect(factory('foo').describe('bar')).toBe("'bar' !== 'foo'");
       });
-    });
 
-    describe('assert()', () => {
-      it('should not throw a node-assertion error', () => {
-        expect(noJest(() => factory('foo').assert('foobar'))).not.toThrow();
-        expect(noJest(() => factory('foo').assert('bar'))).not.toThrow();
-        expect(noJest(() => factory('foo').assert('barfoo'))).not.toThrow();
-      });
-
-      it('should throw a node-assertion error', () => {
-        expect(noJest(() => factory('foo').assert('foo'))).toThrow(
-          "'foo' !== 'foo'"
+      it('should return a custom description', () => {
+        expect(factory('foo').describe('bar', '<value>')).toBe(
+          "(<value> = 'bar') !== 'foo'"
         );
-      });
-
-      it('should not throw a jest-assertion error', () => {
-        expect(() => factory('foo').assert('foobar')).not.toThrow();
-        expect(() => factory('foo').assert('bar')).not.toThrow();
-        expect(() => factory('foo').assert('barfoo')).not.toThrow();
-      });
-
-      it('should throw a jest-assertion error', () => {
-        const message = 'Expected value to not be:';
-
-        expect(() => factory('foo').assert('foo')).toThrow(message);
       });
     });
 
@@ -127,30 +61,12 @@ describe('Predicate', () => {
     const factory = Predicate.isGreaterThan;
 
     describe('describe()', () => {
-      it('should return a description', () => {
+      it('should return the default description', () => {
         expect(factory(0).describe(1)).toBe('1 > 0');
       });
-    });
 
-    describe('assert()', () => {
-      it('should not throw a node-assertion error', () => {
-        expect(noJest(() => factory(0).assert(1))).not.toThrow();
-      });
-
-      it('should throw a node-assertion error', () => {
-        expect(noJest(() => factory(0).assert(-1))).toThrow('-1 > 0');
-        expect(noJest(() => factory(0).assert(0))).toThrow('0 > 0');
-      });
-
-      it('should not throw a jest-assertion error', () => {
-        expect(() => factory(0).assert(1)).not.toThrow();
-      });
-
-      it('should throw a jest-assertion error', () => {
-        const message = 'Expected value to be greater than:';
-
-        expect(() => factory(0).assert(-1)).toThrow(message);
-        expect(() => factory(0).assert(0)).toThrow(message);
+      it('should return a custom description', () => {
+        expect(factory(0).describe(1, '<value>')).toBe('(<value> = 1) > 0');
       });
     });
 
@@ -170,30 +86,12 @@ describe('Predicate', () => {
     const factory = Predicate.isGreaterThanOrEqual;
 
     describe('describe()', () => {
-      it('should return a description', () => {
+      it('should return the default description', () => {
         expect(factory(0).describe(1)).toBe('1 >= 0');
       });
-    });
 
-    describe('assert()', () => {
-      it('should not throw a node-assertion error', () => {
-        expect(noJest(() => factory(0).assert(0))).not.toThrow();
-        expect(noJest(() => factory(0).assert(1))).not.toThrow();
-      });
-
-      it('should throw a node-assertion error', () => {
-        expect(noJest(() => factory(0).assert(-1))).toThrow('-1 >= 0');
-      });
-
-      it('should not throw a jest-assertion error', () => {
-        expect(() => factory(0).assert(0)).not.toThrow();
-        expect(() => factory(0).assert(1)).not.toThrow();
-      });
-
-      it('should throw a jest-assertion error', () => {
-        const message = 'Expected value to be greater than or equal:';
-
-        expect(() => factory(0).assert(-1)).toThrow(message);
+      it('should return a custom description', () => {
+        expect(factory(0).describe(1, '<value>')).toBe('(<value> = 1) >= 0');
       });
     });
 
@@ -213,30 +111,12 @@ describe('Predicate', () => {
     const factory = Predicate.isLessThan;
 
     describe('describe()', () => {
-      it('should return a description', () => {
+      it('should return the default description', () => {
         expect(factory(0).describe(1)).toBe('1 < 0');
       });
-    });
 
-    describe('assert()', () => {
-      it('should not throw a node-assertion error', () => {
-        expect(noJest(() => factory(0).assert(-1))).not.toThrow();
-      });
-
-      it('should throw a node-assertion error', () => {
-        expect(noJest(() => factory(0).assert(0))).toThrow('0 < 0');
-        expect(noJest(() => factory(0).assert(1))).toThrow('1 < 0');
-      });
-
-      it('should not throw a jest-assertion error', () => {
-        expect(() => factory(0).assert(-1)).not.toThrow();
-      });
-
-      it('should throw a jest-assertion error', () => {
-        const message = 'Expected value to be less than:';
-
-        expect(() => factory(0).assert(0)).toThrow(message);
-        expect(() => factory(0).assert(1)).toThrow(message);
+      it('should return a custom description', () => {
+        expect(factory(0).describe(1, '<value>')).toBe('(<value> = 1) < 0');
       });
     });
 
@@ -256,30 +136,12 @@ describe('Predicate', () => {
     const factory = Predicate.isLessThanOrEqual;
 
     describe('describe()', () => {
-      it('should return a description', () => {
+      it('should return the default description', () => {
         expect(factory(0).describe(1)).toBe('1 <= 0');
       });
-    });
 
-    describe('assert()', () => {
-      it('should not throw a node-assertion error', () => {
-        expect(noJest(() => factory(0).assert(-1))).not.toThrow();
-        expect(noJest(() => factory(0).assert(0))).not.toThrow();
-      });
-
-      it('should throw a node-assertion error', () => {
-        expect(noJest(() => factory(0).assert(1))).toThrow('1 <= 0');
-      });
-
-      it('should not throw a jest-assertion error', () => {
-        expect(() => factory(0).assert(-1)).not.toThrow();
-        expect(() => factory(0).assert(0)).not.toThrow();
-      });
-
-      it('should throw a jest-assertion error', () => {
-        const message = 'Expected value to be less than or equal:';
-
-        expect(() => factory(0).assert(1)).toThrow(message);
+      it('should return a custom description', () => {
+        expect(factory(0).describe(1, '<value>')).toBe('(<value> = 1) <= 0');
       });
     });
 
@@ -299,34 +161,14 @@ describe('Predicate', () => {
     const factory = Predicate.includes;
 
     describe('describe()', () => {
-      it('should return a description', () => {
+      it('should return the default description', () => {
         expect(factory('foo').describe('bar')).toBe("'bar' =~ 'foo'");
       });
-    });
 
-    describe('assert()', () => {
-      it('should not throw a node-assertion error', () => {
-        expect(noJest(() => factory('foo').assert('foo'))).not.toThrow();
-        expect(noJest(() => factory('foo').assert('foobar'))).not.toThrow();
-        expect(noJest(() => factory('foo').assert('barfoo'))).not.toThrow();
-      });
-
-      it('should throw a node-assertion error', () => {
-        expect(noJest(() => factory('foo').assert('bar'))).toThrow(
-          "'bar' =~ 'foo'"
+      it('should return a custom description', () => {
+        expect(factory('foo').describe('bar', '<value>')).toBe(
+          "(<value> = 'bar') =~ 'foo'"
         );
-      });
-
-      it('should not throw a jest-assertion error', () => {
-        expect(() => factory('foo').assert('foo')).not.toThrow();
-        expect(() => factory('foo').assert('foobar')).not.toThrow();
-        expect(() => factory('foo').assert('barfoo')).not.toThrow();
-      });
-
-      it('should throw a jest-assertion error', () => {
-        const message = 'To contain value:';
-
-        expect(() => factory('foo').assert('bar')).toThrow(message);
       });
     });
 
@@ -347,40 +189,14 @@ describe('Predicate', () => {
     const factory = Predicate.notIncludes;
 
     describe('describe()', () => {
-      it('should return a description', () => {
+      it('should return the default description', () => {
         expect(factory('foo').describe('bar')).toBe("'bar' !~ 'foo'");
       });
-    });
 
-    describe('assert()', () => {
-      it('should not throw a node-assertion error', () => {
-        expect(noJest(() => factory('foo').assert('bar'))).not.toThrow();
-      });
-
-      it('should throw a node-assertion error', () => {
-        expect(noJest(() => factory('foo').assert('foo'))).toThrow(
-          "'foo' !~ 'foo'"
+      it('should return a custom description', () => {
+        expect(factory('foo').describe('bar', '<value>')).toBe(
+          "(<value> = 'bar') !~ 'foo'"
         );
-
-        expect(noJest(() => factory('foo').assert('foobar'))).toThrow(
-          "'foobar' !~ 'foo'"
-        );
-
-        expect(noJest(() => factory('foo').assert('barfoo'))).toThrow(
-          "'barfoo' !~ 'foo'"
-        );
-      });
-
-      it('should not throw a jest-assertion error', () => {
-        expect(() => factory('foo').assert('bar')).not.toThrow();
-      });
-
-      it('should throw a jest-assertion error', () => {
-        const message = 'Not to contain value:';
-
-        expect(() => factory('foo').assert('foo')).toThrow(message);
-        expect(() => factory('foo').assert('foobar')).toThrow(message);
-        expect(() => factory('foo').assert('barfoo')).toThrow(message);
       });
     });
 
@@ -401,34 +217,14 @@ describe('Predicate', () => {
     const factory = Predicate.matches;
 
     describe('describe()', () => {
-      it('should return a description', () => {
+      it('should return the default description', () => {
         expect(factory(/foo/).describe('bar')).toBe("'bar' =~ /foo/");
       });
-    });
 
-    describe('assert()', () => {
-      it('should not throw a node-assertion error', () => {
-        expect(noJest(() => factory(/foo/).assert('foo'))).not.toThrow();
-        expect(noJest(() => factory(/foo/).assert('foobar'))).not.toThrow();
-        expect(noJest(() => factory(/foo/).assert('barfoo'))).not.toThrow();
-      });
-
-      it('should throw a node-assertion error', () => {
-        expect(noJest(() => factory(/foo/).assert('bar'))).toThrow(
-          "'bar' =~ /foo/"
+      it('should return a custom description', () => {
+        expect(factory(/foo/).describe('bar', '<value>')).toBe(
+          "(<value> = 'bar') =~ /foo/"
         );
-      });
-
-      it('should not throw a jest-assertion error', () => {
-        expect(() => factory(/foo/).assert('foo')).not.toThrow();
-        expect(() => factory(/foo/).assert('foobar')).not.toThrow();
-        expect(() => factory(/foo/).assert('barfoo')).not.toThrow();
-      });
-
-      it('should throw a jest-assertion error', () => {
-        const message = 'Expected value to match:';
-
-        expect(() => factory(/foo/).assert('bar')).toThrow(message);
       });
     });
 
@@ -449,40 +245,14 @@ describe('Predicate', () => {
     const factory = Predicate.notMatches;
 
     describe('describe()', () => {
-      it('should return a description', () => {
+      it('should return the default description', () => {
         expect(factory(/foo/).describe('bar')).toBe("'bar' !~ /foo/");
       });
-    });
 
-    describe('assert()', () => {
-      it('should not throw a node-assertion error', () => {
-        expect(noJest(() => factory(/foo/).assert('bar'))).not.toThrow();
-      });
-
-      it('should throw a node-assertion error', () => {
-        expect(noJest(() => factory(/foo/).assert('foo'))).toThrow(
-          "'foo' !~ /foo/"
+      it('should return a custom description', () => {
+        expect(factory(/foo/).describe('bar', '<value>')).toBe(
+          "(<value> = 'bar') !~ /foo/"
         );
-
-        expect(noJest(() => factory(/foo/).assert('foobar'))).toThrow(
-          "'foobar' !~ /foo/"
-        );
-
-        expect(noJest(() => factory(/foo/).assert('barfoo'))).toThrow(
-          "'barfoo' !~ /foo/"
-        );
-      });
-
-      it('should not throw a jest-assertion error', () => {
-        expect(() => factory(/foo/).assert('bar')).not.toThrow();
-      });
-
-      it('should throw a jest-assertion error', () => {
-        const message = 'Expected value not to match:';
-
-        expect(() => factory(/foo/).assert('foo')).toThrow(message);
-        expect(() => factory(/foo/).assert('foobar')).toThrow(message);
-        expect(() => factory(/foo/).assert('barfoo')).toThrow(message);
       });
     });
 

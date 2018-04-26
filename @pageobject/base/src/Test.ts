@@ -9,8 +9,7 @@ type TestStep = () => Promise<TestStep[]>;
 function reliable(
   testStep: TestStep,
   retryOnError: boolean,
-  timeoutInSeconds: number,
-  customMessage?: string
+  timeoutInSeconds: number
 ): TestStep {
   return async () => {
     let message = `Timeout after ${timeoutInSeconds} second${
@@ -42,7 +41,7 @@ function reliable(
           await new Promise<void>(setImmediate);
         }
 
-        throw new Error(customMessage || message);
+        throw new Error(message);
       })(),
       (async () => {
         await new Promise<void>(resolve => {
@@ -51,7 +50,7 @@ function reliable(
 
         resolved = true;
 
-        throw new Error(customMessage || message);
+        throw new Error(message);
       })()
     ]);
   };
@@ -85,26 +84,28 @@ export class Test {
   }
 
   public assert<TValue>(
-    value: Effect<TValue>,
+    getter: Effect<TValue>,
     predicate: Predicate<TValue>,
-    customMessage?: string,
+    valueName?: string,
     timeoutInSeconds: number = this.defaultTimeoutInSeconds
   ): this {
     const testStep = async () => {
-      predicate.assert(await value());
+      const value = await getter();
+
+      if (!predicate.test(value)) {
+        throw new Error(predicate.describe(value, valueName));
+      }
 
       return [];
     };
 
-    this._testSteps.push(
-      reliable(testStep, true, timeoutInSeconds, customMessage)
-    );
+    this._testSteps.push(reliable(testStep, true, timeoutInSeconds));
 
     return this;
   }
 
   public if<TValue>(
-    value: Effect<TValue>,
+    getter: Effect<TValue>,
     predicate: Predicate<TValue>,
     callback: ConditionalTestCallback,
     timeoutInSeconds: number = this.defaultTimeoutInSeconds
@@ -115,7 +116,9 @@ export class Test {
     callback(thenTest, elseTest);
 
     const testStep = async () =>
-      predicate.test(await value()) ? thenTest._testSteps : elseTest._testSteps;
+      predicate.test(await getter())
+        ? thenTest._testSteps
+        : elseTest._testSteps;
 
     this._testSteps.push(reliable(testStep, true, timeoutInSeconds));
 
