@@ -950,11 +950,11 @@ img { max-width: 100%; }
 			<pre><code class="lang-js">test.perform(app.page.goto(<span class="hljs-string">'http://todomvc.com/examples/react/#/'</span>));
 
 test
-  .assert(app.newTodoInput.hasFocus(), is(<span class="hljs-literal">true</span>), <span class="hljs-string">'newTodoInput has focus (1)'</span>)
+  .assert(app.newTodoInput.hasFocus(), is(<span class="hljs-literal">true</span>), <span class="hljs-string">'newTodoInput.focus'</span>)
   .perform(app.keyboard.type(<span class="hljs-string">'My first todo'</span>))
   .perform(app.keyboard.press(<span class="hljs-string">'Enter'</span>))
 
-  .assert(app.newTodoInput.hasFocus(), is(<span class="hljs-literal">true</span>), <span class="hljs-string">'newTodoInput has focus (2)'</span>)
+  .assert(app.newTodoInput.hasFocus(), is(<span class="hljs-literal">true</span>), <span class="hljs-string">'newTodoInput.focus'</span>)
   .perform(app.keyboard.type(<span class="hljs-string">'My second todo'</span>))
   .perform(app.keyboard.press(<span class="hljs-string">'Enter'</span>))
 
@@ -966,16 +966,16 @@ test
 			<pre><code class="lang-js">test.perform(app.page.goto(<span class="hljs-string">'http://todomvc.com/examples/react/#/'</span>));
 
 test
-  .assert(app.newTodoInput.hasFocus(), is(<span class="hljs-literal">true</span>), <span class="hljs-string">'newTodoInput has focus'</span>)
+  .assert(app.newTodoInput.hasFocus(), is(<span class="hljs-literal">true</span>), <span class="hljs-string">'newTodoInput.focus'</span>)
   .perform(app.keyboard.type(<span class="hljs-string">'My todo'</span>))
   .perform(app.keyboard.press(<span class="hljs-string">'Enter'</span>));
 
 <span class="hljs-keyword">const</span> todo = app.todoList.todos.first();
 
 test
-  .assert(todo.toggle.isChecked(), is(<span class="hljs-literal">false</span>), <span class="hljs-string">'toggle is not checked'</span>)
+  .assert(todo.toggle.isChecked(), is(<span class="hljs-literal">false</span>), <span class="hljs-string">'toggle.checked'</span>)
   .perform(todo.toggle.click())
-  .assert(todo.toggle.isChecked(), is(<span class="hljs-literal">true</span>), <span class="hljs-string">'toggle is checked'</span>);
+  .assert(todo.toggle.isChecked(), is(<span class="hljs-literal">true</span>), <span class="hljs-string">'toggle.checked'</span>);
 </code></pre>
 			<p><img src="../../images/completing-a-todo.png" alt="Completing a todo"></p>
 			<h2 id="api-documentation">API documentation</h2>

@@ -29,11 +29,11 @@ You can find the **complete code** of all test cases [here](https://github.com/c
 test.perform(app.page.goto('http://todomvc.com/examples/react/#/'));
 
 test
-  .assert(app.newTodoInput.hasFocus(), is(true), 'newTodoInput has focus (1)')
+  .assert(app.newTodoInput.hasFocus(), is(true), 'newTodoInput.focus')
   .perform(app.keyboard.type('My first todo'))
   .perform(app.keyboard.press('Enter'))
 
-  .assert(app.newTodoInput.hasFocus(), is(true), 'newTodoInput has focus (2)')
+  .assert(app.newTodoInput.hasFocus(), is(true), 'newTodoInput.focus')
   .perform(app.keyboard.type('My second todo'))
   .perform(app.keyboard.press('Enter'))
 
@@ -49,16 +49,16 @@ test
 test.perform(app.page.goto('http://todomvc.com/examples/react/#/'));
 
 test
-  .assert(app.newTodoInput.hasFocus(), is(true), 'newTodoInput has focus')
+  .assert(app.newTodoInput.hasFocus(), is(true), 'newTodoInput.focus')
   .perform(app.keyboard.type('My todo'))
   .perform(app.keyboard.press('Enter'));
 
 const todo = app.todoList.todos.first();
 
 test
-  .assert(todo.toggle.isChecked(), is(false), 'toggle is not checked')
+  .assert(todo.toggle.isChecked(), is(false), 'toggle.checked')
   .perform(todo.toggle.click())
-  .assert(todo.toggle.isChecked(), is(true), 'toggle is checked');
+  .assert(todo.toggle.isChecked(), is(true), 'toggle.checked');
 ```
 
 ![Completing a todo](../../docs/images/completing-a-todo.png)

@@ -7,11 +7,11 @@ jestTest('Creating todos', (test, app) => {
   test.perform(app.page.goto('http://todomvc.com/examples/react/#/'));
 
   test
-    .assert(app.newTodoInput.hasFocus(), is(true), 'newTodoInput has focus (1)')
+    .assert(app.newTodoInput.hasFocus(), is(true), 'newTodoInput.focus')
     .perform(app.keyboard.type('My first todo'))
     .perform(app.keyboard.press('Enter'))
 
-    .assert(app.newTodoInput.hasFocus(), is(true), 'newTodoInput has focus (2)')
+    .assert(app.newTodoInput.hasFocus(), is(true), 'newTodoInput.focus')
     .perform(app.keyboard.type('My second todo'))
     .perform(app.keyboard.press('Enter'))
 
