@@ -67,14 +67,14 @@ export abstract class Component<TNode, TAdapter extends Adapter<TNode>> {
    * @returns An extended copy of `this` component.
    */
   public where<TValue>(
-    getter: (component: this) => Effect<TValue>,
+    property: (component: this) => Effect<TValue>,
     predicate: Predicate<TValue>
   ): this {
     const reconstruction = this.reconstruct();
 
     reconstruction._filter = async component =>
       (this._filter ? await this._filter(component) : true) &&
-      predicate.test(await getter(component as this)());
+      predicate.test(await property(component as this)());
 
     reconstruction._position = this._position;
 
