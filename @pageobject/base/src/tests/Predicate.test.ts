@@ -24,6 +24,12 @@ describe('Predicate', () => {
   describe('is() => Predicate', () => {
     const factory = Predicate.is;
 
+    describe('describe()', () => {
+      it('should return a description', () => {
+        expect(factory('foo').describe('bar')).toBe("'bar' === 'foo'");
+      });
+    });
+
     describe('assert()', () => {
       it('should not throw a node-assertion error', () => {
         expect(noJest(() => factory('foo').assert('foo'))).not.toThrow();
@@ -72,6 +78,12 @@ describe('Predicate', () => {
   describe('isNot() => Predicate', () => {
     const factory = Predicate.isNot;
 
+    describe('describe()', () => {
+      it('should return a description', () => {
+        expect(factory('foo').describe('bar')).toBe("'bar' !== 'foo'");
+      });
+    });
+
     describe('assert()', () => {
       it('should not throw a node-assertion error', () => {
         expect(noJest(() => factory('foo').assert('foobar'))).not.toThrow();
@@ -114,6 +126,12 @@ describe('Predicate', () => {
   describe('isGreaterThan() => Predicate', () => {
     const factory = Predicate.isGreaterThan;
 
+    describe('describe()', () => {
+      it('should return a description', () => {
+        expect(factory(0).describe(1)).toBe('1 > 0');
+      });
+    });
+
     describe('assert()', () => {
       it('should not throw a node-assertion error', () => {
         expect(noJest(() => factory(0).assert(1))).not.toThrow();
@@ -148,8 +166,14 @@ describe('Predicate', () => {
     });
   });
 
-  describe('isGreaterThanOrEquals() => Predicate', () => {
-    const factory = Predicate.isGreaterThanOrEquals;
+  describe('isGreaterThanOrEqual() => Predicate', () => {
+    const factory = Predicate.isGreaterThanOrEqual;
+
+    describe('describe()', () => {
+      it('should return a description', () => {
+        expect(factory(0).describe(1)).toBe('1 >= 0');
+      });
+    });
 
     describe('assert()', () => {
       it('should not throw a node-assertion error', () => {
@@ -188,6 +212,12 @@ describe('Predicate', () => {
   describe('isLessThan() => Predicate', () => {
     const factory = Predicate.isLessThan;
 
+    describe('describe()', () => {
+      it('should return a description', () => {
+        expect(factory(0).describe(1)).toBe('1 < 0');
+      });
+    });
+
     describe('assert()', () => {
       it('should not throw a node-assertion error', () => {
         expect(noJest(() => factory(0).assert(-1))).not.toThrow();
@@ -222,8 +252,14 @@ describe('Predicate', () => {
     });
   });
 
-  describe('isLessThanOrEquals() => Predicate', () => {
-    const factory = Predicate.isLessThanOrEquals;
+  describe('isLessThanOrEqual() => Predicate', () => {
+    const factory = Predicate.isLessThanOrEqual;
+
+    describe('describe()', () => {
+      it('should return a description', () => {
+        expect(factory(0).describe(1)).toBe('1 <= 0');
+      });
+    });
 
     describe('assert()', () => {
       it('should not throw a node-assertion error', () => {
@@ -261,6 +297,12 @@ describe('Predicate', () => {
 
   describe('includes() => Predicate', () => {
     const factory = Predicate.includes;
+
+    describe('describe()', () => {
+      it('should return a description', () => {
+        expect(factory('foo').describe('bar')).toBe("'bar' =~ 'foo'");
+      });
+    });
 
     describe('assert()', () => {
       it('should not throw a node-assertion error', () => {
@@ -303,6 +345,12 @@ describe('Predicate', () => {
 
   describe('notIncludes() => Predicate', () => {
     const factory = Predicate.notIncludes;
+
+    describe('describe()', () => {
+      it('should return a description', () => {
+        expect(factory('foo').describe('bar')).toBe("'bar' !~ 'foo'");
+      });
+    });
 
     describe('assert()', () => {
       it('should not throw a node-assertion error', () => {
@@ -352,6 +400,12 @@ describe('Predicate', () => {
   describe('matches() => Predicate', () => {
     const factory = Predicate.matches;
 
+    describe('describe()', () => {
+      it('should return a description', () => {
+        expect(factory(/foo/).describe('bar')).toBe("'bar' =~ /foo/");
+      });
+    });
+
     describe('assert()', () => {
       it('should not throw a node-assertion error', () => {
         expect(noJest(() => factory(/foo/).assert('foo'))).not.toThrow();
@@ -393,6 +447,12 @@ describe('Predicate', () => {
 
   describe('notMatches() => Predicate', () => {
     const factory = Predicate.notMatches;
+
+    describe('describe()', () => {
+      it('should return a description', () => {
+        expect(factory(/foo/).describe('bar')).toBe("'bar' !~ /foo/");
+      });
+    });
 
     describe('assert()', () => {
       it('should not throw a node-assertion error', () => {

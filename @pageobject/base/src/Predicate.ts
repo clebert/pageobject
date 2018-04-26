@@ -28,20 +28,20 @@ export abstract class Predicate<TValue> {
       : new IsGreaterThan(expected);
   }
 
-  public static isGreaterThanOrEquals(expected: number): Predicate<number> {
+  public static isGreaterThanOrEqual(expected: number): Predicate<number> {
     return useJest()
-      ? new JestIsGreaterThanOrEquals(expected)
-      : new IsGreaterThanOrEquals(expected);
+      ? new JestIsGreaterThanOrEqual(expected)
+      : new IsGreaterThanOrEqual(expected);
   }
 
   public static isLessThan(expected: number): Predicate<number> {
     return useJest() ? new JestIsLessThan(expected) : new IsLessThan(expected);
   }
 
-  public static isLessThanOrEquals(expected: number): Predicate<number> {
+  public static isLessThanOrEqual(expected: number): Predicate<number> {
     return useJest()
-      ? new JestIsLessThanOrEquals(expected)
-      : new IsLessThanOrEquals(expected);
+      ? new JestIsLessThanOrEqual(expected)
+      : new IsLessThanOrEqual(expected);
   }
 
   public static includes(expected: string): Predicate<string> {
@@ -66,9 +66,8 @@ export abstract class Predicate<TValue> {
     ok(this.test(actual), this.describe(actual));
   }
 
+  public abstract describe(actual: TValue): string;
   public abstract test(actual: TValue): boolean;
-
-  protected abstract describe(actual: TValue): string;
 }
 
 abstract class BinaryPredicate<TActual, TExpected = TActual> extends Predicate<
@@ -84,12 +83,12 @@ abstract class BinaryPredicate<TActual, TExpected = TActual> extends Predicate<
 }
 
 class Is<TValue> extends BinaryPredicate<TValue> {
-  public test(actual: TValue): boolean {
-    return actual === this.expected;
+  public describe(actual: TValue): string {
+    return `${serialize(actual)} === ${serialize(this.expected)}`;
   }
 
-  protected describe(actual: TValue): string {
-    return `${serialize(actual)} === ${serialize(this.expected)}`;
+  public test(actual: TValue): boolean {
+    return actual === this.expected;
   }
 }
 
@@ -100,12 +99,12 @@ class JestIs<TValue> extends Is<TValue> {
 }
 
 class IsNot<TValue> extends Is<TValue> {
-  public test(actual: TValue): boolean {
-    return !super.test(actual);
+  public describe(actual: TValue): string {
+    return `${serialize(actual)} !== ${serialize(this.expected)}`;
   }
 
-  protected describe(actual: TValue): string {
-    return `${serialize(actual)} !== ${serialize(this.expected)}`;
+  public test(actual: TValue): boolean {
+    return !super.test(actual);
   }
 }
 
@@ -116,12 +115,12 @@ class JestIsNot<TValue> extends IsNot<TValue> {
 }
 
 class IsGreaterThan extends BinaryPredicate<number> {
-  public test(actual: number): boolean {
-    return actual > this.expected;
+  public describe(actual: number): string {
+    return `${actual} > ${this.expected}`;
   }
 
-  protected describe(actual: number): string {
-    return `${actual} > ${this.expected}`;
+  public test(actual: number): boolean {
+    return actual > this.expected;
   }
 }
 
@@ -131,29 +130,29 @@ class JestIsGreaterThan extends IsGreaterThan {
   }
 }
 
-class IsGreaterThanOrEquals extends BinaryPredicate<number> {
+class IsGreaterThanOrEqual extends BinaryPredicate<number> {
+  public describe(actual: number): string {
+    return `${actual} >= ${this.expected}`;
+  }
+
   public test(actual: number): boolean {
     return actual >= this.expected;
   }
-
-  protected describe(actual: number): string {
-    return `${actual} >= ${this.expected}`;
-  }
 }
 
-class JestIsGreaterThanOrEquals extends IsGreaterThanOrEquals {
+class JestIsGreaterThanOrEqual extends IsGreaterThanOrEqual {
   public assert(actual: number): void {
     expect(actual).toBeGreaterThanOrEqual(this.expected);
   }
 }
 
 class IsLessThan extends BinaryPredicate<number> {
-  public test(actual: number): boolean {
-    return actual < this.expected;
+  public describe(actual: number): string {
+    return `${actual} < ${this.expected}`;
   }
 
-  protected describe(actual: number): string {
-    return `${actual} < ${this.expected}`;
+  public test(actual: number): boolean {
+    return actual < this.expected;
   }
 }
 
@@ -163,29 +162,29 @@ class JestIsLessThan extends IsLessThan {
   }
 }
 
-class IsLessThanOrEquals extends BinaryPredicate<number> {
+class IsLessThanOrEqual extends BinaryPredicate<number> {
+  public describe(actual: number): string {
+    return `${actual} <= ${this.expected}`;
+  }
+
   public test(actual: number): boolean {
     return actual <= this.expected;
   }
-
-  protected describe(actual: number): string {
-    return `${actual} <= ${this.expected}`;
-  }
 }
 
-class JestIsLessThanOrEquals extends IsLessThanOrEquals {
+class JestIsLessThanOrEqual extends IsLessThanOrEqual {
   public assert(actual: number): void {
     expect(actual).toBeLessThanOrEqual(this.expected);
   }
 }
 
 class Includes extends BinaryPredicate<string> {
-  public test(actual: string): boolean {
-    return actual.includes(this.expected);
+  public describe(actual: string): string {
+    return `${serialize(actual)} =~ ${serialize(this.expected)}`;
   }
 
-  protected describe(actual: string): string {
-    return `${serialize(actual)} =~ ${serialize(this.expected)}`;
+  public test(actual: string): boolean {
+    return actual.includes(this.expected);
   }
 }
 
@@ -196,12 +195,12 @@ class JestIncludes extends Includes {
 }
 
 class NotIncludes extends Includes {
-  public test(actual: string): boolean {
-    return !super.test(actual);
+  public describe(actual: string): string {
+    return `${serialize(actual)} !~ ${serialize(this.expected)}`;
   }
 
-  protected describe(actual: string): string {
-    return `${serialize(actual)} !~ ${serialize(this.expected)}`;
+  public test(actual: string): boolean {
+    return !super.test(actual);
   }
 }
 
@@ -212,12 +211,12 @@ class JestNotIncludes extends NotIncludes {
 }
 
 class Matches extends BinaryPredicate<string, RegExp> {
-  public test(actual: string): boolean {
-    return this.expected.test(actual);
+  public describe(actual: string): string {
+    return `${serialize(actual)} =~ ${serialize(this.expected)}`;
   }
 
-  protected describe(actual: string): string {
-    return `${serialize(actual)} =~ ${serialize(this.expected)}`;
+  public test(actual: string): boolean {
+    return this.expected.test(actual);
   }
 }
 
@@ -228,12 +227,12 @@ class JestMatches extends Matches {
 }
 
 class NotMatches extends Matches {
-  public test(actual: string): boolean {
-    return !super.test(actual);
+  public describe(actual: string): string {
+    return `${serialize(actual)} !~ ${serialize(this.expected)}`;
   }
 
-  protected describe(actual: string): string {
-    return `${serialize(actual)} !~ ${serialize(this.expected)}`;
+  public test(actual: string): boolean {
+    return !super.test(actual);
   }
 }
 
