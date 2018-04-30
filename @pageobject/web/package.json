@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@pageobject/base": "^11.2.0",
-    "jsdom": "^11.9.0"
+    "jsdom": "^11.10.0"
   },
   "devDependencies": {
     "@types/jsdom": "^11.0.4"
